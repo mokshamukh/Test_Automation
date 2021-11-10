@@ -1,0 +1,369 @@
+2021-11-01 16:45:30,134 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-11-01 16:45:31,570 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-11-01 16:45:31,692 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-11-01 16:45:31,692 INFO  [Log] **************************************************************************************** 
+2021-11-01 16:45:31,693 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-11-01 16:45:31,693 INFO  [Log] **************************************************************************************** 
+2021-11-01 16:45:36,981 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-01 16:45:36,985 INFO  [Log] Go To URL [https://navtest01.fiservse.net/nav_nav1151/nav1151.aspx] 
+2021-11-01 16:45:42,995 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Select Group]   ###   Action [SelectByVisibleTxt]    ###   Text [TL101]   ###   Locator [By.xpath: //select[@id='Group']] 
+2021-11-01 16:45:43,254 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@name='Submit']] 
+2021-11-01 16:45:46,452 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [User = UATUSER1]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalID']] 
+2021-11-01 16:45:46,645 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Password = A2B65Fiserv]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalPWD']] 
+2021-11-01 16:45:46,909 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Institution = 01]   ###   Action [ClearAndType]    ###   Locator [By.xpath: //input[@id='OrgID']] 
+2021-11-01 16:45:47,232 INFO  [Log] Page Name [ Login Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@id='submitButton']] 
+2021-11-01 16:45:53,113 INFO  [Log] Page Name [ Home Page]  ###  Field Name [Customer Menu ]   ###   Action [Click]    ###   Locator [By.xpath: //a[@data-key='Customer']] 
+2021-11-01 16:45:56,580 INFO  [Log] Page Name [ Home Menu Page]  ###  Field Name [name field]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='Names']] 
+2021-11-01 16:45:56,832 INFO  [Log] Page Name [ Home Menu Page]  ###  Field Name [new name field]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='New Name']] 
+2021-11-01 16:46:12,883 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Name field = Jim Garrell]   ###   Action [EnterText]    ###   Locator [By.xpath: (//label[text()='Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 16:46:13,066 INFO  [Log] Page Name [ New Name Page] ### Field Name and value [First Name = Jim] ### Action [ValidateDDTxt] ### Locator [By.xpath: (//label[text()='First Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 16:46:13,067 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [First Name]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//label[text()='First Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 16:46:13,184 INFO  [Log] Page Name [ New Name Page] ### Field Name and value [Last Name = Garrell] ### Action [ValidateDDTxt] ### Locator [By.xpath: (//label[text()='Last Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 16:46:13,184 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [Last Name]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//label[text()='Last Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 16:46:13,299 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Date of Birth = 28761]   ###   Action [EnterText]    ###   Locator [By.xpath: (//label[text()='Date of Birth:'])[1]/../following-sibling::td/div/input] 
+2021-11-01 16:46:13,577 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Tax Identification = 034-53-4333]   ###   Action [EnterText]    ###   Locator [By.xpath: (//label[text()='Tax ID Number:'])[1]/../following-sibling::td/input] 
+2021-11-01 16:46:13,850 ERROR [Log] Could Not Enter Text [034-53-4333] On Page Name [ New Name Page]  And  Field Name [Tax Identification] 
+org.openqa.selenium.ElementNotInteractableException: element not interactable
+  (Session info: chrome=95.0.4638.54)
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.1.43', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.54, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:50588}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1ad081dae8c9415858fa7c5f210741b5
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:279)
+	at org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:100)
+	at testframe.application.common.CommonLibrary.enterText(CommonLibrary.java:401)
+	at testframe.application.premier.pages.Premier_CustomerNewName.enterCustomerName(Premier_CustomerNewName.java:99)
+	at testframe.application.premier.pages.Premier_CustomerNewName.createNewName(Premier_CustomerNewName.java:58)
+	at testframe.application.premier.businessflow.PremierTest.executeTestCase(PremierTest.java:119)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:51)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-01 16:46:21,804 ERROR [Log] Could Not Find Locator [ By.xpath: //label[text()='Step 3 - Contact Methods']] 
+org.openqa.selenium.UnhandledAlertException: unexpected alert open: {Alert text : The day field requires a valid number between 1 and 28}
+  (Session info: chrome=95.0.4638.54): The day field requires a valid number between 1 and 28
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.1.43', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.54, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:50588}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1ad081dae8c9415858fa7c5f210741b5
+*** Element info: {Using=xpath, value=//label[text()='Step 3 - Contact Methods']}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:120)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:398)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementsByXPath(RemoteWebDriver.java:477)
+	at org.openqa.selenium.By$ByXPath.findElements(By.java:356)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:359)
+	at testframe.application.common.CommonLibrary.isElementPresent(CommonLibrary.java:788)
+	at testframe.application.premier.pages.Premier_CustomerNewName.enterContactMethod(Premier_CustomerNewName.java:142)
+	at testframe.application.premier.pages.Premier_CustomerNewName.createNewName(Premier_CustomerNewName.java:60)
+	at testframe.application.premier.businessflow.PremierTest.executeTestCase(PremierTest.java:119)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:51)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-01 16:46:21,870 ERROR [Log] Could Not Find Locator [ By.xpath: //label[text()='Step 4 - Codes']] 
+org.openqa.selenium.UnhandledAlertException: unexpected alert open: {Alert text : The day field requires a valid number between 1 and 28}
+  (Session info: chrome=95.0.4638.54): The day field requires a valid number between 1 and 28
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.1.43', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.54, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:50588}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1ad081dae8c9415858fa7c5f210741b5
+*** Element info: {Using=xpath, value=//label[text()='Step 4 - Codes']}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:120)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:398)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementsByXPath(RemoteWebDriver.java:477)
+	at org.openqa.selenium.By$ByXPath.findElements(By.java:356)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:359)
+	at testframe.application.common.CommonLibrary.isElementPresent(CommonLibrary.java:788)
+	at testframe.application.premier.pages.Premier_CustomerNewName.enterCodeLable(Premier_CustomerNewName.java:183)
+	at testframe.application.premier.pages.Premier_CustomerNewName.createNewName(Premier_CustomerNewName.java:61)
+	at testframe.application.premier.businessflow.PremierTest.executeTestCase(PremierTest.java:119)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:51)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-01 16:46:21,928 ERROR [Log] Could Not Find Locator [ By.xpath: //label[text()='Step 5 - Build Relationships']] 
+org.openqa.selenium.UnhandledAlertException: unexpected alert open: {Alert text : The day field requires a valid number between 1 and 28}
+  (Session info: chrome=95.0.4638.54): The day field requires a valid number between 1 and 28
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.1.43', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.54, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:50588}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1ad081dae8c9415858fa7c5f210741b5
+*** Element info: {Using=xpath, value=//label[text()='Step 5 - Build Relationships']}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:120)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:398)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementsByXPath(RemoteWebDriver.java:477)
+	at org.openqa.selenium.By$ByXPath.findElements(By.java:356)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:359)
+	at testframe.application.common.CommonLibrary.isElementPresent(CommonLibrary.java:788)
+	at testframe.application.premier.pages.Premier_CustomerNewName.createNewName(Premier_CustomerNewName.java:62)
+	at testframe.application.premier.businessflow.PremierTest.executeTestCase(PremierTest.java:119)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:51)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-01 16:46:21,981 ERROR [Log] Could Not Find Locator [ By.xpath: //div[contains(text(),'Customer')]] 
+org.openqa.selenium.UnhandledAlertException: unexpected alert open: {Alert text : The day field requires a valid number between 1 and 28}
+  (Session info: chrome=95.0.4638.54): The day field requires a valid number between 1 and 28
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.1.43', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.54, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:50588}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1ad081dae8c9415858fa7c5f210741b5
+*** Element info: {Using=xpath, value=//div[contains(text(),'Customer')]}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:120)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:398)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementsByXPath(RemoteWebDriver.java:477)
+	at org.openqa.selenium.By$ByXPath.findElements(By.java:356)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:359)
+	at testframe.application.common.CommonLibrary.isElementPresent(CommonLibrary.java:788)
+	at testframe.application.premier.pages.Premier_HomeMenu.clickNewContact(Premier_HomeMenu.java:138)
+	at testframe.application.premier.businessflow.PremierTest.executeTestCase(PremierTest.java:120)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:51)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-01 16:46:26,115 ERROR [Log] Could Not Find Locator [ By.xpath: //div[contains(text(),'Customer')]] 
+org.openqa.selenium.UnhandledAlertException: unexpected alert open: {Alert text : The day field requires a valid number between 1 and 28}
+  (Session info: chrome=95.0.4638.54): The day field requires a valid number between 1 and 28
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.1.43', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.54, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:50588}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1ad081dae8c9415858fa7c5f210741b5
+*** Element info: {Using=xpath, value=//div[contains(text(),'Customer')]}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:120)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:398)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementsByXPath(RemoteWebDriver.java:477)
+	at org.openqa.selenium.By$ByXPath.findElements(By.java:356)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:359)
+	at testframe.application.common.CommonLibrary.isElementPresent(CommonLibrary.java:788)
+	at testframe.application.premier.pages.Premier_HomeMenu.clickNewAddress(Premier_HomeMenu.java:114)
+	at testframe.application.premier.businessflow.PremierTest.executeTestCase(PremierTest.java:122)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:51)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-01 16:46:26,151 INFO  [Log] Switch To Frame With Name As [Main] 
+2021-11-01 16:46:26,177 ERROR [Log] Could not Switch To Frame With Name As [Main] 
+org.openqa.selenium.UnhandledAlertException: unexpected alert open: {Alert text : The day field requires a valid number between 1 and 28}
+  (Session info: chrome=95.0.4638.54): The day field requires a valid number between 1 and 28
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.1.43', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.54, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:50588}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1ad081dae8c9415858fa7c5f210741b5
+*** Element info: {Using=tag name, value=iframe}
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:120)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:398)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementsByTagName(RemoteWebDriver.java:445)
+	at org.openqa.selenium.By$ByTagName.findElements(By.java:327)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElements(RemoteWebDriver.java:359)
+	at testframe.application.common.CommonLibrary.switchToWithinFrameWithName(CommonLibrary.java:180)
+	at testframe.application.premier.pages.Premier_CustomerAddress.createNewAddress(Premier_CustomerAddress.java:48)
+	at testframe.application.premier.businessflow.PremierTest.executeTestCase(PremierTest.java:123)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:51)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-01 16:46:30,105 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             -E---N---D- :    PREMIER_TC001             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-01 16:46:30,105 INFO  [Log] X 
+2021-11-01 16:46:30,105 INFO  [Log] X 

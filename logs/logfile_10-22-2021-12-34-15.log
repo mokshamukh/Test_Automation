@@ -1,0 +1,23 @@
+2021-10-22 12:34:15,433 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-22 12:34:16,639 INFO  [Log] $$           Test Execution for Application : COMMERCIALCENTER           $$ 
+2021-10-22 12:34:16,762 INFO  [Log] $$           Reading Test Case Details from 'COMMERCIALCENTER' sheet of Master file           $$ 
+2021-10-22 12:34:16,762 INFO  [Log] **************************************************************************************** 
+2021-10-22 12:34:16,762 INFO  [Log] $$     CC_CORP_TC008 : INITIATE TRANSFER FUTURE ONE TO ONE ACCOUNT (CHECKING TO SAVING) + PAYMENT ACTIVITY - EDIT TRANSFER FOR FUTURE DATE AND VIEW     $$ 
+2021-10-22 12:34:16,767 INFO  [Log] **************************************************************************************** 
+2021-10-22 12:34:20,836 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-10-22 12:34:20,841 INFO  [Log] Go To URL [https://republiccert.olbanking.com/corporate] 
+2021-10-22 12:35:25,621 INFO  [Log] Page Name [ Corporate Login Page]  ###  Field Name and Value [CompanyID = FGS_Company03]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='companyId']] 
+2021-10-22 12:35:25,909 INFO  [Log] Page Name [ Corporate Login Page]  ###  Field Name and Value [UserID = FGS_User06]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='userId']] 
+2021-10-22 12:35:26,150 INFO  [Log] Page Name [ Corporate Login Page]  ###  Field Name [Login Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Login']] 
+2021-10-22 12:35:29,564 INFO  [Log] Page Name [ Corporate Login Page]  ###  Field Name and Value [Password = Fiserv@1234]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='password']] 
+2021-10-22 12:35:29,720 INFO  [Log] Page Name [ Corporate Login Page]  ###  Field Name [Login Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Login']] 
+2021-10-22 12:35:29,857 INFO  [Log] Get xpath for Field Name [Menu Bar Option] 
+2021-10-22 12:35:39,162 INFO  [Log] Page Name [ Corporate Home Page]  ###  Field Name [Menu Bar]   ###   Action [Click]    ###   Locator [By.xpath: //a[@title='Menu']] 
+2021-10-22 12:35:39,335 INFO  [Log] Page Name [ Corporate Home Page] ### Field Name [Menu Bar] ### Action [Click]  
+2021-10-22 12:36:52,218 INFO  [Log] Page Name [ Home Page] ### Field Name [Sub Menu Bar] ### Action [Click]  
+2021-10-22 12:36:58,664 INFO  [Log] Page Name [ Home Page] ### Field Name [Sub Menu Bar] ### Action [Click]  
+2021-10-22 12:37:29,945 INFO  [Log] Page Name [ Future Payment Activity] ### Field Name [Select Future date] ### Action [Click]  
+2021-10-22 12:37:44,292 INFO  [Log] Page Name [ Future Payment Activity]  ###  Field Name [Search Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@aria-label='Search']] 
+2021-10-22 12:37:44,462 INFO  [Log] Page Name [ Future Payment Activity]  ###  Field Name [Search Symbol]   ###   Action [Click]    ###   Locator [By.xpath: //button[@type='submit']] 
+2021-10-22 12:37:48,660 INFO  [Log] Page Name [ Corporate Page]  ###  Field Name [User button]   ###   Action [Click]    ###   Locator [By.xpath: //div[@class='d-none d-sm-inline']] 
+2021-10-22 12:37:48,863 INFO  [Log] Page Name [ Corporate Page]  ###  Field Name [Log Off button]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Logout']] 

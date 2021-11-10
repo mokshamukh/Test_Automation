@@ -1,0 +1,81 @@
+2021-10-27 15:14:30,104 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-27 15:14:39,977 INFO  [Log] $$           Test Execution for Application : EPP           $$ 
+2021-10-27 15:14:40,584 INFO  [Log] $$           Reading Test Case Details from 'EPP' sheet of Master file           $$ 
+2021-10-27 15:14:40,585 INFO  [Log] **************************************************************************************** 
+2021-10-27 15:14:40,585 INFO  [Log] $$     EPP_TC001 : CREATE A MANUAL PAYMENT[BANK FRB]     $$ 
+2021-10-27 15:14:40,596 INFO  [Log] **************************************************************************************** 
+2021-10-27 15:15:10,105 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-10-27 15:15:10,159 INFO  [Log] Go To URL [https://portal.uat.fec-frms.fiservapps.com/portal/login?c=D02T021] 
+2021-10-27 15:17:19,015 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [Login Logo]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[text()='Log in to your account']] 
+2021-10-27 15:17:19,285 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPUserID = DT021TS]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrName']] 
+2021-10-27 15:17:20,776 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPPswd = Fiserv@1234]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrPwd']] 
+2021-10-27 15:17:21,784 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [LoginButton]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Log in']] 
+2021-10-27 15:17:22,487 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [SecurityQuestion]   ###   Action [WaitForPresence]    ###   Locator [By.xpath:  //h2[@id='securityQuestionsHeading']] 
+2021-10-27 15:17:33,257 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [Security Question]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[@id='securityQuestionsHeading']] 
+2021-10-27 15:17:33,488 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion1]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//label] 
+2021-10-27 15:17:33,895 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion2]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//label] 
+2021-10-27 15:17:37,265 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion1 = name]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//input[@id='newQuestionAns-0']] 
+2021-10-27 15:17:39,629 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion2 = school]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//input[@id='newQuestionAns-1']] 
+2021-10-27 15:17:43,577 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestions]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='btnVerifySecurityQuestionsSubmit']] 
+2021-10-27 15:18:05,381 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-10-27 15:18:05,468 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [Click]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-10-27 15:18:17,650 INFO  [Log] Switch To Window With Title As [Unauthorized Access Warning] 
+2021-10-27 15:18:22,098 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-10-27 15:18:26,648 INFO  [Log] Page Name [ EPP_SubMenuPage] ### Field Name [Sub Menu Selected] ### Action [Click]  
+2021-10-27 15:20:17,078 ERROR [Log] Could Not Click On [Sub Menu Selected] On Page [ EPP_SubMenuPage] 
+org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//a[@class='linkMenu'][text()='Payment Creation']"}
+  (Session info: chrome=94.0.4606.81)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.43.220', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 94.0.4606.81, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:60122}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: a5e3418f293f7f083456a2da92e1a0f8
+*** Element info: {Using=xpath, value=//a[@class='linkMenu'][text()='Payment Creation']}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:371)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:473)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at testframe.application.common.CommonLibrary.getDynamicElementClick(CommonLibrary.java:1302)
+	at testframe.application.epp.pages.EPP_MenuOptions.selectSubMenuOptions(EPP_MenuOptions.java:61)
+	at testframe.application.epp.businessflow.EppTest.executeTestCase(EppTest.java:150)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:47)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-10-27 15:20:21,692 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-10-27 15:20:28,532 INFO  [Log] Get xpath for Field Name [EPP_CreatePayment] 
+2021-10-27 15:20:28,533 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Ordering Bank Account = 021000021]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='OrderInstID']] 

@@ -1,0 +1,19 @@
+2021-10-18 00:52:12,683 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-18 00:52:14,022 INFO  [Log] $$           Test Execution for Application : COMMERCIALCENTER           $$ 
+2021-10-18 00:52:14,139 INFO  [Log] $$           Reading Test Case Details from 'COMMERCIALCENTER' sheet of Master file           $$ 
+2021-10-18 00:52:19,511 INFO  [Log] **************************************************************************************** 
+2021-10-18 00:52:19,511 INFO  [Log] $$     CC_ADMIN_TC001 : CREATE AND SEARCH COMPANY      $$ 
+2021-10-18 00:52:19,518 INFO  [Log] **************************************************************************************** 
+2021-10-18 00:52:23,709 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-10-18 00:54:53,397 INFO  [Log] Go To URL [https://republiccert.olbanking.com/onlineMessenger] 
+2021-10-18 00:55:59,401 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name and Value [CompanyID = training]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='company']] 
+2021-10-18 00:55:59,785 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name and Value [UserID = admin11]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='user']] 
+2021-10-18 00:55:59,977 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [Login Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='login']] 
+2021-10-18 00:56:03,579 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [CompanyID]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //label[text()='Company ID']/parent::li/b] Expected Text [training] 
+2021-10-18 00:56:03,697 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [User ID]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //label[text()='User ID']/parent::li/b] Expected Text [admin11] 
+2021-10-18 00:56:03,831 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name and Value [Password = Fiserv@1234]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='passwordPrompt']] 
+2021-10-18 00:56:04,013 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [Login Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='login']] 
+2021-10-18 00:56:11,245 INFO  [Log] Get xpath for Field Name [Menu Bar Option] 
+2021-10-18 00:56:30,411 INFO  [Log] Page Name [ Home Page] ### Field Name [Menu Bar] ### Action [Click]  
+2021-10-18 00:56:37,573 INFO  [Log] Page Name [ Home Page] ### Field Name [Sub Menu Bar] ### Action [Click]  
+2021-10-18 00:56:53,207 INFO  [Log] Page Name [ Admin Page]  ###  Field Name [Log Off button]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='Log Off']] 

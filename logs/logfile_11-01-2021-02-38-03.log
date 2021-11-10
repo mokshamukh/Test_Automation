@@ -1,0 +1,6 @@
+2021-11-01 14:38:03,145 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-11-01 14:38:03,814 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-11-01 14:38:03,874 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-11-01 14:38:03,874 INFO  [Log] **************************************************************************************** 
+2021-11-01 14:38:03,874 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-11-01 14:38:03,875 INFO  [Log] **************************************************************************************** 

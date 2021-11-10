@@ -1,0 +1,8 @@
+2021-10-22 12:03:24,918 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-22 12:03:26,667 INFO  [Log] $$           Test Execution for Application : COMMERCIALCENTER           $$ 
+2021-10-22 12:03:26,849 INFO  [Log] $$           Reading Test Case Details from 'COMMERCIALCENTER' sheet of Master file           $$ 
+2021-10-22 12:03:26,849 INFO  [Log] **************************************************************************************** 
+2021-10-22 12:03:26,849 INFO  [Log] $$     CC_CORP_TC008 : INITIATE TRANSFER FUTURE ONE TO ONE ACCOUNT (CHECKING TO SAVING) + PAYMENT ACTIVITY - EDIT TRANSFER FOR FUTURE DATE AND VIEW     $$ 
+2021-10-22 12:03:26,850 INFO  [Log] **************************************************************************************** 
+2021-10-22 12:03:31,032 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-10-22 12:03:31,036 INFO  [Log] Go To URL [https://republiccert.olbanking.com/corporate] 

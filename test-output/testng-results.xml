@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="69669" started-at="2021-11-08T15:11:17Z" finished-at="2021-11-08T15:12:26Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="69669" started-at="2021-11-08T15:11:17Z" finished-at="2021-11-08T15:12:26Z">
+      <class name="testframe.runmanager.RunDriver">
+        <test-method status="PASS" signature="navigateToTest()[pri:0, instance:testframe.runmanager.RunDriver@55d56113]" name="navigateToTest" duration-ms="69612" started-at="2021-11-08T20:41:17Z" finished-at="2021-11-08T20:42:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateToTest -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:testframe.runmanager.RunDriver@55d56113]" name="tearDown" is-config="true" duration-ms="2" started-at="2021-11-08T20:42:26Z" finished-at="2021-11-08T20:42:26Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=navigateToTest status=SUCCESS method=RunDriver.navigateToTest()[pri:0, instance:testframe.runmanager.RunDriver@55d56113] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- testframe.runmanager.RunDriver -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

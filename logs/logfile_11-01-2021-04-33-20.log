@@ -1,0 +1,10 @@
+2021-11-01 16:33:20,720 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-11-01 16:33:22,312 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-11-01 16:33:22,450 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-11-01 16:33:22,450 INFO  [Log] **************************************************************************************** 
+2021-11-01 16:33:22,450 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-11-01 16:33:22,451 INFO  [Log] **************************************************************************************** 
+2021-11-01 16:33:28,112 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-01 16:33:28,116 INFO  [Log] Go To URL [https://navtest01.fiservse.net/nav_nav1151/nav1151.aspx] 
+2021-11-01 16:33:35,442 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Select Group]   ###   Action [SelectByVisibleTxt]    ###   Text [TL101]   ###   Locator [By.xpath: //select[@id='Group']] 
+2021-11-01 16:33:35,808 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@name='Submit']] 

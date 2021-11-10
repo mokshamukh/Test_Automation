@@ -1,0 +1,7 @@
+2021-10-28 19:23:03,085 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-28 19:23:04,702 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-10-28 19:23:04,845 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-10-28 19:23:04,846 INFO  [Log] **************************************************************************************** 
+2021-10-28 19:23:04,846 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-10-28 19:23:04,852 INFO  [Log] **************************************************************************************** 
+2021-10-28 19:23:10,243 INFO  [Log] Switch To Frame With Name As [Main] 

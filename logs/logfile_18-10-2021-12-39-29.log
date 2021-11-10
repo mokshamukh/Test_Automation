@@ -1,0 +1,7 @@
+2021-10-18 00:39:29,379 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-18 00:39:30,683 INFO  [Log] $$           Test Execution for Application : COMMERCIALCENTER           $$ 
+2021-10-18 00:39:30,804 INFO  [Log] $$           Reading Test Case Details from 'COMMERCIALCENTER' sheet of Master file           $$ 
+2021-10-18 00:39:35,751 INFO  [Log] **************************************************************************************** 
+2021-10-18 00:39:35,752 INFO  [Log] $$     CC_ADMIN_TC001 : CREATE AND SEARCH COMPANY      $$ 
+2021-10-18 00:39:35,759 INFO  [Log] **************************************************************************************** 
+2021-10-18 00:39:39,962 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 

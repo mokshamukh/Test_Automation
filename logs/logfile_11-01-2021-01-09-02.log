@@ -1,0 +1,8 @@
+2021-11-01 13:09:02,887 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-11-01 13:09:04,224 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-11-01 13:09:04,345 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-11-01 13:09:04,345 INFO  [Log] **************************************************************************************** 
+2021-11-01 13:09:04,345 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-11-01 13:09:04,352 INFO  [Log] **************************************************************************************** 
+2021-11-01 13:09:08,710 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-01 13:09:08,714 INFO  [Log] Go To URL [https://navtest01.fiservse.net/nav_nav1151/nav1151.aspx] 

@@ -1,0 +1,14 @@
+2021-10-28 18:31:25,753 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-28 18:31:27,106 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-10-28 18:31:27,235 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-10-28 18:31:27,235 INFO  [Log] **************************************************************************************** 
+2021-10-28 18:31:27,235 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-10-28 18:31:27,236 INFO  [Log] **************************************************************************************** 
+2021-10-28 18:31:32,040 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-10-28 18:31:32,044 INFO  [Log] Go To URL [https://navtest01.fiservse.net/nav_nav1151/nav1151.aspx] 
+2021-10-28 18:31:37,772 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Select Group]   ###   Action [SelectByVisibleTxt]    ###   Text [TL101]   ###   Locator [By.xpath: //select[@id='Group']] 
+2021-10-28 18:31:38,035 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@name='Submit']] 
+2021-10-28 18:31:44,373 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [User = FGS_User06]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalID']] 
+2021-10-28 18:31:44,533 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Password = A2B65Fiserv]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalPWD']] 
+2021-10-28 18:31:44,724 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Institution = 01]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='OrgID']] 
+2021-10-28 18:31:44,923 INFO  [Log] Page Name [ Login Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@id='submitButton']] 

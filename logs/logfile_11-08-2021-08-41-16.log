@@ -1,0 +1,46 @@
+2021-11-08 20:41:17,281 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-11-08 20:41:18,901 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-11-08 20:41:19,019 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-11-08 20:41:19,020 INFO  [Log] **************************************************************************************** 
+2021-11-08 20:41:19,020 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-11-08 20:41:19,038 INFO  [Log] **************************************************************************************** 
+2021-11-08 20:41:23,938 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-08 20:41:23,954 INFO  [Log] Go To URL [https://navtest01.fiservse.net/nav_nav1151/nav1151.aspx] 
+2021-11-08 20:41:30,782 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Select Group]   ###   Action [SelectByVisibleTxt]    ###   Text [TL101]   ###   Locator [By.xpath: //select[@id='Group']] 
+2021-11-08 20:41:31,051 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@name='Submit']] 
+2021-11-08 20:41:34,167 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [User = UATUSER1]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalID']] 
+2021-11-08 20:41:34,335 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Password = A2B65Fiserv]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalPWD']] 
+2021-11-08 20:41:34,532 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Institution = 01]   ###   Action [ClearAndType]    ###   Locator [By.xpath: //input[@id='OrgID']] 
+2021-11-08 20:41:34,767 INFO  [Log] Page Name [ Login Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@id='submitButton']] 
+2021-11-08 20:41:38,144 INFO  [Log] Page Name [ Home Page]  ###  Field Name [Customer Menu ]   ###   Action [Click]    ###   Locator [By.xpath: //a[@data-key='Customer']] 
+2021-11-08 20:41:39,991 INFO  [Log] Page Name [ Home Page]  ###  Field Name [Customer Inquiry]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='Customer Inquiry']] 
+2021-11-08 20:41:41,764 INFO  [Log] Switch To Frame With Name As [Main] 
+2021-11-08 20:41:43,187 INFO  [Log] Page Name [ Customer Inquiry Page]  ###  Field Name and Value [Name = 034-53-4567]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@name='TaxID']] 
+2021-11-08 20:41:43,342 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Submit]   ###   Action [Click]    ###   Locator [By.xpath: //button[@name='Submit']] 
+2021-11-08 20:42:07,329 INFO  [Log] Switch To Default Content 
+2021-11-08 20:42:09,168 INFO  [Log] Switch To Frame With Name As [Main] 
+2021-11-08 20:42:09,224 INFO  [Log] Switch To Frame With Name As [bottom] 
+2021-11-08 20:42:09,302 INFO  [Log] Page Name [ Customer Inquiry page]  ###  Field Name [Customer Analaysis Header]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //td[@id='Customer AnalysisText']] 
+2021-11-08 20:42:09,368 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [See Additional Addresses]   ###   Action [Click]    ###   Locator [By.xpath: //u[text()='See Additional Addresses']] 
+2021-11-08 20:42:11,661 INFO  [Log] Switch To Default Content 
+2021-11-08 20:42:13,410 INFO  [Log] Switch To Frame With Name As [Main] 
+2021-11-08 20:42:13,465 INFO  [Log] Switch To Frame With Name As [bottom] 
+2021-11-08 20:42:13,517 INFO  [Log] Page Name [ Customer Inquiry page]  ###  Field Name [Summary Header]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //td[@id='SummaryText']] 
+2021-11-08 20:42:13,546 INFO  [Log] Page Name [ Customer Inquiry Page]  ###  Field Name [Customer Expand]   ###   Action [Click]    ###   Locator [By.xpath: //td[contains(@id,'Customer')]] 
+2021-11-08 20:42:13,838 INFO  [Log] Page Name [ Customer Inquiry Page]  ###  Field Name [Name Expand]   ###   Action [Click]    ###   Locator [By.xpath: //img[@class='csr-hand']] 
+2021-11-08 20:42:14,154 INFO  [Log] Switch To Default Content 
+2021-11-08 20:42:15,923 INFO  [Log] Switch To Frame With Name As [Main] 
+2021-11-08 20:42:15,991 INFO  [Log] Switch To Frame With Name As [bottom] 
+2021-11-08 20:42:16,055 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Name]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-left'])[2]] 
+2021-11-08 20:42:16,810 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Tax Identification]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-right'])[1]] 
+2021-11-08 20:42:17,011 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Date of birth]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-right'])[2]] 
+2021-11-08 20:42:17,249 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Email]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-right'])[4]] 
+2021-11-08 20:42:17,476 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Phone Number]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-right'])[3]] 
+2021-11-08 20:42:17,717 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Address1]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-left'])[11]] 
+2021-11-08 20:42:17,914 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Address2]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-left'])[12]] 
+2021-11-08 20:42:18,079 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [City State Zip]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-left'])[13]] 
+2021-11-08 20:42:18,264 INFO  [Log] Page Name [ Customer Inquiry]  ###  Field Name [Relationship]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//td[@class=' tc-usr-information txt-left'])[14]] 
+2021-11-08 20:42:18,438 INFO  [Log] Switch To Default Content 
+2021-11-08 20:42:26,664 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             -E---N---D- :    PREMIER_TC001             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-08 20:42:26,664 INFO  [Log] X 
+2021-11-08 20:42:26,664 INFO  [Log] X 

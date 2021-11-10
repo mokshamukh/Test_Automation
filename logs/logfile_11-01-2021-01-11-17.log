@@ -1,0 +1,30 @@
+2021-11-01 13:11:17,794 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-11-01 13:11:19,032 INFO  [Log] $$           Test Execution for Application : PREMIER           $$ 
+2021-11-01 13:11:19,143 INFO  [Log] $$           Reading Test Case Details from 'PREMIER' sheet of Master file           $$ 
+2021-11-01 13:11:19,144 INFO  [Log] **************************************************************************************** 
+2021-11-01 13:11:19,144 INFO  [Log] $$     PREMIER_TC001 : LAUNCH AND LOGIN TO APPLICATION.CAPTURE CUSTOMER DETAILS     $$ 
+2021-11-01 13:11:19,144 INFO  [Log] **************************************************************************************** 
+2021-11-01 13:11:23,428 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-01 13:11:23,432 INFO  [Log] Go To URL [https://navtest01.fiservse.net/nav_nav1151/nav1151.aspx] 
+2021-11-01 13:11:29,048 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Select Group]   ###   Action [SelectByVisibleTxt]    ###   Text [TL101]   ###   Locator [By.xpath: //select[@id='Group']] 
+2021-11-01 13:11:29,276 INFO  [Log] Page Name [ Group Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@name='Submit']] 
+2021-11-01 13:11:32,326 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [User = UATUSER1]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalID']] 
+2021-11-01 13:11:32,759 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Password = A2B65Fiserv]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='PrincipalPWD']] 
+2021-11-01 13:11:33,170 INFO  [Log] Page Name [ Login Page]  ###  Field Name and Value [Institution = 01]   ###   Action [ClearAndType]    ###   Locator [By.xpath: //input[@id='OrgID']] 
+2021-11-01 13:11:33,585 INFO  [Log] Page Name [ Login Page]  ###  Field Name [Submit Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@id='submitButton']] 
+2021-11-01 13:11:39,164 INFO  [Log] Page Name [ Home Page]  ###  Field Name [Customer Menu ]   ###   Action [Click]    ###   Locator [By.xpath: //a[@data-key='Customer']] 
+2021-11-01 13:11:42,189 INFO  [Log] Page Name [ Home Menu Page]  ###  Field Name [name field]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='Names']] 
+2021-11-01 13:11:42,629 INFO  [Log] Page Name [ Home Menu Page]  ###  Field Name [new name field]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='New Name']] 
+2021-11-01 13:11:52,183 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Name field = Jimmy Garrett]   ###   Action [EnterText]    ###   Locator [By.xpath: (//label[text()='Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 13:11:52,353 INFO  [Log] Page Name [ New Name Page] ### Field Name and value [First Name = Jimmy] ### Action [ValidateDDTxt] ### Locator [By.xpath: (//label[text()='First Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 13:11:52,353 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [First Name]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//label[text()='First Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 13:11:52,458 INFO  [Log] Page Name [ New Name Page] ### Field Name and value [Last Name = Garrett] ### Action [ValidateDDTxt] ### Locator [By.xpath: (//label[text()='Last Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 13:11:52,459 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [Last Name]   ###   Action [GetElementText]    ###   Locator [By.xpath: (//label[text()='Last Name:'])[1]/../following-sibling::td/input] 
+2021-11-01 13:11:52,543 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Date of Birth = 10/28/1978]   ###   Action [EnterText]    ###   Locator [By.xpath: (//label[text()='Date of Birth:'])[1]/../following-sibling::td/div/input] 
+2021-11-01 13:11:52,761 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Tax Identification = 034-53-4567]   ###   Action [EnterText]    ###   Locator [By.xpath: (//label[text()='Tax ID Number:'])[1]/../following-sibling::td/input] 
+2021-11-01 13:11:53,025 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [Next Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='NextButton']] 
+2021-11-01 13:11:56,071 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [Next Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='NextButton']] 
+2021-11-01 13:12:17,835 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [Phone Number]   ###   Action [Click]    ###   Locator [By.xpath: //a[@id='lnkPhone']] 
+2021-11-01 13:12:21,162 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Phone Number = 345-6234]   ###   Action [EnterText]    ###   Locator [By.xpath: (//input[contains(@name,'PhoneNumber')])[1]] 
+2021-11-01 13:12:39,065 INFO  [Log] Page Name [ New Name Page]  ###  Field Name [Email link]   ###   Action [Click]    ###   Locator [By.xpath: //a[@id='lnkEmail']] 
+2021-11-01 13:12:41,018 INFO  [Log] Page Name [ New Name Page]  ###  Field Name and Value [Phone Number = Garrett.jimmy@Test.com]   ###   Action [EnterText]    ###   Locator [By.xpath: (//input[contains(@name,'ContactInfo')])[1]] 

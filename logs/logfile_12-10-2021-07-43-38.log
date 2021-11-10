@@ -1,0 +1,57 @@
+2021-10-12 19:43:38,584 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-10-12 19:43:39,793 INFO  [Log] $$           Test Execution for Application : COMMERCIALCENTER           $$ 
+2021-10-12 19:43:39,869 INFO  [Log] $$           Reading Test Case Details from 'COMMERCIALCENTER' sheet of Master file           $$ 
+2021-10-12 19:43:39,870 INFO  [Log] **************************************************************************************** 
+2021-10-12 19:43:39,870 INFO  [Log] $$     CC_ADMIN_TC002 : CREATE AND EDIT A COMPANY     $$ 
+2021-10-12 19:43:39,870 INFO  [Log] **************************************************************************************** 
+2021-10-12 19:43:43,696 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-10-12 19:43:43,701 INFO  [Log] Go To URL [https://republiccert.olbanking.com/onlineMessenger] 
+2021-10-12 19:43:55,205 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [CompanyID]   ###   Action [EnterText]    ###   Text [training]   ###   Locator [By.xpath: //input[@id='company']] 
+2021-10-12 19:43:55,894 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [UserID]   ###   Action [EnterText]    ###   Text [admin11]   ###   Locator [By.xpath: //input[@id='user']] 
+2021-10-12 19:43:56,132 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [Login Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='login']] 
+2021-10-12 19:43:59,796 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [CompanyID]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //label[text()='Company ID']/parent::li/b] Expected Text [training] 
+2021-10-12 19:43:59,912 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [User ID]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //label[text()='User ID']/parent::li/b] Expected Text [admin11] 
+2021-10-12 19:44:00,000 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [Password]   ###   Action [EnterText]    ###   Text [Fiserv@1234]   ###   Locator [By.xpath: //input[@id='passwordPrompt']] 
+2021-10-12 19:44:00,130 INFO  [Log] Page Name [ Admin Login Page]  ###  Field Name [Login Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='login']] 
+2021-10-12 19:44:05,719 INFO  [Log] Get xpath for Field Name [Menu Bar Option] 
+2021-10-12 19:44:09,782 INFO  [Log] Page Name [ Home Page] ### Field Name [Menu Bar] ### Action [Click]  
+2021-10-12 19:44:09,842 INFO  [Log] Page Name [ Home Page] ### Field Name [Sub Menu Bar] ### Action [Click]  
+2021-10-12 19:44:13,599 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Create Company Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='createCompany']] 
+2021-10-12 19:44:19,806 INFO  [Log] Page Name [ Create Company]  ###  Field Name [companyIDField]   ###   Action [EnterText]    ###   Text [FGS_AutoCompany03]   ###   Locator [By.xpath: //input[@id='companyvo.code']] 
+2021-10-12 19:44:19,872 INFO  [Log] Page Name [ Create Company]  ###  Field Name [companyNameField]   ###   Action [EnterText]    ###   Text [FGS_AutoCompany03]   ###   Locator [By.xpath: //input[@id='companyvo.name']] 
+2021-10-12 19:44:19,964 INFO  [Log] Page Name [ Create Company]  ###  Field Name [businessUnitField]   ###   Action [EnterText]    ###   Text [BU]   ###   Locator [By.xpath: //input[@id='companyvo.businessunit']] 
+2021-10-12 19:44:20,035 INFO  [Log] Page Name [ Create Company]  ###  Field Name [streetAddressField]   ###   Action [EnterText]    ###   Text [112, tx lane]   ###   Locator [By.xpath: //textarea[@id='companyvo.streetaddress']] 
+2021-10-12 19:44:20,108 INFO  [Log] Page Name [ Create Company]  ###  Field Name [cityField]   ###   Action [EnterText]    ###   Text [Atlanta]   ###   Locator [By.xpath: //input[@id='companyvo.city']] 
+2021-10-12 19:44:20,179 INFO  [Log] Page Name [ Create Company]  ###  Field Name [stateField]   ###   Action [EnterText]    ###   Text [GA]   ###   Locator [By.xpath: //input[@id='companyvo.state']] 
+2021-10-12 19:44:20,248 INFO  [Log] Page Name [ Create Company]  ###  Field Name [zipcodeField]   ###   Action [EnterText]    ###   Text [39892]   ###   Locator [By.xpath: //input[@id='companyvo.zipcode']] 
+2021-10-12 19:44:20,321 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Country]   ###   Action [SelectByVisibleTxt]    ###   Text [United States]   ###   Locator [By.xpath: //select[@id='companyvo.country']] 
+2021-10-12 19:44:20,384 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Market Segment]   ###   Action [SelectByVisibleTxt]    ###   Text [Cash Management - Large]   ###   Locator [By.xpath: //select[@id='companyvo.marketsegment']] 
+2021-10-12 19:44:20,467 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Billing Account]   ###   Action [EnterText]    ###   Text [998899]   ###   Locator [By.xpath: //input[@id='companyvo.billingaccount']] 
+2021-10-12 19:44:20,533 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Time Zone]   ###   Action [SelectByVisibleTxt]    ###   Text [US/Eastern (EDT)]   ###   Locator [By.xpath: //select[@id='companyvo.timezone']] 
+2021-10-12 19:44:20,595 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Date Field]   ###   Action [EnterText]    ###   Text [10/11/2021]   ###   Locator [By.xpath: //input[@name='datepicker_companyvo.enabledate']] 
+2021-10-12 19:44:20,749 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Processing Center]   ###   Action [SelectByVisibleTxt]    ###   Text [Republic Bank]   ###   Locator [By.xpath: //select[@id='companyvo.processingCenterId']] 
+2021-10-12 19:44:20,844 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Saved Company]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='saveButton']] 
+2021-10-12 19:44:20,914 INFO  [Log] Get xpath for Field Name [Company Name] 
+2021-10-12 19:44:26,347 INFO  [Log] Page Name [ Company Details]  ###  Field Name [Search Companies Link]   ###   Action [Click]    ###   Locator [By.xpath: //a[@id='menu-SEARCHCOMPANIES']] 
+2021-10-12 19:44:28,743 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Company ID]   ###   Action [EnterText]    ###   Text [FGS_AutoCompany03]   ###   Locator [By.xpath: //input[@id='companyCode']] 
+2021-10-12 19:44:28,806 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Company Name]   ###   Action [EnterText]    ###   Text [FGS_AutoCompany03]   ###   Locator [By.xpath: //input[@id='companyName']] 
+2021-10-12 19:44:28,886 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Market Segment]   ###   Action [ClearText]  ###   Locator [By.xpath: //label[text()='Market Segment']/../input[@class='autocomplete ac_input']] 
+2021-10-12 19:44:28,948 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Market Segment]   ###   Action [EnterText]    ###   Text [Cash Management - Large]   ###   Locator [By.xpath: //label[text()='Market Segment']/../input[@class='autocomplete ac_input']] 
+2021-10-12 19:44:29,009 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Search Companies Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='searchCompany']] 
+2021-10-12 19:44:29,081 INFO  [Log] Get xpath for Field Name [Company Name] 
+2021-10-12 19:44:33,471 INFO  [Log] Page Name [ Company Details]  ###  Field Name [Action click]   ###   Action [Click]    ###   Locator [By.xpath: //button[contains(@class,'companyActions')]/span[text()='Actions']] 
+2021-10-12 19:44:33,543 INFO  [Log] Page Name [ Company Details]  ###  Field Name [Edit Company click]   ###   Action [Click]    ###   Locator [By.xpath: //button/span[contains(text(),'Edit Company')]] 
+2021-10-12 19:44:34,787 INFO  [Log] Page Name [ Create Company]  ###  Field Name [companyNameField]   ###   Action [ClearAndType]    ###   Text [FGS_EditAutoCompany03]   ###   Locator [By.xpath: //input[@id='companyvo.name']] 
+2021-10-12 19:44:34,912 INFO  [Log] Page Name [ Create Company]  ###  Field Name [Saved Company]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='saveButton']] 
+2021-10-12 19:44:34,975 INFO  [Log] Get xpath for Field Name [Company Name] 
+2021-10-12 19:44:36,439 INFO  [Log] Page Name [ Company Details]  ###  Field Name [Search Companies Link]   ###   Action [Click]    ###   Locator [By.xpath: //a[@id='menu-SEARCHCOMPANIES']] 
+2021-10-12 19:44:38,090 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Company ID]   ###   Action [EnterText]    ###   Text [FGS_AutoCompany03]   ###   Locator [By.xpath: //input[@id='companyCode']] 
+2021-10-12 19:44:38,160 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Company Name]   ###   Action [EnterText]    ###   Text [FGS_EditAutoCompany03]   ###   Locator [By.xpath: //input[@id='companyName']] 
+2021-10-12 19:44:38,248 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Market Segment]   ###   Action [ClearText]  ###   Locator [By.xpath: //label[text()='Market Segment']/../input[@class='autocomplete ac_input']] 
+2021-10-12 19:44:38,310 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Market Segment]   ###   Action [EnterText]    ###   Text [Cash Management - Large]   ###   Locator [By.xpath: //label[text()='Market Segment']/../input[@class='autocomplete ac_input']] 
+2021-10-12 19:44:38,373 INFO  [Log] Page Name [ Admin Search Companies Page]  ###  Field Name [Search Companies Button]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='searchCompany']] 
+2021-10-12 19:44:38,438 INFO  [Log] Get xpath for Field Name [Company Name] 
+2021-10-12 19:44:41,502 INFO  [Log] Page Name [ Admin Page]  ###  Field Name [Log Off button]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='Log Off']] 
+2021-10-12 19:44:43,051 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             -E---N---D- :CC_ADMIN_TC002             XXXXXXXXXXXXXXXXXXXXXX 
+2021-10-12 19:44:43,051 INFO  [Log] X 
+2021-10-12 19:44:43,051 INFO  [Log] X 
