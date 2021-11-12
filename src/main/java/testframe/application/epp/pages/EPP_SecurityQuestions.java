@@ -43,16 +43,15 @@ public class EPP_SecurityQuestions extends CommonLibrary {
 			String[] securityQuestionTD_split = securityQuestionTD.trim().split("\\|");
 			String[] securityAnswerTD_split = securityAnswerTD.trim().split("\\|");
 			for (int i = 0; i < securityQuestionTD_split.length; i++) {
-				waitElement(1000);
+				waitElement(4000);
 				if (securityQuestionTD_split[i].equals(secuirtyQues1)) {
 					enterText(eppSecurityPage, "SecurityQuestion1", firstSecurityAnswer, securityAnswerTD_split[i]);
 				}
 				if (securityQuestionTD_split[i].equals(secuirtyQues2)) {
 					enterText(eppSecurityPage, "SecurityQuestion2", secondSecurityAnswer, securityAnswerTD_split[i]);
 				}
-			}
-			clickOnElement(eppSecurityPage, "SecurityQuestions", submitButton);
-			waitElement(1000);
+			}			clickOnElement(eppSecurityPage, "SecurityQuestions", submitButton);
+			waitElement(5000);
 			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

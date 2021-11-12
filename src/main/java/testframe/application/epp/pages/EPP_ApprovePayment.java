@@ -38,14 +38,13 @@ public class EPP_ApprovePayment extends CommonLibrary{
 	By backutton = By.xpath("//div[@class='titleBarBackButton']");
 	
 	
-	public void verifyAndApprovePayments(String bannerDetails,String paymentDetailstab,
-			String eppTemplateName,String amountApproval,String dateField) {
+	public void verifyAndApprovePayments(String eppTemplateName,String amountApproval,String dateField) {
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement(eppApprovePayment, "Approve Payment", screenTitle);
 			if(isElementPresent(screenTitle)) {
-				validateTextContains(eppApprovePayment,  "Payment Details Banner", paymentBanner, bannerDetails);
-				getDynamicElement("Payment Details Tab", paymentTabs, paymentDetailstab );
+				validateTextContains(eppApprovePayment,  "Payment Details Banner", paymentBanner, "This transaction has been submitted for approval following manual creation");
+				getDynamicElement("Payment Details Tab", paymentTabs, "Payment Details" );
 				isElementPresent(transactionvalue);
 				validateTextEquals(eppApprovePayment, "Template Name", templateName, eppTemplateName);
 				waitElement(2000);

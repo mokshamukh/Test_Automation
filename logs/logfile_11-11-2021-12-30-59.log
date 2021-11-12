@@ -1,0 +1,278 @@
+2021-11-11 12:31:00,118 INFO  [Log] <<<<<<<<<<<<<         Execution Kick Off - Reading Master file         >>>>>>>>>>>>> 
+2021-11-11 12:31:01,376 INFO  [Log] $$           Test Execution for Application : EPP           $$ 
+2021-11-11 12:31:01,504 INFO  [Log] $$           Reading Test Case Details from 'EPP' sheet of Master file           $$ 
+2021-11-11 12:31:01,504 INFO  [Log] **************************************************************************************** 
+2021-11-11 12:31:01,505 INFO  [Log] $$     EPP_TC003 : CREATE A MANUAL PAYMENT[INCOMING_CUST FRB]     $$ 
+2021-11-11 12:31:01,513 INFO  [Log] **************************************************************************************** 
+2021-11-11 12:31:05,714 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-11 12:31:05,716 INFO  [Log] Go To URL [https://portal.uat.fec-frms.fiservapps.com/portal/login?c=D02T021] 
+2021-11-11 12:33:47,772 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [Login Logo]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[text()='Log in to your account']] 
+2021-11-11 12:33:47,829 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPUserID = DT021TS]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrName']] 
+2021-11-11 12:33:48,328 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPPswd = Fiserv@1234]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrPwd']] 
+2021-11-11 12:33:48,664 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [LoginButton]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Log in']] 
+2021-11-11 12:33:51,193 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [Security Question]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[@id='securityQuestionsHeading']] 
+2021-11-11 12:33:51,607 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion1]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//label] 
+2021-11-11 12:33:51,724 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion2]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//label] 
+2021-11-11 12:33:55,870 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion1 = employer]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//input[@id='newQuestionAns-0']] 
+2021-11-11 12:34:04,246 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion2 = name]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//input[@id='newQuestionAns-1']] 
+2021-11-11 12:34:20,827 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestions]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='btnVerifySecurityQuestionsSubmit']] 
+2021-11-11 12:34:29,088 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:34:29,607 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [Click]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:35:00,362 INFO  [Log] Switch To Window With Title As [Unauthorized Access Warning] 
+2021-11-11 12:35:06,546 INFO  [Log] Page Name [ EPP_DisclaimerPage]  ###  Field Name [Disclaimer]   ###   Action [Click]    ###   Locator [By.xpath: //div[@id='img_button_continue']] 
+2021-11-11 12:35:55,416 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:35:58,680 INFO  [Log] Page Name [ Epp_MenuPage] ### Field Name [Menu Selected] ### Action [Click]  
+2021-11-11 12:36:00,547 INFO  [Log] Page Name [ EPP_SubMenuPage] ### Field Name [Sub Menu Selected] ### Action [Click]  
+2021-11-11 12:36:02,400 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:36:55,581 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:36:55,581 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:36:55,581 INFO  [Log] Page Name [ EPP_Templates]  ###  Field Name [Template]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='Incoming High Value Customer Payment (FRB)']] 
+2021-11-11 12:36:55,626 INFO  [Log] Page Name [ EPP_Templates] ### Field Name [Template] ### Action [Click]  
+2021-11-11 12:38:02,642 INFO  [Log] Get xpath for Field Name [EPP_CreatePayment] 
+2021-11-11 12:38:02,643 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Ordering Customer Account = 33442]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='OrderCustAccount']] 
+2021-11-11 12:38:05,945 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Ordering Bank Expand Button]   ###   Action [Click]    ###   Locator [By.xpath: //table[@id='OrderingBankTable']//..//td[contains(text(),'Ordering Bank')]] 
+2021-11-11 12:38:09,445 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Ordering Bank Account = 021000021]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='OrderInstID']] 
+2021-11-11 12:38:12,752 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [System Code]   ###   Action [SelectByVisibleTxt]    ###   Text [ABA (American Bankers Association) Fedwire Routing Number]   ###   Locator [By.xpath: //select[@id='OrderInstIDType']] 
+2021-11-11 12:38:16,089 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Ordering Bank_LookUp]   ###   Action [Click]    ###   Locator [By.xpath: //span[@id='OrderInstIDTypeWrapper']//..//div[@id='img_button_lookUp']] 
+2021-11-11 12:38:24,420 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Customer_Amount = 6]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='Amount']] 
+2021-11-11 12:38:27,766 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Benificiary Customer Account = 000100011]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='BenCustAccount']] 
+2021-11-11 12:38:31,186 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Bene Customer_LookUp]   ###   Action [Click]    ###   Locator [By.xpath: //input[@id='BenCustAccount']//..//div[@id='img_button_lookUp']] 
+2021-11-11 12:38:39,499 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Credit Account = 000100011]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='Credit_Account_Override']] 
+2021-11-11 12:38:44,780 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Validate Button]   ###   Action [Click]    ###   Locator [By.xpath: //a[@id='Validate']] 
+2021-11-11 12:38:53,652 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Validation Successfull Window]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='confirmWindow']] 
+2021-11-11 12:38:57,703 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Submit Payment Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@id='SubmitPayment']] 
+2021-11-11 12:39:57,532 INFO  [Log] Page Name [ Payment Template]  ###  Field Name [Transaction ID]   ###   Action [GetElementText]    ###   Locator [By.xpath: //div[@id='Refresh_UserResponse']//td[@id='userResponseInfoTD']//a[1]] 
+2021-11-11 12:39:59,674 INFO  [Log] Switch To Window With Title As [Authentication Gateway] 
+2021-11-11 12:40:02,731 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 12:40:02,772 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 12:40:13,069 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [Login Logo]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[text()='Log in to your account']] 
+2021-11-11 12:40:13,132 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPUserID = DT021KP]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrName']] 
+2021-11-11 12:40:13,592 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPPswd = Test@12345]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrPwd']] 
+2021-11-11 12:40:13,903 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [LoginButton]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Log in']] 
+2021-11-11 12:40:17,137 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [Security Question]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[@id='securityQuestionsHeading']] 
+2021-11-11 12:40:17,465 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion1]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//label] 
+2021-11-11 12:40:17,592 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion2]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//label] 
+2021-11-11 12:40:25,719 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion1 = neighbors]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//input[@id='newQuestionAns-0']] 
+2021-11-11 12:40:38,146 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion2 = sport]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//input[@id='newQuestionAns-1']] 
+2021-11-11 12:40:46,710 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestions]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='btnVerifySecurityQuestionsSubmit']] 
+2021-11-11 12:40:54,252 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:40:54,369 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [Click]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:41:24,924 INFO  [Log] Switch To Window With Title As [Unauthorized Access Warning] 
+2021-11-11 12:41:31,098 INFO  [Log] Page Name [ EPP_DisclaimerPage]  ###  Field Name [Disclaimer]   ###   Action [Click]    ###   Locator [By.xpath: //div[@id='img_button_continue']] 
+2021-11-11 12:42:55,825 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:42:56,037 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:42:56,038 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:42:56,038 INFO  [Log] Page Name [ EPP_Templates]  ###  Field Name [Template]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='Payment Creation Verification']] 
+2021-11-11 12:42:56,102 INFO  [Log] Page Name [ EPP_Templates] ### Field Name [Template] ### Action [Click]  
+2021-11-11 12:43:46,580 INFO  [Log] Page Name [ EPP_TransactionIDList]  ###  Field Name [Work Summary List]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='headerBar']//td[contains(text(),'Work Summary')]] 
+2021-11-11 12:43:46,645 INFO  [Log] Page Name [ EPP_TransactionIDList] ### Field Name [Work Summary List] ### Action [Click]  
+2021-11-11 12:46:16,087 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Approve Payment]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='headerBar']//td[contains(text(),'Verify Payment')]] 
+2021-11-11 12:46:16,208 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Payment Details Banner]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'approval')]] Expected Text [This transaction has been submitted for approval following manual creation] 
+2021-11-11 12:46:16,358 INFO  [Log] Get xpath for Field Name [Payment Details Tab] 
+2021-11-11 12:46:16,398 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Template Name]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //form[@id='FormPayment']//td//b] Expected Text [Incoming High Value Customer Payment (FRB)] 
+2021-11-11 12:46:18,527 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name and Value [Approval Amount = 6]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@class='validationBlindRekey']] 
+2021-11-11 12:46:20,806 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name and Value [Value Date Field = 11/11/21]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='Value_Date']] 
+2021-11-11 12:46:23,185 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Approve Payment]   ###   Action [Click]    ###   Locator [By.xpath: //div[@id='img_button_approve']] 
+2021-11-11 12:48:00,858 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:48:04,067 INFO  [Log] Page Name [ Epp_MenuPage] ### Field Name [Menu Selected] ### Action [Click]  
+2021-11-11 12:48:05,777 INFO  [Log] Page Name [ EPP_SubMenuPage] ### Field Name [Sub Menu Selected] ### Action [Click]  
+2021-11-11 12:48:07,329 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:48:56,198 INFO  [Log] Page Name [ EPP_TransactionInquiry]  ###  Field Name [Transaction Inquiry]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='headerBar']//td[contains(text(),'Transaction Inquiry')]] 
+2021-11-11 12:48:56,261 INFO  [Log] Page Name [ EPP_TransactionInquiry]  ###  Field Name and Value [Instruction Amount = 131500000349]   ###   Action [EnterText]    ###   Locator [By.xpath: //div[@class='lightShadedBackground']//..//..//input[@name='ReferenceValue']] 
+2021-11-11 12:48:56,594 INFO  [Log] Page Name [ EPP_TransactionInquiry]  ###  Field Name [Instruction Amount]   ###   Action [SelectByVisibleTxt]    ###   Text [USD]   ###   Locator [By.xpath: //select[@name='AmountCCY']] 
+2021-11-11 12:48:59,856 INFO  [Log] Page Name [ EPP_TransactionInquiry]  ###  Field Name and Value [Instruction Amount = 6]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@name='Amount']] 
+2021-11-11 12:49:00,140 INFO  [Log] Page Name [ EPP_TransactionInquiry]  ###  Field Name and Value [Value Date = 11/11/21]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='ValueDate']] 
+2021-11-11 12:49:00,513 INFO  [Log] Page Name [ EPP_TransactionInquiry]  ###  Field Name [Search Button]   ###   Action [Click]    ###   Locator [By.xpath: //div[@id='img_button_search']] 
+2021-11-11 12:49:30,347 INFO  [Log] Page Name [ EPP_PaymentDetails]  ###  Field Name [Transaction Status]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Completed')]] Expected Text [Completed] 
+2021-11-11 12:49:30,468 INFO  [Log] Page Name [ EPP_PaymentDetails]  ###  Field Name [Transaction Status]   ###   Action [ValidateElementPresent]    ###   Locator [By.xpath: //div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Completed')]] 
+2021-11-11 12:49:30,504 INFO  [Log] Page Name [ EPP_PaymentDetails]  ###  Field Name [Transaction ID]   ###   Action [GetElementText]    ###   Locator [By.xpath: //div[@id='Refresh_PaymentDetailsHeader5']//td//span[contains(text(),'Transaction ID')]//..//..//td[@class='valueCell'][1]] 
+2021-11-11 12:49:32,286 INFO  [Log] Switch To Window With Title As [Authentication Gateway] 
+2021-11-11 12:49:35,324 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 12:49:35,357 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 12:49:56,605 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             -E---N---D- :    EPP_TC003             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-11 12:49:56,605 INFO  [Log] X 
+2021-11-11 12:49:56,605 INFO  [Log] X 
+2021-11-11 12:49:56,606 INFO  [Log] **************************************************************************************** 
+2021-11-11 12:49:56,606 INFO  [Log] $$     EPP_TC004 : CREATE A MANUAL PAYMENT[INCOMING_BANK FRB]     $$ 
+2021-11-11 12:49:56,606 INFO  [Log] **************************************************************************************** 
+2021-11-11 12:49:59,258 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             Iteration - 1             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-11 12:49:59,262 INFO  [Log] Go To URL [https://portal.uat.fec-frms.fiservapps.com/portal/login?c=D02T021] 
+2021-11-11 12:54:01,110 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [Login Logo]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[text()='Log in to your account']] 
+2021-11-11 12:54:01,148 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPUserID = DT021TS]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrName']] 
+2021-11-11 12:54:01,516 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPPswd = Fiserv@1234]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrPwd']] 
+2021-11-11 12:54:01,797 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [LoginButton]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Log in']] 
+2021-11-11 12:54:03,814 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [Security Question]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[@id='securityQuestionsHeading']] 
+2021-11-11 12:54:04,999 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion1]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//label] 
+2021-11-11 12:54:05,106 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion2]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//label] 
+2021-11-11 12:54:13,203 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion1 = neighbors]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//input[@id='newQuestionAns-0']] 
+2021-11-11 12:54:21,529 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion2 = school]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//input[@id='newQuestionAns-1']] 
+2021-11-11 12:54:33,745 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestions]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='btnVerifySecurityQuestionsSubmit']] 
+2021-11-11 12:54:40,675 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:54:40,711 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [Click]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:55:11,116 INFO  [Log] Switch To Window With Title As [Unauthorized Access Warning] 
+2021-11-11 12:55:17,292 INFO  [Log] Page Name [ EPP_DisclaimerPage]  ###  Field Name [Disclaimer]   ###   Action [Click]    ###   Locator [By.xpath: //div[@id='img_button_continue']] 
+2021-11-11 12:55:44,316 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:55:47,477 INFO  [Log] Page Name [ Epp_MenuPage] ### Field Name [Menu Selected] ### Action [Click]  
+2021-11-11 12:55:49,203 INFO  [Log] Page Name [ EPP_SubMenuPage] ### Field Name [Sub Menu Selected] ### Action [Click]  
+2021-11-11 12:55:50,814 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:56:04,363 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:56:04,364 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:56:04,364 INFO  [Log] Page Name [ EPP_Templates]  ###  Field Name [Template]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='Incoming High Value Bank Payment (FRB)']] 
+2021-11-11 12:56:04,443 INFO  [Log] Page Name [ EPP_Templates] ### Field Name [Template] ### Action [Click]  
+2021-11-11 12:56:39,244 INFO  [Log] Get xpath for Field Name [EPP_CreatePayment] 
+2021-11-11 12:56:39,244 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Ordering Bank Account = 021000021]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='OrderInstID']] 
+2021-11-11 12:56:42,582 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [System Code]   ###   Action [SelectByVisibleTxt]    ###   Text [ABA (American Bankers Association) Fedwire Routing Number]   ###   Locator [By.xpath: //select[@id='OrderInstIDType']] 
+2021-11-11 12:56:45,883 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Ordering Bank_LookUp]   ###   Action [Click]    ###   Locator [By.xpath: //span[@id='OrderInstIDTypeWrapper']//..//div[@id='img_button_lookUp']] 
+2021-11-11 12:56:54,188 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Customer_Amount = 5]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='Amount']] 
+2021-11-11 12:56:58,613 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Benificiary Customer Account = 000100011]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='BenBankAccount']] 
+2021-11-11 12:57:02,927 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Bene Customer_LookUp]   ###   Action [Click]    ###   Locator [By.xpath: //table[@id='BeneficiaryBankTable']//input[@id='BenBankAccountType']//..//div[@id='img_button_lookUp']] 
+2021-11-11 12:57:11,516 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name and Value [Credit Account = 000100011]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='Credit_Account_Override']] 
+2021-11-11 12:57:16,823 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Validate Button]   ###   Action [Click]    ###   Locator [By.xpath: //a[@id='Validate']] 
+2021-11-11 12:57:25,989 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Validation Successfull Window]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='confirmWindow']] 
+2021-11-11 12:57:30,028 INFO  [Log] Page Name [ EPP_CreatePayment]  ###  Field Name [Submit Payment Button]   ###   Action [Click]    ###   Locator [By.xpath: //input[@id='SubmitPayment']] 
+2021-11-11 12:57:56,069 INFO  [Log] Page Name [ Payment Template]  ###  Field Name [Transaction ID]   ###   Action [GetElementText]    ###   Locator [By.xpath: //div[@id='Refresh_UserResponse']//td[@id='userResponseInfoTD']//a[1]] 
+2021-11-11 12:57:57,944 INFO  [Log] Switch To Window With Title As [Authentication Gateway] 
+2021-11-11 12:58:00,983 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 12:58:01,008 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 12:58:09,700 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [Login Logo]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[text()='Log in to your account']] 
+2021-11-11 12:58:09,752 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPUserID = DT021KP]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrName']] 
+2021-11-11 12:58:10,090 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name and Value [EPPPswd = Test@12345]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='usrPwd']] 
+2021-11-11 12:58:10,431 INFO  [Log] Page Name [ EPP_LoginPage]  ###  Field Name [LoginButton]   ###   Action [Click]    ###   Locator [By.xpath: //button[text()='Log in']] 
+2021-11-11 12:58:13,187 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [Security Question]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //h2[@id='securityQuestionsHeading']] 
+2021-11-11 12:58:13,611 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion1]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//label] 
+2021-11-11 12:58:13,710 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestion2]   ###   Action [GetElementText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//label] 
+2021-11-11 12:58:21,822 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion1 = neighbors]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[1]//input[@id='newQuestionAns-0']] 
+2021-11-11 12:58:26,176 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name and Value [SecurityQuestion2 = name]   ###   Action [EnterText]    ###   Locator [By.xpath: //p[@id='securityQuestionsSubHeading']//../div[2]//input[@id='newQuestionAns-1']] 
+2021-11-11 12:58:43,516 INFO  [Log] Page Name [ EPP_SecurityPage]  ###  Field Name [SecurityQuestions]   ###   Action [Click]    ###   Locator [By.xpath: //button[@id='btnVerifySecurityQuestionsSubmit']] 
+2021-11-11 12:58:50,206 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:58:50,238 INFO  [Log] Page Name [ EPP_ProductSelection]  ###  Field Name [EPP Product Selected]   ###   Action [Click]    ###   Locator [By.xpath: //img[@class='product_logo'][@title='Enterprise Payments Platform']] 
+2021-11-11 12:59:20,612 INFO  [Log] Switch To Window With Title As [Unauthorized Access Warning] 
+2021-11-11 12:59:26,802 INFO  [Log] Page Name [ EPP_DisclaimerPage]  ###  Field Name [Disclaimer]   ###   Action [Click]    ###   Locator [By.xpath: //div[@id='img_button_continue']] 
+2021-11-11 12:59:54,258 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 12:59:54,425 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:59:54,425 INFO  [Log] Get xpath for Field Name [Template] 
+2021-11-11 12:59:54,425 INFO  [Log] Page Name [ EPP_Templates]  ###  Field Name [Template]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='Payment Creation Verification']] 
+2021-11-11 12:59:54,464 INFO  [Log] Page Name [ EPP_Templates] ### Field Name [Template] ### Action [Click]  
+2021-11-11 13:00:12,603 INFO  [Log] Page Name [ EPP_TransactionIDList]  ###  Field Name [Work Summary List]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='headerBar']//td[contains(text(),'Work Summary')]] 
+2021-11-11 13:00:12,662 INFO  [Log] Page Name [ EPP_TransactionIDList] ### Field Name [Work Summary List] ### Action [Click]  
+2021-11-11 13:01:09,434 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Approve Payment]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='headerBar']//td[contains(text(),'Verify Payment')]] 
+2021-11-11 13:01:09,499 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Payment Details Banner]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'approval')]] Expected Text [This transaction has been submitted for approval following manual creation] 
+2021-11-11 13:01:09,609 INFO  [Log] Get xpath for Field Name [Payment Details Tab] 
+2021-11-11 13:01:09,643 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Template Name]   ###   Action [ValidateTextEquals]    ###   Locator [By.xpath: //form[@id='FormPayment']//td//b] Expected Text [Incoming High Value Bank Payment (FRB)] 
+2021-11-11 13:01:11,738 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name and Value [Approval Amount = 5]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@class='validationBlindRekey']] 
+2021-11-11 13:01:13,972 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name and Value [Value Date Field = 11/11/21]   ###   Action [EnterText]    ###   Locator [By.xpath: //input[@id='Value_Date']] 
+2021-11-11 13:01:16,253 INFO  [Log] Page Name [ EPP_ApprovePayment]  ###  Field Name [Approve Payment]   ###   Action [Click]    ###   Locator [By.xpath: //div[@id='img_button_approve']] 
+2021-11-11 13:07:16,575 ERROR [Log] Could Not Click On [Approve Payment]   On Page [ EPP_ApprovePayment] 
+org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@id='img_button_approve']"}
+  (Session info: chrome=95.0.4638.69)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.43.157', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 95.0.4638.69, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: C:\Users\F9Z2G8A\AppData\Lo...}, goog:chromeOptions: {debuggerAddress: localhost:61441}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 207911001df782a37cc71177b8f33e2b
+*** Element info: {Using=xpath, value=//div[@id='img_button_approve']}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:160)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:371)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:473)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at testframe.application.common.CommonLibrary.scrollToElement(CommonLibrary.java:1212)
+	at testframe.application.common.CommonLibrary.findElement(CommonLibrary.java:1168)
+	at testframe.application.common.CommonLibrary.clickOnElement(CommonLibrary.java:266)
+	at testframe.application.epp.pages.EPP_ApprovePayment.verifyAndApprovePayments(EPP_ApprovePayment.java:55)
+	at testframe.application.epp.businessflow.EppTest.executeTestCase(EppTest.java:281)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:47)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+2021-11-11 13:07:18,716 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 13:07:21,952 INFO  [Log] Page Name [ Epp_MenuPage] ### Field Name [Menu Selected] ### Action [Click]  
+2021-11-11 13:07:23,655 INFO  [Log] Page Name [ EPP_SubMenuPage] ### Field Name [Sub Menu Selected] ### Action [Click]  
+2021-11-11 13:07:51,329 INFO  [Log] Switch To Window With Title As [Enterprise Payments Platform] 
+2021-11-11 13:08:11,309 INFO  [Log] Page Name [ EPP_TransactionInquiry]  ###  Field Name [Transaction Inquiry]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //div[@id='headerBar']//td[contains(text(),'Transaction Inquiry')]] 
+2021-11-11 13:11:43,419 ERROR [Log] Could Not be find [Transaction Inquiry] in [60] Seconds On Page [EPP_TransactionInquiry] 
+org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element located by: By.xpath: //div[@id='headerBar']//td[contains(text(),'Transaction Inquiry')] (tried for 60 second(s) with 500 MILLISECONDS interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:82)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:231)
+	at testframe.application.common.CommonLibrary.waitForPresenceOfElement(CommonLibrary.java:867)
+	at testframe.application.epp.pages.EPP_TransactionInquiry.searchTransaction(EPP_TransactionInquiry.java:45)
+	at testframe.application.epp.businessflow.EppTest.executeTestCase(EppTest.java:285)
+	at testframe.application.common.SelectApplicationFlow.executeApplicationFlow(SelectApplicationFlow.java:47)
+	at testframe.runmanager.RunDriver.navigateToTest(RunDriver.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.xpath: //div[@id='headerBar']//td[contains(text(),'Transaction Inquiry')]
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.9.1', revision: '63f7b50', time: '2018-02-07T22:25:02.294Z'
+System info: host: 'NOI-5CD1218R56', ip: '192.168.43.157', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_301'
+Driver info: driver.version: RunDriver
+	at org.openqa.selenium.support.ui.ExpectedConditions.lambda$findElement$0(ExpectedConditions.java:896)
+	at java.util.Optional.orElseThrow(Optional.java:290)
+	at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:895)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:44)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:183)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:180)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:208)
+	... 30 more
+2021-11-11 13:13:49,788 INFO  [Log] Switch To Window With Title As [Authentication Gateway] 
+2021-11-11 13:13:52,866 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [WaitForPresence]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 13:13:52,906 INFO  [Log] Page Name [ EPPlogoutPage]  ###  Field Name [Logout Page]   ###   Action [Click]    ###   Locator [By.xpath: //a[text()='power_settings_new']] 
+2021-11-11 13:14:07,140 INFO  [Log] XXXXXXXXXXXXXXXXXXXXXXX             -E---N---D- :    EPP_TC004             XXXXXXXXXXXXXXXXXXXXXX 
+2021-11-11 13:14:07,140 INFO  [Log] X 
+2021-11-11 13:14:07,141 INFO  [Log] X 

@@ -26,41 +26,32 @@ public class EPP_TransactionInquiry extends CommonLibrary {
 	}
 	
 	public String eppTransactionInquiry = "EPP_TransactionInquiry";
+	String approveTransID;
 
 	By transactionTitle = By.xpath("//div[@id='headerBar']//td[contains(text(),'Transaction Inquiry')]");
 	By instructionAmount = By.xpath("//input[@name='Amount']");
 	By valueDate = By.xpath("//input[@id='ValueDate']");
 	By searchButton = By.xpath("//div[@id='img_button_search']");
 	By paymentTitle = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Details')]");
-	By transactionStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Completed')]");
-	By bypassON = By.xpath("//div[@id='Refresh_UserResponse']//..//td[contains(text(),'Bypass Flag is currently ON')]");
-    By transactionId = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td//span[contains(text(),'Transaction ID')]//..//..//td[@class='valueCell'][1]");
-  
+    By selectAmount = By.xpath("//select[@name='AmountCCY']");
+    By refTransID = By.xpath("//div[@class='lightShadedBackground']//..//..//input[@name='ReferenceValue']");
+    
 	
-   public void searchAndverifyTransactionStatus(String instAmount,String valueDateField,String transactionFinalStatus) {
+   public void searchTransaction(String instAmount,String valueDateField) {
 	 boolean stepResult = false;
 	try {
 		switchToWindowWithTitleContaining("Enterprise Payments Platform");
 		driver.switchTo().frame("main");
 		waitForPresenceOfElement(eppTransactionInquiry, "Transaction Inquiry", transactionTitle);
 		if(isElementPresent(transactionTitle)) {
+			approveTransID = eppCreatePayment.getTransactionID();
+			enterText(eppTransactionInquiry, "Instruction Amount", refTransID, approveTransID);
+			selectElementByVisibleText(eppTransactionInquiry, "Instruction Amount", selectAmount, "USD");
+			waitElement(3000);
 			enterText(eppTransactionInquiry, "Instruction Amount", instructionAmount, instAmount);
-			enterText(eppTransactionInquiry, "Instruction Amount", valueDate, valueDateField);
+			enterText(eppTransactionInquiry, "Value Date", valueDate, valueDateField);
 			clickOnElement(eppTransactionInquiry, "Search Button", searchButton);
 			waitElement(5000);
-		}
-		waitElement(3000);
-		if(isElementPresent(paymentTitle)) {
-			validateTextContains(eppTransactionInquiry,  "Transaction Status", transactionStatus, transactionFinalStatus);
-			validateElementPresent(eppTransactionInquiry, "Transaction Status", transactionStatus);
-			String transactionIDStatus = getElementText(eppTransactionInquiry, "Transaction ID", transactionId);
-			String approveTransID = eppCreatePayment.getTransactionID();
-			if(transactionIDStatus.equalsIgnoreCase(approveTransID)) {
-				System.out.println("Pass");
-				stepResult = true;
-			}else {
-				System.out.println("fail");
-			}
 		}
 		stepResult = true;
 	} catch (Exception e) {
@@ -69,10 +60,10 @@ public class EPP_TransactionInquiry extends CommonLibrary {
 	} finally {
 		if (stepResult == true) {
 			System.out.println("Pass");
-			new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application", "Transaction verified Successfully","Passed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application", "Transaction searched Successfully","Passed", driver, "Y");
 		} else {
 			System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application","Could not verify Transaction Successfully", "Failed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application","Could not search Transaction Successfully", "Failed", driver, "Y");
 		}
 	}
 

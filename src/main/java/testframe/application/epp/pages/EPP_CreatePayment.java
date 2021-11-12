@@ -60,12 +60,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 	public String createPaymentTitle = "//div[@id='headerBar']//td[contains(text(),'%s')]";
 	public String PaymentTemplate = "Payment Template";
 
-	public void createOutgoingHVBankPaymentFRB(String value, String accNum, String systemCode, String debitAccount,
+	public void createOutgoingHVBankPaymentFRB(String accNum, String systemCode, String debitAccount,
 			String amount, String benAccount, String beneName, String beneAddress, String accWithBankNo,
 			String accWithSysCode) {
 		boolean stepResult = false;
 		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, value);
+			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
 			enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, accNum);
 			waitElement(3000);
 			selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, systemCode);
@@ -106,7 +106,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 			if (stepResult == true) {
 				System.out.println("Pass");
 				//new HTMLReportHelper().HtmlReportBody("TransactionID - EPP application", "Created Successfully","Passed", driver, "Y");
-				new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on '" + value +"' Create Payment", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on '" + "+Create Payment+" +"' Create Payment", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application","Could not Create Successfully", "Failed", driver, "Y");
@@ -133,12 +133,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 
 	}
 
-	public void createOutgoingHVCustomerPaymentFRB(String value, String custAccNum, String debitAccount, String amount,
+	public void createOutgoingHVCustomerPaymentFRB(String custAccNum, String debitAccount, String amount,
 			String benCustAccount, String benecustName, String benecustAddress, String accWithBankNo,
 			String accWithSysCode) {
 		boolean stepResult = false;
 		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, value);
+			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
 			enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
 			waitElement(3000);
 			clickOnElement(eppCreatePayment, "Ordering Customer_LookUp", custLookup);
@@ -186,12 +186,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 		}
 	}
 
-	public void createIncomingHVCustomerPaymentFRB(String value, String custAccNum, String bankAccNum,
+	public void createIncomingHVCustomerPaymentFRB(String custAccNum, String bankAccNum,
 			String bankSystemCode, String amount, String benCustAccount, String creditAccNum, String accWithBankNo,
 			String accWithSysCode) {
 		boolean stepResult = false;
 		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, value);
+			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
 			enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
 			waitElement(3000);
 			clickOnElement(eppCreatePayment, "Ordering Bank Expand Button", incomngOrderBankExpand);
@@ -237,11 +237,11 @@ public class EPP_CreatePayment extends CommonLibrary {
 		}
 	}
 
-	public void createIncomingHVBankPaymentFRB(String value, String bankAccNum, String bankSystemCode, String amount,
+	public void createIncomingHVBankPaymentFRB(String bankAccNum, String bankSystemCode, String amount,
 			String benCustAccount, String creditAccNum, String accWithBankNo, String accWithSysCode) {
 		boolean stepResult = false;
 		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, value);
+			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
 			enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, bankAccNum);
 			waitElement(3000);
 			selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, bankSystemCode);

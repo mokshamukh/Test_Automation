@@ -21,24 +21,24 @@ public class EPP_Templates extends CommonLibrary{
 	}
 	
 	public String eppTemplates = "EPP_Templates";
+	public String poolTemplateOptions = "//a[text()='%s']";
+	public String blockName = "//div[@id='headerBar']//table//td[contains(text(),'%s')]";
 	
 	
-	By manualPayment = By.xpath("//h2[text()='Manual Payments']");
+	 By manualPayment = By.xpath("//h2[text()='Manual Payments']");
 	//By paymentCreation = By.xpath("//a[@class='linkMenu'][text()='Payment Creation']");
 	//By outgoingFRB = By.xpath("//a[text()='Outgoing High Value Bank Payment (FRB)']");
 	
-	public String paymentTemplateOptions = "//a[text()='%s']";
-	public String templateLabel = "//div[@id='headerBar']//table//td[contains(text(),'%s')]";
 	
 	
-	public void selectPaymentTemplate(String templateHeader,String value) {
+	public void selectTemplate(String blockHeaderName,String poolValue) {
 		boolean stepResult = false;
 		try {
 			switchToWindowWithTitleContaining("Enterprise Payments Platform");
 			driver.switchTo().frame("main");
-			getDynamicElement("Template",templateLabel,templateHeader); 
-			waitForPresenceOfElement(eppTemplates, "Payment_Template", getDynamicElement("Payment Template",paymentTemplateOptions, value));
-			getDynamicElementClick(eppTemplates, "Payment Template", paymentTemplateOptions, value);
+			getDynamicElement("Template",blockName,blockHeaderName); 
+			waitForPresenceOfElement(eppTemplates, "Template", getDynamicElement("Template",poolTemplateOptions, poolValue));
+			getDynamicElementClick(eppTemplates, "Template", poolTemplateOptions, poolValue);
 			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -46,10 +46,10 @@ public class EPP_Templates extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Template option '" + value +"' template", "Successfully clicked on '" + value +"' template", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Template option '" + poolValue +"' template", "Successfully clicked on '" + poolValue +"' template", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Template option '" + value +"' template", "Could not clicked on '" + value +"' template", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Template option '" + poolValue +"' template", "Could not clicked on '" + poolValue +"' template", "Failed", driver, "Y");
 			}
 		}
 	}

@@ -25,7 +25,7 @@ public class EPP_ProductSelection extends CommonLibrary{
 		// TODO Auto-generated constructor stub
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 50), this);
 	}
-
+	
 	public String eppproductSelectionPage ="EPP_ProductSelection";
 	public String eppdisclaimerPage = "EPP_DisclaimerPage";
 
@@ -34,21 +34,20 @@ public class EPP_ProductSelection extends CommonLibrary{
 	By disclaimerBox = By.xpath("//div[@class='legalDisclaimerBox']");
 	By disclaimerContinueBtn = By.xpath("//div[@id='img_button_continue']");
 
-
-
-	public void selectProductForPayment(String title) {
+	
+	
+	public void selectProductEPP() {
 		boolean stepResult = false;
 		try {
-			waitElement(10000);
 			waitForPresenceOfElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
 			clickOnElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
-			waitElement(10000);
-			switchToWindowWithTitleContaining(title);
+			waitElement(30000);
+			switchToWindowWithTitleContaining("Unauthorized Access Warning");
 			waitElement(6000);
 			if(isElementPresent(disclaimerBox)) {
-				clickOnElement(eppdisclaimerPage, "Disclaimer", disclaimerContinueBtn);
-				waitElement(6000);
-				stepResult = true;
+			clickOnElement(eppdisclaimerPage, "Disclaimer", disclaimerContinueBtn);
+			waitElement(6000);
+			stepResult = true;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -62,7 +61,7 @@ public class EPP_ProductSelection extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Product_Selection EPP - EPP application","Could not Select Product Successfully", "Failed", driver, "Y");
 			}
 		}
-
+		
 	}
-
+	
 }

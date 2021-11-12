@@ -57,7 +57,6 @@ public class EPP_Login extends CommonLibrary {
 			enterText(eppLoginPage, "EPPUserID", userID, eppUserID);
 			enterText(eppLoginPage, "EPPPswd", password, eppPswd);
 			clickOnElement(eppLoginPage, "LoginButton", loginButton);
-			waitForPresenceOfElement(eppLoginPage, "SecurityQuestion", securityQuestLogo);
 			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
