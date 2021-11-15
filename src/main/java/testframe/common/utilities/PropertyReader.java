@@ -16,7 +16,7 @@ public class PropertyReader {
 	private  String strpathToConfigProperties;
 	private  String strpathToAppConfigPropFolder;
 	private  String strpathToAppReportFolder;
-	private  String strParamValue;
+	private  String strParamValue,strpathToSummaryReportTemplate,strpathToCopySummaryReport;
 
 	private  String configpropertyFile_Path;
 
@@ -54,8 +54,14 @@ public class PropertyReader {
 		}
 		return strpathToAppReportFolder;
 	}
-
-
+	
+	public  String pathToSummaryReportTemplateFromFrameworkPropFile() throws IOException {
+		if (strpathToSummaryReportTemplate == null) {
+			strpathToSummaryReportTemplate = readProperties(frameworkpropertyFile,"pathToSummaryReportTemplate");
+		}
+		return strpathToSummaryReportTemplate;
+	}
+	
 	public  String getParamfromConfigProperties(String paramName) throws IOException {
 		configpropertyFile_Path = pathToConfigPropertiesFromFrameworkPropFile();
 		strParamValue = readProperties(configpropertyFile_Path,paramName);

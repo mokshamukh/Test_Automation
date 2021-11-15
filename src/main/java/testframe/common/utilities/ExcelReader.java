@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 
@@ -242,5 +244,13 @@ public class ExcelReader {
 		if (sFoundCol =="N")
 			throw new Exception("Could not find column '"+ columnName + "'  in excel file :'"+ excelFilePath + "' and sheet :'"+ sheetName + "'");
 	}
+	
+	public void copyExcelFile(String fromLocation, String toLocation) throws IOException{
+		
+		File from = new File(fromLocation); 
+		File to = new File(toLocation);
+		FileUtils.copyFileToDirectory(from, to);
+	}
+	
 
 }
