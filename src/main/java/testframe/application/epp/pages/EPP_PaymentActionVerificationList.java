@@ -1,5 +1,9 @@
 package testframe.application.epp.pages;
-
+/**
+ * PageName : EPP_PaymentActionVerificationList
+ * 
+ * @author Shilpa.Thangapalam
+ */
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -28,7 +32,7 @@ public class EPP_PaymentActionVerificationList extends CommonLibrary{
 	
 	
 	
-	public void selectPaymentActionOnTransactionID() {
+	public void selectPaymentActionOnTransactionID() throws Exception {
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement(eppPaymentActionList, "Work Summary List", title);

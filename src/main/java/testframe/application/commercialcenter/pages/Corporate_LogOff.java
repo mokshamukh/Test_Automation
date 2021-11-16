@@ -27,7 +27,7 @@ public class Corporate_LogOff extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void logoffApplication() {
+	public void logoffApplication() throws Exception {
 		boolean stepResult = false;
 		try {
 			clickOnElement("Corporate Page", "User button", user);

@@ -27,9 +27,10 @@ public class EPP_Login extends CommonLibrary {
 	By password = By.xpath("//input[@id='usrPwd']");
 	By loginButton = By.xpath("//button[text()='Log in']");
 	By securityQuestLogo = By.xpath(" //h2[@id='securityQuestionsHeading']");
+	By securityQuest = By.xpath("//h2[@id='securityQuestionsHeading']");
 	
 	
-	public void launchApplication(String url) {
+	public void launchApplication(String url) throws Exception {
 		boolean stepResult = false;
 		try {
 			goTo(url);
@@ -49,7 +50,7 @@ public class EPP_Login extends CommonLibrary {
 		}
 	}
 
-	public void loginEppApplication (String eppUserID, String eppPswd) {
+	public void loginEppApplication (String eppUserID, String eppPswd) throws Exception {
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement(eppLoginPage, "Login Logo", loginLogo);
@@ -57,6 +58,7 @@ public class EPP_Login extends CommonLibrary {
 			enterText(eppLoginPage, "EPPUserID", userID, eppUserID);
 			enterText(eppLoginPage, "EPPPswd", password, eppPswd);
 			clickOnElement(eppLoginPage, "LoginButton", loginButton);
+			waitForPresenceOfElement(eppLoginPage, "Security Question", securityQuest);
 			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

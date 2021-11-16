@@ -22,7 +22,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 	}
 	
-	public void createNewContact(String sSN){
+	public void createNewContact(String sSN) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -48,7 +48,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 		
 	}
 
-	public void searchSSN(String sSN){
+	public void searchSSN(String sSN) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);

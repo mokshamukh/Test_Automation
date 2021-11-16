@@ -60,7 +60,7 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 	}
 
 	public void verifyAccDetails(String fromAccReview, String toAccReview, String memoReview, String payInstrReview,
-			String amtReview) {
+			String amtReview) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accTransferReviewTitle)) {
@@ -107,7 +107,7 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 			String payInstrReview, String amtReview, String fromAccReview1, String toAccReview1, String memoReview1,
 			String payInstrReview1, String amtReview1, String fromAccReview2, String toAccReview2, String memoReview2,
 			String payInstrReview2, String amtReview2, String fromAccReview3, String toAccReview3, String memoReview3,
-			String payInstrReview3, String amtReview3) {
+			String payInstrReview3, String amtReview3) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accTransferReviewTitle)) {
@@ -214,7 +214,7 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 		}
 	}
 
-	public void clickConfirmButton() {
+	public void clickConfirmButton() throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(2000);

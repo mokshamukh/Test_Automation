@@ -22,7 +22,7 @@ public class EPP_LogOff extends CommonLibrary{
 	By logoutButton = By.xpath("//a[text()='power_settings_new']");
 	
 	
-	public void logOffEPPApplication() {
+	public void logOffEPPApplication() throws Exception {
 		boolean stepResult = false;
 		try {
 			switchToWindowWithTitleContaining("Authentication Gateway");

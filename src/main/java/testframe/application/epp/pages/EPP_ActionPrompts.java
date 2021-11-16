@@ -1,5 +1,9 @@
 package testframe.application.epp.pages;
-
+/**
+ * PageName : EPP_ActionPrompts
+ * 
+ * @author Shilpa.Thangapalam
+ */
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -31,7 +35,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	By repairReason = By.xpath("//input[@name='RepairPaymentReason']");
 	
 	
-	public void performActionForCancelPayment(String commentTxtBox,String cancelInitiator) {
+	public void performActionForCancelPayment(String commentTxtBox,String cancelInitiator) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(actionPrompts)) {
@@ -69,8 +73,9 @@ public class EPP_ActionPrompts extends CommonLibrary{
 		try {
 			if (!(actionOntransactionID == null)) {
 				transactionIDWithAction = actionOntransactionID;
+				stepResult = true;
 			}
-			stepResult = true;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -84,7 +89,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	}
 	
 	
-	public void VerifyAndPerformActionForReleaseHold(String releaseReasonTxtBox) {
+	public void VerifyAndPerformActionForReleaseHold(String releaseReasonTxtBox) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(actionPrompts)) {
@@ -114,7 +119,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 		}
 	
 	
-	public void VerifyAndPerformPaymentRepair(String commentTxtBox,String cancelInitiator) {
+	public void VerifyAndPerformPaymentRepair(String commentTxtBox,String cancelInitiator) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(actionPrompts)) {
@@ -146,7 +151,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	}
 	
 	
-	public void performActionForRepairPayment(String commentTxtBox) {
+	public void performActionForRepairPayment(String commentTxtBox) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(actionPrompts)) {

@@ -3,12 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="testframe.runmanager.RunDriver">
+      <class name="testframe.common.reporting.ReportHelper">
         <methods>
-          <include name="tearDown"/>
-          <include name="navigateToTest"/>
+          <include name="copyExcelFile"/>
         </methods>
-      </class> <!-- testframe.runmanager.RunDriver -->
+      </class> <!-- testframe.common.reporting.ReportHelper -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

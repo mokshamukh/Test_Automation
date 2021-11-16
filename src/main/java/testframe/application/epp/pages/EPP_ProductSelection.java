@@ -36,7 +36,7 @@ public class EPP_ProductSelection extends CommonLibrary{
 
 	
 	
-	public void selectProductEPP() {
+	public void selectProductEPP() throws Exception {
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);

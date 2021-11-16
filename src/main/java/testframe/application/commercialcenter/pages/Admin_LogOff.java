@@ -26,7 +26,7 @@ public class Admin_LogOff extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void logoffApplication(){
+	public void logoffApplication() throws Exception{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Admin Page", "Log Off button", logoff);

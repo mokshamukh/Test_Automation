@@ -1,5 +1,9 @@
 package testframe.application.epp.pages;
-
+/**
+ * PageName : EPP_VerifyPayment
+ * 
+ * @author Shilpa.Thangapalam
+ */
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -23,10 +27,11 @@ public class EPP_VerifyPayment extends CommonLibrary{
     By cancelBtn = By.xpath("//a[@id='CancelPayment']");
     By actionSuccessfull = By.xpath("//div[@id='Refresh_UserResponse']//td[@id='userResponseInfoTD']");
     By transIdSaved = By.xpath("//div[@id='Refresh_UserResponse']//td[@id='userResponseInfoTD']//a[1]");
-    By transactionStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Repair')]");
+    By transactionStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Completed')]");
     By paymentDetails = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Details')]");
+    By amount = By.xpath("//input[@id='Amount']");
     
-	public void approvePaymentRepairAction(String valueDate) {
+	public void approvePaymentRepairAction(String valueDate) throws Exception {
 		 boolean stepResult = false;
 			try {
 				waitElement(3000);
@@ -59,7 +64,7 @@ public class EPP_VerifyPayment extends CommonLibrary{
 	}
 	
 	
-	public void rejectPaymentRepairAction(String valueDate) {
+	public void rejectPaymentRepairAction(String valueDate) throws Exception {
 		 boolean stepResult = false;
 			try {
 				waitElement(3000);

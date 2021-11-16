@@ -114,14 +114,14 @@ public class AdminTest extends ApplicationBase {
 				adminHomePage.clickOnMenuBar(tc_Test_Data.get(iTDRow).get("MenuBar"));
 				adminHomePage.clickOnSubMenuBar(tc_Test_Data.get(iTDRow).get("SubMenuBar"));
 				adminSearchCompanies.clickCreateCompany();
-				/*adminCreateCompany.createAndSaveCompany(tc_Test_Data.get(iTDRow).get("CompanyID"), tc_Test_Data.get(iTDRow).get("CompanyName"), tc_Test_Data.get(iTDRow).get("BusinessUnit"), tc_Test_Data.get(iTDRow).get("Address"), tc_Test_Data.get(iTDRow).get("City"),
+				adminCreateCompany.createAndSaveCompany(tc_Test_Data.get(iTDRow).get("CompanyID"), tc_Test_Data.get(iTDRow).get("CompanyName"), tc_Test_Data.get(iTDRow).get("BusinessUnit"), tc_Test_Data.get(iTDRow).get("Address"), tc_Test_Data.get(iTDRow).get("City"),
 						tc_Test_Data.get(iTDRow).get("State"), tc_Test_Data.get(iTDRow).get("ZipCode"), tc_Test_Data.get(iTDRow).get("Country"), tc_Test_Data.get(iTDRow).get("MarketSegment"),  tc_Test_Data.get(iTDRow).get("BillingAccount"), 
 						tc_Test_Data.get(iTDRow).get("TimeZone"), tc_Test_Data.get(iTDRow).get("EnableDate"), tc_Test_Data.get(iTDRow).get("ProcessingCenter"), tc_Test_Data.get(iTDRow).get("IsBank"), tc_Test_Data.get(iTDRow).get("ReVerification"),
 						tc_Test_Data.get(iTDRow).get("AdditionaIDType"), tc_Test_Data.get(iTDRow).get("AdditionaIDValue"), tc_Test_Data.get(iTDRow).get("AddIdentifier"), tc_Test_Data.get(iTDRow).get("Labels"));
 				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateSearchCompany"));
 				adminCompanyDetails.searchCompaniesSideLink();
 				adminSearchCompanies.searchCompany(tc_Test_Data.get(iTDRow).get("SearchCompanyID"), tc_Test_Data.get(iTDRow).get("SearchAccountNumber"), tc_Test_Data.get(iTDRow).get("SearchCompanyName"), tc_Test_Data.get(iTDRow).get("SearchMarketSegment"), tc_Test_Data.get(iTDRow).get("SearchLabel"), tc_Test_Data.get(iTDRow).get("SearchShowLabels"));
-				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateSearchCompany"));*/
+				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateSearchCompany"));
 				adminlogOffPage.logoffApplication();
 				
 				break;

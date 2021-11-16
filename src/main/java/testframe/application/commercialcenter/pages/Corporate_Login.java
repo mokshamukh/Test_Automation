@@ -32,7 +32,7 @@ public class Corporate_Login extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void launchApplication(String url) {
+	public void launchApplication(String url) throws Exception {
 		boolean stepResult = false;
 		try {
 			goTo(url);
@@ -52,7 +52,7 @@ public class Corporate_Login extends CommonLibrary {
 
 	}
 
-	public void logInToApplication(String corpCompanyID, String corpUserID, String psd, String fieldToValidate) {
+	public void logInToApplication(String corpCompanyID, String corpUserID, String psd, String fieldToValidate) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);

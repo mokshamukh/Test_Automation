@@ -55,7 +55,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 	}
 
 	public void filterTransaction(String transactionID, String seriesName, String product, String inclTrans,
-			String entryMethod, String importFile) {
+			String entryMethod, String importFile) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -105,7 +105,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 		}
 	}
 
-	public void editPaymentActivity(String transactionID, String seriesName) {
+	public void editPaymentActivity(String transactionID, String seriesName) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (!seriesName.equals("")) {
@@ -139,7 +139,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 		return newDate;
 	}
 
-	public void selectPaymentActivityTab(String activityTab) {
+	public void selectPaymentActivityTab(String activityTab) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (!activityTab.equals("")) {
@@ -162,7 +162,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 		}
 	}
 
-	public void clickOnRightArrow(String transactionID) {
+	public void clickOnRightArrow(String transactionID) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (!transactionID.equals("")) {
@@ -186,7 +186,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 
 	}
 
-	public void clickApproveButton(String approvePaymentValue) {
+	public void clickApproveButton(String approvePaymentValue) throws Exception {
 		boolean stepResult = false;
 		try {
 			clickOnElement("Future Payment Activity CC- Corporate application", "Approve Button", approveButton);
@@ -210,7 +210,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 
 	}
 
-	public void clickRejectButton(String rejectReason) {
+	public void clickRejectButton(String rejectReason) throws Exception {
 		boolean stepResult = false;
 		try {
 			clickOnElement("Future Payment Activity CC- Corporate application", "Reject Button", rejectButton);
@@ -235,7 +235,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 
 	}
 	
-	public void verifyRjectedMsg(String transactionID){
+	public void verifyRjectedMsg(String transactionID) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(6000);

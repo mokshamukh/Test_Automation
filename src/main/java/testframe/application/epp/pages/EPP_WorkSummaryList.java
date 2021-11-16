@@ -31,7 +31,7 @@ public class EPP_WorkSummaryList extends CommonLibrary {
 	public String transactionIdList = "//div[@id='Refresh_PaymentCreationVerification']//a[@class='linkGeneral'][text()='%s']";
 	
 	
-	public void selectTransactionIDFromList() {
+	public void selectTransactionIDFromList() throws Exception {
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement(eppWorkSummary, "Work Summary List", title);

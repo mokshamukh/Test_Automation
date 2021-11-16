@@ -2,6 +2,7 @@ package testframe.common.utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -180,7 +181,7 @@ public class ExcelReader {
 		Workbook wb =sheet.getWorkbook();
 
 		int totalColumn = sheet.getRow(sheet.getFirstRowNum()).getLastCellNum();
-		
+
 		for (int currentColumn = 0; currentColumn < totalColumn; currentColumn++) {
 			columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(currentColumn).getStringCellValue();
 			if(columnHeaderName.equalsIgnoreCase(columnName)){
@@ -216,10 +217,6 @@ public class ExcelReader {
 		row = sheet.getRow(rowNo);
 		int totalColumn = sheet.getRow(sheet.getFirstRowNum()).getLastCellNum();
 
-		//Sheet sheet = getSheetByName(excelFilePath, sheetName);
-		//Workbook wb =sheet.getWorkbook();
-		//row = sheet.getRow(rowNo);
-		//int totalColumn = sheet.getRow(sheet.getFirstRowNum()).getLastCellNum();
 		for (int currentColumn = 0; currentColumn < totalColumn; currentColumn++) {
 			columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(currentColumn).getStringCellValue();
 			if(columnHeaderName.equalsIgnoreCase(columnName)){
@@ -244,13 +241,42 @@ public class ExcelReader {
 		if (sFoundCol =="N")
 			throw new Exception("Could not find column '"+ columnName + "'  in excel file :'"+ excelFilePath + "' and sheet :'"+ sheetName + "'");
 	}
-	
-	public void copyExcelFile(String fromLocation, String toLocation) throws IOException{
-		
+
+	public void copyFileToFolder(String fromLocation, String toLocation) throws IOException{
+
 		File from = new File(fromLocation); 
 		File to = new File(toLocation);
 		FileUtils.copyFileToDirectory(from, to);
 	}
-	
+
+
+	public void setValueInSpecificColumnRow(String excelFilePath, String sheetName,int columnNum,int rowNo,String setValue) {
+		Cell cell;
+		Row row;
+
+		//Workbook wb =getWorkBook(excelFilePath);
+		FileInputStream inputStream;
+		try {
+			inputStream = new FileInputStream(new File(excelFilePath));
+
+			Workbook workbook = WorkbookFactory.create(inputStream);
+			Sheet sheet = workbook.getSheet(sheetName);
+			row = sheet.getRow(rowNo);
+			cell = row.createCell(columnNum,CellType.STRING);
+			cell.setCellValue(setValue);
+			
+			inputStream.close();
+			
+			FileOutputStream outputStream = new FileOutputStream(new File(excelFilePath));
+			workbook.write(outputStream);
+			
+			outputStream.close();
+			workbook.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 }

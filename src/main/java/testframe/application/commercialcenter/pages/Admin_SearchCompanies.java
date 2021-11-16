@@ -37,7 +37,7 @@ public class Admin_SearchCompanies extends CommonLibrary{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void clickCreateCompany(){
+	public void clickCreateCompany() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(searchCompanyTitle)){
@@ -63,7 +63,7 @@ public class Admin_SearchCompanies extends CommonLibrary{
 
 
 
-	public void searchCompany(String sCompanyId,String accountNum, String sCompanyName,String marketSeg,String labelVal,String showLabels) {
+	public void searchCompany(String sCompanyId,String accountNum, String sCompanyName,String marketSeg,String labelVal,String showLabels) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(searchCompanyTitle)){

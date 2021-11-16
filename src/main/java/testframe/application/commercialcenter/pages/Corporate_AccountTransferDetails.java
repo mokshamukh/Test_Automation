@@ -37,7 +37,7 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 
 	}
 
-	public void verifyAccStatus(String accountStatus) {
+	public void verifyAccStatus(String accountStatus) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accountTransferDetailsTitle)) {
@@ -61,7 +61,7 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 	}
 	
 
-	public String getAccTransaction() {
+	public String getAccTransaction() throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accountTransferDetailsTitle)) {
@@ -89,7 +89,7 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 
 	}
 
-	public String getMultiAccTransaction(String field, String field1, String field2, String field3) {
+	public String getMultiAccTransaction(String field, String field1, String field2, String field3) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accountTransferDetailsTitle)) {

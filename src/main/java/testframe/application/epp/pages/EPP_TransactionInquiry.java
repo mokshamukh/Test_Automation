@@ -37,7 +37,7 @@ public class EPP_TransactionInquiry extends CommonLibrary {
     By refTransID = By.xpath("//div[@class='lightShadedBackground']//..//..//input[@name='ReferenceValue']");
     
 	
-   public void searchTransaction(String instAmount,String valueDateField) {
+   public void searchTransaction(String instAmount,String valueDateField) throws Exception {
 	 boolean stepResult = false;
 	try {
 		switchToWindowWithTitleContaining("Enterprise Payments Platform");

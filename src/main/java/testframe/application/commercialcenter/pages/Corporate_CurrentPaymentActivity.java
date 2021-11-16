@@ -154,7 +154,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		}
 	}
 	
-	public void verifyApprovePaymentMessage(String transactionID) {
+	public void verifyApprovePaymentMessage(String transactionID) throws Exception {
 		boolean stepResult = false;
 		try {
 			String approvePaymentMsg = "//div[text()='Payment "+transactionID+" successfully approved.']";
@@ -174,7 +174,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		}
 	}
 	
-	public void filterCurrentActivityDetails(String typeVal, String transNum, String status, String nameVal, String amtVal){
+	public void filterCurrentActivityDetails(String typeVal, String transNum, String status, String nameVal, String amtVal) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);

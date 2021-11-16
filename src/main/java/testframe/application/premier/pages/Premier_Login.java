@@ -35,7 +35,7 @@ public class Premier_Login extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void launchApplication(String url){
+	public void launchApplication(String url) throws Exception{
 		boolean stepResult = false;
 		try {
 			goTo(url);
@@ -57,7 +57,7 @@ public class Premier_Login extends CommonLibrary {
 
 	}
 
-	public void selectGroup(String sGroup){
+	public void selectGroup(String sGroup) throws Exception{
 		boolean stepResult = false;
 		try {
 			selectElementByVisibleText("Group Page","Select Group",group,sGroup);
@@ -79,7 +79,7 @@ public class Premier_Login extends CommonLibrary {
 
 	}
 
-	public void logInToApplication( String sUserID, String psd,String sInstitution) {
+	public void logInToApplication( String sUserID, String psd,String sInstitution) throws Exception {
 		boolean stepResult = false;
 		try {
 

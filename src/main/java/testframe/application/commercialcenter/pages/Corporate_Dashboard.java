@@ -25,7 +25,7 @@ public class Corporate_Dashboard extends CommonLibrary{
 	}
 	
 	//value = ACH,Wires,Account Transfers
-	public void selectApprovals(String ApprovalTypes){
+	public void selectApprovals(String ApprovalTypes) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);

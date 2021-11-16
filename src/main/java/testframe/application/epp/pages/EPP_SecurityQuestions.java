@@ -33,7 +33,7 @@ public class EPP_SecurityQuestions extends CommonLibrary {
 	By cancelButton = By.xpath("//button[@id='btnVerifySecurityQuestionsCancel']");
 
 	
-	public void enterSecurityQuestions(String securityQuestionTD, String securityAnswerTD) {
+	public void enterSecurityQuestions(String securityQuestionTD, String securityAnswerTD) throws Exception {
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement(eppSecurityPage, "Security Question", securityQuest);

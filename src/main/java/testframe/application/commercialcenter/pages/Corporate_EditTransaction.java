@@ -61,7 +61,7 @@ public class Corporate_EditTransaction extends CommonLibrary {
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 	}
 
-	public void editFromAccount(String fromAcc, String fromAccAmt) {
+	public void editFromAccount(String fromAcc, String fromAccAmt) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(8000);
@@ -89,7 +89,7 @@ public class Corporate_EditTransaction extends CommonLibrary {
 	}
 
 	public void enterToAccount(String toAcc, String toAccAmt, String toAccAmtVal, String toAccMemo, String toAccMemoVal,
-			String toAccPayInstr) {
+			String toAccPayInstr) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(6000);
@@ -179,7 +179,7 @@ public class Corporate_EditTransaction extends CommonLibrary {
 
 	}
 
-	public void enterTransferDate(String transferDates) {
+	public void enterTransferDate(String transferDates) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(2000);
@@ -207,7 +207,7 @@ public class Corporate_EditTransaction extends CommonLibrary {
 		}
 	}
 
-	public void clickReqTransfer() {
+	public void clickReqTransfer() throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -231,7 +231,7 @@ public class Corporate_EditTransaction extends CommonLibrary {
 	}
 
 	public void verifyAccountTransferDetails(String fromAcc_verify, String toAcc_verify, String memo_verify,
-			String payInstr_verify, String amt_verify) {
+			String payInstr_verify, String amt_verify) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accTransferDeatilsTitle)) {
@@ -276,7 +276,7 @@ public class Corporate_EditTransaction extends CommonLibrary {
 	public void editAddAndEnterFromAccDetails(String editAddFromAccountVal1, String editFromAcMemo, String editFromAcc1,
 			String editFromAccAmt1, String editFromAccMemo1, String editAddFromAccountVal2, String editFromAcc2,
 			String editFromAccAmt2, String editFromAccMemo2, String editAddFromAccountVal3, String editFromAcc3,
-			String editFromAccAmt3, String editFromAccMemo3) {
+			String editFromAccAmt3, String editFromAccMemo3) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (editAddFromAccountVal1.equals("Yes")) {
@@ -344,7 +344,7 @@ public class Corporate_EditTransaction extends CommonLibrary {
 			String editAddToAccountVal2, String editToAcc2, String editToAccAmt2, String toAccAmtVal2,
 			String toAccMemo2, String editToAccMemoVal2, String editToAccPayInstr2, String editAddToAccountVal3,
 			String editToAcc3, String editToAccAmt3, String toAccAmtVal3, String toAccMemo3, String editToAccMemoVal3,
-			String editToAccPayInstr3) {
+			String editToAccPayInstr3) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (editAddToAccountVal1.equals("Yes")) {

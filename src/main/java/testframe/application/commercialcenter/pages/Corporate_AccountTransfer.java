@@ -80,7 +80,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void enterFromAccount(String fromAcc, String fromAccAmt) {
+	public void enterFromAccount(String fromAcc, String fromAccAmt) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(8000);
@@ -109,7 +109,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 
 	public void addAndEnterFromAccDetails(String addFromAccountVal1, String fromAcMemo, String fromAcc1,
 			String fromAccAmt1, String fromAccMemo1, String addFromAccountVal2, String fromAcc2, String fromAccAmt2,
-			String fromAccMemo2, String addFromAccountVal3, String fromAcc3, String fromAccAmt3, String fromAccMemo3) {
+			String fromAccMemo2, String addFromAccountVal3, String fromAcc3, String fromAccAmt3, String fromAccMemo3) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (addFromAccountVal1.equals("Yes")) {
@@ -169,7 +169,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	}
 
 	public void enterToAccount(String toAcc, String toAccAmt, String toAccAmtVal, String toAccMemo, String toAccMemoVal,
-			String toAccPayInstr) {
+			String toAccPayInstr) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -213,7 +213,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			String toAccMemo1, String toAccMemoVal1, String toAccPayInstr1, String addToAccountVal2, String toAcc2,
 			String toAccAmt2, String toAccAmtVal2, String toAccMemo2, String toAccMemoVal2, String toAccPayInstr2,
 			String addToAccountVal3, String toAcc3, String toAccAmt3, String toAccAmtVal3, String toAccMemo3,
-			String toAccMemoVal3, String toAccPayInstr3) {
+			String toAccMemoVal3, String toAccPayInstr3) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (addToAccountVal1.equals("Yes")) {
@@ -338,7 +338,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 
 	}
 
-	public void enterTransferDate(String transferDates) {
+	public void enterTransferDate(String transferDates) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(2000);
@@ -365,7 +365,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 		}
 	}
 
-	public void clickReqTransfer() {
+	public void clickReqTransfer() throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -394,7 +394,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	
 	
 	 */
-	public void selectRecurringOption(String recurringOpt, String frequency, String dailyopt, String dailySubOpt,String day) {
+	public void selectRecurringOption(String recurringOpt, String frequency, String dailyopt, String dailySubOpt,String day) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (!recurringOpt.equals("")) {
@@ -437,7 +437,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	}
 
 	// Duration :Indefinitely,Until End Date,Fixed Number
-	public void selectDuration(String duration, String transDate, String fixedNumTrans) {
+	public void selectDuration(String duration, String transDate, String fixedNumTrans) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (!duration.equals("")) {
@@ -473,7 +473,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 		}
 	}
 
-	public void enterSeriesDetails(String seriesDate){
+	public void enterSeriesDetails(String seriesDate) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(2000);
@@ -500,7 +500,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 
 	}
 	
-	public void clickRecurringOptButton(){
+	public void clickRecurringOptButton() throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(2000);
@@ -520,7 +520,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 		}
 	}
 	
-	public void enterSeriesName(String name){
+	public void enterSeriesName(String name) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(2000);

@@ -50,7 +50,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 	}
 
 	public void createNewName(String name, String firstName, String lastName, String dob, String taxID,String phoneNumber,
-			String branchRegion,String email) {
+			String branchRegion,String email) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(6000);
@@ -82,7 +82,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		
 	}
 	
-	public void enterCustomerName(String name, String firstName, String lastName, String dob, String taxID){
+	public void enterCustomerName(String name, String firstName, String lastName, String dob, String taxID) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -115,7 +115,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		}
 	}
 	
-	public void enterDuplicate(){
+	public void enterDuplicate() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(duplicateLabel)) {
@@ -136,7 +136,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		}
 	}
 	
-	public void enterContactMethod(String phoneNumber,String email){
+	public void enterContactMethod(String phoneNumber,String email) throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(contactMethodsLabel)) {
@@ -177,7 +177,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		
 	}}
 
-	public void enterCodeLable(String branchRegion){
+	public void enterCodeLable(String branchRegion) throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(codeLabel)) {

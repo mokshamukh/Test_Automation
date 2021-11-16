@@ -27,7 +27,7 @@ public class Corporate_HomeMenu extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void clickOnMenu(String corpMenu) {
+	public void clickOnMenu(String corpMenu) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -51,7 +51,7 @@ public class Corporate_HomeMenu extends CommonLibrary {
 		}
 	}
 
-	public void clickOnSubMenuBar(String subMenuValue, String subOption) {
+	public void clickOnSubMenuBar(String subMenuValue, String subOption) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);

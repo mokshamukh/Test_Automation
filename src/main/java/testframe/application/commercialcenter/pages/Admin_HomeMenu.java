@@ -26,7 +26,7 @@ public class Admin_HomeMenu extends CommonLibrary{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void clickOnMenuBar(String value){
+	public void clickOnMenuBar(String value) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -47,7 +47,7 @@ public class Admin_HomeMenu extends CommonLibrary{
 		}
 	}
 	
-	public void clickOnSubMenuBar(String value){
+	public void clickOnSubMenuBar(String value) throws Exception{
 		boolean stepResult = false;
 		try {
 			getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);

@@ -39,12 +39,13 @@ public class HTMLReportHelper {
 	static int VPNbr;
 	static String  strHTMLFileData,shtmlfilePath,spdffilePath, sScreenShotFolderpath
 	,sMasterFilePath,sSummaryReportPath,sExecutionStart;
-	String Base64StringofScreenshot,sBase64StringScreenshot,color,strScreenShotFilePath;
+	String Base64StringofScreenshot,sBase64StringScreenshot,color,strScreenShotFilePath,strScreenshot;
 	String sScreenShotPath;
 	static Date d1 = null;
 	static Date d2 = null;
 	static Date sTime,eTime;
 	String tTimeTaken,strStartTime,strEndTime;
+	String strScreenshot_split[],sScreenshot_Path="";
 
 	ExcelReader er = new ExcelReader();
 
@@ -61,16 +62,20 @@ public class HTMLReportHelper {
 		this.sMasterFilePath = sMasterFilePath;
 	}
 
-	
+
 
 	public void setExecutionStart(String sExecutionStart){
 		this.sExecutionStart = sExecutionStart;
 	}
 
 	public void HTMLReportHeader(String Module, String TestCaseID, String TestDescription) throws Exception{
+		
 		VPNbr =1;
 		strHTMLFileData="";
 		sTime= new DateTimeHelper().Now("yyyy/MM/dd HH:mm:ss");
+		
+		new ReportHelper().createUpdateSummaryReport();
+		
 		strHTMLFileData = strHTMLFileData + "<html>" + "\r\n"+ "\t";
 		strHTMLFileData = strHTMLFileData +  "\t" + "<head><title>Automation Test Report</title>" + "\r\n";//</head>" + "\r\n";
 		//strHTMLFileData = strHTMLFileData +"<style>" + "\r\n" + "@media print" +  "\r\n" + "{ tr.page-break  { display: block; page-break-before: always; } "
@@ -118,28 +123,21 @@ public class HTMLReportHelper {
 	}
 
 	//public void HtmlReportBody(String pstrStep,String pstrDetails,String result,WebDriver driver,String ScreenshotPath ){
-	public void HtmlReportBody(String sStepDescription,String sActualResultDescription,String result,WebDriver driver,String sTakeScreenshot ){
+	public void HtmlReportBody(String sStepDescription,String sActualResultDescription,String result,WebDriver driver,String sTakeScreenshot ) throws Exception{
 
 		strScreenShotFilePath = sScreenShotFolderpath;
-		/*If instr(1,pstrDetails,"object was not found",vbtextcompare)>0 or instr(1,pstrDetails,"Object required",vbtextcompare)>0 Then
-					stepResult = "ABORT";
-				Else
-					stepResult = ucase(Left(result,4))*/
-
 		if (result.equalsIgnoreCase("passed")){
 			color = "#228B22";
-			/*strScreenShotFilePath = strScreenShotFilePath &"\ScreenShot\VerificationPointScreenShot\"& Environment.Value("TestID")	 &"\"&"VP"& cStr(VPNbr) &".png"
-							AppObject.CaptureBitmap strScreenShotFilePath*/
 		}
 		else{
 			color ="#FF0000";
-			/*rp.AppendInTextFile(pstrDetails)
-					strScreenShotFilePath = strScreenShotFilePath &"\ScreenShot\FailureScreenShot\" & Environment.Value("TestID") &"\"&"VP"& cStr(VPNbr) &".png"
-					AppObject.CaptureBitmap strScreenShotFilePathn*/
 		}
 		if (sTakeScreenshot.equalsIgnoreCase("Y") || sTakeScreenshot.equalsIgnoreCase("YES")){
 			//sBase64StringScreenshot = getScreenshot(driver);
-			sBase64StringScreenshot = getCompleteScreenShot(driver);
+			strScreenshot = getCompleteScreenShot(driver);
+			strScreenshot_split = strScreenshot.split("\\|\\|");
+			sBase64StringScreenshot = strScreenshot_split[0];
+			sScreenshot_Path = strScreenshot_split[1];
 		}
 		if (VPNbr >1){
 			strHTMLFileData = strHTMLFileData + "\r\n"+"<table align=center width=650px heigth=400px cellspacing=2 cellpading=2 Border=0 bordercolor=#000000>"+ "\r\n" +"\t" ;
@@ -153,25 +151,15 @@ public class HTMLReportHelper {
 		//strHTMLFileData = strHTMLFileData + "<tr><td colspan=4 align=center><br></td></tr>" + "\r\n" + "\t"; 
 		if (sTakeScreenshot.equalsIgnoreCase("Y") || sTakeScreenshot.equalsIgnoreCase("YES"))
 			strHTMLFileData = strHTMLFileData + "<tr>" + "\r\n" + "\t"+ "\t" +"<td colspan=4 align=center><img width=600px heigth=600px src ='"+ sBase64StringScreenshot + "'"+" class='zoomA'/></td>" + "\r\n" + "\t" + "</tr>" + "\r\n" + "\t"; 
-		//strHTMLFileData = strHTMLFileData + "<tr>" + "\r\n" + "\t"+ "\t" +"<td colspan=4 align=center><img width=600px heigth=600px src ='"+ sBase64StringScreenshot + "'"+" alt=Screenshot class='zoomA'/></td>" + "\r\n" + "\t" + "</tr>" + "\r\n" + "\t";
-		//strHTMLFileData = strHTMLFileData + "<tr><td colspan=4 align=center>aaaaa</td></tr>" + "\r\n" + "\t" ;
-		//strHTMLFileData = strHTMLFileData + "<tr><td  class='page-break'></td></tr>" + "\r\n" + "\t" ;
+		
 		strHTMLFileData = strHTMLFileData + "<tr><td colspan=4 align=center><br><br></td></tr>" + "\r\n" + "\t" ;
 		if (VPNbr >1){
 			strHTMLFileData = strHTMLFileData + "\t"+"<div class='pagebreak'> </div>"+ "\r\n" +"\t" ;
 		}
 		strHTMLFileData = strHTMLFileData + "\r\n"+"</table>"+ "\r\n" +"\t" ;
-
 		VPNbr = VPNbr+1;
-		/*If Configuration.GetDatabaseReportingFlag()="Y" Then  'for reporting database
-					pstrDetails=replace(pstrDetails,"'","")
-					pstrStep=replace(pstrStep,"'","")
-					Base64ImageText=convertImageToBase64(strScreenShotFilePath)  'for reporting database
 
-					InputStepDetailSQL = "Insert into TCStepDetails (RunID,CheckpointDescription, CheckpointDetail, CheckpointStatus,AutomationTestCaseID,CheckPointScreenshotPath,CheckPointStepID) Values  (" & chr(39) & Environment.value("RunID") & chr(39) & " ,"& chr(39) & pstrStep & chr(39) &","& chr(39) & pstrDetails & chr(39) &","& chr(39) & result & chr(39) &","& chr(39) & Environment.Value("TestId")& chr(39) &","& chr(39) & Base64ImageText & chr(39) &","& chr(39) & Environment.value("CheckPointStepID") & chr(39) &")"  'for reporting database
-					objCon.Execute InputStepDetailSQL
-				End If*/	
-
+		new ReportHelper().writeToSummaryReportVerificationTab(sStepDescription, sActualResultDescription, result.toUpperCase(), sScreenshot_Path);
 	}
 
 	public void HtmlReportFooter() throws Exception{
@@ -220,44 +208,17 @@ public class HTMLReportHelper {
 			strHTMLFileData = strHTMLFileData.replace("RVTEQ","<b style='color:#696A69'>No Execution</p>");		
 			appendValue = "' _Done";
 		}
-
-
-
 		BufferedWriter bw = new BufferedWriter(new FileWriter(shtmlfilePath));
 		bw.write(strHTMLFileData);
 		bw.close();
-
 		ConverterProperties converterProperties = new ConverterProperties();
 		HtmlConverter.convertToPdf(new FileInputStream(shtmlfilePath), 
 				new FileOutputStream(spdffilePath), converterProperties);
-
 		System.out.println( "PDF Created!" );
-
 		storeResultToMasterFile(appendValue,sExecutionStart,strEndTime);
+		
+		new ReportHelper().writeToSummaryReportTestDetailsTab(appendValue, strStartTime, strEndTime, tTimeTaken.toString(), Integer.toString(totalPassed), Integer.toString(totalFailed), Integer.toString(totalPassed+totalFailed), spdffilePath);
 
-
-		/*Environment.Value("PDFResult")=appendValue		
-				If Environment.Value("TestID") <>"" then 
-				Path = reportBasePath &"\HTMLReports\ExecutionReport_"& Environment.Value("TestID")&".html"
-				If (Not  fso.FileExists(Path)) and (instr(1, strHTMLFileData,"<html>",vbtextcompare)>0)Then
-				Set file = htmlfso.CreateTextFile(Path,true)
-				file.WriteLine strHTMLFileData
-				file.Close
-				Set file = nothing
-				strHTMLFileData = ""		
-				If configuration.getGeneratePDFReportFlag() = "Y" Then
-				rp.PopMessage("Generating PDF report")
-				Call convertPDF(Path,appendValue)
-				rp.PopMessage("PDF report generated")		
-				End If	
-				End If
-				End If*/ 
-		//Environment.Value("TCExecutionStartTime")=sTime;
-		//Environment.Value("TCExecutionEndTime")=eTime;
-		//Environment.Value("TCCheckpointsPassed")=totalPassed;
-		//Environment.Value("TCExecutedTime")=tTimeTaken;
-		//Environment.Value("TCTotalCheckpoints")=totalFailed+totalPassed;
-		//Environment.Value("TCCheckpointsFailed")=totalFailed;
 	}
 
 	public String getScreenshot(WebDriver driver){
@@ -276,7 +237,7 @@ public class HTMLReportHelper {
 		} catch(Exception e){
 			System.out.println("Capture failed :" +e.getMessage());
 		}
-		return Base64StringofScreenshot;
+		return Base64StringofScreenshot+"||"+ sScreenShotPath;
 	}
 
 	public String getCompleteScreenShot(WebDriver driver){
@@ -293,7 +254,7 @@ public class HTMLReportHelper {
 		}catch(Exception e){
 			System.out.println("Capture failed :" +e.getMessage());
 		}
-		return Base64StringofScreenshot;
+		return Base64StringofScreenshot +"||"+ sScreenShotPath;
 
 		//ImageIO.write(s.getImage(),"PNG",new File("C:\\projectScreenshots\\fullPageScreenshot.png"));
 

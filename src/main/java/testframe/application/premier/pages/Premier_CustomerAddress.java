@@ -42,7 +42,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 
 	}
 
-	public void createNewAddress(String address1Val, String address2Val, String zipcodeVal, String sSSN,String realationshipVal,String branchRegion) {
+	public void createNewAddress(String address1Val, String address2Val, String zipcodeVal, String sSSN,String realationshipVal,String branchRegion) throws Exception {
 		boolean stepResult = false;
 		try {
 			switchToWithinFrameWithName("Main");
@@ -71,7 +71,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		}
 	}
 
-	public void enterAddress(String address1Val, String address2Val, String zipcodeVal,String branchRegion) {
+	public void enterAddress(String address1Val, String address2Val, String zipcodeVal,String branchRegion) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -107,7 +107,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 
 	}
 
-	public void createBuildRelationship(String sSN, String realationshipVal) {
+	public void createBuildRelationship(String sSN, String realationshipVal) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);

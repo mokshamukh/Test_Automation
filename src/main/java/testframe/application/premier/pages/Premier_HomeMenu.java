@@ -38,7 +38,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void customerMenu(){
+	public void customerMenu() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(homePageHeader)){
@@ -61,7 +61,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 
 	}
 	
-	public void customerInquiry(){
+	public void customerInquiry() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(homePageHeader)){
@@ -84,7 +84,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 
 	}
 	
-	public void clickNewName(){
+	public void clickNewName() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(homePageHeader)){
@@ -108,7 +108,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 		
 	} 
 	
-	public void clickNewAddress(){
+	public void clickNewAddress() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(customerHeader)){
@@ -132,7 +132,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 		
 	} 
 	
-	public void clickNewContact(){
+	public void clickNewContact() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(customerHeader)){

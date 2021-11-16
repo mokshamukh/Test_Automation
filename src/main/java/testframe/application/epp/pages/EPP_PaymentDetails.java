@@ -52,8 +52,9 @@ public class EPP_PaymentDetails extends CommonLibrary {
 	By stageDetails = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td//span[contains(text(),'Stage')]//..//..//td[contains(text(),'Complete')]");
 	By cancelRepairBanner = By.xpath("//div[contains(@id,'Refresh_PaymentDetails')]//p[contains(.,'Cancel requested while in Repair')]");
 	By paymentSentRepairBanner = By.xpath("//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'Payment sent to repair from Duplicate Content')]");
+	By futureTransStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'FutureWarehouse')]");
 	
-	public void verifyPaymentTransaction() {
+	public void verifyCompletedPaymentTransaction() throws Exception {
 		 boolean stepResult = false;
 		try {
 			waitElement(3000);
@@ -85,14 +86,14 @@ public class EPP_PaymentDetails extends CommonLibrary {
 
 		}
 	
-	public void submitActionOnTransactionWithApproval(String duplicateTransactionStatus,String approvalAction) {
+	public void submitActionOnTransactionWithApproval() throws Exception {
 		 boolean stepResult = false;
 			try {
 				waitElement(3000);
 				waitForPresenceOfElement(eppPaymentDetails, "Payment Title", paymentTitle);
 				if(isElementPresent(displayMsg)) {
 					validateElementPresent(eppPaymentDetails, "Transaction Status", dupTransStatus);
-					validateTextContains(eppPaymentDetails,  "Transaction Status", dupTransStatus, duplicateTransactionStatus);
+					validateTextContains(eppPaymentDetails,  "Transaction Status", dupTransStatus, "Duplicate Content");
 					String duplicatetransID = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
 					approveDuplicateTransID = eppActionPrompts.getTransactionIDOnAction();
 					if(duplicatetransID.equalsIgnoreCase(approveDuplicateTransID)) {
@@ -130,7 +131,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 	}
 	
 	
-	public void approveRepairPayment() {
+	public void approveRepairPayment() throws Exception {
 		 boolean stepResult = false;
 			try {
 				waitElement(3000);
@@ -217,5 +218,73 @@ public class EPP_PaymentDetails extends CommonLibrary {
 //	}
 	
 
+	public void verifyFutureDatedPaymentTransaction() throws Exception {
+		 boolean stepResult = false;
+		try {
+			waitElement(3000);
+			waitForPresenceOfElement(eppPaymentDetails, "Payment Saved with Transaction", transIdSaved);
+			clickOnElement(eppPaymentDetails, "Payment Saved with Transaction ID", transIdSaved);
+			if(isElementPresent(paymentTitle)) {
+				validateTextContains(eppPaymentDetails,  "Transaction Status", futureTransStatus, "FutureWarehouse");
+				validateElementPresent(eppPaymentDetails, "Transaction Status", futureTransStatus);
+				String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
+				approveTransID = eppCreatePayment.getTransactionID();
+				if(transactionIDStatus.equalsIgnoreCase(approveTransID)) {
+					System.out.println("Pass");
+					stepResult = true;
+				}else {
+					System.out.println("fail");
+				}
+			}
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Payment Details EPP - EPP application", "Transaction verified Successfully","Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Payment Details EPP - EPP application","Could not verify Transaction Successfully", "Failed", driver, "Y");
+			}
+		}
+
+		}
+	
+	
+	public void verifyRepairPaymentTransStatus() throws Exception {
+		 boolean stepResult = false;
+		try {
+			waitElement(3000);
+			waitForPresenceOfElement(eppPaymentDetails, "Payment Saved with Transaction", transIdSaved);
+			clickOnElement(eppPaymentDetails, "Payment Saved with Transaction ID", transIdSaved);
+			if(isElementPresent(paymentTitle)) {
+				validateTextContains(eppPaymentDetails,  "Transaction Status", repairStatus, "Repair");
+				validateElementPresent(eppPaymentDetails, "Transaction Status", repairStatus);
+				String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
+				approveTransID = eppCreatePayment.getTransactionID();
+				if(transactionIDStatus.equalsIgnoreCase(approveTransID)) {
+					System.out.println("Pass");
+					stepResult = true;
+				}else {
+					System.out.println("fail");
+				}
+			}
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Payment Details EPP - EPP application", "Transaction verified Successfully","Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Payment Details EPP - EPP application","Could not verify Transaction Successfully", "Failed", driver, "Y");
+			}
+		}
+
+		}
 }
 

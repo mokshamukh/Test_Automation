@@ -47,7 +47,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 	}
 
 
-	public void searchCustomer(String sName, String sSSN){
+	public void searchCustomer(String sName, String sSSN) throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(customerInquiryHeader)){
@@ -74,7 +74,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 	}
 
 
-	public void seeAdditionalAddresses(){
+	public void seeAdditionalAddresses() throws Exception{
 		boolean stepResult = false;
 		try {
 
@@ -103,7 +103,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 
 	}
 
-	public void customerExpand(){
+	public void customerExpand() throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(customerInquiryHeader)){
@@ -133,7 +133,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 	}
 
 
-	public void getCustomer(String excelFilePath, String sheetName,int rowNo){
+	public void getCustomer(String excelFilePath, String sheetName,int rowNo) throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(customerInquiryHeader)){

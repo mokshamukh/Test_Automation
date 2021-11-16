@@ -1,5 +1,9 @@
 package testframe.application.epp.pages;
-
+/**
+ * PageName : EPP_PaymentRepairVerificationList
+ * 
+ * @author Shilpa.Thangapalam
+ */
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -24,7 +28,7 @@ public class EPP_PaymentRepairVerificationList extends CommonLibrary {
 	public String eppPaymentRepairList = "EPP_PaymentRepairVerificationList";
 	public String actionOntransactionIdList = "//div[@id='Refresh_MEPaymentVerify']//a[@class='linkGeneral'][text()='%s']";
 
-	public void selectPaymentRepairOnTransactionID() {
+	public void selectPaymentRepairOnTransactionID() throws Exception {
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement(eppPaymentRepairList, "Work Summary List", title);

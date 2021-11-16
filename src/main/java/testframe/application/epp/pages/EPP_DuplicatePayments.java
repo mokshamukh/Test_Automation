@@ -1,4 +1,9 @@
 package testframe.application.epp.pages;
+/**
+ * PageName : EPP_DuplicatePayments
+ * 
+ * @author Shilpa.Thangapalam
+ */
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -32,7 +37,7 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 	By executeButton = By.xpath("//div[@id='img_button_execute']");	
 	
 	
-    public void selectCancelDuplicatePayment() {
+    public void selectCancelDuplicatePayment() throws Exception {
     	boolean stepResult = false;
     	try {
 			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
@@ -59,7 +64,7 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 		}
 }
     
-    public void selectReleaseHoldPayment() {
+    public void selectReleaseHoldPayment() throws Exception {
     	boolean stepResult = false;
     	try {
 			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
@@ -87,7 +92,7 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 }
 
     
-    public void selectRepairPayment() {
+    public void selectRepairPayment() throws Exception {
     	boolean stepResult = false;
     	try {
 			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);

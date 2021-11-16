@@ -31,6 +31,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 	By orderBankLookUp = By.xpath("//span[@id='OrderInstIDTypeWrapper']//..//div[@id='img_button_lookUp']");
 	By debitAcc = By.xpath("//input[@id='Debit_Account_Override']");
 	By amountTxtBox = By.xpath("//input[@id='Amount']");
+	By valueDate = By.xpath("//input[@id='Value_Date']");
 	By beneBankAccount = By.xpath("//input[@id='BenBankAccount']");
 	By beneBankLookUp = By.xpath(
 			"//table[@id='BeneficiaryBankTable']//input[@id='BenBankAccountType']//..//div[@id='img_button_lookUp']");
@@ -61,8 +62,8 @@ public class EPP_CreatePayment extends CommonLibrary {
 	public String PaymentTemplate = "Payment Template";
 
 	public void createOutgoingHVBankPaymentFRB(String accNum, String systemCode, String debitAccount,
-			String amount, String benAccount, String beneName, String beneAddress, String accWithBankNo,
-			String accWithSysCode) {
+			String amount,String valueDateField,String benAccount, String beneName, String beneAddress, String accWithBankNo,
+			String accWithSysCode) throws Exception {
 		boolean stepResult = false;
 		try {
 			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
@@ -75,6 +76,9 @@ public class EPP_CreatePayment extends CommonLibrary {
 			enterText(eppCreatePayment, "Debit Account", debitAcc, debitAccount);
 			waitElement(3000);
 			enterText(eppCreatePayment, "Amount", amountTxtBox, amount);
+			waitElement(3000);
+			clearAndType(eppCreatePayment, "Value Date", valueDate, valueDateField);
+			//enterText(eppCreatePayment, "Value Date", valueDate, valueDateField);
 			waitElement(3000);
 			enterText(eppCreatePayment, "Benificiary Bank Account", beneBankAccount, benAccount);
 			waitElement(3000);
@@ -135,7 +139,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 
 	public void createOutgoingHVCustomerPaymentFRB(String custAccNum, String debitAccount, String amount,
 			String benCustAccount, String benecustName, String benecustAddress, String accWithBankNo,
-			String accWithSysCode) {
+			String accWithSysCode) throws Exception {
 		boolean stepResult = false;
 		try {
 			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
@@ -188,7 +192,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 
 	public void createIncomingHVCustomerPaymentFRB(String custAccNum, String bankAccNum,
 			String bankSystemCode, String amount, String benCustAccount, String creditAccNum, String accWithBankNo,
-			String accWithSysCode) {
+			String accWithSysCode) throws Exception {
 		boolean stepResult = false;
 		try {
 			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
@@ -238,7 +242,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 	}
 
 	public void createIncomingHVBankPaymentFRB(String bankAccNum, String bankSystemCode, String amount,
-			String benCustAccount, String creditAccNum, String accWithBankNo, String accWithSysCode) {
+			String benCustAccount, String creditAccNum, String accWithBankNo, String accWithSysCode) throws Exception {
 		boolean stepResult = false;
 		try {
 			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
