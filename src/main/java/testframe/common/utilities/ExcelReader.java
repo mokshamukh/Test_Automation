@@ -215,6 +215,8 @@ public class ExcelReader {
 		Workbook workbook = WorkbookFactory.create(inputStream);
 		Sheet sheet = workbook.getSheet(sheetName);
 		row = sheet.getRow(rowNo);
+		if (row==null)
+			row = sheet.createRow(rowNo);
 		int totalColumn = sheet.getRow(sheet.getFirstRowNum()).getLastCellNum();
 
 		for (int currentColumn = 0; currentColumn < totalColumn; currentColumn++) {

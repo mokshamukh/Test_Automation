@@ -41,8 +41,8 @@ public class HTMLReportHelper {
 	,sMasterFilePath,sSummaryReportPath,sExecutionStart;
 	String Base64StringofScreenshot,sBase64StringScreenshot,color,strScreenShotFilePath,strScreenshot;
 	String sScreenShotPath;
-	static Date d1 = null;
-	static Date d2 = null;
+	Date d1 = null;
+	Date d2 = null;
 	static Date sTime,eTime;
 	String tTimeTaken,strStartTime,strEndTime;
 	String strScreenshot_split[],sScreenshot_Path="";
@@ -74,7 +74,7 @@ public class HTMLReportHelper {
 		strHTMLFileData="";
 		sTime= new DateTimeHelper().Now("yyyy/MM/dd HH:mm:ss");
 		
-		new ReportHelper().createUpdateSummaryReport();
+		new ReportHelper().createUpdateSummaryReport(sTime);
 		
 		strHTMLFileData = strHTMLFileData + "<html>" + "\r\n"+ "\t";
 		strHTMLFileData = strHTMLFileData +  "\t" + "<head><title>Automation Test Report</title>" + "\r\n";//</head>" + "\r\n";
@@ -168,6 +168,7 @@ public class HTMLReportHelper {
 		strHTMLFileData = strHTMLFileData + "</body>" + "\r\n";
 		strHTMLFileData = strHTMLFileData + "</html>" + "\r\n"; 
 		eTime= new DateTimeHelper().Now("yyyy/MM/dd HH:mm:ss");
+		new ReportHelper().setExecutionEndtDateTime(eTime);
 		d1 = sTime;
 		d2 = eTime;
 		long diff = d2.getTime() - d1.getTime();
@@ -191,7 +192,7 @@ public class HTMLReportHelper {
 		int totalFailed = getCount(strHTMLFileData,"<font face=Arial size=2 color=white>FAILED");
 		strHTMLFileData = strHTMLFileData.replace("STIME",strStartTime);
 		strHTMLFileData = strHTMLFileData.replace("ETIME",strEndTime);
-		strHTMLFileData = strHTMLFileData.replace("TTIME",tTimeTaken.toString());
+		strHTMLFileData = strHTMLFileData.replace("TTIME",tTimeTaken);
 		strHTMLFileData = strHTMLFileData.replace("PVPPVP1",Integer.toString(totalPassed));
 		strHTMLFileData = strHTMLFileData.replace("FVPFVP1",Integer.toString(totalFailed));
 		String appendValue="";
