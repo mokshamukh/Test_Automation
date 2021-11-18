@@ -32,8 +32,45 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	public By relationship = By.xpath("//select[contains(@id,'RelationshipCode')]");
 	public By finishButton = By.xpath("//button[@name='SubmitButton']");
 	public By iframeVal = By.xpath("//iframe[@id='bottom']");
+	public By branchRegionButton = By.xpath("//button[contains(@id,'BranchNumber_b')]");
 	public By branchRegionVal = By.xpath("(//label[text()='Branch Region:'])[1]/../following-sibling::td//input[contains(@class,'EllipseText')]");
+	String BranchRegionCombobox =  "//select[contains(@id,'BranchNumber_d')]/option[contains(text(),'%s')]";
 	public By msg = By.xpath("//*[text()='The record was updated successfully.']");
+	//below xpath are not used yet
+	public By foreignList = By.xpath("(//label[text()='Foreign:'])[1]/../following-sibling::td/select");
+	public By deliveryPointTextbox = By.xpath("(//label[text()='Delivery Point:'])[1]/../following-sibling::td/input");
+	public By accountingBranchButton =  By.xpath("//button[contains(@id,'AccountingGroup_b')]");
+	String accountingBranchList =  "//select[contains(@id,'AccountingGroup_d')]/option[contains(text(),'%s')]";
+	public By censusTractTextBox = By.xpath("(//label[text()='Census Tract:'])[1]/../following-sibling::td/input");
+	public By mSACodeButton =  By.xpath("(//button[contains(@id,'MsaCode_b')])[1]");
+	String mSACodeList =  "(//select[contains(@id,'MsaCode_d')]/option[contains(text(),'%s')])[1]";
+	public By countryCodeButton =  By.xpath("(//button[contains(@id,'CountryCode_b')])[1]");
+	String countryCodeList =  "(//select[contains(@id,'CountryCode_d')]/option[contains(text(),'%s')])[1]";
+	public By handlingCodeOption = By.xpath("(//label[text()='Handling Code Option:'])[1]/../following-sibling::td/select");
+	public By handlingCodeButton =  By.xpath("(//button[contains(@id,'HandlingCode_b')])[1]");
+	String handlingCodeList =  "(//select[contains(@id,'HandlingCode_d')]/option[contains(text(),'%s')])[1]";
+	public By responsibilityCodeButton =  By.xpath("//button[contains(@id,'ResponsibilityCode_b')]");
+	String responsibilityCodeList =  "//select[contains(@id,'ResponsibilityCode_d')]/option[contains(text(),'%s')]";
+	public By referralresponsibilityCodeButton =  By.xpath("//button[contains(@id,'ReferralRespCode_b')]");
+	String referralresponsibilityCodeList =  "//select[contains(@id,'ReferralRespCode_d')]/option[contains(text(),'%s')]";
+	public By AddressRetentionCodeList =  By.xpath("//select[contains(@id,'RetentionCode')]");
+	public By seasonal_Address1 = By.xpath("(//label[text()='Address 1:'])[2]/../following-sibling::td/input");
+	public By seasonal_Address2 = By.xpath("(//label[text()='Address 2:'])[2]/../following-sibling::td/input");
+	public By seasonal_CityStateZip = By.xpath("(//label[text()='City State Zip:'])[2]/../following-sibling::td//input");
+	public By seasonal_Foreign = By.xpath("(//label[text()='Foreign:'])[2]/../following-sibling::td/select");
+	public By seasonal_FromDate = By.xpath("//input[contains(@name,'AltFromDate')]");
+	public By seasonal_ThroughDate = By.xpath("//input[contains(@name,'AltThruDate')]");
+	public By seasonal_DeliveryPoint = By.xpath("//input[contains(@name,'AltDeliveryPt')]");
+	public By seasonal_CensusTract = By.xpath("(//label[text()='Census Tract:'])[2]/../following-sibling::td/input");
+	public By seasonal_MSACodeButton =  By.xpath("(//button[contains(@id,'MsaCode_b')])[2]");
+	String seasonal_MSACodeList =  "(//select[contains(@id,'MsaCode_d')]/option[contains(text(),'%s')])[2]";
+	public By seasonal_CountryCodeButton =  By.xpath("(//button[contains(@id,'CountryCode_b')])[2]");
+	String seasonal_CountryCodeList =  "(//select[contains(@id,'CountryCode_d')]/option[contains(text(),'%s')])[2]";
+	public By seasonal_HandlingCodeOption = By.xpath("(//label[text()='Handling Code Option:'])[2]/../following-sibling::td/select");
+	public By seasonal_HandlingCodeButton =  By.xpath("(//button[contains(@id,'HandlingCode_b')])[2]");
+	String seasonal_HandlingCodeList =  "(//select[contains(@id,'HandlingCode_d')]/option[contains(text(),'%s')])[2]";
+	public By seasonal_HomePhoneNumber = By.xpath("//input[contains(@name,'AltHomePhone')]");
+	public By noDuplicateMsg = By.xpath("//label[text()='No Possible Address Duplicates']");
 	
 	public Premier_CustomerAddress(WebDriver driver) {
 		super(driver);
@@ -53,9 +90,10 @@ public class Premier_CustomerAddress extends CommonLibrary {
 			}
 			createBuildRelationship(sSSN, realationshipVal);
 			Thread.sleep(2000);
-			isElementPresent(msg);
+			if (isElementPresent(msg)) {
+				stepResult = true;
+			}
 			switchToDefaultContent();
-			stepResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -85,12 +123,16 @@ public class Premier_CustomerAddress extends CommonLibrary {
 				if (!zipCode.equals("")) {
 					enterText("New Address Page", "zip code", zipCode, zipcodeVal);
 				}
-				clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
-				enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
+				//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
+				//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
+				clickOnElement("New Name Page", "Branch Region Button",branchRegionButton);
+				Thread.sleep(2000);
+				clickOnElement("New Name Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));
 				clickOnElement("New Name Page", "Next Button", nextButton);
 				clickOnElement("New Address Page", "next button", nextButton);
+				stepResult = true;
 			}
-			stepResult = true;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -126,8 +168,8 @@ public class Premier_CustomerAddress extends CommonLibrary {
 				}
 				selectElementByVisibleText("New Address Page", "Select Group", relationship, realationshipVal);
 				clickOnElement("New Address Page", "Finish Button", finishButton);
+				stepResult = true;
 			}
-			stepResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

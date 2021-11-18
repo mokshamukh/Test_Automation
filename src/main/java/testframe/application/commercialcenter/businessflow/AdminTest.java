@@ -115,7 +115,7 @@ public class AdminTest extends ApplicationBase {
 				adminLoginPage.logInToApplication(sCompanyID, sUserID, sPassword,tc_Test_Data.get(iTDRow).get("ValidateLogin"));
 				adminHomePage.clickOnMenuBar(tc_Test_Data.get(iTDRow).get("MenuBar"));
 				adminHomePage.clickOnSubMenuBar(tc_Test_Data.get(iTDRow).get("SubMenuBar"));
-				adminSearchCompanies.clickCreateCompany();
+				/*adminSearchCompanies.clickCreateCompany();
 				adminCreateCompany.createAndSaveCompany(tc_Test_Data.get(iTDRow).get("CompanyID"), tc_Test_Data.get(iTDRow).get("CompanyName"), tc_Test_Data.get(iTDRow).get("BusinessUnit"), tc_Test_Data.get(iTDRow).get("Address"), tc_Test_Data.get(iTDRow).get("City"),
 						tc_Test_Data.get(iTDRow).get("State"), tc_Test_Data.get(iTDRow).get("ZipCode"), tc_Test_Data.get(iTDRow).get("Country"), tc_Test_Data.get(iTDRow).get("MarketSegment"),  tc_Test_Data.get(iTDRow).get("BillingAccount"), 
 						tc_Test_Data.get(iTDRow).get("TimeZone"), tc_Test_Data.get(iTDRow).get("EnableDate"), tc_Test_Data.get(iTDRow).get("ProcessingCenter"), tc_Test_Data.get(iTDRow).get("IsBank"), tc_Test_Data.get(iTDRow).get("ReVerification"),
@@ -124,7 +124,7 @@ public class AdminTest extends ApplicationBase {
 				adminCompanyDetails.searchCompaniesSideLink();
 				adminSearchCompanies.searchCompany(tc_Test_Data.get(iTDRow).get("SearchCompanyID"), tc_Test_Data.get(iTDRow).get("SearchAccountNumber"), tc_Test_Data.get(iTDRow).get("SearchCompanyName"), tc_Test_Data.get(iTDRow).get("SearchMarketSegment"), tc_Test_Data.get(iTDRow).get("SearchLabel"), tc_Test_Data.get(iTDRow).get("SearchShowLabels"));
 				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateSearchCompany"));
-				adminlogOffPage.logoffApplication();
+				adminlogOffPage.logoffApplication();*/
 				
 				break;
 				
@@ -135,7 +135,7 @@ public class AdminTest extends ApplicationBase {
 				adminLoginPage.logInToApplication(sCompanyID, sUserID, sPassword,tc_Test_Data.get(iTDRow).get("ValidateLogin"));
 				adminHomePage.clickOnMenuBar(tc_Test_Data.get(iTDRow).get("MenuBar"));
 				adminHomePage.clickOnSubMenuBar(tc_Test_Data.get(iTDRow).get("SubMenuBar"));
-				adminSearchCompanies.clickCreateCompany();
+				/*adminSearchCompanies.clickCreateCompany();
 				adminCreateCompany.createAndSaveCompany(tc_Test_Data.get(iTDRow).get("CompanyID"), tc_Test_Data.get(iTDRow).get("CompanyName"), tc_Test_Data.get(iTDRow).get("BusinessUnit"), tc_Test_Data.get(iTDRow).get("Address"), tc_Test_Data.get(iTDRow).get("City"),
 						tc_Test_Data.get(iTDRow).get("State"), tc_Test_Data.get(iTDRow).get("ZipCode"), tc_Test_Data.get(iTDRow).get("Country"), tc_Test_Data.get(iTDRow).get("MarketSegment"),  tc_Test_Data.get(iTDRow).get("BillingAccount"), 
 						tc_Test_Data.get(iTDRow).get("TimeZone"), tc_Test_Data.get(iTDRow).get("EnableDate"), tc_Test_Data.get(iTDRow).get("ProcessingCenter"), tc_Test_Data.get(iTDRow).get("IsBank"), tc_Test_Data.get(iTDRow).get("ReVerification"),
@@ -154,7 +154,7 @@ public class AdminTest extends ApplicationBase {
 				adminCompanyDetails.searchCompaniesSideLink();
 				adminSearchCompanies.searchCompany(tc_Test_Data.get(iTDRow).get("Edit_SearchCompanyID"), tc_Test_Data.get(iTDRow).get("Edit_SearchAccountNumber"), tc_Test_Data.get(iTDRow).get("Edit_SearchCompanyName"), tc_Test_Data.get(iTDRow).get("Edit_SearchMarketSegment"), tc_Test_Data.get(iTDRow).get("Edit_SearchLabel"), tc_Test_Data.get(iTDRow).get("Edit_SearchShowLabels"));
 				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("Edit_ValidateSearchCompany"));
-				adminlogOffPage.logoffApplication();
+				adminlogOffPage.logoffApplication();*/
 				
 			
 			case "CC_ADMIN_TC003_TBD":

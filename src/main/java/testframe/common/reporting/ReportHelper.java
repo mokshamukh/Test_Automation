@@ -89,7 +89,7 @@ public class ReportHelper extends ApplicationBase {
 		er.setValueInColumnforRow(sSummaryReportPath, "VerificationDetail", "StepName", iSummary_VerificationRowNum, sStepDescription);
 		er.setValueInColumnforRow(sSummaryReportPath, "VerificationDetail", "Result", iSummary_VerificationRowNum, result);
 		er.setValueInColumnforRow(sSummaryReportPath, "VerificationDetail", "StepDescription", iSummary_VerificationRowNum, sActualResultDescription);
-		er.setValueInColumnforRow(sSummaryReportPath, "VerificationDetail", "ScreenShotLink", iSummary_VerificationRowNum, new File(sScreeshotPath).getAbsolutePath());
+		er.setValueInColumnforRow(sSummaryReportPath, "VerificationDetail", "ScreenShotLink", iSummary_VerificationRowNum, "HYPERLINK-"+new File(sScreeshotPath).toURI().toString());
 		iSummary_VerificationRowNum= iSummary_VerificationRowNum+1;
 	}
 	
@@ -103,7 +103,7 @@ public class ReportHelper extends ApplicationBase {
 		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "Failed", iSummary_testDetailsRowNum,sTotalFailed);
 		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "BaselineChecks", iSummary_testDetailsRowNum,sTotalPassFail);
 		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "Module", iSummary_testDetailsRowNum,sModule);
-		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "ReportLink", iSummary_testDetailsRowNum,new File(sPDFFilePath).getAbsolutePath());
+		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "ReportLink", iSummary_testDetailsRowNum,"HYPERLINK-"+new File(sPDFFilePath).toURI().toString());
 		
 		
 		/*if (iSummary_testDetailsRowNum == 1){

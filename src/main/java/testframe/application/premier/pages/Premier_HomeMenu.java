@@ -28,7 +28,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By newName =  By.xpath("//a[text()='New Name']");
 	public By address = By.xpath("//a[text()='Address']");
 	public By newAddress = By.xpath("//a[text()='New Address']");
-	public By customerHeader = By.xpath("//div[contains(text(),'Customer')]");
+	public By customerHeader = By.xpath("(//a[text()='Customer'])[2]");
 	public By contacts = By.xpath("//a[text()='Contacts']");
 	public By newContact = By.xpath("//a[text()='New Name Contact']");
 

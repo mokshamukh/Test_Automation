@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
-
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -223,9 +227,30 @@ public class ExcelReader {
 			columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(currentColumn).getStringCellValue();
 			if(columnHeaderName.equalsIgnoreCase(columnName)){
 				sFoundCol ="Y";
-				cell = row.createCell(currentColumn,CellType.STRING);
-				cell.setCellValue(setValue);
-				break;
+				if (!setValue.toLowerCase().contains("hyperlink-")){
+					cell = row.createCell(currentColumn,CellType.STRING);
+					cell.setCellValue(setValue);
+					break;
+				}	
+				else{
+					setValue = setValue.replace("HYPERLINK-", "");
+					//cell = row.createCell(currentColumn,CellType.FORMULA);  
+					//cell.setCellFormula("HYPERLINK(\""+setValue+"\", \"Click here\")");
+					CreationHelper creationHelper = workbook.getCreationHelper();
+					CellStyle hlink_style = workbook.createCellStyle();
+					Font hlink_font = workbook.createFont();
+					hlink_font.setUnderline(Font.U_SINGLE);
+					hlink_font.setColor(Font.COLOR_RED);
+					hlink_style.setFont(hlink_font);
+					Hyperlink hyperlink = creationHelper.createHyperlink(HyperlinkType.FILE);
+					hyperlink.setAddress(setValue);
+					hyperlink.setLabel("Click here");
+					cell = row.createCell(currentColumn,CellType.STRING);
+					cell.setHyperlink(hyperlink);
+					cell.setCellStyle(hlink_style);
+					cell.setCellValue("Click here");
+				}
+					
 			}
 		}
 		inputStream.close();

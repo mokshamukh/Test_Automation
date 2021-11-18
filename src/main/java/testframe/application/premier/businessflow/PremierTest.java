@@ -101,7 +101,7 @@ public class PremierTest extends ApplicationBase {
 			
 			switch(sTestCase.toUpperCase()){
 			
-			case "PREMIER_TC001":
+			case "PREMIER_POC":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
@@ -114,8 +114,6 @@ public class PremierTest extends ApplicationBase {
 				premierCustomerInquiryPage.customerExpand();
 				premierCustomerInquiryPage.getCustomer(testdataFile_Path, sTestCase, iTDRow+1);
 				
-				
-				
 				/*premierHomeMenuPage.clickNewName();
 				premierCustomerNewName.createNewName(tc_Test_Data.get(iTDRow).get("Name"),tc_Test_Data.get(iTDRow).get("FirstName"),tc_Test_Data.get(iTDRow).get("LastName"),tc_Test_Data.get(iTDRow).get("DOB"),tc_Test_Data.get(iTDRow).get("TaxIdentification"),tc_Test_Data.get(iTDRow).get("PhoneNumber"),tc_Test_Data.get(iTDRow).get("BranchRegion"),tc_Test_Data.get(iTDRow).get("Email"));
 				premierHomeMenuPage.clickNewContact();
@@ -126,21 +124,27 @@ public class PremierTest extends ApplicationBase {
 				break;
 				
 				
+			case "PREMIER_TC001":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				premierHomeMenuPage.customerMenu();
 				
+				premierHomeMenuPage.clickNewName();
+				premierCustomerNewName.createNewName(tc_Test_Data.get(iTDRow).get("Name_Name"),tc_Test_Data.get(iTDRow).get("Name_FirstName"),tc_Test_Data.get(iTDRow).get("Name_LastName"),tc_Test_Data.get(iTDRow).get("Name_NameFormatCode"),
+						tc_Test_Data.get(iTDRow).get("Name_DOB"),tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"),tc_Test_Data.get(iTDRow).get("Name_WithholdingCode"),tc_Test_Data.get(iTDRow).get("Name_Alt_Name"),tc_Test_Data.get(iTDRow).get("Name_Alt_FirstName"),tc_Test_Data.get(iTDRow).get("Name_Alt_LastName"),tc_Test_Data.get(iTDRow).get("Name_Alt_MiddleInitial"),tc_Test_Data.get(iTDRow).get("Name_Alt_NameFormatCode"),
+						tc_Test_Data.get(iTDRow).get("Name_PhoneNumber"),tc_Test_Data.get(iTDRow).get("Name_BranchRegion"),tc_Test_Data.get(iTDRow).get("Name_Email"),tc_Test_Data.get(iTDRow).get("Name_WebAddress"),tc_Test_Data.get(iTDRow).get("Name_Gender"),
+						tc_Test_Data.get(iTDRow).get("Name_RiskRanking"),tc_Test_Data.get(iTDRow).get("Name_CreditScore"),tc_Test_Data.get(iTDRow).get("Name_NAICSCodes_EconomicSector"),tc_Test_Data.get(iTDRow).get("Name_CustomerType"),tc_Test_Data.get(iTDRow).get("Name_BeneficialName_SSN"),
+						tc_Test_Data.get(iTDRow).get("Name_Build_Relationship"),tc_Test_Data.get(iTDRow).get("Name_BeneficialOwnerName"),tc_Test_Data.get(iTDRow).get("Name_Beneficial_Relationship"),tc_Test_Data.get(iTDRow).get("Name_Beneficial_Percent"));
+				premierHomeMenuPage.clickNewContact();
+				premierCustomerContact.createNewContact(tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"));
+				premierHomeMenuPage.clickNewAddress();
+				premierCustomerAddress.createNewAddress(tc_Test_Data.get(iTDRow).get("Address_Address1"), tc_Test_Data.get(iTDRow).get("Address_Address2"), tc_Test_Data.get(iTDRow).get("Address_Zipcode"), tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"), tc_Test_Data.get(iTDRow).get("Address_BuildRelationship"),tc_Test_Data.get(iTDRow).get("Name_BranchRegion"));
 				
-				
-				
-						
+				break;				
 			}
-			
 			new HTMLReportHelper().HtmlReportFooter();
 		}
 		driver.close();
 	}
-	
-	
-		
-	
-	
-
 }
