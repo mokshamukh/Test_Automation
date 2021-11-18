@@ -90,8 +90,9 @@ public class EPP_ApprovePayment extends CommonLibrary{
 				waitElement(7000);
 				isElementPresent(paymentApprovedMsg);
 				waitElement(3000);
+				stepResult = true;
 			}
-			stepResult = true;
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -101,13 +101,15 @@ public class CorporateTest extends ApplicationBase  {
 				sScreenShotFolder = sScreenShotFolder +"/" +"Iterations-"+ (iTDRow+1);
 				Log.info("XXXXXXXXXXXXXXXXXXXXXXX             "+"Iteration - " + (iTDRow+1)+"             XXXXXXXXXXXXXXXXXXXXXX");
 			}
+			System.setProperty("testcaseid.iteration", sTestCase+"||"+iIteration_count);
 			fi.createFile(sHTMLFilePath);
 			fi.checkAndCreateFolder(sScreenShotFolder);
+			
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
 			new HTMLReportHelper().HTMLReportHeader("Corporate", sTestCase, sTestDescription);
-			System.setProperty("testcaseid.iteration", sTestCase+"||"+iIteration_count);
+			
 
 
 			switch(sTestCase.toUpperCase()){

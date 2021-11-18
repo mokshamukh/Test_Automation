@@ -112,13 +112,14 @@ public class EppTest extends ApplicationBase {
 				Log.info("XXXXXXXXXXXXXXXXXXXXXXX             " + "Iteration - " + (iTDRow + 1)
 						+ "             XXXXXXXXXXXXXXXXXXXXXX");
 			}
+			System.setProperty("testcaseid.iteration", sTestCase + "||" + iIteration_count);
 			fi.createFile(sHTMLFilePath);
 			fi.checkAndCreateFolder(sScreenShotFolder);
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
 			new HTMLReportHelper().HTMLReportHeader("EPP", sTestCase, sTestDescription);
-			System.setProperty("testcaseid.iteration", sTestCase + "||" + iIteration_count);
+			
 
 			switch (sTestCase.toUpperCase()) {
 
@@ -160,8 +161,8 @@ public class EppTest extends ApplicationBase {
 			  eppProductSelection.selectProductEPP();
 			  eppMenuOPtions.selectManualPaymentOptions();
 			  eppMenuOPtions.selectPaymentCreationSubMenu();
-			  eppTemplates.verifyWorkSummaryPool();
-			  eppTemplates.selectPaymentCreationVerificationOption();
+			  eppTemplates.verifyPaymentCreationPool();
+			  eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 			  //eppTransactionIDList.selectTransactionIDFromList();
 			  //eppTemplates.selectTemplate("Payment Creation", "Outgoing High Value Bank Payment (FRB)");
 			  eppCreatePayment.createOutgoingHVBankPaymentFRB(accNum,systemCode, debitAccount, amount, valueDateField,
@@ -193,11 +194,11 @@ public class EppTest extends ApplicationBase {
 				eppProductSelection.selectProductEPP();
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
+				eppTemplates.verifyPaymentCreationPool();
+				eppTemplates.selectOutgoingHVCustomerPaymentFRBOption();
 				//eppMenuOPtions.selectMenuOptions("Manual Payments");
 				//eppMenuOPtions.selectSubMenuOptions("Payment Creation");
-				eppTemplates.selectTemplate("Payment Creation","Outgoing High Value Customer Payment (FRB)");
+				//eppTemplates.selectTemplate("Payment Creation","Outgoing High Value Customer Payment (FRB)");
 				eppCreatePayment.createOutgoingHVCustomerPaymentFRB(tc_Test_Data.get(iTDRow).get("CustAccountNumber"), 
 						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("Amount"), 
 						tc_Test_Data.get(iTDRow).get("BeneCustAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneCustName"), 
@@ -210,12 +211,16 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Payment Creation Verification");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectPaymentCreationVerificationOption();
+				//eppTemplates.selectTemplate("Work Summary","Payment Creation Verification");
 				eppTransactionIDList.selectTransactionIDFromList();
 				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				eppMenuOPtions.selectMenuOptions("Payment Tracking");
-				eppMenuOPtions.selectSubMenuOptions("Transaction Inquiry");
+				eppMenuOPtions.selectPaymentTrackingOptions();
+				eppMenuOPtions.selectTransactionInquirySubMenu();
+				//eppMenuOPtions.selectMenuOptions("Payment Tracking");
+				//eppMenuOPtions.selectSubMenuOptions("Transaction Inquiry");
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"));
 				eppPaymentDetails.verifyCompletedPaymentTransaction();
@@ -230,9 +235,13 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppMenuOPtions.selectMenuOptions("Manual Payments");
-				eppMenuOPtions.selectSubMenuOptions("Payment Creation");
-				eppTemplates.selectTemplate("Payment Creation","Incoming High Value Customer Payment (FRB)");
+				eppMenuOPtions.selectManualPaymentOptions();
+				eppMenuOPtions.selectPaymentCreationSubMenu();
+				eppTemplates.verifyPaymentCreationPool();
+				eppTemplates.selectIncomingHVCustomerPaymentFRBOption();
+				//eppMenuOPtions.selectMenuOptions("Manual Payments");
+				//eppMenuOPtions.selectSubMenuOptions("Payment Creation");
+				//eppTemplates.selectTemplate("Payment Creation","Incoming High Value Customer Payment (FRB)");
 				eppCreatePayment.createIncomingHVCustomerPaymentFRB(tc_Test_Data.get(iTDRow).get("OrderingCustAcctNumber"), tc_Test_Data.get(iTDRow).get("OrderingBankAccount"),
 						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"), tc_Test_Data.get(iTDRow).get("Amount"), 
 						tc_Test_Data.get(iTDRow).get("BeneCustAccountNumber"),tc_Test_Data.get(iTDRow).get("CreditAccount"),
@@ -243,12 +252,15 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Payment Creation Verification");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectPaymentCreationVerificationOption();
+				//eppTemplates.selectTemplate("Work Summary","Payment Creation Verification");
 				eppTransactionIDList.selectTransactionIDFromList();
 				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("ValueDate"));
-
-				eppMenuOPtions.selectMenuOptions("Payment Tracking");
-				eppMenuOPtions.selectSubMenuOptions("Transaction Inquiry");
+				eppMenuOPtions.selectPaymentTrackingOptions();
+				eppMenuOPtions.selectTransactionInquirySubMenu();
+				//eppMenuOPtions.selectMenuOptions("Payment Tracking");
+				//eppMenuOPtions.selectSubMenuOptions("Transaction Inquiry");
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"));
 				eppPaymentDetails.verifyCompletedPaymentTransaction();
@@ -264,9 +276,13 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppMenuOPtions.selectMenuOptions("Manual Payments");
-				eppMenuOPtions.selectSubMenuOptions("Payment Creation");
-				eppTemplates.selectTemplate("Payment Creation","Incoming High Value Bank Payment (FRB)");
+				eppMenuOPtions.selectManualPaymentOptions();
+				eppMenuOPtions.selectPaymentCreationSubMenu();
+				eppTemplates.verifyPaymentCreationPool();
+				eppTemplates.selectIncomingHVBankPaymentFRBOption();
+				//eppMenuOPtions.selectMenuOptions("Manual Payments");
+				//eppMenuOPtions.selectSubMenuOptions("Payment Creation");
+				//eppTemplates.selectTemplate("Payment Creation","Incoming High Value Bank Payment (FRB)");
 				eppCreatePayment.createIncomingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("OrderingBankAccount"),
 						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"), tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("BeneCustAccountNumber"), tc_Test_Data.get(iTDRow).get("CreditAccount"),
@@ -277,11 +293,15 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Payment Creation Verification");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectPaymentCreationVerificationOption();
+				//eppTemplates.selectTemplate("Work Summary","Payment Creation Verification");
 				eppTransactionIDList.selectTransactionIDFromList();
 				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("ValueDate"));
-				eppMenuOPtions.selectMenuOptions("Payment Tracking");
-				eppMenuOPtions.selectSubMenuOptions("Transaction Inquiry");
+				eppMenuOPtions.selectPaymentTrackingOptions();
+				eppMenuOPtions.selectTransactionInquirySubMenu();
+				//eppMenuOPtions.selectMenuOptions("Payment Tracking");
+				//eppMenuOPtions.selectSubMenuOptions("Transaction Inquiry");
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"));
 				eppPaymentDetails.verifyCompletedPaymentTransaction();
@@ -295,9 +315,11 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Duplicate Payments");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectDuplicatePaymentOption();
+				//eppTemplates.selectTemplate("Work Summary","Duplicate Payments");
 				eppDuplicatePayments.selectCancelDuplicatePayment();
-				eppActionPrompts.performActionForCancelPayment("Testing","CUST");
+				eppActionPrompts.performActionForCancelPayment("CUST");
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				eppLoginPage.launchApplication(sURL);
@@ -305,7 +327,9 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Payment Action Verification");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectPaymentActionVerificationOption();
+				//eppTemplates.selectTemplate("Work Summary","Payment Action Verification");
 				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID();
 				eppPaymentDetails.submitActionOnTransactionWithApproval();
 			    driver.close();
@@ -319,9 +343,11 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Duplicate Payments");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectDuplicatePaymentOption();
+				//eppTemplates.selectTemplate("Work Summary","Duplicate Payments");
 				eppDuplicatePayments.selectReleaseHoldPayment();
-				eppActionPrompts.VerifyAndPerformActionForReleaseHold("Testing");
+				eppActionPrompts.VerifyAndPerformActionForReleaseHold();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 			    break;

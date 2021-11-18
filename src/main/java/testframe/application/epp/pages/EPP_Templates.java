@@ -28,9 +28,14 @@ public class EPP_Templates extends CommonLibrary{
 	 By manualPayment = By.xpath("//h2[text()='Manual Payments']");
 	 By paymentTemplate = By.xpath("//div[@id='headerBar']//table//td[contains(text(),'Payment Template')]");
 	 By workSummary = By.xpath("//div[@id='headerBar']//table//td[contains(text(),'Work Summary')]");
-	 By outgoingFRB = By.xpath("//a[text()='Outgoing High Value Bank Payment (FRB)']");
+	 By outgoingBankFRB = By.xpath("//a[text()='Outgoing High Value Bank Payment (FRB)']");
+	 By outgoingCustFRB = By.xpath("//a[text()='Outgoing High Value Customer Payment (FRB)']");
+	 By incomingCustFRB = By.xpath("//a[text()='Incoming High Value Customer Payment (FRB)']");
+	 By incomingBankFRB = By.xpath("//a[text()='Incoming High Value Bank Payment (FRB)']");
 	 By paymentCreationVerificationOption = By.xpath("//a[text()='Payment Creation Verification']");
+	 By paymentActionVerificationOption = By.xpath("//a[text()='Payment Action Verification']");
 	 By paymentRepair = By.xpath("//a[text()='Payment Repair']");
+	 By duplicatePayment = By.xpath("//a[text()='Duplicate Payments']");
 	 By paymentRepairVerification = By.xpath("//a[text()='Payment Repair Verification']");
 	
 	
@@ -103,8 +108,8 @@ public class EPP_Templates extends CommonLibrary{
 	public void selectOutgoingHVBankPaymentFRBOption() throws Exception {
 		boolean stepResult = false;
 		try {
-			waitForPresenceOfElement(eppPoolOptions, "Pool Value", outgoingFRB);
-			clickOnElement(eppPoolOptions, "Pool Value", outgoingFRB);
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", outgoingBankFRB);
+			clickOnElement(eppPoolOptions, "Pool Value", outgoingBankFRB);
 			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -119,6 +124,109 @@ public class EPP_Templates extends CommonLibrary{
 			}
 		}
 	}
+	
+	public void selectOutgoingHVCustomerPaymentFRBOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", outgoingCustFRB);
+			clickOnElement(eppPoolOptions, "Pool Value", outgoingCustFRB);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Outgoing High Value Customer Payment (FRB) template", "Successfully clicked on Outgoing High Value Customer Payment (FRB) template", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Outgoing High Value Customer Payment (FRB) template", "Could not clicked on Outgoing High Value Customer Payment (FRB) template", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void selectIncomingHVCustomerPaymentFRBOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", incomingCustFRB);
+			clickOnElement(eppPoolOptions, "Pool Value", incomingCustFRB);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Outgoing High Value Customer Payment (FRB) template", "Successfully clicked on Outgoing High Value Customer Payment (FRB) template", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Outgoing High Value Customer Payment (FRB) template", "Could not clicked on Outgoing High Value Customer Payment (FRB) template", "Failed", driver, "Y");
+			}
+		}
+	}
+
+	
+	public void selectIncomingHVBankPaymentFRBOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", incomingBankFRB);
+			clickOnElement(eppPoolOptions, "Pool Value", incomingBankFRB);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Outgoing High Value Customer Payment (FRB) template", "Successfully clicked on Outgoing High Value Customer Payment (FRB) template", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Outgoing High Value Customer Payment (FRB) template", "Could not clicked on Outgoing High Value Customer Payment (FRB) template", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void selectDuplicatePaymentOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", duplicatePayment);
+			clickOnElement(eppPoolOptions, "Pool Value", duplicatePayment);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Duplicate Payment", "Successfully clicked on Duplicate Payment", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Duplicate Payment", "Could not clicked on Duplicate Payment", "Failed", driver, "Y");
+			}
+		}
+	}
+
+	
+	public void selectPaymentActionVerificationOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", paymentCreationVerificationOption);
+			clickOnElement(eppPoolOptions, "Pool Value", paymentCreationVerificationOption);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Payment Creation Verification Option", "Successfully clicked on Payment Creation Verification Option", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Payment Creation Verification Option", "Could not clicked on Payment Creation Verification Option", "Failed", driver, "Y");
+			}
+		}
+	}
+	
 	
 	public void selectPaymentCreationVerificationOption() throws Exception {
 		boolean stepResult = false;
@@ -160,6 +268,8 @@ public class EPP_Templates extends CommonLibrary{
 		}
 	}
 	
+	
+	
 	public void selectPaymentRepairVerificationOption() throws Exception {
 		boolean stepResult = false;
 		try {
@@ -179,4 +289,5 @@ public class EPP_Templates extends CommonLibrary{
 			}
 		}
 	}
-}
+
+	}

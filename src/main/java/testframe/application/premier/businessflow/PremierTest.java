@@ -90,13 +90,14 @@ public class PremierTest extends ApplicationBase {
 				sScreenShotFolder = sScreenShotFolder +"/" +"Iterations-"+ (iTDRow+1);
 				Log.info("XXXXXXXXXXXXXXXXXXXXXXX             "+"Iteration - " + (iTDRow+1)+"             XXXXXXXXXXXXXXXXXXXXXX");
 			}
+			System.setProperty("testcaseid.iteration", sTestCase+"||"+iTDRow);
 			fi.createFile(sHTMLFilePath);
 			fi.checkAndCreateFolder(sScreenShotFolder);
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 			
 			new HTMLReportHelper().HTMLReportHeader("Premier", sTestCase, sTestDescription);
-			System.setProperty("testcaseid.iteration", sTestCase+"||"+iTDRow);
+			
 			
 			switch(sTestCase.toUpperCase()){
 			

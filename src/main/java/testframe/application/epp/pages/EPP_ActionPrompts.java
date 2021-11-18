@@ -35,11 +35,11 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	By repairReason = By.xpath("//input[@name='RepairPaymentReason']");
 	
 	
-	public void performActionForCancelPayment(String commentTxtBox,String cancelInitiator) throws Exception {
+	public void performActionForCancelPayment(String cancelInitiator) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(actionPrompts)) {
-			 enterText(eppActionPrompts, "Additional Comments", cancelPaymentTxtBox, commentTxtBox);
+			 enterText(eppActionPrompts, "Additional Comments", cancelPaymentTxtBox, "Testing");
 			 if(cancelInitiator.equals("BANK")) {
 				 clickOnElement(eppActionPrompts, "Cancel Initiator", cancelByBankBtn);
 			 }else {
@@ -73,9 +73,8 @@ public class EPP_ActionPrompts extends CommonLibrary{
 		try {
 			if (!(actionOntransactionID == null)) {
 				transactionIDWithAction = actionOntransactionID;
-				stepResult = true;
 			}
-			
+			stepResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -89,11 +88,11 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	}
 	
 	
-	public void VerifyAndPerformActionForReleaseHold(String releaseReasonTxtBox) throws Exception {
+	public void VerifyAndPerformActionForReleaseHold() throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(actionPrompts)) {
-				enterText(eppActionPrompts, "Additional Comments", releaseReason, releaseReasonTxtBox);
+				enterText(eppActionPrompts, "Additional Comments", releaseReason, "Testing");
 				clickOnElement(eppActionPrompts, "Submit Button", submitButton);
 				waitElement(4000);
 				if (isElementPresent(transIdSaved)) {
