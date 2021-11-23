@@ -124,8 +124,8 @@ public class ExcelReader {
 
 	private  LinkedHashMap<String, String> getCellValue(Sheet sheet, Row row, int currentColumn) {
 		Workbook wb =sheet.getWorkbook();
-		wb.setForceFormulaRecalculation(true);
-		sheet.setForceFormulaRecalculation(true);
+		//wb.setForceFormulaRecalculation(true);
+		//sheet.setForceFormulaRecalculation(true);
 		FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
 		LinkedHashMap<String, String> columnMapdata = new LinkedHashMap<String, String>();
@@ -139,13 +139,7 @@ public class ExcelReader {
 			}
 		} else {
 			cell = row.getCell(currentColumn, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-			if (cell.getCellType() == CellType.FORMULA) 
-				//cell.getCachedFormulaResultType();
-				try{
-					evaluator.evaluateFormulaCell(cell);}
-			catch(Exception e){
-				System.out.println(e);
-			}
+
 			if (cell.getCellType() == CellType.STRING) {
 				if (sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getCellType() != CellType.BLANK) {
 					String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex()).getStringCellValue();
@@ -171,6 +165,37 @@ public class ExcelReader {
 					String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex()).getStringCellValue();
 					columnMapdata.put(columnHeaderName, Byte.toString(cell.getErrorCellValue()));
 				}
+			}else if (cell.getCellType() == CellType.FORMULA) {
+				//cell.getCachedFormulaResultType();
+				//evaluator.evaluateFormulaCell(cell);
+				
+					if (evaluator.evaluateFormulaCell(cell) == CellType.STRING) {
+						if (sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getCellType() != CellType.BLANK) {
+							String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex()).getStringCellValue();
+							columnMapdata.put(columnHeaderName, cell.getStringCellValue());
+						}
+					} else if (evaluator.evaluateFormulaCell(cell) == CellType.NUMERIC) {
+						if (sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getCellType() != CellType.BLANK) {
+							String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex()).getStringCellValue();
+							columnMapdata.put(columnHeaderName, NumberToTextConverter.toText(cell.getNumericCellValue()));
+						}
+					} else if (evaluator.evaluateFormulaCell(cell) == CellType.BLANK) {
+						if (sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getCellType() != CellType.BLANK) {
+							String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex()).getStringCellValue();
+							columnMapdata.put(columnHeaderName, "");
+						}
+					} else if (evaluator.evaluateFormulaCell(cell) == CellType.BOOLEAN) {
+						if (sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getCellType() != CellType.BLANK) {
+							String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex()).getStringCellValue();
+							columnMapdata.put(columnHeaderName, Boolean.toString(cell.getBooleanCellValue()));
+						}
+					} else if (evaluator.evaluateFormulaCell(cell) == CellType.ERROR) {
+						if (sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).getCellType() != CellType.BLANK) {
+							String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex()).getStringCellValue();
+							columnMapdata.put(columnHeaderName, Byte.toString(cell.getErrorCellValue()));
+						}
+					}
+				
 			}
 		}
 		return columnMapdata;
@@ -250,7 +275,7 @@ public class ExcelReader {
 					cell.setCellStyle(hlink_style);
 					cell.setCellValue("Click here");
 				}
-					
+
 			}
 		}
 		inputStream.close();
@@ -291,12 +316,12 @@ public class ExcelReader {
 			row = sheet.getRow(rowNo);
 			cell = row.createCell(columnNum,CellType.STRING);
 			cell.setCellValue(setValue);
-			
+
 			inputStream.close();
-			
+
 			FileOutputStream outputStream = new FileOutputStream(new File(excelFilePath));
 			workbook.write(outputStream);
-			
+
 			outputStream.close();
 			workbook.close();
 		} catch (Exception e) {
