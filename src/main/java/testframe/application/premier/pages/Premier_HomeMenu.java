@@ -31,6 +31,9 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By customerHeader = By.xpath("(//a[text()='Customer'])[2]");
 	public By contacts = By.xpath("//a[text()='Contacts']");
 	public By newContact = By.xpath("//a[text()='New Name Contact']");
+	public By portfolioMenu =  By.xpath("(//a[text()='Portfolio'])[2]");
+	public By newPortfolio =  By.xpath("//a[text()='New Portfolio']");
+	
 
 	public Premier_HomeMenu(WebDriver driver) {
 		super(driver);
@@ -155,5 +158,48 @@ public class Premier_HomeMenu extends CommonLibrary {
 		}
 		
 	} 
-	
+	public void portfolioMenu() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)){
+				clickOnElement("Home Page", "Portfolio Menu ",portfolioMenu );
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Portfolio from menu selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select Portfolio from menu", "Failed", driver, "Y");
+			}
+		}
+
+	}
+	public void portfolioNew() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)){
+				clickOnElement("Home Page", "New Portfolio", newPortfolio);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "New Portfolio from Portfolio menu selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select New Portfolio from Portfolio menu" , "Failed", driver, "Y");
+			}
+		}
+
+	}
 }

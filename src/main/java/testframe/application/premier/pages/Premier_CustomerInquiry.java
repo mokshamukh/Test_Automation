@@ -35,9 +35,12 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 	public By dob =  By.xpath("(//td[@class=' tc-usr-information txt-right'])[2]");
 	public By email =  By.xpath("(//td[@class=' tc-usr-information txt-right'])[4]");
 	public By phonenumber =  By.xpath("(//td[@class=' tc-usr-information txt-right'])[3]");
-	public By address1 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[11]");
-	public By address2 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[12]");
-	public By zipcode =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[13]");
+	//public By address1 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[11]");
+	//public By address2 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[12]");
+	//public By zipcode =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[13]");
+	public By address1 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[4]");
+	public By address2 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[6]");
+	public By zipcode =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[8]");
 	public By relationship =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[14]");
 
 	public Premier_CustomerInquiry(WebDriver driver) throws Exception {
@@ -52,7 +55,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 		try {
 			if (isElementPresent(customerInquiryHeader)){
 				switchToFrameWithName("Main");
-				enterText("Customer Inquiry Page", "Name", ssnSearch, sSSN);
+				enterText("Customer Inquiry Page", "Tax Identification", ssnSearch, sSSN);
 				clickOnElement("Customer Inquiry", "Submit", submitSearch);
 				stepResult = true;
 				switchToDefaultContent();
@@ -175,8 +178,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 				if(sRelationship != "")
 					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Relationship", rowNo, sRelationship);
 
-
-
+				
 				switchToDefaultContent();
 				stepResult = true;
 			}	
@@ -192,9 +194,36 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Could not search the Customer" , "Failed", driver, "Y");
 			}
-		}
+		}}
 
-	}
+	public void validateCustomerDetails(String customerName, String sSN, String phoneNumber, String eMailID,String sAddress1,String sAddress2,String zipCode) throws Exception {
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(customerInquiryHeader)){
+				switchToWithinFrameWithName("Main");
+				switchToWithinFrameWithName("bottom");
+				validateTextEquals("Customer Inquiry" , "Name", name, customerName);
+				validateTextContains("Customer Inquiry" , "SSN", taxIdentification, sSN);
+				validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber);
+				validateTextEquals("Customer Inquiry" , "Email ID", email, eMailID);
+				validateTextEquals("Customer Inquiry" , "Address 1", address1, sAddress1);
+				validateTextEquals("Customer Inquiry" , "Address 2", address2, sAddress2);
+				validateTextEquals("Customer Inquiry" , "Zip Code", zipcode, zipCode);
+				switchToDefaultContent();
+				stepResult = true;
 
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Could not Validated Customer Details on Customer Inquiry page" , "Failed", driver, "Y");
+			}
+		}}
 
 }
