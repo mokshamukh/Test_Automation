@@ -63,7 +63,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Contact Page", "Create Contact page Successfully", "Failed",
+				new HTMLReportHelper().HtmlReportBody("New Contact Page", "Couls not Create Contact page Successfully", "Failed",
 						driver, "Y");
 			}
 		}
@@ -76,7 +76,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 			Thread.sleep(4000);
 				if (isElementPresent(searchTitle)) {
 					clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
-					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN.substring(4));
+					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
 					clickOnElement("Add Name Page", "Submit", submitSearch);
 					if(isElementPresent(nameLink)){
 					clickOnElement("Add Name Page", "Name link", nameLink);}

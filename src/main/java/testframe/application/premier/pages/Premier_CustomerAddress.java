@@ -114,20 +114,23 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		try {
 			Thread.sleep(4000);
 			if (isElementPresent(addressTitle)) {
-				if (!address1.equals("")) {
+				if (!address1Val.equals("")) {
 					enterText("New Address Page", "Address 1", address1, address1Val);
 				}
-				if (!address2.equals("")) {
+				if (!address2Val.equals("")) {
 					enterText("New Address Page", "Address 2", address2, address2Val);
 				}
-				if (!zipCode.equals("")) {
+				if (!zipcodeVal.equals("")) {
 					enterText("New Address Page", "zip code", zipCode, zipcodeVal);
 				}
-				//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
-				//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
-				clickOnElement("New Name Page", "Branch Region Button",branchRegionButton);
-				Thread.sleep(2000);
-				clickOnElement("New Name Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));
+				if (!branchRegion.equals("")) {
+					//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
+					//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
+					clickOnElement("New Name Page", "Branch Region Button",branchRegionButton);
+					Thread.sleep(2000);
+					clickOnElement("New Name Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));
+				}
+
 				clickOnElement("New Name Page", "Next Button", nextButton);
 				clickOnElement("New Address Page", "next button", nextButton);
 				stepResult = true;
@@ -138,11 +141,11 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Create Address page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("New Address Page", "Address entered on  Address page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Create Address page Successfully", "Failed",
+				new HTMLReportHelper().HtmlReportBody("New Address Page", "Could Not entered Address on Address Page", "Failed",
 						driver, "Y");
 			}
 		}
@@ -160,12 +163,13 @@ public class Premier_CustomerAddress extends CommonLibrary {
 				driver.switchTo().frame("bottom");
 				if (isElementPresent(searchTitle)) {
 					clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
-					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN.substring(4));
+					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
 					clickOnElement("Add Name Page", "Submit", submitSearch);
 					clickOnElement("Add Name Page", "Name link", nameLink);
 					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 					switchToWithinFrameWithName("Main");
 				}
+				Thread.sleep(2000);
 				selectElementByVisibleText("New Address Page", "Select Group", relationship, realationshipVal);
 				clickOnElement("New Address Page", "Finish Button", finishButton);
 				stepResult = true;
@@ -175,11 +179,11 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Create Address page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("New Address Page", "created Build Relationship on Create Address page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Could not Create Address page Successfully", "Failed",
+				new HTMLReportHelper().HtmlReportBody("New Address Page", "Could not Create Build Relationship on Address page", "Failed",
 						driver, "Y");
 			}
 		}

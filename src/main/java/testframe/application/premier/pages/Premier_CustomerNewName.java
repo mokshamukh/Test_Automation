@@ -26,6 +26,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 	public By firstNametextbox = By.xpath("(//label[text()='First Name:'])[1]/../following-sibling::td/input");
 	public By nameFormatCodeCombobox = By.xpath("(//label[text()='Name Format Code:'])[1]/../following-sibling::td/select");
 	public By dateOfBirth = By.xpath("(//label[text()='Date of Birth:'])[1]/../following-sibling::td/div/input");
+	public By taxIDCodeList = By.xpath("(//label[text()='Tax ID Code:'])[1]/../following-sibling::td/select");
 	public By taxIDNum = By.xpath("(//label[text()='Tax ID Number:'])[1]/../following-sibling::td/input");
 	public By withholdingCodeCombobox = By.xpath("//label[text()='Withholding Code:']/../following-sibling::td/select");
 	public By altNameTextbox = By.xpath("(//label[text()='Name:'])[2]/../following-sibling::td/input");
@@ -45,7 +46,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 	public By buildRelationshipLabel = By.xpath("//label[text()='Step 5 - Build Relationships']");
 	public By addNameImage = By.xpath("//img[@title='Add Name']");
 	public By SearchTitle = By.xpath("//label[text()='Search']");
-	public By BeneficalSSN = By.xpath("//label[text()='Tax Identification:']/../following-sibling::td//input[@id='TaxID']");
+	public By BuildRelationshipSSN = By.xpath("//label[text()='Tax Identification:']/../following-sibling::td//input[@id='TaxID']");
 	public By SubmitButton_SearchScreen = By.xpath("//button[text()='Submit']");
 	public By NameList = By.xpath("//label[text()='Name List']");
 	public By SearchResult = By.xpath("//a[contains(@id,'SearchType=Name')]");
@@ -71,6 +72,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 	public By BeneOwnerName = By.xpath("(//select[contains(@id,'RelatedToId')])[1]");
 	public By BeneRelationship = By.xpath("(//table[@id='Rel_Beneficial']//select[contains(@id,'RelationshipCode')])[1]");
 	public By BenePercent = By.xpath("(//input[contains(@id,'RelationshipPercent')])[1]");
+	public By RelationshipName2 =By.xpath("(//table[@id='Rel_Name']//select[contains(@id,'RelationshipCode')])[3]");
+	public By BeneOwnerName2 = By.xpath("(//select[contains(@id,'RelatedToId')])[2]");
+	public By BeneRelationship2 = By.xpath("(//table[@id='Rel_Beneficial']//select[contains(@id,'RelationshipCode')])[2]");
+	public By BenePercent2 = By.xpath("(//input[contains(@id,'RelationshipPercent')])[2]");
 	//below xpaths are not used yet in scripts
 	public By middleInitialTextBox = By.xpath("(//label[text()='Middle Initial:'])[1]/../following-sibling::td/input");
 	public By generationCodeButton = By.xpath("//label[text()='Generation Code:']/../following-sibling::td//button");
@@ -150,17 +155,18 @@ public class Premier_CustomerNewName extends CommonLibrary {
 
 	}
 
-	public void createNewName(String name, String firstName, String lastName,String nameFormatCode, String dob, String taxID,String withholdingCode,String alt_Name,String alt_FirstName,String alt_LastName,String alt_MiddleInitial,String alt_NameFormatCode,String phoneNumber,
-			String branchRegion,String email,String webAddress,String gender,String riskRanking,String creditScore,String nAICSCodes,String customerType,String beneficialName_SSN, String buildRelationship,String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent) throws Exception {
+	public void createNewName(String name, String firstName, String lastName,String nameFormatCode, String dob,String taxIDCode, String taxID,String withholdingCode,String alt_Name,String alt_FirstName,String alt_LastName,String alt_MiddleInitial,String alt_NameFormatCode,String phoneNumber,
+			String branchRegion,String email,String webAddress,String gender,String riskRanking,String creditScore,String nAICSCodes,String customerType,String buildRelationship_SSN, String buildRelationship,String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent,
+			String buildRelationship_2_Flag, String buildRelationship_2_SSN, String build_Relationship_2, String beneficialOwner_2_Flag, String beneficialOwnerName_2, String beneficial_Relationship_2, String beneficial_Percent_2) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(6000);
 				driver.switchTo().frame("Main");
-				enterCustomerName(name,firstName, lastName,nameFormatCode,dob,taxID,withholdingCode,alt_Name,alt_FirstName,alt_LastName,alt_MiddleInitial,alt_NameFormatCode);
+				enterCustomerName(name,firstName, lastName,nameFormatCode,dob,taxIDCode,taxID,withholdingCode,alt_Name,alt_FirstName,alt_LastName,alt_MiddleInitial,alt_NameFormatCode);
 				enterDuplicate();
 				enterContactMethod(phoneNumber, email, webAddress);
 				enterCodeLable(gender,riskRanking,creditScore,nAICSCodes,customerType,branchRegion);
-				enterBuildRelationship(beneficialName_SSN,buildRelationship,beneficialOwnerName,beneficial_Relationship,beneficial_Percent);
+				enterBuildRelationship(buildRelationship_SSN,buildRelationship,beneficialOwnerName,beneficial_Relationship,beneficial_Percent,buildRelationship_2_Flag,buildRelationship_2_SSN,build_Relationship_2,beneficialOwner_2_Flag,beneficialOwnerName_2,beneficial_Relationship_2,beneficial_Percent_2);
 				clickOnElement("New Name Page", "Finish Button", finishButton);
 				Thread.sleep(2000);
 				isElementPresent(msg);
@@ -182,7 +188,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		
 	}
 	
-	public void enterCustomerName(String name, String firstName, String lastName,String nameFormatCode ,String dob, String taxID,String withholdingCode,String alt_Name,String alt_FirstName,String alt_LastName,String alt_MiddleInitial,String alt_NameFormatCode) throws Exception{
+	public void enterCustomerName(String name, String firstName, String lastName,String nameFormatCode ,String dob,String taxIDCode, String taxID,String withholdingCode,String alt_Name,String alt_FirstName,String alt_LastName,String alt_MiddleInitial,String alt_NameFormatCode) throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -200,7 +206,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 						enterText("New Name Page", "Date of Birth", dateOfBirth, dob);
 					}
 					if (!taxID.equals("")) {
-						enterText("New Name Page", "Tax Identification", taxIDNum, taxID.substring(4));
+						selectElementByVisibleText("New Name Page", "Tax Identification Code", taxIDCodeList, taxIDCode);
+					}
+					if (!taxID.equals("")) {
+						enterText("New Name Page", "Tax Identification", taxIDNum, taxID);
 					}
 					if (!withholdingCode.equals("")) {
 						selectElementByVisibleText("New Name Page", "Withholding Code field", withholdingCodeCombobox, withholdingCode);
@@ -225,7 +234,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create name page Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create name page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could not Create name page Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -248,7 +257,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Duplicate page Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Duplicate page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could Not Create Duplicate page Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -271,7 +280,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				WebDriverWait wait1 = new WebDriverWait(driver, 20);
 				WebElement element1 = wait1.until(ExpectedConditions.elementToBeClickable(phoneNumVal));
 				element1.click();
-				enterText("New Name Page", "Phone Number", phoneNumVal, phoneNumber.substring(10));
+				enterText("New Name Page", "Phone Number", phoneNumVal, phoneNumber);
 				Thread.sleep(2000);
 				clickOnElement("New Name Page", "Email link", emailLink);
 				WebElement element2 = wait1.until(ExpectedConditions.elementToBeClickable(emailVal));
@@ -297,7 +306,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Contact method page Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Contact method page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could Not Create Contact method page Successfully", "Failed", driver, "Y");
 			}
 		
 	}}
@@ -350,30 +359,18 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Code lable page Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Code lable page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could Not Create Code lable page Successfully", "Failed", driver, "Y");
 			}
 		
 	}}
-	public void enterBuildRelationship(String beneficialName_SSN,String build_Relationship,String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent) throws Exception {
+	public void enterBuildRelationship(String buildRelationship_SSN,String build_Relationship,String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent,String buildRelationship_2_Flag,String buildRelationship_2_SSN,String build_Relationship_2,String beneficialOwner_2_Flag,String beneficialOwnerName_2,String beneficial_Relationship_2,String beneficial_Percent_2) throws Exception {
 		boolean stepResult = false;
 		try {
-			//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 			if(isElementPresent(buildRelationshipLabel)){
 				Thread.sleep(1000);
-				if (!beneficialName_SSN.equals("")) {
-					clickOnElement("New Name Page", "Add Name Image",addNameImage);
-					switchToWindowWithTitleContaining("Add Name");
-					driver.switchTo().frame("bottom");
-					if (isElementPresent(SearchTitle)) {
-						enterText("New Name Page", "Enter SSN Field", BeneficalSSN, beneficialName_SSN);
-						clickOnElement("New Name Page", "Submit Button",SubmitButton_SearchScreen);
-						waitForPresenceOfElement("New Name Page", "Searched Name List", NameList);
-						clickOnElement("New Name Page", "Searched Result Link",SearchResult);
-						//driver.switchTo().defaultContent();
-						switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
-						driver.switchTo().frame("Main");
-					}
-				}
+				if (!buildRelationship_SSN.equals("")) {
+					buildRelationshipAddSSN(buildRelationship_SSN);
+				
 				if (!build_Relationship.equals("")) {
 					selectElementByVisibleText("New Name Page", "Name Relationship field", RelationshipName, build_Relationship);
 				}
@@ -386,6 +383,24 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				if (!beneficial_Percent.equals("")) {
 					enterText("New Name Page", "Beneficial Percent Field", BenePercent, beneficial_Percent);
 				}
+				
+				if (buildRelationship_2_Flag.equals("Yes")) {
+					buildRelationshipAddSSN(buildRelationship_2_SSN);
+					if (!build_Relationship_2.equals("")) {
+						selectElementByVisibleText("New Name Page", "Name Relationship field", RelationshipName2, build_Relationship_2);
+					}
+				}
+				if (beneficialOwner_2_Flag.equals("Yes")) {
+					if (!beneficialOwnerName_2.equals("")) {
+						selectElementByVisibleText("New Name Page", "Beneficial Owner Name field", BeneOwnerName2, beneficialOwnerName_2);
+					}
+					if (!beneficial_Relationship_2.equals("")) {
+						selectElementByVisibleText("New Name Page", "Beneficial Relationship field", BeneRelationship2, beneficial_Relationship_2);
+					}
+					if (!beneficial_Percent_2.equals("")) {
+						enterText("New Name Page", "Beneficial Percent Field", BenePercent2, beneficial_Percent_2);
+					}
+				}}
 				stepResult = true;
 			}
 		}catch(Exception e){
@@ -393,14 +408,42 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		}finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Code lable page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Build Relationship page Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Code lable page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could not Create Build Relationship lable page Successfully", "Failed", driver, "Y");
 			}
 		
 	}}
-				
+	
+	public void buildRelationshipAddSSN(String sSN) throws Exception {
+		boolean stepResult = false;
+		try {
+			clickOnElement("New Name Page", "Add Name Image",addNameImage);
+			switchToWindowWithTitleContaining("Add Name");
+			driver.switchTo().frame("bottom");
+			if (isElementPresent(SearchTitle)) {
+				enterText("New Name Page", "Enter SSN Field", BuildRelationshipSSN, sSN);
+				clickOnElement("New Name Page", "Submit Button",SubmitButton_SearchScreen);
+				waitForPresenceOfElement("New Name Page", "Searched Name List", NameList);
+				clickOnElement("New Name Page", "Searched Result Link",SearchResult);
+
+				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				driver.switchTo().frame("Main");
+				stepResult = true;
+			}
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Add SSN on Build Relationship Page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("New Name Page", "Not able to Add SSN on Build Relationship Page Successfully", "Failed", driver, "Y");
+			}
+		}}
 	
 	
 }
