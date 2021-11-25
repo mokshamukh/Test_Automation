@@ -58,7 +58,7 @@ public class EPP_MenuOptions extends CommonLibrary{
 			new HTMLReportHelper().HtmlReportBody("Click on '" + menuValue +"' menu", "Successfully clicked on '" + menuValue +"' menu", "Passed", driver, "N");
 		} else {
 			System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("Click on '" + menuValue +"' menu", "Could not clicked on '" + menuValue +"' menu", "Failed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Click on '" + menuValue +"' menu", "Could not clicked on '" + menuValue +"' menu", "Failed", driver, "N");
 		}
 	}
 }
@@ -121,7 +121,7 @@ public class EPP_MenuOptions extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Click on Payment Tracking menu", "Successfully clicked on Payment Tracking menu", "Passed", driver, "N");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on Payment Tracking menu", "Could not clicked on Payment Tracking menu", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Click on Payment Tracking menu", "Could not clicked on Payment Tracking menu", "Failed", driver, "N");
 			}
 		}
 	}
@@ -153,6 +153,7 @@ public class EPP_MenuOptions extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			clickOnElement(eppSubMenuPage, "Transaction Inquiry Sub Menu Selected", transactionInquiry);
+			waitElement(5000);
 			switchToWindowWithTitleContaining("Enterprise Payments Platform");
 			driver.switchTo().frame("main");
 			waitForPresenceOfElement(eppSubMenuPage, "Payment Template", transInquiryHeader);

@@ -14,44 +14,44 @@ import testframe.common.reporting.HTMLReportHelper;
 
 public class EPP_PaymentActionVerificationList extends CommonLibrary{
 	
-	EPP_ActionPrompts eppActionPrompts;
+	EPP_CreatePayment eppCreatePayment;
 
 	public EPP_PaymentActionVerificationList(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
+		eppCreatePayment = new EPP_CreatePayment(driver);
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 50), this);
-		eppActionPrompts = new EPP_ActionPrompts(driver);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String eppPaymentActionList = "EPP_PaymentActionVerificationList";
-	public String actionOntransactionIdList = "//div[@id='Refresh_PaymentActionVerification']//a[@class='linkGeneral'][text()='%s']";
+	public String eppPaymentActionVerification = "EPP_PaymentActionVerificationList";
+	public String transactionIdList = "//div[@id='Refresh_PaymentActionVerification']//a[@class='linkGeneral'][text()='%s']";
 	
 
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Work Summary')]");
 	
 	
 	
-	public void selectPaymentActionOnTransactionID() throws Exception {
+	public void selectPaymentActionVerificationTransID() throws Exception {
 		boolean stepResult = false;
 		try {
-			waitForPresenceOfElement(eppPaymentActionList, "Work Summary List", title);
-			if (isElementPresent(title)) {
-				String transID = eppActionPrompts.getTransactionIDOnAction();
-				getDynamicElementClick(eppPaymentActionList, "Work Summary List", actionOntransactionIdList, transID);
+			waitForPresenceOfElement(eppPaymentActionVerification, "Work Summary List", title);
+			if(isElementPresent(title)){
+				String transactionID = eppCreatePayment.getTransactionID();
+				getDynamicElementClick(eppPaymentActionVerification, "Work Summary List", transactionIdList, transactionID);
 				waitElement(8000);
+				stepResult = true;
 			}
-			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				 new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully","Passed", driver, "Y");
+				 new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully from Payment Action Verification","Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully from Payment Action Verification", "Failed", driver, "Y");
 			}
 		}
 

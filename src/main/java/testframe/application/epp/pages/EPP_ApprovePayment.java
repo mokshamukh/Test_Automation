@@ -53,11 +53,11 @@ public class EPP_ApprovePayment extends CommonLibrary{
 				enterText(eppApprovePayment, "Value Date Field", valueDate, dateField);
 				waitElement(2000);
 				clickOnElement(eppApprovePayment, "Approve Payment", approveButton);
-				waitElement(7000);
+				waitElement(10000);
 				isElementPresent(paymentApprovedMsg);
 				waitElement(3000);
+				stepResult = true;
 			}
-			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +92,6 @@ public class EPP_ApprovePayment extends CommonLibrary{
 				waitElement(3000);
 				stepResult = true;
 			}
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

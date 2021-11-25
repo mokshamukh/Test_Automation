@@ -15,10 +15,10 @@ import testframe.common.reporting.HTMLReportHelper;
 
 public class Premier_LogOff extends CommonLibrary {
 
-	public String adminLoginPage;
+	public By customerInquiry =  By.xpath("//a[text()='Security Control']");
 
-	public By logoff = By.xpath("//a[text()='Log Off']");
-	public By logOffMessage =  By.xpath("//h1[text()='You are now logged off']"); 
+	public By logoff = By.xpath("//a[text()='Log Out']");
+	public By myGroupPageHeader = By.xpath("//h2[text()='My Groups']");
 
 	public Premier_LogOff(WebDriver driver) {
 		super(driver);
@@ -30,7 +30,7 @@ public class Premier_LogOff extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			clickOnElement("Admin Page", "Log Off button", logoff);
-			if (isElementPresent(logOffMessage))
+			if (isElementPresent(myGroupPageHeader))
 				stepResult = true;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -38,11 +38,11 @@ public class Premier_LogOff extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("LogOff CC- Admin application", "LogOff Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("LogOff Premier application", "LogOff Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("LogOff CC- Admin application", "Could not LogOff Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("LogOff Premier application", "Could not LogOff Successfully", "Failed", driver, "Y");
 			}
 		}
 
