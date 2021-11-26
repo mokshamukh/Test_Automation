@@ -15,7 +15,7 @@ import testframe.common.reporting.HTMLReportHelper;
 
 public class Premier_LogOff extends CommonLibrary {
 
-	public By customerInquiry =  By.xpath("//a[text()='Security Control']");
+	public By securityControl =  By.xpath("//a[text()='Security Control']");
 
 	public By logoff = By.xpath("//a[text()='Log Out']");
 	public By myGroupPageHeader = By.xpath("//h2[text()='My Groups']");
@@ -29,7 +29,9 @@ public class Premier_LogOff extends CommonLibrary {
 	public void logoffApplication() throws Exception{
 		boolean stepResult = false;
 		try {
-			clickOnElement("Admin Page", "Log Off button", logoff);
+			switchToDefaultContent();
+			clickOnElement("Home Page", "Security Control Option", securityControl);
+			clickOnElement("Home Page", "Log Off link", logoff);
 			if (isElementPresent(myGroupPageHeader))
 				stepResult = true;
 		}catch (Exception e) {

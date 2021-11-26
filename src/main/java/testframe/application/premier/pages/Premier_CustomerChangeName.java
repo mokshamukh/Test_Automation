@@ -22,9 +22,10 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 
 
 	public By changeNameTitle = By.xpath("//div[text()='Customer - Names - Change Name']");
-	public By nameSearchChange =  By.xpath("//input[@name='//input[@name='SoundexName']']");
+	public By nameSearchChange =  By.xpath("//input[@name='SoundexName']");
 	public By ssnSearchChange =  By.xpath("//input[@name='TaxID']");
-	public By submitSearch =  By.xpath("//button[@name='Submit']");
+	public By submitSearch =  By.xpath("//button[text()='Submit']");
+	public By nameTextbox = By.xpath("(//label[text()='Name:'])[1]/../following-sibling::td/input");
 	public By lastNameTextbox = By.xpath("(//label[text()='Last Name:'])[1]/../following-sibling::td/input");
 	public By contactDetailsTab =  By.xpath("//a[contains(text(),'Contact Methods')]");
 	public By contactDetailsTabTitle = By.xpath("//label[contains(text(),'Contact Methods')]");
@@ -37,7 +38,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 	public By lastRelationship = By.xpath("//table[@id='Rel_Name']//tr[last()]/td[6]/select[contains(@id,'RelationshipCode')]");
 	public By addBeneficiaryLink = By.xpath("//a[text()='Add Beneficial Owner']");
 	public By lastBeneficialOwnerName =By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[2]//select[contains(@id,'RelatedToId')]");
-	public By lastBeneficialRelationship =By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[4]//2select[contains(@id,'RelationshipCode')]");
+	public By lastBeneficialRelationship =By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[4]//select[contains(@id,'RelationshipCode')]");
 	public By lastBeneficialPercent =By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[6]//input[contains(@id,'RelationshipPercent')]");
 	public By lastDeleteBeneficiary = By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[12]/img[@alt='Delete']");
 	public By selectPhoneType = By.xpath("//select[@id='ddPhone']");
@@ -50,11 +51,10 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 	String sWebAddressValue = "(//input[contains(@name,'ContactInfo')])[%s]";
 	public By lastPhoneNumValue =By.xpath("//table[@id='mcPhoneNumbers']//tr[last()-1]/td[6]/input[contains(@name,'PhoneNumber')]");
 	public By lastemailidValue =By.xpath("//table[@id='mcEmailAddress']//tr[last()-1]/td[6]/input[contains(@name,'ContactInfo')]");
-	
+	public By allRelationshipNameCheckBoc =By.xpath("//input[contains(@type,'checkbox') and contains(@name,'Name')]");
 	
 	//below xpaths are not used yet in scripts
 	public By nameTitle = By.xpath("//label[text()='Step 1 - Name']");
-	public By nameTextbox = By.xpath("(//label[text()='Name:'])[1]/../following-sibling::td/input");
 	public By firstNametextbox = By.xpath("(//label[text()='First Name:'])[1]/../following-sibling::td/input");
 	public By nameFormatCodeCombobox = By.xpath("(//label[text()='Name Format Code:'])[1]/../following-sibling::td/select");
 	public By dateOfBirth = By.xpath("(//label[text()='Date of Birth:'])[1]/../following-sibling::td/div/input");
@@ -192,7 +192,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 				if (!sName.equals(""))
 					enterText("Change Name - Search Page", "Name", nameSearchChange, sName);
 				if (!sSSN.equals(""))
-				enterText("Change Name - Search Page", "Tax Identification", ssnSearchChange, sSSN);
+					enterText("Change Name - Search Page", "Tax Identification", ssnSearchChange, sSSN);
 				clickOnElement("Change Name - Search Page", "Submit", submitSearch);
 				stepResult = true;
 				switchToDefaultContent();
@@ -214,13 +214,25 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 	}
 
 
-	public void updateNameDetails(String lastName) throws Exception {
+	public void updateNameDetails(String name,String lastName) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(changeNameTitle)){
 				driver.switchTo().frame("Main");
-				if(!lastName.equals(""))
-					enterText("Change Name Page", "Last Name field", lastNameTextbox, lastName);
+				
+				clearText("Change Name Page", "First Name field", firstNametextbox);
+				//clearText("Change Name Page", "First Name field", nameTextbox);
+				if(!lastName.equals("")){
+					clearAndType("Change Name Page", "Last Name field", lastNameTextbox, lastName);
+					clearAndType("Change Name Page", "Last Name field", lastNameTextbox, lastName);
+				}
+				Thread.sleep(3000);
+				if(!name.equals("")){
+					clearAndType("Change Name Page", "Name field", nameTextbox, name);
+					clearAndType("Change Name Page", "Name field", nameTextbox, name);
+				}
+				
+				
 				stepResult = true;
 			}
 		} catch (Exception e) {
@@ -261,15 +273,15 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 			if (isElementPresent(contactDetailsTabTitle)){
 				if(!phoneNumber.equals("")){
 					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Phone Number", phoneNumVal);
-					enterText("Change Name - Contact Methods Page", "Phone Number", phoneNumVal, phoneNumber);
+					clearAndType("Change Name - Contact Methods Page", "Phone Number", phoneNumVal, phoneNumber);
 				}
 				if(!email.equals("")){
 					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Email", emailVal);
-					enterText("Change Name - Contact Methods Page", "Email address", emailVal, email);
+					clearAndType("Change Name - Contact Methods Page", "Email address", emailVal, email);
 				}
 				if(!webAddress.equals("")){
 					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Web Address", webAddressVal);
-					enterText("Change Name - Contact Methods Page", "Web Address", webAddressVal, webAddress);
+					clearAndType("Change Name - Contact Methods Page", "Web Address", webAddressVal, webAddress);
 				}
 				stepResult = true;
 			}
@@ -293,6 +305,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 				if(!phoneNumber.equals("")){
 					selectElementByVisibleText("Change Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
 					clickOnElement("Change Name - Contact Methods Page", "Add Phone link", phoneNumLink);
+					Thread.sleep(4000);
 					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Phone Number", lastPhoneNumValue);
 					enterText("Change Name - Contact Methods Page", "Phone Number", lastPhoneNumValue, phoneNumber);
 				}
@@ -318,8 +331,9 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 				if(!mailid.equals("")){
 					selectElementByVisibleText("Change Name - Contact Methods Page", "Mail Type", selectEmailType, emailType);
 					clickOnElement("Change Name - Contact Methods Page", "Add Email link", emailLink);
+					Thread.sleep(4000);
 					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Email Address", lastemailidValue);
-					enterText("Change Name - Contact Methods Page", "Phone Number", lastemailidValue, mailid);
+					enterText("Change Name - Contact Methods Page", "Email Address", lastemailidValue, mailid);
 				}
 				stepResult = true;
 			}
@@ -361,7 +375,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(relationshipsTitle)){
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 				if (!buildRelationship_SSN.equals("")) {
 					clickOnElement("Change Name - Relationship Page", "Add Name Image",addNameImage);
 					switchToWindowWithTitleContaining("Add Name");
@@ -369,16 +383,22 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 					if (isElementPresent(SearchTitle)) {
 						enterText("Change Name - Search Page", "Enter SSN Field", BuildRelationshipSSN, buildRelationship_SSN);
 						clickOnElement("Change Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
-						waitForPresenceOfElement("Change Name - Search Page", "Searched Name List", NameList);
-						clickOnElement("Change Name - Search Page", "Searched Result Link",SearchResult);
+						//waitForPresenceOfElement("Change Name - Search Page", "Searched Name List", NameList);
+						if (isElementPresent(NameList)){
+							clickOnElement("Change Name - Search Page", "Searched Result Link",SearchResult);
+							stepResult = true;
+						}
 						switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 						driver.switchTo().frame("Main");
 					}
+					Thread.sleep(3000);
 					if (!build_Relationship.equals("")) {
+						stepResult = false;
 						selectElementByVisibleText("Change Name - Relationship Page", "Relationship field", lastRelationship, build_Relationship);
+						stepResult = true;
 					}
 				}
-				stepResult = true;
+				//stepResult = true;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -398,7 +418,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(beneficiaryOwnerTitle)){
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 				if (!beneficialOwnerName.equals("")) {
 					selectElementByVisibleText("Change Name - Relationship Page", "Beneficial Owner Name field", lastBeneficialOwnerName, beneficialOwnerName);
 				}
@@ -428,8 +448,14 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			clickOnElement("Change Name Page", "Save", saveButton);
+			
+			if (isOptionalElementPresent(allRelationshipNameCheckBoc)){
+				clickOnElement("Change Name Page", "All relationships will reflect name changes Check Box", allRelationshipNameCheckBoc);
+				clickOnElement("Change Name Page", "Save", saveButton);
+				
+			}
 			if (isElementPresent(searchLabel)){
-				//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 				switchToDefaultContent();
 				stepResult = true;
 				

@@ -34,6 +34,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By portfolioMenu =  By.xpath("(//a[text()='Portfolio'])[2]");
 	public By newPortfolio =  By.xpath("//a[text()='New Portfolio']");
 	public By changeNameMenu =  By.xpath("//a[text()='Change Name']");
+	public By changeNameTitle = By.xpath("//div[text()='Customer - Names - Change Name']");
 	
 	
 
@@ -69,7 +70,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void customerInquiry() throws Exception{
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(homePageHeader)){
+			if (isElementPresent(homePageHeader) || isElementPresent(changeNameTitle)){
 				clickOnElement("Home Page", "Customer Inquiry", customerInquiry);
 				stepResult = true;
 			}	
@@ -208,6 +209,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void changeName() throws Exception{
 		boolean stepResult = false;
 		try {
+			Thread.sleep(2000);
 			if (isElementPresent(customerHeader)){
 				clickOnElement("Home Page", "Change Name ",changeNameMenu );
 				stepResult = true;
