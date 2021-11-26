@@ -99,11 +99,11 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Create New Address page Successfully",
+				new HTMLReportHelper().HtmlReportBody("Create New Address", "Create New Address page Successfully",
 						"Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Create New Address page Successfully",
+				new HTMLReportHelper().HtmlReportBody("Create New Address", "Could not Create New Address",
 						"Failed", driver, "Y");
 			}
 		}
@@ -141,11 +141,11 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Address entered on  Address page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Enter Address details", "Address entered on  Address page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Could Not entered Address on Address Page", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Enter Address details", "Could Not entered Address on Address Page", "Failed",
 						driver, "Y");
 			}
 		}
@@ -179,11 +179,11 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "created Build Relationship on Create Address page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("create Build Relationship", "created Build Relationship on Create Address page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Address Page", "Could not Create Build Relationship on Address page", "Failed",
+				new HTMLReportHelper().HtmlReportBody("create Build Relationship", "Could not Create Build Relationship on Address page", "Failed",
 						driver, "Y");
 			}
 		}

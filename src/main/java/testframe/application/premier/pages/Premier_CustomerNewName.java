@@ -178,10 +178,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create name Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Create New Name", "Create name Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could not create name.", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Create New Name", "Could not create name.", "Failed", driver, "Y");
 			}
 		}
 
@@ -231,10 +231,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create name page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Customer Name entered Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could not Create name page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Could not entered customer name details", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -254,10 +254,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Duplicate page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Verify Duplicate Screen", "Duplicate Screen displayed Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could Not Create Duplicate page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Verify Duplicate Screen", "Could Not verified Duplicate page", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -267,15 +267,6 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		try {
 			if (isElementPresent(contactMethodsLabel)) {
 				Thread.sleep(2000);
-				/*clickOnElement("New Name Page", "Phone Number", phoneNumLink);
-				clickOnElement("New Name Page", "Phone Number", phoneNumVal);
-				enterText("New Name Page", "Phone Number", phoneNumVal, phoneNumber.substring(10));
-				Thread.sleep(2000);
-				clickOnElement("New Name Page", "Email link", emailLink);
-				clickOnElement("New Name Page", "Email", emailVal);
-				enterText("New Name Page", "Email", emailVal, email);
-				Thread.sleep(2000);
-				clickOnElement("New Name Page", "Next Button", nextButton);*/
 				clickOnElement("New Name Page", "Phone Number", phoneNumLink);
 				WebDriverWait wait1 = new WebDriverWait(driver, 20);
 				WebElement element1 = wait1.until(ExpectedConditions.elementToBeClickable(phoneNumVal));
@@ -303,10 +294,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Contact method page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter Details on Contact Method Page", "Details entered on Contact Method page Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could Not Create Contact method page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter Details on Contact Method Page", "Could Not entered Details on Contact method page", "Failed", driver, "Y");
 			}
 		
 	}}
@@ -356,10 +347,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Code lable page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter Details on Code label Page", "Details entered on Code label page Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could Not Create Code lable page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter Details on Code label Page", "Could Not entered details on Code lable page", "Failed", driver, "Y");
 			}
 		
 	}}
@@ -408,10 +399,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		}finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Create Build Relationship page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter details and Build Relationship", "Details entered and Relationship build Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Could not Create Build Relationship lable page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter details and Build Relationship", "Could not entered Details and Relationship build", "Failed", driver, "Y");
 			}
 		
 	}}
@@ -438,10 +429,10 @@ public class Premier_CustomerNewName extends CommonLibrary {
 		}finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Add SSN on Build Relationship Page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Add SSN and Build Relationship", "Add SSN and Build Relationship Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Name Page", "Not able to Add SSN on Build Relationship Page Successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Add SSN and Build Relationship", "Could Not Add SSN and Build Relationship", "Failed", driver, "Y");
 			}
 		}}
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
@@ -29,10 +30,11 @@ public class PremierTest extends ApplicationBase {
 	String pathToAppConfigPropFolder,pathToApplicationTestDataFolder,appConfigPropertyFilePath,testdataFile,
 			testdataFile_Path,sPathToAppReportFolder, strpathToAppReportFile,sHTMLFilePath,sScreenShotFolder
 			,sScreenShotFolder_Itr,strpathToAppReportFileDateTimeStamp;
-	int iIteration_count;
+	int iIteration_count,iPortfolioCustomerCount;
+	//String strPortfolioCustName;
 	String sUserID,sPassword,sCompanyID ,sPassword_Encrypt,sSecretKey,sInstitution,sGroup;
 	String sName,sFName,sLName,sDOB,sTaxIDCode,sTaxIdentification,sAltName,sAltFirstName,sAltLastName,sPhoneNumber,sEmail,
-	sGender,sAddress1,sAddress2,sZipCode;
+	sGender,sAddress1,sAddress2,sZipCode,sPortfolioRelationship,sPortfolioNameFormatCode;
 	
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver,String sApplicationName, String sURL,String sTestCase, String sTestDescription,
@@ -304,13 +306,19 @@ public class PremierTest extends ApplicationBase {
 				premierCustomerInquiryPage.validateCustomerDetails(tc_Test_Data.get(iTDRow).get("Name_Name"),tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"),tc_Test_Data.get(iTDRow).get("Name_PhoneNumber"),tc_Test_Data.get(iTDRow).get("Name_Email"),tc_Test_Data.get(iTDRow).get("Address_Address1"), tc_Test_Data.get(iTDRow).get("Address_Address2"), tc_Test_Data.get(iTDRow).get("Address_Zipcode"));
 				
 				break;
-			case "PREMIER_TC009":
+			case "PREMIER_TC012":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.portfolioMenu();
 				premierHomeMenuPage.portfolioNew();
-				
+				Thread.sleep(6000);
+				premierPortfolioNew.portfolioSearchCustomer(tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1"));
+				if (!tc_Test_Data.get(iTDRow).get("Portfolio_Address1").equals("")) {
+				premierPortfolioNew.portfolioSearchAddress(tc_Test_Data.get(iTDRow).get("Portfolio_Address1"));
+				}
+				premierPortfolioNew.portfolioCustomerDetails(tc_Test_Data.get(iTDRow).get("Portfolio_DeliveryPoint"),tc_Test_Data.get(iTDRow).get("Portfolio_BranchRegion"),tc_Test_Data.get(iTDRow).get("Portfolio_AccountingBranch"));
+				/*
 				premierPortfolioNew.createNewPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_Name1"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxCode1"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1"),tc_Test_Data.get(iTDRow).get("Portfolio_DOB1"),
 						tc_Test_Data.get(iTDRow).get("Portfolio_Name2"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxCode2"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber2"),tc_Test_Data.get(iTDRow).get("Portfolio_DOB2"),
 						tc_Test_Data.get(iTDRow).get("Portfolio_Name3"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxCode3"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber3"),tc_Test_Data.get(iTDRow).get("Portfolio_DOB3"),
@@ -318,6 +326,35 @@ public class PremierTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("Portfolio_Address1"),tc_Test_Data.get(iTDRow).get("Portfolio_Address2"),tc_Test_Data.get(iTDRow).get("Portfolio_CityStateZip"),tc_Test_Data.get(iTDRow).get("Portfolio_DeliveryPoint"),tc_Test_Data.get(iTDRow).get("Portfolio_BranchRegion"),
 						tc_Test_Data.get(iTDRow).get("Portfolio_AccountingBranch"),tc_Test_Data.get(iTDRow).get("Portfolio_Relationship"),tc_Test_Data.get(iTDRow).get("Portfolio_Portfolio"),tc_Test_Data.get(iTDRow).get("Portfolio_PortfolioTypeCode"),
 						tc_Test_Data.get(iTDRow).get("Portfolio_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Portfolio_MiscellaneousCode"));
+				*/
+				
+				break;
+			case "PREMIER_TC013":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				
+				premierHomeMenuPage.clickNewName();
+				premierCustomerNewName.createNewName(tc_Test_Data.get(iTDRow).get("Name_Name"),tc_Test_Data.get(iTDRow).get("Name_FirstName"),tc_Test_Data.get(iTDRow).get("Name_LastName"),tc_Test_Data.get(iTDRow).get("Name_NameFormatCode"),
+						tc_Test_Data.get(iTDRow).get("Name_DOB"),tc_Test_Data.get(iTDRow).get("Name_TaxIDCode"),tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"),tc_Test_Data.get(iTDRow).get("Name_WithholdingCode"),tc_Test_Data.get(iTDRow).get("Name_Alt_Name"),tc_Test_Data.get(iTDRow).get("Name_Alt_FirstName"),tc_Test_Data.get(iTDRow).get("Name_Alt_LastName"),tc_Test_Data.get(iTDRow).get("Name_Alt_MiddleInitial"),tc_Test_Data.get(iTDRow).get("Name_Alt_NameFormatCode"),
+						tc_Test_Data.get(iTDRow).get("Name_PhoneNumber"),tc_Test_Data.get(iTDRow).get("Name_BranchRegion"),tc_Test_Data.get(iTDRow).get("Name_Email"),tc_Test_Data.get(iTDRow).get("Name_WebAddress"),tc_Test_Data.get(iTDRow).get("Name_Gender"),
+						tc_Test_Data.get(iTDRow).get("Name_RiskRanking"),tc_Test_Data.get(iTDRow).get("Name_CreditScore"),tc_Test_Data.get(iTDRow).get("Name_NAICSCodes_EconomicSector"),tc_Test_Data.get(iTDRow).get("Name_CustomerType"),tc_Test_Data.get(iTDRow).get("Name_BuildRelationship_SSN"),
+						tc_Test_Data.get(iTDRow).get("Name_Build_Relationship"),tc_Test_Data.get(iTDRow).get("Name_BeneficialOwnerName"),tc_Test_Data.get(iTDRow).get("Name_Beneficial_Relationship"),tc_Test_Data.get(iTDRow).get("Name_Beneficial_Percent"),
+						tc_Test_Data.get(iTDRow).get("Name_BuildRelationship_2_Flag"), tc_Test_Data.get(iTDRow).get("Name_BuildRelationship_2_SSN"), tc_Test_Data.get(iTDRow).get("Name_Build_Relationship_2"), tc_Test_Data.get(iTDRow).get("Name_BeneficialOwner_2_Flag"), tc_Test_Data.get(iTDRow).get("Name_BeneficialOwnerName_2"), tc_Test_Data.get(iTDRow).get("Name_Beneficial_Relationship_2"), tc_Test_Data.get(iTDRow).get("Name_Beneficial_Percent_2"));
+				premierHomeMenuPage.clickNewContact();
+				premierCustomerContact.createNewContact(tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"));
+				premierHomeMenuPage.clickNewAddress();
+				premierCustomerAddress.createNewAddress(tc_Test_Data.get(iTDRow).get("Address_Address1"), tc_Test_Data.get(iTDRow).get("Address_Address2"), tc_Test_Data.get(iTDRow).get("Address_Zipcode"), tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"), tc_Test_Data.get(iTDRow).get("Address_BuildRelationship"),tc_Test_Data.get(iTDRow).get("Name_BranchRegion"));
+				
+				premierHomeMenuPage.portfolioMenu();
+				premierHomeMenuPage.portfolioNew();
+				Thread.sleep(6000);
+				premierPortfolioNew.portfolioCustomerName(tc_Test_Data.get(iTDRow).get("Portfolio_Name1"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxCode1"),tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1"),tc_Test_Data.get(iTDRow).get("Portfolio_DOB1"),1);
+				premierPortfolioNew.portfolioCustomerAddress(tc_Test_Data.get(iTDRow).get("Portfolio_Address1"),tc_Test_Data.get(iTDRow).get("Portfolio_Address2"),tc_Test_Data.get(iTDRow).get("Portfolio_CityStateZip"));
+				premierPortfolioNew.portfolioCustomerDetails(tc_Test_Data.get(iTDRow).get("Portfolio_DeliveryPoint"),tc_Test_Data.get(iTDRow).get("Portfolio_BranchRegion"),tc_Test_Data.get(iTDRow).get("Portfolio_AccountingBranch"));
+				premierPortfolioNew.portfolioNew_PossibleDuplicate();
+				premierPortfolioNew.portfolioNew_NameScreen(tc_Test_Data.get(iTDRow).get("Portfolio_Relationship"),1);
+				premierPortfolioNew.portfolioNew_CodesScreen(tc_Test_Data.get(iTDRow).get("Portfolio_PortfolioTypeCode"),tc_Test_Data.get(iTDRow).get("Portfolio_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Portfolio_MiscellaneousCode"),testdataFile_Path, sTestCase, iTDRow+1);
 				
 				break;
 			case "PREMIER_TC014":
@@ -381,6 +418,86 @@ public class PremierTest extends ApplicationBase {
 				premierCustomerAddress.createNewAddress(sAddress1, sAddress2, sZipCode, sTaxIdentification, tc_Test_Data.get(iTDRow).get("Address_BuildRelationship"),tc_Test_Data.get(iTDRow).get("Name_BranchRegion"));
 				
 				}
+				break;
+			case "PREMIER_TC015":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				
+				premierHomeMenuPage.portfolioMenu();
+				premierHomeMenuPage.portfolioNew();
+				Thread.sleep(6000);
+				String strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Portfolio_Name1");
+				String[] strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+				iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {
+					sName = strPortfolioCustName_Split[i];
+					sTaxIDCode = (tc_Test_Data.get(iTDRow).get("Portfolio_TaxCode1").split("\\|\\|"))[i];
+					sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1").split("\\|\\|"))[i];
+					sDOB = (tc_Test_Data.get(iTDRow).get("Portfolio_DOB1").split("\\|\\|"))[i];
+					if (i>2) {
+						premierPortfolioNew.clickAddNameLink();
+					}
+					premierPortfolioNew.portfolioCustomerName(sName,sTaxIDCode,sTaxIdentification,sDOB,i+1);
+				}
+				premierPortfolioNew.portfolioCustomerAddress(tc_Test_Data.get(iTDRow).get("Portfolio_Address1"),tc_Test_Data.get(iTDRow).get("Portfolio_Address2"),tc_Test_Data.get(iTDRow).get("Portfolio_CityStateZip"));
+				premierPortfolioNew.portfolioCustomerDetails(tc_Test_Data.get(iTDRow).get("Portfolio_DeliveryPoint"),tc_Test_Data.get(iTDRow).get("Portfolio_BranchRegion"),tc_Test_Data.get(iTDRow).get("Portfolio_AccountingBranch"));
+				premierPortfolioNew.portfolioNew_PossibleDuplicate_NewCustomer();
+				premierPortfolioNew.portfolioNew_NameScreen(tc_Test_Data.get(iTDRow).get("Portfolio_Relationship"),1);
+				premierPortfolioNew.portfolioNew_CodesScreen(tc_Test_Data.get(iTDRow).get("Portfolio_PortfolioTypeCode"),tc_Test_Data.get(iTDRow).get("Portfolio_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Portfolio_MiscellaneousCode"),testdataFile_Path, sTestCase, iTDRow+1);
+				
+				break;
+			case "PREMIER_TC016":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				
+				premierHomeMenuPage.portfolioMenu();
+				premierHomeMenuPage.portfolioNew();
+				Thread.sleep(6000);
+				strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Portfolio_Name1");
+				strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+				iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {
+					sName = strPortfolioCustName_Split[i];
+					sTaxIDCode = (tc_Test_Data.get(iTDRow).get("Portfolio_TaxCode1").split("\\|\\|"))[i];
+					sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1").split("\\|\\|"))[i];
+					sDOB = (tc_Test_Data.get(iTDRow).get("Portfolio_DOB1").split("\\|\\|"))[i];
+					if (i>2) {
+						premierPortfolioNew.clickAddNameLink();
+					}
+					premierPortfolioNew.portfolioCustomerName(sName,sTaxIDCode,sTaxIdentification,sDOB,i+1);
+				}
+				premierPortfolioNew.portfolioCustomerAddress(tc_Test_Data.get(iTDRow).get("Portfolio_Address1"),tc_Test_Data.get(iTDRow).get("Portfolio_Address2"),tc_Test_Data.get(iTDRow).get("Portfolio_CityStateZip"));
+				premierPortfolioNew.portfolioCustomerDetails(tc_Test_Data.get(iTDRow).get("Portfolio_DeliveryPoint"),tc_Test_Data.get(iTDRow).get("Portfolio_BranchRegion"),tc_Test_Data.get(iTDRow).get("Portfolio_AccountingBranch"));
+				premierPortfolioNew.portfolioNew_PossibleDuplicate_NewCustomer();
+				
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {	
+					if(tc_Test_Data.get(iTDRow).get("Portfolio_Relationship").contains("||")) {
+						sPortfolioRelationship = (tc_Test_Data.get(iTDRow).get("Portfolio_Relationship").split("\\|\\|"))[i];
+					}else {
+						sPortfolioRelationship = tc_Test_Data.get(iTDRow).get("Portfolio_Relationship");
+					}
+					if(tc_Test_Data.get(iTDRow).get("Portfolio_NameFormatCode").contains("||")) {
+						sPortfolioNameFormatCode = (tc_Test_Data.get(iTDRow).get("Portfolio_NameFormatCode").split("\\|\\|"))[i];
+					}else {
+						sPortfolioNameFormatCode = tc_Test_Data.get(iTDRow).get("Portfolio_NameFormatCode");
+					}
+					if(tc_Test_Data.get(iTDRow).get("Portfolio_PhoneNumber").contains("||")) {
+						sPhoneNumber = (tc_Test_Data.get(iTDRow).get("Portfolio_PhoneNumber").split("\\|\\|"))[i];
+					}else {
+						sPhoneNumber = tc_Test_Data.get(iTDRow).get("Portfolio_PhoneNumber");
+					}
+					if(tc_Test_Data.get(iTDRow).get("Portfolio_Email").contains("||")) {
+						sEmail = (tc_Test_Data.get(iTDRow).get("Portfolio_Email").split("\\|\\|"))[i];
+					}else {
+						sEmail = tc_Test_Data.get(iTDRow).get("Portfolio_Email");
+					}
+					premierPortfolioNew.portfolioNew_NameScreenMultipleCust(sPortfolioRelationship,sPortfolioNameFormatCode,sPhoneNumber,sEmail,i+1);
+				}
+				premierPortfolioNew.clickOnNextButton();
+				premierPortfolioNew.portfolioNew_CodesScreen(tc_Test_Data.get(iTDRow).get("Portfolio_PortfolioTypeCode"),tc_Test_Data.get(iTDRow).get("Portfolio_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Portfolio_MiscellaneousCode"),testdataFile_Path, sTestCase, iTDRow+1);
+				
 				break;
 			}
 			new HTMLReportHelper().HtmlReportFooter();
