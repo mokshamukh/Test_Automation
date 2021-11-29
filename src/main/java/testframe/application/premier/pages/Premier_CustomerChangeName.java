@@ -342,7 +342,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "E-mail Addressr added Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "E-mail Address added Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "Could not add E-mail Address", "Failed", driver, "Y");
