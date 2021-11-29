@@ -29,8 +29,10 @@ public class Premier_LogOff extends CommonLibrary {
 	public void logoffApplication() throws Exception{
 		boolean stepResult = false;
 		try {
-		clickOnElement("Home Page", "Security Control Option", securityControl);
-		clickOnElement("Home Page", "Log Off link", logoff);
+			//switchToDefaultContent();
+			clickOnElement("Home Page", "Security Control Option", securityControl);
+			clickOnElement("Home Page", "Log Off link", logoff);
+
 			if (isElementPresent(myGroupPageHeader))
 			stepResult = true;
 		}catch (Exception e) {

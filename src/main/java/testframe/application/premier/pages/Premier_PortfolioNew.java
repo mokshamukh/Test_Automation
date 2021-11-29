@@ -63,6 +63,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public By addressIDSearch = By.xpath("//input[@name='AddressID']");
 	public By submitSearch = By.xpath("//button[text()='Submit']");
 	public By addressLink = By.xpath("(//a[contains(@id,'SearchType=Address')])[1]");
+	public By portfolioSearch = By.xpath("//td[contains(text(),'Portfolio Number:')]/following-sibling::td/input");
 	
 	public Premier_PortfolioNew(WebDriver driver) {
 		super(driver);
@@ -452,5 +453,28 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
 			}	
+		}}
+	public void searchPortfolio(String portfolioNo) throws Exception{
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+				if (isElementPresent(searchTitle)) {
+					clickOnElement("Search Portfolio Page", "Portfolio Number", portfolioSearch);
+					enterText("Search Portfolio Page", "Portfolio Number", portfolioSearch, portfolioNo);
+					clickOnElement("Search Portfolio Page", "Submit", submitSearch);
+					stepResult = true;
+				}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Search SSN", "Search SSN on Contact page Successfully", "Passed",
+						driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Search SSN", "Could not Search SSN on Contact page Successfully", "Failed",
+						driver, "Y");
+			}
 		}}
 }

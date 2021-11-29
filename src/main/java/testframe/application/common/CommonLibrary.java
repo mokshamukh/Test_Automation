@@ -796,6 +796,27 @@ public class CommonLibrary {
 
 		return found;
 	}
+	
+	/**
+	 * Get Validate Element Present
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected Boolean isOptionalElementPresent(By by) throws Exception {
+		Boolean found = false;
+		String errorMessageToDisplay = "Could Not Find Locator [ " + by + "]";
+		try {
+			int elementCount = driver.findElements(by).size();
+			if (elementCount > 0) {
+				found = true;
+			}
+		} catch (Exception e) {
+			Log.warn(errorMessageToDisplay+" EXCEPTION MESSAGE: " +e.getMessage());
+			//throw new Exception(errorMessageToDisplay);
+		}
+
+		return found;
+	}
 
 	/**
 	 * Get Validate Element Present
