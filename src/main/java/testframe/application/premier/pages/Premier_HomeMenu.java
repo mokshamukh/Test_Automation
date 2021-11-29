@@ -33,6 +33,8 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By newContact = By.xpath("//a[text()='New Name Contact']");
 	public By portfolioMenu =  By.xpath("(//a[text()='Portfolio'])[2]");
 	public By newPortfolio =  By.xpath("//a[text()='New Portfolio']");
+	public By changeNameMenu =  By.xpath("//a[text()='Change Name']");
+	
 	
 
 	public Premier_HomeMenu(WebDriver driver) {
@@ -54,11 +56,11 @@ public class Premier_HomeMenu extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Customer from menu selected Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select Customer from Menu", "Customer from menu selected Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select Customer from menu", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select Customer from Menu", "Could not select Customer from menu", "Failed", driver, "Y");
 			}
 		}
 
@@ -101,11 +103,11 @@ public class Premier_HomeMenu extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Menu name selected Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Menu New Name selected Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select Menu name.", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Could not select Menu New Name.", "Failed", driver, "Y");
 			}
 		}
 		
@@ -125,11 +127,11 @@ public class Premier_HomeMenu extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Menu Address selected Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Menu New Address selected Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select Menu Address.", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Could not select Menu New Address.", "Failed", driver, "Y");
 			}
 		}
 		
@@ -149,11 +151,11 @@ public class Premier_HomeMenu extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Menu Contacts selected Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Conatct from Menu", "Menu New contact selected Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select Menu Contacts.", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Contact from Menu", "Could not select Menu New Contact.", "Failed", driver, "Y");
 			}
 		}
 		
@@ -171,11 +173,11 @@ public class Premier_HomeMenu extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Portfolio from menu selected Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select Portfolio from Menu", "Portfolio from menu selected Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select Portfolio from menu", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select Portfolio from Menu", "Could not select Portfolio from menu", "Failed", driver, "Y");
 			}
 		}
 
@@ -193,11 +195,34 @@ public class Premier_HomeMenu extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "New Portfolio from Portfolio menu selected Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Portfolio from Menu", "New Portfolio from Portfolio menu selected Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Could not select New Portfolio from Portfolio menu" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Select New Portfolio from Menu", "Could not select New Portfolio from Portfolio menu" , "Failed", driver, "Y");
+			}
+		}
+
+	}
+	
+	public void changeName() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(customerHeader)){
+				clickOnElement("Home Page", "Change Name ",changeNameMenu );
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Change Name from Menu", "Change name from menu selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Change Name from Menu", "Could not select Change name from menu", "Failed", driver, "Y");
 			}
 		}
 

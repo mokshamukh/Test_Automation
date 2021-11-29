@@ -66,11 +66,11 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Search customer Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Search a customer", "Search customer Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Could not search the Customer" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Search a customer", "Could not search the Customer" , "Failed", driver, "Y");
 			}
 		}
 
@@ -96,11 +96,11 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "See Additional Addresses click Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Click on See Additional Addresses", "See Additional Addresses click Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Could not click See Additional Addresses" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Click on See Additional Addresses", "Could not click See Additional Addresses" , "Failed", driver, "Y");
 			}
 		}
 
@@ -125,11 +125,11 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Expand customer Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Expand Customer details", "Expand customer Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Could not Expand customer" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Expand Customer details", "Could not Expand customer" , "Failed", driver, "Y");
 			}
 		}
 
@@ -188,11 +188,11 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Search customer Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Get customer details", "Customer details captured Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Could not search the Customer" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Get customer details", "Could not capture the Customer details" , "Failed", driver, "Y");
 			}
 		}}
 
@@ -218,11 +218,11 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 		}finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Customer Inquiry Page", "Could not Validated Customer Details on Customer Inquiry page" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Could not Validated Customer Details on Customer Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
 

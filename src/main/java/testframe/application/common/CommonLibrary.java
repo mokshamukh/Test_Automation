@@ -894,6 +894,28 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
+	
+	/**
+	 * Wait For Element To be Clickable by locator
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected void clickAfterWaitForElementToBeClickable(String pageName, String fieldName, By by) throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [WaitForElementTobeClickable]    ###   Locator [" + by + "]";
+		String errorMessageToDisplay = "Could Not Click [" + fieldName + "] in [" + DEFAULT_EXPLICIT_WAIT_TIMEOUT
+				+ "] Seconds On Page [" + pageName + "]";
+		try {
+			Log.info(messageToDisplay);
+			WebDriverWait wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT_TIMEOUT);
+			WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
+			element.click();
+		} catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+	}
+	
 
 	/**
 	 * Wait For Element To be Invisible by locator
@@ -958,6 +980,7 @@ public class CommonLibrary {
 		}
 		return text;
 	}
+	
 
 	/**
 	 * Get Element Text by locator

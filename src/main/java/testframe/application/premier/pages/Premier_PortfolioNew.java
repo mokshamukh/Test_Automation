@@ -19,26 +19,12 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	//public By taxCode1List =  By.xpath("//td[contains(text(),'Name 1:')]/following-sibling::td//select[contains(@id,'TaxIdCode')]");
 	//public By taxNumber1Textbox =  By.xpath("//td[contains(text(),'Name 1:')]/following-sibling::td//input[contains(@id,'TaxIdNumber')]");
 	//public By dOBTextbox1 =  By.xpath("//td[contains(text(),'Name 1:')]/following-sibling::td//input[contains(@id,'DateOfBirth')]");
+	//public By search1 =  By.xpath("//td[contains(text(),'Name 1:')]/following-sibling::td//img[@title='Search']");
 	String name1Textbox =  "//td[contains(text(),'Name %s:')]/following-sibling::td/input[contains(@id,'Name')]";
 	String taxCode1List =  "//td[contains(text(),'Name %s:')]/following-sibling::td//select[contains(@id,'TaxIdCode')]";
 	String taxNumber1Textbox =  "//td[contains(text(),'Name %s:')]/following-sibling::td//input[contains(@id,'TaxIdNumber')]";
-	String dOBTextbox1 =  "//td[contains(text(),'Name %s:')]/following-sibling::td//input[contains(@id,'DateOfBirth')]";
-	public By search1 =  By.xpath("//td[contains(text(),'Name 1:')]/following-sibling::td//img[@title='Search']");
-	public By name2Textbox =  By.xpath("//td[contains(text(),'Name 2:')]/following-sibling::td/input[contains(@id,'Name')]");
-	public By taxCode2List =  By.xpath("//td[contains(text(),'Name 2:')]/following-sibling::td//select[contains(@id,'TaxIdCode')]");
-	public By taxNumber2Textbox =  By.xpath("//td[contains(text(),'Name 2:')]/following-sibling::td//input[contains(@id,'TaxIdNumber')]");
-	public By dOBTextbox2 =  By.xpath("//td[contains(text(),'Name 2:')]/following-sibling::td//input[contains(@id,'DateOfBirth')]");
-	public By search2 =  By.xpath("//td[contains(text(),'Name 2:')]/following-sibling::td//img[@title='Search']");
-	public By name3Textbox =  By.xpath("//td[contains(text(),'Name 3:')]/following-sibling::td/input[contains(@id,'Name')]");
-	public By taxCode3List =  By.xpath("//td[contains(text(),'Name 3:')]/following-sibling::td//select[contains(@id,'TaxIdCode')]");
-	public By taxNumber3Textbox =  By.xpath("//td[contains(text(),'Name 3:')]/following-sibling::td//input[contains(@id,'TaxIdNumber')]");
-	public By dOBTextbox3 =  By.xpath("//td[contains(text(),'Name 3:')]/following-sibling::td//input[contains(@id,'DateOfBirth')]");
-	public By search3 =  By.xpath("//td[contains(text(),'Name 3:')]/following-sibling::td//img[@title='Search']");
-	public By name4Textbox =  By.xpath("//td[contains(text(),'Name 4:')]/following-sibling::td/input[contains(@id,'Name')]");
-	public By taxCode4List =  By.xpath("//td[contains(text(),'Name 4:')]/following-sibling::td//select[contains(@id,'TaxIdCode')]");
-	public By taxNumber4Textbox =  By.xpath("//td[contains(text(),'Name 4:')]/following-sibling::td//input[contains(@id,'TaxIdNumber')]");
-	public By dOBTextbox4 =  By.xpath("//td[contains(text(),'Name 4:')]/following-sibling::td//input[contains(@id,'DateOfBirth')]");
-	public By search4 =  By.xpath("//td[contains(text(),'Name 4:')]/following-sibling::td//img[@title='Search']");
+	String dOBTextbox1 =  "//td[contains(text(),'Name %s:')]/following-sibling::td//input[contains(@id,'DateOfBirth')]";	
+	String search1 = "//td[contains(text(),'Name %s:')]/following-sibling::td//img[@title='Search']";
 	public By address1 =  By.xpath("//td[contains(text(),'Address 1:')]/following-sibling::td/input[contains(@id,'Address')]");
 	public By address2 =  By.xpath("//td[contains(text(),'Address 2:')]/following-sibling::td/input[contains(@id,'Address')]");
 	public By cityStateZip =  By.xpath("//td[contains(text(),'City State Zip:')]/following-sibling::td/input[contains(@id,'CityStZip')]");
@@ -56,6 +42,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	String name_NameRelationshipPage =  "//td/b[text()='Name']/../../following-sibling::tr//u[contains(text(),'%s')]";
 	//public By relationshipList =  By.xpath("(//select[contains(@id,'RelationshipCode')])[1]");
 	String relationshipList =  "(//select[contains(@id,'RelationshipCode')])[%s]";
+	public By addressPageTitle =  By.xpath("//a[text()='Step 4 - Address']");
 	public By codesPageTitle =  By.xpath("//a[text()='Step 5 - Codes']");
 	public By nextAvailableLink = By.xpath("//u[text()='Next Available']");
 	public By portfolioTextbox =  By.xpath("//td[contains(text(),'Portfolio:')]/following-sibling::td/input[contains(@id,'PortfolioNumber')]");
@@ -68,8 +55,14 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	String portfolioNameFormatCodeList =  "(//td[contains(text(),'Name Format Code')])[%s]/following-sibling::td/select";
 	String portfolioAddPhoneLink =  "(//u[contains(text(),'Add Phone')])[%s]";
 	String portfolioPhoneNumberTextBox =  "(//input[contains(@id,'PhoneNumber')])[%s]";
-	String portfolioAddEmailLink =  "((//u[contains(text(),'Add E-Mail')])[%s]";
+	String portfolioAddEmailLink =  "(//u[contains(text(),'Add E-Mail')])[%s]";
 	String portfolioEMailTextBox =  "(//input[contains(@id,'ContactInfo')])[%s]";
+	public By searchTitle = By.xpath("//label[text()='Search']");
+	public By addressSearch = By.xpath("//input[@name='Address']");
+	public By streetSearch = By.xpath("//input[@name='StreetName']");
+	public By addressIDSearch = By.xpath("//input[@name='AddressID']");
+	public By submitSearch = By.xpath("//button[text()='Submit']");
+	public By addressLink = By.xpath("(//a[contains(@id,'SearchType=Address')])[1]");
 	
 	public Premier_PortfolioNew(WebDriver driver) {
 		super(driver);
@@ -77,13 +70,15 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 	}
 	
-	public void portfolioSearchCustomer(String sSN) throws Exception {
+	public void portfolioSearchCustomer(String sSN, int CustomerCount) throws Exception {
 		boolean stepResult = false;
 		try {
-			driver.switchTo().frame("Main");
+			if (CustomerCount==1) {
+				driver.switchTo().frame("Main");
+			}
 			if (isElementPresent(newPortfolioHeader)) {
 				if (isElementPresent(customerPageTitle)) {
-					clickOnElement("New Portfolio Page", "Search Icon", search1);
+					clickOnElement("New Portfolio Page", "Search Icon", getDynamicElement("Search Icon",search1,Integer.toString(CustomerCount)));
 					switchToWindowWithTitleContaining("Name Search");
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
@@ -110,7 +105,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			if (!customerPageTitle.equals("")) {
 				clickOnElement("New Portfolio Page", "Search Icon", searchAddress);
-				switchToWindowWithTitleContaining("Name Search");
+				switchToWindowWithTitleContaining("Address Search");
 				driver.switchTo().frame("bottom");
 				searchAddress(Address1);
 				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
@@ -130,15 +125,17 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		}}
 	public void searchAddress(String Address1) throws Exception {
 		boolean stepResult = false;
-		try {/*
+		try {
 			if (isElementPresent(searchTitle)) {
-				clickOnElement("Add Address Page", "Address 1", ssnSearch);
-				enterText("Add Address Page", "Address 1", ssnSearch, Address1);
+				clickOnElement("Add Address Page", "Address 1", addressSearch);
+				enterText("Add Address Page", "Address 1", addressSearch, Address1);
+				//enterText("Add Address Page", "Street Name", streetSearch, Address1);
+				//enterText("Add Address Page", "Address ID", addressIDSearch, Address1);
 				clickOnElement("Add Address Page", "Submit", submitSearch);
-				if(isElementPresent(nameLink)){
-				clickOnElement("Add Address Page", "Address link", nameLink);
+				if(isElementPresent(addressLink)){
+				clickOnElement("Add Address Page", "Address link", addressLink);
 				}				
-			}*/
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
@@ -288,7 +285,8 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			if(isElementPresent(nameRelationshipPageTitle)) {
 				selectElementByVisibleText("New Portfolio Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sRelationship);
-				clickOnElement("New Portfolio Page", "Next Button", nextButton);
+				Thread.sleep(1000);
+				//clickOnElement("New Portfolio Page", "Next Button", nextButton);
 				stepResult = true;
 			}					
 			}catch(Exception e) {
@@ -307,12 +305,25 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(nameRelationshipPageTitle)) {
+				if (!sRelationship.equals("")) {
 				selectElementByVisibleText("New Portfolio Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sRelationship);
+				}
+				Thread.sleep(2000);
+				if (!nameFormatCode.equals("")) {
 				selectElementByVisibleText("New Portfolio Page", "Name Format Field", getDynamicElement("Name Format Field",portfolioNameFormatCodeList,Integer.toString(CustomerCount)), nameFormatCode);
+				}
+				Thread.sleep(1000);
+				if (!sPhoneNumber.equals("")) {
 				clickOnElement("New Portfolio Page", "Add Phone Number Link", getDynamicElement("Add Phone Number Link",portfolioAddPhoneLink,Integer.toString(CustomerCount)));
-				//
+				clickAfterWaitForElementToBeClickable("New Portfolio Page - Name Screen", "Phone Number TextBox", getDynamicElement("Phone Number",portfolioPhoneNumberTextBox,Integer.toString(CustomerCount)));
+				enterText("New Portfolio Page - Name Screen", "Phone Number TextBox", getDynamicElement("Phone Number",portfolioPhoneNumberTextBox,Integer.toString(CustomerCount)), sPhoneNumber);
+				}
+				Thread.sleep(1000);
+				if (!sEmail.equals("")) {
 				clickOnElement("New Portfolio Page", "Add Email Link", getDynamicElement("Add Email Link",portfolioAddEmailLink,Integer.toString(CustomerCount)));
-				//
+				clickAfterWaitForElementToBeClickable("New Portfolio Page - Name Screen", "Email TextBox", getDynamicElement("Phone Number",portfolioEMailTextBox,Integer.toString(CustomerCount)));
+				enterText("New Portfolio Page - Name Screen", "Email TextBox", getDynamicElement("Email Textbox",portfolioEMailTextBox,Integer.toString(CustomerCount)), sEmail);
+				}
 				stepResult = true;
 			}					
 			}catch(Exception e) {
@@ -332,10 +343,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			if(isElementPresent(codesPageTitle)) {
 				clickOnElement("New Portfolio Page", "Next Available Link",nextAvailableLink);
-				Thread.sleep(1000);
-				sPortfolioNo=getElementText("New Portfolio Page", "Portfolio No",  portfolioTextbox);
+				Thread.sleep(2000);
+				sPortfolioNo=getElementAttribute("New Portfolio Page", "Portfolio No",  portfolioTextbox,"value");
 				if(sPortfolioNo != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Portfolio_Portfolio", rowNo, sPortfolioNo);				
+					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Portfolio_Portfolio", rowNo, sPortfolioNo);				
 				
 				if (!sPortfolioTypeCode.equals("")) {
 					enterText("New Portfolio Page", "Portfolio Type", portfolioTypeCode, sPortfolioTypeCode);
@@ -348,11 +359,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				if (!sMiscellaneousCode.equals("")) {
 					enterText("New Portfolio Page", "Miscellaneous Code", miscCode, sMiscellaneousCode);
 				}
-				clickOnElement("New Portfolio Page", "Finish Button", finishButton);
-				Thread.sleep(2000);
-				//isElementPresent(msg);
-				driver.switchTo().defaultContent();
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				//clickOnElement("New Portfolio Page", "Finish Button", finishButton);
+				//Thread.sleep(2000);
+				//driver.switchTo().defaultContent();
+				//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 				stepResult = true;
 			}					
 			}catch(Exception e) {
@@ -401,6 +411,46 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Next Button", "Could not clicked on Next Button", "Failed",driver, "Y");
+			}	
+		}}
+
+	public void portfolioNew_AddressScreen() throws Exception {
+		boolean stepResult = false;
+		try {
+			if(isElementPresent(addressPageTitle)) {
+					clickOnElement("New Portfolio Page", "Next Button", nextButton);
+					stepResult = true;
+			}					
+			}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Verify Address Screen", "Address Screen displayed Successfully", "Passed",driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Verify Address Screen", "Could not displayed Address Screen", "Failed",driver, "Y");
+			}
+			
+		}}
+	public void portfolioFinishButton() throws Exception {
+		boolean stepResult = false;
+		try {
+			clickOnElement("New Portfolio Page", "Finish Button", finishButton);
+			Thread.sleep(2000);
+			driver.switchTo().defaultContent();
+			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			stepResult = true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
 			}	
 		}}
 }

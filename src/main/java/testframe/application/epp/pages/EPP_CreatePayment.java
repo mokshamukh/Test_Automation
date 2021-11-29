@@ -110,7 +110,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 			if (stepResult == true) {
 				System.out.println("Pass");
 				//new HTMLReportHelper().HtmlReportBody("TransactionID - EPP application", "Created Successfully","Passed", driver, "Y");
-				new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on '" + "+Create Payment+" +"' Create Payment", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on Create Payment", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application","Could not Create Successfully", "Failed", driver, "Y");

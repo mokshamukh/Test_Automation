@@ -76,7 +76,22 @@ public class Premier_CustomerNewName extends CommonLibrary {
 	public By BeneOwnerName2 = By.xpath("(//select[contains(@id,'RelatedToId')])[2]");
 	public By BeneRelationship2 = By.xpath("(//table[@id='Rel_Beneficial']//select[contains(@id,'RelationshipCode')])[2]");
 	public By BenePercent2 = By.xpath("(//input[contains(@id,'RelationshipPercent')])[2]");
-	//below xpaths are not used yet in scripts
+	public By selectPhoneType = By.xpath("//select[@id='ddPhone']");
+	public By selectEmailType = By.xpath("//select[@id='ddEmail']");
+	public By lastPhoneNumValue =By.xpath("//table[@id='mcPhoneNumbers']//tr[last()-1]/td[6]/input[contains(@name,'PhoneNumber')]");
+	public By lastemailidValue =By.xpath("//table[@id='mcEmailAddress']//tr[last()-1]/td[6]/input[contains(@name,'ContactInfo')]");
+	public By lastRelationship = By.xpath("//table[@id='Rel_Name']//tr[last()]/td[6]/select[contains(@id,'RelationshipCode')]");
+	public By addBeneficiaryLink = By.xpath("//a[text()='Add Beneficial Owner']");
+	//public By lastBeneficialOwnerName =By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[2]//select[contains(@id,'RelatedToId')]");
+	//public By lastBeneficialRelationship =By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[4]//2select[contains(@id,'RelationshipCode')]");
+	//public By lastBeneficialPercent =By.xpath("//table[@id='Rel_Beneficial']//tr[last()-1]/td[6]//input[contains(@id,'RelationshipPercent')]");
+	
+	String sBeneOwnerName = "(//select[contains(@id,'RelatedToId')])[%s]";
+	String sBeneRelationship = "(//table[@id='Rel_Beneficial']//select[contains(@id,'RelationshipCode')])[%s]";
+	String sBenePercent = "(//input[contains(@id,'RelationshipPercent')])[%s]";
+	
+	
+	//xpaths not used
 	public By middleInitialTextBox = By.xpath("(//label[text()='Middle Initial:'])[1]/../following-sibling::td/input");
 	public By generationCodeButton = By.xpath("//label[text()='Generation Code:']/../following-sibling::td//button");
 	String generationCodeList = "//Select[contains(@id,'GenerationCode')]/option[contains(text(),%s')]";
@@ -276,7 +291,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				clickOnElement("New Name Page", "Email link", emailLink);
 				WebElement element2 = wait1.until(ExpectedConditions.elementToBeClickable(emailVal));
 				element2.click();
-				enterText("New Name Page", "Phone Number", emailVal, email);
+				enterText("New Name Page", "Email Address", emailVal, email);
 				Thread.sleep(2000);
 				if (!webAddress.equals("")) {
 				clickOnElement("New Name Page", "Add Web Page Address", webAddresslink);
@@ -301,7 +316,56 @@ public class Premier_CustomerNewName extends CommonLibrary {
 			}
 		
 	}}
+	
+	public void addPhoneNumber(String phoneType, String phoneNumber) throws Exception {
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(contactMethodsLabel)){
+				if(!phoneNumber.equals("")){
+					selectElementByVisibleText("New Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
+					clickOnElement("New Name - Contact Methods Page", "Add Phone link", phoneNumLink);
+					clickAfterWaitForElementToBeClickable("New Name - Contact Methods Page", "Phone Number", lastPhoneNumValue);
+					enterText("New Name - Contact Methods Page", "Phone Number", lastPhoneNumValue, phoneNumber);
+				}
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Add a phone number", "Phone Number added Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Add a phone number", "Could not add Phone Number", "Failed", driver, "Y");
+			}
+		}
+	}
 
+	public void addEmail(String emailType, String mailid) throws Exception {
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(contactMethodsLabel)){
+				if(!mailid.equals("")){
+					selectElementByVisibleText("New Name - Contact Methods Page", "Mail Type", selectEmailType, emailType);
+					clickOnElement("New Name - Contact Methods Page", "Add Email link", emailLink);
+					clickAfterWaitForElementToBeClickable("New Name - Contact Methods Page", "Email Address", lastemailidValue);
+					enterText("New Name - Contact Methods Page", "Phone Number", lastemailidValue, mailid);
+				}
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "E-mail Addressr added Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "Could not add E-mail Address", "Failed", driver, "Y");
+			}
+		}
+	}
 	public void enterCodeLable(String gender,String riskRanking,String creditScore,String nAICSCodes,String customerType,String branchRegion) throws Exception{
 		boolean stepResult = false;
 		try {
@@ -436,7 +500,74 @@ public class Premier_CustomerNewName extends CommonLibrary {
 			}
 		}}
 	
+	public void buildRelationship(String buildRelationship_SSN,String build_Relationship) throws Exception {
+		boolean stepResult = false;
+		try {
+			if(isElementPresent(buildRelationshipLabel)){
+				Thread.sleep(1000);
+				if (!buildRelationship_SSN.equals("")) {
+					clickOnElement("New Name - Relationship Page", "Add Name Image",addNameImage);
+					switchToWindowWithTitleContaining("Add Name");
+					driver.switchTo().frame("bottom");
+					if (isElementPresent(SearchTitle)) {
+						enterText("New Name - Search Page", "Enter SSN Field", BuildRelationshipSSN, buildRelationship_SSN);
+						clickOnElement("New Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
+						waitForPresenceOfElement("New Name - Search Page", "Searched Name List", NameList);
+						clickOnElement("New Name - Search Page", "Searched Result Link",SearchResult);
+						switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+						driver.switchTo().frame("Main");
+					}
+					if (!build_Relationship.equals("")) {
+						selectElementByVisibleText("New Name - Relationship Page", "Relationship field", lastRelationship, build_Relationship);
+					}
+				}
+				stepResult = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Relationship added Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Could not add Relationship", "Failed", driver, "Y");
+			}
+
+		}
+	}
 	
+	public void addDetailsOfBeneficiary(String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent,int iCount) throws Exception {
+		boolean stepResult = false;
+		try {
+			if(isElementPresent(buildRelationshipLabel)){
+				Thread.sleep(1000);
+				if (!beneficialOwnerName.equals("")) {
+					selectElementByVisibleText("New Name - Relationship Page", "Beneficial Owner Name field", getDynamicElement("Beneficial Owner Name field",sBeneOwnerName,Integer.toString(iCount)), beneficialOwnerName);
+				}
+				if (!beneficial_Relationship.equals("")) {
+					selectElementByVisibleText("New Name - Relationship Page", "Beneficial Relationship field", getDynamicElement("Beneficial Relationship field",sBeneRelationship,Integer.toString(iCount)), beneficial_Relationship);
+				}
+				if (!beneficial_Percent.equals("")) {
+					enterText("New Name - Relationship Page", "Beneficial Percent Field", getDynamicElement("Beneficial Percent Field",sBenePercent,Integer.toString(iCount)), beneficial_Percent);
+				}
+				stepResult = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Beneficial Ownership added Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Could not add Beneficial Ownership", "Failed", driver, "Y");
+			}
+
+		}
+	}
+
+
 }
 
 

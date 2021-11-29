@@ -37,7 +37,9 @@ public class EPP_Templates extends CommonLibrary{
 	 By paymentRepair = By.xpath("//a[text()='Payment Repair']");
 	 By duplicatePayment = By.xpath("//a[text()='Duplicate Payments']");
 	 By paymentRepairVerification = By.xpath("//a[text()='Payment Repair Verification']");
-	
+	 By internalFilter = By.xpath("//a[text()='Internal Filter']");
+	 By notification = By.xpath("//a[text()='Notification']");	
+	 By pendingOutgoingRecallReq = By.xpath("//a[text()='Pending Outgoing Recall Requests Pool']");
 	
 	
 	public void selectTemplate(String blockHeaderName,String poolValue) throws Exception {
@@ -210,8 +212,8 @@ public class EPP_Templates extends CommonLibrary{
 	public void selectPaymentActionVerificationOption() throws Exception {
 		boolean stepResult = false;
 		try {
-			waitForPresenceOfElement(eppPoolOptions, "Pool Value", paymentCreationVerificationOption);
-			clickOnElement(eppPoolOptions, "Pool Value", paymentCreationVerificationOption);
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", paymentActionVerificationOption);
+			clickOnElement(eppPoolOptions, "Pool Value", paymentActionVerificationOption);
 			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -219,10 +221,10 @@ public class EPP_Templates extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Pool option Payment Creation Verification Option", "Successfully clicked on Payment Creation Verification Option", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Pool option Payment Action Verification Option", "Successfully clicked on Payment Action Verification Option", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Pool option Payment Creation Verification Option", "Could not clicked on Payment Creation Verification Option", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Pool option Payment Action Verification Option", "Could not clicked on Payment Action Verification Option", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -286,6 +288,66 @@ public class EPP_Templates extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Pool option Payment Repair Verification", "Could not clicked on Payment Repair Verification", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void selectInternalFilterOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", internalFilter);
+			clickOnElement(eppPoolOptions, "Pool Value", internalFilter);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Internal Filter", "Successfully clicked on Internal Filter", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Internal Filter", "Could not clicked on Internal Filter", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void selectNotificationPoolOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", notification);
+			clickOnElement(eppPoolOptions, "Pool Value", notification);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Notification", "Successfully clicked on Notification", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Notification", "Could not clicked on Notification", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void selectPendingOutgoingRequestPoolOption() throws Exception {
+		boolean stepResult = false;
+		try {
+			waitForPresenceOfElement(eppPoolOptions, "Pool Value", pendingOutgoingRecallReq);
+			clickOnElement(eppPoolOptions, "Pool Value", pendingOutgoingRecallReq);
+			stepResult = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Pool option Notification", "Successfully clicked on PendingOutgoingRequest", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Pool option Notification", "Could not clicked on PendingOutgoingRequest", "Failed", driver, "Y");
 			}
 		}
 	}
