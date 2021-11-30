@@ -29,27 +29,24 @@ public class Premier_LogOff extends CommonLibrary {
 	public void logoffApplication() throws Exception{
 		boolean stepResult = false;
 		try {
-			switchToDefaultContent();
+			//switchToDefaultContent();
 			clickOnElement("Home Page", "Security Control Option", securityControl);
 			clickOnElement("Home Page", "Log Off link", logoff);
+
 			if (isElementPresent(myGroupPageHeader))
-				stepResult = true;
+			stepResult = true;
 		}catch (Exception e) {
-			e.printStackTrace();
+		e.printStackTrace();
 		}
 		finally {
 			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("LogOff Premier application", "LogOff Successfully", "Passed", driver, "Y");
+			System.out.println("Pass");
+			new HTMLReportHelper().HtmlReportBody("LogOff Premier application", "LogOff Successfully", "Passed", driver, "Y");
 			}
 			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("LogOff Premier application", "Could not LogOff Successfully", "Failed", driver, "Y");
+			System.out.println("fail");
+			new HTMLReportHelper().HtmlReportBody("LogOff Premier application", "Could not LogOff Successfully", "Failed", driver, "Y");
 			}
-		}
-
-	}
-
-	
+		}}
 
 }

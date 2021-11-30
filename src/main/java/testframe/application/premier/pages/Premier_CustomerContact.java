@@ -13,7 +13,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 	public By searchTitle = By.xpath("//label[text()='Search']");
 	public By ssnSearch = By.xpath("//input[@name='TaxID']");
 	public By submitSearch = By.xpath("//button[text()='Submit']");
-	public By nameLink = By.xpath("(//a[contains(@onclick,'HourglassWork')])[1]");
+	public By nameLink = By.xpath("(//a[contains(@id,'SearchType=Name')])[1]");
 	public By saveButton = By.xpath("//a[contains(@onclick,'Save')]");
 	//below xpath are not used yet
 	public By reasonButton =  By.xpath("//button[contains(@id,'ContactPurposeCode_b')]");
@@ -59,11 +59,11 @@ public class Premier_CustomerContact extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Contact Page", "Create Contact page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Create New Contact", "Create Contact page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Contact Page", "Couls not Create Contact page Successfully", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Create New Contact", "Could not Create Contact page Successfully", "Failed",
 						driver, "Y");
 			}
 		}
@@ -78,6 +78,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 					clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
 					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
 					clickOnElement("Add Name Page", "Submit", submitSearch);
+					Thread.sleep(4000);
 					if(isElementPresent(nameLink)){
 					clickOnElement("Add Name Page", "Name link", nameLink);}
 					stepResult = true;
@@ -88,11 +89,11 @@ public class Premier_CustomerContact extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("New Contact Page", "Search Contact page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Search SSN", "Search SSN on Contact page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("New Contact Page", "Could not Search Contact page Successfully", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Search SSN", "Could not Search SSN on Contact page Successfully", "Failed",
 						driver, "Y");
 			}
 		}

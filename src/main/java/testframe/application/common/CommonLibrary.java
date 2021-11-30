@@ -1001,6 +1001,7 @@ public class CommonLibrary {
 		}
 		return text;
 	}
+	
 
 	/**
 	 * Get Element Text by locator

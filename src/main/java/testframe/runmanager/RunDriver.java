@@ -32,8 +32,8 @@ public class RunDriver {
 	PropertyReader pr =new PropertyReader();
 	ExcelReader er = new ExcelReader();
 	SelectApplicationFlow af =new SelectApplicationFlow();
-
-
+	
+	
 	
 	static{
 		String sCurrentDateTime = new DateTimeHelper().CurrentDateTime("MM-dd-yyyy-hh-mm-ss");
