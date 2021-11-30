@@ -40,7 +40,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public By existingNameRadioButton =  By.xpath("(//td[contains(text(),'Existing Name')]/following-sibling::td/input[contains(@id,'RelatedToIdRadio')])[1]");
 	public By nameRelationshipPageTitle =  By.xpath("//a[text()='Step 3 - Name Relationship']");
 	String name_NameRelationshipPage =  "//td/b[text()='Name']/../../following-sibling::tr//u[contains(text(),'%s')]";
-	//public By relationshipList =  By.xpath("(//select[contains(@id,'RelationshipCode')])[1]");
+	public By relationshipListFirst =  By.xpath("(//select[contains(@id,'RelationshipCode')])[1]");
 	String relationshipList =  "(//select[contains(@id,'RelationshipCode')])[%s]";
 	public By addressPageTitle =  By.xpath("//a[text()='Step 4 - Address']");
 	public By codesPageTitle =  By.xpath("//a[text()='Step 5 - Codes']");
@@ -48,6 +48,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public By portfolioTextbox =  By.xpath("//td[contains(text(),'Portfolio:')]/following-sibling::td/input[contains(@id,'PortfolioNumber')]");
 	public By portfolioTypeCode =  By.xpath("//td[contains(text(),'Portfolio Type Code:')]/following-sibling::td/input[contains(@id,'AccountTypeCode')]");
 	public By miscCode =  By.xpath("//td[contains(text(),'Miscellaneous Code:')]/following-sibling::td/input[contains(@id,'MiscCode')]");
+	public By responsibilityCodeInput =  By.xpath("(//input[contains(@name,'ResponsibilityCode')])[1]");
 	public By responsibilityCodeButton =  By.xpath("(//input[contains(@name,'ResponsibilityCode')])[3]");
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	public By nextButton = By.xpath("//button[@value='Next']");
@@ -58,12 +59,20 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	String portfolioAddEmailLink =  "(//u[contains(text(),'Add E-Mail')])[%s]";
 	String portfolioEMailTextBox =  "(//input[contains(@id,'ContactInfo')])[%s]";
 	public By searchTitle = By.xpath("//label[text()='Search']");
+	public By searchTitlePortfolio = By.xpath("//td[contains(text(),'Search')]");
 	public By addressSearch = By.xpath("//input[@name='Address']");
 	public By streetSearch = By.xpath("//input[@name='StreetName']");
 	public By addressIDSearch = By.xpath("//input[@name='AddressID']");
 	public By submitSearch = By.xpath("//button[text()='Submit']");
 	public By addressLink = By.xpath("(//a[contains(@id,'SearchType=Address')])[1]");
+	//Change Portfolio xpaths are below
 	public By portfolioSearch = By.xpath("//td[contains(text(),'Portfolio Number:')]/following-sibling::td/input");
+	public By codesTab = By.xpath("//li//a[text()='Codes']");
+	public By relationshipTab = By.xpath("//li//a[text()='Relationships']");
+	public By newNameLink = By.xpath("//u[text()='New Name']");
+	String accountNameList =  "(//select[contains(@name,'RelatedToIdTMP')])[%s]";
+	public By saveButton = By.xpath("//img[contains(@title,'Save')]");
+	
 	
 	public Premier_PortfolioNew(WebDriver driver) {
 		super(driver);
@@ -458,7 +467,8 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
-				if (isElementPresent(searchTitle)) {
+				driver.switchTo().frame("Main");
+				if (isElementPresent(searchTitlePortfolio)) {
 					clickOnElement("Search Portfolio Page", "Portfolio Number", portfolioSearch);
 					enterText("Search Portfolio Page", "Portfolio Number", portfolioSearch, portfolioNo);
 					clickOnElement("Search Portfolio Page", "Submit", submitSearch);
@@ -477,4 +487,100 @@ public class Premier_PortfolioNew extends CommonLibrary{
 						driver, "Y");
 			}
 		}}
+	public void changePortfolioDetails(String sPortfolioBranchRegion,String sPortfolioResponsibilityCode, String sPortfolioRelationship) throws Exception{
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+				if (isElementPresent(codesTab)) {
+					if(!sPortfolioBranchRegion.equals("")) {
+							clickOnElement("Change Portfolio Page", "Branch Region Input Field",branchRegionTextbox);
+							Thread.sleep(1000);
+						clickOnElement("Change Portfolio Page", "Branch Region Button",branchRegionButton);
+						Thread.sleep(1000);
+						clickOnElement("Change Portfolio Page", "Branch Region list",getDynamicElement("Branch Region list",branchRegionList,sPortfolioBranchRegion));
+					}
+					if(!sPortfolioResponsibilityCode.equals("")) {
+						clickOnElement("Change Portfolio Page", "Responsibility Code Input Field",responsibilityCodeInput);
+						Thread.sleep(1000);
+						clickOnElement("Change Portfolio Page", "Responsibility Code Button",responsibilityCodeButton);
+						Thread.sleep(1000);
+						clickOnElement("Change Portfolio Page", "Responsibility Code list",getDynamicElement("Responsibility Code list",responsibilityCodeList,sPortfolioResponsibilityCode));
+					}
+					clickOnElement("Change Portfolio Page", "Relationship Tab",relationshipTab);
+					Thread.sleep(5000);
+					if(!sPortfolioRelationship.equals("")) {
+						selectElementByVisibleText("Change Portfolio Page", "Relationship Field", relationshipListFirst, sPortfolioRelationship);
+					}
+					stepResult = true;
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Change Portfolio Details", "Portfolio details Changed Successfully", "Passed",
+						driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Change Portfolio Details", "Could not change portfolio details", "Failed",
+						driver, "Y");
+			}
+		}}
+	public void addCustomer(String sSN,String sName,String sRelationship, int CustomerCount) throws Exception{
+		boolean stepResult = false;
+		try {
+				if (isElementPresent(relationshipTab)) {
+					clickOnElement("Change Portfolio Page", "Add Name", newNameLink);
+					Thread.sleep(5000);
+					switchToWindowWithTitleContaining("Name Search");
+					driver.switchTo().frame("bottom");
+					new Premier_CustomerContact(driver).searchSSN(sSN);
+					Thread.sleep(4000);
+					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+					driver.switchTo().frame("Main");
+					
+					if(!sRelationship.equals("")) {
+					selectElementByVisibleText("Change Portfolio Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sRelationship);					
+					}
+					Thread.sleep(2000);
+					if(!sName.equals("")) {
+					selectElementByVisibleText("Change Portfolio Page", "Name Field", getDynamicElement("Name Field",accountNameList,Integer.toString(CustomerCount)), sName);
+					}
+					Thread.sleep(2000);
+					stepResult = true;
+				}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Add Customer", "Customer Added Successfully", "Passed",
+						driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Add Customer", "Could not add Customer", "Failed",
+						driver, "Y");
+			}
+		}}
+	public void portfolioSaveButton() throws Exception {
+		boolean stepResult = false;
+		try {
+			clickOnElement("New Contact Page", "Save Button", saveButton);
+			Thread.sleep(2000);
+			driver.switchTo().defaultContent();
+			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			stepResult = true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Clicked on Save Button Successfully", "Passed",driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
+			}	
+		}}
+	
 }

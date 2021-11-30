@@ -812,8 +812,20 @@ public class PremierTest extends ApplicationBase {
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.portfolioMenu();
 				premierHomeMenuPage.portfolioChange();
-				premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("PortfolioNo"));
+				premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+				premierPortfolioNew.changePortfolioDetails(tc_Test_Data.get(iTDRow).get("PortfolioChange_BranchRegion"),tc_Test_Data.get(iTDRow).get("PortfolioChange_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("PortfolioChange_Relationship"));
 				
+				strPortfolioTaxNumber  = tc_Test_Data.get(iTDRow).get("PortfolioChange_SSN");
+				strPortfolioTaxNumber_Split = strPortfolioTaxNumber.split("\\|\\|"); 
+				iPortfolioCustomerCount = strPortfolioTaxNumber_Split.length;
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {
+					sTaxIdentification = (tc_Test_Data.get(iTDRow).get("PortfolioChange_SSN").split("\\|\\|"))[i];
+					sName = (tc_Test_Data.get(iTDRow).get("PortfolioChange_NewName").split("\\|\\|"))[i];
+					sPortfolioRelationship = (tc_Test_Data.get(iTDRow).get("PortfolioChange_RelationshipNewName").split("\\|\\|"))[i];
+					premierPortfolioNew.addCustomer(sTaxIdentification,sName,sPortfolioRelationship,i+2);
+				}
+				premierPortfolioNew.portfolioSaveButton();
+				premierLogOff.logoffApplication();
 				
 				break;
 			}
