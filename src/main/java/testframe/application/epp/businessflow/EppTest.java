@@ -363,7 +363,8 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Duplicate Payments");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectDuplicatePaymentOption();
 				eppDuplicatePayments.selectRepairPayment();
 				eppActionPrompts.performActionForRepairPayment("Testing");
 				//eppMenuOPtions.selectMenuOptions(tc_Test_Data.get(iTDRow).get("Menu"));
@@ -394,7 +395,8 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				eppTemplates.selectTemplate("Work Summary","Duplicate Payments");
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectDuplicatePaymentOption();
 				eppDuplicatePayments.selectRepairPayment();
 				eppActionPrompts.performActionForRepairPayment("Testing");
 				//eppMenuOPtions.selectMenuOptions(tc_Test_Data.get(iTDRow).get("Menu"));
@@ -472,6 +474,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -501,6 +504,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+			}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
 				eppPaymentRepair.selectTransIDFromPaymentRepair();
@@ -527,6 +531,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -556,6 +561,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
 				eppPaymentRepair.selectTransIDFromPaymentRepair();
@@ -584,6 +590,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -613,6 +620,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
 				eppPaymentRepair.selectTransIDFromPaymentRepair();
@@ -639,6 +647,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -668,6 +677,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
 				eppPaymentRepair.selectTransIDFromPaymentRepair();
@@ -696,6 +706,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -724,6 +735,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectInternalFilterOption();
 				eppPaymentDetails.selectReleaseFromInternalFilterPayment();
@@ -744,6 +756,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -772,6 +785,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectInternalFilterOption();
 				eppPaymentDetails.selectCancelPaymentForInternalFilter();
@@ -797,6 +811,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -825,6 +840,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectNotificationPoolOption();
 				eppPaymentDetails.selectReleaseFromBusinessFilterPayment();
@@ -845,6 +861,7 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 				eppMenuOPtions.selectManualPaymentOptions();
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
@@ -884,12 +901,12 @@ public class EppTest extends ApplicationBase {
 				eppPaymentDetails.approveRecallPaymentTransaction();
 				eppMenuOPtions.selectPaymentTrackingOptions();
 				eppMenuOPtions.selectWorkSummarySubMenu();
+				}
 				eppTemplates.selectPendingOutgoingRequestPoolOption();
 				eppTransactionIDList.selectPendingOutgoingRecallTransactionIDFromList();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
-				
 			}
 			new HTMLReportHelper().HtmlReportFooter();
 

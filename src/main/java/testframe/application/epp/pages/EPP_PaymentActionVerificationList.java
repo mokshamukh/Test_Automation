@@ -15,6 +15,7 @@ import testframe.common.reporting.HTMLReportHelper;
 public class EPP_PaymentActionVerificationList extends CommonLibrary{
 	
 	EPP_CreatePayment eppCreatePayment;
+	static String firstTransID;
 
 	public EPP_PaymentActionVerificationList(WebDriver driver) {
 		super(driver);
@@ -29,7 +30,7 @@ public class EPP_PaymentActionVerificationList extends CommonLibrary{
 	
 
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Work Summary')]");
-	
+	By firstPaymentActionID = By.xpath("//div[@id='Refresh_PaymentActionVerification']//a[@class='linkGeneral']");
 	
 	
 	public void selectPaymentActionVerificationTransID() throws Exception {
@@ -38,8 +39,16 @@ public class EPP_PaymentActionVerificationList extends CommonLibrary{
 			waitForPresenceOfElement(eppPaymentActionVerification, "Work Summary List", title);
 			if(isElementPresent(title)){
 				String transactionID = eppCreatePayment.getTransactionID();
-				getDynamicElementClick(eppPaymentActionVerification, "Work Summary List", transactionIdList, transactionID);
-				waitElement(8000);
+				if(!(transactionID==null)) {
+					getDynamicElementClick(eppPaymentActionVerification, "Work Summary List", transactionIdList, transactionID);
+					waitElement(2000);
+				}else {
+					String firstTransID = getElementText(eppPaymentActionVerification, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
+					eppCreatePayment.setTransactionID(firstTransID);
+					clickOnElement(eppPaymentActionVerification, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
+				}
+				//String transactionID = eppCreatePayment.getTransactionID();
+				
 				stepResult = true;
 			}
 		} catch (Exception e) {
