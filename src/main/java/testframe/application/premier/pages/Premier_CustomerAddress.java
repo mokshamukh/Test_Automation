@@ -82,18 +82,20 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	public void createNewAddress(String address1Val, String address2Val, String zipcodeVal, String sSSN,String realationshipVal,String branchRegion) throws Exception {
 		boolean stepResult = false;
 		try {
-			switchToWithinFrameWithName("Main");
+			//switchToWithinFrameWithName("Main");
 			enterAddress(address1Val, address2Val, zipcodeVal,branchRegion);
 			Thread.sleep(2000);
 			if (isElementPresent(duplicateTitle)) {
 				clickOnElement("New Address Page", "next button", nextButton);
 			}
 			createBuildRelationship(sSSN, realationshipVal);
+
 			Thread.sleep(2000);
 			if (isElementPresent(msg)) {
 				stepResult = true;
 			}
 			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -112,6 +114,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	public void enterAddress(String address1Val, String address2Val, String zipcodeVal,String branchRegion) throws Exception {
 		boolean stepResult = false;
 		try {
+			driver.switchTo().frame("Main");
 			Thread.sleep(4000);
 			if (isElementPresent(addressTitle)) {
 				if (!address1Val.equals("")) {
@@ -133,6 +136,8 @@ public class Premier_CustomerAddress extends CommonLibrary {
 
 				clickOnElement("New Name Page", "Next Button", nextButton);
 				clickOnElement("New Address Page", "next button", nextButton);
+				
+				
 				stepResult = true;
 			}
 			
@@ -151,7 +156,32 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		}
 
 	}
+	
+	public void duplicateAddress() throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(2000);
+			if (isElementPresent(duplicateTitle)) {
+				clickOnElement("New Address Page", "next button", nextButton);
+				stepResult = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Check duplicate address", "Check for duplicate address Successfully",
+						"Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Check duplicate address", "Could not Check duplicate address",
+						"Failed", driver, "Y");
+			}
+		}
+	}
 
+	
 	public void createBuildRelationship(String sSN, String realationshipVal) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -170,9 +200,13 @@ public class Premier_CustomerAddress extends CommonLibrary {
 					switchToWithinFrameWithName("Main");
 				}
 				Thread.sleep(2000);
-				selectElementByVisibleText("New Address Page", "Select Group", relationship, realationshipVal);
+				selectElementByVisibleText("New Address Page", "Select Realationship", relationship, realationshipVal);
 				clickOnElement("New Address Page", "Finish Button", finishButton);
-				stepResult = true;
+				Thread.sleep(2000);
+				if (isElementPresent(msg)) {
+					stepResult = true;
+				}
+				switchToDefaultContent();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

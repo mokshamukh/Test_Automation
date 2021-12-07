@@ -136,6 +136,16 @@ public class EPP_CreatePayment extends CommonLibrary {
 		return transactionID;
 
 	}
+	
+	public void setTransactionID(String savedtransactionID) {
+		try {
+			if (!(savedtransactionID == null)) {
+				transactionID = savedtransactionID;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void createOutgoingHVCustomerPaymentFRB(String custAccNum, String debitAccount, String amount,
 			String benCustAccount, String benecustName, String benecustAddress, String accWithBankNo,

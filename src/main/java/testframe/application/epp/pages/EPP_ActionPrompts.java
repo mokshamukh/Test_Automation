@@ -195,7 +195,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			if(isElementPresent(actionPrompts)) {
 				driver.findElement(By.xpath("//select[@name='FilterKeysList']//option[contains(.,'IFlimit')]")).click();
 				clickOnElement(eppActionPrompts, "Submit Button", submitButton);
-				waitElement(5000);
+				waitElement(2000);
 			    isElementPresent(internalFilterAction); 
 				stepResult = true;
 			 }
@@ -221,6 +221,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 				clickOnElement(eppActionPrompts, "Submit Button", submitButton);
 				waitElement(5000);
 				isElementPresent(transIdSaved);
+				//clickOnElement(eppActionPrompts, "Action Executed Successfully", transIdSaved);
 				stepResult = true;
 			}
 		} catch (Exception e) {

@@ -5,6 +5,7 @@ import testframe.application.commercialcenter.businessflow.CorporateTest;
 import testframe.application.epp.businessflow.EppTest;
 import testframe.application.premier.businessflow.PremierTest;
 
+
 public class ApplicationTestBase {
 	
 	public AdminTest admintest = new AdminTest();

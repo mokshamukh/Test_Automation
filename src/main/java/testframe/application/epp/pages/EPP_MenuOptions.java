@@ -152,10 +152,12 @@ public class EPP_MenuOptions extends CommonLibrary{
 	public void selectTransactionInquirySubMenu() throws Exception {
 		boolean stepResult = false;
 		try {
+			waitElement(7000);
 			clickOnElement(eppSubMenuPage, "Transaction Inquiry Sub Menu Selected", transactionInquiry);
 			waitElement(5000);
 			switchToWindowWithTitleContaining("Enterprise Payments Platform");
 			driver.switchTo().frame("main");
+			waitElement(7000);
 			waitForPresenceOfElement(eppSubMenuPage, "Payment Template", transInquiryHeader);
 			stepResult = true;
 		} catch (Exception e) {
