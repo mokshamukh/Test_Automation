@@ -89,7 +89,13 @@ public class Premier_CustomerAddress extends CommonLibrary {
 				clickOnElement("New Address Page", "next button", nextButton);
 			}
 			createBuildRelationship(sSSN, realationshipVal);
-			//switchToDefaultContent();
+
+			Thread.sleep(2000);
+			if (isElementPresent(msg)) {
+				stepResult = true;
+			}
+			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

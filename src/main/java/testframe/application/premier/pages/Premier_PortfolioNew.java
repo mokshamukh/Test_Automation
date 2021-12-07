@@ -36,7 +36,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public By accountingBranch =  By.xpath("//td[contains(text(),'Accounting Branch:')]/following-sibling::td/input[contains(@id,'AccountingGroup')]");
 	public By duplicatePageTitle =  By.xpath("//a[text()='Step 2 - Possible Duplicates']");
 	public By duplicateMsg =  By.xpath("//td[contains(text(),'No duplicate matches were found.')]");
-	public By duplicateMsgNameAddress =  By.xpath("//td[contains(text(),'No duplicate matches were found.  The new name and address entries will be used.')]");
+	public By duplicateMsgNameAddress =  By.xpath("(//td[contains(text(),'No duplicate matches were found.')])[1]");
 	public By existingNameRadioButton =  By.xpath("(//td[contains(text(),'Existing Name')]/following-sibling::td/input[contains(@id,'RelatedToIdRadio')])[1]");
 	public By nameRelationshipPageTitle =  By.xpath("//a[text()='Step 3 - Name Relationship']");
 	String name_NameRelationshipPage =  "//td/b[text()='Name']/../../following-sibling::tr//u[contains(text(),'%s')]";
@@ -59,7 +59,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	String portfolioAddEmailLink =  "(//u[contains(text(),'Add E-Mail')])[%s]";
 	String portfolioEMailTextBox =  "(//input[contains(@id,'ContactInfo')])[%s]";
 	public By searchTitle = By.xpath("//label[text()='Search']");
-	public By searchTitlePortfolio = By.xpath("//td[contains(text(),'Search')]");
+	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By addressSearch = By.xpath("//input[@name='Address']");
 	public By streetSearch = By.xpath("//input[@name='StreetName']");
 	public By addressIDSearch = By.xpath("//input[@name='AddressID']");
@@ -71,7 +71,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public By relationshipTab = By.xpath("//li//a[text()='Relationships']");
 	public By newNameLink = By.xpath("//u[text()='New Name']");
 	String accountNameList =  "(//select[contains(@name,'RelatedToIdTMP')])[%s]";
-	public By saveButton = By.xpath("//img[contains(@title,'Save')]");
+	public By saveButton2 = By.xpath("//img[contains(@title,'Save')]");
 	
 	
 	public Premier_PortfolioNew(WebDriver driver) {
@@ -139,12 +139,12 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			if (isElementPresent(searchTitle)) {
 				clickOnElement("Add Address Page", "Address 1", addressSearch);
 				enterText("Add Address Page", "Address 1", addressSearch, Address1);
-				//enterText("Add Address Page", "Street Name", streetSearch, Address1);
-				//enterText("Add Address Page", "Address ID", addressIDSearch, Address1);
 				clickOnElement("Add Address Page", "Submit", submitSearch);
+				waitElement(4000);
 				if(isElementPresent(addressLink)){
 				clickOnElement("Add Address Page", "Address link", addressLink);
-				}				
+				}
+				stepResult = true;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -429,8 +429,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			if(isElementPresent(addressPageTitle)) {
 					clickOnElement("New Portfolio Page", "Next Button", nextButton);
-					stepResult = true;
-			}					
+					stepResult = true;	
+			} 
+			else 
+				if(isElementPresent(codesPageTitle)) {
+					stepResult = true;	
+			}		
+						
 			}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -447,7 +452,8 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			clickOnElement("New Portfolio Page", "Finish Button", finishButton);
-			Thread.sleep(2000);
+			Thread.sleep(5000);
+			validateElementPresent("New Portfolio Page", "Customer Page Title", customerPageTitle);
 			driver.switchTo().defaultContent();
 			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 			stepResult = true;
@@ -468,7 +474,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			Thread.sleep(4000);
 				driver.switchTo().frame("Main");
-				if (isElementPresent(searchTitlePortfolio)) {
+				if (isElementPresent(searchTitle2)) {
 					clickOnElement("Search Portfolio Page", "Portfolio Number", portfolioSearch);
 					enterText("Search Portfolio Page", "Portfolio Number", portfolioSearch, portfolioNo);
 					clickOnElement("Search Portfolio Page", "Submit", submitSearch);
@@ -479,11 +485,11 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search SSN", "Search SSN on Contact page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Search Portfolio", "Search Portfolio on Portfolio page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search SSN", "Could not Search SSN on Contact page Successfully", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Search Portfolio", "Could not Search Portfolio on Portfolio page Successfully", "Failed",
 						driver, "Y");
 			}
 		}}
@@ -565,7 +571,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public void portfolioSaveButton() throws Exception {
 		boolean stepResult = false;
 		try {
-			clickOnElement("New Contact Page", "Save Button", saveButton);
+			clickOnElement("New Contact Page", "Save Button", saveButton2);
 			Thread.sleep(2000);
 			driver.switchTo().defaultContent();
 			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
