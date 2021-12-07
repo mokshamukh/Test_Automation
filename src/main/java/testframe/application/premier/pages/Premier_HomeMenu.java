@@ -36,6 +36,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By changePortfolio =  By.xpath("//a[text()='Change Portfolio']");
 	public By changeNameMenu =  By.xpath("//a[text()='Change Name']");
 	public By changeNameTitle = By.xpath("//div[text()='Customer - Names - Change Name']");
+	public By newAddresTitle = By.xpath("//div[text()='Customer - Address - New Address']");
 	
 	
 
@@ -71,7 +72,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void customerInquiry() throws Exception{
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(homePageHeader) || isElementPresent(changeNameTitle)){
+			if (isElementPresent(homePageHeader) || isElementPresent(changeNameTitle) || isElementPresent(newAddresTitle)){
 				clickOnElement("Home Page", "Customer Inquiry", customerInquiry);
 				stepResult = true;
 			}	
@@ -115,6 +116,54 @@ public class Premier_HomeMenu extends CommonLibrary {
 		
 	} 
 	
+	public void goToNames() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)|| isElementPresent(customerInquiryHeader)){
+				clickOnElement("Home Menu Page", "name field", name);
+				//clickOnElement("Home Menu Page", "new name field", newName);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Names from Menu", "Menu Name selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Names from Menu", "Could not select Menu Names", "Failed", driver, "Y");
+			}
+		}
+		
+	}
+	
+	public void goToNewName() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)|| isElementPresent(customerInquiryHeader)){
+				//clickOnElement("Home Menu Page", "name field", name);
+				clickOnElement("Home Menu Page", "new name field", newName);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Menu New Name selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Could not select Menu New Name", "Failed", driver, "Y");
+			}
+		}
+		
+	}
+	
 	public void clickNewAddress() throws Exception{
 		boolean stepResult = false;
 		try {
@@ -139,6 +188,54 @@ public class Premier_HomeMenu extends CommonLibrary {
 		
 	} 
 	
+	public void goToAddress() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(customerHeader)){
+				clickOnElement("Home Menu Page", "Address field", address);
+				//clickOnElement("Home Menu Page", "new address field", newAddress);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Address from Menu", "Menu Address selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Address from Menu", "Could not select Menu Address.", "Failed", driver, "Y");
+			}
+		}
+		
+	}
+	
+	public void goToNewAddress() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(customerHeader)){
+				//clickOnElement("Home Menu Page", "Address field", address);
+				clickOnElement("Home Menu Page", "new address field", newAddress);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Menu New Address selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Could not select Menu New Address.", "Failed", driver, "Y");
+			}
+		}
+		
+	}
+	
 	public void clickNewContact() throws Exception{
 		boolean stepResult = false;
 		try {
@@ -161,7 +258,56 @@ public class Premier_HomeMenu extends CommonLibrary {
 			}
 		}
 		
-	} 
+	}
+	
+	public void goToContact() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(customerHeader)){
+				clickOnElement("Home Menu Page", "Contacts field", contacts);
+				//clickOnElement("Home Menu Page", "new contact field", newContact);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Conatct from Menu", "Menu contact selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Contact from Menu", "Could not select Menu Contact.", "Failed", driver, "Y");
+			}
+		}
+		
+	}
+	
+	public void goTokNewContact() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(customerHeader)){
+				//clickOnElement("Home Menu Page", "Contacts field", contacts);
+				clickOnElement("Home Menu Page", "new contact field", newContact);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Conatct from Menu", "Menu New contact selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Contact from Menu", "Could not select Menu New Contact.", "Failed", driver, "Y");
+			}
+		}
+		
+	}
+	
 	public void portfolioMenu() throws Exception{
 		boolean stepResult = false;
 		try {

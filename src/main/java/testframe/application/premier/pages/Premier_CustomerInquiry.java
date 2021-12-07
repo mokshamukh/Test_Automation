@@ -204,8 +204,10 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 				switchToWithinFrameWithName("bottom");
 				validateTextEquals("Customer Inquiry" , "Name", name, customerName);
 				validateTextContains("Customer Inquiry" , "SSN", taxIdentification, sSN);
-				validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber);
-				validateTextEquals("Customer Inquiry" , "Email ID", email, eMailID);
+				if (!(phoneNumber.equals("")))
+					validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber);
+				if (!(eMailID.equals("")))
+					validateTextEquals("Customer Inquiry" , "Email ID", email, eMailID);
 				validateTextEquals("Customer Inquiry" , "Address 1", address1, sAddress1);
 				validateTextEquals("Customer Inquiry" , "Address 2", address2, sAddress2);
 				validateTextEquals("Customer Inquiry" , "Zip Code", zipcode, zipCode);
@@ -221,6 +223,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
 			}
 			else{
+				switchToDefaultContent();
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Could not Validated Customer Details on Customer Inquiry page" , "Failed", driver, "Y");
 			}
