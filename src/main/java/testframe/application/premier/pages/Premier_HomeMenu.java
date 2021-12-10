@@ -50,9 +50,16 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By accountInquiryCertificates =  By.xpath("//a[text()='Certificates']/following-sibling::ul/li/a[contains(text(),'Account Inquiry')]");
 	public By changeAccountCertificates =  By.xpath("//a[text()='Certificates']/following-sibling::ul/li/a[contains(text(),'Change Account')]");
 	public By newAddresTitle = By.xpath("//div[text()='Customer - Address - New Address']");
+	public By linesMenu = By.xpath("//a[text()='Lines']");
+	public By newLine = By.xpath("//a[text()='New Line']");
+	public By lineInquiry = By.xpath("//a[text()='Line Inquiry']");
+	public By loansMenu = By.xpath("//a[text()='Loans']");
+	public By newNote = By.xpath("//a[text()='New Note']");
+	public By accountInquiryLoans =  By.xpath("//a[text()='Loans']/../ul//a[(text()='Account Inquiry')]");
 	public By changeAddress = By.xpath("//a[text()='Change Address']");
 	public By changeAddressTitle= By.xpath("//div[text()='Customer - Address - Change Address']");		
 			
+
 
 	
 	public Premier_HomeMenu(WebDriver driver) {
@@ -639,7 +646,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void accountInquiryCertificates() throws Exception{
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(savingsDepositsSubMenu)){
+			if (isElementPresent(certificatesDepositsSubMenu)){
 				clickOnElement("Home Page", "Account Inquiry Certificates",accountInquiryCertificates );
 				stepResult = true;
 			}	
@@ -659,7 +666,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void changeAccountCertificates() throws Exception{
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(savingsDepositsSubMenu)){
+			if (isElementPresent(certificatesDepositsSubMenu)){
 				clickOnElement("Home Page", "Change Account Certificates",changeAccountCertificates );
 				stepResult = true;
 			}	
@@ -676,6 +683,137 @@ public class Premier_HomeMenu extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("Select Change Account from Certificates Menu", "Could not select Change Account from Certificates menu", "Failed", driver, "Y");
 			}
 		}}
+
+	public void selectLinesMenu() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(linesMenu)){
+				clickOnElement("Home Menu Page", "Lines field", linesMenu);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Could not select Menu New Line.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectNewLine() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(linesMenu)){
+				clickOnElement("Home Menu Page", "New Line field", newLine);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Could not select Menu New Line.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectLineInquiry() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(linesMenu)){
+				clickOnElement("Home Menu Page", "Line Inquiry field", lineInquiry);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Line Inquiry from Menu", "Menu Line Inquiry selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Line Inquiry from Menu", "Could not select Menu Line Inquiry.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectLoansMenu() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(loansMenu)){
+				clickOnElement("Home Menu Page", "Loans field", loansMenu);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Loans from Menu", "Menu Loans selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Loans from Menu", "Could not select Menu Loans.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectNewNote() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(loansMenu)){
+				clickOnElement("Home Menu Page", "New Note field", newNote);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Note from Menu", "Menu New Note selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Note from Menu", "Could not select Menu New Note.", "Failed", driver, "Y");
+			}
+		}
+	}
+	public void loanAccountInquiry() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(loansMenu)){
+				clickOnElement("Home Menu Page", "Loan Account Inquiry field", accountInquiryLoans);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Menu", "Account Inquiry selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Menu", "Could not select Account Inquiry.", "Failed", driver, "Y");
+			}
+		}
+	}
 	
 	
 	public void goToChangeAddress() throws Exception{
