@@ -41,6 +41,10 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 	public By address1 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[4]");
 	public By address2 =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[6]");
 	public By zipcode =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[8]");
+	String sDelimiter;
+	String sInquireData = "//td[text()='%s']";
+	String sInquireLinkData = "//u[text()='%s']";
+	
 	public By relationship =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[14]");
 
 	public Premier_CustomerInquiry(WebDriver driver) throws Exception {
@@ -196,21 +200,74 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 			}
 		}}
 
-	public void validateCustomerDetails(String customerName, String sSN, String phoneNumber, String eMailID,String sAddress1,String sAddress2,String zipCode) throws Exception {
+	public void validateCustomerDetails(String customerName, String sSN, String phoneNumber, String eMailID,String sAddress1,String sAddress2,String zipCode,String sSSNRelationship,String sBeneficialOnwerName) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(customerInquiryHeader)){
 				switchToWithinFrameWithName("Main");
 				switchToWithinFrameWithName("bottom");
-				validateTextEquals("Customer Inquiry" , "Name", name, customerName);
-				validateTextContains("Customer Inquiry" , "SSN", taxIdentification, sSN);
-				if (!(phoneNumber.equals("")))
-					validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber);
-				if (!(eMailID.equals("")))
-					validateTextEquals("Customer Inquiry" , "Email ID", email, eMailID);
-				validateTextEquals("Customer Inquiry" , "Address 1", address1, sAddress1);
-				validateTextEquals("Customer Inquiry" , "Address 2", address2, sAddress2);
-				validateTextEquals("Customer Inquiry" , "Zip Code", zipcode, zipCode);
+				if (!(customerName.equals("")))
+					validateTextEquals("Customer Inquiry" , "Name", name, customerName);
+				if (!(sSN.equals("")))
+					validateTextContains("Customer Inquiry" , "SSN", taxIdentification, sSN);
+				if (!(phoneNumber.equals(""))){
+					if(phoneNumber.contains("||") || phoneNumber.contains(",")){
+						if (phoneNumber.contains("||"))
+							sDelimiter="\\|\\|";
+						else if(phoneNumber.contains(","))
+							sDelimiter=",";
+						for (int i=0; i<phoneNumber.split(sDelimiter).length;i++){
+							validateTextEquals("Customer Inquiry" , "Relationship Type", phonenumber, phoneNumber.split(sDelimiter)[i]);
+						}	
+					}
+					else
+						validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber);
+				}	
+				if (!(eMailID.equals(""))){
+					if(eMailID.contains("||") || eMailID.contains(",")){
+						if (eMailID.contains("||"))
+							sDelimiter="\\|\\|";
+						else if(eMailID.contains(","))
+							sDelimiter=",";
+						for (int i=0; i<eMailID.split(sDelimiter).length;i++){
+							validateTextEquals("Customer Inquiry" , "Relationship Type", email, eMailID.split(sDelimiter)[i]);
+						}	
+					}
+					else
+						validateTextEquals("Customer Inquiry" , "Email ID",email , eMailID);
+				}	
+				if (!(sAddress1.equals("")))
+					validateTextEquals("Customer Inquiry" , "Address 1", getDynamicElement("Customer Inquiry",sInquireData,sAddress1), sAddress1);
+				if (!(sAddress2.equals("")))
+					validateTextEquals("Customer Inquiry" , "Address 2", getDynamicElement("Customer Inquiry",sInquireData,sAddress2), sAddress2);
+				if (!(zipCode.equals("")))
+					validateTextEquals("Customer Inquiry" , "Zip Code", getDynamicElement("Customer Inquiry",sInquireData,zipCode), zipCode);
+				if (!(sSSNRelationship.equals(""))){
+					if(sSSNRelationship.contains("||") || sSSNRelationship.contains(",")){
+						if (sSSNRelationship.contains("||"))
+							sDelimiter="\\|\\|";
+						else if(sSSNRelationship.contains(","))
+							sDelimiter=",";
+						for (int i=0; i<sSSNRelationship.split(sDelimiter).length;i++){
+							validateTextEquals("Customer Inquiry" , "Relationship Type", getDynamicElement("Customer Inquiry",sInquireData,sSSNRelationship.split(sDelimiter)[i]), sSSNRelationship.split(sDelimiter)[i]);
+						}	
+					}
+					else	
+						validateTextEquals("Customer Inquiry" , "Relationship Type", getDynamicElement("Customer Inquiry",sInquireData,sSSNRelationship), sSSNRelationship);
+				}
+				if (!(sBeneficialOnwerName.equals(""))){
+					if(sBeneficialOnwerName.contains("||") || sBeneficialOnwerName.contains(",")){
+						if (sBeneficialOnwerName.contains("||"))
+							sDelimiter="\\|\\|";
+						else if(sBeneficialOnwerName.contains(","))
+							sDelimiter=",";
+						for (int i=0; i<sBeneficialOnwerName.split(sDelimiter).length;i++){
+							validateTextEquals("Customer Inquiry" , "Relationship Type", getDynamicElement("Customer Inquiry",sInquireData,sBeneficialOnwerName.split(sDelimiter)[i]), sBeneficialOnwerName.split(sDelimiter)[i]);
+						}	
+					}
+					else
+						validateTextEquals("Customer Inquiry" , "Beneficial Owner Name", getDynamicElement("Customer Inquiry",sInquireData,sBeneficialOnwerName), sBeneficialOnwerName);
+				}
 				switchToDefaultContent();
 				stepResult = true;
 
