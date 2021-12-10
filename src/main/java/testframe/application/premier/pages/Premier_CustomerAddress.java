@@ -36,6 +36,16 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	public By branchRegionVal = By.xpath("(//label[text()='Branch Region:'])[1]/../following-sibling::td//input[contains(@class,'EllipseText')]");
 	String BranchRegionCombobox =  "//select[contains(@id,'BranchNumber_d')]/option[contains(text(),'%s')]";
 	public By msg = By.xpath("//*[text()='The record was updated successfully.']");
+	public By searchAddress = By.xpath("//input[@id='Address']");
+	String searchAddressLink = "//a[contains(text(),'%s')]";
+	By changeAddressTitle = By.xpath("//div[text()='Customer - Address - Change Address']");
+	By updateBranchRegion = By.xpath("//input[contains(@id,'BranchNumber_l')]");
+	By updateSeasonalAddress1= By.xpath("(//input[contains(@id,'AltAddress')])[1]");
+	By updateSeasonalAddress2= By.xpath("(//input[contains(@id,'AltAddress')])[2]");
+	By updateSeasonalZipCode= By.xpath("//input[contains(@id,'AltCityStZip')]");
+	By saveLink = By.xpath("//a[text()=' Save']");
+	By sesonalAddressCheckbox = By.xpath("//input[contains(@id,'AltFromDate')][@type='checkbox']");
+
 	//below xpath are not used yet
 	public By foreignList = By.xpath("(//label[text()='Foreign:'])[1]/../following-sibling::td/select");
 	public By deliveryPointTextbox = By.xpath("(//label[text()='Delivery Point:'])[1]/../following-sibling::td/input");
@@ -71,7 +81,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	String seasonal_HandlingCodeList =  "(//select[contains(@id,'HandlingCode_d')]/option[contains(text(),'%s')])[2]";
 	public By seasonal_HomePhoneNumber = By.xpath("//input[contains(@name,'AltHomePhone')]");
 	public By noDuplicateMsg = By.xpath("//label[text()='No Possible Address Duplicates']");
-	
+
 	public Premier_CustomerAddress(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -129,18 +139,18 @@ public class Premier_CustomerAddress extends CommonLibrary {
 				if (!branchRegion.equals("")) {
 					//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
 					//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
-					clickOnElement("New Name Page", "Branch Region Button",branchRegionButton);
+					clickOnElement("New Addresss Page", "Branch Region Button",branchRegionButton);
 					Thread.sleep(2000);
-					clickOnElement("New Name Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));
+					clickOnElement("New Address Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));
 				}
 
-				clickOnElement("New Name Page", "Next Button", nextButton);
+				clickOnElement("New Address Page", "Next Button", nextButton);
 				clickOnElement("New Address Page", "next button", nextButton);
-				
-				
+
+
 				stepResult = true;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -156,7 +166,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		}
 
 	}
-	
+
 	public void duplicateAddress() throws Exception {
 		boolean stepResult = false;
 		try {
@@ -165,7 +175,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 				clickOnElement("New Address Page", "next button", nextButton);
 				stepResult = true;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -181,7 +191,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		}
 	}
 
-	
+
 	public void createBuildRelationship(String sSN, String realationshipVal) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -222,6 +232,118 @@ public class Premier_CustomerAddress extends CommonLibrary {
 			}
 		}
 
+	}
+
+
+	public void searchAddress(String address1Val) throws Exception {
+		boolean stepResult = false;
+		try {
+			switchToWithinFrameWithName("Main");
+			if (isElementPresent(searchTitle)) {
+				enterText("Searh Address Page", "Address field", searchAddress, address1Val);
+				clickOnElement("Search Address Page", "Submit button", submitSearch);
+				if (isElementPresent(getDynamicElement("Search Address Link",searchAddressLink,address1Val))){
+					clickOnElement("Search Address Page", "Search Address Link", getDynamicElement("Search Address Link",searchAddressLink,address1Val));
+				}
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Seacrh Address  Successfully","Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Could not search the Address","Failed", driver, "Y");
+			}
+		}
+	}
+
+
+	public void updateAddress(String address1Val, String address2Val, String zipcodeVal,String branchRegion,String seasonalAddress1, 
+			String seasonalAddress2,String seasonalZipCode) throws Exception {
+		boolean stepResult = false;
+		try {
+			switchToDefaultContent();
+			Thread.sleep(4000);
+			if (isElementPresent(changeAddressTitle)) {
+				switchToWithinFrameWithName("Main");
+				if (!address1Val.equals("")) {
+					clearAndType("Change Address Page", "Address 1", address1, address1Val);
+					//Thread.sleep(1000);
+				}
+				if (!address2Val.equals("")) {
+					clearAndType("Change Address Page", "Address 2", address2, address2Val);
+					//Thread.sleep(2500);
+				}
+				if (!zipcodeVal.equals("")) {
+					clearAndType("Change Address Page", "zip code", zipCode, zipcodeVal);
+					//Thread.sleep(2500);
+				}
+				if (!branchRegion.equals("")) {
+					clearAndType("Change Address Page", "zip code", updateBranchRegion,branchRegion);
+					//Thread.sleep(2500);
+				}
+				
+				if (!seasonalAddress1.equals("")) {
+					clearAndType("Change Address Page", "zip code", updateSeasonalAddress1,seasonalAddress1);
+					//Thread.sleep(2500);
+				}
+				
+				if (!seasonalAddress2.equals("")) {
+					clearAndType("Change Address Page", "zip code", updateSeasonalAddress2,seasonalAddress2);
+					//Thread.sleep(2500);
+				}
+				
+				if (!seasonalZipCode.equals("")) {
+					clearAndType("Change Address Page", "zip code", updateSeasonalZipCode,seasonalZipCode);
+					//Thread.sleep(2500);
+				}
+				
+				stepResult = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Update Address details", "Address updated on  Address page Successfully", "Passed",
+						driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Update Address details", "Could Not updated Address on Address Page", "Failed",
+						driver, "Y");
+			}
+		}
+
+	}
+
+	public void saveAddress() throws Exception {
+		boolean stepResult = false;
+		try {
+
+			clickOnElement("Change Address Page", "Save Link", saveLink);
+			if (isElementPresent(sesonalAddressCheckbox)){
+				clickOnElement("Change Address Page", "Seasonal Address Information Will be Cleared Checkbox", sesonalAddressCheckbox);
+				clickOnElement("Change Address Page", "Save Link", saveLink);
+			}
+			if (isElementPresent(searchTitle)) {
+				stepResult = true;
+			}
+			switchToDefaultContent();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Save Address", "Save Address  Successfully","Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Save Address", "Could not Save the Address","Failed", driver, "Y");
+			}
+		}
 	}
 
 }

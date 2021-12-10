@@ -56,6 +56,11 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By loansMenu = By.xpath("//a[text()='Loans']");
 	public By newNote = By.xpath("//a[text()='New Note']");
 	public By accountInquiryLoans =  By.xpath("//a[text()='Loans']/../ul//a[(text()='Account Inquiry')]");
+	public By changeAddress = By.xpath("//a[text()='Change Address']");
+	public By changeAddressTitle= By.xpath("//div[text()='Customer - Address - Change Address']");		
+			
+
+
 	
 	public Premier_HomeMenu(WebDriver driver) {
 		super(driver);
@@ -89,7 +94,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void customerInquiry() throws Exception{
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(homePageHeader) || isElementPresent(changeNameTitle) || isElementPresent(newAddresTitle)){
+			if (isElementPresent(homePageHeader) || isElementPresent(changeNameTitle) || isElementPresent(newAddresTitle) || isElementPresent(changeAddressTitle)){
 				clickOnElement("Home Page", "Customer Inquiry", customerInquiry);
 				stepResult = true;
 			}	
@@ -678,6 +683,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("Select Change Account from Certificates Menu", "Could not select Change Account from Certificates menu", "Failed", driver, "Y");
 			}
 		}}
+
 	public void selectLinesMenu() throws Exception{
 		boolean stepResult = false;
 		try {
@@ -807,5 +813,29 @@ public class Premier_HomeMenu extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Menu", "Could not select Account Inquiry.", "Failed", driver, "Y");
 			}
 		}
+	}
+	
+	
+	public void goToChangeAddress() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(customerHeader)){
+				clickOnElement("Home Menu Page", "Change Address field", changeAddress);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Change Address from Menu", "Menu Change Address selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("SelectChange Address from Menu", "Could not select Menu Change Address", "Failed", driver, "Y");
+			}
+		}
+		
 	}
 }

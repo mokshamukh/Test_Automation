@@ -452,14 +452,15 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 			if (isOptionalElementPresent(allRelationshipNameCheckBoc)){
 				clickOnElement("Change Name Page", "All relationships will reflect name changes Check Box", allRelationshipNameCheckBoc);
 				clickOnElement("Change Name Page", "Save", saveButton);
+				Thread.sleep(1000);
 				
 			}
 			if (isElementPresent(searchLabel)){
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
-				switchToDefaultContent();
 				stepResult = true;
-				
 			}
+			
+			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToDefaultContent();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
