@@ -356,7 +356,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				Thread.sleep(2000);
 				sPortfolioNo=getElementAttribute("New Portfolio Page", "Portfolio No",  portfolioTextbox,"value");
 				if(sPortfolioNo != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Portfolio_Portfolio", rowNo, sPortfolioNo);				
+					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Portfolio_No", rowNo, sPortfolioNo);				
 				
 				if (!sPortfolioTypeCode.equals("")) {
 					enterText("New Portfolio Page", "Portfolio Type", portfolioTypeCode, sPortfolioTypeCode);

@@ -220,5 +220,246 @@ public class PremierCommonNavigation extends PremierTest{
 
 		
 	}
+	public void portfolioCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sPortflioInquireFlag) throws Exception{
+		premierHomeMenuPage.portfolioMenu();
+		premierHomeMenuPage.portfolioNew();
+		Thread.sleep(6000);
+		String strPortfolioTaxNumber  = tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1");
+		String[] strPortfolioTaxNumber_Split = strPortfolioTaxNumber.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioTaxNumber_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1").split("\\|\\|"))[i];
+			if (i>2) {
+				premierPortfolioNew.clickAddNameLink();
+			}
+			premierPortfolioNew.portfolioSearchCustomer(sTaxIdentification,i+1);
+		}
+		if (!tc_Test_Data.get(iTDRow).get("Portfolio_Address1").equals("")) {
+			premierPortfolioNew.portfolioSearchAddress(tc_Test_Data.get(iTDRow).get("Portfolio_Address1"));
+		}
+		premierPortfolioNew.portfolioCustomerDetails(tc_Test_Data.get(iTDRow).get("Portfolio_DeliveryPoint"),tc_Test_Data.get(iTDRow).get("Portfolio_BranchRegion"),tc_Test_Data.get(iTDRow).get("Portfolio_AccountingBranch"));
+		//premierPortfolioNew.portfolioNew_PossibleDuplicate();
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {	
+			if(tc_Test_Data.get(iTDRow).get("Portfolio_Relationship").contains("||")) {
+				sPortfolioRelationship = (tc_Test_Data.get(iTDRow).get("Portfolio_Relationship").split("\\|\\|"))[i];
+			}else {
+				sPortfolioRelationship = tc_Test_Data.get(iTDRow).get("Portfolio_Relationship");
+			}
+			premierPortfolioNew.portfolioNew_NameScreen(sPortfolioRelationship,i+1);
+		}
+		premierPortfolioNew.clickOnNextButton();
+		premierPortfolioNew.portfolioNew_CodesScreen(tc_Test_Data.get(iTDRow).get("Portfolio_PortfolioTypeCode"),tc_Test_Data.get(iTDRow).get("Portfolio_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Portfolio_MiscellaneousCode"),testdataFile_Path, sTestCase, iTDRow+1);
+		premierPortfolioNew.portfolioFinishButton();
+		if (sPortflioInquireFlag.equalsIgnoreCase("Y")){
+			//need to create 
+			//new PremierCommonNavigation().portfolioInquiry(sLName, sTaxIdentification, sName, "", "", sAddress1, sAddress2, sZipCode);
+		}
+	}
+	
+	public void portfolioCreationWithCustomer(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sPortflioInquireFlag) throws Exception{
+		premierHomeMenuPage.portfolioMenu();
+		premierHomeMenuPage.portfolioNew();
+		Thread.sleep(6000);
+		String strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Portfolio_Name1");
+		String[] strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sName = strPortfolioCustName_Split[i];
+			sTaxIDCode = (tc_Test_Data.get(iTDRow).get("Portfolio_TaxCode1").split("\\|\\|"))[i];
+			sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Portfolio_TaxNumber1").split("\\|\\|"))[i];
+			sDOB = (tc_Test_Data.get(iTDRow).get("Portfolio_DOB1").split("\\|\\|"))[i];
+			if (i>2) {
+				premierPortfolioNew.clickAddNameLink();
+			}
+			premierPortfolioNew.portfolioCustomerName(sName,sTaxIDCode,sTaxIdentification,sDOB,i+1);
+		}
+		premierPortfolioNew.portfolioCustomerAddress(tc_Test_Data.get(iTDRow).get("Portfolio_Address1"),tc_Test_Data.get(iTDRow).get("Portfolio_Address2"),tc_Test_Data.get(iTDRow).get("Portfolio_CityStateZip"));
+		premierPortfolioNew.portfolioCustomerDetails(tc_Test_Data.get(iTDRow).get("Portfolio_DeliveryPoint"),tc_Test_Data.get(iTDRow).get("Portfolio_BranchRegion"),tc_Test_Data.get(iTDRow).get("Portfolio_AccountingBranch"));
+		premierPortfolioNew.portfolioNew_PossibleDuplicate_NewCustomer();
+		
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			if(tc_Test_Data.get(iTDRow).get("Portfolio_Relationship").contains("||")) {
+				sPortfolioRelationship = (tc_Test_Data.get(iTDRow).get("Portfolio_Relationship").split("\\|\\|"))[i];
+			}else {
+				sPortfolioRelationship = tc_Test_Data.get(iTDRow).get("Portfolio_Relationship");
+			}
+			if(tc_Test_Data.get(iTDRow).get("Portfolio_NameFormatCode").contains("||")) {
+				sPortfolioNameFormatCode = (tc_Test_Data.get(iTDRow).get("Portfolio_NameFormatCode").split("\\|\\|"))[i];
+			}else {
+				sPortfolioNameFormatCode = tc_Test_Data.get(iTDRow).get("Portfolio_NameFormatCode");
+			}
+			if(tc_Test_Data.get(iTDRow).get("Portfolio_PhoneNumber").contains("||")) {
+				sPhoneNumber = (tc_Test_Data.get(iTDRow).get("Portfolio_PhoneNumber").split("\\|\\|"))[i];
+			}else {
+				sPhoneNumber = tc_Test_Data.get(iTDRow).get("Portfolio_PhoneNumber");
+			}
+			if(tc_Test_Data.get(iTDRow).get("Portfolio_Email").contains("||")) {
+				sEmail = (tc_Test_Data.get(iTDRow).get("Portfolio_Email").split("\\|\\|"))[i];
+			}else {
+				sEmail = tc_Test_Data.get(iTDRow).get("Portfolio_Email");
+			}
+			premierPortfolioNew.portfolioNew_NameScreenMultipleCust(sPortfolioRelationship,sPortfolioNameFormatCode,sPhoneNumber,sEmail,i+1);
+		}
+		premierPortfolioNew.clickOnNextButton();
+		premierPortfolioNew.portfolioNew_AddressScreen();
+		premierPortfolioNew.portfolioNew_CodesScreen(tc_Test_Data.get(iTDRow).get("Portfolio_PortfolioTypeCode"),tc_Test_Data.get(iTDRow).get("Portfolio_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Portfolio_MiscellaneousCode"),testdataFile_Path, sTestCase, iTDRow+1);
+		premierPortfolioNew.portfolioFinishButton();
+	}
+	public void demandDepositAccountCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sDepositInquireFlag) throws Exception{
+		premierHomeMenuPage.depositsMenu();
+		premierHomeMenuPage.demandDepositsSubMenu();
+		premierHomeMenuPage.newDemandDeposits();
+		premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));								
+		String strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Deposit_Name");
+		String[] strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sName = (tc_Test_Data.get(iTDRow).get("Deposit_Name").split("\\|\\|"))[i];
+			sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Deposit_SearchSSN").split("\\|\\|"))[i];
+			sDepositRelationship = (tc_Test_Data.get(iTDRow).get("Deposit_Relationship").split("\\|\\|"))[i];
+			sDepositStatement = (tc_Test_Data.get(iTDRow).get("Deposit_eStatement").split("\\|\\|"))[i];
+			premierDepositAccounts.newDepositAccount_CustomerScreenSearch(sTaxIdentification,sName,sDepositRelationship,sDepositStatement,i+1);
+		}
+		premierDepositAccounts.newDepositAccount_CustomerScreenDetails(tc_Test_Data.get(iTDRow).get("Deposit_Product"));
+		premierDepositAccounts.newDepositAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"),tc_Test_Data.get(iTDRow).get("Deposit_InitialDeposit"),tc_Test_Data.get(iTDRow).get("Deposit_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitlePrintOption"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitle"),testdataFile_Path, sTestCase, iTDRow+1);
+		premierDepositAccounts.depositFinishButton();//need to update
+		
+		premierHomeMenuPage.accountInquiryDemandDeposits();
+		premierDepositAccounts.searchAccount(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"));	
+		
+		strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Deposit_Name");
+		strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sName = (tc_Test_Data.get(iTDRow).get("Deposit_Name").split("\\|\\|"))[i];
+			sDepositRelationship = (tc_Test_Data.get(iTDRow).get("Deposit_Relationship").split("\\|\\|"))[i];
+			premierDepositAccounts.validateAccountDetails(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"),sName,sDepositRelationship,tc_Test_Data.get(iTDRow).get("Deposit_Product"));
+		}
+		premierDepositAccounts.closeScreen_Image();
+	}
+	public void savingAccountCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sDepositInquireFlag) throws Exception{
+		premierHomeMenuPage.depositsMenu();
+		premierHomeMenuPage.savingsDepositsSubMenu();
+		premierHomeMenuPage.newAccountSavings();
+		premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));								
+		String strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Deposit_Name");
+		String[] strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sName = (tc_Test_Data.get(iTDRow).get("Deposit_Name").split("\\|\\|"))[i];
+			sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Deposit_SearchSSN").split("\\|\\|"))[i];
+			sDepositRelationship = (tc_Test_Data.get(iTDRow).get("Deposit_Relationship").split("\\|\\|"))[i];
+			sDepositStatement = (tc_Test_Data.get(iTDRow).get("Deposit_eStatement").split("\\|\\|"))[i];
+			premierDepositAccounts.newDepositAccount_CustomerScreenSearch(sTaxIdentification,sName,sDepositRelationship,sDepositStatement,i+1);
+		}
+		premierDepositAccounts.newDepositAccount_CustomerScreenDetails(tc_Test_Data.get(iTDRow).get("Deposit_Product"));
+		premierDepositAccounts.newDepositAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"),tc_Test_Data.get(iTDRow).get("Deposit_InitialDeposit"),tc_Test_Data.get(iTDRow).get("Deposit_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitlePrintOption"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitle"),testdataFile_Path, sTestCase, iTDRow+1);
+		premierDepositAccounts.depositFinishButton();//need to update
+		
+		premierHomeMenuPage.accountInquirySavings();
+		premierDepositAccounts.searchAccount(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"));	
+		
+		strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Deposit_Name");
+		strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sName = (tc_Test_Data.get(iTDRow).get("Deposit_Name").split("\\|\\|"))[i];
+			sDepositRelationship = (tc_Test_Data.get(iTDRow).get("Deposit_Relationship").split("\\|\\|"))[i];
+			premierDepositAccounts.validateAccountDetails(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"),sName,sDepositRelationship,tc_Test_Data.get(iTDRow).get("Deposit_Product"));
+		}
+		premierDepositAccounts.closeScreen_Image();
+		
+	}
+	public void certificateAccountCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sDepositInquireFlag) throws Exception{
+		premierHomeMenuPage.depositsMenu();
+		premierHomeMenuPage.certificatesDepositsSubMenu();
+		premierHomeMenuPage.newAccountCertificates();
+		premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));								
+		String strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Deposit_Name");
+		String[] strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sName = (tc_Test_Data.get(iTDRow).get("Deposit_Name").split("\\|\\|"))[i];
+			sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Deposit_SearchSSN").split("\\|\\|"))[i];
+			sDepositRelationship = (tc_Test_Data.get(iTDRow).get("Deposit_Relationship").split("\\|\\|"))[i];
+			sDepositStatement = (tc_Test_Data.get(iTDRow).get("Deposit_eStatement").split("\\|\\|"))[i];
+			premierDepositAccounts.newDepositAccount_CustomerScreenSearch(sTaxIdentification,sName,sDepositRelationship,sDepositStatement,i+1);
+		}
+		premierDepositAccounts.newDepositAccount_CustomerScreenDetails(tc_Test_Data.get(iTDRow).get("Deposit_Product"));
+		premierDepositAccounts.newDepositAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"),tc_Test_Data.get(iTDRow).get("Deposit_InitialDeposit"),tc_Test_Data.get(iTDRow).get("Deposit_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitlePrintOption"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitle"),testdataFile_Path, sTestCase, iTDRow+1);
+		premierDepositAccounts.depositFinishButton();//need to update
+		
+		premierHomeMenuPage.accountInquiryCertificates();
+		premierDepositAccounts.searchAccount(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"));					
+		strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Deposit_Name");
+		strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+		iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+		for (int i = 0; i<iPortfolioCustomerCount;i++) {
+			sName = (tc_Test_Data.get(iTDRow).get("Deposit_Name").split("\\|\\|"))[i];
+			sDepositRelationship = (tc_Test_Data.get(iTDRow).get("Deposit_Relationship").split("\\|\\|"))[i];
+			premierDepositAccounts.validateAccountDetails(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"),sName,sDepositRelationship,tc_Test_Data.get(iTDRow).get("Deposit_Product"));
+		}
+		premierDepositAccounts.closeScreen_Image();
+		
+	}
+	
+	public void loanCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sLoanInquireFlag) throws Exception{
+		premierHomeMenuPage.selectLinesMenu();
+		premierHomeMenuPage.selectNewLine();
+		premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+		 String strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Line_Name");
+         String[] strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|");
+         iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+         for (int i = 0; i<iPortfolioCustomerCount;i++) {
+        	 sLineName = (tc_Test_Data.get(iTDRow).get("Line_Name").split("\\|\\|"))[i];
+        	 sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Line_SearchSSN").split("\\|\\|"))[i];
+             String sLineRelationship = (tc_Test_Data.get(iTDRow).get("Line_Relationship").split("\\|\\|"))[i];
+             String sLineStatement = (tc_Test_Data.get(iTDRow).get("Line_eStatement").split("\\|\\|"))[i];
+             premierLinesNewLine.newLine_CustomerScreen_Search(sTaxIdentification,sLineName,sLineRelationship,sLineStatement,i+1);
+         }
+         premierPortfolioNew.clickOnNextButton();
+         premierLinesNewLine.newLineAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("Line_FinancialStatementNotify"),
+        		 tc_Test_Data.get(iTDRow).get("Line_NextFinDate"),tc_Test_Data.get(iTDRow).get("Line_NextReviewDate"),
+        		 tc_Test_Data.get(iTDRow).get("Line_MaximumCredit"),tc_Test_Data.get(iTDRow).get("Line_MaximumCreditCode"),
+        		 tc_Test_Data.get(iTDRow).get("Line_ResponsibiliytCode"));
+         premierLinesNewLine.newLinesFinishButton();
+         premierHomeMenuPage.selectLineInquiry();
+         premierLinesNewLine.searchLineNumber(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+         //strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Line_Name");
+         //strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+        // iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+         for (int i = 0; i<iPortfolioCustomerCount;i++) {
+        	 sLineName = (tc_Test_Data.get(iTDRow).get("Line_Name").split("\\|\\|"))[i];
+        	 premierLinesNewLine.validateDetailsInLineInquiry(tc_Test_Data.get(iTDRow).get("Portfolio_No"), sLineName);
+         }
+         premierLinesNewLine.closeScreen_Image();
+         
+         premierHomeMenuPage.selectLoansMenu();
+         premierHomeMenuPage.selectNewNote();
+         premierLinesNewLine.searchLineNumber(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+         //strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Line_Name");
+         //strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+         //iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+         for (int i = 0; i<iPortfolioCustomerCount;i++) {
+        	 sLineName = (tc_Test_Data.get(iTDRow).get("Line_Name").split("\\|\\|"))[i];
+        	 sTaxIdentification = (tc_Test_Data.get(iTDRow).get("Line_SearchSSN").split("\\|\\|"))[i];
+             String sLineRelationship = (tc_Test_Data.get(iTDRow).get("Line_Relationship").split("\\|\\|"))[i];
+             String sLineStatement = (tc_Test_Data.get(iTDRow).get("Line_eStatement").split("\\|\\|"))[i];
+             premierLinesNewLine.newLine_CustomerScreen_Search(sTaxIdentification,sLineName,sLineRelationship,sLineStatement,i+1);
+         }
+         premierLinesNewLine.newLine_CustomerProductDetails(tc_Test_Data.get(iTDRow).get("Loan_Product"));
+         premierLoansNewNote.newNoteLoanAcc_CodesScreen(tc_Test_Data.get(iTDRow).get("Loan_NoteNumber"), tc_Test_Data.get(iTDRow).get("Loan_CashProceeds"), tc_Test_Data.get(iTDRow).get("Loan_MaximumCredit"),tc_Test_Data.get(iTDRow).get("Loan_MaximumCreditCode"), tc_Test_Data.get(iTDRow).get("Loan_NoteDate"), tc_Test_Data.get(iTDRow).get("Loan_ContractDate"), tc_Test_Data.get(iTDRow).get("Loan_AccountOpenedMethod"), tc_Test_Data.get(iTDRow).get("Loan_OriginalCreditScore"),tc_Test_Data.get(iTDRow).get("Loan_PaymentReserveOption"), tc_Test_Data.get(iTDRow).get("Loan_OriginalPaymentReserve"), tc_Test_Data.get(iTDRow).get("Loan_InternalPaymentOption"),tc_Test_Data.get(iTDRow).get("Loan_ResponsibilityCode"));
+         premierLoansNewNote.newNoteLoan_PaymentScreen(tc_Test_Data.get(iTDRow).get("Loans_InterestMethod"), tc_Test_Data.get(iTDRow).get("Loans_FirstPaymentDate"), tc_Test_Data.get(iTDRow).get("Loans_PaymentFrequency"),tc_Test_Data.get(iTDRow).get("Loans_FirstInterestPaymentDate"), tc_Test_Data.get(iTDRow).get("Loans_InterestPaymentFrequency"), tc_Test_Data.get(iTDRow).get("Loans_PurposeCode"), tc_Test_Data.get(iTDRow).get("Loans_PaymentCode"), tc_Test_Data.get(iTDRow).get("Loans_ChargeAccount"),tc_Test_Data.get(iTDRow).get("Loans_Rate"), tc_Test_Data.get(iTDRow).get("Loans_RateAdjuster1"), tc_Test_Data.get(iTDRow).get("Loans_RateAdjuster2"),tc_Test_Data.get(iTDRow).get("Loans_PercentofPrimeCode"), tc_Test_Data.get(iTDRow).get("Loans_TotalInterest"));
+         premierLoansNewNote.newNoteLoan_InsuranceScreen(tc_Test_Data.get(iTDRow).get("Loans_Insurance_Plan"), tc_Test_Data.get(iTDRow).get("Loans_Insurance_Premium"), tc_Test_Data.get(iTDRow).get("Loans_Insurance_LineLifeInsuranceOption"),tc_Test_Data.get(iTDRow).get("Loans_Insurance_SimpleInsuranceBillingDay"));
+         premierLoansNewNote.newNoteLoan_ScheduleScreen(tc_Test_Data.get(iTDRow).get("Loan_Schedule_StartDate"), tc_Test_Data.get(iTDRow).get("Loan_Schedule_Frequency"), tc_Test_Data.get(iTDRow).get("Loan_Schedule_Number"),tc_Test_Data.get(iTDRow).get("Loan_Schedule_PIAmount"), tc_Test_Data.get(iTDRow).get("Loan_Schedule_Escrow"), tc_Test_Data.get(iTDRow).get("Loan_Schedule_Rate"), tc_Test_Data.get(iTDRow).get("Loan_Schedule_SuppressPaymentChangeNotice"), tc_Test_Data.get(iTDRow).get("Loan_Schedule_OtherEscrow"));
+         premierLoansNewNote.loanFinishButton();
+         premierHomeMenuPage.loanAccountInquiry();
+         premierDepositAccounts.searchAccount(tc_Test_Data.get(iTDRow).get("Loan_NoteNumber"));
+         for (int i = 0; i<iPortfolioCustomerCount;i++) {
+        	 sLineName = (tc_Test_Data.get(iTDRow).get("Line_Name").split("\\|\\|"))[i];
+        	 premierLoansNewNote.validateDetailsInLoansInquiry(tc_Test_Data.get(iTDRow).get("Loan_NoteNumber"), sLineName);
+         }
+         premierLinesNewLine.closeScreen_Image();
+	}
 }
 
