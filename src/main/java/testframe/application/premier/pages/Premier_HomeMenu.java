@@ -58,7 +58,9 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By accountInquiryLoans =  By.xpath("//a[text()='Loans']/../ul//a[(text()='Account Inquiry')]");
 	public By changeAddress = By.xpath("//a[text()='Change Address']");
 	public By changeAddressTitle= By.xpath("//div[text()='Customer - Address - Change Address']");		
-			
+	public By safeDepositBox = By.xpath("//a[text()='Safe Deposit Box']");
+	public By newAccountSafeDepositBox = By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'New Account')]");
+	
 
 
 	
@@ -837,5 +839,48 @@ public class Premier_HomeMenu extends CommonLibrary {
 			}
 		}
 		
+	}
+	
+	public void goToSafeDepositBox() throws Exception{
+		boolean stepResult = false;
+		try {
+				clickOnElement("Home Menu Page", "Safe Deposit Box link", safeDepositBox);
+				stepResult = true;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Safe Deposit Box from Menu", "Safe Deposit Box clicked Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Safe Deposit Box from Menu", "Could not click on Safe Deposit Box", "Failed", driver, "Y");
+			}
+		}
+
+	}
+
+
+	public void goToNewAccountSafeDepositBox() throws Exception{
+		boolean stepResult = false;
+		try {
+			clickOnElement("New Account - Safe Deposit Box", "New Account - Safe Deposit Box link", newAccountSafeDepositBox);
+			stepResult = true;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("New Account - Safe Deposit Box from Menu", "New Account - Safe Deposit Box clicked Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("New Account - Safe Deposit Box from Menu", "Could not click on New Account - Safe Deposit Box", "Failed", driver, "Y");
+			}
+		}
+
 	}
 }
