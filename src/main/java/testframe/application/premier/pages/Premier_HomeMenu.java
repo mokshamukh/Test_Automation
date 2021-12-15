@@ -60,6 +60,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By changeAddressTitle= By.xpath("//div[text()='Customer - Address - Change Address']");		
 	public By safeDepositBox = By.xpath("//a[text()='Safe Deposit Box']");
 	public By newAccountSafeDepositBox = By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'New Account')]");
+	public By accountInquirySDBDeposits = By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'Account Inquiry')]");
 	
 
 
@@ -883,4 +884,25 @@ public class Premier_HomeMenu extends CommonLibrary {
 		}
 
 	}
+	
+	public void accountInquirySDB() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(safeDepositBox)){
+				clickOnElement("Home Page", "Account Inquiry Safe Deposits Box",accountInquirySDBDeposits );
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Safe Deposit Box Menu", "Account Inquiry from Safe Deposit Box menu selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Safe Deposit Box Menu", "Could not select Account Inquiry from Safe Deposit Box menu", "Failed", driver, "Y");
+			}
+		}}
 }

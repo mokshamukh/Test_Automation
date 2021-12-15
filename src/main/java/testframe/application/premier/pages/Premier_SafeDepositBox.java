@@ -11,8 +11,8 @@ import testframe.common.utilities.ExcelReader;
 
 public class Premier_SafeDepositBox extends CommonLibrary{
 	public String sAccountNo;
-	
-	
+
+
 	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By ssnSearch = By.xpath("//input[@name='TaxID']");
 	public By submitSearch = By.xpath("//button[text()='Submit']");
@@ -25,28 +25,34 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By accountSearch = By.xpath("//td[contains(text(),'Account Number:')]/following-sibling::td/input");
 	public By closeScreenImg = By.xpath("//img[contains(@title,'Close')]");
 	String search1 = "(//img[@title='Search'])[%s]";
-	
+
 	public By newDDHeader =  By.xpath("//td[text()='New Demand Deposit']");
 	public By customerPageTitle =  By.xpath("//a[text()='Step 2 - Customer']");	
 	String accountNameList =  "(//select[contains(@name,'RelatedToIdTMP')])[%s]";
 	String relationshipList =  "(//select[contains(@name,'RelationshipCode')])[%s]";
-	String eStatementList =  "(//select[contains(@name,'EmailAddrIndicator1')])[%s]";
-	public By productList =  By.xpath("//select[contains(@name,'ProductNumber')]");
 	public By codesPageTitle =  By.xpath("//a[text()='Step 3 - Codes']");
 	public By nextAvailableLink = By.xpath("//u[text()='Next Available']");
 	public By accountNumberTextbox =  By.xpath("//td[contains(text(),'Account Number:')]/following-sibling::td/input[contains(@id,'AccountNumber')]");
-	public By initialDepositTextbox =  By.xpath("//td[contains(text(),'Initial Deposit:')]/following-sibling::td/input[contains(@id,'InitialDeposit')]");
-	public By responsibilityCodeInput =  By.xpath("(//input[contains(@name,'ResponsibilityCode')])[1]");
-	public By responsibilityCodeButton =  By.xpath("(//input[contains(@name,'ResponsibilityCode')])[3]");
-	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
-	public By accountTitlePrintOptionList = By.xpath("//select[contains(@name,'AccountTitleOption')]");
-	public By accountTitleTextbox =  By.xpath("//td[contains(text(),'Account Title:')]/following-sibling::td/input[contains(@id,'AccountTitle')]");
-	//public By depositInquiryHeader = By.xpath("//td[contains(text(),'Demand Deposit')]");
-	String depositInquiryHeader =  "//td[contains(text(),'%s')]";
-	public By productInquiryPage = By.xpath("//td[contains(text(),'Product:')]/following-sibling::td[1]");
+	public By rentCodeButton =  By.xpath("(//td/input[contains(@id,'BoxRentCode')])[3]");
+	public String selectRentCode =  "//select[contains(@id,'BoxRentCode')]/option[contains(text(),'%s')]";
+	public By selectBillingMethod =  By.xpath("//select[contains(@id,'BillingCode')]");
+	public By chargeAccount =  By.xpath("//input[contains(@id,'ChargeAccountNumber')]");
+	public By selectBillingFrequency =  By.xpath("//select[contains(@id,'BillingFrequency')]");
+	public By lastBillingDate =  By.xpath("//input[contains(@id,'NextBillingDate')]");
 	String accountNameInquiryPage =  "//td//u[contains(text(),'%s')]";
 	String relationshipInquiryPage =  "//td[contains(text(),'%s')]";
-	
+
+
+
+	//public By depositInquiryHeader = By.xpath("//td[contains(text(),'Demand Deposit')]");
+	String sdbInquiryHeader =  "//td[contains(text(),'%s')]";
+
+	public By lastBillingDateText = By.xpath("//td[text()='Last Billing Date:']/following-sibling::td");
+	public By billingFrequencyText = By.xpath("//td[text()='Billing Frequency:']/following-sibling::td");
+	public By billingMethodText = By.xpath("td[text()='Billing Method:']/following-sibling::td");
+
+
+
 	String depositChangeHeader = "//a[contains(text(),'%s')]";
 	public By warningTextbox =  By.xpath("//td[contains(text(),'Warning:')]/following-sibling::td/input[contains(@name,'Warning')]");
 	public By statusCodeList =  By.xpath("//td[contains(text(),'Status Code:')]/following-sibling::td/select[contains(@name,'/StatusCode')]");
@@ -60,80 +66,79 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By expandWarningInquiryPage =  By.xpath("//img[@id='WarningsArrow']");
 	public By warningInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
 	public By transRestrictionCodeInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
-	
-	
-	
+
+
+
 	public Premier_SafeDepositBox(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 	}
-	
-	public void newDepositAccount_CustomerScreen(String sName, String sDepositRelationship, String sDepositStatement, int CustomerCount) throws Exception{
+
+	public void newSDBAccount_CustomerScreen(String sName, String sRelationship,  int CustomerCount) throws Exception{
 		boolean stepResult = false;
 		try {
-				if(isElementPresent(customerPageTitle)) {
-					selectElementByVisibleText("New Deposit Page", "Name Field", getDynamicElement("Name Field",accountNameList,Integer.toString(CustomerCount)), sName);
-					Thread.sleep(2000);
-					selectElementByVisibleText("New Deposit Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sDepositRelationship);
-					Thread.sleep(2000);
-					selectElementByVisibleText("New Deposit Page", "eStatement Field", getDynamicElement("eStatement Field",eStatementList,Integer.toString(CustomerCount)), sDepositStatement);
-					Thread.sleep(2000);
-					stepResult = true;
-				}
+			if(isElementPresent(customerPageTitle)) {
+				selectElementByVisibleText("New Safe Deposit Box Page", "Name Field", getDynamicElement("Name Field",accountNameList,Integer.toString(CustomerCount)), sName);
+				//Thread.sleep(2000);
+				selectElementByVisibleText("New Safe Deposit Box Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sRelationship);
+				//Thread.sleep(2000);
+				stepResult = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Deposit Account Customer Screen", "Customer Details entered on New Deposit Account Customer screen Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Safe Deposit Box Account Customer Screen", "Customer Details entered on New Safe Deposit Box Account Customer screen Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Deposit Account Customer Screen", "Could not entered Customer details", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Safe Deposit Box Account Customer Screen", "Could not entered Customer details", "Failed",
 						driver, "Y");
 			}
-		}}
-	public void newDepositAccount_CustomerScreenSearch(String sSN,String sName, String sDepositRelationship, String sDepositStatement, int CustomerCount) throws Exception{
+		}
+	}
+
+	public void newSDBAccount_CustomerScreenSearch(String sSN,String sName, String sRelationship, int CustomerCount) throws Exception{
 		boolean stepResult = false;
 		try {
-				if(isElementPresent(customerPageTitle)) {
-					clickOnElement("New Deposit Page", "Search Icon", getDynamicElement("Search Icon",search1,Integer.toString(CustomerCount)));
-					switchToWindowWithTitleContaining("Name Search");
-					driver.switchTo().frame("bottom");
-					new Premier_CustomerContact(driver).searchSSN(sSN);
-					
-					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
-					driver.switchTo().frame("Main");
-					
-					selectElementByVisibleText("New Deposit Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sDepositRelationship);
-					Thread.sleep(2000);
-					selectElementByVisibleText("New Deposit Page", "eStatement Field", getDynamicElement("eStatement Field",eStatementList,Integer.toString(CustomerCount)), sDepositStatement);
-					Thread.sleep(2000);
-					stepResult = true;
-				}
+			if(isElementPresent(customerPageTitle)) {
+				clickOnElement("New Safe Deposit Box Page", "Search Icon", getDynamicElement("Search Icon",search1,Integer.toString(CustomerCount)));
+				switchToWindowWithTitleContaining("Name Search");
+				driver.switchTo().frame("bottom");
+				new Premier_CustomerContact(driver).searchSSN(sSN);
+
+				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				driver.switchTo().frame("Main");
+
+				selectElementByVisibleText("New Safe Deposit Box Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sRelationship);
+				Thread.sleep(1500);
+
+				stepResult = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search Customer on New Deposit Account Customer Screen", "Customer Details Searched on New Deposit Account Customer screen Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Search Customer on New Safe Deposit Box Account Customer Screen", "Customer Details Searched on New Safe Deposit Box Account Customer screen Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search Customer on New Deposit Account Customer Screen", "Could not Searched Customer details", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Search Customer on New Safe Deposit Box Account Customer Screen", "Could not Searched Customer details", "Failed",
 						driver, "Y");
 			}
-		}}
-	public void newDepositAccount_CustomerScreenDetails(String sProduct) throws Exception{
+		}
+	}
+
+	public void clickOnNext() throws Exception{
 		boolean stepResult = false;
 		try {
-				if(isElementPresent(customerPageTitle)) {
-					selectElementByVisibleText("New Deposit Page", "Product Field", productList, sProduct);
-					Thread.sleep(1000);
-					clickOnElement("New Deposit Page", "Next Button", nextButton);
-					stepResult = true;
-				}
+			if(isElementPresent(customerPageTitle)) {
+				clickOnElement("New Deposit Page", "Next Button", nextButton);
+				stepResult = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -147,7 +152,8 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 						driver, "Y");
 			}
 		}}
-	public void newDepositAccount_CodesScreen(String sDepositAccntNo, String sInitialDeposit,String sResponsibilityCode,String sAccountTitlePrintOption,String sAccountTitle,String excelFilePath, String sheetName, int rowNo) throws Exception {
+	public void newSDBAccount_CodesScreen(String sAccountNum, String sRentCode,String sBillingMethod,String sChargeAccount,
+			String sBillingFrequency,String sLastBillingDate,String excelFilePath, String sheetName, int rowNo) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(codesPageTitle)) {
@@ -157,32 +163,37 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				sAccountNo=getElementAttribute("New DD Account Page", "Account No",  accountNumberTextbox,"value");
 				if(sAccountNo != "")
 					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Deposit_AccountNumber", rowNo, sAccountNo);				
-				*/
-				if (!sDepositAccntNo.equals("")) {
-					enterText("New Deposit Account Page", "Account Number", accountNumberTextbox, sDepositAccntNo);
+				 */
+				if (!sAccountNum.equals("")) {
+					enterText("New Safe Deposit Box Account Page", "Account Number", accountNumberTextbox, sAccountNum);
 				}				
-				if (!sInitialDeposit.equals("")) {
-					enterText("New Deposit Account Page", "Initial Deposit Type", initialDepositTextbox, sInitialDeposit);
-				}
-				if (!sResponsibilityCode.equals("")) {
-					clickOnElement("New Deposit Account Page", "Responsibility Code Button",responsibilityCodeButton);
+				if (!sRentCode.equals("")) {
+					clickOnElement("New Safe Deposit Box Account Page", "Rent Code Button",rentCodeButton);
 					Thread.sleep(1000);
-					clickOnElement("New Deposit Account Page", "Responsibility Code list",getDynamicElement("Responsibility Code list",responsibilityCodeList,sResponsibilityCode));
+					clickOnElement("New Safe Deposit Box Account Page", "Rent Code list",getDynamicElement("Responsibility Code list",selectRentCode,sRentCode));
 				}
-				if (!sAccountTitlePrintOption.equals("")) {
-					selectElementByVisibleText("New Deposit Account Page", "Account Title Print Option Field", accountTitlePrintOptionList, sAccountTitlePrintOption);
+
+				if (!sBillingMethod.equals("")) {
+					selectElementByVisibleText("New Deposit Account Page", "Billing Method Field", selectBillingMethod, sBillingMethod);
 				}
-				if (!sAccountTitle.equals("")) {
-					enterText("New Deposit Account Page", "Account Title Code", accountTitleTextbox, sAccountTitle);
+
+				if (!sChargeAccount.equals("")) {
+					enterText("New Safe Deposit Box Account Page", "Charge Account Number", chargeAccount, sChargeAccount);
 				}
-				waitElement(5000);
+				if (!sBillingFrequency.equals("")) {
+					selectElementByVisibleText("New Safe Deposit Box Account Page", "Billing Frequency Field", selectBillingFrequency, sBillingFrequency);
+				}
+				if (!sLastBillingDate.equals("")) {
+					enterText("New Safe Deposit Box Account Page", "Account Title Code", lastBillingDate, sLastBillingDate);
+				}
+				waitElement(1500);
 				//clickOnElement("New DD Account Page", "Finish Button", finishButton);
 				//Thread.sleep(2000);
 				//driver.switchTo().defaultContent();
 				//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 				stepResult = true;
 			}					
-			}catch(Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			if (stepResult == true) {
@@ -192,18 +203,20 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Could not entered details on Codes Screen", "Failed",driver, "Y");
 			}
-			
-		}}
-	public void depositFinishButton() throws Exception {
+
+		}
+	}
+
+	public void sdbFinishButton() throws Exception {
 		boolean stepResult = false;
 		try {
-			clickOnElement("New Deposit Page", "Finish Button", finishButton);
+			clickOnElement("New Safe Deposit Box Page", "Finish Button", finishButton);
 			Thread.sleep(5000);
-			validateElementPresent("New Deposit Page", "Search Title", searchTitle2);
+			validateElementPresent("New Safe Deposit Box Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
 			//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 			stepResult = true;
-			
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
@@ -214,18 +227,19 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
 			}	
-		}}
+		}
+	}
 	public void searchAccount(String accountNo) throws Exception{
 		boolean stepResult = false;
 		try {
-				waitElement(6000);
-				driver.switchTo().frame("Main");
-				if (isElementPresent(searchTitle2)) {
-					clickOnElement("Search Account Page", "Account Number", accountSearch);
-					enterText("Search Account Page", "Account Number", accountSearch, accountNo);
-					clickOnElement("Search Account Page", "Submit", submitSearch);
-					stepResult = true;
-				}	
+			waitElement(2500);
+			driver.switchTo().frame("Main");
+			if (isElementPresent(searchTitle2)) {
+				clickOnElement("Search Account Page", "Account Number", accountSearch);
+				enterText("Search Account Page", "Account Number", accountSearch, accountNo);
+				clickOnElement("Search Account Page", "Submit", submitSearch);
+				stepResult = true;
+			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -239,41 +253,49 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 						driver, "Y");
 			}
 		}}
-	public void validateAccountDetails(String sAccountNumber,String customerName, String sCustomerRelationship, String sProduct) throws Exception {
+	public void validateAccountDetails(String sAccountNumber,String customerName,String sCustomerRelationship,String sLastBillingDate, String sBillingFrequency,
+			String sBillingMethod) throws Exception {
 		boolean stepResult = false;
 		try {
 			switchToWithinFrameWithName("bottom");
-			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){
+			if (isElementPresent(getDynamicElement("Account Number Header field",sdbInquiryHeader,sAccountNumber))){
+
 				validateTextContains("Account Inquiry" , "Name field", getDynamicElement("Name field",accountNameInquiryPage,customerName), customerName);
 				validateTextContains("Account Inquiry" , "Relationship field", getDynamicElement("Relationship field",relationshipInquiryPage,sCustomerRelationship), sCustomerRelationship);
-				//validateTextContains("Account Inquiry" , "Product field", productInquiryPage, sProduct);
+
+				if (!sLastBillingDate.equals(""))
+					validateTextEquals("Account Inquiry" , "Last Billing Date field", lastBillingDateText, sBillingMethod);
+				if (!sBillingFrequency.equals(""))
+					validateTextEquals("Account Inquiry" , "Billing Frequency field", billingFrequencyText, sBillingMethod);
+				if (!sBillingMethod.equals(""))
+					validateTextEquals("Account Inquiry" , "Billing Method field", billingMethodText, sBillingMethod);
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
 				stepResult = true;
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Could not Validated Customer Details on Customer Inquiry page" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Could not Validate Account Details on Account Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
 	public void closeScreen_Image() throws Exception {
 		boolean stepResult = false;
 		try {
 			clickOnElement("Inquiry Page", "Close Button", closeScreenImg);
-			Thread.sleep(5000);
+			Thread.sleep(1500);
 			validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
 			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 			stepResult = true;
-			
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
@@ -294,7 +316,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 			driver.switchTo().defaultContent();
 			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
 			stepResult = true;
-			
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
@@ -310,7 +332,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
-				
+
 				if (!sAccountWarning.equals("")) {
 					enterText("Change Account Page", "Warning field", warningTextbox, sAccountWarning);
 				}
@@ -328,7 +350,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 					selectElementByVisibleText("Change Account Page", "statement Cycle Field", statementCycleList, statementCycle);
 				}
 				stepResult = true;
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -348,7 +370,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 			waitElement(5000);
 			clickOnElement("Account Inquiry Page", "Codes Tab Field",codesTab);	
 			switchToWithinFrameWithName("bottom");
-			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){			
+			if (isElementPresent(getDynamicElement("Account Number Header field",sdbInquiryHeader,sAccountNumber))){			
 				validateTextContains("Account Inquiry" , "Statement Cycle field", statementCycleInquiryPage, statementCycle);
 				validateTextContains("Account Inquiry" , "Status Code field",statusCodeInquiryPage, sAccountStatusCode);
 				waitElement(2000);
@@ -360,7 +382,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
 				stepResult = true;
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
