@@ -601,7 +601,7 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");				
+				new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");				
 				premierLogOff.logoffApplication();				
 				break;
 
@@ -672,6 +672,7 @@ public class PremierTest extends ApplicationBase {
 				premierLogOff.logoffApplication();
 
 				break;
+			
 			case "PREMIER_TC026":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
@@ -720,7 +721,7 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().savingAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+				new PremierCommonNavigation().savingAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");	
 				premierLogOff.logoffApplication();				
 				break;
 
@@ -839,7 +840,7 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().certificateAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+				new PremierCommonNavigation().certificateAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");	
 				premierLogOff.logoffApplication();				
 				break;
 
@@ -1009,11 +1010,11 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+				new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");	
 				premierLogOff.logoffApplication();
 				break;
 				
-			case "PREMIER_TC037":
+			case "PREMIER_TC044":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
@@ -1062,7 +1063,7 @@ public class PremierTest extends ApplicationBase {
 				break;
 				
 			
-			case "PREMIER_TC038":
+			case "PREMIER_TC045":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
@@ -1109,12 +1110,53 @@ public class PremierTest extends ApplicationBase {
 				premierSafeDepositBox.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;
+			
+			case "PREMIER_TC046":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);			
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+				}
+				new PremierCommonNavigation().safeDepositBoxCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");				
+				premierLogOff.logoffApplication();				
+				break;
+				
+			
+			case "PREMIER_TC047":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				String sAccountNumberUpdate = tc_Test_Data.get(iTDRow).get("ChangeSDB_AccountNumber");
+				if(sAccountNumberUpdate.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().safeDepositBoxCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumberUpdate = tc_Test_Data.get(iTDRow).get("SDB_AccountNumber");
+					premierHomeMenuPage.goToSafeDepositBox();
+					
+				}
+				premierHomeMenuPage.goToSafeDepositBox();
+				premierHomeMenuPage.goToChangeSDBAccount();
+				premierSafeDepositBox.searchAccount(sAccountNumberUpdate);	
+				premierSafeDepositBox.changeAccountDetails(sAccountNumberUpdate, tc_Test_Data.get(iTDRow).get("ChangeSDB_CurrentRentDue"), 
+						tc_Test_Data.get(iTDRow).get("ChangeSDB_LastBillingDate"), tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingFrequency"),
+						tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingMethod"), tc_Test_Data.get(iTDRow).get("ChangeSDB_ChargeAccountNumber"), 
+						tc_Test_Data.get(iTDRow).get("ChangeSDB_BoxRentCode"));
+				premierSafeDepositBox.saveButton();
+				
+				premierHomeMenuPage.accountInquirySDB();
+				premierSafeDepositBox.searchAccount(sAccountNumberUpdate);
+				premierSafeDepositBox.validateAccountDetailsAfterChange(sAccountNumberUpdate,tc_Test_Data.get(iTDRow).get("ChangeSDB_CurrentRentDue"),new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeSDB_LastBillingDate"),"MM/dd/yyyy","MMM dd, yyyy"),tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingFrequency"),tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingMethod"));
+				premierSafeDepositBox.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
 
 			}
+			
+			
 			new HTMLReportHelper().HtmlReportFooter();
-			
-			
-		
 		}
 		driver.close();
 	}

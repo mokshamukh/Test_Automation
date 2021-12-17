@@ -61,7 +61,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By safeDepositBox = By.xpath("//a[text()='Safe Deposit Box']");
 	public By newAccountSafeDepositBox = By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'New Account')]");
 	public By accountInquirySDBDeposits = By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'Account Inquiry')]");
-	
+	public By changeAccountSDB =  By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'Change Account')]");
 
 
 	
@@ -905,4 +905,26 @@ public class Premier_HomeMenu extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Safe Deposit Box Menu", "Could not select Account Inquiry from Safe Deposit Box menu", "Failed", driver, "Y");
 			}
 		}}
+
+	public void goToChangeSDBAccount() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(safeDepositBox)){
+				clickOnElement("Home Page", "Change Account Safe Deposit Box",changeAccountSDB );
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Change Account from Safe Deposit Box Menu", "Change Account from Safe Deposit Box menu selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Change Account from Safe Deposit Box Menu", "Could not select Change Account from  menu", "Failed", driver, "Y");
+			}
+		}}
+	
 }
