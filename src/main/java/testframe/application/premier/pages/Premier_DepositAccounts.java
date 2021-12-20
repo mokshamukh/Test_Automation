@@ -306,7 +306,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
 			}	
 		}}
-	public void changeAccountDetails(String sAccountNumber,String sAccountWarning, String sAccountStatusCode, String sAccntsTransRestrictionCode, String statementCycle) throws Exception {
+	public void changeAccountCodeDetails(String sAccountNumber,String sAccountWarning, String sAccountStatusCode, String sAccntsTransRestrictionCode, String statementCycle) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
@@ -349,14 +349,20 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			clickOnElement("Account Inquiry Page", "Codes Tab Field",codesTab);	
 			switchToWithinFrameWithName("bottom");
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){			
-				validateTextContains("Account Inquiry" , "Statement Cycle field", statementCycleInquiryPage, statementCycle);
-				validateTextContains("Account Inquiry" , "Status Code field",statusCodeInquiryPage, sAccountStatusCode);
+				if (!statementCycle.equals(""))
+					validateTextContains("Account Inquiry" , "Statement Cycle field", statementCycleInquiryPage, statementCycle);
+				if (!sAccountStatusCode.equals(""))
+					validateTextContains("Account Inquiry" , "Status Code field",statusCodeInquiryPage, sAccountStatusCode);
 				waitElement(2000);
-				clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field",expandWarningInquiryPage);
-				waitElement(1000);
-				validateTextContains("Account Inquiry" , "Warning field",warningInquiryPage, sAccountWarning);
-				sAccntsTransRestrictionCode = ((sAccntsTransRestrictionCode.split("\\["))[0]).trim();
-				validateTextContains("Account Inquiry" , "Trans Restriction Code field",transRestrictionCodeInquiryPage, sAccntsTransRestrictionCode);							
+				if (!sAccountWarning.equals("")){
+					clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field",expandWarningInquiryPage);
+					waitElement(1000);
+					validateTextContains("Account Inquiry" , "Warning field",warningInquiryPage, sAccountWarning);
+				}
+				if (!sAccntsTransRestrictionCode.equals("")){
+					sAccntsTransRestrictionCode = ((sAccntsTransRestrictionCode.split("\\["))[0]).trim();
+					validateTextContains("Account Inquiry" , "Trans Restriction Code field",transRestrictionCodeInquiryPage, sAccntsTransRestrictionCode);							
+				}
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
 				stepResult = true;

@@ -60,13 +60,15 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By updateChargeAccount =  By.xpath("//input[contains(@id,'ChargeAccountNumber')]");
 	public By updateBranchNumInput =  By.xpath("(//td/input[contains(@id,'BranchNumber')])[1]");
 	public By updateBranchNumBtn =  By.xpath("(//td/input[contains(@id,'BranchNumber')])[3]");
+	public By updateEscheatDate =  By.xpath("//input[contains(@id,'EscheatDate')]");
 	//public By updateBoxRentCode =  By.xpath("//input[contains(@id,'BoxRentCode')]");
 
 	public By verifyCurrentRentDue =  By.xpath("(//td[text()='Current Rent Due:']/following-sibling::td)[1]");
 	public By verifyLastBillingDate =  By.xpath("(//td[text()='Last Billing Date:']/following-sibling::td)[1]");
 	public By verifyBillingFrequency =  By.xpath("(//td[text()='Billing Frequency:']/following-sibling::td)[1]");
 	public By verifyBillingMethod =  By.xpath("(//td[text()='Billing Method:']/following-sibling::td)[1]");
-
+	public By verifyRentCode =  By.xpath("(//td[text()='Rent Code:']/following-sibling::td)[1]");
+	public By verifyEscheatDate =  By.xpath("(//td[text()='Escheat Date:']/following-sibling::td)[1]");
 
 	public By statusCodeList =  By.xpath("//td[contains(text(),'Status Code:')]/following-sibling::td/select[contains(@name,'/StatusCode')]");
 	public By transactionRestrictionCodeInput =  By.xpath("(//input[contains(@name,'TranRestrictionCode')])[1]");
@@ -340,7 +342,9 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
 			}	
 		}}
-	public void changeAccountDetails(String sAccountNumber,String sCurrentRentDue,String sLastBillingDate, String sBillingFrequency,String sBillingCode, String sChargeAccountNumber, String sBoxRentCode) throws Exception {
+	public void changeAccountCodesDetails(String sAccountNumber,String sCurrentRentDue,String sLastBillingDate, 
+			String sBillingFrequency,String sBillingCode, String sChargeAccountNumber, String sBoxRentCode,
+			String sEscheatDate) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(getDynamicElement("Account Number Header field",sdbChangeHeader,sAccountNumber))){
@@ -375,6 +379,9 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 					clickOnElement("Change Account Page", "Rent Code list",getDynamicElement("Rent Code list",selectRentCode,sBoxRentCode));
 
 				}
+				if (!sEscheatDate.equals("")) {
+					clearAndType("Change Account Page", "Escheat Date field", updateEscheatDate, sEscheatDate);
+				}
 
 				stepResult = true;
 
@@ -391,7 +398,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details" , "Failed", driver, "Y");
 			}
 		}}
-	public void validateAccountDetailsAfterChange(String sAccountNumber,String sVerifyCurrentRentDue, String sVerifyLastBillingDate, String sVerifyBillingFrequency, String sVerifyBillingMethod) throws Exception {
+	public void validateAccountBalancesAfterChange(String sAccountNumber,String sVerifyCurrentRentDue, String sVerifyLastBillingDate, String sVerifyBillingFrequency, String sVerifyBillingMethod) throws Exception {
 		boolean stepResult = false;
 		try {
 			waitElement(2500);
@@ -406,6 +413,37 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 					validateTextEquals("Account Inquiry" , "Billing Frequency field", verifyBillingFrequency, sVerifyBillingFrequency);
 				if (!sVerifyBillingMethod.equals(""))
 					validateTextEquals("Account Inquiry" , "Billing Method field", verifyBillingMethod, sVerifyBillingMethod);
+					
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;
+
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Could not Validated Account Details on Account Inquiry page" , "Failed", driver, "Y");
+			}
+		}}
+	
+	public void validateAccountCodesAfterChange(String sAccountNumber,String sVerifyEscheatDate, String sVerifyRentCode) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(2500);
+			clickOnElement("Account Inquiry Page", "Codes Tab Field",codesTab);	
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field",sdbInquiryHeader,sAccountNumber))){			
+				
+				if (!sVerifyEscheatDate.equals(""))
+					validateTextEquals("Account Inquiry" , "Escheat Date field", verifyEscheatDate, sVerifyEscheatDate);
+				if (!sVerifyRentCode.equals(""))
+					validateTextContains("Account Inquiry" , "Rent Code field", verifyRentCode, ((sVerifyRentCode.split("\\["))[0]).trim());
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
 				stepResult = true;
