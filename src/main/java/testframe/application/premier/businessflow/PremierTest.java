@@ -19,6 +19,7 @@ import testframe.application.premier.pages.Premier_LoansNewNote;
 import testframe.application.premier.pages.Premier_LogOff;
 import testframe.application.premier.pages.Premier_Login;
 import testframe.application.premier.pages.Premier_PortfolioNew;
+import testframe.application.premier.pages.Premier_SafeDepositBox;
 import testframe.common.reporting.HTMLReportHelper;
 import testframe.common.reporting.Log;
 import testframe.common.utilities.DateTimeHelper;
@@ -30,6 +31,7 @@ public class PremierTest extends ApplicationBase {
 
 	int iIteration_count,iPortfolioCustomerCount;
 	String sDepositRelationship,sDepositStatement;
+	String sSDBRelationship,sSDBStatement;
 	String sUserID,sPassword,sCompanyID ,sPassword_Encrypt,sSecretKey,sInstitution,sGroup;
 	String sName,sFName,sLName,sDOB,sTaxIDCode,sTaxIdentification,sAltName,sAltFirstName,sAltLastName,sPhoneNumber,sEmail,
 	sGender,sAddress1,sAddress2,sZipCode,sPortfolioRelationship,sPortfolioNameFormatCode,strPortfolioTaxNumber,sLineName;
@@ -53,6 +55,8 @@ public class PremierTest extends ApplicationBase {
 	static  Premier_LinesNewLine premierLinesNewLine;
 	static  Premier_LoansNewNote premierLoansNewNote;
 	static  Premier_LoansChangeAccount premierLoansChange;
+	static  Premier_SafeDepositBox premierSafeDepositBox;
+
 
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver,String sApplicationName, String sURL,String sTestCase, String sTestDescription,
@@ -72,6 +76,8 @@ public class PremierTest extends ApplicationBase {
 		premierLinesNewLine = new Premier_LinesNewLine(driver);
 		premierLoansNewNote = new Premier_LoansNewNote(driver);
 		premierLoansChange = new Premier_LoansChangeAccount(driver);
+		premierSafeDepositBox = new Premier_SafeDepositBox(driver);
+
 		
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
 		strpathToAppReportFile = sPathToAppReportFolder + "/" + sApplicationName;
@@ -128,9 +134,9 @@ public class PremierTest extends ApplicationBase {
 
 			new HTMLReportHelper().HTMLReportHeader("Premier", sTestCase, sTestDescription);
 
-
+			String sAccountNumber;
 			switch(sTestCase.toUpperCase()){
-
+			
 			case "PREMIER_POC":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
@@ -600,7 +606,7 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");				
+				new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");				
 				premierLogOff.logoffApplication();				
 				break;
 
@@ -608,7 +614,7 @@ public class PremierTest extends ApplicationBase {
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
-				String sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
 				if(sAccountNumber.equals("")) {					
 					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
@@ -622,11 +628,11 @@ public class PremierTest extends ApplicationBase {
 				premierHomeMenuPage.demandDepositsSubMenu();
 				premierHomeMenuPage.changeAccountDemandDeposits();
 				premierDepositAccounts.searchAccount(sAccountNumber);	
-				premierDepositAccounts.changeAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("Deposit_warning"),tc_Test_Data.get(iTDRow).get("Deposit_StatusCode"),tc_Test_Data.get(iTDRow).get("Deposit_TransactionRestrictionCode"),tc_Test_Data.get(iTDRow).get("Deposit_StatementCycle"));
+				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeDeposit_warning"),"","","","","","","","","");
 				premierDepositAccounts.saveButton();
 				premierHomeMenuPage.accountInquiryDemandDeposits();
 				premierDepositAccounts.searchAccount(sAccountNumber);
-				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeDeposit_warning"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatusCode"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_TransactionRestrictionCode"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatementCycle"));
+				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeDeposit_warning"),"","","");
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;
@@ -671,6 +677,7 @@ public class PremierTest extends ApplicationBase {
 				premierLogOff.logoffApplication();
 
 				break;
+			
 			case "PREMIER_TC026":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
@@ -719,7 +726,7 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().savingAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+				new PremierCommonNavigation().savingAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");	
 				premierLogOff.logoffApplication();				
 				break;
 
@@ -741,7 +748,7 @@ public class PremierTest extends ApplicationBase {
 				premierHomeMenuPage.savingsDepositsSubMenu();
 				premierHomeMenuPage.changeAccountSavings();
 				premierDepositAccounts.searchAccount(sAccountNumber);	
-				premierDepositAccounts.changeAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("Deposit_warning"),tc_Test_Data.get(iTDRow).get("Deposit_StatusCode"),tc_Test_Data.get(iTDRow).get("Deposit_TransactionRestrictionCode"),tc_Test_Data.get(iTDRow).get("Deposit_StatementCycle"));
+				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("Deposit_warning"),tc_Test_Data.get(iTDRow).get("Deposit_StatusCode"),tc_Test_Data.get(iTDRow).get("Deposit_TransactionRestrictionCode"),tc_Test_Data.get(iTDRow).get("Deposit_StatementCycle"),"","","","","","");
 				premierDepositAccounts.saveButton();
 				premierHomeMenuPage.accountInquirySavings();
 				premierDepositAccounts.searchAccount(sAccountNumber);
@@ -838,7 +845,7 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().certificateAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+				new PremierCommonNavigation().certificateAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");	
 				premierLogOff.logoffApplication();				
 				break;
 
@@ -861,7 +868,7 @@ public class PremierTest extends ApplicationBase {
 				premierHomeMenuPage.certificatesDepositsSubMenu();
 				premierHomeMenuPage.changeAccountCertificates();
 				premierDepositAccounts.searchAccount(sAccountNumber);	
-				premierDepositAccounts.changeAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("Deposit_warning"),tc_Test_Data.get(iTDRow).get("Deposit_StatusCode"),tc_Test_Data.get(iTDRow).get("Deposit_TransactionRestrictionCode"),tc_Test_Data.get(iTDRow).get("Deposit_StatementCycle"));
+				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("Deposit_warning"),tc_Test_Data.get(iTDRow).get("Deposit_StatusCode"),tc_Test_Data.get(iTDRow).get("Deposit_TransactionRestrictionCode"),tc_Test_Data.get(iTDRow).get("Deposit_StatementCycle"),"","","","","","");
 				premierDepositAccounts.saveButton();
 				premierHomeMenuPage.accountInquiryCertificates();
 				premierDepositAccounts.searchAccount(sAccountNumber);
@@ -1008,7 +1015,7 @@ public class PremierTest extends ApplicationBase {
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
 				}
-				new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+				new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");	
 				premierLogOff.logoffApplication();
 				break;
 				
@@ -1236,7 +1243,288 @@ public class PremierTest extends ApplicationBase {
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();
 				break;
+
+			case "PREMIER_TC050":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+				}			
+				premierHomeMenuPage.goToSafeDepositBox();
+				premierHomeMenuPage.goToNewAccountSafeDepositBox();
+				
+				premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));								
+				
+				String portfolioCustName  = tc_Test_Data.get(iTDRow).get("SDB_Name");
+				String[] portfolioCustName_Split = portfolioCustName.split("\\|\\|"); 
+				iPortfolioCustomerCount = portfolioCustName_Split.length;
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {
+					sName = (tc_Test_Data.get(iTDRow).get("SDB_Name").split("\\|\\|"))[i];
+					sSDBRelationship = (tc_Test_Data.get(iTDRow).get("SDB_Relationship").split("\\|\\|"))[i];
+					
+					
+					premierSafeDepositBox.newSDBAccount_CustomerScreen(sName,sSDBRelationship,i+1);
+				}
+				premierSafeDepositBox.clickOnNext();
+				premierSafeDepositBox.newSDBAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"),
+						tc_Test_Data.get(iTDRow).get("SDB_RentCode"),tc_Test_Data.get(iTDRow).get("SDB_BillingMethod"),
+						tc_Test_Data.get(iTDRow).get("SDB_ChargeAccount"),tc_Test_Data.get(iTDRow).get("SDB_BillingFrequency"),
+						tc_Test_Data.get(iTDRow).get("SDB_LastBillingDate"),testdataFile_Path, sTestCase, iTDRow+1);
+				premierSafeDepositBox.sdbFinishButton();//need to update
+
+				premierHomeMenuPage.accountInquirySDB();
+				premierSafeDepositBox.searchAccount(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"));	
+
+				portfolioCustName  = tc_Test_Data.get(iTDRow).get("SDB_Name");
+				portfolioCustName_Split = portfolioCustName.split("\\|\\|"); 
+				iPortfolioCustomerCount = portfolioCustName_Split.length;
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {
+					sName = (tc_Test_Data.get(iTDRow).get("SDB_Name").split("\\|\\|"))[i];
+					sSDBRelationship = (tc_Test_Data.get(iTDRow).get("SDB_Relationship").split("\\|\\|"))[i];
+					//new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("SDB_LastBillingDate"),"MM/dd/yyyy","MMM dd, yyyy");
+					premierSafeDepositBox.validateAccountDetails(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"),sName,
+							sSDBRelationship,new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("SDB_LastBillingDate"),"MM/dd/yyyy","MMM dd, yyyy"),
+							tc_Test_Data.get(iTDRow).get("SDB_BillingFrequency"),tc_Test_Data.get(iTDRow).get("SDB_BillingMethod"));
+				}
+				premierSafeDepositBox.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
+				
+			
+			case "PREMIER_TC051":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+				}			
+				premierHomeMenuPage.goToSafeDepositBox();
+				premierHomeMenuPage.goToNewAccountSafeDepositBox();
+				
+				premierPortfolioNew.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));								
+				
+				String busPortfolioCustName  = tc_Test_Data.get(iTDRow).get("SDB_Name");
+				String[] busPortfolioCustName_Split = busPortfolioCustName.split("\\|\\|"); 
+				iPortfolioCustomerCount = busPortfolioCustName_Split.length;
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {
+					sName = (tc_Test_Data.get(iTDRow).get("SDB_Name").split("\\|\\|"))[i];
+					sSDBRelationship = (tc_Test_Data.get(iTDRow).get("SDB_Relationship").split("\\|\\|"))[i];
+					
+					
+					premierSafeDepositBox.newSDBAccount_CustomerScreen(sName,sSDBRelationship,i+1);
+				}
+				premierSafeDepositBox.clickOnNext();
+				premierSafeDepositBox.newSDBAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"),
+						tc_Test_Data.get(iTDRow).get("SDB_RentCode"),tc_Test_Data.get(iTDRow).get("SDB_BillingMethod"),
+						tc_Test_Data.get(iTDRow).get("SDB_ChargeAccount"),tc_Test_Data.get(iTDRow).get("SDB_BillingFrequency"),
+						tc_Test_Data.get(iTDRow).get("SDB_LastBillingDate"),testdataFile_Path, sTestCase, iTDRow+1);
+				premierSafeDepositBox.sdbFinishButton();//need to update
+
+				premierHomeMenuPage.accountInquirySDB();
+				premierSafeDepositBox.searchAccount(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"));	
+
+				busPortfolioCustName  = tc_Test_Data.get(iTDRow).get("SDB_Name");
+				busPortfolioCustName_Split = busPortfolioCustName.split("\\|\\|"); 
+				iPortfolioCustomerCount = busPortfolioCustName_Split.length;
+				for (int i = 0; i<iPortfolioCustomerCount;i++) {
+					sName = (tc_Test_Data.get(iTDRow).get("SDB_Name").split("\\|\\|"))[i];
+					sSDBRelationship = (tc_Test_Data.get(iTDRow).get("SDB_Relationship").split("\\|\\|"))[i];
+					//new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("SDB_LastBillingDate"),"MM/dd/yyyy","MMM dd, yyyy");
+					premierSafeDepositBox.validateAccountDetails(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"),sName,
+							sSDBRelationship,new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("SDB_LastBillingDate"),"MM/dd/yyyy","MMM dd, yyyy"),
+							tc_Test_Data.get(iTDRow).get("SDB_BillingFrequency"),tc_Test_Data.get(iTDRow).get("SDB_BillingMethod"));
+				}
+				premierSafeDepositBox.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
+			
+			case "PREMIER_TC052":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);			
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+				}
+				new PremierCommonNavigation().safeDepositBoxCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"Y");				
+				premierLogOff.logoffApplication();				
+				break;
+				
+			
+			case "PREMIER_TC053":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				String sAccountNumberUpdate = tc_Test_Data.get(iTDRow).get("ChangeSDB_AccountNumber");
+				if(sAccountNumberUpdate.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().safeDepositBoxCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumberUpdate = tc_Test_Data.get(iTDRow).get("SDB_AccountNumber");
+					premierHomeMenuPage.goToSafeDepositBox();
+					
+				}
+				premierHomeMenuPage.goToSafeDepositBox();
+				premierHomeMenuPage.goToChangeSDBAccount();
+				premierSafeDepositBox.searchAccount(sAccountNumberUpdate);	
+				premierSafeDepositBox.changeAccountCodesDetails(sAccountNumberUpdate, tc_Test_Data.get(iTDRow).get("ChangeSDB_CurrentRentDue"), 
+						tc_Test_Data.get(iTDRow).get("ChangeSDB_LastBillingDate"), tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingFrequency"),
+						tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingMethod"), tc_Test_Data.get(iTDRow).get("ChangeSDB_ChargeAccountNumber"), 
+						"","");
+				premierSafeDepositBox.saveButton();
+				
+				premierHomeMenuPage.accountInquirySDB();
+				premierSafeDepositBox.searchAccount(sAccountNumberUpdate);
+				premierSafeDepositBox.validateAccountBalancesAfterChange(sAccountNumberUpdate,tc_Test_Data.get(iTDRow).get("ChangeSDB_CurrentRentDue"),new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeSDB_LastBillingDate"),"MM/dd/yyyy","MMM dd, yyyy"),tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingFrequency"),tc_Test_Data.get(iTDRow).get("ChangeSDB_BillingMethod"));
+				premierSafeDepositBox.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
+				
+			case "PREMIER_TC054":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				String sAccntNumberUpdate = tc_Test_Data.get(iTDRow).get("ChangeSDB_AccountNumber");
+				if(sAccntNumberUpdate.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().safeDepositBoxCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccntNumberUpdate = tc_Test_Data.get(iTDRow).get("SDB_AccountNumber");
+					premierHomeMenuPage.goToSafeDepositBox();
+					
+				}
+				premierHomeMenuPage.goToSafeDepositBox();
+				premierHomeMenuPage.goToChangeSDBAccount();
+				premierSafeDepositBox.searchAccount(sAccntNumberUpdate);	
+				premierSafeDepositBox.changeAccountCodesDetails(sAccntNumberUpdate, "","","","","",tc_Test_Data.get(iTDRow).get("ChangeSDB_BoxRentCode"),"");
+				premierSafeDepositBox.saveButton();
+				
+				premierHomeMenuPage.accountInquirySDB();
+				premierSafeDepositBox.searchAccount(sAccntNumberUpdate);
+				premierSafeDepositBox.validateAccountCodesAfterChange(sAccntNumberUpdate,"",tc_Test_Data.get(iTDRow).get("ChangeSDB_BoxRentCode"));
+				premierSafeDepositBox.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
+				
+			case "PREMIER_TC055":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				String sAccntNumUpdate = tc_Test_Data.get(iTDRow).get("ChangeSDB_AccountNumber");
+				if(sAccntNumUpdate.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().safeDepositBoxCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccntNumUpdate = tc_Test_Data.get(iTDRow).get("SDB_AccountNumber");
+					premierHomeMenuPage.goToSafeDepositBox();
+					
+				}
+				premierHomeMenuPage.goToSafeDepositBox();
+				premierHomeMenuPage.goToChangeSDBAccount();
+				premierSafeDepositBox.searchAccount(sAccntNumUpdate);	
+				premierSafeDepositBox.changeAccountCodesDetails(sAccntNumUpdate, "","","","","","",tc_Test_Data.get(iTDRow).get("ChangeSDB_EscheatDate"));
+				premierSafeDepositBox.saveButton();
+				
+				premierHomeMenuPage.accountInquirySDB();
+				premierSafeDepositBox.searchAccount(sAccntNumUpdate);
+				premierSafeDepositBox.validateAccountCodesAfterChange(sAccntNumUpdate,new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeSDB_EscheatDate"),"MM/dd/yyyy","MMM dd, yyyy"),"");
+				premierSafeDepositBox.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
+				
+			case "PREMIER_TC065":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.demandDepositsSubMenu();
+				premierHomeMenuPage.changeAccountDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,"",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatusCode"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_TransactionRestrictionCode"),"","","","","","","");
+				premierDepositAccounts.saveButton();
+				premierHomeMenuPage.accountInquiryDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,"",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatusCode"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_TransactionRestrictionCode"),"");
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
+				
+			case "PREMIER_TC066":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.demandDepositsSubMenu();
+				premierHomeMenuPage.changeAccountDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,"","","","","","","",tc_Test_Data.get(iTDRow).get("ChangeDeposit_SuspendedStatementCycle")
+						,tc_Test_Data.get(iTDRow).get("ChangeDeposit_SuspendedInterest"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_SuspendedDepositRateIndex"));
+				premierDepositAccounts.saveButton();
+				/*premierHomeMenuPage.accountInquiryDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeDeposit_warning"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatusCode"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_TransactionRestrictionCode"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatementCycle"));
+				premierDepositAccounts.closeScreen_Image();*/
+				premierLogOff.logoffApplication();				
+				break;
+
+				
+			case "PREMIER_TC067":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.demandDepositsSubMenu();
+				premierHomeMenuPage.changeAccountDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,"","","",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatementCycle"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_AlternateCycleOption"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_AlternateCycle")
+						,tc_Test_Data.get(iTDRow).get("ChangeDeposit_NotificationOption"),"","","");
+				premierDepositAccounts.saveButton();
+				premierHomeMenuPage.accountInquiryDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,"","","",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatementCycle"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
+
 			}
+			
+			
 			new HTMLReportHelper().HtmlReportFooter();
 		}
 		driver.close();

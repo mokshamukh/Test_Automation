@@ -54,14 +54,27 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By transactionRestrictionCodeButton =  By.xpath("(//input[contains(@name,'TranRestrictionCode')])[3]");
 	String transactionRestrictionCodeList =  "//select[contains(@name,'TranRestrictionCode')]/option[contains(text(),'%s')]";
 	public By statementCycleList =  By.xpath("//td[contains(text(),'Statement Cycle:')]/following-sibling::td/select[contains(@name,'/StatementCycle')]");
+	public By alternateCycleOptionList =  By.xpath("//td[contains(text(),'Alternate Cycle Option:')]/following-sibling::td/select[contains(@name,'/AlternateCycleOption')]");
+	public By alternateCycleTextInput =  By.xpath("(//input[contains(@id,'AlternateCycle')])[1]");
+	public By alternateCycleInput =  By.xpath("(//input[contains(@id,'AlternateCycle')])[2]");
+	public By alternateCycleBtn =  By.xpath("(//input[contains(@id,'AlternateCycle')])[3]");
+	String alternateCycleList = "(//select[contains(@id,'AlternateCycle')])[2]/option[contains(text(),'%s')]";
+	public By notificationOptionList = By.xpath("//td[contains(text(),'Notification Option:')]/following-sibling::td/select[contains(@name,'NotificationCode')]");
+	public By suspendedInterestList = By.xpath("//td[contains(text(),'Interest Cycle:')]/following-sibling::td/select[contains(@name,'SuspendInterestCycle')]");
+	public By suspendedDepositRateIndexInput = By.xpath("(//input[contains(@id,'SuspendDepRateCode')])[2]");
+	public By suspendedDepositRateIndexTextInput = By.xpath("(//input[contains(@id,'SuspendDepRateCode')])[1]");
+	public By suspendedDepositRateIndexBtn = By.xpath("(//input[contains(@id,'SuspendDepRateCode')])[3]");
+	String suspendedDepositRateIndexList = "//select[contains(@id,'SuspendDepRateCode')]/option[contains(text(),'%s')]";
+	public By suspendedStatementCycleList = By.xpath("//select[contains(@id,'SuspendStatementCycle')]");
+	
 	public By codesTab = By.xpath("//li//a[text()='Codes']");
 	public By statusCodeInquiryPage =  By.xpath("//td[text()='Status Code:']/following-sibling::td[1]");
 	public By statementCycleInquiryPage =  By.xpath("//td[text()='Statement Cycle:']/following-sibling::td[1]");
 	public By expandWarningInquiryPage =  By.xpath("//img[@id='WarningsArrow']");
 	public By warningInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
 	public By transRestrictionCodeInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
-	
-	
+	public By suspendFieldCheckBox=  By.xpath("//tr[@class='dataRow']//td//u[contains(text(),'Suspend Fields will be Cleared')]/../..//input");
+	public By FileMenu = By.xpath("//a[text()='File']");
 	
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
@@ -289,7 +302,11 @@ public class Premier_DepositAccounts extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Change Page", "Save Button", saveButton2);
-			Thread.sleep(5000);
+			Thread.sleep(1000);
+			if (isElementPresent(suspendFieldCheckBox)){
+				clickOnElement("Change Page", "	Suspend Fields will be Cleared CheckBox", suspendFieldCheckBox);
+				clickOnElement("Change Page", "Save Button", saveButton2);
+			}
 			validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
 			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
@@ -306,7 +323,9 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
 			}	
 		}}
-	public void changeAccountDetails(String sAccountNumber,String sAccountWarning, String sAccountStatusCode, String sAccntsTransRestrictionCode, String statementCycle) throws Exception {
+	public void changeAccountCodeDetails(String sAccountNumber,String sAccountWarning, String sAccountStatusCode, 
+			String sAccntsTransRestrictionCode, String statementCycle,String sAlternateCycleOption,String sAlternateCycle, 
+			String sNotificationOption,String sSuspendedStatementCycle,String sSuspendedInterestList,String sSuspendedDepositRateIndex ) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
@@ -327,6 +346,45 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				if (!statementCycle.equals("")) {
 					selectElementByVisibleText("Change Account Page", "statement Cycle Field", statementCycleList, statementCycle);
 				}
+				
+				if (!sAlternateCycleOption.equals("")) {
+					selectElementByVisibleText("Change Account Page", "Alternate Cycle Option Field", alternateCycleOptionList, sAlternateCycleOption);
+				}
+				
+				if (!sAlternateCycle.equals("")) {
+					if(isElementPresent(alternateCycleTextInput)){
+						clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleTextInput);
+					}
+					clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleInput);
+					//Thread.sleep(1000);
+					clickOnElement("Change Account Page", "Alternate Cycle Button",alternateCycleBtn);
+					//Thread.sleep(1000);
+					clickOnElement("Change Account Page", "Alternate Cycle list",getDynamicElement("Alternate Cycle list",alternateCycleList,sAlternateCycle));
+				}
+				
+				if (!sNotificationOption.equals("")) {
+					selectElementByVisibleText("Change Account Page", "Notification Option Field", notificationOptionList, sNotificationOption);
+				}
+				
+				if (!sSuspendedStatementCycle.equals("")) {
+					selectElementByVisibleText("Change Account Page", "Suspended Statement Cycle Field", suspendedStatementCycleList, sSuspendedStatementCycle);
+				}
+				
+				if (!sSuspendedInterestList.equals("")) {
+					selectElementByVisibleText("Change Account Page", "Suspended Interest Field", suspendedInterestList, sSuspendedInterestList);
+				}
+				
+				if (!sSuspendedDepositRateIndex.equals("")) {
+					if(isElementPresent(suspendedDepositRateIndexTextInput)){
+						clickOnElement("Change Account Page", "Suspended Deposit Rate Index Input",suspendedDepositRateIndexTextInput);
+					}
+					clickOnElement("Change Account Page", "Suspended Deposit Rate Index Input",suspendedDepositRateIndexInput);
+					//Thread.sleep(1000);
+					clickOnElement("Change Account Page", "Suspended Deposit Rate Index Button",suspendedDepositRateIndexBtn);
+					//Thread.sleep(1000);
+					clickOnElement("Change Account Page", "Suspended Deposit Rate Index list",getDynamicElement("Suspended Deposit Rate Index list",suspendedDepositRateIndexList,sSuspendedDepositRateIndex));
+				}
+				
 				stepResult = true;
 				
 			}
@@ -345,18 +403,24 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public void validateAccountDetailsAfterChange(String sAccountNumber,String sAccountWarning, String sAccountStatusCode, String sAccntsTransRestrictionCode, String statementCycle) throws Exception {
 		boolean stepResult = false;
 		try {
-			waitElement(5000);
+			waitElement(1000);
 			clickOnElement("Account Inquiry Page", "Codes Tab Field",codesTab);	
 			switchToWithinFrameWithName("bottom");
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){			
-				validateTextContains("Account Inquiry" , "Statement Cycle field", statementCycleInquiryPage, statementCycle);
-				validateTextContains("Account Inquiry" , "Status Code field",statusCodeInquiryPage, sAccountStatusCode);
-				waitElement(2000);
-				clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field",expandWarningInquiryPage);
-				waitElement(1000);
-				validateTextContains("Account Inquiry" , "Warning field",warningInquiryPage, sAccountWarning);
-				sAccntsTransRestrictionCode = ((sAccntsTransRestrictionCode.split("\\["))[0]).trim();
-				validateTextContains("Account Inquiry" , "Trans Restriction Code field",transRestrictionCodeInquiryPage, sAccntsTransRestrictionCode);							
+				if (!statementCycle.equals(""))
+					validateTextContains("Account Inquiry" , "Statement Cycle field", statementCycleInquiryPage, statementCycle);
+				if (!sAccountStatusCode.equals(""))
+					validateTextContains("Account Inquiry" , "Status Code field",statusCodeInquiryPage, sAccountStatusCode);
+				//waitElement(2000);
+				if (!sAccountWarning.equals("")){
+					clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field",expandWarningInquiryPage);
+					//waitElement(1000);
+					validateTextContains("Account Inquiry" , "Warning field",warningInquiryPage, sAccountWarning);
+				}
+				if (!sAccntsTransRestrictionCode.equals("")){
+					sAccntsTransRestrictionCode = ((sAccntsTransRestrictionCode.split("\\["))[0]).trim();
+					validateTextContains("Account Inquiry" , "Trans Restriction Code field",transRestrictionCodeInquiryPage, sAccntsTransRestrictionCode);							
+				}
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
 				stepResult = true;
