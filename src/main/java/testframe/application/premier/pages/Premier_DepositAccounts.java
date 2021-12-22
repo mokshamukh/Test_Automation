@@ -55,6 +55,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	String transactionRestrictionCodeList =  "//select[contains(@name,'TranRestrictionCode')]/option[contains(text(),'%s')]";
 	public By statementCycleList =  By.xpath("//td[contains(text(),'Statement Cycle:')]/following-sibling::td/select[contains(@name,'/StatementCycle')]");
 	public By alternateCycleOptionList =  By.xpath("//td[contains(text(),'Alternate Cycle Option:')]/following-sibling::td/select[contains(@name,'/AlternateCycleOption')]");
+	public By alternateCycleTextInput =  By.xpath("(//input[contains(@id,'AlternateCycle')])[1]");
 	public By alternateCycleInput =  By.xpath("(//input[contains(@id,'AlternateCycle')])[2]");
 	public By alternateCycleBtn =  By.xpath("(//input[contains(@id,'AlternateCycle')])[3]");
 	String alternateCycleList = "(//select[contains(@id,'AlternateCycle')])[2]/option[contains(text(),'%s')]";
@@ -73,7 +74,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By warningInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
 	public By transRestrictionCodeInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
 	public By suspendFieldCheckBox=  By.xpath("//tr[@class='dataRow']//td//u[contains(text(),'Suspend Fields will be Cleared')]/../..//input");
-	
+	public By FileMenu = By.xpath("//a[text()='File']");
 	
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
@@ -351,6 +352,9 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				}
 				
 				if (!sAlternateCycle.equals("")) {
+					if(isElementPresent(alternateCycleTextInput)){
+						clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleTextInput);
+					}
 					clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleInput);
 					//Thread.sleep(1000);
 					clickOnElement("Change Account Page", "Alternate Cycle Button",alternateCycleBtn);
