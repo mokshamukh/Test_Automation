@@ -52,7 +52,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 			Thread.sleep(2000);
 			clickOnElement("New Contact Page", "Save Button", saveButton);
 			Thread.sleep(2000);
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();

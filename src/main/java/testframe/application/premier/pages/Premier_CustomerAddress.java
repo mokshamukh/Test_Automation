@@ -104,7 +104,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 			if (isElementPresent(msg)) {
 				stepResult = true;
 			}
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -206,7 +206,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
 					clickOnElement("Add Name Page", "Submit", submitSearch);
 					clickOnElement("Add Name Page", "Name link", nameLink);
-					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+					switchToWindowWithTitleContaining("Institution");
 					switchToWithinFrameWithName("Main");
 				}
 				Thread.sleep(2000);
