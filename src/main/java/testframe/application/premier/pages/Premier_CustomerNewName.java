@@ -185,7 +185,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 			clickOnElement("New Name Page", "Finish Button", finishButton);
 			Thread.sleep(2000);
 			isElementPresent(msg);
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			//driver.switchTo().defaultContent();
 			stepResult = true;
 		} catch (Exception e) {
@@ -210,7 +210,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 			{
 				stepResult = true;
 			}
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -545,7 +545,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 				waitForPresenceOfElement("New Name Page", "Searched Name List", NameList);
 				clickOnElement("New Name Page", "Searched Result Link",SearchResult);
 
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				driver.switchTo().frame("Main");
 				stepResult = true;
 			}
@@ -589,7 +589,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 							clickOnElement("New Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
 							waitForPresenceOfElement("New Name - Search Page", "Searched Name List", NameList);
 							clickOnElement("New Name - Search Page", "Searched Result Link",SearchResult);
-							switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+							switchToWindowWithTitleContaining("Institution");
 							driver.switchTo().frame("Main");
 						}
 						if (!build_Relationship.equals("")) {

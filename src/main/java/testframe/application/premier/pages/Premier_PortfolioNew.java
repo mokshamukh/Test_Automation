@@ -93,7 +93,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
 					
-					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 					stepResult = true;
 				}
@@ -118,7 +118,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				switchToWindowWithTitleContaining("Address Search");
 				driver.switchTo().frame("bottom");
 				searchAddress(Address1);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				driver.switchTo().frame("Main");
 				stepResult = true;
 			}
@@ -372,7 +372,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				//clickOnElement("New Portfolio Page", "Finish Button", finishButton);
 				//Thread.sleep(2000);
 				//driver.switchTo().defaultContent();
-				//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				//switchToWindowWithTitleContaining("Institution");
 				stepResult = true;
 			}					
 			}catch(Exception e) {
@@ -455,7 +455,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			Thread.sleep(5000);
 			validateElementPresent("New Portfolio Page", "Customer Page Title", customerPageTitle);
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){
@@ -542,7 +542,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
 					Thread.sleep(4000);
-					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 					
 					if(!sRelationship.equals("")) {
@@ -574,7 +574,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			clickOnElement("New Contact Page", "Save Button", saveButton2);
 			Thread.sleep(2000);
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){

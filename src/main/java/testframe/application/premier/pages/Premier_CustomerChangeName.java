@@ -388,7 +388,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 							clickOnElement("Change Name - Search Page", "Searched Result Link",SearchResult);
 							stepResult = true;
 						}
-						switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+						switchToWindowWithTitleContaining("Institution");
 						driver.switchTo().frame("Main");
 					}
 					Thread.sleep(3000);
@@ -459,7 +459,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 				stepResult = true;
 			}
 			
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			switchToDefaultContent();
 		} catch (Exception e) {
 			e.printStackTrace();

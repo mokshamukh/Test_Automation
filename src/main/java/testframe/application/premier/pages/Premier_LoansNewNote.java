@@ -330,7 +330,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 			}
 			validateElementPresent("New Loan Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){

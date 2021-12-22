@@ -218,7 +218,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					waitElement(2000);
 				}
 				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				stepResult = true;
 				
 			}
@@ -318,7 +318,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				switchToWindowWithTitleContaining("Name Search");
 				driver.switchTo().frame("bottom");
 				new Premier_CustomerContact(driver).searchSSN(sSN);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				driver.switchTo().frame("Main");
 				
 				if (!sRelationship.equals("")) {
@@ -358,7 +358,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					waitElement(2000);
 				}
 				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				stepResult = true;
 				
 			}
@@ -421,7 +421,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					waitElement(2000);
 				}
 				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				stepResult = true;				
 			}
 		}catch(Exception e) {
@@ -493,7 +493,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					waitElement(2000);
 				}
 				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				stepResult = true;				
 			}
 		}catch(Exception e) {
@@ -570,7 +570,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					waitElement(2000);
 				}
 				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				stepResult = true;	
 				}
 		}catch(Exception e) {

@@ -98,7 +98,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
 				driver.switchTo().frame("bottom");
 				new Premier_CustomerContact(driver).searchSSN(sSN);
 				
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				driver.switchTo().frame("Main");
 				
 				selectElementByVisibleText("New Line Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sLineRelationship);
@@ -204,7 +204,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
 					validateTextContains("New Lines Page", "New Line Header", newLineHeader, "New Line");
 				}
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 		}
 		catch(Exception e){
@@ -302,7 +302,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
                Thread.sleep(5000);
                validateElementPresent("Inquiry Page", "Search Title", newLineTitle);
                driver.switchTo().defaultContent();
-               switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+               switchToWindowWithTitleContaining("Institution");
                stepResult = true;
         }
         catch(Exception e){

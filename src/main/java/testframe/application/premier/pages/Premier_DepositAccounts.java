@@ -116,7 +116,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
 					
-					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 					
 					selectElementByVisibleText("New Deposit Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sDepositRelationship);
@@ -192,7 +192,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				//clickOnElement("New DD Account Page", "Finish Button", finishButton);
 				//Thread.sleep(2000);
 				//driver.switchTo().defaultContent();
-				//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				//switchToWindowWithTitleContaining("Institution");
 				stepResult = true;
 			}					
 			}catch(Exception e) {
@@ -214,7 +214,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			Thread.sleep(5000);
 			validateElementPresent("New Deposit Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
-			//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			//switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){
@@ -284,7 +284,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			Thread.sleep(5000);
 			validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){
@@ -309,7 +309,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			}
 			validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){
