@@ -26,7 +26,7 @@ public class PremierTestBackUp extends ApplicationBase {
 	,sScreenShotFolder_Itr,strpathToAppReportFileDateTimeStamp;
 	int iIteration_count,iPortfolioCustomerCount;
 	String sDepositRelationship,sDepositStatement;
-	String sUserID,sPassword,sCompanyID ,sPassword_Encrypt,sSecretKey,sInstitution,sGroup;
+	String sUserID,sPassword,sCompanyID ,sPassword_Encrypt,sSecretKey,sInstitution,sGroup,sEnvType;
 	String sName,sFName,sLName,sDOB,sTaxIDCode,sTaxIdentification,sAltName,sAltFirstName,sAltLastName,sPhoneNumber,sEmail,
 	sGender,sAddress1,sAddress2,sZipCode,sPortfolioRelationship,sPortfolioNameFormatCode;
 	String strName;
@@ -91,7 +91,8 @@ public class PremierTestBackUp extends ApplicationBase {
 		sInstitution = pr.readProperties(appConfigPropertyFilePath,"Institution");
 		sSecretKey = pr.readProperties(appConfigPropertyFilePath,"Secret_Key");
 		sPassword = ed.decrypt(sPassword_Encrypt, sSecretKey);
-
+		sEnvType = pr.readProperties(appConfigPropertyFilePath,"Env_Type");
+		
 		if(sIteration == "")
 			iIteration_count =0;
 		else if(sIteration == "1")
@@ -125,7 +126,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_POC":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -148,7 +149,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC001":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -169,7 +170,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC002":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -195,7 +196,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC003":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -215,7 +216,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC004":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -242,7 +243,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC005":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -263,7 +264,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC006":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -289,7 +290,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC007":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -308,7 +309,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC008":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -336,7 +337,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC009":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				new PremierCommonNavigation().customerCreationAndInquire(tc_Test_Data, iTDRow,"Y");
 				premierLogOff.logoffApplication();
@@ -344,7 +345,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC010":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -419,7 +420,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC011":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -493,7 +494,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC012":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -529,7 +530,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC013":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				if((tc_Test_Data.get(iTDRow).get("Address_UpdateExistingAddress1")).equals(""))	
 					new PremierCommonNavigation().customerCreationAndInquire(tc_Test_Data, iTDRow,"N");
@@ -552,7 +553,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				
 			case "PREMIER_TC014":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 
 				premierHomeMenuPage.customerMenu();
@@ -586,7 +587,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC015":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 
 				premierHomeMenuPage.customerMenu();
@@ -617,7 +618,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC016":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.customerMenu();
 
@@ -713,7 +714,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC017":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 
 				premierHomeMenuPage.portfolioMenu();
@@ -768,7 +769,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC018":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.portfolioMenu();
@@ -823,7 +824,7 @@ public class PremierTestBackUp extends ApplicationBase {
 
 			case "PREMIER_TC019":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 
 				premierHomeMenuPage.portfolioMenu();
@@ -859,7 +860,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC020":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				premierHomeMenuPage.portfolioMenu();
 				premierHomeMenuPage.portfolioChange();
@@ -881,7 +882,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC021":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -918,7 +919,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC022":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -956,7 +957,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				
 			case "PREMIER_TC023":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -994,7 +995,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC024":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1013,7 +1014,7 @@ public class PremierTestBackUp extends ApplicationBase {
 			
 			case "PREMIER_TC025":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1050,7 +1051,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC026":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1088,7 +1089,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				
 			case "PREMIER_TC027":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1126,7 +1127,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC028":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1145,7 +1146,7 @@ public class PremierTestBackUp extends ApplicationBase {
 			
 			case "PREMIER_TC029":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1181,7 +1182,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				break;
 			case "PREMIER_TC030":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1218,7 +1219,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				
 			case "PREMIER_TC031":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
@@ -1255,7 +1256,7 @@ public class PremierTestBackUp extends ApplicationBase {
 				
 			case "PREMIER_TC032":
 				premierLoginPage.launchApplication(sURL);
-				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
 				premierHomeMenuPage.depositsMenu();
