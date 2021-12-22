@@ -612,6 +612,30 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
+	
+	/**
+	 * Get Visible Selected Text On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected String getVisibleSelectedText(String pageName, String fieldName, By by) throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [GetVisibleSelectedText]    ###   Locator [" + by + "]";
+		String errorMessageToDisplay = "Could Not Get Visible Selected Text [" + fieldName + "] On Page [" + pageName + "]";
+
+		String text = null;
+		try {
+			Log.info(messageToDisplay);
+			WebElement element = findElement(by);
+			Select select = new Select(element);
+			WebElement option = select.getFirstSelectedOption();
+			text = option.getText().trim();
+		} catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+		return text;
+	}
 
 	/**
 	 * Validate All Options Element By Visible Text On Element by locators
@@ -1207,7 +1231,37 @@ public class CommonLibrary {
 		}
 
 	}
+	/**
+	 * Validate Text Contains On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected void validateTextContains_UCASE(String pageName, String fieldName, By by, String expText) throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [ValidateTextEquals]    ###   Locator [" + by + "] Expected Text [" + expText + "]";
+		String errorMessageToDisplay = "Expected Text [" + expText + "]  Was not found On Page Name [ " + pageName
+				+ "]  And  Field [" + fieldName + "]";
 
+		Boolean matchFound = false;
+		String actualText = "";
+		try {
+			Log.info(messageToDisplay);
+			WebElement element = findElement(by);
+			actualText = element.getText().trim();
+			actualText = actualText.toUpperCase();
+			if (actualText.contains(expText)) {
+				matchFound = true;
+			}
+		} catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay + "  Actual Text [" + actualText + "]");
+		}
+
+		if (matchFound == false) {
+			throw new Exception(errorMessageToDisplay + "  Actual Text [" + actualText + "]");
+		}
+
+	}
 	private WebElement findElement(By by) {
 		scrollToElement(by);
 		return driver.findElement(by);
