@@ -14,6 +14,7 @@ import testframe.application.premier.pages.Premier_CustomerNewName;
 import testframe.application.premier.pages.Premier_DepositAccounts;
 import testframe.application.premier.pages.Premier_HomeMenu;
 import testframe.application.premier.pages.Premier_LinesNewLine;
+import testframe.application.premier.pages.Premier_LoansChangeAccount;
 import testframe.application.premier.pages.Premier_LoansNewNote;
 import testframe.application.premier.pages.Premier_LogOff;
 import testframe.application.premier.pages.Premier_Login;
@@ -53,7 +54,9 @@ public class PremierTest extends ApplicationBase {
 	static  Premier_DepositAccounts premierDepositAccounts;
 	static  Premier_LinesNewLine premierLinesNewLine;
 	static  Premier_LoansNewNote premierLoansNewNote;
+	static  Premier_LoansChangeAccount premierLoansChange;
 	static  Premier_SafeDepositBox premierSafeDepositBox;
+
 
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver,String sApplicationName, String sURL,String sTestCase, String sTestDescription,
@@ -72,7 +75,9 @@ public class PremierTest extends ApplicationBase {
 		premierDepositAccounts = new Premier_DepositAccounts(driver);
 		premierLinesNewLine = new Premier_LinesNewLine(driver);
 		premierLoansNewNote = new Premier_LoansNewNote(driver);
+		premierLoansChange = new Premier_LoansChangeAccount(driver);
 		premierSafeDepositBox = new Premier_SafeDepositBox(driver);
+
 		
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
 		strpathToAppReportFile = sPathToAppReportFolder + "/" + sApplicationName;
@@ -1014,6 +1019,231 @@ public class PremierTest extends ApplicationBase {
 				premierLogOff.logoffApplication();
 				break;
 				
+			case "PREMIER_TC036":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeLoanAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateLoanAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC037":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeLoanAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateLoanAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC038":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeLoanAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateLoanAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC039":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeLoanAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateLoanAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC040":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeLoanAccountDetails(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateLoanAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_Class"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_BranchRegion"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Codes_AccountingMethod"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Warning"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentFrequency"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_StatusCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_WriteDownStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_Status_LoanRatingCode1"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCode"), tc_Test_Data.get(iTDRow).get("ChangeLoan_PaymentRestrictionCodeOverride"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyChapter"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyStatus"), tc_Test_Data.get(iTDRow).get("ChangeLoan_BankruptcyPetitionFileDate"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC041":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeAccountDetails_AddRelationship(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddName"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddSSN"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddRelationship"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddEstatement"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateAccountDetailsAfterChange_AddRelationship(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddName"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddSSN"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddRelationship"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddEstatement"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC042":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeAccountDetails_UpdateRelationship(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeRelationship_Name"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_UpdateRelationship"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateAccountDetailsAfterChange_UpdateRelationship(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeRelationship_Name"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_UpdateRelationship"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC043":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeAccountDetails_RemoveRelationship(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeRelationship_RemoveName"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateAccountDetailsAfterChange_RemoveRelationship(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeRelationship_RemoveName"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC044":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeLoan_NoteNumber");
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,sTestCase,"N");
+					}
+					new PremierCommonNavigation().loanCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");	
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Loan_NoteNumber");
+					premierHomeMenuPage.selectLoansMenu();
+				}
+				premierHomeMenuPage.selectLoansMenu();
+				premierHomeMenuPage.changeAccountLoans();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.changeAccountDetails_Balances(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_NonAccrualCode"),tc_Test_Data.get(iTDRow).get("ChangeLoan_NonAccrualLateChargeOption"),tc_Test_Data.get(iTDRow).get("ChangeLoan_AutomaticRecoveryOverride"),tc_Test_Data.get(iTDRow).get("ChangeLoan_NonAccrualDate"));
+				//premierDepositAccounts.saveButton();
+				premierHomeMenuPage.loanAccountInquiry();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierLoansChange.validateAccountDetailsAfterChange_Balances(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeLoan_NonAccrualCode"),tc_Test_Data.get(iTDRow).get("ChangeLoan_NonAccrualLateChargeOption"),tc_Test_Data.get(iTDRow).get("ChangeLoan_AutomaticRecoveryOverride"),tc_Test_Data.get(iTDRow).get("ChangeLoan_NonAccrualDate"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+
 			case "PREMIER_TC050":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup);
@@ -1291,7 +1521,6 @@ public class PremierTest extends ApplicationBase {
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;
-
 
 			}
 			

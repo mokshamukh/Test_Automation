@@ -80,14 +80,22 @@ public class Premier_LoansNewNote extends CommonLibrary{
 	By warningCheckBox1 = By.xpath("//td/u[contains(text(),'Note Date is in the Future')]/../..//input");
 	By warning2 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]");
 	By warningCheckBox2 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]/../..//input");
+	//By warning3 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]");
+	//By warningCheckBox3 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]/../..//input");
 	By saveBtn = By.xpath("//*[@title='Save']");
+	public By paymentRestrictionCode =  By.xpath("//select[contains(@id,'/PymtRestrictionCode')]");
+	public By codesTab = By.xpath("//li//a[text()='Codes']");
+	public By paymentTab = By.xpath("//li//a[text()='Payment']");
+	public By paymentFrequencyInquiryPage =  By.xpath("//td[text()='Payment Frequency:']/following-sibling::td[1]");
+	public By paymentRestrictionCodeInquiryPage =  By.xpath("//td[text()='Payment Restriction Code:']/following-sibling::td[1]");
 	
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
 	String purposeCodeList =  "//select[contains(@name,'PurposeCode')]/option[contains(text(),'%s')]";
 	String loansInquiryHeader = "//td[contains(@id,'%s')]";
 	String custLineName = "//u[contains(text(),'%s')]";
-
+	String loanChangeHeader = "//a[contains(text(),'%s')]";
+	String loanChangeHeaderInquiry = "//td[contains(text(),'%s')]";
 	
 	public void newNoteLoanAcc_CodesScreen(String sNoteAccntNo,String scashProceeds,String sMaximumCredit,String sMaximumCreditCode,
 			String sNoteDate,String sContractDate,String sAccountOpenMethod,String sOriginalCreditScore,String sPaymentReserveOption,
@@ -336,6 +344,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
 			}	
 		}}
+   
    public void validateDetailsInLoansInquiry(String sNoteNumber,String sLineName) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -359,7 +368,8 @@ public class Premier_LoansNewNote extends CommonLibrary{
 				}
 			}
 	}
-
+   
+	
 }
 
 

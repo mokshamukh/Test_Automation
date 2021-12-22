@@ -56,6 +56,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By loansMenu = By.xpath("//a[text()='Loans']");
 	public By newNote = By.xpath("//a[text()='New Note']");
 	public By accountInquiryLoans =  By.xpath("//a[text()='Loans']/../ul//a[(text()='Account Inquiry')]");
+	public By changeAccountLoans =  By.xpath("//a[text()='Loans']/following-sibling::ul/li/a[contains(text(),'Change Account')]");
 	public By changeAddress = By.xpath("//a[text()='Change Address']");
 	public By changeAddressTitle= By.xpath("//div[text()='Customer - Address - Change Address']");		
 	public By safeDepositBox = By.xpath("//a[text()='Safe Deposit Box']");
@@ -885,6 +886,27 @@ public class Premier_HomeMenu extends CommonLibrary {
 
 	}
 	
+	public void changeAccountLoans() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(loansMenu)){
+				clickOnElement("Home Page", "Change Account Loans",changeAccountLoans );
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Change Account from Loans Menu", "Change Account from Loans menu selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Change Account from Loans Menu", "Could not select Change Account from Loans menu", "Failed", driver, "Y");
+			}
+		}}
+
 	public void accountInquirySDB() throws Exception{
 		boolean stepResult = false;
 		try {
