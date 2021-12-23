@@ -95,7 +95,7 @@ public class ReportHelper extends ApplicationBase {
 	
 	public void writeToSummaryReportTestDetailsTab(String result,String sStart,String sEnd,String sTotalTime,String sTotalPassed,String sTotalFailed, String sTotalPassFail,String sPDFFilePath) throws IOException, Exception{
 		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "TestExecuted", iSummary_testDetailsRowNum, sTestcaseID+" Iteration - "+sIteration);
-		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "ExecutionResult", iSummary_testDetailsRowNum,result.substring(0, 5));
+		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "ExecutionResult", iSummary_testDetailsRowNum,result.substring(0, 4));
 		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "StartTime", iSummary_testDetailsRowNum,sStart);
 		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "EndTime", iSummary_testDetailsRowNum,sEnd);
 		er.setValueInColumnforRow(sSummaryReportPath, "TestsDetail", "ExecutionTime", iSummary_testDetailsRowNum,sTotalTime);
