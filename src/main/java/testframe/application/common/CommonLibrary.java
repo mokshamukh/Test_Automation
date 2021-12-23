@@ -150,7 +150,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 	protected void switchToFrameWithName(String name) throws Exception {
 		String messageToDisplay = "Switch To Frame With Name As [" + name + "]";
 		String errorMessageToDisplay = "Could not Switch To Frame With Name As [" + name + "]";
@@ -170,7 +170,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 	protected void switchToWithinFrameWithName(String name) throws Exception {
 		String messageToDisplay = "Switch To Frame With Name As [" + name + "]";
 		String errorMessageToDisplay = "Could not Switch To Frame With Name As [" + name + "]";
@@ -191,7 +191,7 @@ public class CommonLibrary {
 	}
 
 
-	
+
 	/**
 	 * Switch To Default Content
 	 * 	 * @author Moksha.mukh
@@ -404,8 +404,8 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
-	
+
+
 	/**
 	 * EnterText On Element by locators
 	 * 
@@ -612,7 +612,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 	/**
 	 * Get Visible Selected Text On Element by locators
 	 * 
@@ -820,7 +820,7 @@ public class CommonLibrary {
 
 		return found;
 	}
-	
+
 	/**
 	 * Get Validate Element Present
 	 * 
@@ -939,7 +939,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 	/**
 	 * Wait For Element To be Clickable by locator
 	 * 
@@ -960,7 +960,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 
 	/**
 	 * Wait For Element To be Invisible by locator
@@ -1025,7 +1025,7 @@ public class CommonLibrary {
 		}
 		return text;
 	}
-	
+
 
 	/**
 	 * Get Element Text by locator
@@ -1286,12 +1286,12 @@ public class CommonLibrary {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-	
+
 	protected void enterOnELementUsingJS(WebElement element,String value) {
-		
+
 		String js = "arguments[0].setAttribute('value','"+value+"')";
 		((JavascriptExecutor) driver).executeScript(js, element);
-		
+
 	}
 
 	public void scrollToTopOfThePage() {
@@ -1593,4 +1593,33 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
+
+
+	/**
+	 * Click On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected void mouseHoverCickOnElement(String pageName, String fieldName, By byMainElement, By bySubElement ) 
+			throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [Mosuse Hover]    ###   Locator [" + byMainElement + "]";
+		String errorMessageToDisplay = "Could Not Mouse Hover and click On [" + fieldName + "]   On Page [ " + pageName + "]";
+		try {
+			Log.info(messageToDisplay);
+			Actions actions = new Actions(driver);
+			actions.moveToElement(driver.findElement(byMainElement));
+			actions.moveToElement(driver.findElement(bySubElement));
+			actions.click().build().perform();
+		}
+		catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+
+
+	}
+
+
+
 }

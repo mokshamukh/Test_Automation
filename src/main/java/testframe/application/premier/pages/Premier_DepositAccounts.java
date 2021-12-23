@@ -74,7 +74,26 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By warningInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
 	public By transRestrictionCodeInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
 	public By suspendFieldCheckBox=  By.xpath("//tr[@class='dataRow']//td//u[contains(text(),'Suspend Fields will be Cleared')]/../..//input");
-	public By FileMenu = By.xpath("//a[text()='File']");
+	public By fileMenu = By.xpath("//a[text()='File']");
+	public By holdMenu = By.xpath("//a[contains(text(),'Hold')]");
+	public By holdTitle = By.xpath("//a[contains(text(),'Hold - New')]");
+	public By holdReason = By.xpath("//input[contains(@id,'HoldReason')]");
+	public By holdAMount = By.xpath("//input[contains(@id,'HoldAmount')]");
+	public By holdExpDate = By.xpath("//input[contains(@id,'ExpirationDate')]");
+	public By accountPledgedOnLoanSelect = By.xpath("//select[contains(@id,'PledgedCode')]");
+	public By pledgedNoteNum = By.xpath("//input[contains(@id,'NoteNumber')]");
+	public By maxPledge = By.xpath("//input[contains(@id,'MaximumPledgedAmount')]");
+	public By holdDate = By.xpath("//input[contains(@id,'HoldDate')]");
+	public By holdPendigStrtDate = By.xpath("//input[contains(@id,'PendingHoldDate')]");
+	public By holdPendingAmt = By.xpath("//input[contains(@id,'PendingHoldAmount')]");
+	public By holdAmtOption = By.xpath("//select[contains(@id,'HoldAmountOption')]");
+	public By holdslabel = By.xpath("//td[text()='Holds']");
+	public By holdExpand = By.xpath("//table[@name='Holds']//img[@class='csr-hand']");
+	
+	String verifyHoldData =  "//table[@name='Holds']//td[contains(text(),'%s')]";
+	
+	
+	
 	
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
@@ -152,11 +171,11 @@ public class Premier_DepositAccounts extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Details on New Deposit Account Customer Screen", "Details entered on New Deposit Account Customer screen Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Enter Details For New Deposit Account", "Details entered on New Deposit Account Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Details on New Deposit Account Customer Screen", "Could not entered details", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Enter Details For New Deposit Account ", "Could not entered details", "Failed",
 						driver, "Y");
 			}
 		}}
@@ -270,7 +289,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 		}finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
@@ -431,11 +450,121 @@ public class Premier_DepositAccounts extends CommonLibrary{
 		}finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Validated Customer Details on Customer Inquiry page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Could not Validated Customer Details on Customer Inquiry page" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Could not Validated Account Details on Account Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
+	
+	public void changeAccountHold(String sAccountNumber,String sHoldReason, String sHoldAmount, 
+			String sExpirationDate, String sAccountPledgedOnLoan,String sPledgedNoteNum,String sMaximumPledge, 
+			String sHoldDate,String sPendingStartDate,String sPendingAmount,String sHoldAmountOption ) throws Exception {
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
+				mouseHoverCickOnElement("Change Account Page", "Hold Menu Field", fileMenu, holdMenu);
+				if (isElementPresent(holdTitle)){
+					
+					if (!sHoldReason.equals("")) {
+						enterText("Change Account Page", "Hold Reason field", holdReason, sHoldReason);
+					}
+					
+					if (!sHoldAmount.equals("")) {
+						enterText("Change Account Page", "Hold Amount field", holdAMount, sHoldAmount);
+					}
+					
+					if (!sExpirationDate.equals("")) {
+						enterText("Change Account Page", "Expiration Date field", holdExpDate, sExpirationDate);
+					}
+					
+					if (!sAccountPledgedOnLoan.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Account Pledged on Loan Field", accountPledgedOnLoanSelect, sAccountPledgedOnLoan);
+					}
+					
+					if (!sPledgedNoteNum.equals("")) {
+						enterText("Change Account Page", "Pledged Note Number field", pledgedNoteNum, sPledgedNoteNum);
+					}
+					
+					if (!sMaximumPledge.equals("")) {
+						enterText("Change Account Page", "Maximum Pledge field", maxPledge, sMaximumPledge);
+					}
+					
+					if (!sHoldDate.equals("")) {
+						enterText("Change Account Page", "Hold Date field", holdDate, sHoldDate);
+					}
+					
+					if (!sPendingStartDate.equals("")) {
+						enterText("Change Account Page", "Pendig Start Date field", holdPendigStrtDate, sPendingStartDate);
+					}
+					
+					if (!sPendingAmount.equals("")) {
+						enterText("Change Account Page", "Pending Amount field", holdPendingAmt, sPendingAmount);
+					}
+					
+					if (!sHoldAmountOption.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Hold Amount Option Field", holdAmtOption, sHoldAmountOption);
+					}
+					stepResult = true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Account Details changed Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details" , "Failed", driver, "Y");
+			}
+		}}
+	
+	public void validateAccountHoldDetailsAfterChange(String sAccountNumber,String sVerifyHoldAmount, String sVerifyHoldReason,
+			String sVerifyExpirationDate, String sVerifyHoldDate,  String sVerifyPendingAmount) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){
+				if (isElementPresent(holdslabel)){
+					clickOnElement("Change Account Page", "Hold Expand Button",holdExpand);
+					
+					if (!sVerifyHoldAmount.equals(""))
+						validateElementPresent("Account Inquiry" , "Hold Amount field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyHoldAmount));
+					
+					if (!sVerifyHoldReason.equals(""))
+						validateElementPresent("Account Inquiry" , "Hold Reason field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyHoldReason));
+					
+					if (!sVerifyExpirationDate.equals(""))
+						validateElementPresent("Account Inquiry" , "Hold Expiration Date field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyExpirationDate));
+					
+					if (!sVerifyHoldDate.equals(""))
+						validateElementPresent("Account Inquiry" , "Hold Date field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyHoldDate));
+					
+					if (!sVerifyPendingAmount.equals(""))
+						validateElementPresent("Account Inquiry" , "Hold Pending Amount", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyPendingAmount));
+				
+					
+					stepResult = true;
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Could not Validated Account Details on Account Inquiry page" , "Failed", driver, "Y");
+			}
+		}}
+	
 }
