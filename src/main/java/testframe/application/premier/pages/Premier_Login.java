@@ -40,7 +40,7 @@ public class Premier_Login extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			goTo(url);
-			if (isElementPresent(myGroupPageHeader) || isElementPresent(loginPageHeader))
+			if (isElementPresent(loginPageHeader) || isElementPresent(myGroupPageHeader))
 				stepResult = true;
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -37,7 +37,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	String BranchRegionCombobox =  "//select[contains(@id,'BranchNumber_d')]/option[contains(text(),'%s')]";
 	public By msg = By.xpath("//*[text()='The record was updated successfully.']");
 	public By searchAddress = By.xpath("//input[@id='Address']");
-	String searchAddressLink = "//a[contains(text(),'%s')]";
+	String searchAddressLink = "(//a[contains(text(),'%s')])[1]";
 	By changeAddressTitle = By.xpath("//div[text()='Customer - Address - Change Address']");
 	By updateBranchRegion = By.xpath("//input[contains(@id,'BranchNumber_l')]");
 	By updateSeasonalAddress1= By.xpath("(//input[contains(@id,'AltAddress')])[1]");
@@ -45,6 +45,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	By updateSeasonalZipCode= By.xpath("//input[contains(@id,'AltCityStZip')]");
 	By saveLink = By.xpath("//a[text()=' Save']");
 	By sesonalAddressCheckbox = By.xpath("//input[contains(@id,'AltFromDate')][@type='checkbox']");
+	By allRelationsUpdatecheckbox = By.xpath("//a[text()='All relationships will reflect address changes.']/../../input");
 
 	//below xpath are not used yet
 	public By foreignList = By.xpath("(//label[text()='Foreign:'])[1]/../following-sibling::td/select");
@@ -242,6 +243,7 @@ public class Premier_CustomerAddress extends CommonLibrary {
 			if (isElementPresent(searchTitle)) {
 				enterText("Searh Address Page", "Address field", searchAddress, address1Val);
 				clickOnElement("Search Address Page", "Submit button", submitSearch);
+				waitElement(3000);
 				if (isElementPresent(getDynamicElement("Search Address Link",searchAddressLink,address1Val))){
 					clickOnElement("Search Address Page", "Search Address Link", getDynamicElement("Search Address Link",searchAddressLink,address1Val));
 				}
@@ -327,8 +329,12 @@ public class Premier_CustomerAddress extends CommonLibrary {
 			clickOnElement("Change Address Page", "Save Link", saveLink);
 			if (isElementPresent(sesonalAddressCheckbox)){
 				clickOnElement("Change Address Page", "Seasonal Address Information Will be Cleared Checkbox", sesonalAddressCheckbox);
+				if (isElementPresent(allRelationsUpdatecheckbox)){
+					clickOnElement("Change Address Page", "all Relations Update checkbox", allRelationsUpdatecheckbox);
+				}
 				clickOnElement("Change Address Page", "Save Link", saveLink);
-			}
+			}			
+			waitElement(2000);
 			if (isElementPresent(searchTitle)) {
 				stepResult = true;
 			}

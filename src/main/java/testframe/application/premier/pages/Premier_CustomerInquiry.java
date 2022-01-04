@@ -217,7 +217,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 						else if(phoneNumber.contains(","))
 							sDelimiter=",";
 						for (int i=0; i<phoneNumber.split(sDelimiter).length;i++){
-							validateTextEquals("Customer Inquiry" , "Relationship Type", phonenumber, phoneNumber.split(sDelimiter)[i]);
+							validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber.split(sDelimiter)[i]);
 						}	
 					}
 					else
@@ -230,14 +230,14 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 						else if(eMailID.contains(","))
 							sDelimiter=",";
 						for (int i=0; i<eMailID.split(sDelimiter).length;i++){
-							validateTextEquals("Customer Inquiry" , "Relationship Type", email, eMailID.split(sDelimiter)[i]);
+							validateTextContains("Customer Inquiry" , "Relationship Type", email, eMailID.split(sDelimiter)[i]);
 						}	
 					}
 					else
-						validateTextEquals("Customer Inquiry" , "Email ID",email , eMailID);
+						validateTextContains("Customer Inquiry" , "Email ID",email , eMailID);
 				}	
 				if (!(sAddress1.equals("")))
-					validateTextEquals("Customer Inquiry" , "Address 1", getDynamicElement("Customer Inquiry",sInquireData,sAddress1), sAddress1);
+					validateTextEquals("Customer Inquiry" , "Address 1", getDynamicElement("Customer Inquiry",sInquireLinkData,sAddress1), sAddress1);
 				if (!(sAddress2.equals("")))
 					validateTextEquals("Customer Inquiry" , "Address 2", getDynamicElement("Customer Inquiry",sInquireData,sAddress2), sAddress2);
 				if (!(zipCode.equals("")))
@@ -262,11 +262,11 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 						else if(sBeneficialOnwerName.contains(","))
 							sDelimiter=",";
 						for (int i=0; i<sBeneficialOnwerName.split(sDelimiter).length;i++){
-							validateTextEquals("Customer Inquiry" , "Relationship Type", getDynamicElement("Customer Inquiry",sInquireData,sBeneficialOnwerName.split(sDelimiter)[i]), sBeneficialOnwerName.split(sDelimiter)[i]);
+							validateTextEquals("Customer Inquiry" , "Beneficial Owner Name", getDynamicElement("Customer Inquiry",sInquireLinkData,sBeneficialOnwerName.split(sDelimiter)[i]), sBeneficialOnwerName.split(sDelimiter)[i]);
 						}	
 					}
 					else
-						validateTextEquals("Customer Inquiry" , "Beneficial Owner Name", getDynamicElement("Customer Inquiry",sInquireData,sBeneficialOnwerName), sBeneficialOnwerName);
+						validateTextEquals("Customer Inquiry" , "Beneficial Owner Name", getDynamicElement("Customer Inquiry",sInquireLinkData,sBeneficialOnwerName), sBeneficialOnwerName);
 				}
 				switchToDefaultContent();
 				stepResult = true;

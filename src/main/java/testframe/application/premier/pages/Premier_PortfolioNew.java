@@ -136,6 +136,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public void searchAddress(String Address1) throws Exception {
 		boolean stepResult = false;
 		try {
+			waitElement(4000);
 			if (isElementPresent(searchTitle)) {
 				clickOnElement("Add Address Page", "Address 1", addressSearch);
 				enterText("Add Address Page", "Address 1", addressSearch, Address1);
@@ -232,7 +233,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 					clickOnElement("New Portfolio Page", "Branch Region list",getDynamicElement("Branch Region list",branchRegionList,branchRegion));
 				}
 				if (!sAccountingBranch.equals("")) {
-					clearAndType("New Portfolio Page", "Delivery Point", accountingBranch, sAccountingBranch);
+					clearAndType("New Portfolio Page", "Accounting Branch", accountingBranch, sAccountingBranch);
 				}
 				clickOnElement("New Portfolio Page", "Next Button", nextButton);
 				stepResult = true;
@@ -353,7 +354,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			if(isElementPresent(codesPageTitle)) {
 				clickOnElement("New Portfolio Page", "Next Available Link",nextAvailableLink);
-				Thread.sleep(2000);
+				Thread.sleep(4000);
 				sPortfolioNo=getElementAttribute("New Portfolio Page", "Portfolio No",  portfolioTextbox,"value");
 				if(sPortfolioNo != "")
 					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Portfolio_No", rowNo, sPortfolioNo);				
@@ -537,8 +538,9 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 				if (isElementPresent(relationshipTab)) {
 					clickOnElement("Change Portfolio Page", "Add Name", newNameLink);
-					Thread.sleep(5000);
+					Thread.sleep(4000);
 					switchToWindowWithTitleContaining("Name Search");
+					Thread.sleep(4000);
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
 					Thread.sleep(4000);

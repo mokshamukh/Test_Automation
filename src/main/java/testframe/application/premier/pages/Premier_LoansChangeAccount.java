@@ -141,13 +141,13 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	String custLineName = "//u[contains(text(),'%s')]";
 	String loanChangeHeader = "//a[contains(text(),'%s')]";
 	String loanChangeHeaderInquiry = "//td[contains(text(),'%s')]";
-	String relationshipAddName = "//option[text()='%s']/../../following-sibling::td/select[contains(@id,'RelationshipCode')]";
+	String relationshipAddName = "//u[text()='%s']/../../td/select[contains(@id,'RelationshipCode')]";
 	String newName = "(//td[contains(text(),'Name:')]/following-sibling::td/select[contains(@name,'RelatedToIdTMP')])[%s]";
 	String newEstatement = "(//td[contains(text(),'Name:')]/following-sibling::td/select[contains(@name,'EmailAddrIndicator1')])[%s]";
 	String newNameInquiryPage = "//table[@name='Relationships']//u[text()='%s']";
-	String updateName = "//b[text()='Name']/../../..//option[text()='%s']";
+	String updateName = "//b[text()='Name']/../../..//u[text()='%s']";
 	String newNameRelationshipInquiryPage = "//table[@name='Relationships']//u[text()='%s']/../../td[10]";
-	String removeNameIcon = "//option[text()='Trent Boult']/../../following-sibling::td/img[contains(@title,'Delete')]";
+	String removeNameIcon = "//u[text()='%s']/../../td/img[contains(@title,'Delete')]";
 	
 	public void changeLoanAccountDetails(String sAccountNumber,String sClass, String sBranchRegion, String sAccountingMethod, String sWarning, String sPaymentFrequency, String sStatusCode, String sWriteDownStatus, String sLoanRatingCode1, String sPaymentRestrictionCode, String sPaymentRestrictionCodeOverride, String sBankruptcyChapter, String sBankruptcyStatus, String sBankruptcyPetitionFileDate) throws Exception {
 		boolean stepResult = false;
@@ -208,6 +208,9 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				clickOnElement("Change Page", "Save Button", saveButton2);
 				Thread.sleep(5000);
 				if(isElementPresent(warningHeader)) {
+					if (isElementPresent(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+					}
 					if (isElementPresent(warning2)) {
 						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
 					}
@@ -351,6 +354,9 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					if (isElementPresent(warning2)) {
 						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
 					}
+					if (isElementPresent(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+					}
 					if (isElementPresent(warning3)) {
 						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
 					}
@@ -413,6 +419,9 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				if(isElementPresent(warningHeader)) {
 					if (isElementPresent(warning2)) {
 						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					}
+					if (isElementPresent(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
 					}
 					if (isElementPresent(warning3)) {
 						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
@@ -485,6 +494,9 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				if(isElementPresent(warningHeader)) {
 					if (isElementPresent(warning2)) {
 						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					}
+					if (isElementPresent(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
 					}
 					if (isElementPresent(warning3)) {
 						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
@@ -559,6 +571,9 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				if(isElementPresent(warningHeader)) {
 					if (isElementPresent(warning2)) {
 						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					}
+					if (isElementPresent(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
 					}
 					if (isElementPresent(warning3)) {
 						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
