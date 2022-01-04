@@ -73,12 +73,12 @@ public class Premier_CustomerContact extends CommonLibrary{
 	public void searchSSN(String sSN) throws Exception{
 		boolean stepResult = false;
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(7000);
 			if (isElementPresent(searchTitle)) {
 				clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
 				enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
 				clickOnElement("Add Name Page", "Submit", submitSearch);
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 				if(isElementPresent(nameLink)){
 					clickOnElement("Add Name Page", "Name link", nameLink);}
 				stepResult = true;

@@ -51,7 +51,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 	String sWebAddressValue = "(//input[contains(@name,'ContactInfo')])[%s]";
 	public By lastPhoneNumValue =By.xpath("//table[@id='mcPhoneNumbers']//tr[last()-1]/td[6]/input[contains(@name,'PhoneNumber')]");
 	public By lastemailidValue =By.xpath("//table[@id='mcEmailAddress']//tr[last()-1]/td[6]/input[contains(@name,'ContactInfo')]");
-	public By allRelationshipNameCheckBoc =By.xpath("//input[contains(@type,'checkbox') and contains(@name,'Name')]");
+	public By allRelationshipNameCheckBoc =By.xpath("//a[text()='All relationships will reflect name changes.']/../../input");
 	
 	//below xpaths are not used yet in scripts
 	public By nameTitle = By.xpath("//label[text()='Step 1 - Name']");
@@ -384,7 +384,8 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 						enterText("Change Name - Search Page", "Enter SSN Field", BuildRelationshipSSN, buildRelationship_SSN);
 						clickOnElement("Change Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
 						//waitForPresenceOfElement("Change Name - Search Page", "Searched Name List", NameList);
-						if (isElementPresent(NameList)){
+						Thread.sleep(3000);
+						if (isElementPresent(SearchResult)){
 							clickOnElement("Change Name - Search Page", "Searched Result Link",SearchResult);
 							stepResult = true;
 						}
@@ -450,6 +451,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 			clickOnElement("Change Name Page", "Save", saveButton);
 			
 			if (isOptionalElementPresent(allRelationshipNameCheckBoc)){
+				Thread.sleep(2000);
 				clickOnElement("Change Name Page", "All relationships will reflect name changes Check Box", allRelationshipNameCheckBoc);
 				clickOnElement("Change Name Page", "Save", saveButton);
 				Thread.sleep(1000);

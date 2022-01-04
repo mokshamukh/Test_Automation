@@ -31,6 +31,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	String accountNameList =  "(//select[contains(@name,'RelatedToIdTMP')])[%s]";
 	String relationshipList =  "(//select[contains(@name,'RelationshipCode')])[%s]";
 	public By codesPageTitle =  By.xpath("//a[text()='Step 3 - Codes']");
+	public By paymentPageTitle =  By.xpath("//a[text()='Step 4 - Payment']");
 	public By nextAvailableLink = By.xpath("//u[text()='Next Available']");
 	public By accountNumberTextbox =  By.xpath("//td[contains(text(),'Account Number:')]/following-sibling::td/input[contains(@id,'AccountNumber')]");
 	public By boxRentCodeInput =  By.xpath("(//td/input[contains(@id,'BoxRentCode')])[1]");
@@ -43,7 +44,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By lastBillingDate =  By.xpath("//input[contains(@id,'NextBillingDate')]");
 	String accountNameInquiryPage =  "//td//u[contains(text(),'%s')]";
 	String relationshipInquiryPage =  "//td[contains(text(),'%s')]";
-
+	public By productList =  By.xpath("//select[contains(@name,'ProductNumber')]");
 
 
 	//public By depositInquiryHeader = By.xpath("//td[contains(text(),'Demand Deposit')]");
@@ -166,18 +167,10 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 						driver, "Y");
 			}
 		}}
-	public void newSDBAccount_CodesScreen(String sAccountNum, String sRentCode,String sBillingMethod,String sChargeAccount,
-			String sBillingFrequency,String sLastBillingDate,String excelFilePath, String sheetName, int rowNo) throws Exception {
+	public void newSDBAccount_CodesScreen(String sAccountNum, String sRentCode,String excelFilePath, String sheetName, int rowNo) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(codesPageTitle)) {
-				/*
-				clickOnElement("New DD Account Page", "Next Available Link",nextAvailableLink);
-				Thread.sleep(2000);
-				sAccountNo=getElementAttribute("New DD Account Page", "Account No",  accountNumberTextbox,"value");
-				if(sAccountNo != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Deposit_AccountNumber", rowNo, sAccountNo);				
-				 */
 				if (!sAccountNum.equals("")) {
 					enterText("New Safe Deposit Box Account Page", "Account Number", accountNumberTextbox, sAccountNum);
 				}				
@@ -186,7 +179,31 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 					Thread.sleep(1000);
 					clickOnElement("New Safe Deposit Box Account Page", "Rent Code list",getDynamicElement("Rent Code list",selectRentCode,sRentCode));
 				}
+				waitElement(1500);
+				clickOnElement("New SDB Page", "Next Button", nextButton);
+				waitElement(1500);
+				stepResult = true;
+			}					
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Details Entered on Codes Screen Successfully", "Passed",driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Could not entered details on Codes Screen", "Failed",driver, "Y");
+			}
 
+		}
+	}
+	
+	public void newSDBAccount_PaymentScreen(String sBillingMethod,String sChargeAccount,
+			String sBillingFrequency,String sLastBillingDate,String excelFilePath, String sheetName, int rowNo) throws Exception {
+		boolean stepResult = false;
+		try {
+			if(isElementPresent(paymentPageTitle)) {
+				
 				if (!sBillingMethod.equals("")) {
 					selectElementByVisibleText("New Deposit Account Page", "Billing Method Field", selectBillingMethod, sBillingMethod);
 				}
@@ -201,10 +218,6 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 					enterText("New Safe Deposit Box Account Page", "Account Title Code", lastBillingDate, sLastBillingDate);
 				}
 				waitElement(1500);
-				//clickOnElement("New DD Account Page", "Finish Button", finishButton);
-				//Thread.sleep(2000);
-				//driver.switchTo().defaultContent();
-				//switchToWindowWithTitleContaining("Institution");
 				stepResult = true;
 			}					
 		}catch(Exception e) {
@@ -459,6 +472,28 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Could not Validated Account Details on Account Inquiry page" , "Failed", driver, "Y");
+			}
+		}}
+	public void newSDB_CustomerProductDetails(String sProduct) throws Exception{
+		boolean stepResult = false;
+		try {
+				if(isElementPresent(customerPageTitle)) {
+					selectElementByVisibleText("New SDB Page", "Product Field", productList, sProduct);
+					Thread.sleep(1000);
+					clickOnElement("New SDB Page", "Next Button", nextButton);
+					stepResult = true;
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Enter Details on New SDB Customer Screen", "Details entered on New SDB Customer screen Successfully", "Passed",
+						driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Enter Details on New SDB Customer Screen", "Could not entered details", "Failed",
+						driver, "Y");
 			}
 		}}
 }

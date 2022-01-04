@@ -63,8 +63,8 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By newAccountSafeDepositBox = By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'New Account')]");
 	public By accountInquirySDBDeposits = By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'Account Inquiry')]");
 	public By changeAccountSDB =  By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'Change Account')]");
-
-
+	public By collateralMenu = By.xpath("//a[text()='Collateral']");
+	public By newCollateral = By.xpath("//a[text()='New Collateral']");
 	
 	public Premier_HomeMenu(WebDriver driver) {
 		super(driver);
@@ -98,10 +98,10 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void customerInquiry() throws Exception{
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(homePageHeader) || isElementPresent(changeNameTitle) || isElementPresent(newAddresTitle) || isElementPresent(changeAddressTitle)){
+			//if (isElementPresent(homePageHeader) || isElementPresent(changeNameTitle) || isElementPresent(newAddresTitle) || isElementPresent(changeAddressTitle)){
 				clickOnElement("Home Page", "Customer Inquiry", customerInquiry);
 				stepResult = true;
-			}	
+			//}	
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -169,7 +169,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public void goToNewName() throws Exception{
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(homePageHeader)|| isElementPresent(customerInquiryHeader)){
+			if (isElementPresent(customerHeader)){
 				//clickOnElement("Home Menu Page", "name field", name);
 				clickOnElement("Home Menu Page", "new name field", newName);
 				stepResult = true;
@@ -949,4 +949,46 @@ public class Premier_HomeMenu extends CommonLibrary {
 			}
 		}}
 	
+	public void selectCollateralMenu() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(collateralMenu)){
+				clickOnElement("Home Menu Page", "Collateral field", collateralMenu);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Collateral from Menu", "Menu Collateral selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Collateral from Menu", "Could not select Menu Collateral.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	public void newCollateralSubMenu() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(collateralMenu)){
+				clickOnElement("Home Menu Page", "New Collateral SubMenu", newCollateral);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Collateral from Menu", "SubMenu New Collateral selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Collateral from Menu", "Could not select SubMenu New Collateral.", "Failed", driver, "Y");
+			}
+		}
+	} 
 }

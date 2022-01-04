@@ -6,11 +6,12 @@ import java.util.Map;
 import testframe.common.utilities.DateTimeHelper;
 
 public class PremierCommonNavigation extends PremierTest{
-
 	
-	 
+	
+	
 	public void customerInquiry(String strLastName, String TaxID,String strName, String strPhoneNum, String strEmail, 
 			String strAddress1,String strAddress2,String strZipCode,String sSSNRelationship,String sBeneficialOnwerName) throws Exception{
+		Thread.sleep(3000);
 		premierHomeMenuPage.customerInquiry();
 		premierCustomerInquiryPage.searchCustomer(strLastName, TaxID);
 		premierCustomerInquiryPage.seeAdditionalAddresses();
@@ -222,7 +223,7 @@ public class PremierCommonNavigation extends PremierTest{
 
 		
 	}
-	public void portfolioCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sPortflioInquireFlag) throws Exception{
+	public void portfolioCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String testdataFile_Path,String sTestCase,String sPortflioInquireFlag) throws Exception{
 		premierHomeMenuPage.portfolioMenu();
 		premierHomeMenuPage.portfolioNew();
 		Thread.sleep(6000);
@@ -258,7 +259,7 @@ public class PremierCommonNavigation extends PremierTest{
 		}
 	}
 	
-	public void portfolioCreationWithCustomer(List<Map<String, String>> tc_Test_Data,int iTDRow,String sTestCase,String sPortflioInquireFlag) throws Exception{
+	public void portfolioCreationWithCustomer(List<Map<String, String>> tc_Test_Data,int iTDRow,String testdataFile_Path,String sTestCase,String sPortflioInquireFlag) throws Exception{
 		premierHomeMenuPage.portfolioMenu();
 		premierHomeMenuPage.portfolioNew();
 		Thread.sleep(6000);
@@ -487,12 +488,14 @@ public class PremierCommonNavigation extends PremierTest{
 			sTaxIdentification = (tc_Test_Data.get(iTDRow).get("SDB_SearchSSN").split("\\|\\|"))[i];
 			premierSafeDepositBox.newSDBAccount_CustomerScreenSearch(sTaxIdentification,sName,sSDBRelationship,i+1);
 		}
-		premierSafeDepositBox.clickOnNext();
+		premierSafeDepositBox.newSDB_CustomerProductDetails(tc_Test_Data.get(iTDRow).get("SDB_Product"));
+		//premierSafeDepositBox.clickOnNext();
 		premierSafeDepositBox.newSDBAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"),
-				tc_Test_Data.get(iTDRow).get("SDB_RentCode"),tc_Test_Data.get(iTDRow).get("SDB_BillingMethod"),
+				tc_Test_Data.get(iTDRow).get("SDB_RentCode"),testdataFile_Path, sTestCase, iTDRow+1);
+		premierSafeDepositBox.newSDBAccount_PaymentScreen(tc_Test_Data.get(iTDRow).get("SDB_BillingMethod"),
 				tc_Test_Data.get(iTDRow).get("SDB_ChargeAccount"),tc_Test_Data.get(iTDRow).get("SDB_BillingFrequency"),
 				tc_Test_Data.get(iTDRow).get("SDB_LastBillingDate"),testdataFile_Path, sTestCase, iTDRow+1);
-		premierSafeDepositBox.sdbFinishButton();//need to update
+		premierSafeDepositBox.sdbFinishButton();
 		if(sSDBInquireFlag.equalsIgnoreCase("Y")){ 
 			premierHomeMenuPage.accountInquirySDB();
 			premierSafeDepositBox.searchAccount(tc_Test_Data.get(iTDRow).get("SDB_AccountNumber"));	
