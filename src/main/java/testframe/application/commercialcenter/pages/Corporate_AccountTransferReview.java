@@ -217,7 +217,6 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 	public void clickConfirmButton() throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(2000);
 			clickOnElement("Corporate Account Transfer Review", "Confirm Button", confirmButton);
 			stepResult = true;
 		} catch (Exception e) {

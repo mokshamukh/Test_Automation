@@ -24,7 +24,8 @@ public class EPP_VerifyPayment extends CommonLibrary{
 	
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Repair Verification')]");
 	By paymentTitle = By.xpath("//div[@id='headerBar']//td[contains(text(),'Verify Payment')]");
-	By displayMsg = By.xpath("//div[@id='Refresh_UserResponse']//..//div//p[contains(text(),'submitted for approval following repair ')]");
+	By displayMsg = By.xpath("//div[@id='Refresh_UserResponse']//..//div//p");
+	//By displayMsg = By.xpath("//div[@id='Refresh_UserResponse']//..//div//p[contains(text(),'submitted for approval following repair ')]");
 	By repairStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td//span[contains(text(),'Status')]//..//..//td[contains(text(),'Repair')]");
 	By date = By.xpath("//input[@id='Value_Date']");
     By approveBtn = By.xpath("//div[@id='img_button_approve']");

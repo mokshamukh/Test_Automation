@@ -36,6 +36,11 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By changePortfolio =  By.xpath("//a[text()='Change Portfolio']");
 	public By changeNameMenu =  By.xpath("//a[text()='Change Name']");
 	public By changeNameTitle = By.xpath("//div[text()='Customer - Names - Change Name']");
+	public By linesMenu = By.xpath("//a[text()='Lines']");
+	public By newLine = By.xpath("//a[text()='New Line']");
+	public By lineInquiry = By.xpath("//a[text()='Line Inquiry']");
+	public By loansMenu = By.xpath("//a[text()='Loans']");
+	public By newNote = By.xpath("//a[text()='New Note']");
 	
 	
 
@@ -248,4 +253,115 @@ public class Premier_HomeMenu extends CommonLibrary {
 		}
 
 	}
+	
+	public void selectLinesMenu() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)){
+				clickOnElement("Home Menu Page", "Lines field", linesMenu);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Could not select Menu New Line.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectNewLine() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)){
+				clickOnElement("Home Menu Page", "New Line field", newLine);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Could not select Menu New Line.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectLineInquiry() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)){
+				clickOnElement("Home Menu Page", "Line Inquiry field", lineInquiry);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Line Inquiry from Menu", "Menu Line Inquiry selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Line Inquiry from Menu", "Could not select Menu Line Inquiry.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectLoansMenu() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)){
+				clickOnElement("Home Menu Page", "Loans field", loansMenu);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select Loans from Menu", "Menu Loans selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select Loans from Menu", "Could not select Menu Loans.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
+	public void selectNewNote() throws Exception{
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(homePageHeader)){
+				clickOnElement("Home Menu Page", "New Note field", newNote);
+				stepResult = true;
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Select New Note from Menu", "Menu New Note selected Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Select New Note from Menu", "Could not select Menu New Note.", "Failed", driver, "Y");
+			}
+		}
+	} 
+	
 }

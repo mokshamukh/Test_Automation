@@ -19,6 +19,7 @@ import testframe.application.premier.pages.Premier_CustomerContact;
 import testframe.application.premier.pages.Premier_CustomerInquiry;
 import testframe.application.premier.pages.Premier_CustomerNewName;
 import testframe.application.premier.pages.Premier_HomeMenu;
+import testframe.application.premier.pages.Premier_LinesNewLine;
 import testframe.application.premier.pages.Premier_LogOff;
 import testframe.application.premier.pages.Premier_Login;
 import testframe.application.premier.pages.Premier_PortfolioNew;
@@ -35,7 +36,7 @@ public class PremierTest extends ApplicationBase {
 	//String strPortfolioCustName;
 	String sUserID,sPassword,sCompanyID ,sPassword_Encrypt,sSecretKey,sInstitution,sGroup;
 	String sName,sFName,sLName,sDOB,sTaxIDCode,sTaxIdentification,sAltName,sAltFirstName,sAltLastName,sPhoneNumber,sEmail,
-	sGender,sAddress1,sAddress2,sZipCode,sPortfolioRelationship,sPortfolioNameFormatCode;
+	sGender,sAddress1,sAddress2,sZipCode,sPortfolioRelationship,sPortfolioNameFormatCode,sLineName,sLineRelationship,sLineStatement,address1Val ;
 	String strName;
 	String[] strName_Split;
 
@@ -51,6 +52,7 @@ public class PremierTest extends ApplicationBase {
 		Premier_CustomerAddress premierCustomerAddress = new Premier_CustomerAddress(driver);
 		Premier_CustomerContact premierCustomerContact = new Premier_CustomerContact(driver);
 		Premier_PortfolioNew premierPortfolioNew = new Premier_PortfolioNew(driver);
+		Premier_LinesNewLine premierLinesNewLine = new Premier_LinesNewLine(driver);
 		Premier_LogOff premierLogOff = new Premier_LogOff(driver);
 
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
@@ -998,8 +1000,57 @@ public class PremierTest extends ApplicationBase {
 				}
 				premierPortfolioNew.portfolioSaveButton();
 				premierLogOff.logoffApplication();
-				
 				break;
+				
+			case "PREMIER_TC030":
+				
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				premierHomeMenuPage.selectLinesMenu();
+				premierHomeMenuPage.selectNewLine();
+				premierLinesNewLine.serachNewLineUsingPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+				 strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Line_Name");
+                 strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+                 iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+                 for (int i = 0; i<iPortfolioCustomerCount;i++) {
+                	 sLineName = (tc_Test_Data.get(iTDRow).get("Line_Name").split("\\|\\|"))[i];
+                                 String sLineRelationship = (tc_Test_Data.get(iTDRow).get("Line_Relationship").split("\\|\\|"))[i];
+                                 String sLineStatement = (tc_Test_Data.get(iTDRow).get("Line_eStatement").split("\\|\\|"))[i];
+                                 premierLinesNewLine.newLine_CustomerScreen(sLineName,sLineRelationship,sLineStatement,i+1);
+                 }
+                 premierLinesNewLine.newLineAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("Line_FinancialStatementNotify"),
+                		 tc_Test_Data.get(iTDRow).get("Line_NextFinDate"),tc_Test_Data.get(iTDRow).get("Line_NextReviewDate"),
+                		 tc_Test_Data.get(iTDRow).get("Line_MaximumCredit"),tc_Test_Data.get(iTDRow).get("Line_MaximumCreditCode"),
+                		 tc_Test_Data.get(iTDRow).get("Line_ResponsibiliytCode"));
+                 premierLinesNewLine.newLinesFinishButton();
+                 premierHomeMenuPage.selectLineInquiry();
+                 premierLinesNewLine.searchLineNumber(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+                 strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Line_Name");
+                 strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+                 iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+                 for (int i = 0; i<iPortfolioCustomerCount;i++) {
+                	 sLineName = (tc_Test_Data.get(iTDRow).get("Line_Name").split("\\|\\|"))[i];
+                	             premierLinesNewLine.validateDetailsInLineInquiry(tc_Test_Data.get(iTDRow).get("Portfolio_No"), sLineName);
+                 }
+                 premierLinesNewLine.closeScreen_Image();
+                 premierHomeMenuPage.selectLoansMenu();
+                 premierHomeMenuPage.selectNewNote();
+                 premierLinesNewLine.searchLineNumber(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+                 strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Line_Name");
+                 strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
+                 iPortfolioCustomerCount = strPortfolioCustName_Split.length;
+                 for (int i = 0; i<iPortfolioCustomerCount;i++) {
+                	 sLineName = (tc_Test_Data.get(iTDRow).get("Line_Name").split("\\|\\|"))[i];
+                                 String sLineRelationship = (tc_Test_Data.get(iTDRow).get("Line_Relationship").split("\\|\\|"))[i];
+                                 String sLineStatement = (tc_Test_Data.get(iTDRow).get("Line_eStatement").split("\\|\\|"))[i];
+                                 premierLinesNewLine.newLine_CustomerScreen(sLineName,sLineRelationship,sLineStatement,i+1);
+                 }
+                 premierLinesNewLine.newLine_CustomerProductDetails(tc_Test_Data.get(iTDRow).get("Line_Product"));
+                 premierLogOff.logoffApplication();
+                 break;
+				
+				
 			}
 			new HTMLReportHelper().HtmlReportFooter();
 		}

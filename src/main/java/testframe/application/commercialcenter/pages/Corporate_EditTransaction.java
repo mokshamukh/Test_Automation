@@ -88,11 +88,11 @@ public class Corporate_EditTransaction extends CommonLibrary {
 		}
 	}
 
-	public void enterToAccount(String toAcc, String toAccAmt, String toAccAmtVal, String toAccMemo, String toAccMemoVal,
+	public void enterToAccount(String toAcc, String toAccAmt, String toAccMemo,
 			String toAccPayInstr) throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(1000);
 			if (isElementPresent(editTransactionTitle)) {
 				if (!toAcc.equals("")) {
 					enterText("Corporate Edit Transaction", "To Account", toAccountField, toAcc);
@@ -100,12 +100,12 @@ public class Corporate_EditTransaction extends CommonLibrary {
 				if (!toAccAmt.equals("")) {
 					Thread.sleep(2000);
 					enterText("Corporate Edit Transaction", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt(toAccAmt)), toAccAmtVal);
+							returnByElement("To Account Amount", getToAccAmt("Amt_0")), toAccAmt);
 				}
 				if (!toAccMemo.equals("")) {
 					Thread.sleep(2000);
 					clearAndType("Corporate Edit Transaction", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo(toAccMemo)), toAccMemoVal);
+							returnByElement("To Account Memo", getToAccMemo("Memo_0")), toAccMemo);
 					/*
 					 * enterText("Corporate Edit Transaction",
 					 * "To Account Memo", returnByElement("To Account Memo",

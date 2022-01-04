@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 
 /**
@@ -34,7 +35,7 @@ public class Admin_SearchUsers extends CommonLibrary{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void searchUser(String userId,String userDestination, String userName,String labelVal,String showLabels) {
+	public void searchUser(String userId,String userDestination, String userName,String labelVal,String showLabels) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(searchUserTitle)) {
@@ -59,16 +60,20 @@ public class Admin_SearchUsers extends CommonLibrary{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
+			if (stepResult == true){
 				System.out.println("Pass -- search");
-			else
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "User searched Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not search user Successfully", "Passed", driver, "Y");
+				}
+			
 		}
 		
 	}
 	 
 	
-	public void clickActionButton() {
+	public void clickActionButton() throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(userActionButton)) {
@@ -80,15 +85,19 @@ public class Admin_SearchUsers extends CommonLibrary{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
+			if (stepResult == true){
 				System.out.println("Pass");
-			else
+				System.out.println("Pass -- search");
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "click action Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not click action Successfully", "Passed", driver, "Y");
+				}
 		}
 	}
 	
 	
-	public void clickEditButton(){
+	public void clickEditButton() throws Exception{
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement("Admin Search User Page", "Edit Button", userEditButton);
@@ -100,15 +109,19 @@ public class Admin_SearchUsers extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "click edit Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not click edit Successfully", "Passed", driver, "Y");
+				}
+			
 		}
 	}
 	
 
-	public void clickCloneButton(){
+	public void clickCloneButton() throws Exception{
 		boolean stepResult = false;
 		try {
 			waitForPresenceOfElement("Admin Search User Page", "Clone Button", userCloneButton);
@@ -120,10 +133,13 @@ public class Admin_SearchUsers extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "click clone Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not click clone Successfully", "Passed", driver, "Y");
+				}
 		}
 	}
 	

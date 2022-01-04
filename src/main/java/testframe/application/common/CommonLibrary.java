@@ -1224,13 +1224,23 @@ public class CommonLibrary {
 	}
 
 	protected void clickOnELementUsingActions(WebElement element) {
+		/*Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().perform();*/
+
+		//---altered code
 		Actions actions = new Actions(driver);
+		actions.moveToElement(element).perform();
+		waitElement(1500);
+		actions.sendKeys(Keys.DOWN).perform();
+		waitElement(1500);
 		actions.moveToElement(element).click().perform();
-	}
+
+		}
 
 	protected void clickOnELementUsingJS(WebElement element) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+		
 	}
 	
 	protected void enterOnELementUsingJS(WebElement element,String value) {
@@ -1437,8 +1447,8 @@ public class CommonLibrary {
 		try {
 			Log.info(messageToDisplay);
 			WebElement element = driver.findElement(By.xpath(String.format(field, value)));
+			waitElement(5000);
 			clickOnELementUsingActions(element);
-
 		} catch (Exception e) {
 			Log.error(errorMessageToDisplay, e);
 			throw new Exception(errorMessageToDisplay);

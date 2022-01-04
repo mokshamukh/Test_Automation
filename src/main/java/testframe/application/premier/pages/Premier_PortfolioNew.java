@@ -59,7 +59,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	String portfolioAddEmailLink =  "(//u[contains(text(),'Add E-Mail')])[%s]";
 	String portfolioEMailTextBox =  "(//input[contains(@id,'ContactInfo')])[%s]";
 	public By searchTitle = By.xpath("//label[text()='Search']");
-	public By searchTitlePortfolio = By.xpath("//td[contains(text(),'Search')]");
+	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By addressSearch = By.xpath("//input[@name='Address']");
 	public By streetSearch = By.xpath("//input[@name='StreetName']");
 	public By addressIDSearch = By.xpath("//input[@name='AddressID']");
@@ -468,7 +468,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			Thread.sleep(4000);
 				driver.switchTo().frame("Main");
-				if (isElementPresent(searchTitlePortfolio)) {
+				if (isElementPresent(searchTitle2)) {
 					clickOnElement("Search Portfolio Page", "Portfolio Number", portfolioSearch);
 					enterText("Search Portfolio Page", "Portfolio Number", portfolioSearch, portfolioNo);
 					clickOnElement("Search Portfolio Page", "Submit", submitSearch);
