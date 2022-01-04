@@ -420,7 +420,7 @@ public class PremierTest extends ApplicationBase {
 				new PremierCommonNavigation().customerInquiry("",  tc_Test_Data.get(iTDRow).get("Name_TaxIdentification"),"", "",	"",
 						tc_Test_Data.get(iTDRow).get("Address_UpdateAddress1"), tc_Test_Data.get(iTDRow).get("Address_UpdateAddress2"),
 						tc_Test_Data.get(iTDRow).get("Address_UpdateZipCode"),"","");
-				premierLogOff.logoffApplication();
+			premierLogOff.logoffApplication();
 				break;
 
 			case "PREMIER_TC014":

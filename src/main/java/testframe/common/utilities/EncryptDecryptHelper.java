@@ -26,6 +26,14 @@ public class EncryptDecryptHelper {
     }
     */
     
+    
+  /*   @Test
+    public void getEncrypt(){
+    	String val = decrypt("SeLgqr9d1W179zWd7wfIWQ==","SECRET");
+    	System.out.print(val);
+    }
+    */
+    
     public void prepareSecreteKey(String myKey) {
         MessageDigest sha = null;
         try {

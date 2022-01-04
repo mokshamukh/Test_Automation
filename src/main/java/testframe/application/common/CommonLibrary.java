@@ -1278,8 +1278,17 @@ public class CommonLibrary {
 	}
 
 	protected void clickOnELementUsingActions(WebElement element) {
+		/*Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().perform();*/
+		
+		//---altered code
 		Actions actions = new Actions(driver);
+		actions.moveToElement(element).perform();
+		waitElement(1000);
+		actions.sendKeys(Keys.DOWN).perform();
+		waitElement(1000);
 		actions.moveToElement(element).click().perform();
+		
 	}
 
 	protected void clickOnELementUsingJS(WebElement element) {
