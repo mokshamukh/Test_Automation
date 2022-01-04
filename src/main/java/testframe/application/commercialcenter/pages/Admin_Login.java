@@ -27,8 +27,10 @@ public class Admin_Login extends CommonLibrary {
 	public By cancelButton = By.xpath("//button[@id='login']");
 	public By forgotPasswordButton = By.xpath("//button[@id='forgot']");
 	public By welcomeRepublicHeader =  By.xpath("//h1[text()='Welcome to Republic Bank CERT']"); 
+	public By dashboardIcon = By.xpath("//li/a/span[text()='Dashboard']");
 
 	String pageMenuOptions = "//li/a/span[text()='%s']";
+	
 	
 	public Admin_Login(WebDriver driver) {
 		super(driver);
@@ -58,7 +60,7 @@ public class Admin_Login extends CommonLibrary {
 
 	}
 
-	public void logInToApplication( String admCompanyID, String admUserID, String psd,String fieldToValidate) throws Exception {
+	public void logInToApplication( String admCompanyID, String admUserID, String psd) throws Exception {
 		boolean stepResult = false;
 		try {
 
@@ -72,7 +74,7 @@ public class Admin_Login extends CommonLibrary {
 				validateTextEquals("Admin Login Page", "User ID", verifyUserID, admUserID);
 				enterText("Admin Login Page", "Password", password, psd);
 				clickOnElement("Admin Login Page", "Login Button", loginButton);
-				if (isElementPresent(getDynamicElement("Menu Bar Option", pageMenuOptions, fieldToValidate)))
+				if (isElementPresent(dashboardIcon))
 				stepResult = true;
 			}
 		} catch (Exception e) {

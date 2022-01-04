@@ -24,6 +24,7 @@ public class Corporate_Login extends CommonLibrary {
 	By forgotPasswordButton = By.xpath("//a[text()='Forgot Password?']");
 	String pageMenuOptions = "//a[@title='%s']";
 	By corpRepublicBankLogo = By.xpath("//img[@class='company-image']");
+	By dashboardTitle = By.xpath("//a[@title='Dashboard']");
 	
 	
 	public Corporate_Login(WebDriver driver) {
@@ -36,7 +37,6 @@ public class Corporate_Login extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			goTo(url);
-			Thread.sleep(4000);
 			if (isElementPresent(corpRepublicBankLogo))
 				stepResult = true;
 		} catch (Exception e) {
@@ -52,10 +52,9 @@ public class Corporate_Login extends CommonLibrary {
 
 	}
 
-	public void logInToApplication(String corpCompanyID, String corpUserID, String psd, String fieldToValidate) throws Exception {
+	public void logInToApplication(String corpCompanyID, String corpUserID, String psd) throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(4000);
 			isElementPresent(corpRepublicBankLogo);
 			enterText("Corporate Login Page", "CompanyID", companyID, corpCompanyID);
 			enterText("Corporate Login Page", "UserID", userID, corpUserID);
@@ -63,7 +62,7 @@ public class Corporate_Login extends CommonLibrary {
 			if (isElementPresent(img)) {
 				enterText("Corporate Login Page", "Password", password, psd);
 				clickOnElement("Corporate Login Page", "Login Button", loginButton);
-				if (isElementPresent(getDynamicElement("Menu Bar Option", pageMenuOptions, fieldToValidate)))
+				if (isElementPresent(dashboardTitle))
 					stepResult = true;
 			}
 		} catch (Exception e) {
