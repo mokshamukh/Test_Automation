@@ -25,7 +25,8 @@ public class Premier_LinesNewLine extends CommonLibrary{
 		premierPortfolioNew = new Premier_PortfolioNew(driver);
 	}
 
-
+	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
+	String search1 = "(//img[@title='Search'])[%s]";
 	By newLineHeader = By.xpath("//td[text()='New Line']");
 	By newLineTitle = By.xpath("//td[contains(text(),'Search')]");
 	By portfolioNumber = By.xpath("//input[@name='Port']");
@@ -40,7 +41,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
 	By maximumCreditCode = By.xpath("(//select[contains(@name,'MaximumCreditCode')])");
 	By responsibilityCodeButton =  By.xpath("(//input[contains(@name,'ResponsibilityCode')])[3]");
 	By finishButton = By.xpath("//button[@value='Finish']");
-	By warningHeader = By.xpath("(//tr[@class='captionBar']//td[@class='caption-text'][contains(text(),'')])[1]");
+	By warningHeader = By.xpath("//tr[@class='captionBar']//td[@class='caption-text'][contains(text(),'Warning')]");
 	By warningChkBox = By.xpath("(//input[contains(@name,'ResponsibilityCode')])[1]");
 	By saveBtn = By.xpath("//*[@title='Save']");
 	By linesInquiryTilte = By.xpath("//div[text()='Lines - Line Inquiry']");
@@ -58,32 +59,6 @@ public class Premier_LinesNewLine extends CommonLibrary{
 	String relationshipList =  "(//select[contains(@name,'RelationshipCode')])[%s]";
 	String eStatementList =  "(//select[contains(@name,'EmailAddrIndicator1')])[%s]";
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
-	 
-	
-
-	public void serachNewLineUsingPortfolio(String portfolioNo) throws Exception {
-		boolean stepResult = false;
-		try {
-			driver.switchTo().frame("Main");
-			if (isElementPresent(newLineHeader)) {
-				if (isElementPresent(newLineTitle)) {
-					premierPortfolioNew.searchPortfolio(portfolioNo);
-					stepResult = true;
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search and New Line", "Customer Searched on New Line Page Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search and New Line", "Could not Searched Customer Details on New Line Page", "Failed",driver, "Y");
-			}	
-		}
-
-	}
 
 
 	public void newLine_CustomerScreen(String sLineName, String sLineRelationship, String sLineStatement, int CustomerCount) throws Exception{
@@ -96,10 +71,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
 				Thread.sleep(2000);
 				selectElementByVisibleText("New Line Page", "eStatement Field", getDynamicElement("eStatement Field",eStatementList,Integer.toString(CustomerCount)), sLineStatement);
 				Thread.sleep(2000);
-//					if (!address1Val.equals("")) {
-//						enterText("New Address Page", "Address 1", custAddress, address1Val);
-//					}
-				clickOnElement("New Line Page", "Next Button", nextBtn);
+			
 				stepResult = true;
 			}
 		} catch (Exception e) {
@@ -117,15 +89,48 @@ public class Premier_LinesNewLine extends CommonLibrary{
 		}
 		
 	}
-
+	public void newLine_CustomerScreen_Search(String sSN,String sLineName, String sLineRelationship, String sLineStatement, int CustomerCount) throws Exception{
+		boolean stepResult = false;
+		try {
+			if(isElementPresent(customerPageTitle)) {
+				clickOnElement("New Line Page", "Search Icon", getDynamicElement("Search Icon",search1,Integer.toString(CustomerCount)));
+				switchToWindowWithTitleContaining("Name Search");
+				driver.switchTo().frame("bottom");
+				new Premier_CustomerContact(driver).searchSSN(sSN);
+				
+				switchToWindowWithTitleContaining("Institution");
+				driver.switchTo().frame("Main");
+				
+				selectElementByVisibleText("New Line Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sLineRelationship);
+				Thread.sleep(2000);
+				selectElementByVisibleText("New Line Page", "eStatement Field", getDynamicElement("eStatement Field",eStatementList,Integer.toString(CustomerCount)), sLineStatement);
+				Thread.sleep(2000);
+			
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Line Account Customer Screen", "Customer Details entered on New Line Account Customer screen Successfully", "Passed",
+						driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Line Account Customer Screen", "Could not entered Customer details", "Failed",
+						driver, "Y");
+			}
+		}
+		
+	}
 	
 	public void newLine_CustomerProductDetails(String sProduct) throws Exception{
 		boolean stepResult = false;
 		try {
 				if(isElementPresent(customerPageTitle)) {
-					selectElementByVisibleText("New Note Page", "Product Field", productList, sProduct);
+					selectElementByVisibleText("New Loan Page", "Product Field", productList, sProduct);
 					Thread.sleep(1000);
-					clickOnElement("New Portfolio Page", "Next Button", nextButton);
+					clickOnElement("New Loan Page", "Next Button", nextButton);
 					stepResult = true;
 				}
 		} catch (Exception e) {
@@ -199,7 +204,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
 					validateTextContains("New Lines Page", "New Line Header", newLineHeader, "New Line");
 				}
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 		}
 		catch(Exception e){
@@ -269,16 +274,13 @@ public class Premier_LinesNewLine extends CommonLibrary{
 	public void validateDetailsInLineInquiry(String lineNumber,String sLineName) throws Exception {
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(linesInquiryTilte)){
 				switchToWithinFrameWithName("bottom");
-				if(isElementPresent(getDynamicElement("Line Number Header field", linesInquiryHeader, lineNumber))) 
-				{
+				if(isElementPresent(getDynamicElement("Line Number Header field", linesInquiryHeader, lineNumber))){ 				
 					validateTextContains("Line Inquiry" , "Name Field", getDynamicElement("Name Field",custLineName,sLineName), sLineName);
 					switchToDefaultContent();
 					switchToWithinFrameWithName("Main");
 					stepResult = true;
-				  }
-				}
+				  }				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -300,7 +302,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
                Thread.sleep(5000);
                validateElementPresent("Inquiry Page", "Search Title", newLineTitle);
                driver.switchTo().defaultContent();
-               switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+               switchToWindowWithTitleContaining("Institution");
                stepResult = true;
         }
         catch(Exception e){

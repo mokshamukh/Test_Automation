@@ -1,12 +1,9 @@
 package testframe.runmanager;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -19,9 +16,6 @@ import testframe.common.utilities.ExcelReader;
 import testframe.common.utilities.PropertyReader;
 
 public class RunDriver {
-	
-	//private static Logger Log = Logger.getLogger(Log.class.getName());
-	
 	public  String strApplication_Name,strModule_Name,strSubModule_Name,strURL,strTCModule_Name
 						 ,strTCNum,strTCSubModule_Name,strTestCaseID,strTestDescription,strTCIterations
 						 ,strTD_filePath,strTD_sheetName;
@@ -33,14 +27,11 @@ public class RunDriver {
 	ExcelReader er = new ExcelReader();
 	SelectApplicationFlow af =new SelectApplicationFlow();
 	
-	
-	
 	static{
 		String sCurrentDateTime = new DateTimeHelper().CurrentDateTime("MM-dd-yyyy-hh-mm-ss");
 		System.setProperty("current.date.time",sCurrentDateTime);
 	}
 	 
-	
 	@Test()
 	public void navigateToTest() throws Exception{
 		DOMConfigurator.configure("log4j.xml");

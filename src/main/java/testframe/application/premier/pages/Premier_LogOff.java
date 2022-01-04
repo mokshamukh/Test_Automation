@@ -19,6 +19,7 @@ public class Premier_LogOff extends CommonLibrary {
 
 	public By logoff = By.xpath("//a[text()='Log Out']");
 	public By myGroupPageHeader = By.xpath("//h2[text()='My Groups']");
+	public By loginPageHeader =  By.xpath("//h2[text()='Log In']"); 
 
 	public Premier_LogOff(WebDriver driver) {
 		super(driver);
@@ -33,7 +34,7 @@ public class Premier_LogOff extends CommonLibrary {
 			clickOnElement("Home Page", "Security Control Option", securityControl);
 			clickOnElement("Home Page", "Log Off link", logoff);
 
-			if (isElementPresent(myGroupPageHeader))
+			if (isElementPresent(loginPageHeader) || isElementPresent(myGroupPageHeader))
 			stepResult = true;
 		}catch (Exception e) {
 		e.printStackTrace();

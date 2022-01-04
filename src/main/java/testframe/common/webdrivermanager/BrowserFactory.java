@@ -42,7 +42,9 @@ public class BrowserFactory {
 			option.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
 			option.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			option.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
+			option.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, false);
 			option.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+		
 
 			driver = new ChromeDriver(option);
 			break;

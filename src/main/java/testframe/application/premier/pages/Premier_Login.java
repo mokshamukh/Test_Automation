@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.PropertyReader;
 
 /**
  * 
@@ -39,7 +40,7 @@ public class Premier_Login extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			goTo(url);
-			if (isElementPresent(myGroupPageHeader))
+			if (isElementPresent(loginPageHeader) || isElementPresent(myGroupPageHeader))
 				stepResult = true;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -57,26 +58,27 @@ public class Premier_Login extends CommonLibrary {
 
 	}
 
-	public void selectGroup(String sGroup) throws Exception{
-		boolean stepResult = false;
-		try {
-			selectElementByVisibleText("Group Page","Select Group",group,sGroup);
-			clickOnElement("Group Page", "Submit Button", submitButton);
-			stepResult = true;
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Select Group", "Group selected successfully", "Passed", driver, "Y");
+	public void selectGroup(String sGroup, String sEnvironment) throws Exception{
+		if (sEnvironment.equals("cert")) {
+			boolean stepResult = false;
+			try {
+				selectElementByVisibleText("Group Page","Select Group",group,sGroup);
+				clickOnElement("Group Page", "Submit Button", submitButton);
+				stepResult = true;
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Select Group", "Could not select the group", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Group", "Group selected successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Group", "Could not select the group", "Failed", driver, "Y");
+				}
 			}
 		}
-
 	}
 
 	public void logInToApplication( String sUserID, String psd,String sInstitution) throws Exception {

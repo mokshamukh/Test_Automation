@@ -36,7 +36,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public By accountingBranch =  By.xpath("//td[contains(text(),'Accounting Branch:')]/following-sibling::td/input[contains(@id,'AccountingGroup')]");
 	public By duplicatePageTitle =  By.xpath("//a[text()='Step 2 - Possible Duplicates']");
 	public By duplicateMsg =  By.xpath("//td[contains(text(),'No duplicate matches were found.')]");
-	public By duplicateMsgNameAddress =  By.xpath("//td[contains(text(),'No duplicate matches were found.  The new name and address entries will be used.')]");
+	public By duplicateMsgNameAddress =  By.xpath("(//td[contains(text(),'No duplicate matches were found.')])[1]");
 	public By existingNameRadioButton =  By.xpath("(//td[contains(text(),'Existing Name')]/following-sibling::td/input[contains(@id,'RelatedToIdRadio')])[1]");
 	public By nameRelationshipPageTitle =  By.xpath("//a[text()='Step 3 - Name Relationship']");
 	String name_NameRelationshipPage =  "//td/b[text()='Name']/../../following-sibling::tr//u[contains(text(),'%s')]";
@@ -71,7 +71,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public By relationshipTab = By.xpath("//li//a[text()='Relationships']");
 	public By newNameLink = By.xpath("//u[text()='New Name']");
 	String accountNameList =  "(//select[contains(@name,'RelatedToIdTMP')])[%s]";
-	public By saveButton = By.xpath("//img[contains(@title,'Save')]");
+	public By saveButton2 = By.xpath("//img[contains(@title,'Save')]");
 	
 	
 	public Premier_PortfolioNew(WebDriver driver) {
@@ -93,7 +93,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
 					
-					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 					stepResult = true;
 				}
@@ -118,7 +118,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				switchToWindowWithTitleContaining("Address Search");
 				driver.switchTo().frame("bottom");
 				searchAddress(Address1);
-				switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				switchToWindowWithTitleContaining("Institution");
 				driver.switchTo().frame("Main");
 				stepResult = true;
 			}
@@ -136,15 +136,16 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public void searchAddress(String Address1) throws Exception {
 		boolean stepResult = false;
 		try {
+			waitElement(4000);
 			if (isElementPresent(searchTitle)) {
 				clickOnElement("Add Address Page", "Address 1", addressSearch);
 				enterText("Add Address Page", "Address 1", addressSearch, Address1);
-				//enterText("Add Address Page", "Street Name", streetSearch, Address1);
-				//enterText("Add Address Page", "Address ID", addressIDSearch, Address1);
 				clickOnElement("Add Address Page", "Submit", submitSearch);
+				waitElement(4000);
 				if(isElementPresent(addressLink)){
 				clickOnElement("Add Address Page", "Address link", addressLink);
-				}				
+				}
+				stepResult = true;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -232,7 +233,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 					clickOnElement("New Portfolio Page", "Branch Region list",getDynamicElement("Branch Region list",branchRegionList,branchRegion));
 				}
 				if (!sAccountingBranch.equals("")) {
-					clearAndType("New Portfolio Page", "Delivery Point", accountingBranch, sAccountingBranch);
+					clearAndType("New Portfolio Page", "Accounting Branch", accountingBranch, sAccountingBranch);
 				}
 				clickOnElement("New Portfolio Page", "Next Button", nextButton);
 				stepResult = true;
@@ -353,10 +354,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			if(isElementPresent(codesPageTitle)) {
 				clickOnElement("New Portfolio Page", "Next Available Link",nextAvailableLink);
-				Thread.sleep(2000);
+				Thread.sleep(4000);
 				sPortfolioNo=getElementAttribute("New Portfolio Page", "Portfolio No",  portfolioTextbox,"value");
 				if(sPortfolioNo != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Portfolio_Portfolio", rowNo, sPortfolioNo);				
+					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Portfolio_No", rowNo, sPortfolioNo);				
 				
 				if (!sPortfolioTypeCode.equals("")) {
 					enterText("New Portfolio Page", "Portfolio Type", portfolioTypeCode, sPortfolioTypeCode);
@@ -372,7 +373,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				//clickOnElement("New Portfolio Page", "Finish Button", finishButton);
 				//Thread.sleep(2000);
 				//driver.switchTo().defaultContent();
-				//switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+				//switchToWindowWithTitleContaining("Institution");
 				stepResult = true;
 			}					
 			}catch(Exception e) {
@@ -429,8 +430,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 			if(isElementPresent(addressPageTitle)) {
 					clickOnElement("New Portfolio Page", "Next Button", nextButton);
-					stepResult = true;
-			}					
+					stepResult = true;	
+			} 
+			else 
+				if(isElementPresent(codesPageTitle)) {
+					stepResult = true;	
+			}		
+						
 			}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -447,9 +453,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			clickOnElement("New Portfolio Page", "Finish Button", finishButton);
-			Thread.sleep(2000);
+			Thread.sleep(5000);
+			validateElementPresent("New Portfolio Page", "Customer Page Title", customerPageTitle);
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){
@@ -479,11 +486,11 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search SSN", "Search SSN on Contact page Successfully", "Passed",
+				new HTMLReportHelper().HtmlReportBody("Search Portfolio", "Search Portfolio on Portfolio page Successfully", "Passed",
 						driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search SSN", "Could not Search SSN on Contact page Successfully", "Failed",
+				new HTMLReportHelper().HtmlReportBody("Search Portfolio", "Could not Search Portfolio on Portfolio page Successfully", "Failed",
 						driver, "Y");
 			}
 		}}
@@ -531,12 +538,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		try {
 				if (isElementPresent(relationshipTab)) {
 					clickOnElement("Change Portfolio Page", "Add Name", newNameLink);
-					Thread.sleep(5000);
+					Thread.sleep(4000);
 					switchToWindowWithTitleContaining("Name Search");
+					Thread.sleep(4000);
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
 					Thread.sleep(4000);
-					switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 					
 					if(!sRelationship.equals("")) {
@@ -565,10 +573,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	public void portfolioSaveButton() throws Exception {
 		boolean stepResult = false;
 		try {
-			clickOnElement("New Contact Page", "Save Button", saveButton);
+			clickOnElement("New Contact Page", "Save Button", saveButton2);
 			Thread.sleep(2000);
 			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution 01 - REPUBLIC BANK UAT");
+			switchToWindowWithTitleContaining("Institution");
 			stepResult = true;
 			
 		}catch(Exception e){

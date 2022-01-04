@@ -150,7 +150,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 	protected void switchToFrameWithName(String name) throws Exception {
 		String messageToDisplay = "Switch To Frame With Name As [" + name + "]";
 		String errorMessageToDisplay = "Could not Switch To Frame With Name As [" + name + "]";
@@ -170,7 +170,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 	protected void switchToWithinFrameWithName(String name) throws Exception {
 		String messageToDisplay = "Switch To Frame With Name As [" + name + "]";
 		String errorMessageToDisplay = "Could not Switch To Frame With Name As [" + name + "]";
@@ -191,7 +191,7 @@ public class CommonLibrary {
 	}
 
 
-	
+
 	/**
 	 * Switch To Default Content
 	 * 	 * @author Moksha.mukh
@@ -404,8 +404,8 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
-	
+
+
 	/**
 	 * EnterText On Element by locators
 	 * 
@@ -614,6 +614,30 @@ public class CommonLibrary {
 	}
 
 	/**
+	 * Get Visible Selected Text On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected String getVisibleSelectedText(String pageName, String fieldName, By by) throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [GetVisibleSelectedText]    ###   Locator [" + by + "]";
+		String errorMessageToDisplay = "Could Not Get Visible Selected Text [" + fieldName + "] On Page [" + pageName + "]";
+
+		String text = null;
+		try {
+			Log.info(messageToDisplay);
+			WebElement element = findElement(by);
+			Select select = new Select(element);
+			WebElement option = select.getFirstSelectedOption();
+			text = option.getText().trim();
+		} catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+		return text;
+	}
+
+	/**
 	 * Validate All Options Element By Visible Text On Element by locators
 	 * 
 	 * @author Moksha.mukh
@@ -796,7 +820,7 @@ public class CommonLibrary {
 
 		return found;
 	}
-	
+
 	/**
 	 * Get Validate Element Present
 	 * 
@@ -915,7 +939,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 	/**
 	 * Wait For Element To be Clickable by locator
 	 * 
@@ -936,7 +960,7 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
-	
+
 
 	/**
 	 * Wait For Element To be Invisible by locator
@@ -1001,7 +1025,7 @@ public class CommonLibrary {
 		}
 		return text;
 	}
-	
+
 
 	/**
 	 * Get Element Text by locator
@@ -1207,7 +1231,37 @@ public class CommonLibrary {
 		}
 
 	}
+	/**
+	 * Validate Text Contains On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected void validateTextContains_UCASE(String pageName, String fieldName, By by, String expText) throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [ValidateTextEquals]    ###   Locator [" + by + "] Expected Text [" + expText + "]";
+		String errorMessageToDisplay = "Expected Text [" + expText + "]  Was not found On Page Name [ " + pageName
+				+ "]  And  Field [" + fieldName + "]";
 
+		Boolean matchFound = false;
+		String actualText = "";
+		try {
+			Log.info(messageToDisplay);
+			WebElement element = findElement(by);
+			actualText = element.getText().trim();
+			actualText = actualText.toUpperCase();
+			if (actualText.contains(expText)) {
+				matchFound = true;
+			}
+		} catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay + "  Actual Text [" + actualText + "]");
+		}
+
+		if (matchFound == false) {
+			throw new Exception(errorMessageToDisplay + "  Actual Text [" + actualText + "]");
+		}
+
+	}
 	private WebElement findElement(By by) {
 		scrollToElement(by);
 		return driver.findElement(by);
@@ -1230,24 +1284,23 @@ public class CommonLibrary {
 		//---altered code
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).perform();
-		waitElement(1500);
+		waitElement(1000);
 		actions.sendKeys(Keys.DOWN).perform();
-		waitElement(1500);
+		waitElement(1000);
 		actions.moveToElement(element).click().perform();
 
 		}
-
 	protected void clickOnELementUsingJS(WebElement element) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		
 	}
-	
+
 	protected void enterOnELementUsingJS(WebElement element,String value) {
-		
+
 		String js = "arguments[0].setAttribute('value','"+value+"')";
 		((JavascriptExecutor) driver).executeScript(js, element);
-		
+
 	}
 
 	public void scrollToTopOfThePage() {
@@ -1549,4 +1602,33 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
+
+
+	/**
+	 * Click On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected void mouseHoverCickOnElement(String pageName, String fieldName, By byMainElement, By bySubElement ) 
+			throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [Mosuse Hover]    ###   Locator [" + byMainElement + "]";
+		String errorMessageToDisplay = "Could Not Mouse Hover and click On [" + fieldName + "]   On Page [ " + pageName + "]";
+		try {
+			Log.info(messageToDisplay);
+			Actions actions = new Actions(driver);
+			actions.moveToElement(driver.findElement(byMainElement));
+			actions.moveToElement(driver.findElement(bySubElement));
+			actions.click().build().perform();
+		}
+		catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+
+
+	}
+
+
+
 }
