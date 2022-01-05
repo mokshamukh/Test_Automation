@@ -36,6 +36,7 @@ public class Admin_CompanyDetails extends CommonLibrary{
 	
 	String validateCompanyName = "//h1[contains(text(),'Company Details : %s')]";
 	
+	
 	public Admin_CompanyDetails(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
