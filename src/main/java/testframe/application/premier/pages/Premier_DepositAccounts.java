@@ -89,9 +89,18 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By holdAmtOption = By.xpath("//select[contains(@id,'HoldAmountOption')]");
 	public By holdslabel = By.xpath("//td[text()='Holds']");
 	public By holdExpand = By.xpath("//table[@name='Holds']//img[@class='csr-hand']");
-	
+	public By ticklerMenu = By.xpath("//a[contains(text(),'Tickler')]");
+	public By ticklerTitle = By.xpath("//a[contains(text(),'Tickler - New')]");
+	public By ticklerDecription = By.xpath("//input[contains(@id,'Description')]");
+	public By ticklerAdditionalMsg = By.xpath("//input[contains(@id,'AdditionalMessage')]");
+	public By ticklerNextDate = By.xpath("//input[contains(@id,'NextTicklerDate')]");
+	public By ticklerFrequencyList = By.xpath("//select[contains(@id,'RecurringFrequency')]");
+	public By ticklerExpDate = By.xpath("//input[contains(@id,'ExpirationDate')]");
+	public By activityMenu = By.xpath("//a[text()='Activity']");
+	public By ticklerlabel = By.xpath("//td[text()='Ticklers']");
 	String verifyHoldData =  "//table[@name='Holds']//td[contains(text(),'%s')]";
-	
+	public By ticklerExpand = By.xpath("//table[@name='Ticklers']//img[@class='csr-hand']");
+	String verifyTicklerData =  "//table[@name='Ticklers']//td[contains(text(),'%s')]";
 	
 	
 	
@@ -514,11 +523,11 @@ public class Premier_DepositAccounts extends CommonLibrary{
 		}finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Account Details changed Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Change Account - Hold Details", "Account - Hold Details changed Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Change Account - Hold Details", "Could not change account - Hold Details" , "Failed", driver, "Y");
 			}
 		}}
 	
@@ -559,12 +568,102 @@ public class Premier_DepositAccounts extends CommonLibrary{
 		}finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Hold Validation", "Validated Account Details - Hold on Account Inquiry page Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Could not Validated Account Details on Account Inquiry page" , "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Hold Validation", "Could not Validated Account Details - Hold on Account Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
+	
+	public void changeAccountTickler(String sAccountNumber,String sTicklerDecription, String sTicklerAdditionalMsg, 
+			String sTicklerNextDate, String sTicklerFrequencyList,String sTicklerExpDate ) throws Exception {
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
+				mouseHoverCickOnElement("Change Account Page", "Tickler Menu Field", fileMenu, ticklerMenu);
+				if (isElementPresent(ticklerTitle)){
+					
+					if (!sTicklerDecription.equals("")) {
+						enterText("Change Account Page", "Tickler Description field", ticklerDecription, sTicklerDecription);
+					}
+					
+					if (!sTicklerAdditionalMsg.equals("")) {
+						enterText("Change Account Page", "Tickler Additional Message field", ticklerAdditionalMsg, sTicklerAdditionalMsg);
+					}
+					
+					if (!sTicklerNextDate.equals("")) {
+						enterText("Change Account Page", "Tickler Next Date field", ticklerNextDate, sTicklerNextDate);
+					}
+					
+					if (!sTicklerFrequencyList.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Tickler Frequency Field", ticklerFrequencyList, sTicklerFrequencyList);
+					}
+					
+					if (!sTicklerExpDate.equals("")) {
+						enterText("Change Account Page", "Tickler Expiration Date field", ticklerExpDate, sTicklerExpDate);
+					}
+					
+					
+					stepResult = true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Change Account - Tickler Details", "Account Details - Tickler changed Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Change Account - Tickler Details", "Could not change account Details- Tickler" , "Failed", driver, "Y");
+			}
+		}}
+	
+	public void validateAccountTickerDetailsAfterChange(String sAccountNumber,String sVerifyTicklerDescription, String sVerifyTicklerDate,
+			String sVerifyTicklerFrequency,String sVerifyTicklerExpDate) throws Exception {
+		boolean stepResult = false;
+		try {
+			
+			
+			mouseHoverCickOnElement("Account Inquiry Page", "Tickler Menu Field", activityMenu, ticklerMenu);
+			waitElement(1000);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){
+				if (isElementPresent(ticklerlabel)){
+					clickOnElement("Change Account Page", "Tickler Expand Button",ticklerExpand);
+					
+					if (!sVerifyTicklerDescription.equals(""))
+						validateElementPresent("Account Inquiry" , "Tickler Description field", getDynamicElement("Tickler Description field",verifyTicklerData,sVerifyTicklerDescription));
+					
+					if (!sVerifyTicklerDate.equals(""))
+						validateElementPresent("Account Inquiry" , "Tickler Next Date field", getDynamicElement("Tickler Next Date field",verifyTicklerData,sVerifyTicklerDate));
+					
+					if (!sVerifyTicklerExpDate.equals(""))
+						validateElementPresent("Account Inquiry" , "Tickler Expiration Date field", getDynamicElement("Tickler Expiration Date field",verifyTicklerData,sVerifyTicklerExpDate));
+					
+					if (!sVerifyTicklerFrequency.equals(""))
+						validateElementPresent("Account Inquiry" , "Tickler Frequency field", getDynamicElement("Tickler Frequency field",verifyTicklerData,sVerifyTicklerFrequency));
+					
+					stepResult = true;
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Tickler Validation", "Validated Account Details - Tickler on Account Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Tickler Validation", "Could not Validated Account Details - Tickler on Account Inquiry page" , "Failed", driver, "Y");
+			}
+		}}
+	
 	
 }

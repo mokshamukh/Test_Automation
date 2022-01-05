@@ -1530,6 +1530,38 @@ public class PremierTest extends ApplicationBase {
 				premierSafeDepositBox.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;
+			
+				
+			case "PREMIER_TC059":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,testdataFile_Path,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.demandDepositsSubMenu();
+				premierHomeMenuPage.changeAccountDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountTickler(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerDescription"), 
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerAdditionalMsg"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerNextDate"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"));
+				premierDepositAccounts.saveButton();
+				
+				premierHomeMenuPage.accountInquiryDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountTickerDetailsAfterChange(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerDescription"), 
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerNextDate"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"), 
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"));
+				premierLogOff.logoffApplication();				
+				break;	
 				
 			case "PREMIER_TC060":
 				premierLoginPage.launchApplication(sURL);
