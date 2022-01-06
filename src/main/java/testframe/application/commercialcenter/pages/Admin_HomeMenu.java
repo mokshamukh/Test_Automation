@@ -17,6 +17,9 @@ public class Admin_HomeMenu extends CommonLibrary{
 
 	public String adminHomePage;
 	By verifyAccInfoTitle = By.xpath("//span[text()='Account Information']");
+	By administration = By.xpath("//li/a/span[text()='Administration']");
+	By searchCompanies = By.xpath("//li/a[text()='Search Companies']");
+	By searchUsers = By.xpath("//li/a[text()='Search Users']");
 	String menuBar = "//li/a/span[text()='%s']";
 	String subMenuBar = "//li/a[text()='%s']";
 	
@@ -26,12 +29,13 @@ public class Admin_HomeMenu extends CommonLibrary{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void clickOnMenuBar(String value) throws Exception{
+	public void clickOnMenuBar() throws Exception{
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
 			if(isElementPresent(verifyAccInfoTitle)){
-				getDynamicElementClick("Home Page", "Menu Bar" , menuBar, value);
+				//getDynamicElementClick("Home Page", "Menu Bar" , menuBar, value);
+				clickOnElement("Home Page", "Menu Bar", administration);
 				stepResult = true;
 			}
 		} catch (Exception e) {
@@ -39,18 +43,19 @@ public class Admin_HomeMenu extends CommonLibrary{
 		}
 		if (stepResult==true){
 			System.out.println("Pass");
-			new HTMLReportHelper().HtmlReportBody("Click on '" + value +"' menu", "Successfully clicked on '" + value +"' menu", "Passed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Click on menu", "Successfully clicked on Administration menu", "Passed", driver, "Y");
 		}
 		else{
 			System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("Click on '" + value +"' menu", "Could not clicked on '" + value +"' menu", "Failed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Click on menu", "Could not clicked on Administration menu", "Failed", driver, "Y");
 		}
 	}
 	
-	public void clickOnSubMenuBar(String value) throws Exception{
+	public void clickOnSubMenuBar() throws Exception{
 		boolean stepResult = false;
 		try {
-			getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);
+			//getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);
+			clickOnElement("Home Page", "Sub Menu Bar", searchCompanies);
 			stepResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,11 +63,32 @@ public class Admin_HomeMenu extends CommonLibrary{
 		finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on '" + value +"' sub-menu", "Successfully clicked on '" + value +"' sub-menu", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on '" + value +"' sub-menu", "Could not clicked on '" + value +"' sub-menu", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void clickOnSearchUsers() throws Exception{
+		boolean stepResult = false;
+		try {
+			//getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);
+			clickOnElement("Home Page", "Sub Menu Bar", searchUsers);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
 			}
 		}
 	}

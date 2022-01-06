@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 /**
  * PageNage : CommercialCenter_Admin_EditUser
@@ -34,6 +35,8 @@ public class Admin_EditUser extends CommonLibrary {
 	By encryptedPsdTitle = By.xpath("//label[text()='Encrypted Report Password']");
 	By psdValidationMsg = By.xpath("//span[text()='Your passwords did not match.']");
 	By verifyUserID = By.xpath("//label[text()='User ID']/../b");
+	By verifySuccessUpdateUserMessage = By.xpath("//div[text()='Successfully updated user information']");
+	String verifyUser= "//span[contains(text(),'%s')]";
 
 	public Admin_EditUser(WebDriver driver) {
 		super(driver);
@@ -41,9 +44,9 @@ public class Admin_EditUser extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void editUser(String editUserID, String userFirstName, String userLastName, String userEnableDate,
+	public void editUser(String userID,String editUserID, String userFirstName, String userLastName, String userEnableDate,
 			String userEmailAddress, String comapanyResidesZip, String mothersName, String tempPsd,
-			String reEnterTempPsd) {
+			String reEnterTempPsd) throws Exception {
 		boolean stepResult = false;
 		boolean flag = false;
 		try {
@@ -53,13 +56,13 @@ public class Admin_EditUser extends CommonLibrary {
 					flag = true;
 				}
 				if (!userFirstName.equals("")) {
-					enterText("Edit User", "First Name", firstName, userFirstName);
+					clearAndType("Edit User", "First Name", firstName, userFirstName);
 				}
 				if (!userLastName.equals("")) {
-					enterText("Edit User", "Last Name", lastName, userLastName);
+					clearAndType("Edit User", "Last Name", lastName, userLastName);
 				}
 				if (!userEnableDate.equals("")) {
-					enterText("Edit User", "Enable Date", enableDate, userEnableDate);
+					clearAndType("Edit User", "Enable Date", enableDate, userEnableDate);
 				}
 				else{
 					isElementPresent(enableDate);
@@ -75,13 +78,13 @@ public class Admin_EditUser extends CommonLibrary {
 					enterText("Edit User", "Company Resides Zip Code", companyZipAdress, comapanyResidesZip);
 				}
 				if (!mothersName.equals("")) {
-					enterText("Edit User", "Mother's Middle Name", mothersMiddleName, mothersName);
+					clearAndType("Edit User", "Mother's Middle Name", mothersMiddleName, mothersName);
 				}
 				if (!tempPsd.equals("")) {
-					enterText("Edit User", "Temporaray Password", tempPassword, tempPsd);
+					clearAndType("Edit User", "Temporaray Password", tempPassword, tempPsd);
 				}
 				if (!reEnterTempPsd.equals("")) {
-					enterText("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
+					clearAndType("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
 				}
 				clickOnElement("Edit User", "Save Button", saveButton);
 				Thread.sleep(2000);
@@ -89,19 +92,22 @@ public class Admin_EditUser extends CommonLibrary {
 				//clickOnElement("Edit User", "Save Button", saveButton);
 				Thread.sleep(2000);
 				if(isElementPresent(psdValidationMsg)){
-					enterText("Edit User", "Temporaray Password", tempPassword, tempPsd);
-					enterText("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
+					clearAndType("Edit User", "Temporaray Password", tempPassword, tempPsd);
+					clearAndType("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
 					clickOnElement("Edit User", "Save Button", saveButton);
+					
 				}
-				stepResult = true;
+				if(isElementPresent(getDynamicElement("Edit User",verifyUser,userID))) 
+					stepResult = true;
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
-				System.out.println("Pass -- edit");
+			if (stepResult == true && flag== true)
+				new HTMLReportHelper().HtmlReportBody("User Details Edit- Admin application", "Edit User Successfully", "Passed", driver, "Y");
 			else
-				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("User Details Edit- Admin application", "Could not edit user details", "Failed", driver, "Y");
 		}
 
 	}

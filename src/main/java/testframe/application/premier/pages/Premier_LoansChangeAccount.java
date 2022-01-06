@@ -86,7 +86,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	By warning4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]");
 	By warningCheckBox4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]/../..//input");
 	By saveBtn = By.xpath("//*[@title='Save']");
-	
+
 	public By classCodeInput =  By.xpath("(//input[contains(@name,'ClassCode')])[1]");
 	public By classCodeButton =  By.xpath("(//input[contains(@name,'ClassCode')])[3]");
 	String classCodeList =  "//select[contains(@name,'ClassCode')]/option[contains(text(),'%s')]";
@@ -133,7 +133,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By nonAccrualLateChargeOptionInquiryPage = By.xpath("//td[text()='Non-Accrual Late Charge Option:']/following-sibling::td[1]");
 	public By automaticRecoveryOverrideInquiryPage = By.xpath("//td[text()='Automatic Recovery Override:']/following-sibling::td[1]");
 	public By nonAccrualDateInquiryPage = By.xpath("//td[text()='Date Non-Accrual:']/following-sibling::td[1]");
-	
+
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
 	String purposeCodeList =  "//select[contains(@name,'PurposeCode')]/option[contains(text(),'%s')]";
@@ -148,96 +148,100 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	String updateName = "//b[text()='Name']/../../..//u[text()='%s']";
 	String newNameRelationshipInquiryPage = "//table[@name='Relationships']//u[text()='%s']/../../td[10]";
 	String removeNameIcon = "//u[text()='%s']/../../td/img[contains(@title,'Delete')]";
-	
+
 	public void changeLoanAccountDetails(String sAccountNumber,String sClass, String sBranchRegion, String sAccountingMethod, String sWarning, String sPaymentFrequency, String sStatusCode, String sWriteDownStatus, String sLoanRatingCode1, String sPaymentRestrictionCode, String sPaymentRestrictionCodeOverride, String sBankruptcyChapter, String sBankruptcyStatus, String sBankruptcyPetitionFileDate) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeader,sAccountNumber))){
-				
-				if (!sClass.equals("")) {
-					clickOnElement("Change Account Page", "Class Field",classCodeInput);	
-					waitElement(1000);
-					clickOnElement("Change Account Page", "Class Field",classCodeButton);
-					waitElement(1000);
-					clickOnElement("Change Account Page", "Class Field", getDynamicElement("Class Field",classCodeList,sClass));
-				}
-				if (!sBranchRegion.equals("")) {
-					clickOnElement("Change Account Page", "Branch Region Input Field",branchRegionTextbox);
-					Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Branch Region Button",branchRegionButton);
-					Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Branch Region list",getDynamicElement("Branch Region list",branchRegionList,sBranchRegion));
-				}
-				if (!sAccountingMethod.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Accounting Method List", accountingMethodList, sAccountingMethod);
-				}
-				if (!sWarning.equals("")) {
-					enterText("Change Account Page", "Warning field", warningTextbox, sWarning);
-				}
-				if (!sPaymentFrequency.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Payment Frequency", paymentFrequency, sPaymentFrequency);
-				}
-				if (!sStatusCode.equals("")) {
-					clickOnElement("Change Account Page", "Status Code Field",statusCodeButton);
-					waitElement(1000);
-					clickOnElement("Change Account Page", "Status Code Field", getDynamicElement("Status Code Field",statusCodeList,sStatusCode));
-				}
-				if (!sWriteDownStatus.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Write Down Status Field", writeDownStatusList, sWriteDownStatus);
-				}
-				if (!sLoanRatingCode1.equals("")) {
-					clickOnElement("Change Account Page", "loan Rating Code 1 List Field",loanRatingCode1Button);
-					waitElement(1000);
-					clickOnElement("Change Account Page", "loan Rating Code 1 List Field", getDynamicElement("loan Rating Code 1 List Field",loanRatingCode1List,sLoanRatingCode1));
-				}
-				if (!sPaymentRestrictionCode.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Payment Restriction Code", paymentRestrictionCode, sPaymentRestrictionCode);
-				}
-				if (!sPaymentRestrictionCodeOverride.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Payment Restriction Override field", paymentRestrictionOverride, sPaymentRestrictionCodeOverride);
-				}
-				if (!sBankruptcyChapter.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Bankruptcy Chapter field", bankruptcyChapter, sBankruptcyChapter);
-				}
-				if (!sBankruptcyStatus.equals("")) {
-					selectElementByVisibleText("Change Account Page", "bankruptcy Status field", bankruptcyStatus, sBankruptcyStatus);
-				}
-				if (!sBankruptcyPetitionFileDate.equals("")) {
-					enterText("Change Account Page", "bankruptcy Petition Date field", bankruptcyPetitionDate, sBankruptcyPetitionFileDate);
-				}
-				clickOnElement("Change Page", "Save Button", saveButton2);
-				Thread.sleep(5000);
-				if(isElementPresent(warningHeader)) {
-					if (isElementPresent(warning1)) {
-						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeader,sAccountNumber))){
+
+					if (!sClass.equals("")) {
+						clickOnElement("Change Account Page", "Class Field",classCodeInput);	
+						waitElement(1000);
+						clickOnElement("Change Account Page", "Class Field",classCodeButton);
+						waitElement(1000);
+						clickOnElement("Change Account Page", "Class Field", getDynamicElement("Class Field",classCodeList,sClass));
 					}
-					if (isElementPresent(warning2)) {
-						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					if (!sBranchRegion.equals("")) {
+						clickOnElement("Change Account Page", "Branch Region Input Field",branchRegionTextbox);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Branch Region Button",branchRegionButton);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Branch Region list",getDynamicElement("Branch Region list",branchRegionList,sBranchRegion));
 					}
-					if (isElementPresent(warning3)) {
-						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+					if (!sAccountingMethod.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Accounting Method List", accountingMethodList, sAccountingMethod);
 					}
-					clickOnElement("New Loan Page", "Save Button", saveBtn);
-					waitElement(2000);
+					if (!sWarning.equals("")) {
+						enterText("Change Account Page", "Warning field", warningTextbox, sWarning);
+					}
+					if (!sPaymentFrequency.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Payment Frequency", paymentFrequency, sPaymentFrequency);
+					}
+					if (!sStatusCode.equals("")) {
+						clickOnElement("Change Account Page", "Status Code Field",statusCodeButton);
+						waitElement(1000);
+						clickOnElement("Change Account Page", "Status Code Field", getDynamicElement("Status Code Field",statusCodeList,sStatusCode));
+					}
+					if (!sWriteDownStatus.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Write Down Status Field", writeDownStatusList, sWriteDownStatus);
+					}
+					if (!sLoanRatingCode1.equals("")) {
+						clickOnElement("Change Account Page", "loan Rating Code 1 List Field",loanRatingCode1Button);
+						waitElement(1000);
+						clickOnElement("Change Account Page", "loan Rating Code 1 List Field", getDynamicElement("loan Rating Code 1 List Field",loanRatingCode1List,sLoanRatingCode1));
+					}
+					if (!sPaymentRestrictionCode.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Payment Restriction Code", paymentRestrictionCode, sPaymentRestrictionCode);
+					}
+					if (!sPaymentRestrictionCodeOverride.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Payment Restriction Override field", paymentRestrictionOverride, sPaymentRestrictionCodeOverride);
+					}
+					if (!sBankruptcyChapter.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Bankruptcy Chapter field", bankruptcyChapter, sBankruptcyChapter);
+					}
+					if (!sBankruptcyStatus.equals("")) {
+						selectElementByVisibleText("Change Account Page", "bankruptcy Status field", bankruptcyStatus, sBankruptcyStatus);
+					}
+					if (!sBankruptcyPetitionFileDate.equals("")) {
+						enterText("Change Account Page", "bankruptcy Petition Date field", bankruptcyPetitionDate, sBankruptcyPetitionFileDate);
+					}
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(5000);
+					if(isElementPresent(warningHeader)) {
+						if (isElementPresent(warning1)) {
+							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+						}
+						if (isElementPresent(warning2)) {
+							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+						}
+						if (isElementPresent(warning3)) {
+							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+						}
+						clickOnElement("New Loan Page", "Save Button", saveBtn);
+						waitElement(2000);
+					}
+					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;
+
 				}
-				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution");
-				stepResult = true;
-				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Account Details changed Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Account Details changed Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details" , "Failed", driver, "Y");
-			}
-		}}
-	
+		}
+	}
+
 	public void validateLoanAccountDetailsAfterChange(String sAccountNumber,String sClass, String sBranchRegion, String sAccountingMethod, String sWarning, String sPaymentFrequency, String sStatusCode, String sWriteDownStatus, String sLoanRatingCode1, String sPaymentRestrictionCode, String sPaymentRestrictionCodeOverride, String sBankruptcyChapter, String sBankruptcyStatus, String sBankruptcyPetitionFileDate) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -246,7 +250,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 			switchToWithinFrameWithName("bottom");
 			if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeaderInquiry,sAccountNumber))){
 				if (!sPaymentFrequency.equals("")) {
-				validateTextContains("Account Inquiry" , "Payment Frequency", paymentFrequencyInquiryPage, sPaymentFrequency);
+					validateTextContains("Account Inquiry" , "Payment Frequency", paymentFrequencyInquiryPage, sPaymentFrequency);
 				}
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
@@ -310,88 +314,92 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Could not Validated Loan Details on Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
-	
+
 	public void changeAccountDetails_AddRelationship(String sAccountNumber,String sName, String sSN, String sRelationship, String sEStatement) throws Exception {
-		boolean stepResult = false;
-		try {				
-			clickOnElement("Change Account Page", "Relationship Tab Field",relationshipTab);
-			waitElement(2000);
-			if (isElementPresent(searchIconName)){
-				clickOnElement("Change Account Page", "Search Icon",searchIconName);
-				switchToWindowWithTitleContaining("Name Search");
-				driver.switchTo().frame("bottom");
-				new Premier_CustomerContact(driver).searchSSN(sSN);
-				switchToWindowWithTitleContaining("Institution");
-				driver.switchTo().frame("Main");
-				
-				if (!sRelationship.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Relationship Field", getDynamicElement("Relationship list",relationshipAddName,sName), sRelationship);
-					waitElement(2000);
-				}
-				if (!sName.equals("")) {
-					tempVar = getVisibleSelectedText("Change Account Page", "Account info Name Field", getDynamicElement("Relationship list",newName,Integer.toString(2)));
-					if (tempVar.equals("(None)")) {
-						selectElementByVisibleText("Change Account Page", "Account info Name Field", getDynamicElement("Account info Name Field",newName,Integer.toString(2)), sName);
-						waitElement(1000);
-						selectElementByVisibleText("Change Account Page", "Mailing info Name Field", getDynamicElement("Mailing info Name Field",newName,Integer.toString(5)), sName);
-						waitElement(1000);
-						if (!sEStatement.equals("")) {
-							selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field", getDynamicElement("Mailing info E Statement Field",newEstatement,Integer.toString(2)), sEStatement);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {				
+				clickOnElement("Change Account Page", "Relationship Tab Field",relationshipTab);
+				waitElement(2000);
+				if (isElementPresent(searchIconName)){
+					clickOnElement("Change Account Page", "Search Icon",searchIconName);
+					switchToWindowWithTitleContaining("Name Search");
+					driver.switchTo().frame("bottom");
+					new Premier_CustomerContact(driver).searchSSN(sSN);
+					switchToWindowWithTitleContaining("Institution");
+					driver.switchTo().frame("Main");
+
+					if (!sRelationship.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Relationship Field", getDynamicElement("Relationship list",relationshipAddName,sName), sRelationship);
+						waitElement(2000);
+					}
+					if (!sName.equals("")) {
+						tempVar = getVisibleSelectedText("Change Account Page", "Account info Name Field", getDynamicElement("Relationship list",newName,Integer.toString(2)));
+						if (tempVar.equals("(None)")) {
+							selectElementByVisibleText("Change Account Page", "Account info Name Field", getDynamicElement("Account info Name Field",newName,Integer.toString(2)), sName);
+							waitElement(1000);
+							selectElementByVisibleText("Change Account Page", "Mailing info Name Field", getDynamicElement("Mailing info Name Field",newName,Integer.toString(5)), sName);
+							waitElement(1000);
+							if (!sEStatement.equals("")) {
+								selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field", getDynamicElement("Mailing info E Statement Field",newEstatement,Integer.toString(2)), sEStatement);
+							}
+						}else {
+							selectElementByVisibleText("Change Account Page", "Account info Name Field", getDynamicElement("Account info Name Field",newName,Integer.toString(3)), sName);
+							waitElement(1000);
+							selectElementByVisibleText("Change Account Page", "Mailing info Name Field", getDynamicElement("Mailing info Name Field",newName,Integer.toString(6)), sName);
+							waitElement(1000);
+							if (!sEStatement.equals("")) {
+								selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field", getDynamicElement("Mailing info E Statement Field",newEstatement,Integer.toString(3)), sEStatement);
+							}
 						}
-					}else {
-						selectElementByVisibleText("Change Account Page", "Account info Name Field", getDynamicElement("Account info Name Field",newName,Integer.toString(3)), sName);
-						waitElement(1000);
-						selectElementByVisibleText("Change Account Page", "Mailing info Name Field", getDynamicElement("Mailing info Name Field",newName,Integer.toString(6)), sName);
-						waitElement(1000);
-						if (!sEStatement.equals("")) {
-							selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field", getDynamicElement("Mailing info E Statement Field",newEstatement,Integer.toString(3)), sEStatement);
+					}
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(2000);
+					if(isElementPresent(warningHeader)) {
+						if (isElementPresent(warning2)) {
+							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
 						}
+						if (isElementPresent(warning1)) {
+							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+						}
+						if (isElementPresent(warning3)) {
+							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+						}
+						clickOnElement("New Loan Page", "Save Button", saveBtn);
+						waitElement(2000);
 					}
+					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;
+
 				}
-				clickOnElement("Change Page", "Save Button", saveButton2);
-				Thread.sleep(2000);
-				if(isElementPresent(warningHeader)) {
-					if (isElementPresent(warning2)) {
-						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
-					}
-					if (isElementPresent(warning1)) {
-						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
-					}
-					if (isElementPresent(warning3)) {
-						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
-					}
-					clickOnElement("New Loan Page", "Save Button", saveBtn);
-					waitElement(2000);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Add Relationship Details", "Relationship added Successfully", "Passed", driver, "Y");
 				}
-				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution");
-				stepResult = true;
-				
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Add Relationship Details", "Could not add Relationship Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account-Add Relationship Details", "Relationship added Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account-Add Relationship Details", "Could not add Relationship Details" , "Failed", driver, "Y");
-			}
-		}}
-	
+		}
+	}
+
 	public void validateAccountDetailsAfterChange_AddRelationship(String sAccountNumber,String sName, String sSN, String sRelationship, String sEStatement) throws Exception {
 		boolean stepResult = false;
 		try {
 			waitElement(1000);
 			clickOnElement("Account Inquiry Page", "Relationship Tab Field",relationshipTab);	
 			switchToWithinFrameWithName("bottom");			
-				if (isElementPresent(getDynamicElement("New Relationship Name",newNameInquiryPage,sName))) {
-					stepResult = true;	
-				}
-				switchToDefaultContent();
-				driver.switchTo().frame("Main");									
+			if (isElementPresent(getDynamicElement("New Relationship Name",newNameInquiryPage,sName))) {
+				stepResult = true;	
+			}
+			switchToDefaultContent();
+			driver.switchTo().frame("Main");									
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -404,48 +412,52 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Could not Validated Relationship Details on Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
-	
+
 	public void changeAccountDetails_UpdateRelationship(String sAccountNumber,String sName, String sRelationship) throws Exception {
-		boolean stepResult = false;
-		try {			
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {			
 				clickOnElement("Change Account Page", "Relationship Tab Field",relationshipTab);
 				waitElement(2000);
 				if (isElementPresent(getDynamicElement("Relationship Name",updateName,sName))) {
-						selectElementByVisibleText("Change Account Page", "Relationship Field", getDynamicElement("Relationship list",relationshipAddName,sName), sRelationship);
-						waitElement(2000);				
-				
-				clickOnElement("Change Page", "Save Button", saveButton2);
-				Thread.sleep(2000);
-				if(isElementPresent(warningHeader)) {
-					if (isElementPresent(warning2)) {
-						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					selectElementByVisibleText("Change Account Page", "Relationship Field", getDynamicElement("Relationship list",relationshipAddName,sName), sRelationship);
+					waitElement(2000);				
+
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(2000);
+					if(isElementPresent(warningHeader)) {
+						if (isElementPresent(warning2)) {
+							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+						}
+						if (isElementPresent(warning1)) {
+							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+						}
+						if (isElementPresent(warning3)) {
+							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+						}
+						clickOnElement("New Loan Page", "Save Button", saveBtn);
+						waitElement(2000);
 					}
-					if (isElementPresent(warning1)) {
-						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
-					}
-					if (isElementPresent(warning3)) {
-						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
-					}
-					clickOnElement("New Loan Page", "Save Button", saveBtn);
-					waitElement(2000);
+					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;				
 				}
-				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution");
-				stepResult = true;				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Update Relationship Details", "Relationship details Updated Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Update Relationship Details", "Could not Update Relationship Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account-Update Relationship Details", "Relationship details Updated Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account-Update Relationship Details", "Could not Update Relationship Details" , "Failed", driver, "Y");
-			}
-		}}
-	
+		}
+	}
+
 	public void validateAccountDetailsAfterChange_UpdateRelationship(String sAccountNumber,String sName, String sRelationship) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -456,8 +468,8 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				validateTextContains("Account Inquiry" , "Relationship field",getDynamicElement("New Relationship Name",newNameRelationshipInquiryPage,sName), sRelationship);					
 				stepResult = true;	
 			}
-				switchToDefaultContent();
-				driver.switchTo().frame("Main");									
+			switchToDefaultContent();
+			driver.switchTo().frame("Main");									
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -470,10 +482,11 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Could not Validated Relationship Details on Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
-	
+
 	public void changeAccountDetails_RemoveRelationship(String sAccountNumber,String sName) throws Exception {
-		boolean stepResult = false;
-		try {			
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {			
 				clickOnElement("Change Account Page", "Relationship Tab Field",relationshipTab);
 				waitElement(2000);
 				if (isElementPresent(getDynamicElement("Relationship Name",updateName,sName))) {					
@@ -484,43 +497,46 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 							waitElement(1000);
 						}
 					}
-					
+
 					if (isElementPresent((getDynamicElement("Remove Name Icon",removeNameIcon,sName)))) {
 						clickOnElement("Change Account Page", "Remove Name Icon", (getDynamicElement("Remove Name Icon",removeNameIcon,sName)));
 					}
-					
-				clickOnElement("Change Page", "Save Button", saveButton2);
-				Thread.sleep(2000);
-				if(isElementPresent(warningHeader)) {
-					if (isElementPresent(warning2)) {
-						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(2000);
+					if(isElementPresent(warningHeader)) {
+						if (isElementPresent(warning2)) {
+							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+						}
+						if (isElementPresent(warning1)) {
+							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+						}
+						if (isElementPresent(warning3)) {
+							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+						}
+						clickOnElement("New Loan Page", "Save Button", saveBtn);
+						waitElement(2000);
 					}
-					if (isElementPresent(warning1)) {
-						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
-					}
-					if (isElementPresent(warning3)) {
-						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
-					}
-					clickOnElement("New Loan Page", "Save Button", saveBtn);
-					waitElement(2000);
+					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;				
 				}
-				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution");
-				stepResult = true;				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Remove Relationship Details", "Relationship details removed Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Remove Relationship Details", "Could not remove Relationship Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account-Remove Relationship Details", "Relationship details removed Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account-Remove Relationship Details", "Could not remove Relationship Details" , "Failed", driver, "Y");
-			}
-		}}
-	
+		}
+	}
+
 	public void validateAccountDetailsAfterChange_RemoveRelationship(String sAccountNumber,String sName) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -532,8 +548,8 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 			}else {
 				stepResult = true;
 			}
-				switchToDefaultContent();
-				driver.switchTo().frame("Main");									
+			switchToDefaultContent();
+			driver.switchTo().frame("Main");									
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -546,10 +562,11 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Could not Validated Relationship Details on Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
-	
+
 	public void changeAccountDetails_Balances(String sAccountNumber,String sNonAccrualCode, String sNonAccrualLateChargeOption, String sAutomaticRecoveryOverride, String sNonAccrualDate) throws Exception {
-		boolean stepResult = false;
-		try {			
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {			
 				clickOnElement("Change Account Page", "Balances Tab Field",balancesTab);
 				waitElement(2000);
 				if (isElementPresent(nonAccrualHeader)) {
@@ -565,43 +582,47 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					if (!sNonAccrualDate.equals("")) {
 						enterText("Change Account Page", "Non Accrual Date Input field", nonAccrualDateInput, sNonAccrualDate);
 					}
-					
-				clickOnElement("Change Page", "Save Button", saveButton2);
-				Thread.sleep(2000);
-				if(isElementPresent(warningHeader)) {
-					if (isElementPresent(warning2)) {
-						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(2000);
+					if(isElementPresent(warningHeader)) {
+						if (isElementPresent(warning2)) {
+							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+						}
+						if (isElementPresent(warning1)) {
+							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+						}
+						if (isElementPresent(warning3)) {
+							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+						}
+						if (isElementPresent(warning4)) {
+							clickOnElement("New Loan Page", "Warning 4 Checkbox", warningCheckBox4);
+						}
+						clickOnElement("New Loan Page", "Save Button", saveBtn);
+						waitElement(2000);
 					}
-					if (isElementPresent(warning1)) {
-						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
-					}
-					if (isElementPresent(warning3)) {
-						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
-					}
-					if (isElementPresent(warning4)) {
-						clickOnElement("New Loan Page", "Warning 4 Checkbox", warningCheckBox4);
-					}
-					clickOnElement("New Loan Page", "Save Button", saveBtn);
-					waitElement(2000);
+					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;	
 				}
-				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-				switchToWindowWithTitleContaining("Institution");
-				stepResult = true;	
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Balances Details", "Balances details updated Successfully", "Passed", driver, "Y");
 				}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account Balances Details", "Balances details updated Successfully", "Passed", driver, "Y");
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Balances Details", "Could not update Balances Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account Balances Details", "Could not update Balances Details" , "Failed", driver, "Y");
-			}
-		}}
-	
+		}
+	}
+
 	public void validateAccountDetailsAfterChange_Balances(String sAccountNumber,String sNonAccrualCode, String sNonAccrualLateChargeOption, String sAutomaticRecoveryOverride,String sNonAccrualDate) throws Exception {
+
 		boolean stepResult = false;
 		try {
 			waitElement(2000);
@@ -621,9 +642,9 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				sNonAccrualDate = new DateTimeHelper().getDateTime(sNonAccrualDate,"MM/dd/yyyy","MMM dd, yyyy");
 				validateTextContains("Account Inquiry" , "Non-Accrual Date Date",nonAccrualDateInquiryPage, sNonAccrualDate);
 			}
-				stepResult = true;
-				switchToDefaultContent();
-				driver.switchTo().frame("Main");									
+			stepResult = true;
+			switchToDefaultContent();
+			driver.switchTo().frame("Main");									
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -634,6 +655,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Could not Validated Relationship Details on Inquiry page" , "Failed", driver, "Y");
+
 			}
 		}}
 }

@@ -37,8 +37,8 @@ public class EPP_PaymentRepair extends CommonLibrary{
 	By cancelPaymentRepair = By.xpath("//select[@id='ActionSelect']//option[@value][contains(.,'Cancel Payment')]");
 	By executeButton = By.xpath("//div[@id='img_button_execute']");	
 	By validateSubmitBtn = By.xpath("//div[@id='img_button_validate&Submit']");
-	By limitINFilter = By.xpath("//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'Payment sent to repair from Internal Filter')]");
-	By limitBIFilter = By.xpath("//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'Payment sent to Repair from BI filter')]");
+	By limitINFilter = By.xpath("//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'Internal Filter')]");
+	By limitBIFilter = By.xpath("//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'BI filter')]");
 	By validateBttn = By.xpath("//a[@id='Validate']");
 	By abanbonBttn = By.xpath("//a[@id='Abandon']");
 	By confirmWindow = By.xpath("//div[@id='confirmWindow']");

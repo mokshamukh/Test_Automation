@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 /**
  * PageNage : CommercialCenter_Admin_CreateCompany
@@ -54,7 +55,7 @@ public class Admin_CreateCompany extends CommonLibrary {
 			String State, String zipcodeVal,String countryName,String marketSegmentVal,
 			String BillingAccountNo,String timeZoneOption,String expDate,String processingCenterVal,
 			String bankChk,String reVerifyBox,String taxIdTyp,String taxIdVal,
-			String addIdentity,String label) {
+			String addIdentity,String label) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(createCompanyTitle)){
@@ -101,15 +102,20 @@ public class Admin_CreateCompany extends CommonLibrary {
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Create Company CC- Admin application", "Company created Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Create Company CC- Admin application", "Could not create company Successfully", "Passed", driver, "Y");
+				}
+				
+			
 		}
 
 	}
 	
-	public void validateCompanyCreation(String validateValue){
+	public void validateCompanyCreation(String validateValue) throws Exception{
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(getDynamicElement("Company Name",validateCompanyName,validateValue))){
@@ -119,10 +125,14 @@ public class Admin_CreateCompany extends CommonLibrary {
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Create Company CC- Admin application", "Company validated Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Create Company CC- Admin application", "Could not validate company Successfully", "Passed", driver, "Y");
+				}
+			
 		}
 	}
 

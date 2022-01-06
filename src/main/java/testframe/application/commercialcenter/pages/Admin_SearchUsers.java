@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 
 /**
@@ -23,9 +24,9 @@ public class Admin_SearchUsers extends CommonLibrary{
 	By label = By.xpath("//label[text()='Label']/../input[@class='autocomplete ac_input']");
 	By showLabel = By.xpath("//input[@id='showLabels']");
 	By searchUsersButton = By.xpath("//span[text()='Search Users']");
-	By userActionButton = By.xpath("//span[text()='Actions']");
-	By userEditButton = By.xpath("//span[text()='Edit']");
-	By userCloneButton = By.xpath("//span[text()='Clone User']");
+	String userActionButton = "//span[contains(text(),'%s')]/ancestor::div[@class='ui-helper-clearfix']//span[text()='Actions']";
+	String userEditButton = "//span[contains(text(),'%s')]/ancestor::div[@class='ui-helper-clearfix']//span[text()='Edit']";
+	String userCloneButton = "//span[contains(text(),'%s')]/ancestor::div[@class='ui-helper-clearfix']//span[text()='Clone User']";
 	
 	
 	public Admin_SearchUsers(WebDriver driver) {
@@ -34,7 +35,7 @@ public class Admin_SearchUsers extends CommonLibrary{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void searchUser(String userId,String userDestination, String userName,String labelVal,String showLabels) {
+	public void searchUser(String userId,String userDestination, String userName,String labelVal,String showLabels) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(searchUserTitle)) {
@@ -59,20 +60,24 @@ public class Admin_SearchUsers extends CommonLibrary{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
+			if (stepResult == true){
 				System.out.println("Pass -- search");
-			else
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "User searched Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not search user Successfully", "Passed", driver, "Y");
+				}
+			
 		}
 		
 	}
 	 
 	
-	public void clickActionButton() {
+	public void clickActionButton(String user) throws Exception {
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(userActionButton)) {
-				clickOnElement("Admin Search User Page", "Actions Button", userActionButton);
+			if (isElementPresent(getDynamicElement("Actions Button",userActionButton,user))) {
+				clickOnElement("Admin Search User Page", "Actions Button", getDynamicElement("Actions Button",userActionButton,user));
 				Thread.sleep(2000);
 				stepResult = true;
 			}
@@ -80,19 +85,23 @@ public class Admin_SearchUsers extends CommonLibrary{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
+			if (stepResult == true){
 				System.out.println("Pass");
-			else
+				System.out.println("Pass -- search");
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "click action Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not click action Successfully", "Passed", driver, "Y");
+				}
 		}
 	}
 	
 	
-	public void clickEditButton(){
+	public void clickEditButton(String user) throws Exception{
 		boolean stepResult = false;
 		try {
-			waitForPresenceOfElement("Admin Search User Page", "Edit Button", userEditButton);
-			clickOnElement("Admin Search User Page", "Edit Button", userEditButton);
+			waitForPresenceOfElement("Admin Search User Page", "Edit Button", getDynamicElement( "Edit Button",userEditButton,user));
+			clickOnElement("Admin Search User Page", "Edit Button", getDynamicElement("Edit Button",userEditButton,user));
 			Thread.sleep(2000);
 			stepResult = true;
 			
@@ -100,19 +109,23 @@ public class Admin_SearchUsers extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "click edit Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not click edit Successfully", "Passed", driver, "Y");
+				}
+			
 		}
 	}
 	
 
-	public void clickCloneButton(){
+	public void clickCloneButton(String user) throws Exception{
 		boolean stepResult = false;
 		try {
-			waitForPresenceOfElement("Admin Search User Page", "Clone Button", userCloneButton);
-			clickOnElement("Admin Search User Page", "Clone Button", userCloneButton);
+			waitForPresenceOfElement("Admin Search User Page", "Clone Button", getDynamicElement("Clone Button",userCloneButton,user));
+			clickOnElement("Admin Search User Page", "Clone Button", getDynamicElement("Clone Button",userCloneButton,user));
 			Thread.sleep(2000);
 			stepResult = true;
 			
@@ -120,10 +133,13 @@ public class Admin_SearchUsers extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Search User CC- Admin application", "click clone Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Saerch User CC- Admin application", "Could not click clone Successfully", "Passed", driver, "Y");
+				}
 		}
 	}
 	

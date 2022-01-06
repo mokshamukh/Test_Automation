@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 /**
  * PageNage : CommercialCenter_Admin_CloneUser
@@ -33,6 +34,7 @@ public class Admin_CloneUser extends CommonLibrary{
 	By encryptedPsw = By.xpath("//input[@id='pdfpassword']");
 	By encryptedPsdTitle = By.xpath("//label[text()='Encrypted Report Password']");
 	By psdValidationMsg = By.xpath("//span[text()='Your passwords did not match.']");
+	String verifyUser= "//span[contains(text(),'%s')]";
 	
 	public Admin_CloneUser(WebDriver driver) {
 		super(driver);
@@ -43,21 +45,21 @@ public class Admin_CloneUser extends CommonLibrary{
 
 	public void cloneUserDetails(String cloneUserID, String cloneFirstName, String cloneLastName, String cloneEnableDate,
 			String cloneEmailAddress, String cloneComapanyResidesZip, String cloneMothersName, String cloneTempPsd,
-			String cloneReEnterTempPsd) {
+			String cloneReEnterTempPsd) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(createUserTitle)) {
 				if (!cloneUserID.equals("")) {
-					enterText("Create User", "User ID", userID, cloneUserID);
+					clearAndType("Create User", "User ID", userID, cloneUserID);
 				}
 				if (!cloneFirstName.equals("")) {
-					enterText("Create User", "First Name", firstName, cloneFirstName);
+					clearAndType("Create User", "First Name", firstName, cloneFirstName);
 				}
 				if (!cloneLastName.equals("")) {
-					enterText("Create User", "Last Name", lastName, cloneLastName);
+					clearAndType("Create User", "Last Name", lastName, cloneLastName);
 				}
 				if (!cloneEnableDate.equals("")) {
-					enterText("Create User", "Enable Date", enableDate, cloneEnableDate);
+					clearAndType("Create User", "Enable Date", enableDate, cloneEnableDate);
 				}
 				else{
 					isElementPresent(enableDate);
@@ -74,13 +76,13 @@ public class Admin_CloneUser extends CommonLibrary{
 					enterText("Create User", "Company Resides Zip Code", companyZipAdress, cloneComapanyResidesZip);
 				}
 				if (!cloneMothersName.equals("")) {
-					enterText("Create User", "Mother's Middle Name", mothersMiddleName, cloneMothersName);
+					clearAndType("Create User", "Mother's Middle Name", mothersMiddleName, cloneMothersName);
 				}
 				if (!cloneTempPsd.equals("")) {
-					enterText("Create User", "Temporaray Password", tempPassword, cloneTempPsd);
+					clearAndType("Create User", "Temporaray Password", tempPassword, cloneTempPsd);
 				}
 				if (!cloneReEnterTempPsd.equals("")) {
-					enterText("Create User", "Reenter Temporaray Password", reEnterPassword, cloneReEnterTempPsd);
+					clearAndType("Create User", "Reenter Temporaray Password", reEnterPassword, cloneReEnterTempPsd);
 				}
 				clickOnElement("Create User", "Save Button", saveButton);
 				Thread.sleep(2000);
@@ -88,19 +90,21 @@ public class Admin_CloneUser extends CommonLibrary{
 				clickOnElement("Create User", "Save Button", saveButton);
 				Thread.sleep(2000);
 				if(isElementPresent(psdValidationMsg)){
-					enterText("Create User", "Temporaray Password", tempPassword, cloneTempPsd);
-					enterText("Create User", "Reenter Temporaray Password", reEnterPassword, cloneReEnterTempPsd);
+					clearAndType("Create User", "Temporaray Password", tempPassword, cloneTempPsd);
+					clearAndType("Create User", "Reenter Temporaray Password", reEnterPassword, cloneReEnterTempPsd);
 					clickOnElement("Create User", "Save Button", saveButton);
+					
 				}
-				stepResult = true;
+				if(isElementPresent(getDynamicElement("Clone User Id",verifyUser,cloneUserID))) 
+					stepResult = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (stepResult == true)
-				System.out.println("Pass - Clone");
+				new HTMLReportHelper().HtmlReportBody("User Details Clone- Admin application", "Clone User Successfully", "Passed", driver, "Y");
 			else
-				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("User Details Clone- Admin application", "Could not clone user details", "Failed", driver, "Y");
 		}
 
 	}

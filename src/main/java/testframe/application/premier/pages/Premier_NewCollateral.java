@@ -93,6 +93,7 @@ public class Premier_NewCollateral extends CommonLibrary{
 	public By finishButtoncollateral = By.xpath("//button[@id='SubmitButton']");
 	
 	public void enterCollateralDefInitionPageDetail(String sCollateralType,String sBranchRegion,String sCollateralCode) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			driver.switchTo().frame("Main");
@@ -123,13 +124,15 @@ public class Premier_NewCollateral extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral definition Screen", "Could not entered details on Collateral definition Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-
+		}
 		}
 	}
    
 	public void enterCollateralCodePageDetail_RealEstate(String sParcelID, String sBuildingStatus, String sPrimaryResidence, String sCollateralValue, String sPropertyType, String sNumberOfUnits, String sMarketValue,
 			String sResponsibilityCode, String sAdditionalInfoParcelNumberValue, String sAdditionalInfoParcelNumberExpirationDate, String sMarginPercent, String sMarginAmount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(collateralCodePageTitle)) {
@@ -187,13 +190,16 @@ public class Premier_NewCollateral extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral Code Screen", "Could not entered details on Collateral Code Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
+		}
 
 		}
 	}
 	
 	public void enterCollateralCodePageDetail_LifeInsurance(String sPolicyDescription, String sCashValue, String sCollateralValue, String sPolicyNumber, String sResponsibilityCode, String sFaceValue, String sPolicyEffectiveDate,
 			String sAdditionalInfoParcelNumberValue, String sAdditionalInfoParcelNumberExpirationDate, String sMarginPercent, String sMarginAmount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(collateralCodePageTitle)) {
@@ -249,13 +255,15 @@ public class Premier_NewCollateral extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral Code Screen", "Could not entered details on Collateral Code Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-
+		}
 		}
 	}
 	
 	public void enterCollateralCodePageDetail_Investment(String sNumberofShares, String sAccountNumber, String sType, String sCUSIP, String sTickerSymbol, String sFundName, String sCollateralValue,
 			String sResponsibilityCode, String sAdditionalInfoParcelNumberValue, String sAdditionalInfoParcelNumberExpirationDate, String sMarginPercent, String sMarginAmount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(collateralCodePageTitle)) {
@@ -313,13 +321,15 @@ public class Premier_NewCollateral extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral Code Screen", "Could not entered details on Collateral Code Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-
+		}
 		}
 	}
 	
 	public void enterCollateralCodePageDetail_Basic(String sDescription, String sCollateralIdentification, String sDateLastStatusChange, String sCollateralStatus, String sPurchasePrice, String sNumberOfUnits, String sCollateralValue,
 			String sResponsibilityCode, String sAdditionalInfoParcelNumberValue, String sAdditionalInfoParcelNumberExpirationDate, String sMarginPercent, String sMarginAmount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(collateralCodePageTitle)) {
@@ -377,13 +387,15 @@ public class Premier_NewCollateral extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral Code Screen", "Could not entered details on Collateral Code Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-
+		}
 		}
 	}
 	
 	public void enterCollateralRelationshipPageDetail(String sSearchSSN, String sSSNRelationship, String sSearchAddress,
 			String sAddressRelationship, String sSearchAccountType, String sSearchAccountNumber, String sAccountPledgeRule) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(collateralrelationshipPageTitle)) {
@@ -441,8 +453,12 @@ public class Premier_NewCollateral extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral relationship Screen", "Details Entered on Collateral relationship Screen Successfully", "Passed",driver, "Y");
 			} else {
 				System.out.println("fail");
+
 				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral relationship Screen", "Could not entered details on Collateral relationship Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
+
 			}
+		}
 
 		}
 	}

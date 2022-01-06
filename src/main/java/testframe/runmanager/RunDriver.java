@@ -30,6 +30,7 @@ public class RunDriver {
 	static{
 		String sCurrentDateTime = new DateTimeHelper().CurrentDateTime("MM-dd-yyyy-hh-mm-ss");
 		System.setProperty("current.date.time",sCurrentDateTime);
+		System.setProperty("runStep","Y");
 	}
 	 
 	@Test()
@@ -42,6 +43,7 @@ public class RunDriver {
 		List<Map<String, String>> app_Data = er.getData(strMasterfilePath,"APP_INFO");
 		for(int iAppRow =0; iAppRow<=app_Data.size()-1;iAppRow++){
 			if((app_Data.get(iAppRow).get("Execute")).equalsIgnoreCase("Y")){
+				System.setProperty("runStep","Y");
 				strAppFlag ="Y";
 				strApplication_Name= app_Data.get(iAppRow).get("Application_Name");
 				Log.info("$$           Test Execution for Application : " + strApplication_Name.toUpperCase() +"           $$");

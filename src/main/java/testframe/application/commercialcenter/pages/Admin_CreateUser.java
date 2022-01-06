@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 /**
  * PageNage : CommercialCenter_Admin_CreateUser
@@ -43,7 +44,7 @@ public class Admin_CreateUser extends CommonLibrary{
 
 	public void enterUserDetails(String newUserID, String userFirstName, String userLastName, String userEnableDate,
 			String userEmailAddress, String comapanyResidesZip, String mothersName, String tempPsd,
-			String reEnterTempPsd) {
+			String reEnterTempPsd) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(createUserTitle)) {
@@ -96,10 +97,13 @@ public class Admin_CreateUser extends CommonLibrary{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
+			if (stepResult == true){
 				System.out.println("Pass -- createuser");
-			else
+				new HTMLReportHelper().HtmlReportBody("Create User CC- Admin application", "User created Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Create User CC- Admin application", "Could not create user Successfully", "Passed", driver, "Y");
+				}
 		}
 
 	}

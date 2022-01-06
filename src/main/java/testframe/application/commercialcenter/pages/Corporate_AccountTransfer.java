@@ -56,6 +56,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	By seriesDetailsDate = By.xpath("//input[@id='defaultStartDate']");
 	By saveButton = By.xpath("//button[text()='Save'][contains(@aria-label,'recurring options')]");
 	By seriesName= By.xpath("//input[@formcontrolname='seriesName']");
+	By fromAccField = By.xpath("//p-autocomplete//input[@id='fromAccount']");
 	// By daily_EachBusiDay =
 	// By.xpath("//p-radiobutton[@formcontrolname='everyDay']/div/div/input[@id='opt1']");
 	// By daily_SpeciDay =
@@ -69,6 +70,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	String paymentInstrField = "(//p-dropdown[@inputid='toPaymentInstruction']//span[text()='Select'])[1]/parent::div/following-sibling::div//span[text()='%s']";
 	String durationOpt = "//p-radiobutton[@name='duration']/label[contains(text(),'%s')]/preceding-sibling::div/div[@role='radio']";
 	String daysOfWeek = "//label[text()='%s']/../div[@class='ui-radiobutton ui-widget']";
+	String fromAccList = "//li[@role='option']/span[text()='%s']";
 	
 	
 	String memo;
@@ -83,10 +85,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	public void enterFromAccount(String fromAcc, String fromAccAmt) throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(8000);
 			if (isElementPresent(accountTransferTitle)) {
-				scrollToElement(fromAccountField);
+				waitElement(2000);
 				enterText("Corporate Account Transfer", "From Account", fromAccountField, fromAcc);
+				waitElement(2000);
+				clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc));
 				if (!fromAccAmt.equals("")) {
 					Thread.sleep(2000);
 					enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt, fromAccAmt);
@@ -119,6 +122,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 				}
 				if (!fromAcc1.equals("")) {
 					enterText("Corporate Account Transfer", "From Account1", fromAccountField, fromAcc1);
+					clickOnElement("Corporate Account Transfer", "From Account1", getDynamicElement("From Account1", fromAccList, fromAcc1));
 				}
 				if (!fromAccAmt1.equals("")) {
 					enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt1, fromAccAmt1);
@@ -168,29 +172,27 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 
 	}
 
-	public void enterToAccount(String toAcc, String toAccAmt, String toAccAmtVal, String toAccMemo, String toAccMemoVal,
+	public void enterToAccount(String toAcc, String toAccAmt, String toAccMemo,
 			String toAccPayInstr) throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(4000);
 			if (isElementPresent(accountTransferTitle)) {
 				if(!toAcc.equals("")){
 				enterText("Corporate Account Transfer", "To Account", toAccountField, toAcc);
+				clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc));
+				//selectElementFromListbox("Corporate Account Transfer", "To Account", toAccountField, fromAccList, toAcc);
+				waitElement(2000);
 				}
 				if (!toAccAmt.equals("")) {
-					Thread.sleep(2000);
 					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt(toAccAmt)), toAccAmtVal);
+							returnByElement("To Account Amount", getToAccAmt("Amt_0")), toAccAmt);
 				}
 				if (!toAccMemo.equals("")) {
-					Thread.sleep(2000);
 					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo(toAccMemo)), toAccMemoVal);
+							returnByElement("To Account Memo", getToAccMemo("Memo_0")) ,toAccMemo);
 				}
 				if (!toAccPayInstr.equals("")) {
-					Thread.sleep(4000);
 					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction", toAccPayInstruction);
-					Thread.sleep(4000);
 					getDynamicElementClick("Corporate Account Transfer", "To Account Payment Instruction", paymentInstrField, toAccPayInstr);
 				}
 				stepResult = true;
@@ -209,11 +211,10 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 		}
 	}
 
-	public void addAndEnterToAccDetails(String addToAccountVal1, String toAcc1, String toAccAmt1, String toAccAmtVal1,
-			String toAccMemo1, String toAccMemoVal1, String toAccPayInstr1, String addToAccountVal2, String toAcc2,
-			String toAccAmt2, String toAccAmtVal2, String toAccMemo2, String toAccMemoVal2, String toAccPayInstr2,
-			String addToAccountVal3, String toAcc3, String toAccAmt3, String toAccAmtVal3, String toAccMemo3,
-			String toAccMemoVal3, String toAccPayInstr3) throws Exception {
+	public void addAndEnterToAccDetails(String addToAccountVal1, String toAcc1, String toAccAmt1, 
+			String toAccMemo1, String toAccPayInstr1, String addToAccountVal2, String toAcc2,
+			String toAccAmt2, String toAccMemo2, String toAccPayInstr2,
+			String addToAccountVal3, String toAcc3, String toAccAmt3,  String toAccMemo3, String toAccPayInstr3) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (addToAccountVal1.equals("Yes")) {
@@ -223,11 +224,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 				}
 				if (!toAccAmt1.equals("")) {
 					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt(toAccAmt1)), toAccAmtVal1);
+							returnByElement("To Account Amount", getToAccAmt("Amt_1")), toAccAmt1);
 				}
-				if (!toAccMemoVal1.equals("")) {
+				if (!toAccMemo1.equals("")) {
 					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo(toAccMemo1)), toAccMemoVal1);
+							returnByElement("To Account Memo", getToAccMemo("Memo_1")), toAccMemo1);
 				}
 				if (!toAccPayInstr1.equals("")) {
 					Thread.sleep(2000);
@@ -244,11 +245,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 				}
 				if (!toAccAmt2.equals("")) {
 					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt(toAccAmt2)), toAccAmtVal2);
+							returnByElement("To Account Amount", getToAccAmt("Amt_2")), toAccAmt2);
 				}
-				if (!toAccMemoVal2.equals("")) {
+				if (!toAccMemo2.equals("")) {
 					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo(toAccMemo2)), toAccMemoVal2);
+							returnByElement("To Account Memo", getToAccMemo("Memo_2")), toAccMemo2);
 				}
 				if (!toAccPayInstr2.equals("")) {
 					Thread.sleep(2000);
@@ -265,11 +266,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 				}
 				if (!toAccAmt3.equals("")) {
 					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt(toAccAmt3)), toAccAmtVal3);
+							returnByElement("To Account Amount", getToAccAmt("Amt_3")), toAccAmt3);
 				}
-				if (!toAccMemoVal3.equals("")) {
+				if (!toAccMemo3.equals("")) {
 					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo(toAccMemo3)), toAccMemoVal3);
+							returnByElement("To Account Memo", getToAccMemo("Memo_3")), toAccMemo3);
 				}
 				if (!toAccPayInstr3.equals("")) {
 					Thread.sleep(2000);
@@ -341,12 +342,10 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	public void enterTransferDate(String transferDates) throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(2000);
 			if (!transferDates.equals("")) {
 				for (int i = 1; i <= 10; i++) {
 					driver.findElement(transferDate).sendKeys(Keys.BACK_SPACE);
 				}
-				Thread.sleep(7000);
 				enterText("Corporate Account Transfer", "Transfer Date", transferDate, transferDates);
 				clickOnElement("Corporate Account Transfer", "Transfer Date Title", transferDateTitle);
 			}
@@ -368,11 +367,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	public void clickReqTransfer() throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(4000);
 			if (isElementPresent(accountTransferTitle)) {
-				doubleClickOnElement("Corporate Account Transfer", "Transfer Date", reqTransferButton);
+				clickOnELementUsingJS(driver.findElement(By.xpath("//button[@aria-label='Request Transfer']")));
+				stepResult = true;
 			}
-			stepResult = true;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

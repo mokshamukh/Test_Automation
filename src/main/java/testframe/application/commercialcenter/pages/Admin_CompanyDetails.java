@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 /**
  * PageNage : CommercialCenter_Admin_SearchCompanies
@@ -35,6 +36,7 @@ public class Admin_CompanyDetails extends CommonLibrary{
 	
 	String validateCompanyName = "//h1[contains(text(),'Company Details : %s')]";
 	
+	
 	public Admin_CompanyDetails(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -43,7 +45,7 @@ public class Admin_CompanyDetails extends CommonLibrary{
 	
 	
 	
-	public void validateSearchCompany(String validateValue){
+	public void validateSearchCompany(String validateValue) throws Exception{
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(getDynamicElement("Company Name",validateCompanyName,validateValue))){
@@ -53,14 +55,17 @@ public class Admin_CompanyDetails extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "validate search company Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "Could not validate search company  Successfully", "Passed", driver, "Y");
+				}
 		}
 	}
 	
-	public void searchCompaniesSideLink(){
+	public void searchCompaniesSideLink() throws Exception{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Company Details", "Search Companies Link", searchCompanies);
@@ -69,14 +74,17 @@ public class Admin_CompanyDetails extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "click search company side link Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "Could not click search company side link Successfully", "Passed", driver, "Y");
+				}
 		}
 	}
 
-	public void actionClick(){
+	public void actionClick() throws Exception{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Company Details", "Action click", companyActionButton);
@@ -85,15 +93,19 @@ public class Admin_CompanyDetails extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "click action Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "Could not click action Successfully", "Passed", driver, "Y");
+				}
+
 		}
 		
 	}
 	
-	public void editCompany(){
+	public void editCompany() throws Exception{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Company Details", "Edit Company click", editCompany);
@@ -102,16 +114,21 @@ public class Admin_CompanyDetails extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "edit company Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "Could not edit company Successfully", "Passed", driver, "Y");
+				}
+	
+				
 		}
 		
 	}
 	
 	
-	public void deleteCompany(){
+	public void deleteCompany() throws Exception{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Company Details", "Delete Company click", deleteCompany);
@@ -120,15 +137,18 @@ public class Admin_CompanyDetails extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "delete company Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "Could not delete company Successfully", "Passed", driver, "Y");
+				}
 		}
 		
 	}
 	
-	public void addCompanyUser(){
+	public void addCompanyUser() throws Exception{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Company Details", "Actions Button", companyActionButton);
@@ -140,10 +160,13 @@ public class Admin_CompanyDetails extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "add company user Successfully", "Passed", driver, "Y");
+			}else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Company Details CC- Admin application", "Could not add company user Successfully", "Passed", driver, "Y");
+				}
 		}
 	}
 }

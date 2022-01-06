@@ -81,6 +81,7 @@ public class Premier_PortfolioNew extends CommonLibrary{
 	}
 	
 	public void portfolioSearchCustomer(String sSN, int CustomerCount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if (CustomerCount==1) {
@@ -108,9 +109,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Search and Select Customer", "Could not Searched Customer Details on New Portfolio Page", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
-		}}
+		}
+		}
+	}
 	public void portfolioSearchAddress(String Address1) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if (!customerPageTitle.equals("")) {
@@ -131,9 +136,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Search and Select Address", "Could not Searched Address Details on New Portfolio Page", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
-		}}
+		}
+		}
+	}
 	public void searchAddress(String Address1) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			waitElement(4000);
@@ -156,10 +165,14 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Search Address", "Could not Searched Address Details on New Portfolio Page", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
-		}}
+		}
+		}
+	}
 	
 	public void portfolioCustomerName(String name1, String taxCode1, String taxNumber1,String dob1, int CustomerCount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if (CustomerCount==1) {
@@ -190,10 +203,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter Customer Name on New Portfolio Page", "Could not Entered Customer Name on New Portfolio Page", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
-		}}
+		}	
+		}
+		}
 	public void portfolioCustomerAddress(String sAddress1,String sAddress2, String zipCode) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if (!sAddress1.equals("")) {
@@ -216,10 +232,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter Customer Address on New Portfolio Page", "Could not Entered Customer Address on New Portfolio Page", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
-		}}
+		}	
+		}
+		}
 	public void portfolioCustomerDetails(String sdeliveryPoint,String branchRegion, String sAccountingBranch) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 				if (!sdeliveryPoint.equals("")) {
@@ -246,10 +265,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Portfolio Page", "Could not Entered Customer Details on New Portfolio Page", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
-		}}
+		}
+		}
+		}
 	public void portfolioNew_PossibleDuplicate() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(duplicatePageTitle)) {
@@ -266,10 +288,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Verify Possible Duplicates Screen", "Could not displayed Possible Duplicates Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
-		}}
+		}
+		}
+		}
 	public void portfolioNew_PossibleDuplicate_NewCustomer() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(duplicatePageTitle)) {
@@ -288,10 +313,12 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Verify Possible Duplicates Screen", "Could not displayed Possible Duplicates Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
+		}
 		}}
 	public void portfolioNew_NameScreen(String sRelationship, int CustomerCount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(nameRelationshipPageTitle)) {
@@ -309,10 +336,12 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Verify Names Screen", "Could not displayed Names Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
+		}
 		}}
 	public void portfolioNew_NameScreenMultipleCust(String sRelationship,String nameFormatCode,String sPhoneNumber,String sEmail, int CustomerCount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(nameRelationshipPageTitle)) {
@@ -346,10 +375,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Names Screen", "Could not enter details on Names Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
-		}}
+		}	
+		}
+		}
 	public void portfolioNew_CodesScreen(String sPortfolioTypeCode, String sResponsibilityCode,String sMiscellaneousCode,String excelFilePath, String sheetName, int rowNo) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(codesPageTitle)) {
@@ -385,11 +417,14 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Could not entered details on Codes Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
-			
-		}}
+		}	
+		}
+		}
 
 	public void clickAddNameLink() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(customerPageTitle)) {
@@ -405,9 +440,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Add Name Link", "Could not clicked on Add Name Link on New Portfolio Page", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
-		}}
+		}
+		}
+	}
 	public void clickOnNextButton() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			clickOnElement("New Portfolio Page", "Next Button", nextButton);
@@ -422,10 +461,14 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Next Button", "Could not clicked on Next Button", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
-		}}
+		}
+		}
+	}
 
 	public void portfolioNew_AddressScreen() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(addressPageTitle)) {
@@ -446,10 +489,14 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Verify Address Screen", "Could not displayed Address Screen", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}
+		}
 			
-		}}
+		}
+		}
 	public void portfolioFinishButton() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			clickOnElement("New Portfolio Page", "Finish Button", finishButton);
@@ -468,9 +515,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
-		}}
+		}
+		}
+	}
 	public void searchPortfolio(String portfolioNo) throws Exception{
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -492,9 +543,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Search Portfolio", "Could not Search Portfolio on Portfolio page Successfully", "Failed",
 						driver, "Y");
+				System.setProperty("runStep","N");
 			}
-		}}
+		}
+		}
+		}
 	public void changePortfolioDetails(String sPortfolioBranchRegion,String sPortfolioResponsibilityCode, String sPortfolioRelationship) throws Exception{
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -531,9 +586,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Change Portfolio Details", "Could not change portfolio details", "Failed",
 						driver, "Y");
+				System.setProperty("runStep","N");
 			}
-		}}
+		}
+		}
+		}
 	public void addCustomer(String sSN,String sName,String sRelationship, int CustomerCount) throws Exception{
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 				if (isElementPresent(relationshipTab)) {
@@ -568,9 +627,13 @@ public class Premier_PortfolioNew extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Add Customer", "Could not add Customer", "Failed",
 						driver, "Y");
+				System.setProperty("runStep","N");
 			}
-		}}
+		}
+		}
+	}
 	public void portfolioSaveButton() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			clickOnElement("New Contact Page", "Save Button", saveButton2);
@@ -588,7 +651,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
-		}}
+		}
+		}
+	}
 	
 }

@@ -105,7 +105,7 @@ public class Admin_SearchCompanies extends CommonLibrary{
 
 	}
 
-	public void noResults(){
+	public void noResults() throws Exception{
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(noResultCompany)){
@@ -115,11 +115,14 @@ public class Admin_SearchCompanies extends CommonLibrary{
 			e.printStackTrace();
 		}
 		finally {
-			if (stepResult==true)
+			if (stepResult==true){
 				System.out.println("Pass");
-			else
+				new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "No result found", "Passed", driver, "Y");
+			}
+			else{
 				System.out.println("fail");
-		}
+				new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "Could not No result found", "Failed", driver, "Y");
+			}		}
 	}
 
 

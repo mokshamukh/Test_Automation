@@ -14,7 +14,7 @@ import testframe.common.reporting.HTMLReportHelper;
 /**
  * PageNage : Premier_CustomerNewName
  * 
- * @author Ketki.Badalwar
+ * @author Moksha.Mukh
  */
 
 
@@ -52,7 +52,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 	public By lastPhoneNumValue =By.xpath("//table[@id='mcPhoneNumbers']//tr[last()-1]/td[6]/input[contains(@name,'PhoneNumber')]");
 	public By lastemailidValue =By.xpath("//table[@id='mcEmailAddress']//tr[last()-1]/td[6]/input[contains(@name,'ContactInfo')]");
 	public By allRelationshipNameCheckBoc =By.xpath("//a[text()='All relationships will reflect name changes.']/../../input");
-	
+
 	//below xpaths are not used yet in scripts
 	public By nameTitle = By.xpath("//label[text()='Step 1 - Name']");
 	public By firstNametextbox = By.xpath("(//label[text()='First Name:'])[1]/../following-sibling::td/input");
@@ -75,7 +75,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 	public By duplicateMsg = By.xpath("//label[text()='No Possible Name Duplicates']");
 	public By contactMethodsLabel = By.xpath("//label[text()='Step 3 - Contact Methods']");
 	public By buildRelationshipLabel = By.xpath("//label[text()='Step 5 - Build Relationships']");
-	
+
 	public By SearchTitle = By.xpath("//label[text()='Search']");
 	public By BuildRelationshipSSN = By.xpath("//label[text()='Tax Identification:']/../following-sibling::td//input[@id='TaxID']");
 	public By SubmitButton_SearchScreen = By.xpath("//button[text()='Submit']");
@@ -83,7 +83,7 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 	public By SearchResult = By.xpath("//a[contains(@id,'SearchType=Name')]");
 	public By RelationshipName =By.xpath("(//table[@id='Rel_Name']//select[contains(@id,'RelationshipCode')])[1]");
 	public By addAddressImage = By.xpath("//img[@title='Add Address']");
-	
+
 	public By phoneNumVal = By.xpath("(//input[contains(@name,'PhoneNumber')])[1]");
 	public By emailVal = By.xpath("(//input[contains(@name,'ContactInfo')])[1]");
 	public By webAddressVal = By.xpath("(//input[contains(@name,'ContactInfo')])[2]");
@@ -183,188 +183,208 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 
 	}
-	
-	public void searchCustomer(String sName, String sSSN) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(changeNameTitle)){
-				switchToFrameWithName("Main");
-				if (!sName.equals(""))
-					enterText("Change Name - Search Page", "Name", nameSearchChange, sName);
-				if (!sSSN.equals(""))
-					enterText("Change Name - Search Page", "Tax Identification", ssnSearchChange, sSSN);
-				clickOnElement("Change Name - Search Page", "Submit", submitSearch);
-				stepResult = true;
-				switchToDefaultContent();
-			}	
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search a customer", "Search customer Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search a customer", "Could not search the Customer" , "Failed", driver, "Y");
-			}
-		}
 
+	public void searchCustomer(String sName, String sSSN) throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(changeNameTitle)){
+					switchToFrameWithName("Main");
+					if (!sName.equals(""))
+						enterText("Change Name - Search Page", "Name", nameSearchChange, sName);
+					if (!sSSN.equals(""))
+						enterText("Change Name - Search Page", "Tax Identification", ssnSearchChange, sSSN);
+					clickOnElement("Change Name - Search Page", "Submit", submitSearch);
+					stepResult = true;
+					switchToDefaultContent();
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search a customer", "Search customer Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search a customer", "Could not search the Customer" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
 	}
 
 
 	public void updateNameDetails(String name,String lastName) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(changeNameTitle)){
-				driver.switchTo().frame("Main");
-				
-				clearText("Change Name Page", "First Name field", firstNametextbox);
-				//clearText("Change Name Page", "First Name field", nameTextbox);
-				if(!lastName.equals("")){
-					clearAndType("Change Name Page", "Last Name field", lastNameTextbox, lastName);
-					clearAndType("Change Name Page", "Last Name field", lastNameTextbox, lastName);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(changeNameTitle)){
+					driver.switchTo().frame("Main");
+
+					clearText("Change Name Page", "First Name field", firstNametextbox);
+					//clearText("Change Name Page", "First Name field", nameTextbox);
+					if(!lastName.equals("")){
+						clearAndType("Change Name Page", "Last Name field", lastNameTextbox, lastName);
+						clearAndType("Change Name Page", "Last Name field", lastNameTextbox, lastName);
+					}
+					Thread.sleep(3000);
+					if(!name.equals("")){
+						clearAndType("Change Name Page", "Name field", nameTextbox, name);
+						clearAndType("Change Name Page", "Name field", nameTextbox, name);
+					}
+
+
+					stepResult = true;
 				}
-				Thread.sleep(3000);
-				if(!name.equals("")){
-					clearAndType("Change Name Page", "Name field", nameTextbox, name);
-					clearAndType("Change Name Page", "Name field", nameTextbox, name);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Name Details", "Change name Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Name Details", "Could not change name", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				
-				
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Name Details", "Change name Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Name Details", "Could not change name", "Failed", driver, "Y");
 			}
 		}
 	}
 
 	public void goToContactMethodTab() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Change Name - Contact Methods Page", "Contact Methods", contactDetailsTab);
-			stepResult = true;
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("Change Name - Contact Methods Page", "Contact Methods", contactDetailsTab);
+				stepResult = true;
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on Contact Methods", "Click on Contact Methods Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on Contact Methods", "Could not click on Contact Methods", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on Contact Methods", "Click on Contact Methods Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on Contact Methods", "Could not click on Contact Methods", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void updateContactMethods(String phoneNumber,String email,String webAddress) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(contactDetailsTabTitle)){
-				if(!phoneNumber.equals("")){
-					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Phone Number", phoneNumVal);
-					clearAndType("Change Name - Contact Methods Page", "Phone Number", phoneNumVal, phoneNumber);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(contactDetailsTabTitle)){
+					if(!phoneNumber.equals("")){
+						clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Phone Number", phoneNumVal);
+						clearAndType("Change Name - Contact Methods Page", "Phone Number", phoneNumVal, phoneNumber);
+					}
+					if(!email.equals("")){
+						clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Email", emailVal);
+						clearAndType("Change Name - Contact Methods Page", "Email address", emailVal, email);
+					}
+					if(!webAddress.equals("")){
+						clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Web Address", webAddressVal);
+						clearAndType("Change Name - Contact Methods Page", "Web Address", webAddressVal, webAddress);
+					}
+					stepResult = true;
 				}
-				if(!email.equals("")){
-					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Email", emailVal);
-					clearAndType("Change Name - Contact Methods Page", "Email address", emailVal, email);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Update Contact Methods Details", "Change contact methods Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Update Contact Methods Details", "Could not change contact methods", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if(!webAddress.equals("")){
-					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Web Address", webAddressVal);
-					clearAndType("Change Name - Contact Methods Page", "Web Address", webAddressVal, webAddress);
-				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Update Contact Methods Details", "Change contact methods Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Update Contact Methods Details", "Could not change contact methods", "Failed", driver, "Y");
 			}
 		}
 	}
 
 	public void addPhoneNumber(String phoneType, String phoneNumber) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(contactDetailsTabTitle)){
-				if(!phoneNumber.equals("")){
-					selectElementByVisibleText("Change Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
-					clickOnElement("Change Name - Contact Methods Page", "Add Phone link", phoneNumLink);
-					Thread.sleep(4000);
-					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Phone Number", lastPhoneNumValue);
-					enterText("Change Name - Contact Methods Page", "Phone Number", lastPhoneNumValue, phoneNumber);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(contactDetailsTabTitle)){
+					if(!phoneNumber.equals("")){
+						selectElementByVisibleText("Change Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
+						clickOnElement("Change Name - Contact Methods Page", "Add Phone link", phoneNumLink);
+						Thread.sleep(4000);
+						clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Phone Number", lastPhoneNumValue);
+						enterText("Change Name - Contact Methods Page", "Phone Number", lastPhoneNumValue, phoneNumber);
+					}
+					stepResult = true;
 				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a phone number", "Phone Number added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a phone number", "Could not add Phone Number", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a phone number", "Phone Number added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a phone number", "Could not add Phone Number", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void addEmail(String emailType, String mailid) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(contactDetailsTabTitle)){
-				if(!mailid.equals("")){
-					selectElementByVisibleText("Change Name - Contact Methods Page", "Mail Type", selectEmailType, emailType);
-					clickOnElement("Change Name - Contact Methods Page", "Add Email link", emailLink);
-					Thread.sleep(4000);
-					clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Email Address", lastemailidValue);
-					enterText("Change Name - Contact Methods Page", "Email Address", lastemailidValue, mailid);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(contactDetailsTabTitle)){
+					if(!mailid.equals("")){
+						selectElementByVisibleText("Change Name - Contact Methods Page", "Mail Type", selectEmailType, emailType);
+						clickOnElement("Change Name - Contact Methods Page", "Add Email link", emailLink);
+						Thread.sleep(4000);
+						clickAfterWaitForElementToBeClickable("Change Name - Contact Methods Page", "Email Address", lastemailidValue);
+						enterText("Change Name - Contact Methods Page", "Email Address", lastemailidValue, mailid);
+					}
+					stepResult = true;
 				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "E-mail Address added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "Could not add E-mail Address", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "E-mail Address added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "Could not add E-mail Address", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
-	public void goToRelationshipsTab() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Change Name - Relationships Page", "Relationships", relationshipsTab);
-			stepResult = true;
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on Relationships", "Click on Relationships Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on Relationships", "Could not click on Relationships", "Failed", driver, "Y");
+	public void goToRelationshipsTab() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("Change Name - Relationships Page", "Relationships", relationshipsTab);
+				stepResult = true;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on Relationships", "Click on Relationships Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on Relationships", "Could not click on Relationships", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -372,151 +392,165 @@ public class Premier_CustomerChangeName extends CommonLibrary {
 
 
 	public void buildRelationship(String buildRelationship_SSN,String build_Relationship) throws Exception {
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(relationshipsTitle)){
-				Thread.sleep(3000);
-				if (!buildRelationship_SSN.equals("")) {
-					clickOnElement("Change Name - Relationship Page", "Add Name Image",addNameImage);
-					switchToWindowWithTitleContaining("Add Name");
-					driver.switchTo().frame("bottom");
-					if (isElementPresent(SearchTitle)) {
-						enterText("Change Name - Search Page", "Enter SSN Field", BuildRelationshipSSN, buildRelationship_SSN);
-						clickOnElement("Change Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
-						//waitForPresenceOfElement("Change Name - Search Page", "Searched Name List", NameList);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(relationshipsTitle)){
+					Thread.sleep(3000);
+					if (!buildRelationship_SSN.equals("")) {
+						clickOnElement("Change Name - Relationship Page", "Add Name Image",addNameImage);
+						switchToWindowWithTitleContaining("Add Name");
+						driver.switchTo().frame("bottom");
+						if (isElementPresent(SearchTitle)) {
+							enterText("Change Name - Search Page", "Enter SSN Field", BuildRelationshipSSN, buildRelationship_SSN);
+							clickOnElement("Change Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
+							//waitForPresenceOfElement("Change Name - Search Page", "Searched Name List", NameList);
+							Thread.sleep(3000);
+							if (isElementPresent(SearchResult)){
+								clickOnElement("Change Name - Search Page", "Searched Result Link",SearchResult);
+								stepResult = true;
+							}
+							switchToWindowWithTitleContaining("Institution");
+							driver.switchTo().frame("Main");
+						}
 						Thread.sleep(3000);
-						if (isElementPresent(SearchResult)){
-							clickOnElement("Change Name - Search Page", "Searched Result Link",SearchResult);
+						if (!build_Relationship.equals("")) {
+							stepResult = false;
+							selectElementByVisibleText("Change Name - Relationship Page", "Relationship field", lastRelationship, build_Relationship);
 							stepResult = true;
 						}
-						switchToWindowWithTitleContaining("Institution");
-						driver.switchTo().frame("Main");
 					}
-					Thread.sleep(3000);
-					if (!build_Relationship.equals("")) {
-						stepResult = false;
-						selectElementByVisibleText("Change Name - Relationship Page", "Relationship field", lastRelationship, build_Relationship);
-						stepResult = true;
-					}
+					//stepResult = true;
 				}
-				//stepResult = true;
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Relationship added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Could not add Relationship", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Relationship added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Could not add Relationship", "Failed", driver, "Y");
-			}
-
 		}
 	}
 
 	public void addDetailsOfBeneficiary(String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent) throws Exception {
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(beneficiaryOwnerTitle)){
-				Thread.sleep(3000);
-				if (!beneficialOwnerName.equals("")) {
-					selectElementByVisibleText("Change Name - Relationship Page", "Beneficial Owner Name field", lastBeneficialOwnerName, beneficialOwnerName);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(beneficiaryOwnerTitle)){
+					Thread.sleep(3000);
+					if (!beneficialOwnerName.equals("")) {
+						selectElementByVisibleText("Change Name - Relationship Page", "Beneficial Owner Name field", lastBeneficialOwnerName, beneficialOwnerName);
+					}
+					if (!beneficial_Relationship.equals("")) {
+						selectElementByVisibleText("Change Name - Relationship Page", "Beneficial Relationship field", lastBeneficialRelationship, beneficial_Relationship);
+					}
+					if (!beneficial_Percent.equals("")) {
+						enterText("Change Name - Relationship Page", "Beneficial Percent Field", lastBeneficialPercent, beneficial_Percent);
+					}
+					stepResult = true;
 				}
-				if (!beneficial_Relationship.equals("")) {
-					selectElementByVisibleText("Change Name - Relationship Page", "Beneficial Relationship field", lastBeneficialRelationship, beneficial_Relationship);
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Beneficial Ownership added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Could not add Beneficial Ownership", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (!beneficial_Percent.equals("")) {
-					enterText("Change Name - Relationship Page", "Beneficial Percent Field", lastBeneficialPercent, beneficial_Percent);
-				}
-				stepResult = true;
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Beneficial Ownership added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Could not add Beneficial Ownership", "Failed", driver, "Y");
-			}
 
+			}
 		}
 	}
 
 	public void saveDetails() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Change Name Page", "Save", saveButton);
-			
-			if (isOptionalElementPresent(allRelationshipNameCheckBoc)){
-				Thread.sleep(2000);
-				clickOnElement("Change Name Page", "All relationships will reflect name changes Check Box", allRelationshipNameCheckBoc);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 				clickOnElement("Change Name Page", "Save", saveButton);
-				Thread.sleep(1000);
-				
-			}
-			if (isElementPresent(searchLabel)){
-				stepResult = true;
-			}
-			
-			switchToWindowWithTitleContaining("Institution");
-			switchToDefaultContent();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Save Change Name Details", "Change Name details saved Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Save Change Name Details", "Could not saved Change Name details", "Failed", driver, "Y");
+
+				if (isOptionalElementPresent(allRelationshipNameCheckBoc)){
+					Thread.sleep(2000);
+					clickOnElement("Change Name Page", "All relationships will reflect name changes Check Box", allRelationshipNameCheckBoc);
+					clickOnElement("Change Name Page", "Save", saveButton);
+					Thread.sleep(1000);
+
+				}
+				if (isElementPresent(searchLabel)){
+					stepResult = true;
+				}
+
+				switchToWindowWithTitleContaining("Institution");
+				switchToDefaultContent();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Save Change Name Details", "Change Name details saved Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Save Change Name Details", "Could not saved Change Name details", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void deleteLastBeneficiary() throws Exception {
-		boolean stepResult = false;
-		try {
-			
-			if (isElementPresent(beneficiaryOwnerTitle)){
-				clickOnElement("Change Name - Relationships Page", "Delete image", lastDeleteBeneficiary);
-				stepResult = true;
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Delete Beneficiary", "Beneficiary deleted Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Delete Beneficiary", "Could not delete the Beneficiary", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+
+				if (isElementPresent(beneficiaryOwnerTitle)){
+					clickOnElement("Change Name - Relationships Page", "Delete image", lastDeleteBeneficiary);
+					stepResult = true;
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Delete Beneficiary", "Beneficiary deleted Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Delete Beneficiary", "Could not delete the Beneficiary", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
-	
+
 	public void clickAddBeneficiary() throws Exception {
-		boolean stepResult = false;
-		try {
-			
-			if (isElementPresent(beneficiaryOwnerTitle)){
-				clickOnElement("Change Name - Relationships Page", "Add Beneficial Owner Link", addBeneficiaryLink);
-				stepResult = true;
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click Add Beneficial Owner", "Clicked on Add Beneficial Owner Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click Add Beneficial Owner", "Could not Click on Add Beneficial Owner", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+
+				if (isElementPresent(beneficiaryOwnerTitle)){
+					clickOnElement("Change Name - Relationships Page", "Add Beneficial Owner Link", addBeneficiaryLink);
+					stepResult = true;
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click Add Beneficial Owner", "Clicked on Add Beneficial Owner Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click Add Beneficial Owner", "Could not Click on Add Beneficial Owner", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
