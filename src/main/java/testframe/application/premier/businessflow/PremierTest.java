@@ -1287,7 +1287,7 @@ public class PremierTest extends ApplicationBase {
 				premierNewCollateral.enterCollateralCodePageDetail_RealEstate(tc_Test_Data.get(iTDRow).get("Collateral_ParcelID"),tc_Test_Data.get(iTDRow).get("Collateral_BuildingStatus"),tc_Test_Data.get(iTDRow).get("Collateral_PrimaryResidence"),tc_Test_Data.get(iTDRow).get("Collateral_CollateralValue"),tc_Test_Data.get(iTDRow).get("Collateral_PropertyType"),tc_Test_Data.get(iTDRow).get("Collateral_NumberOfUnits"),
 						tc_Test_Data.get(iTDRow).get("Collateral_MarketValue"),tc_Test_Data.get(iTDRow).get("Collateral_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberValue"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberExpirationDate"),tc_Test_Data.get(iTDRow).get("Collateral_MarginPercent"),tc_Test_Data.get(iTDRow).get("Collateral_MarginAmount"));
 				premierNewCollateral.enterCollateralRelationshipPageDetail(tc_Test_Data.get(iTDRow).get("Collateral_SearchSSN"),tc_Test_Data.get(iTDRow).get("Collateral_SSNRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAddress"),tc_Test_Data.get(iTDRow).get("Collateral_AddressRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountType"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountNumber"),tc_Test_Data.get(iTDRow).get("Collateral_AccountPledgeRule"));
-				//premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);
+				premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);
 				break;
 				
 			case "PREMIER_TC047":
@@ -1300,7 +1300,7 @@ public class PremierTest extends ApplicationBase {
 				premierNewCollateral.enterCollateralCodePageDetail_LifeInsurance(tc_Test_Data.get(iTDRow).get("Collateral_PolicyDescription"),tc_Test_Data.get(iTDRow).get("Collateral_CashValue"),tc_Test_Data.get(iTDRow).get("Collateral_CollateralValue"),tc_Test_Data.get(iTDRow).get("Collateral_PolicyNumber"),tc_Test_Data.get(iTDRow).get("Collateral_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Collateral_FaceValue"),
 						tc_Test_Data.get(iTDRow).get("Collateral_PolicyEffectiveDate"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberValue"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberExpirationDate"),tc_Test_Data.get(iTDRow).get("Collateral_MarginPercent"),tc_Test_Data.get(iTDRow).get("Collateral_MarginAmount"));
 				premierNewCollateral.enterCollateralRelationshipPageDetail(tc_Test_Data.get(iTDRow).get("Collateral_SearchSSN"),tc_Test_Data.get(iTDRow).get("Collateral_SSNRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAddress"),tc_Test_Data.get(iTDRow).get("Collateral_AddressRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountType"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountNumber"),tc_Test_Data.get(iTDRow).get("Collateral_AccountPledgeRule"));
-				//premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);				
+				premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);				
 				break;
 				
 			case "PREMIER_TC048":
@@ -1313,7 +1313,7 @@ public class PremierTest extends ApplicationBase {
 				premierNewCollateral.enterCollateralCodePageDetail_Investment(tc_Test_Data.get(iTDRow).get("Collateral_NumberofShares"),tc_Test_Data.get(iTDRow).get("Collateral_AccountNumber"),tc_Test_Data.get(iTDRow).get("Collateral_Type"),tc_Test_Data.get(iTDRow).get("Collateral_CUSIP"),tc_Test_Data.get(iTDRow).get("Collateral_TickerSymbol"),tc_Test_Data.get(iTDRow).get("Collateral_FundName"),
 						tc_Test_Data.get(iTDRow).get("Collateral_CollateralValue"),tc_Test_Data.get(iTDRow).get("Collateral_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberValue"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberExpirationDate"),tc_Test_Data.get(iTDRow).get("Collateral_MarginPercent"),tc_Test_Data.get(iTDRow).get("Collateral_MarginAmount"));
 				premierNewCollateral.enterCollateralRelationshipPageDetail(tc_Test_Data.get(iTDRow).get("Collateral_SearchSSN"),tc_Test_Data.get(iTDRow).get("Collateral_SSNRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAddress"),tc_Test_Data.get(iTDRow).get("Collateral_AddressRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountType"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountNumber"),tc_Test_Data.get(iTDRow).get("Collateral_AccountPledgeRule"));
-				//premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);				
+				premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);				
 				break;
 				
 			case "PREMIER_TC049":
@@ -1326,7 +1326,7 @@ public class PremierTest extends ApplicationBase {
 				premierNewCollateral.enterCollateralCodePageDetail_Basic(tc_Test_Data.get(iTDRow).get("Collateral_Description"),tc_Test_Data.get(iTDRow).get("Collateral_CollateralIdentification"),tc_Test_Data.get(iTDRow).get("Collateral_DateLastStatusChange"),tc_Test_Data.get(iTDRow).get("Collateral_CollateralStatus"),tc_Test_Data.get(iTDRow).get("Collateral_PurchasePrice"),tc_Test_Data.get(iTDRow).get("Collateral_NumberOfUnits"),
 						tc_Test_Data.get(iTDRow).get("Collateral_CollateralValue"),tc_Test_Data.get(iTDRow).get("Collateral_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberValue"),tc_Test_Data.get(iTDRow).get("Collateral_AdditionalInfoParcelNumberExpirationDate"),tc_Test_Data.get(iTDRow).get("Collateral_MarginPercent"),tc_Test_Data.get(iTDRow).get("Collateral_MarginAmount"));
 				premierNewCollateral.enterCollateralRelationshipPageDetail(tc_Test_Data.get(iTDRow).get("Collateral_SearchSSN"),tc_Test_Data.get(iTDRow).get("Collateral_SSNRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAddress"),tc_Test_Data.get(iTDRow).get("Collateral_AddressRelationship"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountType"),tc_Test_Data.get(iTDRow).get("Collateral_SearchAccountNumber"),tc_Test_Data.get(iTDRow).get("Collateral_AccountPledgeRule"));
-				//premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);			
+				premierNewCollateral.finishCollateral(testdataFile_Path, sTestCase, iTDRow+1);			
 				break;
 				
 			case "PREMIER_TC050":

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.ExcelReader;
 
 /**
  * PageNage : Premier_NewCollateral
@@ -23,7 +24,7 @@ public class Premier_NewCollateral extends CommonLibrary{
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 		premierPortfolioNew = new Premier_PortfolioNew(driver);
 	}
-	
+	public String sCollateralRecordNumber;
 	public By searchTitle = By.xpath("//label[text()='Search']");
 	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By ssnSearch = By.xpath("//input[@name='TaxID']");
@@ -83,6 +84,13 @@ public class Premier_NewCollateral extends CommonLibrary{
 	public By dateLastStatusChangeInput = By.xpath("//input[contains(@id,'DateLastStatusChg')]");
 	public By collateralStatusInput = By.xpath("//input[contains(@id,'CollateralStatus')]");
 	public By purchasePriceInput = By.xpath("//input[contains(@id,'PurchasePrice')]");
+	public By accountTypeList = By.xpath("//select[@name='AccountType']");
+	public By accountNumberList = By.xpath("//input[@name='DepositAccountNumber']");
+	String searchAccountLink = "(//a[contains(text(),'%s')])[1]";
+	public By pledgeRuleList = By.xpath("//select[contains(@name,'PledgeRule')]");
+	public By nameRelationshipList = By.xpath("//label[text()='Related Name']/../../following-sibling::tr//select[contains(@id,'RelationshipCode')]");
+	public By addressRelationshipList = By.xpath("//label[text()='Address 1']/../../following-sibling::tr//select[contains(@id,'RelationshipCode')]");
+	public By finishButtoncollateral = By.xpath("//button[@id='SubmitButton']");
 	
 	public void enterCollateralDefInitionPageDetail(String sCollateralType,String sBranchRegion,String sCollateralCode) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
@@ -402,7 +410,7 @@ public class Premier_NewCollateral extends CommonLibrary{
 					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 					if (!sSSNRelationship.equals("")) {
-						//add steps for selecting relationship
+						selectElementByVisibleText("Collateral relationship Screen", "Name Relationship Field ",nameRelationshipList, sSSNRelationship);
 					}
 				}
 				if (!sSearchAddress.equals("")) {
@@ -416,12 +424,22 @@ public class Premier_NewCollateral extends CommonLibrary{
 					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 					if (!sAddressRelationship.equals("")) {
-						//add steps for selecting relationship
+						selectElementByVisibleText("Collateral relationship Screen", "Address Relationship Field ",addressRelationshipList, sAddressRelationship);
 					}
 				}
 				if (!sSearchAccountNumber.equals("")) {
 					clickOnElement("New Collateral Relationship Page", "Search Account", searchNameAccount);
 					Thread.sleep(4000);
+					switchToWindowWithTitleContaining("Account Search");
+					Thread.sleep(4000);
+					driver.switchTo().frame("bottom");
+					searchAccount(sSearchAccountType,sSearchAccountNumber);
+					Thread.sleep(4000);
+					switchToWindowWithTitleContaining("Institution");
+					driver.switchTo().frame("Main");
+					if (!sAccountPledgeRule.equals("")) {
+						selectElementByVisibleText("Collateral relationship Screen", "Account Pledge Rule Field ",pledgeRuleList, sAccountPledgeRule);
+					}
 				}
 				//clickOnElement("New Collateral Page", "Next Button", collateralNextButton);
 				waitElement(2000);
@@ -432,17 +450,84 @@ public class Premier_NewCollateral extends CommonLibrary{
 		}finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral definition Screen", "Details Entered on Collateral definition Screen Successfully", "Passed",driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral relationship Screen", "Details Entered on Collateral relationship Screen Successfully", "Passed",driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral definition Screen", "Could not entered details on Collateral definition Screen", "Failed",driver, "Y");
+
+				new HTMLReportHelper().HtmlReportBody("Enter details on Collateral relationship Screen", "Could not entered details on Collateral relationship Screen", "Failed",driver, "Y");
 				System.setProperty("runStep","N");
+
 			}
 		}
 
 		}
 	}
 	
+	public void searchAccount(String accountType, String accountNumber) throws Exception {
+		boolean stepResult = false;
+		try {
+			switchToWithinFrameWithName("Main");
+			if (isElementPresent(searchTitle)) {
+				selectElementByVisibleText("Searh Account Page", "Account Type Field ",accountTypeList, accountType);
+				enterText("Searh Account Page", "Account field", accountNumberList, accountNumber);
+				clickOnElement("Search Account Page", "Submit button", submitSearch);
+				waitElement(3000);
+				if (isElementPresent(getDynamicElement("Search Account Link",searchAccountLink,accountNumber))){
+					clickOnElement("Search Account Page", "Search Account Link", getDynamicElement("Search Account Link",searchAccountLink,accountNumber));
+				}
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Search Account", "Search Account  Successfully","Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Search Account", "Could not search the Account","Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void finishCollateral(String excelFilePath, String sheetName, int rowNo) throws Exception {
+		boolean stepResult = false;
+		try {
+			sCollateralRecordNumber=getElementText("New Collateral Page", "Collateral No",  collateralrelationshipPageTitle);
+			
+			String[] temp = sCollateralRecordNumber.split("Step 4 - Relationships - Collateral Record ");
+			sCollateralRecordNumber = temp[1];
+			if(sCollateralRecordNumber != "")
+				new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Collateral_RecordNumber", rowNo, sCollateralRecordNumber);							
+			clickOnElement("New Collateral Page", "Finish Button", finishButtoncollateral);
+			Thread.sleep(5000);
+			/*if(isElementPresent(warningHeader)) {
+				if (isElementPresent(warning1)) {
+					clickOnElement("New Collateral Page", "Warning 1 Checkbox", warningCheckBox1);
+				}
+				if (isElementPresent(warning2)) {
+					clickOnElement("New Collateral Page", "Warning 2 Checkbox", warningCheckBox2);
+				}
+				clickOnElement("New Collateral Page", "Save Button", saveBtn);
+				waitElement(2000);
+			}*/
+			validateElementPresent("New Collateral Page", "collateral Definition", collateralDefinitionPageTitle);
+			driver.switchTo().defaultContent();
+			switchToWindowWithTitleContaining("Institution");
+			stepResult = true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
+			}	
+		}
+	}
 }
 
 
