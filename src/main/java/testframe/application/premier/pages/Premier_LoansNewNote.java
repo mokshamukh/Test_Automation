@@ -23,7 +23,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 		premierPortfolioNew = new Premier_PortfolioNew(driver);
 	}
-	
+
 	By customerPageTitle =  By.xpath("//a[text()='Step 2 - Customer']");
 	public By productList =  By.xpath("//select[contains(@name,'ProductNumber')]");
 	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
@@ -88,7 +88,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 	public By paymentTab = By.xpath("//li//a[text()='Payment']");
 	public By paymentFrequencyInquiryPage =  By.xpath("//td[text()='Payment Frequency:']/following-sibling::td[1]");
 	public By paymentRestrictionCodeInquiryPage =  By.xpath("//td[text()='Payment Restriction Code:']/following-sibling::td[1]");
-	
+
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
 	String purposeCodeList =  "//select[contains(@name,'PurposeCode')]/option[contains(text(),'%s')]";
@@ -96,280 +96,292 @@ public class Premier_LoansNewNote extends CommonLibrary{
 	String custLineName = "//u[contains(text(),'%s')]";
 	String loanChangeHeader = "//a[contains(text(),'%s')]";
 	String loanChangeHeaderInquiry = "//td[contains(text(),'%s')]";
-	
+
 	public void newNoteLoanAcc_CodesScreen(String sNoteAccntNo,String scashProceeds,String sMaximumCredit,String sMaximumCreditCode,
 			String sNoteDate,String sContractDate,String sAccountOpenMethod,String sOriginalCreditScore,String sPaymentReserveOption,
 			String sOriginalPaymentReserve,String sInternalPaymentOption,String sResponsibilityCode) throws Exception {
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(codesPageTitle)) {
-				if (!sNoteAccntNo.equals("")) {
-					enterText("New Note Codes Page", "Note Number", noteNumber, sNoteAccntNo);
-				}	
-				if(!scashProceeds.equals("")) {
-					enterText("New Note Codes Page", "Cash Proceeds Field", cashProcceds, scashProceeds);
-				}				
-				if (!sMaximumCredit.equals("")) {
-					enterText("New Note Codes Page", "Maximum Credit Field", maximumCredit, sMaximumCredit);
-				}
-				if (!sMaximumCreditCode.equals("")) {
-					selectElementByVisibleText("New Note Codes Page", "Maximum Credit Code Field", maximumCreditCode, sMaximumCreditCode);
-				}
-				if (!sNoteDate.equals("")) {
-					enterText("New Note Codes Page", "Note Date Field", noteDate, sNoteDate);
-				}
-				if (!sContractDate.equals("")) {
-					enterText("New Note Codes Page", "Contract Date Field", contractDate, sContractDate);
-				}
-				if (!sAccountOpenMethod.equals("")) {
-					clickOnElement("New Note Codes Page", "Account openMethod Text Box",accountOpenMethodInput);
-					Thread.sleep(1000);
-					clickOnElement("New Note Codes Page", "Account openMethod Button",accountOpenMethodButton);
-					Thread.sleep(1000);
-					clickOnElement("New Note Codes Page", "AccountOpenMethod Code list",getDynamicElement("AccountOpenMethod Code list",accountOpenMethodCodeList,sAccountOpenMethod));
-				}
-				if (!sOriginalCreditScore.equals("")) {
-					enterText("New Note Codes Page", "Original CreditScore Field", originalCreditScore, sOriginalCreditScore);
-				}
-				if (!sPaymentReserveOption.equals("")) {
-					selectElementByVisibleText("New Line Codes Page", "Maximum Credit Code", paymentReserveOPtion, sPaymentReserveOption);
-				}
-				if (!sOriginalPaymentReserve.equals("")) {
-					enterText("New Note Codes Page", "Original PaymentReserve Field", originalPaymentReserve, sOriginalPaymentReserve);
-				}
-				if (!sInternalPaymentOption.equals("")) {
-					selectElementByVisibleText("New Line Codes Page", "Internal Payment option", internalPaymentOption, sInternalPaymentOption);
-				}
-				if (!sResponsibilityCode.equals("")) {
-					clickOnElement("New Line Codes Page", "Responsibility Text Box",responsibilityCodeInput);
-					Thread.sleep(1000);
-					clickOnElement("New Line Codes Page", "Responsibility Code Button",responsibilityCodeButton);
-					Thread.sleep(1000);
-					clickOnElement("New Line Codes Page", "Responsibility Code list",getDynamicElement("Responsibility Code list",responsibilityCodeList,sResponsibilityCode));
-				}
-				clickOnElement("New Line Page", "Next Button", nextButton);
-				waitElement(2000);
-				stepResult = true;
-			}					
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Details Entered on Codes Screen Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Could not entered details on Codes Screen", "Failed",driver, "Y");
-			}
-
-		}
-	}
-
-
-   public void newNoteLoan_PaymentScreen(String sinterestMethod,String sFirstPaymentDate,String sPaymentFrequency,String sFirstInterestPaymentDate,
-		   String sInterestPaymentFrequency,String sPurposeCode,String sPaymentCode,String sChargeAccount,String sRate,String sRateAdjuster1,
-		   String sRateAdjuster2,String sPercentOfPrimeCode,String sTotalInterest) throws Exception {
-	   boolean stepResult = false;
-		try {
-			if(isElementPresent(paymentPageTitle)) {
-				if (!sinterestMethod.equals("")) {
-					selectElementByVisibleText("New Note Payment Page", "Interest Method option", interestMethod, sinterestMethod);
-				}
-				if (!sFirstPaymentDate.equals("")) {
-					enterText("New Note Payment Page", "Original PaymentReserve Field", firstPaymentDate, sFirstPaymentDate);
-				}
-				if (!sPaymentFrequency.equals("")) {
-					selectElementByVisibleText("New Note Payment Page", "Interest Method option", paymentFrequency, sPaymentFrequency);
-				}
-				if (!sFirstInterestPaymentDate.equals("")) {
-					enterText("New Note Payment Page", "Original PaymentReserve Field", firstPaymentInterestDate, sFirstInterestPaymentDate);
-				}
-				if (!sInterestPaymentFrequency.equals("")) {
-					selectElementByVisibleText("New Note Payment Page", "Interest Method option", interestPaymentFrequency, sInterestPaymentFrequency);
-				}
-				if (!sPurposeCode.equals("")) {
-					clickOnElement("New Note Payment Page", "Purpose TextBox",purposeCodeInput);
-					Thread.sleep(1000);
-					clickOnElement("New Note Payment Page", "Purpose Code Button",purposeCodeButton);
-					Thread.sleep(1000);
-					clickOnElement("New Note Payment Page", "Purpose Code list",getDynamicElement("Purpose Code list",purposeCodeList,sPurposeCode));
-				}
-				if (!sPaymentCode.equals("")) {
-					selectElementByVisibleText("New Note Payment Page", "Interest Method option", paymentCode, sPaymentCode);
-				}
-				if (!sChargeAccount.equals("")) {
-					enterText("New Note Payment Page", "Original PaymentReserve Field", chargeAccount, sChargeAccount);
-				}
-				waitElement(1000);
-				if (!sRate.equals("")) {
-					enterText("New Note Payment Page", "Rate Field", rate, sRate);
-				}
-				if (!sRateAdjuster1.equals("")) {
-					enterText("New Note Payment Page", "Original PaymentReserve Field", rateAdjuster1, sRateAdjuster1);
-				}
-				if (!sRateAdjuster2.equals("")) {
-					enterText("New Note Payment Page", "Original PaymentReserve Field", rateAdjuster2, sRateAdjuster2);
-				}
-				if (!sPercentOfPrimeCode.equals("")) {
-					selectElementByVisibleText("New Note Payment Page", "Interest Method option", percentPrimeCode, sPercentOfPrimeCode);
-				}
-				if (!sTotalInterest.equals("")) {
-					enterText("New Note Payment Page", "Original PaymentReserve Field", totalInterest, sTotalInterest);
-				}
-				clickOnElement("New Line Page", "Next Button", nextButton);
-				waitElement(2000);
-				stepResult = true;
-			}					
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Payment Screen", "Details Entered on Payment Screen Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Payment Screen", "Could not entered details on Payment Screen", "Failed",driver, "Y");
-			}
-
-		}
-   }
-	
-   public void newNoteLoan_InsuranceScreen(String sPlan, String sPremium,String slineLifeInsuranceOption,String sSimpleInsuranceBillingDay) throws Exception {
-	   boolean stepResult = false;
-		try {
-			if(isElementPresent(insurancePageTitle)) {
-				if (!sPlan.equals("")) {
-					enterText("New Note Insurance Page", "Insurance Plan Field", plan1_Textbox, sPlan);
-				}
-				if (!sPremium.equals("")) {
-					enterText("New Note Insurance Page", "Insurance Premium Field", premium1_Textbox, sPremium);
-				}
-				if (!slineLifeInsuranceOption.equals("")) {
-					selectElementByVisibleText("New Note Insurance Page", "line Life Insurance Option Field", lineLifeInsuranceOption, slineLifeInsuranceOption);
-				}
-				if (!sSimpleInsuranceBillingDay.equals("")) {
-					selectElementByVisibleText("New Note Insurance Page", "Simple Insurance Billing Day Field", simpleInsuranceBillingDay, sSimpleInsuranceBillingDay);
-				}
-				clickOnElement("New Loan Page", "Next Button", nextButton);
-				waitElement(2000);
-				stepResult = true;
-			}					
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Insurance Screen", "Details Entered on Insurance Screen Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Insurance Screen", "Could not entered details on Insurance Screen", "Failed",driver, "Y");
-			}
-
-		}
-   }
-   public void newNoteLoan_ScheduleScreen(String sStartDate, String sFrequency,String sNumber,String sPIAmount,String sEscrow, String sRate,String sSuppressPaymentChangeNotice,String sOtherEscrow) throws Exception {
-	   boolean stepResult = false;
-		try {
-			if(isElementPresent(schedulePageTitle)) {
-				if (!sStartDate.equals("")) {
-					enterText("New Note Schedule Page", "Start Date Field", scheduleStartDate, sStartDate);
-				}
-				if (!sFrequency.equals("")) {
-					selectElementByVisibleText("New Note Schedule Page", "Frequency Field", scheduleFrequency, sFrequency);
-				}
-				if (!sNumber.equals("")) {
-					clearText("New Note Schedule Page", "Number Field", scheduleNumber);
-					enterText("New Note Schedule Page", "Number Field", scheduleNumber, sNumber);
-				}
-				if (!sPIAmount.equals("")) {
-					enterText("New Note Schedule Page", "PIAmount Field", schedulePIAmount, sPIAmount);
-				}
-				if (!sEscrow.equals("")) {
-					enterText("New Note Schedule Page", "Escrow Field", scheduleEscrow, sEscrow);
-				}
-				if (!sRate.equals("")) {
-					enterText("New Note Schedule Page", "Rate Field", scheduleRate, sRate);
-				}
-				if (!sSuppressPaymentChangeNotice.equals("Yes")) {
-					clickOnElement("New Note Schedule Page", "Suppress Payment Change Notice Field", scheduleSuppressPaymentChangeNotice);
-				}
-				if (!sOtherEscrow.equals("")) {
-					enterText("New Note Schedule Page", "Other Escrow Field", scheduleOtherEscrow, sOtherEscrow);
-				}
-				//clickOnElement("New Loan Page", "Next Button", nextButton);
-				waitElement(2000);
-				stepResult = true;
-			}					
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Schedule Screen", "Details Entered on Schedule Screen Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Schedule Screen", "Could not entered details on Schedule Screen", "Failed",driver, "Y");
-			}
-
-		}
-   }
-   public void loanFinishButton() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("New Loan Page", "Finish Button", finishButtonLoan);
-			Thread.sleep(5000);
-			if(isElementPresent(warningHeader)) {
-				if (isElementPresent(warning1)) {
-					clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
-				}
-				if (isElementPresent(warning2)) {
-					clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
-				}
-				clickOnElement("New Loan Page", "Save Button", saveBtn);
-				waitElement(2000);
-			}
-			validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution");
-			stepResult = true;
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
-			}	
-		}}
-   
-   public void validateDetailsInLoansInquiry(String sNoteNumber,String sLineName) throws Exception {
-		boolean stepResult = false;
-		try {
-				switchToWithinFrameWithName("bottom");
-				if(isElementPresent(getDynamicElement("Note Number Header field", loansInquiryHeader, sNoteNumber))){ 				
-					validateTextContains("Loan Inquiry" , "Name Field", getDynamicElement("Name Field",custLineName,sLineName), sLineName);
-					switchToDefaultContent();
-					switchToWithinFrameWithName("Main");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(codesPageTitle)) {
+					if (!sNoteAccntNo.equals("")) {
+						enterText("New Note Codes Page", "Note Number", noteNumber, sNoteAccntNo);
+					}	
+					if(!scashProceeds.equals("")) {
+						enterText("New Note Codes Page", "Cash Proceeds Field", cashProcceds, scashProceeds);
+					}				
+					if (!sMaximumCredit.equals("")) {
+						enterText("New Note Codes Page", "Maximum Credit Field", maximumCredit, sMaximumCredit);
+					}
+					if (!sMaximumCreditCode.equals("")) {
+						selectElementByVisibleText("New Note Codes Page", "Maximum Credit Code Field", maximumCreditCode, sMaximumCreditCode);
+					}
+					if (!sNoteDate.equals("")) {
+						enterText("New Note Codes Page", "Note Date Field", noteDate, sNoteDate);
+					}
+					if (!sContractDate.equals("")) {
+						enterText("New Note Codes Page", "Contract Date Field", contractDate, sContractDate);
+					}
+					if (!sAccountOpenMethod.equals("")) {
+						clickOnElement("New Note Codes Page", "Account openMethod Text Box",accountOpenMethodInput);
+						Thread.sleep(1000);
+						clickOnElement("New Note Codes Page", "Account openMethod Button",accountOpenMethodButton);
+						Thread.sleep(1000);
+						clickOnElement("New Note Codes Page", "AccountOpenMethod Code list",getDynamicElement("AccountOpenMethod Code list",accountOpenMethodCodeList,sAccountOpenMethod));
+					}
+					if (!sOriginalCreditScore.equals("")) {
+						enterText("New Note Codes Page", "Original CreditScore Field", originalCreditScore, sOriginalCreditScore);
+					}
+					if (!sPaymentReserveOption.equals("")) {
+						selectElementByVisibleText("New Line Codes Page", "Maximum Credit Code", paymentReserveOPtion, sPaymentReserveOption);
+					}
+					if (!sOriginalPaymentReserve.equals("")) {
+						enterText("New Note Codes Page", "Original PaymentReserve Field", originalPaymentReserve, sOriginalPaymentReserve);
+					}
+					if (!sInternalPaymentOption.equals("")) {
+						selectElementByVisibleText("New Line Codes Page", "Internal Payment option", internalPaymentOption, sInternalPaymentOption);
+					}
+					if (!sResponsibilityCode.equals("")) {
+						clickOnElement("New Line Codes Page", "Responsibility Text Box",responsibilityCodeInput);
+						Thread.sleep(1000);
+						clickOnElement("New Line Codes Page", "Responsibility Code Button",responsibilityCodeButton);
+						Thread.sleep(1000);
+						clickOnElement("New Line Codes Page", "Responsibility Code list",getDynamicElement("Responsibility Code list",responsibilityCodeList,sResponsibilityCode));
+					}
+					clickOnElement("New Line Page", "Next Button", nextButton);
+					waitElement(2000);
 					stepResult = true;
-				  }				
+				}					
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if (stepResult==true){
+				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Validated Line Details on Loan Inquiry page Successfully", "Passed", driver, "Y");
-				}
-				else{
+					new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Details Entered on Codes Screen Successfully", "Passed",driver, "Y");
+				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Could not Validated Loan Details on Line Inquiry page" , "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Could not entered details on Codes Screen", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
 				}
 			}
+		}
 	}
-   
-	
+
+
+	public void newNoteLoan_PaymentScreen(String sinterestMethod,String sFirstPaymentDate,String sPaymentFrequency,String sFirstInterestPaymentDate,
+			String sInterestPaymentFrequency,String sPurposeCode,String sPaymentCode,String sChargeAccount,String sRate,String sRateAdjuster1,
+			String sRateAdjuster2,String sPercentOfPrimeCode,String sTotalInterest) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(paymentPageTitle)) {
+					if (!sinterestMethod.equals("")) {
+						selectElementByVisibleText("New Note Payment Page", "Interest Method option", interestMethod, sinterestMethod);
+					}
+					if (!sFirstPaymentDate.equals("")) {
+						enterText("New Note Payment Page", "Original PaymentReserve Field", firstPaymentDate, sFirstPaymentDate);
+					}
+					if (!sPaymentFrequency.equals("")) {
+						selectElementByVisibleText("New Note Payment Page", "Interest Method option", paymentFrequency, sPaymentFrequency);
+					}
+					if (!sFirstInterestPaymentDate.equals("")) {
+						enterText("New Note Payment Page", "Original PaymentReserve Field", firstPaymentInterestDate, sFirstInterestPaymentDate);
+					}
+					if (!sInterestPaymentFrequency.equals("")) {
+						selectElementByVisibleText("New Note Payment Page", "Interest Method option", interestPaymentFrequency, sInterestPaymentFrequency);
+					}
+					if (!sPurposeCode.equals("")) {
+						clickOnElement("New Note Payment Page", "Purpose TextBox",purposeCodeInput);
+						Thread.sleep(1000);
+						clickOnElement("New Note Payment Page", "Purpose Code Button",purposeCodeButton);
+						Thread.sleep(1000);
+						clickOnElement("New Note Payment Page", "Purpose Code list",getDynamicElement("Purpose Code list",purposeCodeList,sPurposeCode));
+					}
+					if (!sPaymentCode.equals("")) {
+						selectElementByVisibleText("New Note Payment Page", "Interest Method option", paymentCode, sPaymentCode);
+					}
+					if (!sChargeAccount.equals("")) {
+						enterText("New Note Payment Page", "Original PaymentReserve Field", chargeAccount, sChargeAccount);
+					}
+					waitElement(1000);
+					if (!sRate.equals("")) {
+						enterText("New Note Payment Page", "Rate Field", rate, sRate);
+					}
+					if (!sRateAdjuster1.equals("")) {
+						enterText("New Note Payment Page", "Original PaymentReserve Field", rateAdjuster1, sRateAdjuster1);
+					}
+					if (!sRateAdjuster2.equals("")) {
+						enterText("New Note Payment Page", "Original PaymentReserve Field", rateAdjuster2, sRateAdjuster2);
+					}
+					if (!sPercentOfPrimeCode.equals("")) {
+						selectElementByVisibleText("New Note Payment Page", "Interest Method option", percentPrimeCode, sPercentOfPrimeCode);
+					}
+					if (!sTotalInterest.equals("")) {
+						enterText("New Note Payment Page", "Original PaymentReserve Field", totalInterest, sTotalInterest);
+					}
+					clickOnElement("New Line Page", "Next Button", nextButton);
+					waitElement(2000);
+					stepResult = true;
+				}					
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Payment Screen", "Details Entered on Payment Screen Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Payment Screen", "Could not entered details on Payment Screen", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+	public void newNoteLoan_InsuranceScreen(String sPlan, String sPremium,String slineLifeInsuranceOption,String sSimpleInsuranceBillingDay) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(insurancePageTitle)) {
+					if (!sPlan.equals("")) {
+						enterText("New Note Insurance Page", "Insurance Plan Field", plan1_Textbox, sPlan);
+					}
+					if (!sPremium.equals("")) {
+						enterText("New Note Insurance Page", "Insurance Premium Field", premium1_Textbox, sPremium);
+					}
+					if (!slineLifeInsuranceOption.equals("")) {
+						selectElementByVisibleText("New Note Insurance Page", "line Life Insurance Option Field", lineLifeInsuranceOption, slineLifeInsuranceOption);
+					}
+					if (!sSimpleInsuranceBillingDay.equals("")) {
+						selectElementByVisibleText("New Note Insurance Page", "Simple Insurance Billing Day Field", simpleInsuranceBillingDay, sSimpleInsuranceBillingDay);
+					}
+					clickOnElement("New Loan Page", "Next Button", nextButton);
+					waitElement(2000);
+					stepResult = true;
+				}					
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Insurance Screen", "Details Entered on Insurance Screen Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Insurance Screen", "Could not entered details on Insurance Screen", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void newNoteLoan_ScheduleScreen(String sStartDate, String sFrequency,String sNumber,String sPIAmount,String sEscrow, String sRate,String sSuppressPaymentChangeNotice,String sOtherEscrow) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(schedulePageTitle)) {
+					if (!sStartDate.equals("")) {
+						enterText("New Note Schedule Page", "Start Date Field", scheduleStartDate, sStartDate);
+					}
+					if (!sFrequency.equals("")) {
+						selectElementByVisibleText("New Note Schedule Page", "Frequency Field", scheduleFrequency, sFrequency);
+					}
+					if (!sNumber.equals("")) {
+						clearText("New Note Schedule Page", "Number Field", scheduleNumber);
+						enterText("New Note Schedule Page", "Number Field", scheduleNumber, sNumber);
+					}
+					if (!sPIAmount.equals("")) {
+						enterText("New Note Schedule Page", "PIAmount Field", schedulePIAmount, sPIAmount);
+					}
+					if (!sEscrow.equals("")) {
+						enterText("New Note Schedule Page", "Escrow Field", scheduleEscrow, sEscrow);
+					}
+					if (!sRate.equals("")) {
+						enterText("New Note Schedule Page", "Rate Field", scheduleRate, sRate);
+					}
+					if (!sSuppressPaymentChangeNotice.equals("Yes")) {
+						clickOnElement("New Note Schedule Page", "Suppress Payment Change Notice Field", scheduleSuppressPaymentChangeNotice);
+					}
+					if (!sOtherEscrow.equals("")) {
+						enterText("New Note Schedule Page", "Other Escrow Field", scheduleOtherEscrow, sOtherEscrow);
+					}
+					//clickOnElement("New Loan Page", "Next Button", nextButton);
+					waitElement(2000);
+					stepResult = true;
+				}					
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Schedule Screen", "Details Entered on Schedule Screen Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Schedule Screen", "Could not entered details on Schedule Screen", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void loanFinishButton() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("New Loan Page", "Finish Button", finishButtonLoan);
+				Thread.sleep(5000);
+				if(isElementPresent(warningHeader)) {
+					if (isElementPresent(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+					}
+					if (isElementPresent(warning2)) {
+						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					}
+					clickOnElement("New Loan Page", "Save Button", saveBtn);
+					waitElement(2000);
+				}
+				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+				driver.switchTo().defaultContent();
+				switchToWindowWithTitleContaining("Institution");
+				stepResult = true;
+
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}	
+			}
+		}
+	}
+
+	public void validateDetailsInLoansInquiry(String sNoteNumber,String sLineName) throws Exception {
+		boolean stepResult = false;
+		try {
+			switchToWithinFrameWithName("bottom");
+			if(isElementPresent(getDynamicElement("Note Number Header field", loansInquiryHeader, sNoteNumber))){ 				
+				validateTextContains("Loan Inquiry" , "Name Field", getDynamicElement("Name Field",custLineName,sLineName), sLineName);
+				switchToDefaultContent();
+				switchToWithinFrameWithName("Main");
+				stepResult = true;
+			}				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Validated Line Details on Loan Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Could not Validated Loan Details on Line Inquiry page" , "Failed", driver, "Y");
+			}
+		}
+	}
+
+
 }
 
 

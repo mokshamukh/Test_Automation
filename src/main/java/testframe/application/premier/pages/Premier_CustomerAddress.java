@@ -11,7 +11,7 @@ import testframe.common.reporting.HTMLReportHelper;
 /**
  * PageNage : Premier_CustomerAddress
  * 
- * @author Ketki.Badalwar
+ * @author Moksha.Mukh
  */
 
 
@@ -91,173 +91,186 @@ public class Premier_CustomerAddress extends CommonLibrary {
 	}
 
 	public void createNewAddress(String address1Val, String address2Val, String zipcodeVal, String sSSN,String realationshipVal,String branchRegion) throws Exception {
-		boolean stepResult = false;
-		try {
-			//switchToWithinFrameWithName("Main");
-			enterAddress(address1Val, address2Val, zipcodeVal,branchRegion);
-			Thread.sleep(2000);
-			if (isElementPresent(duplicateTitle)) {
-				clickOnElement("New Address Page", "next button", nextButton);
-			}
-			createBuildRelationship(sSSN, realationshipVal);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				//switchToWithinFrameWithName("Main");
+				enterAddress(address1Val, address2Val, zipcodeVal,branchRegion);
+				Thread.sleep(2000);
+				if (isElementPresent(duplicateTitle)) {
+					clickOnElement("New Address Page", "next button", nextButton);
+				}
+				createBuildRelationship(sSSN, realationshipVal);
 
-			Thread.sleep(2000);
-			if (isElementPresent(msg)) {
-				stepResult = true;
-			}
-			switchToWindowWithTitleContaining("Institution");
+				Thread.sleep(2000);
+				if (isElementPresent(msg)) {
+					stepResult = true;
+				}
+				switchToWindowWithTitleContaining("Institution");
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Create New Address", "Create New Address page Successfully",
-						"Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create New Address", "Could not Create New Address",
-						"Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Create New Address", "Create New Address page Successfully",
+							"Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create New Address", "Could not Create New Address",
+							"Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void enterAddress(String address1Val, String address2Val, String zipcodeVal,String branchRegion) throws Exception {
-		boolean stepResult = false;
-		try {
-			driver.switchTo().frame("Main");
-			Thread.sleep(4000);
-			if (isElementPresent(addressTitle)) {
-				if (!address1Val.equals("")) {
-					enterText("New Address Page", "Address 1", address1, address1Val);
-				}
-				if (!address2Val.equals("")) {
-					enterText("New Address Page", "Address 2", address2, address2Val);
-				}
-				if (!zipcodeVal.equals("")) {
-					enterText("New Address Page", "zip code", zipCode, zipcodeVal);
-				}
-				if (!branchRegion.equals("")) {
-					//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
-					//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
-					clickOnElement("New Addresss Page", "Branch Region Button",branchRegionButton);
-					Thread.sleep(2000);
-					clickOnElement("New Address Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				driver.switchTo().frame("Main");
+				Thread.sleep(4000);
+				if (isElementPresent(addressTitle)) {
+					if (!address1Val.equals("")) {
+						enterText("New Address Page", "Address 1", address1, address1Val);
+					}
+					if (!address2Val.equals("")) {
+						enterText("New Address Page", "Address 2", address2, address2Val);
+					}
+					if (!zipcodeVal.equals("")) {
+						enterText("New Address Page", "zip code", zipCode, zipcodeVal);
+					}
+					if (!branchRegion.equals("")) {
+						//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
+						//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
+						clickOnElement("New Addresss Page", "Branch Region Button",branchRegionButton);
+						Thread.sleep(2000);
+						clickOnElement("New Address Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));
+					}
+
+					clickOnElement("New Address Page", "Next Button", nextButton);
+					clickOnElement("New Address Page", "next button", nextButton);
+
+
+					stepResult = true;
 				}
 
-				clickOnElement("New Address Page", "Next Button", nextButton);
-				clickOnElement("New Address Page", "next button", nextButton);
-
-
-				stepResult = true;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Address details", "Address entered on  Address page Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Address details", "Could Not entered Address on Address Page", "Failed",
-						driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter Address details", "Address entered on  Address page Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter Address details", "Could Not entered Address on Address Page", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
-
 	}
 
 	public void duplicateAddress() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(2000);
-			if (isElementPresent(duplicateTitle)) {
-				clickOnElement("New Address Page", "next button", nextButton);
-				stepResult = true;
-			}
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				if (isElementPresent(duplicateTitle)) {
+					clickOnElement("New Address Page", "next button", nextButton);
+					stepResult = true;
+				}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Check duplicate address", "Check for duplicate address Successfully",
-						"Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Check duplicate address", "Could not Check duplicate address",
-						"Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Check duplicate address", "Check for duplicate address Successfully",
+							"Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Check duplicate address", "Could not Check duplicate address",
+							"Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 
 	public void createBuildRelationship(String sSN, String realationshipVal) throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			if (isElementPresent(bulidRelationshipTitle)) {
-				clickOnElement("New Address Page", "Build relationship button", plusIcon);
-				Thread.sleep(7000);
-				switchToWindowWithTitleContaining("Add Name");
-				driver.switchTo().frame("bottom");
-				if (isElementPresent(searchTitle)) {
-					clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
-					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
-					clickOnElement("Add Name Page", "Submit", submitSearch);
-					clickOnElement("Add Name Page", "Name link", nameLink);
-					switchToWindowWithTitleContaining("Institution");
-					switchToWithinFrameWithName("Main");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				if (isElementPresent(bulidRelationshipTitle)) {
+					clickOnElement("New Address Page", "Build relationship button", plusIcon);
+					Thread.sleep(7000);
+					switchToWindowWithTitleContaining("Add Name");
+					driver.switchTo().frame("bottom");
+					if (isElementPresent(searchTitle)) {
+						clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
+						enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
+						clickOnElement("Add Name Page", "Submit", submitSearch);
+						clickOnElement("Add Name Page", "Name link", nameLink);
+						switchToWindowWithTitleContaining("Institution");
+						switchToWithinFrameWithName("Main");
+					}
+					Thread.sleep(2000);
+					selectElementByVisibleText("New Address Page", "Select Realationship", relationship, realationshipVal);
+					clickOnElement("New Address Page", "Finish Button", finishButton);
+					Thread.sleep(2000);
+					if (isElementPresent(msg)) {
+						stepResult = true;
+					}
+					switchToDefaultContent();
 				}
-				Thread.sleep(2000);
-				selectElementByVisibleText("New Address Page", "Select Realationship", relationship, realationshipVal);
-				clickOnElement("New Address Page", "Finish Button", finishButton);
-				Thread.sleep(2000);
-				if (isElementPresent(msg)) {
-					stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("create Build Relationship", "created Build Relationship on Create Address page Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("create Build Relationship", "Could not Create Build Relationship on Address page", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				switchToDefaultContent();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("create Build Relationship", "created Build Relationship on Create Address page Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("create Build Relationship", "Could not Create Build Relationship on Address page", "Failed",
-						driver, "Y");
 			}
 		}
-
 	}
 
 
 	public void searchAddress(String address1Val) throws Exception {
-		boolean stepResult = false;
-		try {
-			switchToWithinFrameWithName("Main");
-			if (isElementPresent(searchTitle)) {
-				enterText("Searh Address Page", "Address field", searchAddress, address1Val);
-				clickOnElement("Search Address Page", "Submit button", submitSearch);
-				waitElement(3000);
-				if (isElementPresent(getDynamicElement("Search Address Link",searchAddressLink,address1Val))){
-					clickOnElement("Search Address Page", "Search Address Link", getDynamicElement("Search Address Link",searchAddressLink,address1Val));
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				switchToWithinFrameWithName("Main");
+				if (isElementPresent(searchTitle)) {
+					enterText("Searh Address Page", "Address field", searchAddress, address1Val);
+					clickOnElement("Search Address Page", "Submit button", submitSearch);
+					waitElement(3000);
+					if (isElementPresent(getDynamicElement("Search Address Link",searchAddressLink,address1Val))){
+						clickOnElement("Search Address Page", "Search Address Link", getDynamicElement("Search Address Link",searchAddressLink,address1Val));
+					}
+					stepResult = true;
 				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Seacrh Address  Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Could not search the Address","Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Seacrh Address  Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Could not search the Address","Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -265,89 +278,95 @@ public class Premier_CustomerAddress extends CommonLibrary {
 
 	public void updateAddress(String address1Val, String address2Val, String zipcodeVal,String branchRegion,String seasonalAddress1, 
 			String seasonalAddress2,String seasonalZipCode) throws Exception {
-		boolean stepResult = false;
-		try {
-			switchToDefaultContent();
-			Thread.sleep(4000);
-			if (isElementPresent(changeAddressTitle)) {
-				switchToWithinFrameWithName("Main");
-				if (!address1Val.equals("")) {
-					clearAndType("Change Address Page", "Address 1", address1, address1Val);
-					//Thread.sleep(1000);
-				}
-				if (!address2Val.equals("")) {
-					clearAndType("Change Address Page", "Address 2", address2, address2Val);
-					//Thread.sleep(2500);
-				}
-				if (!zipcodeVal.equals("")) {
-					clearAndType("Change Address Page", "zip code", zipCode, zipcodeVal);
-					//Thread.sleep(2500);
-				}
-				if (!branchRegion.equals("")) {
-					clearAndType("Change Address Page", "zip code", updateBranchRegion,branchRegion);
-					//Thread.sleep(2500);
-				}
-				
-				if (!seasonalAddress1.equals("")) {
-					clearAndType("Change Address Page", "zip code", updateSeasonalAddress1,seasonalAddress1);
-					//Thread.sleep(2500);
-				}
-				
-				if (!seasonalAddress2.equals("")) {
-					clearAndType("Change Address Page", "zip code", updateSeasonalAddress2,seasonalAddress2);
-					//Thread.sleep(2500);
-				}
-				
-				if (!seasonalZipCode.equals("")) {
-					clearAndType("Change Address Page", "zip code", updateSeasonalZipCode,seasonalZipCode);
-					//Thread.sleep(2500);
-				}
-				
-				stepResult = true;
-			}
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				switchToDefaultContent();
+				Thread.sleep(4000);
+				if (isElementPresent(changeAddressTitle)) {
+					switchToWithinFrameWithName("Main");
+					if (!address1Val.equals("")) {
+						clearAndType("Change Address Page", "Address 1", address1, address1Val);
+						//Thread.sleep(1000);
+					}
+					if (!address2Val.equals("")) {
+						clearAndType("Change Address Page", "Address 2", address2, address2Val);
+						//Thread.sleep(2500);
+					}
+					if (!zipcodeVal.equals("")) {
+						clearAndType("Change Address Page", "zip code", zipCode, zipcodeVal);
+						//Thread.sleep(2500);
+					}
+					if (!branchRegion.equals("")) {
+						clearAndType("Change Address Page", "zip code", updateBranchRegion,branchRegion);
+						//Thread.sleep(2500);
+					}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Update Address details", "Address updated on  Address page Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Update Address details", "Could Not updated Address on Address Page", "Failed",
-						driver, "Y");
+					if (!seasonalAddress1.equals("")) {
+						clearAndType("Change Address Page", "zip code", updateSeasonalAddress1,seasonalAddress1);
+						//Thread.sleep(2500);
+					}
+
+					if (!seasonalAddress2.equals("")) {
+						clearAndType("Change Address Page", "zip code", updateSeasonalAddress2,seasonalAddress2);
+						//Thread.sleep(2500);
+					}
+
+					if (!seasonalZipCode.equals("")) {
+						clearAndType("Change Address Page", "zip code", updateSeasonalZipCode,seasonalZipCode);
+						//Thread.sleep(2500);
+					}
+
+					stepResult = true;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Update Address details", "Address updated on  Address page Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Update Address details", "Could Not updated Address on Address Page", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
 	public void saveAddress() throws Exception {
-		boolean stepResult = false;
-		try {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 
-			clickOnElement("Change Address Page", "Save Link", saveLink);
-			if (isElementPresent(sesonalAddressCheckbox)){
-				clickOnElement("Change Address Page", "Seasonal Address Information Will be Cleared Checkbox", sesonalAddressCheckbox);
-				if (isElementPresent(allRelationsUpdatecheckbox)){
-					clickOnElement("Change Address Page", "all Relations Update checkbox", allRelationsUpdatecheckbox);
-				}
 				clickOnElement("Change Address Page", "Save Link", saveLink);
-			}			
-			waitElement(2000);
-			if (isElementPresent(searchTitle)) {
-				stepResult = true;
-			}
-			switchToDefaultContent();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Save Address", "Save Address  Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Save Address", "Could not Save the Address","Failed", driver, "Y");
+				if (isElementPresent(sesonalAddressCheckbox)){
+					clickOnElement("Change Address Page", "Seasonal Address Information Will be Cleared Checkbox", sesonalAddressCheckbox);
+					if (isElementPresent(allRelationsUpdatecheckbox)){
+						clickOnElement("Change Address Page", "all Relations Update checkbox", allRelationsUpdatecheckbox);
+					}
+					clickOnElement("Change Address Page", "Save Link", saveLink);
+				}			
+				waitElement(2000);
+				if (isElementPresent(searchTitle)) {
+					stepResult = true;
+				}
+				switchToDefaultContent();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Save Address", "Save Address  Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Save Address", "Could not Save the Address","Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}

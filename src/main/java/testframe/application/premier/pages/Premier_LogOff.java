@@ -10,7 +10,7 @@ import testframe.common.reporting.HTMLReportHelper;
 /**
  * 
  * 
- * @author Ketki.Badalwar
+ * @author Moksha.mukh
  */
 
 public class Premier_LogOff extends CommonLibrary {
@@ -30,7 +30,8 @@ public class Premier_LogOff extends CommonLibrary {
 	public void logoffApplication() throws Exception{
 		boolean stepResult = false;
 		try {
-			//switchToDefaultContent();
+			if(System.getProperty("runStep")=="N")
+				switchToDefaultContent();
 			clickOnElement("Home Page", "Security Control Option", securityControl);
 			clickOnElement("Home Page", "Log Off link", logoff);
 

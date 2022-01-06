@@ -11,7 +11,7 @@ import testframe.common.utilities.ExcelReader;
 
 public class Premier_DepositAccounts extends CommonLibrary{
 	public String sAccountNo;
-	
+
 	public By searchTitle = By.xpath("//label[text()='Search']");
 	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By ssnSearch = By.xpath("//input[@name='TaxID']");
@@ -25,7 +25,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By accountSearch = By.xpath("//td[contains(text(),'Account Number:')]/following-sibling::td/input");
 	public By closeScreenImg = By.xpath("//img[contains(@title,'Close')]");
 	String search1 = "(//img[@title='Search'])[%s]";
-	
+
 	public By newDDHeader =  By.xpath("//td[text()='New Demand Deposit']");
 	public By customerPageTitle =  By.xpath("//a[text()='Step 2 - Customer']");	
 	String accountNameList =  "(//select[contains(@name,'RelatedToIdTMP')])[%s]";
@@ -46,7 +46,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By productInquiryPage = By.xpath("//td[contains(text(),'Product:')]/following-sibling::td[1]");
 	String accountNameInquiryPage =  "//td//u[contains(text(),'%s')]";
 	String relationshipInquiryPage =  "//td[contains(text(),'%s')]";
-	
+
 	String depositChangeHeader = "//a[contains(text(),'%s')]";
 	public By warningTextbox =  By.xpath("//td[contains(text(),'Warning:')]/following-sibling::td/input[contains(@name,'Warning')]");
 	public By statusCodeList =  By.xpath("//td[contains(text(),'Status Code:')]/following-sibling::td/select[contains(@name,'/StatusCode')]");
@@ -66,7 +66,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By suspendedDepositRateIndexBtn = By.xpath("(//input[contains(@id,'SuspendDepRateCode')])[3]");
 	String suspendedDepositRateIndexList = "//select[contains(@id,'SuspendDepRateCode')]/option[contains(text(),'%s')]";
 	public By suspendedStatementCycleList = By.xpath("//select[contains(@id,'SuspendStatementCycle')]");
-	
+
 	public By codesTab = By.xpath("//li//a[text()='Codes']");
 	public By statusCodeInquiryPage =  By.xpath("//td[text()='Status Code:']/following-sibling::td[1]");
 	public By statementCycleInquiryPage =  By.xpath("//td[text()='Statement Cycle:']/following-sibling::td[1]");
@@ -101,18 +101,19 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	String verifyHoldData =  "//table[@name='Holds']//td[contains(text(),'%s')]";
 	public By ticklerExpand = By.xpath("//table[@name='Ticklers']//img[@class='csr-hand']");
 	String verifyTicklerData =  "//table[@name='Ticklers']//td[contains(text(),'%s')]";
-	
-	
-	
+
+
+
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 	}
-	
+
 	public void newDepositAccount_CustomerScreen(String sName, String sDepositRelationship, String sDepositStatement, int CustomerCount) throws Exception{
-		boolean stepResult = false;
-		try {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 				if(isElementPresent(customerPageTitle)) {
 					selectElementByVisibleText("New Deposit Page", "Name Field", getDynamicElement("Name Field",accountNameList,Integer.toString(CustomerCount)), sName);
 					Thread.sleep(2000);
@@ -122,143 +123,164 @@ public class Premier_DepositAccounts extends CommonLibrary{
 					Thread.sleep(2000);
 					stepResult = true;
 				}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Deposit Account Customer Screen", "Customer Details entered on New Deposit Account Customer screen Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Deposit Account Customer Screen", "Could not entered Customer details", "Failed",
-						driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Deposit Account Customer Screen", "Customer Details entered on New Deposit Account Customer screen Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter Customer Details on New Deposit Account Customer Screen", "Could not entered Customer details", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}}
+		}
+	}
 	public void newDepositAccount_CustomerScreenSearch(String sSN,String sName, String sDepositRelationship, String sDepositStatement, int CustomerCount) throws Exception{
-		boolean stepResult = false;
-		try {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 				if(isElementPresent(customerPageTitle)) {
 					clickOnElement("New Deposit Page", "Search Icon", getDynamicElement("Search Icon",search1,Integer.toString(CustomerCount)));
 					switchToWindowWithTitleContaining("Name Search");
 					driver.switchTo().frame("bottom");
 					new Premier_CustomerContact(driver).searchSSN(sSN);
-					
+
 					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
-					
+
 					selectElementByVisibleText("New Deposit Page", "Relationship Field", getDynamicElement("Relationship Field",relationshipList,Integer.toString(CustomerCount)), sDepositRelationship);
 					Thread.sleep(2000);
 					selectElementByVisibleText("New Deposit Page", "eStatement Field", getDynamicElement("eStatement Field",eStatementList,Integer.toString(CustomerCount)), sDepositStatement);
 					Thread.sleep(2000);
 					stepResult = true;
 				}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search Customer on New Deposit Account Customer Screen", "Customer Details Searched on New Deposit Account Customer screen Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search Customer on New Deposit Account Customer Screen", "Could not Searched Customer details", "Failed",
-						driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search Customer on New Deposit Account Customer Screen", "Customer Details Searched on New Deposit Account Customer screen Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search Customer on New Deposit Account Customer Screen", "Could not Searched Customer details", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}}
+		}
+	}
+
 	public void newDepositAccount_CustomerScreenDetails(String sProduct) throws Exception{
-		boolean stepResult = false;
-		try {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 				if(isElementPresent(customerPageTitle)) {
 					selectElementByVisibleText("New Deposit Page", "Product Field", productList, sProduct);
 					Thread.sleep(1000);
 					clickOnElement("New Deposit Page", "Next Button", nextButton);
 					stepResult = true;
 				}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Details For New Deposit Account", "Details entered on New Deposit Account Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Details For New Deposit Account ", "Could not entered details", "Failed",
-						driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter Details For New Deposit Account", "Details entered on New Deposit Account Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter Details For New Deposit Account ", "Could not entered details", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}}
+		}
+	}
 	public void newDepositAccount_CodesScreen(String sDepositAccntNo, String sInitialDeposit,String sResponsibilityCode,String sAccountTitlePrintOption,String sAccountTitle,String excelFilePath, String sheetName, int rowNo) throws Exception {
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(codesPageTitle)) {
-				/*
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(codesPageTitle)) {
+					/*
 				clickOnElement("New DD Account Page", "Next Available Link",nextAvailableLink);
 				Thread.sleep(2000);
 				sAccountNo=getElementAttribute("New DD Account Page", "Account No",  accountNumberTextbox,"value");
 				if(sAccountNo != "")
 					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Deposit_AccountNumber", rowNo, sAccountNo);				
-				*/
-				if (!sDepositAccntNo.equals("")) {
-					enterText("New Deposit Account Page", "Account Number", accountNumberTextbox, sDepositAccntNo);
-				}				
-				if (!sInitialDeposit.equals("")) {
-					enterText("New Deposit Account Page", "Initial Deposit Type", initialDepositTextbox, sInitialDeposit);
+					 */
+					if (!sDepositAccntNo.equals("")) {
+						enterText("New Deposit Account Page", "Account Number", accountNumberTextbox, sDepositAccntNo);
+					}				
+					if (!sInitialDeposit.equals("")) {
+						enterText("New Deposit Account Page", "Initial Deposit Type", initialDepositTextbox, sInitialDeposit);
+					}
+					if (!sResponsibilityCode.equals("")) {
+						clickOnElement("New Deposit Account Page", "Responsibility Code Button",responsibilityCodeButton);
+						Thread.sleep(1000);
+						clickOnElement("New Deposit Account Page", "Responsibility Code list",getDynamicElement("Responsibility Code list",responsibilityCodeList,sResponsibilityCode));
+					}
+					if (!sAccountTitlePrintOption.equals("")) {
+						selectElementByVisibleText("New Deposit Account Page", "Account Title Print Option Field", accountTitlePrintOptionList, sAccountTitlePrintOption);
+					}
+					if (!sAccountTitle.equals("")) {
+						enterText("New Deposit Account Page", "Account Title Code", accountTitleTextbox, sAccountTitle);
+					}
+					waitElement(5000);
+					//clickOnElement("New DD Account Page", "Finish Button", finishButton);
+					//Thread.sleep(2000);
+					//driver.switchTo().defaultContent();
+					//switchToWindowWithTitleContaining("Institution");
+					stepResult = true;
+				}					
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Details Entered on Codes Screen Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Could not entered details on Codes Screen", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (!sResponsibilityCode.equals("")) {
-					clickOnElement("New Deposit Account Page", "Responsibility Code Button",responsibilityCodeButton);
-					Thread.sleep(1000);
-					clickOnElement("New Deposit Account Page", "Responsibility Code list",getDynamicElement("Responsibility Code list",responsibilityCodeList,sResponsibilityCode));
-				}
-				if (!sAccountTitlePrintOption.equals("")) {
-					selectElementByVisibleText("New Deposit Account Page", "Account Title Print Option Field", accountTitlePrintOptionList, sAccountTitlePrintOption);
-				}
-				if (!sAccountTitle.equals("")) {
-					enterText("New Deposit Account Page", "Account Title Code", accountTitleTextbox, sAccountTitle);
-				}
-				waitElement(5000);
-				//clickOnElement("New DD Account Page", "Finish Button", finishButton);
-				//Thread.sleep(2000);
-				//driver.switchTo().defaultContent();
+			}	
+		}
+	}
+	public void depositFinishButton() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("New Deposit Page", "Finish Button", finishButton);
+				Thread.sleep(5000);
+				validateElementPresent("New Deposit Page", "Search Title", searchTitle2);
+				driver.switchTo().defaultContent();
 				//switchToWindowWithTitleContaining("Institution");
 				stepResult = true;
-			}					
-			}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Details Entered on Codes Screen Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter details on Codes Screen", "Could not entered details on Codes Screen", "Failed",driver, "Y");
+
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}	
 			}
-			
-		}}
-	public void depositFinishButton() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("New Deposit Page", "Finish Button", finishButton);
-			Thread.sleep(5000);
-			validateElementPresent("New Deposit Page", "Search Title", searchTitle2);
-			driver.switchTo().defaultContent();
-			//switchToWindowWithTitleContaining("Institution");
-			stepResult = true;
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
-			}	
-		}}
+		}
+	}
+
 	public void searchAccount(String accountNo) throws Exception{
-		boolean stepResult = false;
-		try {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 				waitElement(6000);
 				driver.switchTo().frame("Main");
 				if (isElementPresent(searchTitle2)) {
@@ -267,20 +289,24 @@ public class Premier_DepositAccounts extends CommonLibrary{
 					clickOnElement("Search Account Page", "Submit", submitSearch);
 					stepResult = true;
 				}	
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search Account", "Search Account on Account page Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search Account", "Could not Search Account on Account page Successfully", "Failed",
-						driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search Account", "Search Account on Account page Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search Account", "Could not Search Account on Account page Successfully", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}}
+		}
+	}
 	public void validateAccountDetails(String sAccountNumber,String customerName, String sCustomerRelationship, String sProduct) throws Exception {
+
 		boolean stepResult = false;
 		try {
 			switchToWithinFrameWithName("bottom");
@@ -291,7 +317,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
 				stepResult = true;
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -303,131 +329,146 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Customer Details Validation", "Could not Validated Customer Details on Customer Inquiry page" , "Failed", driver, "Y");
+
 			}
-		}}
+
+		}
+	}
 	public void closeScreen_Image() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Inquiry Page", "Close Button", closeScreenImg);
-			Thread.sleep(5000);
-			validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
-			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution");
-			stepResult = true;
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on Close Button", "Clicked on Close Button Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on Close Button", "Could not clicked on Close Button", "Failed",driver, "Y");
-			}	
-		}}
-	public void saveButton() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Change Page", "Save Button", saveButton2);
-			Thread.sleep(1000);
-			if (isElementPresent(suspendFieldCheckBox)){
-				clickOnElement("Change Page", "	Suspend Fields will be Cleared CheckBox", suspendFieldCheckBox);
-				clickOnElement("Change Page", "Save Button", saveButton2);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("Inquiry Page", "Close Button", closeScreenImg);
+				Thread.sleep(5000);
+				validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
+				driver.switchTo().defaultContent();
+				switchToWindowWithTitleContaining("Institution");
+				stepResult = true;
+
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on Close Button", "Clicked on Close Button Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on Close Button", "Could not clicked on Close Button", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-			validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
-			driver.switchTo().defaultContent();
-			switchToWindowWithTitleContaining("Institution");
-			stepResult = true;
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Clicked on Save Button Successfully", "Passed",driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
-			}	
-		}}
+		}
+	}
+	public void saveButton() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("Change Page", "Save Button", saveButton2);
+				Thread.sleep(1000);
+				if (isElementPresent(suspendFieldCheckBox)){
+					clickOnElement("Change Page", "	Suspend Fields will be Cleared CheckBox", suspendFieldCheckBox);
+					clickOnElement("Change Page", "Save Button", saveButton2);
+				}
+				validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
+				driver.switchTo().defaultContent();
+				switchToWindowWithTitleContaining("Institution");
+				stepResult = true;
+
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Clicked on Save Button Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}	
+			}
+		}
+	}
 	public void changeAccountCodeDetails(String sAccountNumber,String sAccountWarning, String sAccountStatusCode, 
 			String sAccntsTransRestrictionCode, String statementCycle,String sAlternateCycleOption,String sAlternateCycle, 
 			String sNotificationOption,String sSuspendedStatementCycle,String sSuspendedInterestList,String sSuspendedDepositRateIndex ) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
-				
-				if (!sAccountWarning.equals("")) {
-					enterText("Change Account Page", "Warning field", warningTextbox, sAccountWarning);
-				}
-				if (!sAccountStatusCode.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Status Code Field", statusCodeList, sAccountStatusCode);
-				}
-				if (!sAccntsTransRestrictionCode.equals("")) {
-					clickOnElement("Change Account Page", "Trans Restriction Code Input",transactionRestrictionCodeInput);
-					Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Trans Restriction Code Button",transactionRestrictionCodeButton);
-					Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Trans Restriction Code list",getDynamicElement("Trans Restriction Code list",transactionRestrictionCodeList,sAccntsTransRestrictionCode));
-				}
-				if (!statementCycle.equals("")) {
-					selectElementByVisibleText("Change Account Page", "statement Cycle Field", statementCycleList, statementCycle);
-				}
-				
-				if (!sAlternateCycleOption.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Alternate Cycle Option Field", alternateCycleOptionList, sAlternateCycleOption);
-				}
-				
-				if (!sAlternateCycle.equals("")) {
-					if(isElementPresent(alternateCycleTextInput)){
-						clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleTextInput);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
+
+					if (!sAccountWarning.equals("")) {
+						enterText("Change Account Page", "Warning field", warningTextbox, sAccountWarning);
 					}
-					clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleInput);
-					//Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Alternate Cycle Button",alternateCycleBtn);
-					//Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Alternate Cycle list",getDynamicElement("Alternate Cycle list",alternateCycleList,sAlternateCycle));
-				}
-				
-				if (!sNotificationOption.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Notification Option Field", notificationOptionList, sNotificationOption);
-				}
-				
-				if (!sSuspendedStatementCycle.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Suspended Statement Cycle Field", suspendedStatementCycleList, sSuspendedStatementCycle);
-				}
-				
-				if (!sSuspendedInterestList.equals("")) {
-					selectElementByVisibleText("Change Account Page", "Suspended Interest Field", suspendedInterestList, sSuspendedInterestList);
-				}
-				
-				if (!sSuspendedDepositRateIndex.equals("")) {
-					if(isElementPresent(suspendedDepositRateIndexTextInput)){
-						clickOnElement("Change Account Page", "Suspended Deposit Rate Index Input",suspendedDepositRateIndexTextInput);
+					if (!sAccountStatusCode.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Status Code Field", statusCodeList, sAccountStatusCode);
 					}
-					clickOnElement("Change Account Page", "Suspended Deposit Rate Index Input",suspendedDepositRateIndexInput);
-					//Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Suspended Deposit Rate Index Button",suspendedDepositRateIndexBtn);
-					//Thread.sleep(1000);
-					clickOnElement("Change Account Page", "Suspended Deposit Rate Index list",getDynamicElement("Suspended Deposit Rate Index list",suspendedDepositRateIndexList,sSuspendedDepositRateIndex));
+					if (!sAccntsTransRestrictionCode.equals("")) {
+						clickOnElement("Change Account Page", "Trans Restriction Code Input",transactionRestrictionCodeInput);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Trans Restriction Code Button",transactionRestrictionCodeButton);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Trans Restriction Code list",getDynamicElement("Trans Restriction Code list",transactionRestrictionCodeList,sAccntsTransRestrictionCode));
+					}
+					if (!statementCycle.equals("")) {
+						selectElementByVisibleText("Change Account Page", "statement Cycle Field", statementCycleList, statementCycle);
+					}
+
+					if (!sAlternateCycleOption.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Alternate Cycle Option Field", alternateCycleOptionList, sAlternateCycleOption);
+					}
+
+					if (!sAlternateCycle.equals("")) {
+						if(isElementPresent(alternateCycleTextInput)){
+							clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleTextInput);
+						}
+						clickOnElement("Change Account Page", "Alternate Cycle Input",alternateCycleInput);
+						//Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Alternate Cycle Button",alternateCycleBtn);
+						//Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Alternate Cycle list",getDynamicElement("Alternate Cycle list",alternateCycleList,sAlternateCycle));
+					}
+
+					if (!sNotificationOption.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Notification Option Field", notificationOptionList, sNotificationOption);
+					}
+
+					if (!sSuspendedStatementCycle.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Suspended Statement Cycle Field", suspendedStatementCycleList, sSuspendedStatementCycle);
+					}
+
+					if (!sSuspendedInterestList.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Suspended Interest Field", suspendedInterestList, sSuspendedInterestList);
+					}
+
+					if (!sSuspendedDepositRateIndex.equals("")) {
+						if(isElementPresent(suspendedDepositRateIndexTextInput)){
+							clickOnElement("Change Account Page", "Suspended Deposit Rate Index Input",suspendedDepositRateIndexTextInput);
+						}
+						clickOnElement("Change Account Page", "Suspended Deposit Rate Index Input",suspendedDepositRateIndexInput);
+						//Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Suspended Deposit Rate Index Button",suspendedDepositRateIndexBtn);
+						//Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Suspended Deposit Rate Index list",getDynamicElement("Suspended Deposit Rate Index list",suspendedDepositRateIndexList,sSuspendedDepositRateIndex));
+					}
+
+					stepResult = true;
+
 				}
-				
-				stepResult = true;
-				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Account Details changed Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Account Details changed Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details" , "Failed", driver, "Y");
-			}
-		}}
+		}
+	}
 	public void validateAccountDetailsAfterChange(String sAccountNumber,String sAccountWarning, String sAccountStatusCode, String sAccntsTransRestrictionCode, String statementCycle) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -452,7 +493,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
 				stepResult = true;
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -466,71 +507,75 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Account Details Validation", "Could not Validated Account Details on Account Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
-	
+
 	public void changeAccountHold(String sAccountNumber,String sHoldReason, String sHoldAmount, 
 			String sExpirationDate, String sAccountPledgedOnLoan,String sPledgedNoteNum,String sMaximumPledge, 
 			String sHoldDate,String sPendingStartDate,String sPendingAmount,String sHoldAmountOption ) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
-				mouseHoverCickOnElement("Change Account Page", "Hold Menu Field", fileMenu, holdMenu);
-				if (isElementPresent(holdTitle)){
-					
-					if (!sHoldReason.equals("")) {
-						enterText("Change Account Page", "Hold Reason field", holdReason, sHoldReason);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
+					mouseHoverCickOnElement("Change Account Page", "Hold Menu Field", fileMenu, holdMenu);
+					if (isElementPresent(holdTitle)){
+
+						if (!sHoldReason.equals("")) {
+							enterText("Change Account Page", "Hold Reason field", holdReason, sHoldReason);
+						}
+
+						if (!sHoldAmount.equals("")) {
+							enterText("Change Account Page", "Hold Amount field", holdAMount, sHoldAmount);
+						}
+
+						if (!sExpirationDate.equals("")) {
+							enterText("Change Account Page", "Expiration Date field", holdExpDate, sExpirationDate);
+						}
+
+						if (!sAccountPledgedOnLoan.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Account Pledged on Loan Field", accountPledgedOnLoanSelect, sAccountPledgedOnLoan);
+						}
+
+						if (!sPledgedNoteNum.equals("")) {
+							enterText("Change Account Page", "Pledged Note Number field", pledgedNoteNum, sPledgedNoteNum);
+						}
+
+						if (!sMaximumPledge.equals("")) {
+							enterText("Change Account Page", "Maximum Pledge field", maxPledge, sMaximumPledge);
+						}
+
+						if (!sHoldDate.equals("")) {
+							enterText("Change Account Page", "Hold Date field", holdDate, sHoldDate);
+						}
+
+						if (!sPendingStartDate.equals("")) {
+							enterText("Change Account Page", "Pendig Start Date field", holdPendigStrtDate, sPendingStartDate);
+						}
+
+						if (!sPendingAmount.equals("")) {
+							enterText("Change Account Page", "Pending Amount field", holdPendingAmt, sPendingAmount);
+						}
+
+						if (!sHoldAmountOption.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Hold Amount Option Field", holdAmtOption, sHoldAmountOption);
+						}
+						stepResult = true;
 					}
-					
-					if (!sHoldAmount.equals("")) {
-						enterText("Change Account Page", "Hold Amount field", holdAMount, sHoldAmount);
-					}
-					
-					if (!sExpirationDate.equals("")) {
-						enterText("Change Account Page", "Expiration Date field", holdExpDate, sExpirationDate);
-					}
-					
-					if (!sAccountPledgedOnLoan.equals("")) {
-						selectElementByVisibleText("Change Account Page", "Account Pledged on Loan Field", accountPledgedOnLoanSelect, sAccountPledgedOnLoan);
-					}
-					
-					if (!sPledgedNoteNum.equals("")) {
-						enterText("Change Account Page", "Pledged Note Number field", pledgedNoteNum, sPledgedNoteNum);
-					}
-					
-					if (!sMaximumPledge.equals("")) {
-						enterText("Change Account Page", "Maximum Pledge field", maxPledge, sMaximumPledge);
-					}
-					
-					if (!sHoldDate.equals("")) {
-						enterText("Change Account Page", "Hold Date field", holdDate, sHoldDate);
-					}
-					
-					if (!sPendingStartDate.equals("")) {
-						enterText("Change Account Page", "Pendig Start Date field", holdPendigStrtDate, sPendingStartDate);
-					}
-					
-					if (!sPendingAmount.equals("")) {
-						enterText("Change Account Page", "Pending Amount field", holdPendingAmt, sPendingAmount);
-					}
-					
-					if (!sHoldAmountOption.equals("")) {
-						selectElementByVisibleText("Change Account Page", "Hold Amount Option Field", holdAmtOption, sHoldAmountOption);
-					}
-					stepResult = true;
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Hold Details", "Account - Hold Details changed Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Hold Details", "Could not change account - Hold Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account - Hold Details", "Account - Hold Details changed Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account - Hold Details", "Could not change account - Hold Details" , "Failed", driver, "Y");
-			}
-		}}
-	
+		}
+	}
+
 	public void validateAccountHoldDetailsAfterChange(String sAccountNumber,String sVerifyHoldAmount, String sVerifyHoldReason,
 			String sVerifyExpirationDate, String sVerifyHoldDate,  String sVerifyPendingAmount) throws Exception {
 		boolean stepResult = false;
@@ -540,28 +585,28 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){
 				if (isElementPresent(holdslabel)){
 					clickOnElement("Change Account Page", "Hold Expand Button",holdExpand);
-					
+
 					if (!sVerifyHoldAmount.equals(""))
 						validateElementPresent("Account Inquiry" , "Hold Amount field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyHoldAmount));
-					
+
 					if (!sVerifyHoldReason.equals(""))
 						validateElementPresent("Account Inquiry" , "Hold Reason field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyHoldReason));
-					
+
 					if (!sVerifyExpirationDate.equals(""))
 						validateElementPresent("Account Inquiry" , "Hold Expiration Date field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyExpirationDate));
-					
+
 					if (!sVerifyHoldDate.equals(""))
 						validateElementPresent("Account Inquiry" , "Hold Date field", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyHoldDate));
-					
+
 					if (!sVerifyPendingAmount.equals(""))
 						validateElementPresent("Account Inquiry" , "Hold Pending Amount", getDynamicElement("Hold Amount field",verifyHoldData,sVerifyPendingAmount));
-				
-					
+
+
 					stepResult = true;
 				}
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -575,82 +620,86 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Account Details - Hold Validation", "Could not Validated Account Details - Hold on Account Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
-	
+
 	public void changeAccountTickler(String sAccountNumber,String sTicklerDecription, String sTicklerAdditionalMsg, 
 			String sTicklerNextDate, String sTicklerFrequencyList,String sTicklerExpDate ) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
-				mouseHoverCickOnElement("Change Account Page", "Tickler Menu Field", fileMenu, ticklerMenu);
-				if (isElementPresent(ticklerTitle)){
-					
-					if (!sTicklerDecription.equals("")) {
-						enterText("Change Account Page", "Tickler Description field", ticklerDecription, sTicklerDecription);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
+					mouseHoverCickOnElement("Change Account Page", "Tickler Menu Field", fileMenu, ticklerMenu);
+					if (isElementPresent(ticklerTitle)){
+
+						if (!sTicklerDecription.equals("")) {
+							enterText("Change Account Page", "Tickler Description field", ticklerDecription, sTicklerDecription);
+						}
+
+						if (!sTicklerAdditionalMsg.equals("")) {
+							enterText("Change Account Page", "Tickler Additional Message field", ticklerAdditionalMsg, sTicklerAdditionalMsg);
+						}
+
+						if (!sTicklerNextDate.equals("")) {
+							enterText("Change Account Page", "Tickler Next Date field", ticklerNextDate, sTicklerNextDate);
+						}
+
+						if (!sTicklerFrequencyList.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Tickler Frequency Field", ticklerFrequencyList, sTicklerFrequencyList);
+						}
+
+						if (!sTicklerExpDate.equals("")) {
+							enterText("Change Account Page", "Tickler Expiration Date field", ticklerExpDate, sTicklerExpDate);
+						}
+
+
+						stepResult = true;
 					}
-					
-					if (!sTicklerAdditionalMsg.equals("")) {
-						enterText("Change Account Page", "Tickler Additional Message field", ticklerAdditionalMsg, sTicklerAdditionalMsg);
-					}
-					
-					if (!sTicklerNextDate.equals("")) {
-						enterText("Change Account Page", "Tickler Next Date field", ticklerNextDate, sTicklerNextDate);
-					}
-					
-					if (!sTicklerFrequencyList.equals("")) {
-						selectElementByVisibleText("Change Account Page", "Tickler Frequency Field", ticklerFrequencyList, sTicklerFrequencyList);
-					}
-					
-					if (!sTicklerExpDate.equals("")) {
-						enterText("Change Account Page", "Tickler Expiration Date field", ticklerExpDate, sTicklerExpDate);
-					}
-					
-					
-					stepResult = true;
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Tickler Details", "Account Details - Tickler changed Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Tickler Details", "Could not change account Details- Tickler" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Change Account - Tickler Details", "Account Details - Tickler changed Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Change Account - Tickler Details", "Could not change account Details- Tickler" , "Failed", driver, "Y");
-			}
-		}}
-	
+		}
+	}
+
 	public void validateAccountTickerDetailsAfterChange(String sAccountNumber,String sVerifyTicklerDescription, String sVerifyTicklerDate,
 			String sVerifyTicklerFrequency,String sVerifyTicklerExpDate) throws Exception {
 		boolean stepResult = false;
 		try {
-			
-			
+
+
 			mouseHoverCickOnElement("Account Inquiry Page", "Tickler Menu Field", activityMenu, ticklerMenu);
 			waitElement(1000);
 			switchToWithinFrameWithName("bottom");
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){
 				if (isElementPresent(ticklerlabel)){
 					clickOnElement("Change Account Page", "Tickler Expand Button",ticklerExpand);
-					
+
 					if (!sVerifyTicklerDescription.equals(""))
 						validateElementPresent("Account Inquiry" , "Tickler Description field", getDynamicElement("Tickler Description field",verifyTicklerData,sVerifyTicklerDescription));
-					
+
 					if (!sVerifyTicklerDate.equals(""))
 						validateElementPresent("Account Inquiry" , "Tickler Next Date field", getDynamicElement("Tickler Next Date field",verifyTicklerData,sVerifyTicklerDate));
-					
+
 					if (!sVerifyTicklerExpDate.equals(""))
 						validateElementPresent("Account Inquiry" , "Tickler Expiration Date field", getDynamicElement("Tickler Expiration Date field",verifyTicklerData,sVerifyTicklerExpDate));
-					
+
 					if (!sVerifyTicklerFrequency.equals(""))
 						validateElementPresent("Account Inquiry" , "Tickler Frequency field", getDynamicElement("Tickler Frequency field",verifyTicklerData,sVerifyTicklerFrequency));
-					
+
 					stepResult = true;
 				}
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
-				
+
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -663,7 +712,8 @@ public class Premier_DepositAccounts extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Account Details - Tickler Validation", "Could not Validated Account Details - Tickler on Account Inquiry page" , "Failed", driver, "Y");
 			}
-		}}
-	
-	
+		}
+	}
+
+
 }

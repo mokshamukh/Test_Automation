@@ -117,7 +117,7 @@ public class PremierTest extends ApplicationBase {
 
 		List<Map<String, String>> tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 		for(int iTDRow =0; iTDRow<=iIteration_count;iTDRow++){
-
+			
 			if (iIteration_count == 0){
 				sHTMLFilePath= strpathToAppReportFileDateTimeStamp +"/" + sTestCase.toUpperCase()+ "_" +  sHTMLFileName+"_"+ new DateTimeHelper().CurrentDateTime()+".html" ;
 				Log.info("XXXXXXXXXXXXXXXXXXXXXXX             "+"Iteration - 1"+"             XXXXXXXXXXXXXXXXXXXXXX");
@@ -129,6 +129,7 @@ public class PremierTest extends ApplicationBase {
 				Log.info("XXXXXXXXXXXXXXXXXXXXXXX             "+"Iteration - " + (iTDRow+1)+"             XXXXXXXXXXXXXXXXXXXXXX");
 			}
 			System.setProperty("testcaseid.iteration", sTestCase+"||"+iTDRow);
+			System.setProperty("runStep","Y");
 			fi.createFile(sHTMLFilePath);
 			fi.checkAndCreateFolder(sScreenShotFolder);
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
