@@ -1553,14 +1553,15 @@ public class PremierTest extends ApplicationBase {
 				premierDepositAccounts.searchAccount(sAccountNumber);	
 				premierDepositAccounts.changeAccountTickler(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerDescription"), 
 						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerAdditionalMsg"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerNextDate"),
-						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"));
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerExpirationDate"));
 				premierDepositAccounts.saveButton();
 				
 				premierHomeMenuPage.accountInquiryDemandDeposits();
 				premierDepositAccounts.searchAccount(sAccountNumber);
 				premierDepositAccounts.validateAccountTickerDetailsAfterChange(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerDescription"), 
-						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerNextDate"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"), 
-						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"));
+						new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerNextDate"),"MM/dd/yyyy","MMM dd, yyyy"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerFrequency"), 
+						new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_TicklerExpirationDate"),"MM/dd/yyyy","MMM dd, yyyy"));
+				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;	
 				
@@ -1599,6 +1600,35 @@ public class PremierTest extends ApplicationBase {
 				premierLogOff.logoffApplication();				
 				break;
 			
+			case "PREMIER_TC061":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,testdataFile_Path,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.demandDepositsSubMenu();
+				premierHomeMenuPage.changeAccountDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountOverDrafts(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_OverdraftLimit"), 
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_ODLimitPriority"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_DDBaseAccount"));
+				premierDepositAccounts.saveButton();
+				
+				premierHomeMenuPage.accountInquiryDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountODDetailsAfterChange(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_OverdraftLimit"), 
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_ODLimitPriority"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;	
 			
 			
 			case "PREMIER_TC065":

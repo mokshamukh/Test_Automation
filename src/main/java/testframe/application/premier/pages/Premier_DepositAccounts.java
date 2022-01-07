@@ -99,11 +99,20 @@ public class Premier_DepositAccounts extends CommonLibrary{
 	public By activityMenu = By.xpath("//a[text()='Activity']");
 	public By ticklerlabel = By.xpath("//td[text()='Ticklers']");
 	String verifyHoldData =  "//table[@name='Holds']//td[contains(text(),'%s')]";
-	public By ticklerExpand = By.xpath("//table[@name='Ticklers']//img[@class='csr-hand']");
+	String ticklerExpand = "//table[@name='Ticklers']//td[text()='%s']//..//img";
+	//public By ticklerExpand = By.xpath("//table[@name='Ticklers']//img[@class='csr-hand']");
 	String verifyTicklerData =  "//table[@name='Ticklers']//td[contains(text(),'%s')]";
-
-
-
+	
+	public By overdraftsMenu = By.xpath("//a[text()='Overdrafts']");
+	public By overdraftsSectionLabel = By.xpath("(//a[text()='Overdrafts'])[2]");
+	public By overdraftLimit = By.xpath("//input[contains(@id,'OverdraftLimit')]");
+	public By overdraftLimitPriorityList = By.xpath("//select[contains(@id,'OverdraftLimitPriority')]");
+	public By ddBaseAccount = By.xpath("//input[contains(@id,'BaseAccount')]");
+	String warningsCheckbox = "(//table[@class='advisoryTable']//input[@type='checkbox'])[%s]";
+	public By warningsCheckbox_1 = By.xpath("//table[@class='advisoryTable']//input[@type='checkbox']");
+	public By overdraftslabel = By.xpath("//td[text()='Overdrafts']");
+	String verifyOverdraftsData =  "//table[@name='Overdrafts']//td[contains(text(),'%s')]";
+	
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -365,10 +374,20 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			try {
 				clickOnElement("Change Page", "Save Button", saveButton2);
 				Thread.sleep(1000);
-				if (isElementPresent(suspendFieldCheckBox)){
+				if (isElementPresentZeroWait(suspendFieldCheckBox)){
 					clickOnElement("Change Page", "	Suspend Fields will be Cleared CheckBox", suspendFieldCheckBox);
 					clickOnElement("Change Page", "Save Button", saveButton2);
 				}
+				
+				if (isElementPresentZeroWait(warningsCheckbox_1)){
+					int count = getElementCount("Change Page","Warning Checkboxs",warningsCheckbox_1);
+					for(int i=1;i<=count;i++){
+						clickOnElement("Change Page", "Warning CheckBox", getDynamicElement("Warning CheckBox",warningsCheckbox,Integer.toString(i)));
+					}
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(1500);
+				}
+				
 				validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
 				driver.switchTo().defaultContent();
 				switchToWindowWithTitleContaining("Institution");
@@ -631,15 +650,15 @@ public class Premier_DepositAccounts extends CommonLibrary{
 					if (isElementPresent(ticklerTitle)){
 
 						if (!sTicklerDecription.equals("")) {
-							enterText("Change Account Page", "Tickler Description field", ticklerDecription, sTicklerDecription);
+							clearAndType("Change Account Page", "Tickler Description field", ticklerDecription, sTicklerDecription);
 						}
 
 						if (!sTicklerAdditionalMsg.equals("")) {
-							enterText("Change Account Page", "Tickler Additional Message field", ticklerAdditionalMsg, sTicklerAdditionalMsg);
+							clearAndType("Change Account Page", "Tickler Additional Message field", ticklerAdditionalMsg, sTicklerAdditionalMsg);
 						}
 
 						if (!sTicklerNextDate.equals("")) {
-							enterText("Change Account Page", "Tickler Next Date field", ticklerNextDate, sTicklerNextDate);
+							clearAndType("Change Account Page", "Tickler Next Date field", ticklerNextDate, sTicklerNextDate);
 						}
 
 						if (!sTicklerFrequencyList.equals("")) {
@@ -647,7 +666,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 						}
 
 						if (!sTicklerExpDate.equals("")) {
-							enterText("Change Account Page", "Tickler Expiration Date field", ticklerExpDate, sTicklerExpDate);
+							clearAndType("Change Account Page", "Tickler Expiration Date field", ticklerExpDate, sTicklerExpDate);
 						}
 
 
@@ -681,7 +700,7 @@ public class Premier_DepositAccounts extends CommonLibrary{
 			switchToWithinFrameWithName("bottom");
 			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){
 				if (isElementPresent(ticklerlabel)){
-					clickOnElement("Change Account Page", "Tickler Expand Button",ticklerExpand);
+					getDynamicElementClick("Change Account Page", "Tickler Expand Button",ticklerExpand,sVerifyTicklerDescription);
 
 					if (!sVerifyTicklerDescription.equals(""))
 						validateElementPresent("Account Inquiry" , "Tickler Description field", getDynamicElement("Tickler Description field",verifyTicklerData,sVerifyTicklerDescription));
@@ -715,5 +734,84 @@ public class Premier_DepositAccounts extends CommonLibrary{
 		}
 	}
 
+	public void changeAccountOverDrafts(String sAccountNumber,String sODLimit, String sOverdraftLimitPriority, 
+			String sDDBaseAccount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field",depositChangeHeader,sAccountNumber))){
+					mouseHoverCickOnElement("Change Account Page", "Overdrafts Menu Field", activityMenu, overdraftsMenu);
+					if (isElementPresent(overdraftsSectionLabel)){
+
+						if (!sODLimit.equals("")) {
+							clearAndType("Change Account Page", "Overdrafts Limit field", overdraftLimit, sODLimit);
+						}
+
+						
+						if (!sOverdraftLimitPriority.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Overdraft Limit Priority Field", overdraftLimitPriorityList, sOverdraftLimitPriority);
+						}
+
+						if (!sDDBaseAccount.equals("")) {
+							clearAndType("Change Account Page", "Demand Deposit Base Account field", ddBaseAccount, sDDBaseAccount);
+						}
+
+
+						stepResult = true;
+					}
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Overdrafts Details", "Account Details - Overdrafts changed Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Overdrafts Details", "Could not change account Details- Overdrafts" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+	public void validateAccountODDetailsAfterChange(String sAccountNumber,String sVerifyODLimit, String sVerifyODLimitPriority) throws Exception {
+		boolean stepResult = false;
+		try {
+
+
+			mouseHoverCickOnElement("Change Account Page", "Overdrafts Menu Field", activityMenu, overdraftsMenu);
+			waitElement(1000);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field",depositInquiryHeader,sAccountNumber))){
+				if (isElementPresent(overdraftslabel)){
+					//clickOnElement("Change Account Page", "Tickler Expand Button",ticklerExpand);
+
+					if (!sVerifyODLimit.equals(""))
+						validateElementPresent("Account Inquiry" , "Overdrafts Limit field", getDynamicElement("Overdrafts Limit field field",verifyOverdraftsData,sVerifyODLimit));
+
+					if (!sVerifyODLimitPriority.equals(""))
+						validateElementPresent("Account Inquiry" , "Overdrafts Limit Priority field", getDynamicElement("Overdrafts Limit Priority field",verifyOverdraftsData,sVerifyODLimitPriority));
+
+					stepResult = true;
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Overdrafts Validation", "Validated Account Details - Overdrafts on Account Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Overdrafts Validation", "Could not Validated Account Details - Overdrafts on Account Inquiry page" , "Failed", driver, "Y");
+			}
+		}
+	}
 
 }
