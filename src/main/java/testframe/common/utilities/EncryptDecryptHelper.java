@@ -21,7 +21,7 @@ public class EncryptDecryptHelper {
     
     @Test
     public void getEncrypt(){
-    	String val = encrypt("F1servTr@in","SECRET");
+    	String val = encrypt("Test@12345","SECRET");
     	System.out.print(val);
     }
     

@@ -1630,7 +1630,81 @@ public class PremierTest extends ApplicationBase {
 				premierLogOff.logoffApplication();				
 				break;	
 			
+			case "PREMIER_TC062":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,testdataFile_Path,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.demandDepositsSubMenu();
+				premierHomeMenuPage.changeAccountDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountDetails_UpdateAddRelationship(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeRelationship_Name"), 
+						tc_Test_Data.get(iTDRow).get("ChangeRelationship_UpdateRelationship"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddName"), 
+						tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddSSN"), tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddRelationship"), 
+						tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddEstatement"));
+				
+				premierHomeMenuPage.accountInquiryDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountDetailsAfterChange_AddRelationship(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeRelationship_Name"),
+						tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddName"), "", tc_Test_Data.get(iTDRow).get("ChangeRelationship_AddRelationship"), "");
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;	
 			
+				
+			case "PREMIER_TC063":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,testdataFile_Path,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.demandDepositsSubMenu();
+				premierHomeMenuPage.changeAccountDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountStopPay(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayType"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPaydate"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayExpirationdate"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayItemdate"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromNumber"),
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughNumber"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromAmount"),
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughAmount"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromTransCode"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughTransCode"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayACHCompanyID"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayee"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayeeReason"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayeeComments"));
+				premierDepositAccounts.submitButton();
+				premierDepositAccounts.saveButton();
+				
+				premierHomeMenuPage.accountInquiryDemandDeposits();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountStopPayAfterChange(sAccountNumber,  tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayType"),
+						new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayItemdate"),"MM/dd/yyyy","MMM dd, yyyy"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromNumber"),
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughNumber"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromAmount"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughAmount"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayACHCompanyID"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayee"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayeeReason"),
+						 new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPaydate"),"MM/dd/yyyy","MMM dd, yyyy"),
+						 new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayExpirationdate"),"MM/dd/yyyy","MMM dd, yyyy"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;	
+			
+				
 			case "PREMIER_TC065":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
