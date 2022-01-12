@@ -254,31 +254,31 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 		}
 
 	}
-//
-//	public void clickRejectButton(String rejectReason) throws Exception {
-//		boolean stepResult = false;
-//		try {
-//			clickOnElement("Future Payment Activity CC- Corporate application", "Reject Button", rejectButton);
-//			if (isElementPresent(rejectPaymentTitle)) {
-//				enterText("Future Payment Activity CC- Corporate application", "Reject Payment", rejectTextbox,
-//						rejectReason);
-//			}
-//			stepResult = true;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			if (stepResult == true) {
-//				System.out.println("Pass - Future Payment Activity - Filter data");
-//				new HTMLReportHelper().HtmlReportBody("Future Payment Activity CC- Corporate application",
-//						"Click on right arrow to view transaction Successfully", "Passed", driver, "Y");
-//			} else {
-//				System.out.println("fail");
-//				new HTMLReportHelper().HtmlReportBody("Future Payment Activity CC- Corporate application",
-//						"Could not Click on right arrow to view transaction Successfully", "Failed", driver, "Y");
-//			}
-//		}
-//
-//	}
+
+	public void clickRejectButton(String rejectReason) throws Exception {
+		boolean stepResult = false;
+		try {
+			clickOnElement("Future Payment Activity CC- Corporate application", "Reject Button", rejectButton);
+			if (isElementPresent(rejectPaymentTitle)) {
+				enterText("Future Payment Activity CC- Corporate application", "Reject Payment", rejectTextbox,
+						rejectReason);
+			}
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - Future Payment Activity - Filter data");
+				new HTMLReportHelper().HtmlReportBody("Future Payment Activity CC- Corporate application",
+						"Click on right arrow to view transaction Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Future Payment Activity CC- Corporate application",
+						"Could not Click on right arrow to view transaction Successfully", "Failed", driver, "Y");
+			}
+		}
+
+	}
 	
 	public void verifyRjectedMsg(String transactionID) throws Exception{
 		boolean stepResult = false;
