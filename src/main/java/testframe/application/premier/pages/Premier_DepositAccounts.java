@@ -171,7 +171,9 @@ public class Premier_DepositAccounts extends CommonLibrary {
 			.xpath("//td/u[contains(text(),'Branch Region Does Not Match Portfolio Branch Region')]/../..//input");
 	By warning4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]");
 	By warningCheckBox4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]/../..//input");
-	By saveBtn = By.xpath("//*[@title='Save']");
+	//By saveBtn = By.xpath("//*[@title='Save']");
+	
+	String removeNameIcon = "//u[text()='%s']/../../td/img[contains(@title,'Delete')]";
 
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
@@ -625,8 +627,8 @@ public class Premier_DepositAccounts extends CommonLibrary {
 			waitElement(1000);
 			clickOnElement("Account Inquiry Page", "Codes Tab Field", codesTab);
 			switchToWithinFrameWithName("bottom");
-			if (isElementPresent(
-					getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field", expandWarningInquiryPage);
 				if (!statementCycle.equals(""))
 					validateTextContains("Account Inquiry", "Statement Cycle field", statementCycleInquiryPage,
 							statementCycle);
@@ -635,7 +637,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 							sAccountStatusCode);
 				// waitElement(2000);
 				if (!sAccountWarning.equals("")) {
-					clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field", expandWarningInquiryPage);
+					
 					// waitElement(1000);
 					validateTextContains("Account Inquiry", "Warning field", warningInquiryPage, sAccountWarning);
 				}
@@ -740,7 +742,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 
 	public void validateAccountHoldDetailsAfterChange(String sAccountNumber, String sVerifyHoldAmount,
 			String sVerifyHoldReason, String sVerifyExpirationDate, String sVerifyHoldDate, String sVerifyPendingAmount)
-			throws Exception {
+					throws Exception {
 		boolean stepResult = false;
 		try {
 			waitElement(1000);
@@ -992,7 +994,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 			String sStopPayExpireDate, String sStopPayItemDate, String sStopPayFromNum, String sStopPayThruNum,
 			String sStopPayFromAmt, String sStopPayThruAmt, String sStopPayFromTransCode, String sStopPayThruTransCode,
 			String sStopPayACHCompanyID, String sStopPayPayee, String sStopPayPayeeReason, String sStopPayPayeeComments)
-			throws Exception {
+					throws Exception {
 		if (System.getProperty("runStep") == "Y") {
 			boolean stepResult = false;
 			try {
@@ -1212,7 +1214,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 
 	public void changeAccountDetails_UpdateAddRelationship(String sAccountNumber, String sUpdateName,
 			String sUpdateRelationship, String sName, String sSN, String sRelationship, String sEStatement)
-			throws Exception {
+					throws Exception {
 		if (System.getProperty("runStep") == "Y") {
 			boolean stepResult = false;
 			try {
@@ -1228,52 +1230,53 @@ public class Premier_DepositAccounts extends CommonLibrary {
 					switchToWindowWithTitleContaining("Institution");
 					driver.switchTo().frame("Main");
 
-					
-						selectElementByVisibleText("Change Account Page", "Add Relationship Field",
-								getDynamicElement("Add Relationship list", relationshipAddName, sName), sRelationship);
-						waitElement(1500);
-					
-					
-						tempVar = getVisibleSelectedText("Change Account Page", "Account info Name Field",
-								getDynamicElement("Relationship list", newName, Integer.toString(2)));
-						if (tempVar.equals("(None)")) {
-							selectElementByVisibleText("Change Account Page", "Account info Name Field",
-									getDynamicElement("Account info Name Field", newName, Integer.toString(2)), sName);
-							waitElement(1000);
-							selectElementByVisibleText("Change Account Page", "Mailing info Name Field",
-									getDynamicElement("Mailing info Name Field", newName, Integer.toString(5)), sName);
-							waitElement(1000);
-							if (!sEStatement.equals("")) {
-								selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field",
-										getDynamicElement("Mailing info E Statement Field", newEstatement,
-												Integer.toString(2)),
-										sEStatement);
-							}
-						} else {
-							selectElementByVisibleText("Change Account Page", "Account info Name Field",
-									getDynamicElement("Account info Name Field", newName, Integer.toString(3)), sName);
-							waitElement(1000);
-							selectElementByVisibleText("Change Account Page", "Mailing info Name Field",
-									getDynamicElement("Mailing info Name Field", newName, Integer.toString(6)), sName);
-							waitElement(1000);
-							if (!sEStatement.equals("")) {
-								selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field",
-										getDynamicElement("Mailing info E Statement Field", newEstatement,
-												Integer.toString(3)),
-										sEStatement);
-							}
+
+					selectElementByVisibleText("Change Account Page", "Add Relationship Field",
+							getDynamicElement("Add Relationship list", relationshipAddName, sName), sRelationship);
+					waitElement(1500);
+
+
+					tempVar = getVisibleSelectedText("Change Account Page", "Account info Name Field",
+							getDynamicElement("Relationship list", newName, Integer.toString(2)));
+					if (tempVar.equals("(None)")) {
+						selectElementByVisibleText("Change Account Page", "Account info Name Field",
+								getDynamicElement("Account info Name Field", newName, Integer.toString(2)), sName);
+						waitElement(1000);
+						selectElementByVisibleText("Change Account Page", "Mailing info Name Field",
+								getDynamicElement("Mailing info Name Field", newName, Integer.toString(5)), sName);
+						waitElement(1000);
+						if (!sEStatement.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field",
+									getDynamicElement("Mailing info E Statement Field", newEstatement,
+											Integer.toString(2)),
+									sEStatement);
 						}
-					
-					
+					} else {
+						selectElementByVisibleText("Change Account Page", "Account info Name Field",
+								getDynamicElement("Account info Name Field", newName, Integer.toString(3)), sName);
+						waitElement(1000);
+						selectElementByVisibleText("Change Account Page", "Mailing info Name Field",
+								getDynamicElement("Mailing info Name Field", newName, Integer.toString(6)), sName);
+						waitElement(1000);
+						if (!sEStatement.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Mailing info E Statement Field",
+									getDynamicElement("Mailing info E Statement Field", newEstatement,
+											Integer.toString(3)),
+									sEStatement);
+						}
+					}
+
+
 
 				}
-				
+
 				if (isElementPresent(getDynamicElement("Relationship Name", updateName, sUpdateName))) {
 					selectElementByVisibleText("Change Account Page", "Update Relationship Field",
 							getDynamicElement("Update Relationship list", relationshipAddName, sUpdateName),
 							sUpdateRelationship);
+					waitElement(1000);
 				}
-				
+
 				clickOnElement("Change Page", "Save Button", saveButton2);
 				Thread.sleep(2000);
 				/*
@@ -1320,7 +1323,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	}
 
 	public void validateAccountDetailsAfterChange_AddRelationship(String sAccountNumber, String sUpdateName,
-			String sName, String sSN, String sRelationship, String sEStatement) throws Exception {
+			String sName, String sSN, String sUpdateRelationship, String sEStatement) throws Exception {
 		boolean stepResult = false;
 		try {
 			waitElement(1000);
@@ -1336,7 +1339,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 						getDynamicElement("Update Relationship Name Field", newNameInquiryPage, sUpdateName));
 				validateTextContains("Account Inquiry", "Update Relationship field",
 						getDynamicElement("Update Relationship Field", newNameRelationshipInquiryPage, sUpdateName),
-						sRelationship);
+						sUpdateRelationship);
 
 			}
 			stepResult = true;
@@ -1481,5 +1484,86 @@ public class Premier_DepositAccounts extends CommonLibrary {
 		}
 
 	}
+	
+	public void changeAccountDetails_RemoveRelationship(String sAccountNumber,String sName) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {			
+				clickOnElement("Change Account Page", "Relationship Tab Field",relationshipTab);
+				waitElement(1500);
+				if (isElementPresent(getDynamicElement("Relationship Name",updateName,sName))) {					
+					if (isElementPresentZeroWait((getDynamicElement("Remove Name Icon",removeNameIcon,sName)))) {
+						clickOnElement("Change Account Page", "Remove Name Icon", (getDynamicElement("Remove Name Icon",removeNameIcon,sName)));
+						waitElement(1500);
+					}
+					for (int i = 2; i<=6;i++) {
+						tempVar = getVisibleSelectedText("Change Account Page", "Account info Name Field", getDynamicElement("Relationship list",newName,Integer.toString(i)));
+						if (tempVar.equals(sName)) {
+							selectElementByVisibleText("Change Account Page", "Account info Name Field", getDynamicElement("Account info Name Field",newName,Integer.toString(i)), "(None)");
+							waitElement(1000);
+						}
+					}
+					
+					if (isElementPresentZeroWait((getDynamicElement("Remove Name Icon",removeNameIcon,sName)))) {
+						clickOnElement("Change Account Page", "Remove Name Icon", (getDynamicElement("Remove Name Icon",removeNameIcon,sName)));
+						waitElement(1500);
+					}
+
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(2000);
+					if (isElementPresentZeroWait(warningsCheckbox_1)) {
+						int count = getElementCount("Change Page", "Warning Checkboxs", warningsCheckbox_1);
+						for (int i = 1; i <= count; i++) {
+							clickOnElement("Change Page", "Warning CheckBox",
+									getDynamicElement("Warning CheckBox", warningsCheckbox, Integer.toString(i)));
+						}
+						clickOnElement("Change Page", "Save Button", saveButton2);
+						Thread.sleep(1500);
+					}
+					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;				
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Remove Relationship Details", "Relationship details removed Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account-Remove Relationship Details", "Could not remove Relationship Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+	public void validateAccountDetailsAfterChange_RemoveRelationship(String sAccountNumber,String sName) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(2000);
+			clickOnElement("Account Inquiry Page", "Relationship Tab Field",relationshipTab);	
+			switchToWithinFrameWithName("bottom");			
+			if (!sName.equals("")) {
+				validateElementIsNotPresent("Account Inquiry Page","Remove Relationship Name",getDynamicElement("Remove Relationship Name",newNameInquiryPage,sName));
+				stepResult = true;
+			}
+			switchToDefaultContent();
+			driver.switchTo().frame("Main");									
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Validated Relationship Details on Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Could not Validated Relationship Details on Inquiry page" , "Failed", driver, "Y");
+			}
+		}}
+
 
 }
