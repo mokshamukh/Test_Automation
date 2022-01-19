@@ -19,12 +19,12 @@ public class EncryptDecryptHelper {
     private static byte[] key;
     private static final String ALGORITHM = "AES";
     
-   /* @Test
+    @Test
     public void getEncrypt(){
-    	String val = encrypt("A2B65Fiserv","SECRET");
+    	String val = encrypt("Test@12345","SECRET");
     	System.out.print(val);
     }
-    */
+    
     
     
   /*   @Test

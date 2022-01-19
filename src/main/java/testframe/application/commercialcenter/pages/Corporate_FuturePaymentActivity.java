@@ -420,8 +420,3 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 // getDynamicElementClick("Future Payment Activity", "Select Transaction Link",
 // transactionLink, transID);
 
-/*
- * getDynamicElementActionClick("Future Payment Activity",
- * "Select Transaction Link", transactionLink, transactionID);
- * Thread.sleep(5000);
- */

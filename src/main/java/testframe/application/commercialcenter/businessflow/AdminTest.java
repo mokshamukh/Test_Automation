@@ -98,13 +98,14 @@ public class AdminTest extends ApplicationBase {
 				sScreenShotFolder = sScreenShotFolder +"/" +"Iterations-"+ (iTDRow+1);
 				Log.info("XXXXXXXXXXXXXXXXXXXXXXX             "+"Iteration - " + (iTDRow+1)+"             XXXXXXXXXXXXXXXXXXXXXX");
 			}
+			System.setProperty("testcaseid.iteration", sTestCase+"||"+iTDRow);
 			fi.createFile(sHTMLFilePath);
 			fi.checkAndCreateFolder(sScreenShotFolder);
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 			
 			new HTMLReportHelper().HTMLReportHeader("Admin", sTestCase, sTestDescription);
-			System.setProperty("testcaseid.iteration", sTestCase+"||"+iTDRow);
+			
 			
 			switch(sTestCase.toUpperCase()){
 			
@@ -182,7 +183,8 @@ public class AdminTest extends ApplicationBase {
 				adminHomePage.clickOnMenuBar();
 				adminHomePage.clickOnSubMenuBar();
 				adminSearchCompanies.searchCompany(tc_Test_Data.get(iTDRow).get("CompanyID"), tc_Test_Data.get(iTDRow).get("AccountNumber"), tc_Test_Data.get(iTDRow).get("CompanyName"), tc_Test_Data.get(iTDRow).get("MarketSegment"), tc_Test_Data.get(iTDRow).get("Label"), tc_Test_Data.get(iTDRow).get("ShowLabels"));
-				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateCompanyNameCreation"));
+				//adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateCompanyNameCreation"));
+				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("CompanyName")+ " ("+ tc_Test_Data.get(iTDRow).get("CompanyID") + ")");
 				adminCompanyDetails.addCompanyUser();
 				adminCreateUser.enterUserDetails(tc_Test_Data.get(iTDRow).get("NewUserID"), tc_Test_Data.get(iTDRow).get("FirstName"), tc_Test_Data.get(iTDRow).get("LastName"), tc_Test_Data.get(iTDRow).get("EnableDate"), tc_Test_Data.get(iTDRow).get("EmailAddress"), tc_Test_Data.get(iTDRow).get("ZipCodeCompanyResides"), tc_Test_Data.get(iTDRow).get("MothersName"), tc_Test_Data.get(iTDRow).get("TemporaryPassword"), tc_Test_Data.get(iTDRow).get("ReEnterTemporaryPassword"));
 				adminHomePage.clickOnMenuBar();
@@ -198,15 +200,17 @@ public class AdminTest extends ApplicationBase {
 				adminHomePage.clickOnMenuBar();
 				adminHomePage.clickOnSubMenuBar();
 				adminSearchCompanies.searchCompany(tc_Test_Data.get(iTDRow).get("CompanyID"), tc_Test_Data.get(iTDRow).get("AccountNumber"), tc_Test_Data.get(iTDRow).get("CompanyName"), tc_Test_Data.get(iTDRow).get("MarketSegment"), tc_Test_Data.get(iTDRow).get("Label"), tc_Test_Data.get(iTDRow).get("ShowLabels"));
-				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateCompanyNameCreation"));
+				//adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateCompanyNameCreation"));
+				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("CompanyName")+ " ("+ tc_Test_Data.get(iTDRow).get("CompanyID") + ")");
 				adminCompanyDetails.addCompanyUser();
 				adminCreateUser.enterUserDetails(tc_Test_Data.get(iTDRow).get("NewUserID"), tc_Test_Data.get(iTDRow).get("FirstName"), tc_Test_Data.get(iTDRow).get("LastName"), tc_Test_Data.get(iTDRow).get("EnableDate"), tc_Test_Data.get(iTDRow).get("EmailAddress"), tc_Test_Data.get(iTDRow).get("ZipCodeCompanyResides"), tc_Test_Data.get(iTDRow).get("MothersName"), tc_Test_Data.get(iTDRow).get("TemporaryPassword"), tc_Test_Data.get(iTDRow).get("ReEnterTemporaryPassword"));
+				
 				adminHomePage.clickOnMenuBar();
 				adminHomePage.clickOnSearchUsers();
-				adminSearchUsers.searchUser(tc_Test_Data.get(iTDRow).get("User_ID"), tc_Test_Data.get(iTDRow).get("Destination"), tc_Test_Data.get(iTDRow).get("User_Name"), tc_Test_Data.get(iTDRow).get("Label"), tc_Test_Data.get(iTDRow).get("ShowLabels"));
-				adminSearchUsers.clickActionButton();
-				adminSearchUsers.clickEditButton();
-				adminEditUser.editUser(tc_Test_Data.get(iTDRow).get("EditUserID"),tc_Test_Data.get(iTDRow).get("EditFirstName"), tc_Test_Data.get(iTDRow).get("EditLastName"), tc_Test_Data.get(iTDRow).get("EditEnableDate"), tc_Test_Data.get(iTDRow).get("EditEmailAddress"), tc_Test_Data.get(iTDRow).get("EditZipCodeCompanyResides"), tc_Test_Data.get(iTDRow).get("EditMothersName"), tc_Test_Data.get(iTDRow).get("EditTemporaryPassword"), tc_Test_Data.get(iTDRow).get("EditReEnterTemporaryPassword"));
+				adminSearchUsers.searchUser(tc_Test_Data.get(iTDRow).get("NewUserID"), tc_Test_Data.get(iTDRow).get("Destination"), tc_Test_Data.get(iTDRow).get("FirstName")+" "+tc_Test_Data.get(iTDRow).get("LastName"), tc_Test_Data.get(iTDRow).get("Label"), tc_Test_Data.get(iTDRow).get("ShowLabels"));
+				adminSearchUsers.clickActionButton(tc_Test_Data.get(iTDRow).get("NewUserID"));
+				adminSearchUsers.clickEditButton(tc_Test_Data.get(iTDRow).get("NewUserID"));
+				adminEditUser.editUser(tc_Test_Data.get(iTDRow).get("NewUserID"),tc_Test_Data.get(iTDRow).get("CompanyID") +" / "+tc_Test_Data.get(iTDRow).get("NewUserID") ,tc_Test_Data.get(iTDRow).get("EditFirstName"), tc_Test_Data.get(iTDRow).get("EditLastName"), tc_Test_Data.get(iTDRow).get("EditEnableDate"), tc_Test_Data.get(iTDRow).get("EditEmailAddress"), tc_Test_Data.get(iTDRow).get("EditZipCodeCompanyResides"), tc_Test_Data.get(iTDRow).get("EditMothersName"), tc_Test_Data.get(iTDRow).get("EditTemporaryPassword"), tc_Test_Data.get(iTDRow).get("EditReEnterTemporaryPassword"));
 				adminlogOffPage.logoffApplication();
 				break;
 			
@@ -217,14 +221,16 @@ public class AdminTest extends ApplicationBase {
 				adminHomePage.clickOnMenuBar();
 				adminHomePage.clickOnSubMenuBar();
 				adminSearchCompanies.searchCompany(tc_Test_Data.get(iTDRow).get("CompanyID"), tc_Test_Data.get(iTDRow).get("AccountNumber"), tc_Test_Data.get(iTDRow).get("CompanyName"), tc_Test_Data.get(iTDRow).get("MarketSegment"), tc_Test_Data.get(iTDRow).get("Label"), tc_Test_Data.get(iTDRow).get("ShowLabels"));
-				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateCompanyNameCreation"));
+				//adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("ValidateCompanyNameCreation"));
+				adminCompanyDetails.validateSearchCompany(tc_Test_Data.get(iTDRow).get("CompanyName")+ " ("+ tc_Test_Data.get(iTDRow).get("CompanyID") + ")");
 				adminCompanyDetails.addCompanyUser();
 				adminCreateUser.enterUserDetails(tc_Test_Data.get(iTDRow).get("NewUserID"), tc_Test_Data.get(iTDRow).get("FirstName"), tc_Test_Data.get(iTDRow).get("LastName"), tc_Test_Data.get(iTDRow).get("EnableDate"), tc_Test_Data.get(iTDRow).get("EmailAddress"), tc_Test_Data.get(iTDRow).get("ZipCodeCompanyResides"), tc_Test_Data.get(iTDRow).get("MothersName"), tc_Test_Data.get(iTDRow).get("TemporaryPassword"), tc_Test_Data.get(iTDRow).get("ReEnterTemporaryPassword"));
+				
 				adminHomePage.clickOnMenuBar();
 				adminHomePage.clickOnSearchUsers();
-				adminSearchUsers.searchUser(tc_Test_Data.get(iTDRow).get("User_ID"), tc_Test_Data.get(iTDRow).get("Destination"), tc_Test_Data.get(iTDRow).get("User_Name"), tc_Test_Data.get(iTDRow).get("Label"), tc_Test_Data.get(iTDRow).get("ShowLabels"));
-				adminSearchUsers.clickActionButton();
-				adminSearchUsers.clickCloneButton();
+				adminSearchUsers.searchUser(tc_Test_Data.get(iTDRow).get("NewUserID"), tc_Test_Data.get(iTDRow).get("Destination"), tc_Test_Data.get(iTDRow).get("FirstName")+" "+tc_Test_Data.get(iTDRow).get("LastName"), tc_Test_Data.get(iTDRow).get("Label"), tc_Test_Data.get(iTDRow).get("ShowLabels"));
+				adminSearchUsers.clickActionButton(tc_Test_Data.get(iTDRow).get("NewUserID"));
+				adminSearchUsers.clickCloneButton(tc_Test_Data.get(iTDRow).get("NewUserID"));
 				adminCloneUser.cloneUserDetails(tc_Test_Data.get(iTDRow).get("CloneUserID"), tc_Test_Data.get(iTDRow).get("CloneFirstName"), tc_Test_Data.get(iTDRow).get("CloneLastName"), tc_Test_Data.get(iTDRow).get("CloneEnableDate"), tc_Test_Data.get(iTDRow).get("CloneEmailAddress"), tc_Test_Data.get(iTDRow).get("CloneZipCodeCompanyResides"), tc_Test_Data.get(iTDRow).get("CloneMothersName"), tc_Test_Data.get(iTDRow).get("CloneTemporaryPassword"), tc_Test_Data.get(iTDRow).get("CloneReEnterTemporaryPassword"));
 				adminlogOffPage.logoffApplication();
 				break;

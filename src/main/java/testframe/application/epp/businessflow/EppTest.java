@@ -29,8 +29,8 @@ import testframe.common.utilities.DateTimeHelper;
 
 public class EppTest extends ApplicationBase {
 	String pathToAppConfigPropFolder, pathToApplicationTestDataFolder, appConfigPropertyFilePath, testdataFile,
-			testdataFile_Path, sPathToAppReportFolder, strpathToAppReportFile, sHTMLFilePath, sScreenShotFolder,
-			sScreenShotFolder_Itr, strpathToAppReportFileDateTimeStamp;
+	testdataFile_Path, sPathToAppReportFolder, strpathToAppReportFile, sHTMLFilePath, sScreenShotFolder,
+	sScreenShotFolder_Itr, strpathToAppReportFileDateTimeStamp;
 	int iIteration_count;
 	String sUserID1, sUserID2, sUserID3, sPassword1, sPassword2,sPassword3, sCompanyID, sPassword_Encrypt1, sPassword_Encrypt2,sPassword_Encrypt3, sSecretKey;
 	// private WebDriver driver;
@@ -38,7 +38,7 @@ public class EppTest extends ApplicationBase {
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver, String sApplicationName, String sURL, String sTestCase,
 			String sTestDescription, String sApplicationTDFolder, String sIteration, String sHTMLFileName)
-			throws Exception {
+					throws Exception {
 
 		EPP_Login eppLoginPage = new EPP_Login(driver);
 		EPP_SecurityQuestions eppSecurityQuestions = new EPP_SecurityQuestions(driver);
@@ -57,7 +57,7 @@ public class EppTest extends ApplicationBase {
 		EPP_PaymentActionVerificationList eppPaymentActionVerificationList = new EPP_PaymentActionVerificationList(driver);
 		EPP_PaymentRepair eppPaymentRepair = new EPP_PaymentRepair(driver);
 		EPP_VerifyPayment eppVerifyPayment = new EPP_VerifyPayment(driver);
-		
+
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
 		strpathToAppReportFile = sPathToAppReportFolder + "/" + sApplicationName;
 		fi.checkAndCreateFolder(strpathToAppReportFile);
@@ -123,7 +123,7 @@ public class EppTest extends ApplicationBase {
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
 			new HTMLReportHelper().HTMLReportHeader("EPP", sTestCase, sTestDescription);
-			
+
 
 			switch (sTestCase.toUpperCase()) {
 
@@ -158,33 +158,33 @@ public class EppTest extends ApplicationBase {
 				String valueDateField = tc_Test_Data.get(iTDRow).get("ValueDate");
 				String transactionFinalStatus = tc_Test_Data.get(iTDRow).get("TransactionStaus");
 
-				
-			  eppLoginPage.launchApplication(sURL);
-			  eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-			  eppSecurityQuestions.enterSecurityQuestions(securityQuestionTD,securityAnswerTD); 
-			  eppProductSelection.selectProductEPP();
-			  eppMenuOPtions.selectManualPaymentOptions();
-			  eppMenuOPtions.selectPaymentCreationSubMenu();
-			  eppTemplates.verifyPaymentCreationPool();
-			  eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-			  eppCreatePayment.createOutgoingHVBankPaymentFRB(accNum,systemCode, debitAccount, amount, valueDateField,
-					  benAccount, beneName, beneAddress,accWithBankNo, accWithSysCode);
-			  driver.close();
-			  eppLogOff.logOffEPPApplication();
-			  eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-			  eppSecurityQuestions.enterSecurityQuestions(securityQuestionTD, securityAnswerTD);
-			  eppProductSelection.selectProductEPP();
-			  eppTemplates.verifyWorkSummaryPool();
-			  eppTemplates.selectPaymentCreationVerificationOption();
-			  eppTransactionIDList.selectTransactionIDFromList();
-			  eppApprovePayment.verifyAndApprovePayments(amountApproval, dateField);
-			  eppMenuOPtions.selectPaymentTrackingOptions();
-			  eppMenuOPtions.selectTransactionInquirySubMenu();
-			  eppTransactionInquiry.searchTransaction(instAmount, valueDateField);
-			  eppPaymentDetails.verifyCompletedPaymentTransaction();
-			  driver.close();
-			  eppLogOff.logOffEPPApplication();
-			  break;
+
+				eppLoginPage.launchApplication(sURL);
+				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+				eppSecurityQuestions.enterSecurityQuestions(securityQuestionTD,securityAnswerTD); 
+				eppProductSelection.selectProductEPP();
+				eppMenuOPtions.selectManualPaymentOptions();
+				eppMenuOPtions.selectPaymentCreationSubMenu();
+				eppTemplates.verifyPaymentCreationPool();
+				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+				eppCreatePayment.createOutgoingHVBankPaymentFRB(accNum,systemCode, debitAccount, amount, valueDateField,
+						benAccount, beneName, beneAddress,accWithBankNo, accWithSysCode);
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+				eppSecurityQuestions.enterSecurityQuestions(securityQuestionTD, securityAnswerTD);
+				eppProductSelection.selectProductEPP();
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectPaymentCreationVerificationOption();
+				eppTransactionIDList.selectTransactionIDFromList();
+				eppApprovePayment.verifyAndApprovePayments(amountApproval, dateField);
+				eppMenuOPtions.selectPaymentTrackingOptions();
+				eppMenuOPtions.selectTransactionInquirySubMenu();
+				eppTransactionInquiry.searchTransaction(instAmount, valueDateField);
+				eppPaymentDetails.verifyCompletedPaymentTransaction();
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				break;
 
 			case "EPP_TC002":
 
@@ -256,8 +256,8 @@ public class EppTest extends ApplicationBase {
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
-				
-				
+
+
 			case "EPP_TC004":
 
 				eppLoginPage.launchApplication(sURL);
@@ -290,7 +290,7 @@ public class EppTest extends ApplicationBase {
 				eppPaymentDetails.verifyCompletedPaymentTransaction();
 				eppLogOff.logOffEPPApplication();
 				break;
-			
+
 			case "EPP_TC005":
 
 				eppLoginPage.launchApplication(sURL);
@@ -313,10 +313,20 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID();
 				eppPaymentDetails.submitActionOnTransactionWithApproval();
-			    driver.close();
-			    eppLogOff.logOffEPPApplication();
-			    break;
-			    
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				eppLoginPage.launchApplication(sURL);
+				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+				eppProductSelection.selectProductEPP();
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectPaymentActionVerificationOption();
+				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID();
+				eppPaymentDetails.approveCancelledPayment();
+				driver.close();
+				break;
+
 			case "EPP_TC006":
 
 				eppLoginPage.launchApplication(sURL);
@@ -330,8 +340,8 @@ public class EppTest extends ApplicationBase {
 				eppActionPrompts.VerifyAndPerformActionForReleaseHold();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
-			    break;
-			    
+				break;
+
 			case "EPP_TC007":
 
 				eppLoginPage.launchApplication(sURL);
@@ -341,28 +351,30 @@ public class EppTest extends ApplicationBase {
 				eppProductSelection.selectProductEPP();
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectDuplicatePaymentOption();
-				eppDuplicatePayments.selectRepairPayment();
+				eppDuplicatePayments.selectRepairPayment(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppActionPrompts.performActionForRepairPayment("Testing");
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
 				eppPaymentRepair.selectPaymentRepair(tc_Test_Data.get(iTDRow).get("UpdatedAmount"));
 				driver.close();
-				eppLogOff.logOffEPPApplication();	
+				eppLogOff.logOffEPPApplication();
 				eppLoginPage.launchApplication(sURL);
 				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
+				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairVerificationOption();
 				//eppTemplates.selectTemplate("Work Summary","Payment Repair Verification");
 				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID();
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ApprovalDate"));
-			    driver.close();
-			    eppLogOff.logOffEPPApplication();
-			    break;
-			    
-			    
-			    
+				driver.close();
+				eppLogOff.logOffEPPApplication();	
+
+				break;
+
+
+
 			case "EPP_TC008":
 
 				eppLoginPage.launchApplication(sURL);
@@ -372,7 +384,7 @@ public class EppTest extends ApplicationBase {
 				eppProductSelection.selectProductEPP();
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectDuplicatePaymentOption();
-				eppDuplicatePayments.selectRepairPayment();
+				eppDuplicatePayments.selectRepairPayment(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppActionPrompts.performActionForRepairPayment("Testing");
 				//eppMenuOPtions.selectMenuOptions(tc_Test_Data.get(iTDRow).get("Menu"));
 				//eppMenuOPtions.selectSubMenuOptions(tc_Test_Data.get(iTDRow).get("SubMenu"));
@@ -382,7 +394,7 @@ public class EppTest extends ApplicationBase {
 				eppPaymentRepair.selectPaymentRepair(tc_Test_Data.get(iTDRow).get("UpdatedAmount"));
 				//eppActionPrompts.VerifyAndPerformPaymentRepair(tc_Test_Data.get(iTDRow).get("RepairCommentBox"), tc_Test_Data.get(iTDRow).get("CancelInitiator"));
 				driver.close();
-				eppLogOff.logOffEPPApplication();	
+				eppLogOff.logOffEPPApplication();
 				eppLoginPage.launchApplication(sURL);
 				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
@@ -390,7 +402,7 @@ public class EppTest extends ApplicationBase {
 				eppProductSelection.selectProductEPP();
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectTemplate("Work Summary","Payment Repair Verification");
-				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID();
+				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID(); // rmove transID
 				eppVerifyPayment.rejectPaymentRepairAction(tc_Test_Data.get(iTDRow).get("ApprovalDate"));
 				eppActionPrompts.VerifyAndPerformPaymentRepair("Testing","CUST");
 				driver.close();
@@ -404,9 +416,9 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID();
 				eppPaymentDetails.approveRepairPayment();
-			    driver.close();
-			    eppLogOff.logOffEPPApplication();
-			    break;
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				break;
 
 			case "EPP_TC009":
 
@@ -441,7 +453,7 @@ public class EppTest extends ApplicationBase {
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
-			    
+
 			case "EPP_TC010":
 
 				eppLoginPage.launchApplication(sURL);
@@ -450,36 +462,36 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
-						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				 eppPaymentDetails.verifyRepairPaymentTransStatus();
-				//eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-			}
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyRepairPaymentTransStatus();
+					//eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
 				eppPaymentRepair.selectTransIDFromPaymentRepair();
@@ -495,10 +507,10 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairVerificationOption();
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
-			    driver.close();
-			    eppLogOff.logOffEPPApplication();
+				driver.close();
+				eppLogOff.logOffEPPApplication();
 				break;
-			
+
 			case "EPP_TC011":
 
 				eppLoginPage.launchApplication(sURL);
@@ -507,35 +519,35 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
-						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				 eppPaymentDetails.verifyRepairPaymentTransStatus();
-				//eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyRepairPaymentTransStatus();
+					//eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
 				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
@@ -553,10 +565,10 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID();
 				eppPaymentDetails.approveRepairPayment();
-			    driver.close();
-			    eppLogOff.logOffEPPApplication();
-			    break;
-				
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				break;
+
 			case "EPP_TC012":
 
 				eppLoginPage.launchApplication(sURL);
@@ -565,34 +577,34 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
-						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				 eppPaymentDetails.verifyRepairPaymentTransStatus();
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyRepairPaymentTransStatus();
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
 				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
@@ -609,10 +621,10 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairVerificationOption();
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
-			    driver.close();
-			    eppLogOff.logOffEPPApplication();
+				driver.close();
+				eppLogOff.logOffEPPApplication();
 				break;
-				
+
 			case "EPP_TC013":
 
 				eppLoginPage.launchApplication(sURL);
@@ -621,35 +633,35 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
-						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				 eppPaymentDetails.verifyRepairPaymentTransStatus();
-				//eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyRepairPaymentTransStatus();
+					//eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
 				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairOption();
@@ -667,10 +679,10 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID();
 				eppPaymentDetails.approveRepairPayment();
-			    driver.close();
-			    eppLogOff.logOffEPPApplication();
-			    break;
-			    
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				break;
+
 			case "EPP_TC014":
 
 				eppLoginPage.launchApplication(sURL);
@@ -679,34 +691,34 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
-						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				eppPaymentDetails.verifyInternalFilterPaymentTransStatus();
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyInternalFilterPaymentTransStatus();
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
 				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectInternalFilterOption();
@@ -720,7 +732,7 @@ public class EppTest extends ApplicationBase {
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
-				
+
 			case "EPP_TC015":
 
 				eppLoginPage.launchApplication(sURL);
@@ -729,34 +741,34 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
-						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				eppPaymentDetails.verifyInternalFilterPaymentTransStatus();
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyInternalFilterPaymentTransStatus();
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
 				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectInternalFilterOption();
@@ -775,7 +787,7 @@ public class EppTest extends ApplicationBase {
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
-				
+
 			case "EPP_TC016":
 
 				eppLoginPage.launchApplication(sURL);
@@ -784,34 +796,34 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
-						tc_Test_Data.get(iTDRow).get("ValueDate"));
-				eppPaymentDetails.verifyBusinessFilterPaymentTransStatus();
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID3, sPassword3);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyBusinessFilterPaymentTransStatus();
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID3, sPassword3);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
 				}
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectNotificationPoolOption();
@@ -825,7 +837,7 @@ public class EppTest extends ApplicationBase {
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;	
-				
+
 			case "EPP_TC017":
 
 				eppLoginPage.launchApplication(sURL);
@@ -834,45 +846,45 @@ public class EppTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
 				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
-				eppMenuOPtions.selectManualPaymentOptions();
-				eppMenuOPtions.selectPaymentCreationSubMenu();
-				eppTemplates.verifyPaymentCreationPool();
-				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
-						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
-						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
-						tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentCreationVerificationOption();
-				eppTransactionIDList.selectTransactionIDFromList();
-				eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"));
-				eppMenuOPtions.selectPaymentTrackingOptions();
-				eppMenuOPtions.selectTransactionInquirySubMenu();
-				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"));
-				eppPaymentDetails.verifyCompletedPaymentTransaction();
-				eppPaymentDetails.selectRecallPayment();
-				eppActionPrompts.performActionOnRecallPayment();
-				driver.close();
-				eppLogOff.logOffEPPApplication();
-				eppLoginPage.launchApplication(sURL);
-				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
-				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
-						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
-				eppProductSelection.selectProductEPP();
-				eppTemplates.verifyWorkSummaryPool();
-				eppTemplates.selectPaymentActionVerificationOption();
-				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID();
-				eppPaymentDetails.approveRecallPaymentTransaction();
-				eppMenuOPtions.selectPaymentTrackingOptions();
-				eppMenuOPtions.selectWorkSummarySubMenu();
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList();
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppMenuOPtions.selectPaymentTrackingOptions();
+					eppMenuOPtions.selectTransactionInquirySubMenu();
+					eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyCompletedPaymentTransaction();
+					eppPaymentDetails.selectRecallPayment();
+					eppActionPrompts.performActionOnRecallPayment();
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.launchApplication(sURL);
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentActionVerificationOption();
+					eppPaymentActionVerificationList.selectPaymentActionVerificationTransID();
+					eppPaymentDetails.approveRecallPaymentTransaction();
+					eppMenuOPtions.selectPaymentTrackingOptions();
+					eppMenuOPtions.selectWorkSummarySubMenu();
 				}
 				eppTemplates.selectPendingOutgoingRequestPoolOption();
 				eppTransactionIDList.selectPendingOutgoingRecallTransactionIDFromList();

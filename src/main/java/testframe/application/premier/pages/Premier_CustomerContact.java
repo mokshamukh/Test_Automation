@@ -44,57 +44,67 @@ public class Premier_CustomerContact extends CommonLibrary{
 	}
 
 	public void createNewContact(String sSN) throws Exception{
-		boolean stepResult = false;
-		try {
-			Thread.sleep(2000);
-			driver.switchTo().frame("Main");
-			searchSSN(sSN);
-			Thread.sleep(2000);
-			clickOnElement("New Contact Page", "Save Button", saveButton);
-			Thread.sleep(2000);
-			switchToWindowWithTitleContaining("Institution");
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Create New Contact", "Create Contact page Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create New Contact", "Could not Create Contact page Successfully", "Failed",
-						driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				driver.switchTo().frame("Main");
+				searchSSN(sSN);
+				Thread.sleep(2000);
+				clickOnElement("New Contact Page", "Save Button", saveButton);
+				Thread.sleep(2000);
+				switchToWindowWithTitleContaining("Institution");
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Create New Contact", "Create Contact page Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create New Contact", "Could not Create Contact page Successfully", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
 	public void searchSSN(String sSN) throws Exception{
-		boolean stepResult = false;
-		try {
-			Thread.sleep(7000);
-			if (isElementPresent(searchTitle)) {
-				clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
-				enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
-				clickOnElement("Add Name Page", "Submit", submitSearch);
-				Thread.sleep(3000);
-				if(isElementPresent(nameLink)){
-					clickOnElement("Add Name Page", "Name link", nameLink);}
-				stepResult = true;
-			}
+		if (System.getProperty("runStep")=="Y"){
+			
+			boolean stepResult = false;
+			try {
+				Thread.sleep(7000);
+				if (isElementPresent(searchTitle)) {
+					clickOnElement("Add Name Page", "Tax Identification", ssnSearch);
+					enterText("Add Name Page", "Tax Identification", ssnSearch, sSN);
+					clickOnElement("Add Name Page", "Submit", submitSearch);
+					Thread.sleep(3000);
+					if(isElementPresent(nameLink)){
+						clickOnElement("Add Name Page", "Name link", nameLink);
+						
+						Thread.sleep(4000);
+						}
+					stepResult = true;
+				}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search SSN", "Search SSN on Contact page Successfully", "Passed",
-						driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search SSN", "Could not Search SSN on Contact page Successfully", "Failed",
-						driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search SSN", "Search SSN on Contact page Successfully", "Passed",
+							driver, "N");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search SSN", "Could not Search SSN on Contact page Successfully", "Failed",
+							driver, "N");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 

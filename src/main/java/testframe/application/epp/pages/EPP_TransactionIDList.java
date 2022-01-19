@@ -37,26 +37,29 @@ public class EPP_TransactionIDList extends CommonLibrary {
 
 
 	public void selectTransactionIDFromList() throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppTransactionIDList, "Work Summary List", title);
-			if(isElementPresent(title)){
-				String transactionID = eppCreatePayment.getTransactionID();
-				getDynamicElementClick(eppTransactionIDList, "Work Summary List", transactionIdList, transactionID);
-				waitElement(8000);
-				stepResult = true;
-			}
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppTransactionIDList, "Work Summary List", title);
+				if(isElementPresent(title)){
+					String transactionID = eppCreatePayment.getTransactionID();
+					getDynamicElementClick(eppTransactionIDList, "Work Summary List", transactionIdList, transactionID);
+					waitElement(8000);
+					stepResult = true;
+				}
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully", "Failed", driver, "N");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully", "Failed", driver, "N");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
@@ -64,34 +67,37 @@ public class EPP_TransactionIDList extends CommonLibrary {
 
 
 	public void selectPendingOutgoingRecallTransactionIDFromList() throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppTransactionIDList, "Work Summary List", title);
-			if(isElementPresent(title)){
-				String transactionID = eppCreatePayment.getTransactionID();
-				if(!(transactionID==null)) {
-					getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
-				}else {
-					String firstTransID = getElementText(eppTransactionIDList, "First PendingOutgoing Transaction ID", pendingFirstTransID);
-					eppCreatePayment.setTransactionID(firstTransID);
-					clickOnElement(eppTransactionIDList, "First Transaction ID", pendingFirstTransID);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppTransactionIDList, "Work Summary List", title);
+				if(isElementPresent(title)){
+					String transactionID = eppCreatePayment.getTransactionID();
+					if(!(transactionID==null)) {
+						getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
+					}else {
+						String firstTransID = getElementText(eppTransactionIDList, "First PendingOutgoing Transaction ID", pendingFirstTransID);
+						eppCreatePayment.setTransactionID(firstTransID);
+						clickOnElement(eppTransactionIDList, "First Transaction ID", pendingFirstTransID);
+					}
+					//getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
+					validateTextContains(eppTransactionIDList, "Outgoing Recall TransactionID", outgoingRecallReqReason, "RECALL");
+					waitElement(8000);
+					stepResult = true;
 				}
-				//getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
-				validateTextContains(eppTransactionIDList, "Outgoing Recall TransactionID", outgoingRecallReqReason, "RECALL");
-				waitElement(8000);
-				stepResult = true;
-			}
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully from Pending Outgoing Recall Request ","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully from Pending Outgoing Recall Request", "Failed", driver, "N");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully from Pending Outgoing Recall Request ","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully from Pending Outgoing Recall Request", "Failed", driver, "N");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 

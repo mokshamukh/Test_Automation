@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
 
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
@@ -48,7 +50,15 @@ public class HTMLReportHelper {
 	String strScreenshot_split[],sScreenshot_Path="";
 
 	ExcelReader er = new ExcelReader();
-
+	
+	/*@Test
+	public void covertHTMLToPDF() throws FileNotFoundException, IOException{
+		ConverterProperties converterProperties = new ConverterProperties();
+		HtmlConverter.convertToPdf(new FileInputStream("C:\\Users\\F9Z2G8A\\OneDrive - Fiserv Corp\\Desktop\\Republic UAT\\TestAutomation\\git\\workspace\\Test_Automation\\testreport\\application\\CommercialCenter\\01-04-2022-09-56-09\\CC_ADMIN_TC005_CommercialCenter_Admin_01042022-220846.html"), 
+				new FileOutputStream("C:\\Users\\F9Z2G8A\\OneDrive - Fiserv Corp\\Desktop\\Republic UAT\\TestAutomation\\git\\workspace\\Test_Automation\\testreport\\application\\CommercialCenter\\01-04-2022-09-56-09\\CC_ADMIN_TC005_CommercialCenter_Admin_01042022-220846_Passed.pdf"), converterProperties);
+		System.out.println( "PDF Created!" );
+	}
+*/
 	public void setHTMLReportFilePath(String sfilePath){
 		shtmlfilePath = sfilePath;
 		spdffilePath =shtmlfilePath.replace(".html", ".pdf");

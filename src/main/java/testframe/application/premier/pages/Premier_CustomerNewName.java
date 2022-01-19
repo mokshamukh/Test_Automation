@@ -14,7 +14,7 @@ import testframe.common.reporting.HTMLReportHelper;
 /**
  * PageNage : Premier_CustomerNewName
  * 
- * @author Ketki.Badalwar
+ * @author Moksha.Mukh
  */
 
 
@@ -173,496 +173,534 @@ public class Premier_CustomerNewName extends CommonLibrary {
 	public void createNewName(String name, String firstName, String lastName,String nameFormatCode, String dob,String taxIDCode, String taxID,String withholdingCode,String alt_Name,String alt_FirstName,String alt_LastName,String alt_MiddleInitial,String alt_NameFormatCode,String phoneNumber,
 			String branchRegion,String email,String webAddress,String gender,String riskRanking,String creditScore,String nAICSCodes,String customerType,String buildRelationship_SSN, String buildRelationship,String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent,
 			String buildRelationship_2_Flag, String buildRelationship_2_SSN, String build_Relationship_2, String beneficialOwner_2_Flag, String beneficialOwnerName_2, String beneficial_Relationship_2, String beneficial_Percent_2,String sPhoneType,String sEmailType) throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(6000);
-			//driver.switchTo().frame("Main");
-			enterCustomerName(name,firstName, lastName,nameFormatCode,dob,taxIDCode,taxID,withholdingCode,alt_Name,alt_FirstName,alt_LastName,alt_MiddleInitial,alt_NameFormatCode);
-			enterDuplicate();
-			enterContactMethod(phoneNumber, email, webAddress,sPhoneType,sEmailType);
-			enterCodeLable(gender,riskRanking,creditScore,nAICSCodes,customerType,branchRegion);
-			enterBuildRelationship(buildRelationship_SSN,buildRelationship,beneficialOwnerName,beneficial_Relationship,beneficial_Percent,buildRelationship_2_Flag,buildRelationship_2_SSN,build_Relationship_2,beneficialOwner_2_Flag,beneficialOwnerName_2,beneficial_Relationship_2,beneficial_Percent_2);
-			clickOnElement("New Name Page", "Finish Button", finishButton);
-			Thread.sleep(2000);
-			isElementPresent(msg);
-			switchToWindowWithTitleContaining("Institution");
-			//driver.switchTo().defaultContent();
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Create New Name", "Create name Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create New Name", "Could not create name.", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				Thread.sleep(6000);
+				//driver.switchTo().frame("Main");
+				enterCustomerName(name,firstName, lastName,nameFormatCode,dob,taxIDCode,taxID,withholdingCode,alt_Name,alt_FirstName,alt_LastName,alt_MiddleInitial,alt_NameFormatCode);
+				enterDuplicate();
+				enterContactMethod(phoneNumber, email, webAddress,sPhoneType,sEmailType);
+				enterCodeLable(gender,riskRanking,creditScore,nAICSCodes,customerType,branchRegion);
+				enterBuildRelationship(buildRelationship_SSN,buildRelationship,beneficialOwnerName,beneficial_Relationship,beneficial_Percent,buildRelationship_2_Flag,buildRelationship_2_SSN,build_Relationship_2,beneficialOwner_2_Flag,beneficialOwnerName_2,beneficial_Relationship_2,beneficial_Percent_2);
+				clickOnElement("New Name Page", "Finish Button", finishButton);
+				Thread.sleep(2000);
+				isElementPresent(msg);
+				switchToWindowWithTitleContaining("Institution");
+				//driver.switchTo().defaultContent();
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Create New Name", "Create name Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create New Name", "Could not create name.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void finsihName() throws Exception{
-		boolean stepResult = false;
-		try {
-			clickOnElement("New Name Page", "Finish Button", finishButton);
-			Thread.sleep(2000);
-			if (isElementPresent(msg))
-			{
-				stepResult = true;
-			}
-			switchToWindowWithTitleContaining("Institution");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("New Name Page", "Finish Button", finishButton);
+				Thread.sleep(2000);
+				if (isElementPresent(msg))
+				{
+					stepResult = true;
+				}
+				switchToWindowWithTitleContaining("Institution");
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Finish Name", "Finish name Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Finish Name", "Could not finish name", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Finish Name", "Finish name Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Finish Name", "Could not finish name", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void enterCustomerName(String name, String firstName, String lastName,String nameFormatCode ,String dob,String taxIDCode, String taxID,String withholdingCode,String alt_Name,String alt_FirstName,String alt_LastName,String alt_MiddleInitial,String alt_NameFormatCode) throws Exception{
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			driver.switchTo().frame("Main");
-			if (isElementPresent(nameTitle)) {
-				if (!name.equals("")) {
-					enterText("New Name Page", "Name field", nameTextbox, name);
-				}
-				validateElementExist("New Name Page", "First Name", firstNametextbox, firstName);
-				validateElementExist("New Name Page", "Last Name", lastNameTextbox, lastName);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				driver.switchTo().frame("Main");
+				if (isElementPresent(nameTitle)) {
+					if (!name.equals("")) {
+						enterText("New Name Page", "Name field", nameTextbox, name);
+					}
+					validateElementExist("New Name Page", "First Name", firstNametextbox, firstName);
+					validateElementExist("New Name Page", "Last Name", lastNameTextbox, lastName);
 
-				if (!nameFormatCode.equals("")) {
-					selectElementByVisibleText("New Name Page", "Name Format Code field", nameFormatCodeCombobox, nameFormatCode);
+					if (!nameFormatCode.equals("")) {
+						selectElementByVisibleText("New Name Page", "Name Format Code field", nameFormatCodeCombobox, nameFormatCode);
+					}
+					if (!dob.equals("")) {
+						enterText("New Name Page", "Date of Birth", dateOfBirth, dob);
+					}
+					if (!taxID.equals("")) {
+						selectElementByVisibleText("New Name Page", "Tax Identification Code", taxIDCodeList, taxIDCode);
+					}
+					if (!taxID.equals("")) {
+						enterText("New Name Page", "Tax Identification", taxIDNum, taxID);
+					}
+					if (!withholdingCode.equals("")) {
+						selectElementByVisibleText("New Name Page", "Withholding Code field", withholdingCodeCombobox, withholdingCode);
+					}
+					if (!alt_Name.equals("")) {
+						enterText("New Name Page", "Alternate Name field", altNameTextbox, alt_Name);
+					}
+					validateElementExist("New Name Page", "Alternate First Name", altFirstNametextbox, alt_FirstName);
+					validateElementExist("New Name Page", "Alternate Last Name", altLastNameTextbox, alt_LastName);
+					if (!alt_NameFormatCode.equals("")) {
+						selectElementByVisibleText("New Name Page", "Alternate Name Format Code field", altNameFormatCodeCombobox, alt_NameFormatCode);
+					}
+					clickOnElement("New Name Page", "Next Button", nextButton);
+					stepResult = true;
 				}
-				if (!dob.equals("")) {
-					enterText("New Name Page", "Date of Birth", dateOfBirth, dob);
-				}
-				if (!taxID.equals("")) {
-					selectElementByVisibleText("New Name Page", "Tax Identification Code", taxIDCodeList, taxIDCode);
-				}
-				if (!taxID.equals("")) {
-					enterText("New Name Page", "Tax Identification", taxIDNum, taxID);
-				}
-				if (!withholdingCode.equals("")) {
-					selectElementByVisibleText("New Name Page", "Withholding Code field", withholdingCodeCombobox, withholdingCode);
-				}
-				if (!alt_Name.equals("")) {
-					enterText("New Name Page", "Alternate Name field", altNameTextbox, alt_Name);
-				}
-				validateElementExist("New Name Page", "Alternate First Name", altFirstNametextbox, alt_FirstName);
-				validateElementExist("New Name Page", "Alternate Last Name", altLastNameTextbox, alt_LastName);
-				if (!alt_NameFormatCode.equals("")) {
-					selectElementByVisibleText("New Name Page", "Alternate Name Format Code field", altNameFormatCodeCombobox, alt_NameFormatCode);
-				}
-				clickOnElement("New Name Page", "Next Button", nextButton);
-				stepResult = true;
-			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Customer Name entered Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Could not entered customer name details", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Customer Name entered Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Could not entered customer name details", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void enterDuplicate() throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(duplicateLabel)) {
-				Thread.sleep(2000);
-				if (isElementPresent(duplicateMsg)) {
-					clickOnElement("New Name Page", "Next Button", nextButton);
-					stepResult = true;
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(duplicateLabel)) {
+					Thread.sleep(2000);
+					if (isElementPresent(duplicateMsg)) {
+						clickOnElement("New Name Page", "Next Button", nextButton);
+						stepResult = true;
+					}
+				}			
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Verify Duplicate Screen", "Duplicate Screen displayed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Verify Duplicate Screen", "Could Not verified Duplicate page", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-			}			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Verify Duplicate Screen", "Duplicate Screen displayed Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Verify Duplicate Screen", "Could Not verified Duplicate page", "Failed", driver, "Y");
 			}
 		}
 	}
 
 	public void enterContactMethod(String phoneNumber,String email,String webAddress,String phoneType,String emailType) throws Exception{
-		boolean stepResult = false;
-		String sDelimiter_phone,sDelimiter_email; 
-		try {
-			if (isElementPresent(contactMethodsLabel)) {
-				Thread.sleep(2000);
-				if (phoneNumber.contains(",")){
-					sDelimiter_phone =",";
-				}	
-				else if (phoneNumber.contains("||")){
-					sDelimiter_phone ="\\|\\|";
-				}
-				else{
-					sDelimiter_phone ="\\|\\|";
-				}
-
-				if (email.contains(",")){
-					sDelimiter_email =",";
-				}	
-				else if (phoneNumber.contains("||")){
-					sDelimiter_email ="\\|\\|";
-				}
-				else{
-					sDelimiter_email ="\\|\\|";
-				}
-				String[] sPhone_split = phoneNumber.split(sDelimiter_phone);
-				for(int j=0;j<=sPhone_split.length-1;j++){
-					if (phoneType.contains(sDelimiter_phone))
-						selectElementByVisibleText("Change Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType.split(sDelimiter_phone)[j]);
-					else
-						selectElementByVisibleText("Change Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
-					clickOnElement("New Name Page", "Phone Number", phoneNumLink);
-					Thread.sleep(2500);
-					//WebDriverWait wait1 = new WebDriverWait(driver, 20);
-					//WebElement element1 = wait1.until(ExpectedConditions.elementToBeClickable(phoneNumVal));
-					//element1.click();
-					clickAfterWaitForElementToBeClickable("New Name - Contact Methods", "Phone Number", lastPhoneNumValue);
-					enterText("New Name Page", "Phone Number", lastPhoneNumValue, phoneNumber.split(sDelimiter_phone)[j]);
-					
-				}
-				String[] sEmail_split = email.split(sDelimiter_email);
-				for(int j=0;j<=sEmail_split.length-1;j++){
-					if (emailType.contains(sDelimiter_email))
-						selectElementByVisibleText("New Name - Contact Methods ", "Mail Type", selectEmailType, emailType.split(sDelimiter_email)[j]);
-					else
-						selectElementByVisibleText("New Name - Contact Methods ", "Mail Type", selectEmailType, emailType);
-					clickOnElement("New Name Page", "Email link", emailLink);
-					//WebElement element2 = wait1.until(ExpectedConditions.elementToBeClickable(emailVal));
-					//element2.click();
-					Thread.sleep(2500);
-					clickAfterWaitForElementToBeClickable("New Name - Contact Methods", "Email Address", lastemailidValue);
-					enterText("New Name Page", "Email Address", lastemailidValue, email.split(sDelimiter_email)[j]);
-					
-				}
-				if (!webAddress.equals("")) {
-					clickOnElement("New Name Page", "Add Web Page Address", webAddresslink);
-					//WebElement element3 = wait1.until(ExpectedConditions.elementToBeClickable(webAddressVal));
-					//element3.click();
-					clickAfterWaitForElementToBeClickable("New Name - Contact Methods", "Web Address", webAddressVal);
-					enterText("New Name Page", "Add Web Page Address", webAddressVal, webAddress);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			String sDelimiter_phone,sDelimiter_email; 
+			try {
+				if (isElementPresent(contactMethodsLabel)) {
 					Thread.sleep(2000);
+					if (phoneNumber.contains(",")){
+						sDelimiter_phone =",";
+					}	
+					else if (phoneNumber.contains("||")){
+						sDelimiter_phone ="\\|\\|";
+					}
+					else{
+						sDelimiter_phone ="\\|\\|";
+					}
+
+					if (email.contains(",")){
+						sDelimiter_email =",";
+					}	
+					else if (phoneNumber.contains("||")){
+						sDelimiter_email ="\\|\\|";
+					}
+					else{
+						sDelimiter_email ="\\|\\|";
+					}
+					String[] sPhone_split = phoneNumber.split(sDelimiter_phone);
+					for(int j=0;j<=sPhone_split.length-1;j++){
+						if (phoneType.contains(sDelimiter_phone))
+							selectElementByVisibleText("Change Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType.split(sDelimiter_phone)[j]);
+						else
+							selectElementByVisibleText("Change Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
+						clickOnElement("New Name Page", "Phone Number", phoneNumLink);
+						Thread.sleep(2500);
+						//WebDriverWait wait1 = new WebDriverWait(driver, 20);
+						//WebElement element1 = wait1.until(ExpectedConditions.elementToBeClickable(phoneNumVal));
+						//element1.click();
+						clickAfterWaitForElementToBeClickable("New Name - Contact Methods", "Phone Number", lastPhoneNumValue);
+						enterText("New Name Page", "Phone Number", lastPhoneNumValue, phoneNumber.split(sDelimiter_phone)[j]);
+
+					}
+					String[] sEmail_split = email.split(sDelimiter_email);
+					for(int j=0;j<=sEmail_split.length-1;j++){
+						if (emailType.contains(sDelimiter_email))
+							selectElementByVisibleText("New Name - Contact Methods ", "Mail Type", selectEmailType, emailType.split(sDelimiter_email)[j]);
+						else
+							selectElementByVisibleText("New Name - Contact Methods ", "Mail Type", selectEmailType, emailType);
+						clickOnElement("New Name Page", "Email link", emailLink);
+						//WebElement element2 = wait1.until(ExpectedConditions.elementToBeClickable(emailVal));
+						//element2.click();
+						Thread.sleep(2500);
+						clickAfterWaitForElementToBeClickable("New Name - Contact Methods", "Email Address", lastemailidValue);
+						enterText("New Name Page", "Email Address", lastemailidValue, email.split(sDelimiter_email)[j]);
+
+					}
+					if (!webAddress.equals("")) {
+						clickOnElement("New Name Page", "Add Web Page Address", webAddresslink);
+						//WebElement element3 = wait1.until(ExpectedConditions.elementToBeClickable(webAddressVal));
+						//element3.click();
+						clickAfterWaitForElementToBeClickable("New Name - Contact Methods", "Web Address", webAddressVal);
+						enterText("New Name Page", "Add Web Page Address", webAddressVal, webAddress);
+						Thread.sleep(2000);
+					}
+					clickOnElement("New Name Page", "Next Button", nextButton);
+					stepResult = true;
 				}
-				clickOnElement("New Name Page", "Next Button", nextButton);
-				stepResult = true;
-			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Details on Contact Method Page", "Details entered on Contact Method page Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Details on Contact Method Page", "Could Not entered Details on Contact method page", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter Details on Contact Method Page", "Details entered on Contact Method page Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter Details on Contact Method Page", "Could Not entered Details on Contact method page", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-
-		}}
+		}
+	}
 
 	public void addPhoneNumber(String phoneType, String phoneNumber) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(contactMethodsLabel)){
-				if(!phoneNumber.equals("")){
-					selectElementByVisibleText("New Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
-					clickOnElement("New Name - Contact Methods Page", "Add Phone link", phoneNumLink);
-					clickAfterWaitForElementToBeClickable("New Name - Contact Methods Page", "Phone Number", lastPhoneNumValue);
-					enterText("New Name - Contact Methods Page", "Phone Number", lastPhoneNumValue, phoneNumber);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(contactMethodsLabel)){
+					if(!phoneNumber.equals("")){
+						selectElementByVisibleText("New Name - Contact Methods Page", "Phone Type", selectPhoneType, phoneType);
+						clickOnElement("New Name - Contact Methods Page", "Add Phone link", phoneNumLink);
+						clickAfterWaitForElementToBeClickable("New Name - Contact Methods Page", "Phone Number", lastPhoneNumValue);
+						enterText("New Name - Contact Methods Page", "Phone Number", lastPhoneNumValue, phoneNumber);
+					}
+					stepResult = true;
 				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a phone number", "Phone Number added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a phone number", "Could not add Phone Number", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a phone number", "Phone Number added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a phone number", "Could not add Phone Number", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void addEmail(String emailType, String mailid) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(contactMethodsLabel)){
-				if(!mailid.equals("")){
-					selectElementByVisibleText("New Name - Contact Methods Page", "Mail Type", selectEmailType, emailType);
-					clickOnElement("New Name - Contact Methods Page", "Add Email link", emailLink);
-					clickAfterWaitForElementToBeClickable("New Name - Contact Methods Page", "Email Address", lastemailidValue);
-					enterText("New Name - Contact Methods Page", "Phone Number", lastemailidValue, mailid);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(contactMethodsLabel)){
+					if(!mailid.equals("")){
+						selectElementByVisibleText("New Name - Contact Methods Page", "Mail Type", selectEmailType, emailType);
+						clickOnElement("New Name - Contact Methods Page", "Add Email link", emailLink);
+						clickAfterWaitForElementToBeClickable("New Name - Contact Methods Page", "Email Address", lastemailidValue);
+						enterText("New Name - Contact Methods Page", "Phone Number", lastemailidValue, mailid);
+					}
+					stepResult = true;
 				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "E-mail Addressr added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "Could not add E-mail Address", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "E-mail Addressr added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a E-mail Address", "Could not add E-mail Address", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 	public void enterCodeLable(String gender,String riskRanking,String creditScore,String nAICSCodes,String customerType,String branchRegion) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(codeLabel)) {
-				Thread.sleep(2000);
-				if (!gender.equals("")) {
-					selectElementByVisibleText("New Name Page", "Gender field", genderCombobox, gender);
-				}
-				if (!riskRanking.equals("")) {
-					clickOnElement("New Name Page", "Risk Ranking Input Field",riskRankingInput);
-					Thread.sleep(1000);
-					clickOnElement("New Name Page", "Risk Ranking Button",riskRankingButton);
-					Thread.sleep(1000);
-					clickOnElement("New Name Page", "Risk Ranking list",getDynamicElement("Risk Ranking List",riskRankingCombobox,riskRanking));
-				}
-				if (!creditScore.equals("")) {
-					enterText("New Name Page", "Credit Score Field", creditScoreTextbox, creditScore);
-				}
-				if (!nAICSCodes.equals("")) {
-					clickOnElement("New Name Page", "NAICS Codes Button",nAICSCodesButton);
-					waitForPresenceOfElement("New Name Page", "NAICSCodes_EconomicSector field", nAICSCodes_EconomicSector);
-					selectElementByVisibleText("New Name Page", "NAICSCodes_EconomicSector field", nAICSCodes_EconomicSector, nAICSCodes);
-					clickOnElement("New Name Page", "NAICS Codes Submit Button Field",nAICSCodesSubmitButton);
-				}
-				if (!customerType.equals("")) {
-					selectElementByVisibleText("New Name Page", "Customer Type field", customerTypeCombobox, customerType);
-				}
-				if (!branchRegion.equals("")) {
-					//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
-					//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
-					clickOnElement("New Name Page", "Branch Region Button",branchRegionButton);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(codeLabel)) {
 					Thread.sleep(2000);
-					clickOnElement("New Name Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));	
+					if (!gender.equals("")) {
+						selectElementByVisibleText("New Name Page", "Gender field", genderCombobox, gender);
+					}
+					if (!riskRanking.equals("")) {
+						clickOnElement("New Name Page", "Risk Ranking Input Field",riskRankingInput);
+						Thread.sleep(1000);
+						clickOnElement("New Name Page", "Risk Ranking Button",riskRankingButton);
+						Thread.sleep(1000);
+						clickOnElement("New Name Page", "Risk Ranking list",getDynamicElement("Risk Ranking List",riskRankingCombobox,riskRanking));
+					}
+					if (!creditScore.equals("")) {
+						enterText("New Name Page", "Credit Score Field", creditScoreTextbox, creditScore);
+					}
+					if (!nAICSCodes.equals("")) {
+						clickOnElement("New Name Page", "NAICS Codes Button",nAICSCodesButton);
+						waitForPresenceOfElement("New Name Page", "NAICSCodes_EconomicSector field", nAICSCodes_EconomicSector);
+						selectElementByVisibleText("New Name Page", "NAICSCodes_EconomicSector field", nAICSCodes_EconomicSector, nAICSCodes);
+						clickOnElement("New Name Page", "NAICS Codes Submit Button Field",nAICSCodesSubmitButton);
+					}
+					if (!customerType.equals("")) {
+						selectElementByVisibleText("New Name Page", "Customer Type field", customerTypeCombobox, customerType);
+					}
+					if (!branchRegion.equals("")) {
+						//clickOnElement("New Name Page", "Branch Region Button",branchRegionVal);
+						//enterText("New Name Page", "Branch Region Button", branchRegionVal, branchRegion);
+						clickOnElement("New Name Page", "Branch Region Button",branchRegionButton);
+						Thread.sleep(2000);
+						clickOnElement("New Name Page", "Branch Region list",getDynamicElement("Branch Region List",BranchRegionCombobox,branchRegion));	
+					}
+
+					clickOnElement("New Name Page", "Next Button", nextButton);
+					stepResult = true;
 				}
 
-				clickOnElement("New Name Page", "Next Button", nextButton);
-				stepResult = true;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter Details on Code label Page", "Details entered on Code label page Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter Details on Code label Page", "Could Not entered details on Code lable page", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
+		}
+	}
 
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter Details on Code label Page", "Details entered on Code label page Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter Details on Code label Page", "Could Not entered details on Code lable page", "Failed", driver, "Y");
-			}
-
-		}}
 	public void enterBuildRelationship(String buildRelationship_SSN,String build_Relationship,String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent,String buildRelationship_2_Flag,String buildRelationship_2_SSN,String build_Relationship_2,String beneficialOwner_2_Flag,String beneficialOwnerName_2,String beneficial_Relationship_2,String beneficial_Percent_2) throws Exception {
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(buildRelationshipLabel)){
-				Thread.sleep(1000);
-				if (!buildRelationship_SSN.equals("")) {
-					buildRelationshipAddSSN(buildRelationship_SSN);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(buildRelationshipLabel)){
+					Thread.sleep(1000);
+					if (!buildRelationship_SSN.equals("")) {
+						buildRelationshipAddSSN(buildRelationship_SSN);
 
-					if (!build_Relationship.equals("")) {
-						selectElementByVisibleText("New Name Page", "Name Relationship field", RelationshipName, build_Relationship);
-					}
-					if (!beneficialOwnerName.equals("")) {
-						selectElementByVisibleText("New Name Page", "Beneficial Owner Name field", BeneOwnerName, beneficialOwnerName);
-					}
-					if (!beneficial_Relationship.equals("")) {
-						selectElementByVisibleText("New Name Page", "Beneficial Relationship field", BeneRelationship, beneficial_Relationship);
-					}
-					if (!beneficial_Percent.equals("")) {
-						enterText("New Name Page", "Beneficial Percent Field", BenePercent, beneficial_Percent);
-					}
+						if (!build_Relationship.equals("")) {
+							selectElementByVisibleText("New Name Page", "Name Relationship field", RelationshipName, build_Relationship);
+						}
+						if (!beneficialOwnerName.equals("")) {
+							selectElementByVisibleText("New Name Page", "Beneficial Owner Name field", BeneOwnerName, beneficialOwnerName);
+						}
+						if (!beneficial_Relationship.equals("")) {
+							selectElementByVisibleText("New Name Page", "Beneficial Relationship field", BeneRelationship, beneficial_Relationship);
+						}
+						if (!beneficial_Percent.equals("")) {
+							enterText("New Name Page", "Beneficial Percent Field", BenePercent, beneficial_Percent);
+						}
 
-					if (buildRelationship_2_Flag.equals("Yes")) {
-						buildRelationshipAddSSN(buildRelationship_2_SSN);
-						if (!build_Relationship_2.equals("")) {
-							selectElementByVisibleText("New Name Page", "Name Relationship field", RelationshipName2, build_Relationship_2);
+						if (buildRelationship_2_Flag.equals("Yes")) {
+							buildRelationshipAddSSN(buildRelationship_2_SSN);
+							if (!build_Relationship_2.equals("")) {
+								selectElementByVisibleText("New Name Page", "Name Relationship field", RelationshipName2, build_Relationship_2);
+							}
 						}
-					}
-					if (beneficialOwner_2_Flag.equals("Yes")) {
-						if (!beneficialOwnerName_2.equals("")) {
-							selectElementByVisibleText("New Name Page", "Beneficial Owner Name field", BeneOwnerName2, beneficialOwnerName_2);
-						}
-						if (!beneficial_Relationship_2.equals("")) {
-							selectElementByVisibleText("New Name Page", "Beneficial Relationship field", BeneRelationship2, beneficial_Relationship_2);
-						}
-						if (!beneficial_Percent_2.equals("")) {
-							enterText("New Name Page", "Beneficial Percent Field", BenePercent2, beneficial_Percent_2);
-						}
-					}}
-				stepResult = true;
+						if (beneficialOwner_2_Flag.equals("Yes")) {
+							if (!beneficialOwnerName_2.equals("")) {
+								selectElementByVisibleText("New Name Page", "Beneficial Owner Name field", BeneOwnerName2, beneficialOwnerName_2);
+							}
+							if (!beneficial_Relationship_2.equals("")) {
+								selectElementByVisibleText("New Name Page", "Beneficial Relationship field", BeneRelationship2, beneficial_Relationship_2);
+							}
+							if (!beneficial_Percent_2.equals("")) {
+								enterText("New Name Page", "Beneficial Percent Field", BenePercent2, beneficial_Percent_2);
+							}
+						}}
+					stepResult = true;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter details and Build Relationship", "Details entered and Relationship build Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter details and Build Relationship", "Could not entered Details and Relationship build", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Enter details and Build Relationship", "Details entered and Relationship build Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Enter details and Build Relationship", "Could not entered Details and Relationship build", "Failed", driver, "Y");
-			}
-
-		}}
+		}
+	}
 
 	public void buildRelationshipAddSSN(String sSN) throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("New Name Page", "Add Name Image",addNameImage);
-			switchToWindowWithTitleContaining("Add Name");
-			driver.switchTo().frame("bottom");
-			if (isElementPresent(SearchTitle)) {
-				enterText("New Name Page", "Enter SSN Field", BuildRelationshipSSN, sSN);
-				clickOnElement("New Name Page", "Submit Button",SubmitButton_SearchScreen);
-				waitForPresenceOfElement("New Name Page", "Searched Name List", NameList);
-				clickOnElement("New Name Page", "Searched Result Link",SearchResult);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("New Name Page", "Add Name Image",addNameImage);
+				switchToWindowWithTitleContaining("Add Name");
+				driver.switchTo().frame("bottom");
+				if (isElementPresent(SearchTitle)) {
+					enterText("New Name Page", "Enter SSN Field", BuildRelationshipSSN, sSN);
+					clickOnElement("New Name Page", "Submit Button",SubmitButton_SearchScreen);
+					waitForPresenceOfElement("New Name Page", "Searched Name List", NameList);
+					clickOnElement("New Name Page", "Searched Result Link",SearchResult);
 
-				switchToWindowWithTitleContaining("Institution");
-				driver.switchTo().frame("Main");
-				stepResult = true;
-			}
+					switchToWindowWithTitleContaining("Institution");
+					driver.switchTo().frame("Main");
+					stepResult = true;
+				}
 
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add SSN and Build Relationship", "Add SSN and Build Relationship Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add SSN and Build Relationship", "Could Not Add SSN and Build Relationship", "Failed", driver, "Y");
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add SSN and Build Relationship", "Add SSN and Build Relationship Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add SSN and Build Relationship", "Could Not Add SSN and Build Relationship", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-		}}
+		}
+	}
 
 	public void buildRelationship(String buildRelationship_SSN,String build_Relationship) throws Exception {
-		boolean stepResult = false;
-		String sDelimiter;
-		try {
-			if(isElementPresent(buildRelationshipLabel)){
-				Thread.sleep(1000);
-				if (!buildRelationship_SSN.equals("")) {
-					if (buildRelationship_SSN.contains(",")){
-						sDelimiter =",";
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			String sDelimiter;
+			try {
+				if(isElementPresent(buildRelationshipLabel)){
+					Thread.sleep(1000);
+					if (!buildRelationship_SSN.equals("")) {
+						if (buildRelationship_SSN.contains(",")){
+							sDelimiter =",";
+						}	
+						else if (buildRelationship_SSN.contains("||")){
+							sDelimiter ="\\|\\|";
+						}
+						else{
+							sDelimiter ="\\|\\|";
+						}
+						String[] sbuildRelationship_SSN_split = buildRelationship_SSN.split(sDelimiter);
+						for(int j=0;j<=sbuildRelationship_SSN_split.length-1;j++){
+
+							clickOnElement("New Name - Relationship Page", "Add Name Image",addNameImage);
+							switchToWindowWithTitleContaining("Add Name");
+							driver.switchTo().frame("bottom");
+							if (isElementPresent(SearchTitle)) {
+								enterText("New Name - Search Page", "Enter SSN Field", BuildRelationshipSSN, sbuildRelationship_SSN_split[j]);
+								clickOnElement("New Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
+								waitForPresenceOfElement("New Name - Search Page", "Searched Name List", NameList);
+								clickOnElement("New Name - Search Page", "Searched Result Link",SearchResult);
+								switchToWindowWithTitleContaining("Institution");
+								driver.switchTo().frame("Main");
+							}
+							if (!build_Relationship.equals("")) {
+								Thread.sleep(2500);
+								selectElementByVisibleText("New Name - Relationship Page", "Relationship field", lastRelationship, build_Relationship.split(sDelimiter)[j]);
+
+							}
+						}
 					}	
-					else if (buildRelationship_SSN.contains("||")){
-						sDelimiter ="\\|\\|";
-					}
-					else{
-						sDelimiter ="\\|\\|";
-					}
-					String[] sbuildRelationship_SSN_split = buildRelationship_SSN.split(sDelimiter);
-					for(int j=0;j<=sbuildRelationship_SSN_split.length-1;j++){
+					stepResult = true;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Relationship added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Could not add Relationship", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 
-						clickOnElement("New Name - Relationship Page", "Add Name Image",addNameImage);
-						switchToWindowWithTitleContaining("Add Name");
-						driver.switchTo().frame("bottom");
-						if (isElementPresent(SearchTitle)) {
-							enterText("New Name - Search Page", "Enter SSN Field", BuildRelationshipSSN, sbuildRelationship_SSN_split[j]);
-							clickOnElement("New Name - Search Page", "Submit Button",SubmitButton_SearchScreen);
-							waitForPresenceOfElement("New Name - Search Page", "Searched Name List", NameList);
-							clickOnElement("New Name - Search Page", "Searched Result Link",SearchResult);
-							switchToWindowWithTitleContaining("Institution");
-							driver.switchTo().frame("Main");
-						}
-						if (!build_Relationship.equals("")) {
-							Thread.sleep(2500);
-							selectElementByVisibleText("New Name - Relationship Page", "Relationship field", lastRelationship, build_Relationship.split(sDelimiter)[j]);
-							
-						}
-					}
-				}	
-				stepResult = true;
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Relationship added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a Relationship", "Could not add Relationship", "Failed", driver, "Y");
-			}
-
 		}
 	}
 
 	public void addDetailsOfBeneficiary(String beneficialOwnerName,String beneficial_Relationship,String beneficial_Percent) throws Exception {
-		boolean stepResult = false;
-		String sDelimiter;
-		try {
-			if(isElementPresent(buildRelationshipLabel)){
-				Thread.sleep(1000);
-				if (!beneficial_Relationship.equals("")) {
-					if (beneficial_Relationship.contains(",")){
-						sDelimiter =",";
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			String sDelimiter;
+			try {
+				if(isElementPresent(buildRelationshipLabel)){
+					Thread.sleep(1000);
+					if (!beneficial_Relationship.equals("")) {
+						if (beneficial_Relationship.contains(",")){
+							sDelimiter =",";
+						}	
+						else if (beneficial_Relationship.contains("||")){
+							sDelimiter ="\\|\\|";
+						}
+						else{
+							sDelimiter ="\\|\\|";
+						}
+
+
+						String[] beneficial_Relationship_split = beneficial_Relationship.split(sDelimiter);
+						for(int j=0;j<=beneficial_Relationship_split.length-1;j++){	
+							if (beneficialOwnerName.contains(sDelimiter))
+								selectElementByVisibleText("New Name - Relationship Page", "Beneficial Owner Name field", getDynamicElement("Beneficial Owner Name field",sBeneOwnerName,Integer.toString(j+1)), beneficialOwnerName.split(sDelimiter)[j]);
+							else
+								selectElementByVisibleText("New Name - Relationship Page", "Beneficial Owner Name field", getDynamicElement("Beneficial Owner Name field",sBeneOwnerName,Integer.toString(j+1)), beneficialOwnerName);
+							if (!beneficial_Relationship.equals("")) {
+								selectElementByVisibleText("New Name - Relationship Page", "Beneficial Relationship field", getDynamicElement("Beneficial Relationship field",sBeneRelationship,Integer.toString(j+1)), beneficial_Relationship.split(sDelimiter)[j]);
+							}
+							if (!beneficial_Percent.equals("")) {
+								if(!beneficial_Percent.split(sDelimiter)[j].equals(""))
+									enterText("New Name - Relationship Page", "Beneficial Percent Field", getDynamicElement("Beneficial Percent Field",sBenePercent,Integer.toString(j+1)), beneficial_Percent.split(sDelimiter)[j]);
+
+							}
+						}			
 					}	
-					else if (beneficial_Relationship.contains("||")){
-						sDelimiter ="\\|\\|";
-					}
-					else{
-						sDelimiter ="\\|\\|";
-					}
-					
-					
-					String[] beneficial_Relationship_split = beneficial_Relationship.split(sDelimiter);
-					for(int j=0;j<=beneficial_Relationship_split.length-1;j++){	
-						if (beneficialOwnerName.contains(sDelimiter))
-							selectElementByVisibleText("New Name - Relationship Page", "Beneficial Owner Name field", getDynamicElement("Beneficial Owner Name field",sBeneOwnerName,Integer.toString(j+1)), beneficialOwnerName.split(sDelimiter)[j]);
-						else
-							selectElementByVisibleText("New Name - Relationship Page", "Beneficial Owner Name field", getDynamicElement("Beneficial Owner Name field",sBeneOwnerName,Integer.toString(j+1)), beneficialOwnerName);
-						if (!beneficial_Relationship.equals("")) {
-							selectElementByVisibleText("New Name - Relationship Page", "Beneficial Relationship field", getDynamicElement("Beneficial Relationship field",sBeneRelationship,Integer.toString(j+1)), beneficial_Relationship.split(sDelimiter)[j]);
-						}
-						if (!beneficial_Percent.equals("")) {
-							if(!beneficial_Percent.split(sDelimiter)[j].equals(""))
-							enterText("New Name - Relationship Page", "Beneficial Percent Field", getDynamicElement("Beneficial Percent Field",sBenePercent,Integer.toString(j+1)), beneficial_Percent.split(sDelimiter)[j]);
-							
-						}
-					}			
-				}	
-				stepResult = true;
+					stepResult = true;
+
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Beneficial Ownership added Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Could not add Beneficial Ownership", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Beneficial Ownership added Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Add a Beneficial Ownership", "Could not add Beneficial Ownership", "Failed", driver, "Y");
-			}
-
 		}
 	}
 

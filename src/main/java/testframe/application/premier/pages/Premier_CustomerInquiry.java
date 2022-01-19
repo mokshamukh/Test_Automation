@@ -12,7 +12,7 @@ import testframe.common.utilities.ExcelReader;
 /**
  * 
  * 
- * @author Ketki.Badalwar
+ * @author Moksha.Mukh
  */
 
 public class Premier_CustomerInquiry extends CommonLibrary {
@@ -44,7 +44,7 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 	String sDelimiter;
 	String sInquireData = "//td[text()='%s']";
 	String sInquireLinkData = "//u[text()='%s']";
-	
+
 	public By relationship =  By.xpath("(//td[@class=' tc-usr-information txt-left'])[14]");
 
 	public Premier_CustomerInquiry(WebDriver driver) throws Exception {
@@ -55,150 +55,161 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 
 
 	public void searchCustomer(String sName, String sSSN) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(customerInquiryHeader)){
-				switchToFrameWithName("Main");
-				enterText("Customer Inquiry Page", "Tax Identification", ssnSearch, sSSN);
-				clickOnElement("Customer Inquiry", "Submit", submitSearch);
-				stepResult = true;
-				switchToDefaultContent();
-			}	
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search a customer", "Search customer Successfully", "Passed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(customerInquiryHeader)){
+					switchToFrameWithName("Main");
+					enterText("Customer Inquiry Page", "Tax Identification", ssnSearch, sSSN);
+					clickOnElement("Customer Inquiry", "Submit", submitSearch);
+					stepResult = true;
+					switchToDefaultContent();
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search a customer", "Could not search the Customer" , "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search a customer", "Search customer Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search a customer", "Could not search the Customer" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
-
 	}
 
 
 	public void seeAdditionalAddresses() throws Exception{
-		boolean stepResult = false;
-		try {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 
-			if (isElementPresent(customerInquiryHeader)){
-				//enterText("Customer Inquiry Page", "Name", nameSearch, sName);
-				switchToWithinFrameWithName("Main");
-				switchToWithinFrameWithName("bottom");
-				waitForPresenceOfElement("Customer Inquiry page", "Customer Analaysis Header", customerAnalysisHeader);
-				clickOnElement("Customer Inquiry", "See Additional Addresses", seeAdditionalAddress);
-				switchToDefaultContent();
-				stepResult = true;
-			}	
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on See Additional Addresses", "See Additional Addresses click Successfully", "Passed", driver, "Y");
+				if (isElementPresent(customerInquiryHeader)){
+					//enterText("Customer Inquiry Page", "Name", nameSearch, sName);
+					switchToWithinFrameWithName("Main");
+					switchToWithinFrameWithName("bottom");
+					waitForPresenceOfElement("Customer Inquiry page", "Customer Analaysis Header", customerAnalysisHeader);
+					clickOnElement("Customer Inquiry", "See Additional Addresses", seeAdditionalAddress);
+					switchToDefaultContent();
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on See Additional Addresses", "Could not click See Additional Addresses" , "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on See Additional Addresses", "See Additional Addresses click Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on See Additional Addresses", "Could not click See Additional Addresses" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
 	public void customerExpand() throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(customerInquiryHeader)){
-				switchToWithinFrameWithName("Main");
-				switchToWithinFrameWithName("bottom");
-				//enterText("Customer Inquiry Page", "Name", nameSearch, sName);
-				waitForPresenceOfElement("Customer Inquiry page", "Summary Header", summaryHeader);
-				clickOnElement("Customer Inquiry Page", "Customer Expand", customerInfoExpand);
-				clickOnElement("Customer Inquiry Page", "Name Expand", nameExpand);
-				switchToDefaultContent();
-				stepResult = true;
-			}	
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Expand Customer details", "Expand customer Successfully", "Passed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(customerInquiryHeader)){
+					switchToWithinFrameWithName("Main");
+					switchToWithinFrameWithName("bottom");
+					//enterText("Customer Inquiry Page", "Name", nameSearch, sName);
+					waitForPresenceOfElement("Customer Inquiry page", "Summary Header", summaryHeader);
+					clickOnElement("Customer Inquiry Page", "Customer Expand", customerInfoExpand);
+					clickOnElement("Customer Inquiry Page", "Name Expand", nameExpand);
+					switchToDefaultContent();
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Expand Customer details", "Could not Expand customer" , "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Expand Customer details", "Expand customer Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Expand Customer details", "Could not Expand customer" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
-
 	}
 
 
 	public void getCustomer(String excelFilePath, String sheetName,int rowNo) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(customerInquiryHeader)){
-				switchToWithinFrameWithName("Main");
-				switchToWithinFrameWithName("bottom");
-				//enterText("Customer Inquiry Page", "Name", nameSearch, sName);
-				sName=getElementText("Customer Inquiry", "Name",  name);
-				if(sName != ""){
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Name", rowNo, sName);
-					sName_split= sName.split(" ");
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "FirstName", rowNo, sName_split[0]);
-					if (sName_split.length > 1)
-						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "LastName", rowNo, sName_split[(sName_split.length)-1]);
-				}	
-				sTaxID=getElementText("Customer Inquiry", "Tax Identification",  taxIdentification);
-				if(sTaxID != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "TaxIdentification", rowNo, sTaxID);
-				sDOB=getElementText("Customer Inquiry", "Date of birth",  dob);
-				if(sDOB != ""){
-					sDOB = new DateTimeHelper().getDateTime(sDOB,"MMM dd, yyyy","MM/dd/yyyy");
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "DOB", rowNo, sDOB);
-				}
-				sEmail=getElementText("Customer Inquiry", "Email",  email);
-				if(sEmail != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Email", rowNo, sEmail);
-				sPhonenumber=getElementText("Customer Inquiry", "Phone Number",  phonenumber);
-				if(sPhonenumber != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "PhoneNumber", rowNo, sPhonenumber);
-				sAddress1=getElementText("Customer Inquiry", "Address1",  address1);
-				if(sAddress1 != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Address1", rowNo, sAddress1);
-				sAddress2=getElementText("Customer Inquiry", "Address2",  address2);
-				if(sAddress2 != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Address2", rowNo, sAddress2);
-				sZipcode=getElementText("Customer Inquiry", "City State Zip",  zipcode);
-				if(sZipcode != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Zipcode", rowNo, sZipcode);
-				sRelationship=getElementText("Customer Inquiry", "Relationship",  relationship);
-				if(sRelationship != "")
-					new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Relationship", rowNo, sRelationship);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(customerInquiryHeader)){
+					switchToWithinFrameWithName("Main");
+					switchToWithinFrameWithName("bottom");
+					//enterText("Customer Inquiry Page", "Name", nameSearch, sName);
+					sName=getElementText("Customer Inquiry", "Name",  name);
+					if(sName != ""){
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Name", rowNo, sName);
+						sName_split= sName.split(" ");
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "FirstName", rowNo, sName_split[0]);
+						if (sName_split.length > 1)
+							new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "LastName", rowNo, sName_split[(sName_split.length)-1]);
+					}	
+					sTaxID=getElementText("Customer Inquiry", "Tax Identification",  taxIdentification);
+					if(sTaxID != "")
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "TaxIdentification", rowNo, sTaxID);
+					sDOB=getElementText("Customer Inquiry", "Date of birth",  dob);
+					if(sDOB != ""){
+						sDOB = new DateTimeHelper().getDateTime(sDOB,"MMM dd, yyyy","MM/dd/yyyy");
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "DOB", rowNo, sDOB);
+					}
+					sEmail=getElementText("Customer Inquiry", "Email",  email);
+					if(sEmail != "")
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Email", rowNo, sEmail);
+					sPhonenumber=getElementText("Customer Inquiry", "Phone Number",  phonenumber);
+					if(sPhonenumber != "")
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "PhoneNumber", rowNo, sPhonenumber);
+					sAddress1=getElementText("Customer Inquiry", "Address1",  address1);
+					if(sAddress1 != "")
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Address1", rowNo, sAddress1);
+					sAddress2=getElementText("Customer Inquiry", "Address2",  address2);
+					if(sAddress2 != "")
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Address2", rowNo, sAddress2);
+					sZipcode=getElementText("Customer Inquiry", "City State Zip",  zipcode);
+					if(sZipcode != "")
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Zipcode", rowNo, sZipcode);
+					sRelationship=getElementText("Customer Inquiry", "Relationship",  relationship);
+					if(sRelationship != "")
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName, "Relationship", rowNo, sRelationship);
 
-				
-				switchToDefaultContent();
-				stepResult = true;
-			}	
-		}catch (Exception e) {
-			e.printStackTrace();
+
+					switchToDefaultContent();
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Get customer details", "Customer details captured Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Get customer details", "Could not capture the Customer details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
 		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Get customer details", "Customer details captured Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Get customer details", "Could not capture the Customer details" , "Failed", driver, "Y");
-			}
-		}}
+	}
 
 	public void validateCustomerDetails(String customerName, String sSN, String phoneNumber, String eMailID,String sAddress1,String sAddress2,String zipCode,String sSSNRelationship,String sBeneficialOnwerName) throws Exception {
 		boolean stepResult = false;

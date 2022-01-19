@@ -24,9 +24,9 @@ public class Admin_SearchUsers extends CommonLibrary{
 	By label = By.xpath("//label[text()='Label']/../input[@class='autocomplete ac_input']");
 	By showLabel = By.xpath("//input[@id='showLabels']");
 	By searchUsersButton = By.xpath("//span[text()='Search Users']");
-	By userActionButton = By.xpath("//span[text()='Actions']");
-	By userEditButton = By.xpath("//span[text()='Edit']");
-	By userCloneButton = By.xpath("//span[text()='Clone User']");
+	String userActionButton = "//span[contains(text(),'%s')]/ancestor::div[@class='ui-helper-clearfix']//span[text()='Actions']";
+	String userEditButton = "//span[contains(text(),'%s')]/ancestor::div[@class='ui-helper-clearfix']//span[text()='Edit']";
+	String userCloneButton = "//span[contains(text(),'%s')]/ancestor::div[@class='ui-helper-clearfix']//span[text()='Clone User']";
 	
 	
 	public Admin_SearchUsers(WebDriver driver) {
@@ -73,11 +73,11 @@ public class Admin_SearchUsers extends CommonLibrary{
 	}
 	 
 	
-	public void clickActionButton() throws Exception {
+	public void clickActionButton(String user) throws Exception {
 		boolean stepResult = false;
 		try {
-			if (isElementPresent(userActionButton)) {
-				clickOnElement("Admin Search User Page", "Actions Button", userActionButton);
+			if (isElementPresent(getDynamicElement("Actions Button",userActionButton,user))) {
+				clickOnElement("Admin Search User Page", "Actions Button", getDynamicElement("Actions Button",userActionButton,user));
 				Thread.sleep(2000);
 				stepResult = true;
 			}
@@ -97,11 +97,11 @@ public class Admin_SearchUsers extends CommonLibrary{
 	}
 	
 	
-	public void clickEditButton() throws Exception{
+	public void clickEditButton(String user) throws Exception{
 		boolean stepResult = false;
 		try {
-			waitForPresenceOfElement("Admin Search User Page", "Edit Button", userEditButton);
-			clickOnElement("Admin Search User Page", "Edit Button", userEditButton);
+			waitForPresenceOfElement("Admin Search User Page", "Edit Button", getDynamicElement( "Edit Button",userEditButton,user));
+			clickOnElement("Admin Search User Page", "Edit Button", getDynamicElement("Edit Button",userEditButton,user));
 			Thread.sleep(2000);
 			stepResult = true;
 			
@@ -121,11 +121,11 @@ public class Admin_SearchUsers extends CommonLibrary{
 	}
 	
 
-	public void clickCloneButton() throws Exception{
+	public void clickCloneButton(String user) throws Exception{
 		boolean stepResult = false;
 		try {
-			waitForPresenceOfElement("Admin Search User Page", "Clone Button", userCloneButton);
-			clickOnElement("Admin Search User Page", "Clone Button", userCloneButton);
+			waitForPresenceOfElement("Admin Search User Page", "Clone Button", getDynamicElement("Clone Button",userCloneButton,user));
+			clickOnElement("Admin Search User Page", "Clone Button", getDynamicElement("Clone Button",userCloneButton,user));
 			Thread.sleep(2000);
 			stepResult = true;
 			
