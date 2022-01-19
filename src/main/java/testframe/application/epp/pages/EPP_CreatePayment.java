@@ -64,61 +64,65 @@ public class EPP_CreatePayment extends CommonLibrary {
 	public void createOutgoingHVBankPaymentFRB(String accNum, String systemCode, String debitAccount,
 			String amount,String valueDateField,String benAccount, String beneName, String beneAddress, String accWithBankNo,
 			String accWithSysCode) throws Exception {
-		boolean stepResult = false;
-		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
-			enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, accNum);
-			waitElement(3000);
-			selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, systemCode);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Debit Account", debitAcc, debitAccount);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Amount", amountTxtBox, amount);
-			waitElement(3000);
-			clearAndType(eppCreatePayment, "Value Date", valueDate, valueDateField);
-			//enterText(eppCreatePayment, "Value Date", valueDate, valueDateField);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Bank Account", beneBankAccount, benAccount);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Name", beneBankName, beneName);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Address", beneBankAddress, beneAddress);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Account With Bank", accWithBankNum, accWithBankNo);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Account With Bank System Code", accSystemCode, accWithSysCode);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Account With Bank_LookUp", accWithBankLookup);
-			waitElement(5000);
-			clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
-			waitElement(8000);
-			waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
-			waitElement(5000);
-			clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
-			waitElement(4000);
-			if (isElementPresent(paymentSaved)) {
-				savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
-			}
-			getTransactionID();
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				//new HTMLReportHelper().HtmlReportBody("TransactionID - EPP application", "Created Successfully","Passed", driver, "Y");
-				new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on Create Payment", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application","Could not Create Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, accNum);
+				waitElement(3000);
+				selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, systemCode);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Debit Account", debitAcc, debitAccount);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Amount", amountTxtBox, amount);
+				waitElement(3000);
+				clearAndType(eppCreatePayment, "Value Date", valueDate, valueDateField);
+				//enterText(eppCreatePayment, "Value Date", valueDate, valueDateField);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Bank Account", beneBankAccount, benAccount);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Name", beneBankName, beneName);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Address", beneBankAddress, beneAddress);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Account With Bank", accWithBankNum, accWithBankNo);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Account With Bank System Code", accSystemCode, accWithSysCode);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Account With Bank_LookUp", accWithBankLookup);
+				waitElement(5000);
+				clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
+				waitElement(8000);
+				waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
+				waitElement(5000);
+				clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
+				waitElement(4000);
+				if (isElementPresent(paymentSaved)) {
+					savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
+				}
+				getTransactionID();
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					//new HTMLReportHelper().HtmlReportBody("TransactionID - EPP application", "Created Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on Create Payment", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application","Could not Create Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public String getTransactionID() {
+
 		boolean stepResult = false;
 		try {
 			if (!(savedtransactionID == null)) {
@@ -136,7 +140,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 		return transactionID;
 
 	}
-	
+
 	public void setTransactionID(String savedtransactionID) {
 		try {
 			if (!(savedtransactionID == null)) {
@@ -150,52 +154,55 @@ public class EPP_CreatePayment extends CommonLibrary {
 	public void createOutgoingHVCustomerPaymentFRB(String custAccNum, String debitAccount, String amount,
 			String benCustAccount, String benecustName, String benecustAddress, String accWithBankNo,
 			String accWithSysCode) throws Exception {
-		boolean stepResult = false;
-		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
-			enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Ordering Customer_LookUp", custLookup);
-			waitElement(8000);
-			enterText(eppCreatePayment, "Debit Account", debitAcc, debitAccount);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Customer_Amount", amountTxtBox, amount);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Customer Account", beneCustAccount, benCustAccount);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Name", beneCustName, benecustName);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Address", beneCustAddress, benecustAddress);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Account With Bank", accWithBankNum, accWithBankNo);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Account With Bank System Code", accSystemCode, accWithSysCode);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Account With Bank_LookUp", accWithBankLookup);
-			waitElement(5000);
-			clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
-			waitElement(8000);
-			waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
-			waitElement(4000);
-			clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
-			waitElement(4000);
-			if (isElementPresent(paymentSaved)) {
-				savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
-			}
-			getTransactionID();
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
-						"Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-						"Could not Create Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Ordering Customer_LookUp", custLookup);
+				waitElement(8000);
+				enterText(eppCreatePayment, "Debit Account", debitAcc, debitAccount);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Customer_Amount", amountTxtBox, amount);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Customer Account", beneCustAccount, benCustAccount);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Name", beneCustName, benecustName);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Address", beneCustAddress, benecustAddress);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Account With Bank", accWithBankNum, accWithBankNo);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Account With Bank System Code", accSystemCode, accWithSysCode);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Account With Bank_LookUp", accWithBankLookup);
+				waitElement(5000);
+				clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
+				waitElement(8000);
+				waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
+				waitElement(4000);
+				clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
+				waitElement(4000);
+				if (isElementPresent(paymentSaved)) {
+					savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
+				}
+				getTransactionID();
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+							"Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
+							"Could not Create Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -203,96 +210,102 @@ public class EPP_CreatePayment extends CommonLibrary {
 	public void createIncomingHVCustomerPaymentFRB(String custAccNum, String bankAccNum,
 			String bankSystemCode, String amount, String benCustAccount, String creditAccNum, String accWithBankNo,
 			String accWithSysCode) throws Exception {
-		boolean stepResult = false;
-		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
-			enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Ordering Bank Expand Button", incomngOrderBankExpand);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, bankAccNum);
-			waitElement(3000);
-			selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, bankSystemCode);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
-			waitElement(8000);
-			enterText(eppCreatePayment, "Customer_Amount", amountTxtBox, amount);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Customer Account", beneCustAccount, benCustAccount);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Bene Customer_LookUp", beneCustLookUp);
-			waitElement(8000);
-			enterText(eppCreatePayment, "Credit Account", creditAcc, creditAccNum);
-			waitElement(5000);
-			clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
-			waitElement(8000);
-			waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
-			waitElement(4000);
-			clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
-			waitElement(4000);
-			if (isElementPresent(paymentSaved)) {
-				savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
-			}
-			getTransactionID();
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
-						"Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-						"Could not Create Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Ordering Bank Expand Button", incomngOrderBankExpand);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, bankAccNum);
+				waitElement(3000);
+				selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, bankSystemCode);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
+				waitElement(8000);
+				enterText(eppCreatePayment, "Customer_Amount", amountTxtBox, amount);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Customer Account", beneCustAccount, benCustAccount);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Bene Customer_LookUp", beneCustLookUp);
+				waitElement(8000);
+				enterText(eppCreatePayment, "Credit Account", creditAcc, creditAccNum);
+				waitElement(5000);
+				clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
+				waitElement(8000);
+				waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
+				waitElement(4000);
+				clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
+				waitElement(4000);
+				if (isElementPresent(paymentSaved)) {
+					savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
+				}
+				getTransactionID();
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+							"Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
+							"Could not Create Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void createIncomingHVBankPaymentFRB(String bankAccNum, String bankSystemCode, String amount,
 			String benCustAccount, String creditAccNum, String accWithBankNo, String accWithSysCode) throws Exception {
-		boolean stepResult = false;
-		try {
-			getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
-			enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, bankAccNum);
-			waitElement(3000);
-			selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, bankSystemCode);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
-			waitElement(8000);
-			enterText(eppCreatePayment, "Customer_Amount", amountTxtBox, amount);
-			waitElement(3000);
-			enterText(eppCreatePayment, "Benificiary Customer Account", beneBankAccount, benCustAccount);
-			waitElement(3000);
-			clickOnElement(eppCreatePayment, "Bene Customer_LookUp", beneBankLookUp);
-			waitElement(8000);
-			enterText(eppCreatePayment, "Credit Account", creditAcc, creditAccNum);
-			waitElement(5000);
-			clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
-			waitElement(8000);
-			waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
-			waitElement(4000);
-			clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
-			waitElement(4000);
-			if (isElementPresent(paymentSaved)) {
-				savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
-			}
-			getTransactionID();
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
-						"Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-						"Could not Create Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, bankAccNum);
+				waitElement(3000);
+				selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, bankSystemCode);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
+				waitElement(8000);
+				enterText(eppCreatePayment, "Customer_Amount", amountTxtBox, amount);
+				waitElement(3000);
+				enterText(eppCreatePayment, "Benificiary Customer Account", beneBankAccount, benCustAccount);
+				waitElement(3000);
+				clickOnElement(eppCreatePayment, "Bene Customer_LookUp", beneBankLookUp);
+				waitElement(8000);
+				enterText(eppCreatePayment, "Credit Account", creditAcc, creditAccNum);
+				waitElement(5000);
+				clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
+				waitElement(8000);
+				waitForPresenceOfElement(eppCreatePayment, "Validation Successfull Window", confirmWindow);
+				waitElement(4000);
+				clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
+				waitElement(4000);
+				if (isElementPresent(paymentSaved)) {
+					savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
+				}
+				getTransactionID();
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+							"Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
+							"Could not Create Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 

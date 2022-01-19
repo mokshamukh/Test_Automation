@@ -558,7 +558,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 					}
 
 					if (!sAlternateCycle.equals("")) {
-						if (isElementPresent(alternateCycleTextInput)) {
+						if (isElementPresentZeroWait(alternateCycleTextInput)) {
 							clickOnElement("Change Account Page", "Alternate Cycle Input", alternateCycleTextInput);
 						}
 						clickOnElement("Change Account Page", "Alternate Cycle Input", alternateCycleInput);
@@ -585,7 +585,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 					}
 
 					if (!sSuspendedDepositRateIndex.equals("")) {
-						if (isElementPresent(suspendedDepositRateIndexTextInput)) {
+						if (isElementPresentZeroWait(suspendedDepositRateIndexTextInput)) {
 							clickOnElement("Change Account Page", "Suspended Deposit Rate Index Input",
 									suspendedDepositRateIndexTextInput);
 						}

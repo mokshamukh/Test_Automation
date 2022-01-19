@@ -32,37 +32,40 @@ public class EPP_SecurityQuestions extends CommonLibrary {
 	By submitButton = By.xpath("//button[@id='btnVerifySecurityQuestionsSubmit']");
 	By cancelButton = By.xpath("//button[@id='btnVerifySecurityQuestionsCancel']");
 
-	
+
 	public void enterSecurityQuestions(String securityQuestionTD, String securityAnswerTD) throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppSecurityPage, "Security Question", securityQuest);
-			isElementPresent(securityQuest);
-			String secuirtyQues1 = getElementText(eppSecurityPage, "SecurityQuestion1", firstSecurityQues);
-			String secuirtyQues2 = getElementText(eppSecurityPage, "SecurityQuestion2", secondSecurityQues);
-			String[] securityQuestionTD_split = securityQuestionTD.trim().split("\\|");
-			String[] securityAnswerTD_split = securityAnswerTD.trim().split("\\|");
-			for (int i = 0; i < securityQuestionTD_split.length; i++) {
-				waitElement(4000);
-				if (securityQuestionTD_split[i].equals(secuirtyQues1)) {
-					enterText(eppSecurityPage, "SecurityQuestion1", firstSecurityAnswer, securityAnswerTD_split[i]);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppSecurityPage, "Security Question", securityQuest);
+				isElementPresent(securityQuest);
+				String secuirtyQues1 = getElementText(eppSecurityPage, "SecurityQuestion1", firstSecurityQues);
+				String secuirtyQues2 = getElementText(eppSecurityPage, "SecurityQuestion2", secondSecurityQues);
+				String[] securityQuestionTD_split = securityQuestionTD.trim().split("\\|");
+				String[] securityAnswerTD_split = securityAnswerTD.trim().split("\\|");
+				for (int i = 0; i < securityQuestionTD_split.length; i++) {
+					waitElement(4000);
+					if (securityQuestionTD_split[i].equals(secuirtyQues1)) {
+						enterText(eppSecurityPage, "SecurityQuestion1", firstSecurityAnswer, securityAnswerTD_split[i]);
+					}
+					if (securityQuestionTD_split[i].equals(secuirtyQues2)) {
+						enterText(eppSecurityPage, "SecurityQuestion2", secondSecurityAnswer, securityAnswerTD_split[i]);
+					}
+				}			clickOnElement(eppSecurityPage, "SecurityQuestions", submitButton);
+				waitElement(5000);
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Security_Questions EPP - EPP application", "Security Questions Answered Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Security_Questions EPP - EPP application","Could not Answer Security Questions Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (securityQuestionTD_split[i].equals(secuirtyQues2)) {
-					enterText(eppSecurityPage, "SecurityQuestion2", secondSecurityAnswer, securityAnswerTD_split[i]);
-				}
-			}			clickOnElement(eppSecurityPage, "SecurityQuestions", submitButton);
-			waitElement(5000);
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Security_Questions EPP - EPP application", "Security Questions Answered Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Security_Questions EPP - EPP application","Could not Answer Security Questions Successfully", "Failed", driver, "Y");
 			}
 		}
 

@@ -17,35 +17,37 @@ public class EPP_LogOff extends CommonLibrary{
 	}
 
 	public String eppLogOff = "EPPlogoutPage";
-	
-	
+
+
 	By logoutButton = By.xpath("//a[text()='power_settings_new']");
-	
-	
+
+
 	public void logOffEPPApplication() throws Exception {
-		boolean stepResult = false;
-		try {
-			switchToWindowWithTitleContaining("Authentication Gateway");
-			driver.switchTo().defaultContent();
-			waitElement(3000);
-			waitForPresenceOfElement(eppLogOff, "Logout Page", logoutButton);
-			clickOnElement(eppLogOff, "Logout Page", logoutButton);
-			waitElement(6000);
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("LogOff EPP - EPP application", "LogOff Successfully",
-						"Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("LogOff EPP - EPP application","Could not LogOff Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				switchToWindowWithTitleContaining("Authentication Gateway");
+				driver.switchTo().defaultContent();
+				waitElement(3000);
+				waitForPresenceOfElement(eppLogOff, "Logout Page", logoutButton);
+				clickOnElement(eppLogOff, "Logout Page", logoutButton);
+				waitElement(6000);
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("LogOff EPP - EPP application", "LogOff Successfully",
+							"Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("LogOff EPP - EPP application","Could not LogOff Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
-		
 	}
-	
+
 }

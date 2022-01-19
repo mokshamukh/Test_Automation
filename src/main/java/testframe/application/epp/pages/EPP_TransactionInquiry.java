@@ -38,36 +38,39 @@ public class EPP_TransactionInquiry extends CommonLibrary {
 
 
 	public void searchTransaction(String instAmount,String valueDateField) throws Exception {
-		boolean stepResult = false;
-		try {
-			switchToWindowWithTitleContaining("Enterprise Payments Platform");
-			driver.switchTo().frame("main");
-			waitForPresenceOfElement(eppTransactionInquiry, "Transaction Inquiry", transactionTitle);
-			if(isElementPresent(transactionTitle)) {
-				approveTransID = eppCreatePayment.getTransactionID();
-				enterText(eppTransactionInquiry, "Instruction Amount", refTransID, approveTransID);
-				if(!(instAmount.equals(""))) {
-					selectElementByVisibleText(eppTransactionInquiry, "Instruction Amount", selectAmount, "USD");
-					waitElement(3000);
-					enterText(eppTransactionInquiry, "Instruction Amount", instructionAmount, instAmount);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				switchToWindowWithTitleContaining("Enterprise Payments Platform");
+				driver.switchTo().frame("main");
+				waitForPresenceOfElement(eppTransactionInquiry, "Transaction Inquiry", transactionTitle);
+				if(isElementPresent(transactionTitle)) {
+					approveTransID = eppCreatePayment.getTransactionID();
+					enterText(eppTransactionInquiry, "Instruction Amount", refTransID, approveTransID);
+					if(!(instAmount.equals(""))) {
+						selectElementByVisibleText(eppTransactionInquiry, "Instruction Amount", selectAmount, "USD");
+						waitElement(3000);
+						enterText(eppTransactionInquiry, "Instruction Amount", instructionAmount, instAmount);
+					}
+					if(!(valueDateField.equals(""))) {
+						enterText(eppTransactionInquiry, "Value Date", valueDate, valueDateField);
+					}
+					clickOnElement(eppTransactionInquiry, "Search Button", searchButton);
+					waitElement(5000);
 				}
-				if(!(valueDateField.equals(""))) {
-					enterText(eppTransactionInquiry, "Value Date", valueDate, valueDateField);
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application", "Transaction searched Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application","Could not search Transaction Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				clickOnElement(eppTransactionInquiry, "Search Button", searchButton);
-				waitElement(5000);
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application", "Transaction searched Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application","Could not search Transaction Successfully", "Failed", driver, "Y");
 			}
 		}
 
