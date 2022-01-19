@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Test;
-
 import testframe.application.commercialcenter.pages.Corporate_ACHBatchTemplate;
 import testframe.application.commercialcenter.pages.Corporate_AccountTransfer;
 import testframe.application.commercialcenter.pages.Corporate_AccountTransferDetails;
@@ -21,7 +18,10 @@ import testframe.application.commercialcenter.pages.Corporate_FuturePaymentActiv
 import testframe.application.commercialcenter.pages.Corporate_HomeMenu;
 import testframe.application.commercialcenter.pages.Corporate_LogOff;
 import testframe.application.commercialcenter.pages.Corporate_Login;
+import testframe.application.commercialcenter.pages.Corporate_ManageWireTemplates;
 import testframe.application.commercialcenter.pages.Corporate_NewACHBatchTemplate;
+import testframe.application.commercialcenter.pages.Corporate_NewPayee;
+import testframe.application.commercialcenter.pages.Corporate_NewWireTransfer;
 import testframe.application.common.ApplicationBase;
 import testframe.common.reporting.HTMLReportHelper;
 import testframe.common.reporting.Log;
@@ -39,6 +39,8 @@ public class CorporateTest extends ApplicationBase  {
 	String transactionID;
 	static Corporate_ACHBatchTemplate corporateACHBatchTemplate;
 	static Corporate_NewACHBatchTemplate corporateNewACHBatchTemplate;
+	static Corporate_NewPayee corporate_NewPayee;
+	static Corporate_NewWireTransfer corporate_NewWireTransfer;
 	
 	public void executeTestCase(WebDriver driver,String sApplicationName, String cURL,String sTestCase, String sTestDescription,
 			String sApplicationTDFolder, String sIteration, String sHTMLFileName) throws IOException, Exception{
@@ -56,7 +58,9 @@ public class CorporateTest extends ApplicationBase  {
 		corporateNewACHBatchTemplate = new Corporate_NewACHBatchTemplate(driver);
 		corporateACHBatchTemplate = new Corporate_ACHBatchTemplate(driver);
 		CorporateCommonNavigation corporateCommonNavigation = new CorporateCommonNavigation();
-
+		Corporate_NewPayee corporateNewPayee = new Corporate_NewPayee(driver);
+		Corporate_NewWireTransfer corporateNewWireTransfer = new Corporate_NewWireTransfer(driver);
+		Corporate_ManageWireTemplates corporateManageWireTemplates = new Corporate_ManageWireTemplates(driver);
 
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
 		strpathToAppReportFile = sPathToAppReportFolder + "/" + sApplicationName;
@@ -395,8 +399,8 @@ public class CorporateTest extends ApplicationBase  {
 				corporateHomeMenu.clickOnfuturePaymentActivity();
 				corporateFuturePaymentActivity.filterTransaction(new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("TransferDate"),"MM/dd/yyyy","yyyy-MM-dd"));
 				//corporateFuturePaymentActivity.filterTransaction(transactionID, tc_Test_Data.get(iTDRow).get("SeriesName"),tc_Test_Data.get(iTDRow).get("Product"),tc_Test_Data.get(iTDRow).get("IncludedTransactions"),tc_Test_Data.get(iTDRow).get("EntryMethod"),tc_Test_Data.get(iTDRow).get("ImportFile"),tc_Test_Data.get(iTDRow).get("TransferDate"));
-				//corporateFuturePaymentActivity.clickOnRightArrow(transactionID);
-//				corporateFuturePaymentActivity.clickRejectButton(tc_Test_Data.get(iTDRow).get("RejectReason"));
+				corporateFuturePaymentActivity.clickOnRightArrow(transactionID);
+				corporateFuturePaymentActivity.clickRejectButton(tc_Test_Data.get(iTDRow).get("RejectReason"));
 				corporateFuturePaymentActivity.verifyRjectedMsg(transactionID);
 				corporateLogOff.logoffApplication();
 				break;
@@ -485,25 +489,27 @@ public class CorporateTest extends ApplicationBase  {
 					corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 					corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
 					corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
-							tc_Test_Data.get(iTDRow).get("AmtReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+							tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 							//cUserID);
 				}else {
-				corporateHomeMenu.clickOnAchPayments();
+				//corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnAchBacthTemplate();
-				corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateHomeMenu.clickOnAchBacthTemplate();
+				corporateCommonNavigation.batchTemplateCreationandSearch(tc_Test_Data, iTDRow, "N");
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
 				corporateNewACHBatchTemplate.startAchPaymentWithTemplate(tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate"));
 				//payeeName = tc_Test_Data.get(iTDRow).get("CreateNewPayeeName");
 				corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
 				transactionID = corporateNewACHBatchTemplate.getTransaction();
 				corporateLogOff.logoffApplication();
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
 				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
-						tc_Test_Data.get(iTDRow).get("AmtReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 						//cUserID);
 			}
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword);
@@ -519,22 +525,25 @@ public class CorporateTest extends ApplicationBase  {
 				if(!tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate").equals("")){
 					corporateHomeMenu.clickOnNewAchBacth();
 					corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+					corporateNewACHBatchTemplate.verifyPassword(cPassword);
 					transactionID = corporateNewACHBatchTemplate.getTransaction();
 					corporateLogOff.logoffApplication();
 					corporateLogin.launchApplication(cURL);
 					corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 					corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
 					corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
-							tc_Test_Data.get(iTDRow).get("AmtReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+							tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 							//cUserID);
 				}else {
-				corporateHomeMenu.clickOnAchPayments();
+				//corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnAchBacthTemplate();
-				corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateHomeMenu.clickOnAchBacthTemplate();
+				corporateCommonNavigation.batchTemplateCreationandSearch(tc_Test_Data, iTDRow, "N");
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
 				corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
 				transactionID = corporateNewACHBatchTemplate.getTransaction();
 				corporateLogOff.logoffApplication();
 				corporateLogin.launchApplication(cURL);
@@ -557,29 +566,32 @@ public class CorporateTest extends ApplicationBase  {
 				if(!tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate").equals("")){
 					corporateHomeMenu.clickOnNewAchBacth();
 					corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+					corporateNewACHBatchTemplate.verifyPassword(cPassword);
 					transactionID = corporateNewACHBatchTemplate.getTransaction();
 					corporateLogOff.logoffApplication();
 					corporateLogin.launchApplication(cURL);
 					corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 					corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
 					corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
-							tc_Test_Data.get(iTDRow).get("AmtReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+							tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 							//cUserID);
 				}else {
-				corporateHomeMenu.clickOnAchPayments();
+				//corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnAchBacthTemplate();
-				corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateHomeMenu.clickOnAchBacthTemplate();
+				corporateCommonNavigation.batchTemplateCreationandSearch(tc_Test_Data, iTDRow, "N");
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
 				corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
 				transactionID = corporateNewACHBatchTemplate.getTransaction();
 				corporateLogOff.logoffApplication();
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
 				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
-						tc_Test_Data.get(iTDRow).get("AmtReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 			}
 				corporateCurrentPaymentActivity.clickCancelButtonForACHPayment(transactionID);
 				corporateLogOff.logoffApplication();
@@ -601,7 +613,7 @@ public class CorporateTest extends ApplicationBase  {
 						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
 						tc_Test_Data.get(iTDRow).get("SendRemittanceToPayee"));
 				}else {
-					corporateNewACHBatchTemplate.searchPayee(tc_Test_Data.get(iTDRow).get("ExistPayeeName"), tc_Test_Data.get(iTDRow).get("ExistPayeeAmt"));
+					corporateNewACHBatchTemplate.searchPayee(tc_Test_Data.get(iTDRow).get("ExistPayeeName"), tc_Test_Data.get(iTDRow).get("Amount"));
 				}
 				corporateNewACHBatchTemplate.reviewAchBatchDetails(tc_Test_Data.get(iTDRow).get("CreatePayeeName"), tc_Test_Data.get(iTDRow).get("Amount"));
 				corporateNewACHBatchTemplate.verifyPassword(cPassword);
@@ -611,10 +623,92 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
 				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
-						tc_Test_Data.get(iTDRow).get("AmtReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword);
 				corporateLogOff.logoffApplication();
 				break;
+				
+			case "CC_CORP_TC018":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnAchPayments();
+				corporateHomeMenu.clickOnNewAchBacth();
+				if(!tc_Test_Data.get(iTDRow).get("ExistPayeeName").equals("")){
+					corporateNewACHBatchTemplate.startAchPaymentWithFreeForm(tc_Test_Data.get(iTDRow).get("ACHCompany"),tc_Test_Data.get(iTDRow).get("DebitORCredit"),tc_Test_Data.get(iTDRow).get("BatchType"));
+					corporateNewACHBatchTemplate.enterACHPaymentDetails(tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("CompanyDiscretionaryData"),
+							tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"),tc_Test_Data.get(iTDRow).get("OffsetAccount"),
+							tc_Test_Data.get(iTDRow).get("CreatePayeeName"),tc_Test_Data.get(iTDRow).get("CreatePayeeID"),
+							tc_Test_Data.get(iTDRow).get("CreateAccountNumber"),tc_Test_Data.get(iTDRow).get("CreateBankID"),
+							tc_Test_Data.get(iTDRow).get("CreateBankName"),tc_Test_Data.get(iTDRow).get("CreateDebitAuthType"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
+							tc_Test_Data.get(iTDRow).get("SendRemittanceToPayee"));
+					corporateNewACHBatchTemplate.searchPayee(tc_Test_Data.get(iTDRow).get("ExistPayeeName"), tc_Test_Data.get(iTDRow).get("Amount"));
+				    corporateNewACHBatchTemplate.clickOnRequestBatchButton();
+				}else {
+					corporateNewACHBatchTemplate.startAchPaymentWithFreeForm(tc_Test_Data.get(iTDRow).get("ACHCompany"),tc_Test_Data.get(iTDRow).get("DebitORCredit"),tc_Test_Data.get(iTDRow).get("BatchType"));
+					corporateNewACHBatchTemplate.enterACHPaymentDetails(tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("CompanyDiscretionaryData"),
+							tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"),tc_Test_Data.get(iTDRow).get("OffsetAccount"),
+							tc_Test_Data.get(iTDRow).get("CreatePayeeName"),tc_Test_Data.get(iTDRow).get("CreatePayeeID"),
+							tc_Test_Data.get(iTDRow).get("CreateAccountNumber"),tc_Test_Data.get(iTDRow).get("CreateBankID"),
+							tc_Test_Data.get(iTDRow).get("CreateBankName"),tc_Test_Data.get(iTDRow).get("CreateDebitAuthType"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
+							tc_Test_Data.get(iTDRow).get("SendRemittanceToPayee"));			
+					corporateNewACHBatchTemplate.clickOnRequestBatchButton();
+					}
+				corporateNewACHBatchTemplate.reviewAchBatchDetails(tc_Test_Data.get(iTDRow).get("CreatePayeeName"), tc_Test_Data.get(iTDRow).get("Amount"));
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
+				transactionID = corporateNewACHBatchTemplate.getTransaction();
+				corporateLogOff.logoffApplication();
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+				corporateCurrentPaymentActivity.clickRejectButtonForACHPayment(transactionID,"Testing");
+				corporateLogOff.logoffApplication();
+				break;
+				
+			case "CC_CORP_TC019":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnAchPayments();
+				corporateHomeMenu.clickOnNewAchBacth();
+				if(!tc_Test_Data.get(iTDRow).get("ExistPayeeName").equals("")){
+					corporateNewACHBatchTemplate.startAchPaymentWithFreeForm(tc_Test_Data.get(iTDRow).get("ACHCompany"),tc_Test_Data.get(iTDRow).get("DebitORCredit"),tc_Test_Data.get(iTDRow).get("BatchType"));
+					corporateNewACHBatchTemplate.enterACHPaymentDetails(tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("CompanyDiscretionaryData"),
+							tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"),tc_Test_Data.get(iTDRow).get("OffsetAccount"),
+							tc_Test_Data.get(iTDRow).get("CreatePayeeName"),tc_Test_Data.get(iTDRow).get("CreatePayeeID"),
+							tc_Test_Data.get(iTDRow).get("CreateAccountNumber"),tc_Test_Data.get(iTDRow).get("CreateBankID"),
+							tc_Test_Data.get(iTDRow).get("CreateBankName"),tc_Test_Data.get(iTDRow).get("CreateDebitAuthType"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
+							tc_Test_Data.get(iTDRow).get("SendRemittanceToPayee"));
+					corporateNewACHBatchTemplate.searchPayee(tc_Test_Data.get(iTDRow).get("ExistPayeeName"), tc_Test_Data.get(iTDRow).get("Amount"));
+				    corporateNewACHBatchTemplate.clickOnRequestBatchButton();
+				}else {
+					corporateNewACHBatchTemplate.startAchPaymentWithFreeForm(tc_Test_Data.get(iTDRow).get("ACHCompany"),tc_Test_Data.get(iTDRow).get("DebitORCredit"),tc_Test_Data.get(iTDRow).get("BatchType"));
+					corporateNewACHBatchTemplate.enterACHPaymentDetails(tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("CompanyDiscretionaryData"),
+							tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"),tc_Test_Data.get(iTDRow).get("OffsetAccount"),
+							tc_Test_Data.get(iTDRow).get("CreatePayeeName"),tc_Test_Data.get(iTDRow).get("CreatePayeeID"),
+							tc_Test_Data.get(iTDRow).get("CreateAccountNumber"),tc_Test_Data.get(iTDRow).get("CreateBankID"),
+							tc_Test_Data.get(iTDRow).get("CreateBankName"),tc_Test_Data.get(iTDRow).get("CreateDebitAuthType"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
+							tc_Test_Data.get(iTDRow).get("SendRemittanceToPayee"));			
+					corporateNewACHBatchTemplate.clickOnRequestBatchButton();
+					}
+				corporateNewACHBatchTemplate.reviewAchBatchDetails(tc_Test_Data.get(iTDRow).get("CreatePayeeName"), tc_Test_Data.get(iTDRow).get("Amount"));
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
+				transactionID = corporateNewACHBatchTemplate.getTransaction();
+				corporateLogOff.logoffApplication();
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+				corporateCurrentPaymentActivity.clickCancelButtonForACHPayment(transactionID);
+				corporateLogOff.logoffApplication();
+				break;		
 				
 			case "CC_CORP_TC020":
 				corporateLogin.launchApplication(cURL);
@@ -626,6 +720,238 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogOff.logoffApplication();
 				break;	
 				
+			case "CC_CORP_TC021":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnAchPayments();
+				if(!tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate").equals("")){
+					corporateHomeMenu.clickOnNewAchBacth();
+					corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+					corporateNewACHBatchTemplate.verifyPassword(cPassword);
+					transactionID = corporateNewACHBatchTemplate.getTransaction();
+					corporateLogOff.logoffApplication();
+					corporateLogin.launchApplication(cURL);
+					corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+					corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+					corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+							tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+							//cUserID);
+				}else {
+				//corporateHomeMenu.clickOnAchPayments();
+				corporateHomeMenu.clickOnAchBacthTemplate();
+				corporateCommonNavigation.batchTemplateCreationandSearch(tc_Test_Data, iTDRow, "N");
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnAchPayments();
+				corporateHomeMenu.clickOnNewAchBacth();
+				corporateNewACHBatchTemplate.startAchPaymentWithTemplate(tc_Test_Data.get(iTDRow).get("TemplateName"));
+				corporateCommonNavigation.newAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
+				transactionID = corporateNewACHBatchTemplate.getTransaction();
+				corporateLogOff.logoffApplication();
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+						//cUserID);
+			}
+				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword);
+				corporateLogOff.logoffApplication();
+				break;		
+			
+			case "CC_CORP_TC022":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnAchPayments();
+				String newTemplate,newBatchType;
+				if(!tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate").equals("")){
+					corporateHomeMenu.clickOnNewAchBacth();
+					newTemplate = tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate");
+					newBatchType = tc_Test_Data.get(iTDRow).get("BatchType");
+					corporateNewACHBatchTemplate.startAchPaymentWithTemplate(tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate"));
+					corporateNewACHBatchTemplate.enterACHPaymentDetails(tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("CompanyDiscretionaryData"),
+							tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"),tc_Test_Data.get(iTDRow).get("OffsetAccount"),
+							tc_Test_Data.get(iTDRow).get("CreateNewPayeeName"),tc_Test_Data.get(iTDRow).get("CreatePayeeID"),
+							tc_Test_Data.get(iTDRow).get("CreateAccountNumber"),tc_Test_Data.get(iTDRow).get("CreateBankID"),
+							tc_Test_Data.get(iTDRow).get("CreateBankName"),tc_Test_Data.get(iTDRow).get("CreateDebitAuthType"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
+							tc_Test_Data.get(iTDRow).get("sendRemittanceToPayee"));
+					corporateNewACHBatchTemplate.clickOnRequestBatchButton();
+				}else {
+					corporateHomeMenu.clickOnAchBacthTemplate();
+					newTemplate = tc_Test_Data.get(iTDRow).get("TemplateName");
+					newBatchType = tc_Test_Data.get(iTDRow).get("BatchType");
+					corporateCommonNavigation.batchTemplateCreationandSearch(tc_Test_Data, iTDRow, "N");
+				}
+				corporateCommonNavigation.editNewAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
+				transactionID = corporateNewACHBatchTemplate.getTransaction();
+				corporateLogOff.logoffApplication();
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword);
+				corporateLogOff.logoffApplication();
+				break;
+				
+			case "CC_CORP_TC023":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnAchPayments();
+				if(!tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate").equals("")){
+					corporateHomeMenu.clickOnNewAchBacth();
+					corporateNewACHBatchTemplate.startAchPaymentWithTemplate(tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate"));
+					corporateNewACHBatchTemplate.enterACHPaymentDetails(tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("CompanyDiscretionaryData"),
+							tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"),tc_Test_Data.get(iTDRow).get("OffsetAccount"),
+							tc_Test_Data.get(iTDRow).get("CreateNewPayeeName"),tc_Test_Data.get(iTDRow).get("CreatePayeeID"),
+							tc_Test_Data.get(iTDRow).get("CreateAccountNumber"),tc_Test_Data.get(iTDRow).get("CreateBankID"),
+							tc_Test_Data.get(iTDRow).get("CreateBankName"),tc_Test_Data.get(iTDRow).get("CreateDebitAuthType"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
+							tc_Test_Data.get(iTDRow).get("sendRemittanceToPayee"));
+					corporateNewACHBatchTemplate.clickOnRequestBatchButton();
+				}else {
+					corporateHomeMenu.clickOnAchBacthTemplate();
+					newTemplate = tc_Test_Data.get(iTDRow).get("TemplateName");
+					newBatchType = tc_Test_Data.get(iTDRow).get("BatchType");
+					corporateCommonNavigation.batchTemplateCreationandSearch(tc_Test_Data, iTDRow, "N");
+				}
+				corporateCommonNavigation.editNewAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
+				transactionID = corporateNewACHBatchTemplate.getTransaction();
+				corporateLogOff.logoffApplication();
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+				corporateCurrentPaymentActivity.clickCancelButtonForACHPayment(transactionID);
+				corporateLogOff.logoffApplication();
+				break;
+			
+			case "CC_CORP_TC024":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnAchPayments();
+				if(!tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate").equals("")){
+					corporateHomeMenu.clickOnNewAchBacth();
+					corporateNewACHBatchTemplate.startAchPaymentWithTemplate(tc_Test_Data.get(iTDRow).get("ExistPaymentTemplate"));
+					corporateNewACHBatchTemplate.enterACHPaymentDetails(tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("CompanyDiscretionaryData"),
+							tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"),tc_Test_Data.get(iTDRow).get("OffsetAccount"),
+							tc_Test_Data.get(iTDRow).get("CreateNewPayeeName"),tc_Test_Data.get(iTDRow).get("CreatePayeeID"),
+							tc_Test_Data.get(iTDRow).get("CreateAccountNumber"),tc_Test_Data.get(iTDRow).get("CreateBankID"),
+							tc_Test_Data.get(iTDRow).get("CreateBankName"),tc_Test_Data.get(iTDRow).get("CreateDebitAuthType"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Addenda"),
+							tc_Test_Data.get(iTDRow).get("sendRemittanceToPayee"));
+					corporateNewACHBatchTemplate.clickOnRequestBatchButton();
+				}else {
+					corporateHomeMenu.clickOnAchBacthTemplate();
+					newTemplate = tc_Test_Data.get(iTDRow).get("TemplateName");
+					newBatchType = tc_Test_Data.get(iTDRow).get("BatchType");
+					corporateCommonNavigation.batchTemplateCreationandSearch(tc_Test_Data, iTDRow, "N");
+				}
+				corporateCommonNavigation.editNewAchPaymentWithTemplate(tc_Test_Data, iTDRow);
+				corporateNewACHBatchTemplate.verifyPassword(cPassword);
+				transactionID = corporateNewACHBatchTemplate.getTransaction();
+				corporateLogOff.logoffApplication();
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+				corporateCurrentPaymentActivity.clickRejectButtonForACHPayment(transactionID,"Reject Testing");
+				corporateLogOff.logoffApplication();
+				break;
+			
+			case "CC_CORP_TC025":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnPayees();
+				corporateHomeMenu.clickOnNewPayee();
+				corporateCommonNavigation.createNewPayeeAndSearch(tc_Test_Data, iTDRow);
+				corporateLogOff.logoffApplication();
+				break;
+				
+			case "CC_CORP_TC026":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				if(!tc_Test_Data.get(iTDRow).get("Payee").equals("")){
+					corporateHomeMenu.clickOnWireTransfers();
+					corporateHomeMenu.clickOnNewWireTransfer();
+					//corporateCommonNavigation.createNewWireTransfer(tc_Test_Data, iTDRow);
+					corporate_NewWireTransfer.createNewWireTransferUsingPayee(tc_Test_Data.get(iTDRow).get("Payee"),
+			    			   tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("PaymentCurrency"),
+			    			   tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),tc_Test_Data.get(iTDRow).get("Amount"));
+						corporate_NewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("DebitAccount"), 
+								tc_Test_Data.get(iTDRow).get("Amount"));
+				}else {
+					corporateHomeMenu.clickOnPayees();
+					corporateHomeMenu.clickOnNewPayee();
+					corporateCommonNavigation.createNewPayeeAndSearch(tc_Test_Data, iTDRow);
+					corporateHomeMenu.clickOnPaymentMenu();
+					corporateHomeMenu.clickOnWireTransfers();
+					corporateHomeMenu.clickOnNewWireTransfer();
+					//corporateCommonNavigation.createNewWireTransfer(tc_Test_Data, iTDRow);
+					corporate_NewWireTransfer.createNewWireTransferUsingPayee(tc_Test_Data.get(iTDRow).get("Payee"),
+			    			   tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("PaymentCurrency"),
+			    			   tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),tc_Test_Data.get(iTDRow).get("Amount"));
+						corporate_NewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("DebitAccount"), 
+								tc_Test_Data.get(iTDRow).get("Amount"));
+				}
+				corporate_NewWireTransfer.verifyPassword(cPassword);
+				transactionID = corporate_NewWireTransfer.getTransaction();
+				corporateLogOff.logoffApplication();
+				break;
+			
+			case "CC_CORP_TC027":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnWireTransfers();
+				corporateHomeMenu.clickOnNewWireTransfer();
+				corporate_NewWireTransfer.createNewWireTransferUsingFreeForm(tc_Test_Data.get(iTDRow).get("Payee"),
+						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("BeneIdType"),
+						tc_Test_Data.get(iTDRow).get("BeneId"),tc_Test_Data.get(iTDRow).get("BeneAddress1"),
+						tc_Test_Data.get(iTDRow).get("BeneAddress2"),tc_Test_Data.get(iTDRow).get("BeneCountry"),
+						tc_Test_Data.get(iTDRow).get("BeneBankIDType"),tc_Test_Data.get(iTDRow).get("PaymentCurrency"),
+						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("BeneBankID"),
+						tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),
+						tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
+				corporate_NewWireTransfer.verifyPassword(cPassword);
+				transactionID = corporate_NewWireTransfer.getTransaction();
+				corporateLogOff.logoffApplication();
+				break;
+				
+			case "CC_CORP_TC028":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnWireTransfers();
+				corporateHomeMenu.clickOnManageWireTemplates();
+				corporateManageWireTemplates.createWireTemplateForFreeForm(tc_Test_Data.get(iTDRow).get("FreeFormTempalte"),
+						tc_Test_Data.get(iTDRow).get("RepetitiveButton"),tc_Test_Data.get(iTDRow).get("TemplateName"),
+						tc_Test_Data.get(iTDRow).get("Payee"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+						tc_Test_Data.get(iTDRow).get("BeneIdType"),tc_Test_Data.get(iTDRow).get("BeneID"),
+						tc_Test_Data.get(iTDRow).get("beneAddress1"),tc_Test_Data.get(iTDRow).get("BeneAddress2"),
+						tc_Test_Data.get(iTDRow).get("BeneCountry"),tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
+						tc_Test_Data.get(iTDRow).get("PaymentCurrency"),tc_Test_Data.get(iTDRow).get("Amount"),
+						tc_Test_Data.get(iTDRow).get("BeneBankID"),tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),
+						tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
+				corporate_NewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("DebitAccount"), 
+						tc_Test_Data.get(iTDRow).get("Amount"));
+				corporate_NewWireTransfer.verifyPassword(cPassword);
+				transactionID = corporate_NewWireTransfer.getTransaction();
+				corporateManageWireTemplates.searchWireTemplate(tc_Test_Data.get(iTDRow).get("TemplateName"), 
+						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Payee"));
+				corporateLogOff.logoffApplication();
+				break;	
 				
 				
 			}	
@@ -634,7 +960,6 @@ public class CorporateTest extends ApplicationBase  {
 		driver.close();
 	}
 }
-
 
 
 
