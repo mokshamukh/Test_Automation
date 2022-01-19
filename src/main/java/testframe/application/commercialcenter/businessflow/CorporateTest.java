@@ -18,6 +18,7 @@ import testframe.application.commercialcenter.pages.Corporate_FuturePaymentActiv
 import testframe.application.commercialcenter.pages.Corporate_HomeMenu;
 import testframe.application.commercialcenter.pages.Corporate_LogOff;
 import testframe.application.commercialcenter.pages.Corporate_Login;
+import testframe.application.commercialcenter.pages.Corporate_ManageWireTemplates;
 import testframe.application.commercialcenter.pages.Corporate_NewACHBatchTemplate;
 import testframe.application.commercialcenter.pages.Corporate_NewPayee;
 import testframe.application.commercialcenter.pages.Corporate_NewWireTransfer;
@@ -57,9 +58,9 @@ public class CorporateTest extends ApplicationBase  {
 		corporateNewACHBatchTemplate = new Corporate_NewACHBatchTemplate(driver);
 		corporateACHBatchTemplate = new Corporate_ACHBatchTemplate(driver);
 		CorporateCommonNavigation corporateCommonNavigation = new CorporateCommonNavigation();
-		Corporate_NewPayee corporate_NewPayee = new Corporate_NewPayee(driver);
-		Corporate_NewWireTransfer corporate_NewWireTransfer = new Corporate_NewWireTransfer(driver);
-
+		Corporate_NewPayee corporateNewPayee = new Corporate_NewPayee(driver);
+		Corporate_NewWireTransfer corporateNewWireTransfer = new Corporate_NewWireTransfer(driver);
+		Corporate_ManageWireTemplates corporateManageWireTemplates = new Corporate_ManageWireTemplates(driver);
 
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
 		strpathToAppReportFile = sPathToAppReportFolder + "/" + sApplicationName;
@@ -908,7 +909,6 @@ public class CorporateTest extends ApplicationBase  {
 				transactionID = corporate_NewWireTransfer.getTransaction();
 				corporateLogOff.logoffApplication();
 				break;
-				
 			
 			case "CC_CORP_TC027":	
 				corporateLogin.launchApplication(cURL);
@@ -916,16 +916,42 @@ public class CorporateTest extends ApplicationBase  {
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnWireTransfers();
 				corporateHomeMenu.clickOnNewWireTransfer();
-//				CorporateTest.corporate_NewWireTransfer.createNewWireTransferUsingFreeForm(payee, debitAccount, beneIdType, beneID, beneAddress1, beneAddress2, beneCountry, beneBankIDType, paymentCurrency, amount);
+				corporate_NewWireTransfer.createNewWireTransferUsingFreeForm(tc_Test_Data.get(iTDRow).get("Payee"),
+						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("BeneIdType"),
+						tc_Test_Data.get(iTDRow).get("BeneId"),tc_Test_Data.get(iTDRow).get("BeneAddress1"),
+						tc_Test_Data.get(iTDRow).get("BeneAddress2"),tc_Test_Data.get(iTDRow).get("BeneCountry"),
+						tc_Test_Data.get(iTDRow).get("BeneBankIDType"),tc_Test_Data.get(iTDRow).get("PaymentCurrency"),
+						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("BeneBankID"),
+						tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),
+						tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
 				corporate_NewWireTransfer.verifyPassword(cPassword);
 				transactionID = corporate_NewWireTransfer.getTransaction();
 				corporateLogOff.logoffApplication();
 				break;
 				
-				
-				
-				
-				
+			case "CC_CORP_TC028":	
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnPaymentMenu();
+				corporateHomeMenu.clickOnWireTransfers();
+				corporateHomeMenu.clickOnManageWireTemplates();
+				corporateManageWireTemplates.createWireTemplateForFreeForm(tc_Test_Data.get(iTDRow).get("FreeFormTempalte"),
+						tc_Test_Data.get(iTDRow).get("RepetitiveButton"),tc_Test_Data.get(iTDRow).get("TemplateName"),
+						tc_Test_Data.get(iTDRow).get("Payee"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+						tc_Test_Data.get(iTDRow).get("BeneIdType"),tc_Test_Data.get(iTDRow).get("BeneID"),
+						tc_Test_Data.get(iTDRow).get("beneAddress1"),tc_Test_Data.get(iTDRow).get("BeneAddress2"),
+						tc_Test_Data.get(iTDRow).get("BeneCountry"),tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
+						tc_Test_Data.get(iTDRow).get("PaymentCurrency"),tc_Test_Data.get(iTDRow).get("Amount"),
+						tc_Test_Data.get(iTDRow).get("BeneBankID"),tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),
+						tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
+				corporate_NewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("DebitAccount"), 
+						tc_Test_Data.get(iTDRow).get("Amount"));
+				corporate_NewWireTransfer.verifyPassword(cPassword);
+				transactionID = corporate_NewWireTransfer.getTransaction();
+				corporateManageWireTemplates.searchWireTemplate(tc_Test_Data.get(iTDRow).get("TemplateName"), 
+						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("Payee"));
+				corporateLogOff.logoffApplication();
+				break;	
 				
 				
 			}	
