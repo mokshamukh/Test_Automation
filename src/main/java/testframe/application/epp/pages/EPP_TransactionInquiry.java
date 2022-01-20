@@ -37,7 +37,7 @@ public class EPP_TransactionInquiry extends CommonLibrary {
 	By refTransID = By.xpath("//div[@class='lightShadedBackground']//..//..//input[@name='ReferenceValue']");
 
 
-	public void searchTransaction(String instAmount,String valueDateField) throws Exception {
+	public void searchTransaction(String instAmount,String valueDateField,String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
@@ -45,7 +45,10 @@ public class EPP_TransactionInquiry extends CommonLibrary {
 				driver.switchTo().frame("main");
 				waitForPresenceOfElement(eppTransactionInquiry, "Transaction Inquiry", transactionTitle);
 				if(isElementPresent(transactionTitle)) {
-					approveTransID = eppCreatePayment.getTransactionID();
+					if (!strTransID.equals(""))
+						approveTransID = strTransID;
+					else	
+						approveTransID = eppCreatePayment.getTransactionID();
 					enterText(eppTransactionInquiry, "Instruction Amount", refTransID, approveTransID);
 					if(!(instAmount.equals(""))) {
 						selectElementByVisibleText(eppTransactionInquiry, "Instruction Amount", selectAmount, "USD");

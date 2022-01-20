@@ -36,15 +36,19 @@ public class EPP_TransactionIDList extends CommonLibrary {
 	By outgoingRecallReqReason = By.xpath("//form[@id='actionableForm']//..//td[contains(text(),'RECALL')]");
 
 
-	public void selectTransactionIDFromList() throws Exception {
+	public void selectTransactionIDFromList(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				waitForPresenceOfElement(eppTransactionIDList, "Work Summary List", title);
 				if(isElementPresent(title)){
-					String transactionID = eppCreatePayment.getTransactionID();
-					getDynamicElementClick(eppTransactionIDList, "Work Summary List", transactionIdList, transactionID);
-					waitElement(8000);
+					if(!strTransID.equals(""))
+						getDynamicElementClick(eppTransactionIDList, "Work Summary List", transactionIdList, strTransID);
+					else{	
+						String transactionID = eppCreatePayment.getTransactionID();
+						getDynamicElementClick(eppTransactionIDList, "Work Summary List", transactionIdList, transactionID);
+						waitElement(8000);
+					}
 					stepResult = true;
 				}
 
@@ -66,19 +70,23 @@ public class EPP_TransactionIDList extends CommonLibrary {
 	}
 
 
-	public void selectPendingOutgoingRecallTransactionIDFromList() throws Exception {
+	public void selectPendingOutgoingRecallTransactionIDFromList(String strTransactionID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				waitForPresenceOfElement(eppTransactionIDList, "Work Summary List", title);
 				if(isElementPresent(title)){
-					String transactionID = eppCreatePayment.getTransactionID();
-					if(!(transactionID==null)) {
-						getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
-					}else {
-						String firstTransID = getElementText(eppTransactionIDList, "First PendingOutgoing Transaction ID", pendingFirstTransID);
-						eppCreatePayment.setTransactionID(firstTransID);
-						clickOnElement(eppTransactionIDList, "First Transaction ID", pendingFirstTransID);
+					if(!strTransactionID.equals("")){
+						getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, strTransactionID);
+					}else{
+						String transactionID = eppCreatePayment.getTransactionID();
+						if(!(transactionID==null)) {
+							getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
+						}else {
+							String firstTransID = getElementText(eppTransactionIDList, "First PendingOutgoing Transaction ID", pendingFirstTransID);
+							eppCreatePayment.setTransactionID(firstTransID);
+							clickOnElement(eppTransactionIDList, "First Transaction ID", pendingFirstTransID);
+						}
 					}
 					//getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
 					validateTextContains(eppTransactionIDList, "Outgoing Recall TransactionID", outgoingRecallReqReason, "RECALL");

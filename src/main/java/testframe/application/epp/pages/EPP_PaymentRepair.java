@@ -201,22 +201,27 @@ public class EPP_PaymentRepair extends CommonLibrary{
 
 	}
 
-	public void selectTransIDFromPaymentRepair() throws Exception {
+	public void selectTransIDFromPaymentRepair(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				waitForPresenceOfElement(eppPaymentRepair, "Work Summary List", title);
 				if (isElementPresent(title)) {
-					String transactionID = eppCreatePayment.getTransactionID();
-					if(!(transactionID==null)) {
-						getDynamicElementClick(eppPaymentRepair, "Work Summary List", transactionIdList, transactionID);
-					}else {
-						String firstTransID = getElementText(eppPaymentDetails, "First Internal Transaction ID", paymentRepairFisrtTransID);
-						eppCreatePayment.setTransactionID(firstTransID);
-						clickOnElement(eppPaymentRepair, "First Transaction ID", paymentRepairFisrtTransID);
+					if(!strTransID.equals("")){
+						getDynamicElementClick(eppPaymentRepair, "Work Summary List", transactionIdList, strTransID);
+					}
+					else{
+						String transactionID = eppCreatePayment.getTransactionID();
+						if(!(transactionID==null)) {
+							getDynamicElementClick(eppPaymentRepair, "Work Summary List", transactionIdList, transactionID);
+						}else {
+							String firstTransID = getElementText(eppPaymentDetails, "First Internal Transaction ID", paymentRepairFisrtTransID);
+							eppCreatePayment.setTransactionID(firstTransID);
+							clickOnElement(eppPaymentRepair, "First Transaction ID", paymentRepairFisrtTransID);
+						}
 					}
 					waitElement(8000);
-					waitForPresenceOfElement(eppPaymentRepair, "Filter", limitINFilter);
+					//waitForPresenceOfElement(eppPaymentRepair, "Filter", limitINFilter);
 					stepResult = true;
 				}
 			} catch (Exception e) {
