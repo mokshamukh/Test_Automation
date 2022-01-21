@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
+import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
 
 import testframe.application.common.ApplicationBase;
 import testframe.common.utilities.DateTimeHelper;
@@ -128,5 +132,38 @@ public class ReportHelper extends ApplicationBase {
 		
 		iSummary_testDetailsRowNum =iSummary_testDetailsRowNum+1;
 	}
+	
+	
+	public  void pdfEncryption (String pdfPath)  throws IOException
+	
+	    {
+	        // step 1. Loading the pdf file
+	        File f = new File(pdfPath);
+	        PDDocument pdd = PDDocument.load(f);
+	 
+	        // step 2.Creating instance of AccessPermission
+	        // class
+	        AccessPermission ap = new AccessPermission();
+	 
+	        // step 3. Creating instance of
+	        // StandardProtectionPolicy
+	        StandardProtectionPolicy stpp
+	            = new StandardProtectionPolicy("Fiserv@123", "Fiserv@123", ap);
+	 
+	        // step 4. Setting the length of Encryption key
+	        stpp.setEncryptionKeyLength(128);
+	 
+	        // step 5. Setting the permission
+	        stpp.setPermissions(ap);
+	 
+	        // step 6. Protecting the PDF file
+	        pdd.protect(stpp);
+	 
+	        // step 7. Saving and closing the the PDF Document
+	        pdd.save(pdfPath);
+	        pdd.close();
+	 
+	        System.out.println("PDF Encrypted successfully...");
+	    }
 	
 }

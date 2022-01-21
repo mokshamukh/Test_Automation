@@ -82,8 +82,8 @@ public class EPP_PaymentDetails extends CommonLibrary {
 			try {
 				waitElement(3000);
 				if(isElementPresent(paymentTitle)) {
-					waitElement(19000);
-					validateTextContains(eppPaymentDetails,  "Transaction Status", transactionStatus, "Completed");
+					waitElement(29000);
+					validateElementPresent(eppPaymentDetails,  "Transaction Status", transactionStatus);
 					validateElementPresent(eppPaymentDetails, "Transaction Status", transactionStatus);
 					String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
 					approveTransID = eppCreatePayment.getTransactionID();
@@ -610,7 +610,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 			boolean stepResult = false;
 			try {
 				if(isElementPresent(paymentTitle)) {
-					validateTextContains(eppPaymentDetails,  "Transaction Status", transactionStatus, "Completed");
+					validateElementPresent(eppPaymentDetails,  "Transaction Status", transactionStatus);
 					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Recall Payment')]")).click();
 					clickOnElement(eppPaymentDetails, "Execute Button", executeButton);
 					stepResult = true;
