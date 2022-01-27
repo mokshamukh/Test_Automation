@@ -226,6 +226,7 @@ public class HTMLReportHelper {
 		HtmlConverter.convertToPdf(new FileInputStream(shtmlfilePath), 
 				new FileOutputStream(spdffilePath), converterProperties);
 		System.out.println( "PDF Created!" );
+		new ReportHelper().pdfEncryption(spdffilePath);
 		storeResultToMasterFile(appendValue,sExecutionStart,strEndTime);
 		
 		new ReportHelper().writeToSummaryReportTestDetailsTab(appendValue, strStartTime, strEndTime, tTimeTaken.toString(), Integer.toString(totalPassed), Integer.toString(totalFailed), Integer.toString(totalPassed+totalFailed), spdffilePath);

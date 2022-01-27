@@ -852,6 +852,7 @@ public class CommonLibrary {
 	    String implicitWait =new PropertyReader().getParamfromConfigProperties("implicitlyWaitInSecond");
 	    driver.manage().timeouts().implicitlyWait(Integer.valueOf(implicitWait), TimeUnit.SECONDS);
 	}
+
 	/**
 	 * Get Validate Element Present
 	 * 
@@ -1293,7 +1294,7 @@ public class CommonLibrary {
 		}
 
 	}
-	private WebElement findElement(By by) {
+	protected WebElement findElement(By by) {
 		scrollToElement(by);
 		return driver.findElement(by);
 	}
@@ -1311,7 +1312,7 @@ public class CommonLibrary {
 	protected void clickOnELementUsingActions(WebElement element) {
 		/*Actions actions = new Actions(driver);
 		actions.moveToElement(element).click().perform();*/
-
+		
 		//---altered code
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).perform();
@@ -1319,14 +1320,19 @@ public class CommonLibrary {
 		actions.sendKeys(Keys.DOWN).perform();
 		waitElement(1000);
 		actions.moveToElement(element).click().perform();
-
-		}
+	}
+	
 	protected void clickOnELementUsingJS(WebElement element) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		
-	}
 
+	}
+	
+	protected void clickOnEnterELementUsingJS(WebElement element) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
+	}
+	
 	protected void enterOnELementUsingJS(WebElement element,String value) {
 
 		String js = "arguments[0].setAttribute('value','"+value+"')";

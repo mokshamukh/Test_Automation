@@ -23,38 +23,41 @@ public class EPP_WorkSummaryList extends CommonLibrary {
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 50), this);
 		eppCreatePayment = new EPP_CreatePayment(driver);
 	}
-	
-	
+
+
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Work Summary')]");
-	
+
 	public String eppWorkSummary = "EPP_WorkSummary";
 	public String transactionIdList = "//div[@id='Refresh_PaymentCreationVerification']//a[@class='linkGeneral'][text()='%s']";
-	
-	
+
+
 	public void selectTransactionIDFromList() throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppWorkSummary, "Work Summary List", title);
-			if(isElementPresent(title)){
-			String transactionID = eppCreatePayment.getTransactionID();
-			getDynamicElementClick(eppWorkSummary, "Work Summary List", transactionIdList, transactionID);
-			waitElement(8000);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppWorkSummary, "Work Summary List", title);
+				if(isElementPresent(title)){
+					String transactionID = eppCreatePayment.getTransactionID();
+					getDynamicElementClick(eppWorkSummary, "Work Summary List", transactionIdList, transactionID);
+					waitElement(8000);
+				}
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-	} finally {
-		if (stepResult == true) {
-			System.out.println("Pass");
-			new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully","Passed", driver, "Y");
-		} else {
-			System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully", "Failed", driver, "Y");
 		}
+
 	}
-		
-	}
-	
-	
+
+
 }

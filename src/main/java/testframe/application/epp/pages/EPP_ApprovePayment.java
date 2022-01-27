@@ -23,7 +23,7 @@ public class EPP_ApprovePayment extends CommonLibrary{
 
 	public String eppApprovePayment = "EPP_ApprovePayment";
 	public String paymentTabs = "//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'approval')]//..//..//a[text()='%s']";
-	
+
 	By screenTitle = By.xpath("//div[@id='headerBar']//td[contains(text(),'Verify Payment')]");
 	By paymentBanner = By.xpath("//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'approval')]");
 	By transactionvalue = By.xpath("//span[@id='TransactionIDReadOnly']");
@@ -37,76 +37,82 @@ public class EPP_ApprovePayment extends CommonLibrary{
 	By paymentApprovedMsg = By.xpath("//div[@id='Refresh_UserResponse']//td[@id='userResponseInfoTD'][@name='Payment.approved']");
 	By backutton = By.xpath("//div[@class='titleBarBackButton']");
 	By paymentDetails = By.xpath("//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'approval')]//..//..//a[text()='Payment Details']");
-	
+
 	public void verifyAndApprovePayments(String amountApproval,String dateField) throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppApprovePayment, "Approve Payment", screenTitle);
-			if(isElementPresent(screenTitle)) {
-				validateTextContains(eppApprovePayment,  "Payment Details Banner", paymentBanner, "This transaction has been submitted for approval following manual creation");
-				getDynamicElement("Payment Details Tab", paymentTabs, "Payment Details" );
-				isElementPresent(transactionvalue);
-				//validateTextEquals(eppApprovePayment, "Template Name", templateName, eppTemplateName);
-				waitElement(2000);
-				enterText(eppApprovePayment, "Approval Amount", approvalAmount, amountApproval);
-				waitElement(2000);
-				enterText(eppApprovePayment, "Value Date Field", valueDate, dateField);
-				waitElement(2000);
-				clickOnElement(eppApprovePayment, "Approve Payment", approveButton);
-				waitElement(10000);
-				isElementPresent(paymentApprovedMsg);
-				waitElement(3000);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-			new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Approved Successfully", "Passed", driver, "Y");
-			}else {
-				System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Could not Approve Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppApprovePayment, "Approve Payment", screenTitle);
+				if(isElementPresent(screenTitle)) {
+					validateTextContains(eppApprovePayment,  "Payment Details Banner", paymentBanner, "This transaction has been submitted for approval following manual creation");
+					getDynamicElement("Payment Details Tab", paymentTabs, "Payment Details" );
+					isElementPresent(transactionvalue);
+					//validateTextEquals(eppApprovePayment, "Template Name", templateName, eppTemplateName);
+					waitElement(2000);
+					enterText(eppApprovePayment, "Approval Amount", approvalAmount, amountApproval);
+					waitElement(2000);
+					enterText(eppApprovePayment, "Value Date Field", valueDate, dateField);
+					waitElement(2000);
+					clickOnElement(eppApprovePayment, "Approve Payment", approveButton);
+					waitElement(10000);
+					isElementPresent(paymentApprovedMsg);
+					waitElement(3000);
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Approved Successfully", "Passed", driver, "Y");
+				}else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Could not Approve Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}	
-	
+
 	public void verifyAndApproveOutgoingHVBankPaymentFRB(String amountApproval,String dateField) throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppApprovePayment, "Approve Payment", screenTitle);
-			if(isElementPresent(screenTitle)) {
-				validateTextContains(eppApprovePayment,  "Payment Details Banner", paymentBanner, "This transaction has been submitted for approval following manual creation");
-				clickOnElement(eppApprovePayment, "Payment Details Tab", paymentDetails);
-				isElementPresent(transactionvalue);
-				validateTextEquals(eppApprovePayment, "Template Name", templateName, "Outgoing High Value Bank Payment (FRB)");
-				waitElement(2000);
-				enterText(eppApprovePayment, "Approval Amount", approvalAmount, amountApproval);
-				waitElement(2000);
-				enterText(eppApprovePayment, "Value Date Field", valueDate, dateField);
-				waitElement(2000);
-				clickOnElement(eppApprovePayment, "Approve Payment", approveButton);
-				waitElement(7000);
-				isElementPresent(paymentApprovedMsg);
-				waitElement(3000);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-			new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Approved Successfully", "Passed", driver, "Y");
-			}else {
-				System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Could not Approve Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppApprovePayment, "Approve Payment", screenTitle);
+				if(isElementPresent(screenTitle)) {
+					validateTextContains(eppApprovePayment,  "Payment Details Banner", paymentBanner, "This transaction has been submitted for approval following manual creation");
+					clickOnElement(eppApprovePayment, "Payment Details Tab", paymentDetails);
+					isElementPresent(transactionvalue);
+					validateTextEquals(eppApprovePayment, "Template Name", templateName, "Outgoing High Value Bank Payment (FRB)");
+					waitElement(2000);
+					enterText(eppApprovePayment, "Approval Amount", approvalAmount, amountApproval);
+					waitElement(2000);
+					enterText(eppApprovePayment, "Value Date Field", valueDate, dateField);
+					waitElement(2000);
+					clickOnElement(eppApprovePayment, "Approve Payment", approveButton);
+					waitElement(7000);
+					isElementPresent(paymentApprovedMsg);
+					waitElement(3000);
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Approved Successfully", "Passed", driver, "Y");
+				}else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Could not Approve Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}	
-	
-	
-	
-	
+
+
+
+
 }

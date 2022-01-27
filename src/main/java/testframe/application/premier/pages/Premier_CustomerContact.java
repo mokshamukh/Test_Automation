@@ -75,6 +75,7 @@ public class Premier_CustomerContact extends CommonLibrary{
 
 	public void searchSSN(String sSN) throws Exception{
 		if (System.getProperty("runStep")=="Y"){
+			
 			boolean stepResult = false;
 			try {
 				Thread.sleep(7000);
@@ -84,7 +85,10 @@ public class Premier_CustomerContact extends CommonLibrary{
 					clickOnElement("Add Name Page", "Submit", submitSearch);
 					Thread.sleep(3000);
 					if(isElementPresent(nameLink)){
-						clickOnElement("Add Name Page", "Name link", nameLink);}
+						clickOnElement("Add Name Page", "Name link", nameLink);
+						
+						Thread.sleep(4000);
+						}
 					stepResult = true;
 				}
 
@@ -94,11 +98,11 @@ public class Premier_CustomerContact extends CommonLibrary{
 				if (stepResult == true) {
 					System.out.println("Pass");
 					new HTMLReportHelper().HtmlReportBody("Search SSN", "Search SSN on Contact page Successfully", "Passed",
-							driver, "Y");
+							driver, "N");
 				} else {
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Search SSN", "Could not Search SSN on Contact page Successfully", "Failed",
-							driver, "Y");
+							driver, "N");
 					System.setProperty("runStep","N");
 				}
 			}

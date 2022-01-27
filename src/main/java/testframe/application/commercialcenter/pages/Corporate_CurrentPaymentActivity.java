@@ -86,7 +86,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 	}
 	
 	//cancel By user
-	public void verifyCancelPaymentMessage(String transactionID) {
+	public void verifyCancelPaymentMessage(String transactionID) throws Exception {
 		boolean stepResult = false;
 		try {
 			String cancelPaymentMsg = "//div[text()='The payment "+transactionID+" has been successfully canceled.']";
@@ -95,12 +95,17 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
+			if (stepResult == true){
 				System.out.println("Pass -Current Payment Activity - Cancel Payment Msg");
-			else
+			new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+					"Cancel payment Msg Successfully", "Passed", driver, "Y");}
+			else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Could not Cancel payment msg Successfully", "Failed", driver, "Y");}
 		}
 	}
+	
 	
 	public void viewCurretPaymentDetails(String date,String transactionID,String amount, String status,String fromAccount,String toAccount,String initiator){
 		boolean stepResult = false;
@@ -193,7 +198,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 			String approvePaymentMsg = "//div[text()='Payment "+transactionID+" successfully approved.']";
-			isElementPresent(returnByElement("Cancel Payment alert Msg", approvePaymentMsg));
+			isElementPresent(returnByElement("Approve Payment alert Msg", approvePaymentMsg));
 			stepResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -324,7 +329,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 					enterText("Corporate Current Payment Activity", "Reject Reason Field", rejectReasonTextField, reason);
 					clickOnElement("Corporate Current Payment Activity", "Ok Button", okButton);
 					Thread.sleep(4000);
-					verifyApproveACHPaymentMessage(transactionID);
+					verifyRejectACHPaymentMessage(transactionID);
 				}
 			}
 			stepResult = true;
@@ -353,7 +358,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 				if(isElementPresent(cancelWarningMsg)){
 					clickOnElement("Corporate Current Payment Activity", "Yes Button", warningYesButton);
 					Thread.sleep(4000);
-					verifyApprovePaymentMessage(transactionID);
+					verifyCancelPaymentMessage(transactionID);
 				}
 			}
 			stepResult = true;
@@ -367,5 +372,30 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		}
 	}
 	
+	
+	public void verifyRejectACHPaymentMessage(String transactionID) throws Exception {
+		boolean stepResult = false;
+		try {
+			String rejectPaymentMsg = "//div[text()='Payment "+transactionID+" has been successfully rejected.']";
+			isElementPresent(returnByElement("Reject Payment alert Msg", rejectPaymentMsg));
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true){
+				System.out.println("Pass -Current Payment Activity - Reject Payment Msg");
+			new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+					"Reject payment Msg Successfully", "Passed", driver, "Y");}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Could not reject payment msg Successfully", "Failed", driver, "Y");}
+		}
+	}
+	
+	
+	
+	
+
 }
 

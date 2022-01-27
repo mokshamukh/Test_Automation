@@ -25,7 +25,7 @@ public class EPP_ProductSelection extends CommonLibrary{
 		// TODO Auto-generated constructor stub
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 50), this);
 	}
-	
+
 	public String eppproductSelectionPage ="EPP_ProductSelection";
 	public String eppdisclaimerPage = "EPP_DisclaimerPage";
 
@@ -34,34 +34,37 @@ public class EPP_ProductSelection extends CommonLibrary{
 	By disclaimerBox = By.xpath("//div[@class='legalDisclaimerBox']");
 	By disclaimerContinueBtn = By.xpath("//div[@id='img_button_continue']");
 
-	
-	
+
+
 	public void selectProductEPP() throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
-			clickOnElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
-			waitElement(30000);
-			switchToWindowWithTitleContaining("Unauthorized Access Warning");
-			waitElement(6000);
-			if(isElementPresent(disclaimerBox)) {
-			clickOnElement(eppdisclaimerPage, "Disclaimer", disclaimerContinueBtn);
-			waitElement(6000);
-			stepResult = true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Product_Selection EPP - EPP application", "Product Selected Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Product_Selection EPP - EPP application","Could not Select Product Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
+				clickOnElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
+				waitElement(30000);
+				switchToWindowWithTitleContaining("Unauthorized Access Warning");
+				waitElement(6000);
+				if(isElementPresent(disclaimerBox)) {
+					clickOnElement(eppdisclaimerPage, "Disclaimer", disclaimerContinueBtn);
+					waitElement(6000);
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Product_Selection EPP - EPP application", "Product Selected Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Product_Selection EPP - EPP application","Could not Select Product Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
-		
+
 	}
-	
+
 }

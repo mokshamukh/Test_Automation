@@ -27,6 +27,7 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 	
 	//frame name = mainfooter
 	By duplicateTransID = By.xpath("//form[@name='duplicateCheckForm']//a[@class='linkGeneral']");
+	String dupTransID = "//form[@name='duplicateCheckForm']//a[contains(text(),'%s')]";
 	By paymentTitle = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Details')]");
 	By transactionStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Duplicate Content')]");
     By selectCancelPaymentAction = By.xpath("//select[@id='ActionSelect'][contains(.,'')]");
@@ -38,6 +39,7 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 	
 	
     public void selectCancelDuplicatePayment() throws Exception {
+    	if (System.getProperty("runStep")=="Y"){
     	boolean stepResult = false;
     	try {
 			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
@@ -60,11 +62,14 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Cancel Duplicate - EPP application","Could not Select Cancel Payment Successfully", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
 			}
 		}
+    	}
 }
     
     public void selectReleaseHoldPayment() throws Exception {
+    	if (System.getProperty("runStep")=="Y"){
     	boolean stepResult = false;
     	try {
 			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
@@ -87,16 +92,25 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Release Hold - EPP application","Could not Select Release From Duplicate Hold Successfully", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
 			}
 		}
+    	}
 }
 
     
-    public void selectRepairPayment() throws Exception {
+    public void selectRepairPayment(String strTransIDVal) throws Exception {
+    	if (System.getProperty("runStep")=="Y"){
     	boolean stepResult = false;
     	try {
-			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
-			clickOnElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+    		if(!strTransIDVal.equals("")){
+    			
+    			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", getDynamicElement("Duplicate Transaction ID",dupTransID,strTransIDVal));
+				clickOnElement(eppDuplicatePayments, "Duplicate Transaction ID", getDynamicElement("Duplicate Transaction ID",dupTransID,strTransIDVal));
+    		}else{
+    			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+				clickOnElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+    		}
 			waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", paymentTitle);
 			if(isElementPresent(transactionStatus)) {
 				driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Repair Payment')]")).click();
@@ -114,8 +128,10 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Repair Payment - EPP application","Could not Select Repair Payment Successfully", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
 			}
 		}
+    	}
 }
     
     

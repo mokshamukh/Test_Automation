@@ -25,6 +25,14 @@ public class Corporate_HomeMenu extends CommonLibrary {
 	By futurePaymentActivityField = By.xpath("//span[text()='Future']");
 	By repeatingPaymentActivity = By.xpath("//span[text()='Repeating']");
 	By aCHPaymentsField = By.xpath("//span[text()='ACH Payments']");
+	By wireTransfers = By.xpath("//span[text()='Wire Transfers']");
+	By newWireTransfer = By.xpath("//span[text()='New Wire Transfer']");
+	By manageWireTemplate = By.xpath("//span[text()='Manage Wire Templates']");
+	By payees = By.xpath("//span[text()='Payees']");
+	By newPayee = By.xpath("//span[text()='New Payee']");
+	By managePayees = By.xpath("//span[text()='Manage Payees']");
+	
+	
 	String subOpt = "//li/a[text()='%s']";
 	By corpRepublicBankLogo = By.xpath("//img[@class='main-logo']");
 	By newAchBatchTemplateField = By.xpath("//span[text()='New ACH Batch']");
@@ -273,6 +281,137 @@ public class Corporate_HomeMenu extends CommonLibrary {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
 						"Could not click on Recurring payment activity Successfully", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void clickOnWireTransfers() throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			clickOnElement("Home Page", "Wire Transfers", wireTransfers);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - submenu bar");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"click on Wire Transfers Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"Could not click on Wire Transfers Successfully", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	
+	public void clickOnNewWireTransfer() throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			clickOnElement("Home Page", "New Wire Transfer", newWireTransfer);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - submenu bar");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"click on New Wire Transfer Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"Could not click on New Wire Transfer Successfully", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	
+	public void clickOnManageWireTemplates() throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			clickOnElement("Home Page", "Manage Wire Templates", manageWireTemplate);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - submenu bar");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"click on Manage Wire Templates Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"Could not click on Manage Wire Templates Successfully", "Failed", driver, "Y");
+			}
+		}
+	
+	}
+		
+
+	public void clickOnPayees() throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			clickOnElement("Home Page", "Payees", payees);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - submenu bar");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"click on Payees Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"Could not click on Payees Successfully", "Failed", driver, "Y");
+			}
+		}
+	}
+		
+	public void clickOnNewPayee() throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			clickOnElement("Home Page", "New Payee", newPayee);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - submenu bar");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"click on New Payee Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"Could not click on New Payee Successfully", "Failed", driver, "Y");
+			}
+		}
+	}
+		
+	
+	public void clickOnManagePayees() throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			clickOnElement("Home Page", "Manage Payees", managePayees);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - submenu bar");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"click on Manage Payees Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+						"Could not click on Manage Payees Successfully", "Failed", driver, "Y");
 			}
 		}
 	}

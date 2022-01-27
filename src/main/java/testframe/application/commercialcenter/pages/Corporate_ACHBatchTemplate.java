@@ -106,7 +106,7 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 			if (!cardType.equals("")) {
 				driver.findElement(By.xpath("//p-dropdown[@inputid='debitCredit-input']//div/span[text()='Select']")).click();
 				selectElementFromListbox("ACH Batch Template", "Debit/redit", debitCreditField, debitcreditList,cardType);
-				waitElement(2000);
+				//waitElement(2000);
 			}
 			if (!batchType.equals("")) {
 				driver.findElement(By.xpath("//p-dropdown[@inputid='batchType-input']//div/span[text()='Select']")).click();

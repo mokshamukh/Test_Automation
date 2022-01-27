@@ -20,7 +20,7 @@ public class EPP_Login extends CommonLibrary {
 	}
 
 	public String eppLoginPage = "EPP_LoginPage";
-	
+
 
 	By loginLogo = By.xpath("//h2[text()='Log in to your account']");
 	By userID = By.xpath("//input[@id='usrName']");
@@ -28,53 +28,59 @@ public class EPP_Login extends CommonLibrary {
 	By loginButton = By.xpath("//button[text()='Log in']");
 	By securityQuestLogo = By.xpath(" //h2[@id='securityQuestionsHeading']");
 	By securityQuest = By.xpath("//h2[@id='securityQuestionsHeading']");
-	
-	
+
+
 	public void launchApplication(String url) throws Exception {
-		boolean stepResult = false;
-		try {
-			goTo(url);
-			isElementPresent(loginLogo);
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Launch EPP - EPP application", "Launch Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Launch EPP - EPP application","Could not Launch Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				goTo(url);
+				isElementPresent(loginLogo);
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Launch EPP - EPP application", "Launch Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Launch EPP - EPP application","Could not Launch Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void loginEppApplication (String eppUserID, String eppPswd) throws Exception {
-		boolean stepResult = false;
-		try {
-			waitForPresenceOfElement(eppLoginPage, "Login Logo", loginLogo);
-			isElementPresent(loginLogo);
-			enterText(eppLoginPage, "EPPUserID", userID, eppUserID);
-			enterText(eppLoginPage, "EPPPswd", password, eppPswd);
-			clickOnElement(eppLoginPage, "LoginButton", loginButton);
-			waitForPresenceOfElement(eppLoginPage, "Security Question", securityQuest);
-			stepResult = true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Login EPP - EPP application", "Login Successfully","Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Login EPP - EPP application","Could not Login Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppLoginPage, "Login Logo", loginLogo);
+				isElementPresent(loginLogo);
+				enterText(eppLoginPage, "EPPUserID", userID, eppUserID);
+				enterText(eppLoginPage, "EPPPswd", password, eppPswd);
+				clickOnElement(eppLoginPage, "LoginButton", loginButton);
+				waitForPresenceOfElement(eppLoginPage, "Security Question", securityQuest);
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Login EPP - EPP application", "Login Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Login EPP - EPP application","Could not Login Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
-	
+
 
 }
