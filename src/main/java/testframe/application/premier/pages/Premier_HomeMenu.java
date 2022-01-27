@@ -65,7 +65,18 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By changeAccountSDB =  By.xpath("//a[text()='Safe Deposit Box']/following-sibling::ul/li/a[contains(text(),'Change Account')]");
 	public By collateralMenu = By.xpath("//a[text()='Collateral']");
 	public By newCollateral = By.xpath("//a[text()='New Collateral']");
-
+	public By collateralInquirySubMenu = By.xpath("//a[text()='Collateral Inquiry']");
+	public By changeCollateralSubMenu = By.xpath("//a[text()='Change Collateral']");
+	public By deleteCollateralSubMenu = By.xpath("//a[text()='Delete Collateral']");
+	public By masterAgreementsMenu = By.xpath("//a[text()='Master Agreements']");
+	public By newAgreements = By.xpath("//a[text()='New Agreement']");
+	public By masterAgreementInquire =  By.xpath("//a[text()='Master Agreements']/../ul//a[(text()='Inquire')]");
+	public By newCommitment = By.xpath("//a[text()='New Commitment']");
+	public By newLineOfCredit = By.xpath("//a[text()='New Line of Credit']");
+	public By newLetterOfCredit = By.xpath("//a[text()='New Letter of Credit']");
+	public By newSubLoan = By.xpath("//a[text()='New Sub Loan']");
+	public By newMasterMortgage = By.xpath("//a[text()='New Master Mortgage']");
+	
 	public Premier_HomeMenu(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -1142,5 +1153,279 @@ public class Premier_HomeMenu extends CommonLibrary {
 
 			}
 		}
-	} 
+	}
+	
+	public void collateralInquirySubMenu() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(collateralMenu)){
+					clickOnElement("Home Menu Page", "Collateral Inquiry SubMenu", collateralInquirySubMenu);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Collateral Inquiry from Menu", "SubMenu Collateral Inquiry selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Collateral Inquiry from Menu", "Could not select SubMenu Collateral Inquiry.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+
+			}
+		}
+	}
+	
+	public void changeCollateralSubMenu() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(collateralMenu)){
+					clickOnElement("Home Menu Page", "Change Collateral SubMenu", changeCollateralSubMenu);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Change Collateral from Menu", "SubMenu Change Collateral selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Change Collateral from Menu", "Could not select SubMenu Change Collateral.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+
+			}
+		}
+	}
+	
+	public void deleteCollateralSubMenu() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(collateralMenu)){
+					clickOnElement("Home Menu Page", "Delete Collateral SubMenu", deleteCollateralSubMenu);
+					stepResult = true;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select delete Collateral from Menu", "SubMenu delete Collateral selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select delete Collateral from Menu", "Could not select SubMenu delete Collateral.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+
+			}
+		}
+	}
+	
+	public void selectMasterAgreementsMenu() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "Master Agreements field", masterAgreementsMenu);
+					stepResult = true;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Master Agreements from Menu", "Menu Master Agreements selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Master Agreements from Menu", "Could not select Menu Master Agreements.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void selectNewAgreement() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "New Agreement field", newAgreements);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select New Agreement from Menu", "Menu New Agreement selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select New Agreement from Menu", "Could not select Menu New Agreement.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void masterAgreementInquire() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "Master Agreement Inquire field", masterAgreementInquire);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Master Agreement Inquire from Menu", "Master Agreement Inquire selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Master Agreement Inquire from Menu", "Could not select Master Agreement Inquire.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void selectNewCommitment() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "New Commitment field", newCommitment);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select New Commitment from Menu", "Menu New Commitment selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select New Commitment from Menu", "Could not select Menu New Commitment.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void selectNewLineOfCredit() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "New Line of Credit field", newLineOfCredit);
+					stepResult = true;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select New Line of Credit from Menu", "Menu New Line of Credit selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select New Line of Credit from Menu", "Could not select Menu New Line of Credit.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void selectNewLetterOfCredit() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "New Letter of Credit field", newLetterOfCredit);
+					stepResult = true;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select New Letter of Credit from Menu", "Menu New Letter of Credit selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select New Letter of Credit from Menu", "Could not select Menu New Letter of Credit.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void selectNewSubLoan() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "New Sub Loan field", newSubLoan);
+					stepResult = true;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select New Sub Loan from Menu", "Menu New Sub Loan selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select New Sub Loan from Menu", "Could not select Menu New Sub Loan.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void selectMasterMortgage() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(masterAgreementsMenu)){
+					clickOnElement("Home Menu Page", "New Master Mortgage field", newMasterMortgage);
+					stepResult = true;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select New Master Mortgage from Menu", "Menu New Master Mortgage selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select New Master Mortgage from Menu", "Could not select Menu New Master Mortgage.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
 }

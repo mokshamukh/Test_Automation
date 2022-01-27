@@ -7,6 +7,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.DateTimeHelper;
 import testframe.common.utilities.ExcelReader;
 
 public class Premier_SafeDepositBox extends CommonLibrary{
@@ -41,7 +42,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By selectBillingMethod =  By.xpath("//select[contains(@id,'BillingCode')]");
 	public By chargeAccount =  By.xpath("//input[contains(@id,'ChargeAccountNumber')]");
 	public By selectBillingFrequency =  By.xpath("//select[contains(@id,'BillingFrequency')]");
-	public By lastBillingDate =  By.xpath("//input[contains(@id,'NextBillingDate')]");
+	public By nextBillingDate =  By.xpath("//input[contains(@id,'NextBillingDate')]");
 	String accountNameInquiryPage =  "//td//u[contains(text(),'%s')]";
 	String relationshipInquiryPage =  "//td[contains(text(),'%s')]";
 	public By productList =  By.xpath("//select[contains(@name,'ProductNumber')]");
@@ -55,7 +56,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By billingMethodText = By.xpath("//td[text()='Billing Method:']/following-sibling::td");
 	String sdbChangeHeader = "//a[contains(text(),'%s')]";
 	public By updateCurrentRentDue =  By.xpath("//input[contains(@id,'CurrRentDue')]");
-	public By updateLastBillingDate =  By.xpath("//input[contains(@id,'NextBillingDate')]");
+	public By updateNextBillingDate =  By.xpath("//input[contains(@id,'NextBillingDate')]");
 	public By updateBillingFrequency =  By.xpath("//select[contains(@id,'BillingFrequency')]");
 	public By updateBillingCode =  By.xpath("//select[contains(@id,'BillingCode')]");
 	public By updateChargeAccount =  By.xpath("//input[contains(@id,'ChargeAccountNumber')]");
@@ -63,7 +64,8 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By updateBranchNumBtn =  By.xpath("(//td/input[contains(@id,'BranchNumber')])[3]");
 	public By updateEscheatDate =  By.xpath("//input[contains(@id,'EscheatDate')]");
 	//public By updateBoxRentCode =  By.xpath("//input[contains(@id,'BoxRentCode')]");
-
+	public By balancesTab = By.xpath("//li//a[text()='Balances']");
+	//public By codesTab = By.xpath("//li//a[text()='Codes']");
 	public By verifyCurrentRentDue =  By.xpath("(//td[text()='Current Rent Due:']/following-sibling::td)[1]");
 	public By verifyLastBillingDate =  By.xpath("(//td[text()='Last Billing Date:']/following-sibling::td)[1]");
 	public By verifyBillingFrequency =  By.xpath("(//td[text()='Billing Frequency:']/following-sibling::td)[1]");
@@ -81,9 +83,18 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public By statementCycleInquiryPage =  By.xpath("//td[text()='Statement Cycle:']/following-sibling::td[1]");
 	public By warningInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
 	public By transRestrictionCodeInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
-
-
-
+	public By searchBoxNumber = By.xpath("//input[contains(@id,'BoxNumber')]/../img");
+	public By boxSizeButton =  By.xpath("//input[contains(@id,'bBoxSize')]");
+	String boxSizeList =  "//select[contains(@id,'dBoxSize')]/option[contains(text(),'%s')]";
+	public By sdbInventoryTitle = By.xpath("//td/a[text()='Safe Deposit Box Inventory Search']");
+	public By searchedBoxNumberLink = By.xpath("(//td/u)[1]");
+	By warningHeader = By.xpath("//tr[@class='captionBar']//td[@class='caption-text'][contains(text(),'Warning')]");
+	By warning1 = By.xpath("//td/u[contains(text(),'Accounting Branch Does Not Match Product Default (0)')]");
+	By warningCheckBox1 = By.xpath("//td/u[contains(text(),'Accounting Branch Does Not Match Product Default (0)')]/../..//input");
+	By warning2 = By.xpath("//td/u[contains(text(),'Branch Region Does Not Match Portfolio Branch Region')]");
+	By warningCheckBox2 = By.xpath("//td/u[contains(text(),'Branch Region Does Not Match Portfolio Branch Region')]/../..//input");
+	By saveBtn = By.xpath("//*[@title='Save']");
+	
 	public Premier_SafeDepositBox(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -123,7 +134,6 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				switchToWindowWithTitleContaining("Name Search");
 				driver.switchTo().frame("bottom");
 				new Premier_CustomerContact(driver).searchSSN(sSN);
-
 				switchToWindowWithTitleContaining("Institution");
 				driver.switchTo().frame("Main");
 
@@ -167,17 +177,29 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 						driver, "Y");
 			}
 		}}
-	public void newSDBAccount_CodesScreen(String sAccountNum, String sRentCode,String excelFilePath, String sheetName, int rowNo) throws Exception {
+	public void newSDBAccount_CodesScreen(String sAccountNum, String sBoxSize,String excelFilePath, String sheetName, int rowNo) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(codesPageTitle)) {
 				if (!sAccountNum.equals("")) {
 					enterText("New Safe Deposit Box Account Page", "Account Number", accountNumberTextbox, sAccountNum);
 				}				
-				if (!sRentCode.equals("")) {
+				/*if (!sRentCode.equals("")) {
 					clickOnElement("New Safe Deposit Box Account Page", "Rent Code Button",rentCodeButton);
 					Thread.sleep(1000);
 					clickOnElement("New Safe Deposit Box Account Page", "Rent Code list",getDynamicElement("Rent Code list",selectRentCode,sRentCode));
+				}*/
+				if (!sBoxSize.equals("")) {
+					clickOnElement("New Safe Deposit Box Account Page", "Box Number Search Icon", searchBoxNumber);
+					Thread.sleep(4000);
+					switchToWindowWithTitleContaining("Safe Deposit Box Inventory Search");
+					Thread.sleep(4000);
+					driver.switchTo().frame("bottom");
+					searchBoxSize(sBoxSize);
+					Thread.sleep(4000);
+					switchToWindowWithTitleContaining("Institution");
+					driver.switchTo().frame("Main");
+					waitElement(2000);
 				}
 				waitElement(1500);
 				clickOnElement("New SDB Page", "Next Button", nextButton);
@@ -199,7 +221,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	}
 	
 	public void newSDBAccount_PaymentScreen(String sBillingMethod,String sChargeAccount,
-			String sBillingFrequency,String sLastBillingDate,String excelFilePath, String sheetName, int rowNo) throws Exception {
+			String sBillingFrequency,String sNextBillingDate,String excelFilePath, String sheetName, int rowNo) throws Exception {
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(paymentPageTitle)) {
@@ -214,8 +236,8 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				if (!sBillingFrequency.equals("")) {
 					selectElementByVisibleText("New Safe Deposit Box Account Page", "Billing Frequency Field", selectBillingFrequency, sBillingFrequency);
 				}
-				if (!sLastBillingDate.equals("")) {
-					enterText("New Safe Deposit Box Account Page", "Account Title Code", lastBillingDate, sLastBillingDate);
+				if (!sNextBillingDate.equals("")) {
+					enterText("New Safe Deposit Box Account Page", "Account Title Code", nextBillingDate, sNextBillingDate);
 				}
 				waitElement(1500);
 				stepResult = true;
@@ -239,6 +261,13 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 		try {
 			clickOnElement("New Safe Deposit Box Page", "Finish Button", finishButton);
 			Thread.sleep(5000);
+			if(isElementPresent(warningHeader)) {
+				if (isElementPresent(warning1)) {
+					clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+				}
+				clickOnElement("New Loan Page", "Save Button", saveBtn);
+				waitElement(2000);
+			}
 			validateElementPresent("New Safe Deposit Box Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
 			//switchToWindowWithTitleContaining("Institution");
@@ -264,6 +293,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 			if (isElementPresent(searchTitle2)) {
 				//clickOnElement("Search Account Page", "Account Number", accountSearch);
 				enterText("Search Account Page", "Account Number", accountSearch, accountNo);
+				waitElement(1000);
 				clickOnElement("Search Account Page", "Submit", submitSearch);
 				stepResult = true;
 			}	
@@ -280,7 +310,7 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 						driver, "Y");
 			}
 		}}
-	public void validateAccountDetails(String sAccountNumber,String customerName,String sCustomerRelationship,String sLastBillingDate, String sBillingFrequency,
+	public void validateAccountDetails(String sAccountNumber,String customerName,String sCustomerRelationship, String sBillingFrequency,
 			String sBillingMethod) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -290,8 +320,8 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				validateTextContains("Account Inquiry" , "Name field", getDynamicElement("Name field",accountNameInquiryPage,customerName), customerName);
 				validateTextContains("Account Inquiry" , "Relationship field", getDynamicElement("Relationship field",relationshipInquiryPage,sCustomerRelationship), sCustomerRelationship);
 
-				if (!sLastBillingDate.equals(""))
-					validateTextEquals("Account Inquiry" , "Last Billing Date field", lastBillingDateText, sLastBillingDate);
+				//if (!sNextBillingDate.equals(""))
+				//	validateTextEquals("Account Inquiry" , "Last Billing Date field", lastBillingDateText, sNextBillingDate);
 				if (!sBillingFrequency.equals(""))
 					validateTextEquals("Account Inquiry" , "Billing Frequency field", billingFrequencyText, sBillingFrequency);
 				if (!sBillingMethod.equals(""))
@@ -338,7 +368,14 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			clickOnElement("Change Page", "Save Button", saveButton2);
-			Thread.sleep(2500);
+			//Thread.sleep(2500);
+			if(isElementPresent(warningHeader)) {
+				if (isElementPresent(warning2)) {
+					clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+				}
+				clickOnElement("New Loan Page", "Save Button", saveBtn);
+				waitElement(2000);
+			}
 			validateElementPresent("Inquiry Page", "Search Title", searchTitle2);
 			driver.switchTo().defaultContent();
 			switchToWindowWithTitleContaining("Institution");
@@ -355,19 +392,21 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Click on Save Button", "Could not clicked on Save Button", "Failed",driver, "Y");
 			}	
 		}}
-	public void changeAccountCodesDetails(String sAccountNumber,String sCurrentRentDue,String sLastBillingDate, 
+	public void changeAccountCodesDetails(String sAccountNumber,String sCurrentRentDue,String sNextBillingDate, 
 			String sBillingFrequency,String sBillingCode, String sChargeAccountNumber, String sBoxRentCode,
 			String sEscheatDate) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(getDynamicElement("Account Number Header field",sdbChangeHeader,sAccountNumber))){
-
+				
+				clickOnElement("Change Account Page", "Balances Tab Field",balancesTab);
+				waitElement(2000);
 				if (!sCurrentRentDue.equals("")) {
 					clearAndType("Change Account Page", "Current Rent Due field", updateCurrentRentDue, sCurrentRentDue);
 				}
 
-				if (!sLastBillingDate.equals("")) {
-					clearAndType("Change Account Page", "Last Billing Date field", updateLastBillingDate, sLastBillingDate);
+				if (!sNextBillingDate.equals("")) {
+					clearAndType("Change Account Page", "Last Billing Date field", updateNextBillingDate, sNextBillingDate);
 				}
 
 				if (!sBillingFrequency.equals("")) {
@@ -381,7 +420,8 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				if (!sChargeAccountNumber.equals("")) {
 					clearAndType("Change Account Page", "Charge Account Number field", updateChargeAccount, sChargeAccountNumber);
 				}
-
+				clickOnElement("Change Account Page", "Codes Tab Field",codesTab);
+				waitElement(2000);
 				if (!sBoxRentCode.equals("")) {
 					clickOnElement("Change Account Page", "Rent Code field",  boxRentCodeInput);
 					clearText("Change Account Page", "Rent Code field", updateBoxRentCodeInput);
@@ -390,7 +430,6 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 					clickOnElement("Change Account Page", "Rent Code Button",rentCodeButton);
 					Thread.sleep(1000);
 					clickOnElement("Change Account Page", "Rent Code list",getDynamicElement("Rent Code list",selectRentCode,sBoxRentCode));
-
 				}
 				if (!sEscheatDate.equals("")) {
 					clearAndType("Change Account Page", "Escheat Date field", updateEscheatDate, sEscheatDate);
@@ -414,14 +453,16 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 	public void validateAccountBalancesAfterChange(String sAccountNumber,String sVerifyCurrentRentDue, String sVerifyLastBillingDate, String sVerifyBillingFrequency, String sVerifyBillingMethod) throws Exception {
 		boolean stepResult = false;
 		try {
-			waitElement(2500);
+			waitElement(3500);
 			//clickOnElement("Account Inquiry Page", "Codes Tab Field",codesTab);	
 			switchToWithinFrameWithName("bottom");
 			if (isElementPresent(getDynamicElement("Account Number Header field",sdbInquiryHeader,sAccountNumber))){			
 				if (!sVerifyCurrentRentDue.equals(""))
 					validateTextContains("Account Inquiry" , "Current Rent Due field", verifyCurrentRentDue, sVerifyCurrentRentDue);
-				if (!sVerifyLastBillingDate.equals(""))
+				if (!sVerifyLastBillingDate.equals("")) {
+					sVerifyLastBillingDate = new DateTimeHelper().getDateTime(sVerifyLastBillingDate,"MM/dd/yyyy","MMM dd, yyyy");
 					validateTextEquals("Account Inquiry" , "Last Billing Date field", verifyLastBillingDate, sVerifyLastBillingDate);
+				}
 				if (!sVerifyBillingFrequency.equals(""))
 					validateTextEquals("Account Inquiry" , "Billing Frequency field", verifyBillingFrequency, sVerifyBillingFrequency);
 				if (!sVerifyBillingMethod.equals(""))
@@ -495,5 +536,37 @@ public class Premier_SafeDepositBox extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Enter Details on New SDB Customer Screen", "Could not entered details", "Failed",
 						driver, "Y");
 			}
-		}}
+		}
+	}
+	
+	public void searchBoxSize(String sBoxSize) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+		boolean stepResult = false;
+		try {
+			//switchToWithinFrameWithName("Main");
+			if (isElementPresent(sdbInventoryTitle)) {
+				Thread.sleep(2000);
+				clickOnElement("New SDB Inventory Page", "Box Size Button",boxSizeButton);
+				Thread.sleep(2000);
+				clickOnElement("New SDB Inventory Page", "Box Size list",getDynamicElement("Box Size list",boxSizeList,sBoxSize));
+				clickOnElement("Search Account Page", "Submit button", submitSearch);
+				waitElement(3000);
+				clickOnElement("Search SDB Inventory Page", "Search Account Link", searchedBoxNumberLink);
+				Thread.sleep(2000);
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Search Account", "Search Account  Successfully","Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Search Account", "Could not search the Account","Failed", driver, "Y");
+				System.setProperty("runStep","N");
+			}
+		}
+	}
+}
 }

@@ -822,12 +822,13 @@ public class CommonLibrary {
 
 		return found;
 	}
-
+	
 	protected Boolean isElementPresentZeroWait(By by) throws Exception {
 		Boolean found = false;
 		String errorMessageToDisplay = "Could Not Find Locator [ " + by + "]";
 		turnOffImplicitWaits();
 		try {
+			Thread.sleep(2000);
 			int elementCount = driver.findElements(by).size();
 			turnOnImplicitWaits();
 			if (elementCount > 0) {
@@ -838,16 +839,18 @@ public class CommonLibrary {
 			Log.error(errorMessageToDisplay, e);
 			throw new Exception(errorMessageToDisplay);
 		}
+		
 		return found;
 	}
-
+	
 	protected void turnOffImplicitWaits() {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-	}
+	    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
+	}
+	
 	protected void turnOnImplicitWaits() throws IOException {
-		String implicitWait =new PropertyReader().getParamfromConfigProperties("implicitlyWaitInSecond");
-		driver.manage().timeouts().implicitlyWait(Integer.valueOf(implicitWait), TimeUnit.SECONDS);
+	    String implicitWait =new PropertyReader().getParamfromConfigProperties("implicitlyWaitInSecond");
+	    driver.manage().timeouts().implicitlyWait(Integer.valueOf(implicitWait), TimeUnit.SECONDS);
 	}
 
 	/**
