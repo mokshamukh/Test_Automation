@@ -172,6 +172,17 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	By warning4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]");
 	By warningCheckBox4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]/../..//input");
 	//By saveBtn = By.xpath("//*[@title='Save']");
+	By maturityTab = By.xpath("//li/a[text()='Maturity']");
+	By maturityLabel = By.xpath("//td/a[text()='Maturity']");
+	By maturityDate = By.xpath("//input[contains(@id,'MaturityDate')]");
+	By maturityTerm = By.xpath("(//input[contains(@id,'Term')])[1]");
+	By maturityTermCodeList = By.xpath("//select[contains(@id,'TermCode')]");
+	By maturityInitialDeposit = By.xpath("//input[contains(@id,'InitialDeposit')]");
+	By maturityIssueDate = By.xpath("//input[contains(@id,'OrigIssueDate')]");
+	By maturityContractDateList = By.xpath("//select[contains(@id,'ContractCode')]");
+	By maturityRateDateList = By.xpath("//select[contains(@id,'MaturityRateCode')]");
+	
+	String verifyMaturityData = "//table[@name='Maturity']//td[contains(text(),'%s')]";
 	
 	String removeNameIcon = "//u[text()='%s']/../../td/img[contains(@title,'Delete')]";
 
@@ -1564,6 +1575,111 @@ public class Premier_DepositAccounts extends CommonLibrary {
 				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Could not Validated Relationship Details on Inquiry page" , "Failed", driver, "Y");
 			}
 		}}
+
+	public void changeAccountMaturityDetails(String sAccountNumber, String sMaturityDate, String sMaturityTerm,
+			String sMaturityTermCode, String sMaturityInitialDeposit, String sMaturityIssueDate,
+			String sMaturityContractCode, String sMaturityRateMethod) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(
+						getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					 if (isElementPresent(maturityLabel)){
+
+						if (!sMaturityDate.equals("")) {
+							clearAndType("Change Account Page", "Maturity Date", maturityDate, sMaturityDate);
+						}
+						if (!sMaturityTerm.equals("")) {
+							clearAndType("Change Account Page", "Maturity Term", maturityTerm, sMaturityTerm);
+						}
+						if (!sMaturityTermCode.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Maturity Term Code", maturityTermCodeList,
+									sMaturityTermCode);
+						}
+						if (!sMaturityInitialDeposit.equals("")) {
+							clearAndType("Change Account Page", "Maturity Initial Deposit", maturityInitialDeposit, sMaturityInitialDeposit);
+						}
+						if (!sMaturityIssueDate.equals("")) {
+							clearAndType("Change Account Page", "Maturity Issue Date", maturityIssueDate, sMaturityIssueDate);
+						}
+						if (!sMaturityContractCode.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Maturity Contract Date", maturityContractDateList,
+									sMaturityContractCode);
+						}
+						if (!sMaturityRateMethod.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Maturity Rate Date", maturityRateDateList,
+									sMaturityRateMethod);
+						}
+						
+						stepResult = true;
+					 }
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details - Maturity",
+							"Account Details - Maturity changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details - Maturity", "Could not change account Details - Maturity",
+							"Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	
+	public void validateAccountDetailsMaturityAfterChange(String sAccountNumber, String sMaturityDate, String sMaturityTerm,
+			String sMaturityTermCode, String sMaturityInitialDeposit, String sMaturityIssueDate,
+			String sMaturityContractCode, String sMaturityRateMethod) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			clickOnElement("Account Inquiry Page", "Maturity Tab Field", maturityTab);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				if (!sMaturityDate.equals(""))
+					validateElementPresent("Account Inquiry", "Maturity Date",
+							getDynamicElement("Maturity Date", verifyMaturityData, sMaturityDate));
+				if (!sMaturityTerm.equals(""))
+					validateElementPresent("Account Inquiry", "Maturity Term Code",
+							getDynamicElement("Maturity Term Code", verifyMaturityData, sMaturityTerm+" "+sMaturityTermCode));
+				if (!sMaturityInitialDeposit.equals(""))
+					validateElementPresent("Account Inquiry", "Maturity Initial Deposit",
+							getDynamicElement("Maturity Initial Deposit", verifyMaturityData, sMaturityInitialDeposit));
+				if (!sMaturityIssueDate.equals(""))
+					validateElementPresent("Account Inquiry", "Maturity Issue Date",
+							getDynamicElement("Maturity Issue Date", verifyMaturityData, sMaturityIssueDate));
+				if (!sMaturityContractCode.equals(""))
+					validateElementPresent("Account Inquiry", "Maturity Contract Code",
+							getDynamicElement("Maturity Contract Code", verifyMaturityData, sMaturityContractCode));
+				if (!sMaturityRateMethod.equals(""))
+					validateElementPresent("Account Inquiry", "Maturity Rate Method",
+							getDynamicElement("Maturity Rate Method", verifyMaturityData, sMaturityRateMethod));
+				
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Maturity Validation",
+						"Validated Account Details - Maturity on Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Maturity Validation",
+						"Could not Validated Account Details - Maturity on Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
 
 
 }
