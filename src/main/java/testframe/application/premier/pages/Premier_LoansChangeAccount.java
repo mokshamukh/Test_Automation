@@ -12,7 +12,7 @@ import testframe.common.utilities.DateTimeHelper;
 /**
  * PageNage : Premier_LoansNewNote
  * 
- * @author shilpa.thangapalam
+ * @author Onkar.Narlawar
  */
 
 public class Premier_LoansChangeAccount extends CommonLibrary{
@@ -27,6 +27,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	String tempVar;
 	By customerPageTitle =  By.xpath("//a[text()='Step 2 - Customer']");
 	public By productList =  By.xpath("//select[contains(@name,'ProductNumber')]");
+	public By searchTitle = By.xpath("//label[text()='Search']");
 	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By saveButton2 = By.xpath("//img[contains(@title,'Save')]");
 	By codesPageTitle =  By.xpath("//a[text()='Step 3 - Codes']");
@@ -109,6 +110,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By paymentTab = By.xpath("//li//a[text()='Payment']");
 	public By relationshipTab = By.xpath("//li//a[text()='Relationships']");
 	public By balancesTab = By.xpath("//li//a[text()='Balances']");
+	public By collateralUnderBalancesTab = By.xpath("//li//a[text()='Balances']/following-sibling::div//a[text()='Collateral']");
 	public By paymentFrequencyInquiryPage =  By.xpath("//td[text()='Payment Frequency:']/following-sibling::td[1]");
 	public By paymentRestrictionCodeInquiryPage =  By.xpath("//td[text()='Payment Restriction Code:']/following-sibling::td[1]");
 	public By paymentRestrictionCodeOverrideInquiryPage =  By.xpath("//td[text()='Payment Restriction Code Override:']/following-sibling::td[1]");	
@@ -133,7 +135,12 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By nonAccrualLateChargeOptionInquiryPage = By.xpath("//td[text()='Non-Accrual Late Charge Option:']/following-sibling::td[1]");
 	public By automaticRecoveryOverrideInquiryPage = By.xpath("//td[text()='Automatic Recovery Override:']/following-sibling::td[1]");
 	public By nonAccrualDateInquiryPage = By.xpath("//td[text()='Date Non-Accrual:']/following-sibling::td[1]");
-
+	public By collateralBoxHeader =By.xpath("//td/a[text()='Collateral']");
+	public By SearchIConCollateral = By.xpath("//img[@title='Search For Collateral']");
+	public By collateralSearch = By.xpath("//label[contains(text(),'Collateral Record Number:')]/../following-sibling::td/input");
+	public By submitSearch = By.xpath("//button[text()='Submit']");
+	public By collateralRecordNoInquiryPage = By.xpath("//table[@name='Collateral to Loan Pledge Summary']//td/u");
+	
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
 	String purposeCodeList =  "//select[contains(@name,'PurposeCode')]/option[contains(text(),'%s')]";
@@ -141,14 +148,15 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	String custLineName = "//u[contains(text(),'%s')]";
 	String loanChangeHeader = "//a[contains(text(),'%s')]";
 	String loanChangeHeaderInquiry = "//td[contains(text(),'%s')]";
-	String relationshipAddName = "//u[text()='%s']/../../td/select[contains(@id,'RelationshipCode')]";
+	String relationshipAddName = "//*[text()='%s']/../../following-sibling::td/select[contains(@id,'RelationshipCode')]";
 	String newName = "(//td[contains(text(),'Name:')]/following-sibling::td/select[contains(@name,'RelatedToIdTMP')])[%s]";
 	String newEstatement = "(//td[contains(text(),'Name:')]/following-sibling::td/select[contains(@name,'EmailAddrIndicator1')])[%s]";
 	String newNameInquiryPage = "//table[@name='Relationships']//u[text()='%s']";
-	String updateName = "//b[text()='Name']/../../..//u[text()='%s']";
+	String updateName = "//b[text()='Name']/../../..//*[text()='%s']";
 	String newNameRelationshipInquiryPage = "//table[@name='Relationships']//u[text()='%s']/../../td[10]";
-	String removeNameIcon = "//u[text()='%s']/../../td/img[contains(@title,'Delete')]";
-
+	String removeNameIcon = "//*[text()='%s']/../../following-sibling::td/img[contains(@title,'Delete')]";
+	String searchAccountLink = "//td/a[contains(text(),'%s')]";	
+	
 	public void changeLoanAccountDetails(String sAccountNumber,String sClass, String sBranchRegion, String sAccountingMethod, String sWarning, String sPaymentFrequency, String sStatusCode, String sWriteDownStatus, String sLoanRatingCode1, String sPaymentRestrictionCode, String sPaymentRestrictionCodeOverride, String sBankruptcyChapter, String sBankruptcyStatus, String sBankruptcyPetitionFileDate) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -318,7 +326,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public void changeAccountDetails_AddRelationship(String sAccountNumber,String sName, String sSN, String sRelationship, String sEStatement) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
-			try {				
+			try {
 				clickOnElement("Change Account Page", "Relationship Tab Field",relationshipTab);
 				waitElement(2000);
 				if (isElementPresent(searchIconName)){
@@ -359,10 +367,10 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 						if (isElementPresent(warning2)) {
 							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
 						}
-						if (isElementPresent(warning1)) {
+						if (isElementPresentZeroWait(warning1)) {
 							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
 						}
-						if (isElementPresent(warning3)) {
+						if (isElementPresentZeroWait(warning3)) {
 							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
 						}
 						clickOnElement("New Loan Page", "Save Button", saveBtn);
@@ -416,7 +424,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public void changeAccountDetails_UpdateRelationship(String sAccountNumber,String sName, String sRelationship) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
-			try {			
+			try {
 				clickOnElement("Change Account Page", "Relationship Tab Field",relationshipTab);
 				waitElement(2000);
 				if (isElementPresent(getDynamicElement("Relationship Name",updateName,sName))) {
@@ -589,13 +597,13 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 						if (isElementPresent(warning2)) {
 							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
 						}
-						if (isElementPresent(warning1)) {
+						if (isElementPresentZeroWait(warning1)) {
 							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
 						}
-						if (isElementPresent(warning3)) {
+						if (isElementPresentZeroWait(warning3)) {
 							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
 						}
-						if (isElementPresent(warning4)) {
+						if (isElementPresentZeroWait(warning4)) {
 							clickOnElement("New Loan Page", "Warning 4 Checkbox", warningCheckBox4);
 						}
 						clickOnElement("New Loan Page", "Save Button", saveBtn);
@@ -657,7 +665,123 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 				new HTMLReportHelper().HtmlReportBody("Relationship Details Validation", "Could not Validated Relationship Details on Inquiry page" , "Failed", driver, "Y");
 
 			}
-		}}
+		}
+	}
+	
+	public void addCollateraltoLoanAccount(String sAccountNumber,String sCollateralRecordNumber) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {			
+				mouseHoverCickOnElement("Change Account Page", "Collateral Under Balances Tab Field",balancesTab,collateralUnderBalancesTab);
+				waitElement(2000);
+				if (isElementPresent(collateralBoxHeader)) {
+					if (!sCollateralRecordNumber.equals("")) {
+						clickOnElement("Change Account Page", "Collateral Search Icon", SearchIConCollateral);		
+						Thread.sleep(4000);
+						switchToWindowWithTitleContaining("Collateral Search");
+						Thread.sleep(4000);
+						//driver.switchTo().frame("bottom");
+						searchCollateral(sCollateralRecordNumber);
+						Thread.sleep(4000);
+						switchToWindowWithTitleContaining("Institution");
+						driver.switchTo().frame("Main");
+						waitElement(2000);
+					}
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(2000);
+					if(isElementPresent(warningHeader)) {
+						if (isElementPresent(warning2)) {
+							clickOnElement("Change Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+						}
+						if (isElementPresentZeroWait(warning1)) {
+							clickOnElement("Change Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+						}
+						if (isElementPresentZeroWait(warning3)) {
+							clickOnElement("Change Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+						}
+						if (isElementPresentZeroWait(warning4)) {
+							clickOnElement("Change Loan Page", "Warning 4 Checkbox", warningCheckBox4);
+						}
+						clickOnElement("Change Loan Page", "Save Button", saveBtn);
+						waitElement(2000);
+					}
+					validateElementPresent("Change Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;	
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Add Collateral to Loan Account Details", "Collateral details updated Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Add Collateral to Loan Account Details", "Could not update Collateral Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void searchCollateral(String scollateralNo) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				switchToWithinFrameWithName("Main");
+				if (isElementPresent(searchTitle)) {
+					clickOnElement("Search Collateral Page", "Collateral Number", collateralSearch);
+					enterText("Search Collateral Page", "Collateral Number", collateralSearch, scollateralNo);
+					clickOnElement("Search Collateral Page", "Submit", submitSearch);
+					waitElement(3000);
+					if (isElementPresent(getDynamicElement("Search Collateral Link",searchAccountLink,scollateralNo))){
+						clickOnElement("Search Collateral Page", "Searched Collateral Link", getDynamicElement("Search Account Link",searchAccountLink,scollateralNo));
+					}
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search Account", "Search Account  Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search Account", "Could not search the Account","Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void validateAccountDetailsAfterCollateralAdd(String sAccountNumber,String sCollateralRecordNumber) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+		boolean stepResult = false;
+		try {
+			mouseHoverCickOnElement("Change Account Page", "Collateral Under Balances Tab Field",balancesTab,collateralUnderBalancesTab);
+			waitElement(2000);			
+			switchToWithinFrameWithName("bottom");			
+			if (!sCollateralRecordNumber.equals("")) {
+				validateTextContains("Account Inquiry" , "Collateral Record Number",collateralRecordNoInquiryPage, sCollateralRecordNumber);
+			}
+			stepResult = true;
+			switchToDefaultContent();
+			driver.switchTo().frame("Main");									
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Validated Collateral Details on Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Could not Validated Collateral Details on Inquiry page" , "Failed", driver, "Y");
+				System.setProperty("runStep","N");
+			}
+		}
+	}
+	}
 }
 
 

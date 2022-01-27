@@ -30,7 +30,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
 	By newLineHeader = By.xpath("//td[text()='New Line']");
 	By newLineTitle = By.xpath("//td[contains(text(),'Search')]");
 	By portfolioNumber = By.xpath("//input[@name='Port']");
-	By customerPageTitle =  By.xpath("//a[text()='Step 2 - Customer']");
+	By customerPageTitle =  By.xpath("//a[contains(text(),'- Customer')]");
 	By custAddress = By.xpath("(//td[contains(text(),'Address:')])[1]/following-sibling::td//select[contains(@name,'RelatedToId')]");
 	By nextBtn = By.xpath("//button[text()='Next']");
 	By codesPageTitle =  By.xpath("//a[text()='Step 3 - Codes']");
@@ -279,7 +279,7 @@ public class Premier_LinesNewLine extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Search Line No", "Search Line Number on Line Inquiry page Successfully", "Passed",
+					new HTMLReportHelper().HtmlReportBody("Search Line No", "Line Number Searched Successfully", "Passed",
 							driver, "Y");
 				} else {
 					System.out.println("fail");

@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,6 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import testframe.common.reporting.Log;
+import testframe.common.utilities.PropertyReader;
 //import org.sikuli.script.Pattern;
 //import org.sikuli.script.Screen;
 
@@ -820,7 +822,36 @@ public class CommonLibrary {
 
 		return found;
 	}
+	
+	protected Boolean isElementPresentZeroWait(By by) throws Exception {
+		Boolean found = false;
+		String errorMessageToDisplay = "Could Not Find Locator [ " + by + "]";
+		turnOffImplicitWaits();
+		try {
+			Thread.sleep(2000);
+			int elementCount = driver.findElements(by).size();
+			turnOnImplicitWaits();
+			if (elementCount > 0) {
+				found = true;
+			}
+		} catch (Exception e) {
+			turnOnImplicitWaits();
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+		
+		return found;
+	}
+	
+	protected void turnOffImplicitWaits() {
+	    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
+	}
+	
+	protected void turnOnImplicitWaits() throws IOException {
+	    String implicitWait =new PropertyReader().getParamfromConfigProperties("implicitlyWaitInSecond");
+	    driver.manage().timeouts().implicitlyWait(Integer.valueOf(implicitWait), TimeUnit.SECONDS);
+	}
 	/**
 	 * Get Validate Element Present
 	 * 

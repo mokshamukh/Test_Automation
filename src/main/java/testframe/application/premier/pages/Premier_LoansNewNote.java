@@ -7,6 +7,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.ExcelReader;
 
 /**
  * PageNage : Premier_LoansNewNote
@@ -23,12 +24,13 @@ public class Premier_LoansNewNote extends CommonLibrary{
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 30), this);
 		premierPortfolioNew = new Premier_PortfolioNew(driver);
 	}
-
+	String sCollateralRecordNumber;
 	By customerPageTitle =  By.xpath("//a[text()='Step 2 - Customer']");
 	public By productList =  By.xpath("//select[contains(@name,'ProductNumber')]");
+	public By searchTitle = By.xpath("//label[text()='Search']");
 	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By saveButton2 = By.xpath("//img[contains(@title,'Save')]");
-	By codesPageTitle =  By.xpath("//a[text()='Step 3 - Codes']");
+	By codesPageTitle =  By.xpath("//a[contains(text(),'- Codes')]");
 	By noteNumber = By.xpath("//td[contains(text(),'Note Number:')]/following-sibling::td/input[contains(@id,'AccountNumber')]");
 	By cashProcceds = By.xpath("//td[contains(text(),'Cash Proceeds:')]/following-sibling::td/input[contains(@id,'OrigCashProceeds')]");
 	By maximumCredit = By.xpath("(//input[contains(@name,'MaximumCredit')])");
@@ -45,7 +47,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 	By responsibilityCodeInput =  By.xpath("(//input[contains(@name,'ResponsibilityCode')])[1]");
 	By responsibilityCodeButton =  By.xpath("(//input[contains(@name,'ResponsibilityCode')])[3]");	
 	By nextButton = By.xpath("//button[@value='Next']");
-	By paymentPageTitle =  By.xpath("//a[text()='Step 4 - Payment']");
+	By paymentPageTitle =  By.xpath("//a[contains(text(),'- Payment')]");
 	By interestMethod = By.xpath("(//select[contains(@name,'OrigIntMethod')])");
 	By firstPaymentDate = By.xpath("//td[contains(text(),'First Payment Date:')]/following-sibling::td/input[contains(@id,'OrigFirstPaymentDate')]");
 	By paymentFrequency = By.xpath("(//select[contains(@name,'OrigPaymentFrequency')])");
@@ -65,7 +67,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 	By premium1_Textbox =  By.xpath("//td[contains(text(),'Insurance 1:')]/following-sibling::td/input[contains(@id,'Premium')]");
 	By lineLifeInsuranceOption =  By.xpath("//td[contains(text(),'Line Life Insurance Option:')]/following-sibling::td/select[contains(@id,'LineLifeInsurCode')]')]");
 	By simpleInsuranceBillingDay =  By.xpath("//td[contains(text(),'Simple Insurance Billing Day:')]/following-sibling::td/select[contains(@id,'SimpleInsBillingDay')]");
-	By schedulePageTitle =  By.xpath("//a[text()='Step 6 - Schedule']");
+	By schedulePageTitle =  By.xpath("//a[contains(text(),'- Schedule')]");
 	By scheduleStartDate =  By.xpath("(//input[contains(@id,'PymtSchedStartDate')])[1]");
 	By scheduleFrequency =  By.xpath("(//select[contains(@id,'PymtSchedFrequency')])[1]");
 	By scheduleNumber =  By.xpath("(//input[contains(@id,'NumberOfPayments')])[1]");
@@ -75,20 +77,26 @@ public class Premier_LoansNewNote extends CommonLibrary{
 	By scheduleSuppressPaymentChangeNotice=  By.xpath("(//input[contains(@id,'AltPymtChgNotifOv')])[1]");
 	By scheduleOtherEscrow =  By.xpath("(//input[contains(@id,'OtherEscrowPayment')])[1]");
 	By finishButtonLoan = By.xpath("//button[@value='Finish Loan']");
+	By finishLoanAddCollateralButton = By.xpath("//button[text()='Finish Loan Add Collateral']");
 	By warningHeader = By.xpath("//tr[@class='captionBar']//td[@class='caption-text'][contains(text(),'Warning')]");
 	By warning1 = By.xpath("//td/u[contains(text(),'Note Date is in the Future')]");
 	By warningCheckBox1 = By.xpath("//td/u[contains(text(),'Note Date is in the Future')]/../..//input");
 	By warning2 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]");
 	By warningCheckBox2 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]/../..//input");
-	//By warning3 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]");
-	//By warningCheckBox3 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]/../..//input");
+	By warning3 = By.xpath("//td/u[contains(text(),'Payment Frequency Does Not Match Product Default (1)')]");
+	By warningCheckBox3 = By.xpath("//td/u[contains(text(),'Payment Frequency Does Not Match Product Default (1)')]/../..//input");
 	By saveBtn = By.xpath("//*[@title='Save']");
+	public By saveButton = By.xpath("//a[contains(@onclick,'Save')]");
 	public By paymentRestrictionCode =  By.xpath("//select[contains(@id,'/PymtRestrictionCode')]");
 	public By codesTab = By.xpath("//li//a[text()='Codes']");
 	public By paymentTab = By.xpath("//li//a[text()='Payment']");
 	public By paymentFrequencyInquiryPage =  By.xpath("//td[text()='Payment Frequency:']/following-sibling::td[1]");
 	public By paymentRestrictionCodeInquiryPage =  By.xpath("//td[text()='Payment Restriction Code:']/following-sibling::td[1]");
-
+	public By collateralAfterLoanTitle = By.xpath("//label[contains(text(),'Collateral for Loan')]");
+	public By buildNewCollateralLink = By.xpath("//a[text()='Build New Collateral']");
+	public By finishButtoncollateral = By.xpath("//button[@id='SubmitButton']");
+	public By collateralrelationshipPageTitle = By.xpath("//label[contains(text(),'Step 4 - Relationships')]");
+	
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
 	String purposeCodeList =  "//select[contains(@name,'PurposeCode')]/option[contains(text(),'%s')]";
@@ -191,7 +199,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 						selectElementByVisibleText("New Note Payment Page", "Interest Method option", interestPaymentFrequency, sInterestPaymentFrequency);
 					}
 					if (!sPurposeCode.equals("")) {
-						clickOnElement("New Note Payment Page", "Purpose TextBox",purposeCodeInput);
+						//clickOnElement("New Note Payment Page", "Purpose TextBox",purposeCodeInput);
 						Thread.sleep(1000);
 						clickOnElement("New Note Payment Page", "Purpose Code Button",purposeCodeButton);
 						Thread.sleep(1000);
@@ -297,7 +305,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 					if (!sRate.equals("")) {
 						enterText("New Note Schedule Page", "Rate Field", scheduleRate, sRate);
 					}
-					if (!sSuppressPaymentChangeNotice.equals("Yes")) {
+					if (sSuppressPaymentChangeNotice.equals("Yes")) {
 						clickOnElement("New Note Schedule Page", "Suppress Payment Change Notice Field", scheduleSuppressPaymentChangeNotice);
 					}
 					if (!sOtherEscrow.equals("")) {
@@ -328,11 +336,14 @@ public class Premier_LoansNewNote extends CommonLibrary{
 				clickOnElement("New Loan Page", "Finish Button", finishButtonLoan);
 				Thread.sleep(5000);
 				if(isElementPresent(warningHeader)) {
-					if (isElementPresent(warning1)) {
-						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
-					}
 					if (isElementPresent(warning2)) {
 						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					}
+					if (isElementPresentZeroWait(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+					}					
+					if (isElementPresentZeroWait(warning3)) {
+						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
 					}
 					clickOnElement("New Loan Page", "Save Button", saveBtn);
 					waitElement(2000);
@@ -381,7 +392,83 @@ public class Premier_LoansNewNote extends CommonLibrary{
 		}
 	}
 
+	public void finishLoanAddCollateralButton() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("New Loan Page", "Finish Loan Add Collateral Button", finishLoanAddCollateralButton);
+				Thread.sleep(5000);
+				if(isElementPresent(warningHeader)) {
+					if (isElementPresent(warning2)) {
+						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+					}
+					if (isElementPresentZeroWait(warning1)) {
+						clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+					}
+					if (isElementPresentZeroWait(warning3)) {
+						clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+					}
+					clickOnElement("New Loan Page", "Save Button", saveBtn);
+					waitElement(8000);
+				}
+				validateElementPresent("New Collateral Page", "Collateral Title",collateralAfterLoanTitle);
+				clickOnElement("New Collateral Page", "Build New Collateral", buildNewCollateralLink);
+				driver.switchTo().defaultContent();
+				//switchToWindowWithTitleContaining("Institution");
+				stepResult = true;
 
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
+					System.setProperty("runStep","N");
+				}	
+			}
+		}
+	}
+	
+	public void finishCollateralwithLoan(String excelFilePath, String sheetName, int rowNo) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+		boolean stepResult = false;
+		try {
+			sCollateralRecordNumber=getElementText("New Collateral Page", "Collateral No",  collateralrelationshipPageTitle);
+			
+			String[] temp = sCollateralRecordNumber.split("Step 4 - Relationships - Collateral Record ");
+			sCollateralRecordNumber = temp[1];
+			temp = sCollateralRecordNumber.split(" For Loan");
+			sCollateralRecordNumber = temp[0];
+			if(sCollateralRecordNumber != "")
+				new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Collateral_RecordNumber", rowNo, sCollateralRecordNumber);							
+			clickOnElement("New Collateral Page", "Finish Button", finishButtoncollateral);
+			Thread.sleep(5000);
+			validateElementPresent("New Collateral Page", "collateral Definition", collateralAfterLoanTitle);
+			clickOnElement("Change Loan Page", "Save Button", saveButton);
+			waitElement(4000);
+			validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+			driver.switchTo().defaultContent();
+			switchToWindowWithTitleContaining("Institution");
+			stepResult = true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Clicked on Finish Button Successfully", "Passed",driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
+			}	
+		}
+	}
+ }
+	
 }
 
 
