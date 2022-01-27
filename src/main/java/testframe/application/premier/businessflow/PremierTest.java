@@ -1794,6 +1794,41 @@ public class PremierTest extends ApplicationBase {
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;
+			
+				
+			case "PREMIER_TC067":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,testdataFile_Path,sTestCase,"N");
+					}
+					new PremierCommonNavigation().demandDepositAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.demandDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.savingsDepositsSubMenu();
+				premierHomeMenuPage.changeAccountSavings();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountHold(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldReason"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldAmount"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldExpirationDate"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldAccountPledgedOnLoan"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldPledgedNoteNum"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldMaxPledge"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldDate"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldPendingStartDate"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldPendingAmount"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldAmountOption"));
+				premierDepositAccounts.saveButton();
+				premierHomeMenuPage.accountInquirySavings();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountHoldDetailsAfterChange(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldAmount"),
+						tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldReason"),new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldExpirationDate"),"MM/dd/yyyy","MMM dd, yyyy"),
+						new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldDate"),"MM/dd/yyyy","MMM dd, yyyy"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_HoldPendingAmount"));
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();				
+				break;
 				
 			case "PREMIER_TC068":
 				premierLoginPage.launchApplication(sURL);
@@ -1822,7 +1857,52 @@ public class PremierTest extends ApplicationBase {
 				premierLogOff.logoffApplication();
 
 				break;
+				
+			case "PREMIER_TC069":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
+						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+					}
+					new PremierCommonNavigation().savingAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.savingsDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.savingsDepositsSubMenu();
+				premierHomeMenuPage.changeAccountSavings();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountStopPay(sAccountNumber, tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayType"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPaydate"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayExpirationdate"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayItemdate"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromNumber"),
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughNumber"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromAmount"),
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughAmount"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromTransCode"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughTransCode"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayACHCompanyID"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayee"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayeeReason"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayeeComments"));
+				premierDepositAccounts.submitButton();
+				premierDepositAccounts.saveButton();
+				
+				premierHomeMenuPage.accountInquirySavings();
+				premierDepositAccounts.searchAccount(sAccountNumber);
+				premierDepositAccounts.validateAccountStopPayAfterChange(sAccountNumber,  tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayType"),
+						new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayItemdate"),"MM/dd/yyyy","MMM dd, yyyy"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromNumber"),
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughNumber"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayFromAmount"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayThroughAmount"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayACHCompanyID"), 
+						 tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayee"), tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayPayeeReason"),
+						 new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPaydate"),"MM/dd/yyyy","MMM dd, yyyy"),
+						 new DateTimeHelper().getDateTime(tc_Test_Data.get(iTDRow).get("ChangeDeposit_StopPayExpirationdate"),"MM/dd/yyyy","MMM dd, yyyy"));
+				
+				premierDepositAccounts.closeScreen_Image();
+				premierLogOff.logoffApplication();
 
+				break;
+	
 			
 			case "PREMIER_TC070":
 				premierLoginPage.launchApplication(sURL);
@@ -1854,7 +1934,34 @@ public class PremierTest extends ApplicationBase {
 				premierLogOff.logoffApplication();
 
 				break;
+				
+			case "PREMIER_TC071":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
+				if(sAccountNumber.equals("")) {					
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
+						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+					}
+					new PremierCommonNavigation().savingAccountCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
+					sAccountNumber = tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber");
+					premierHomeMenuPage.savingsDepositsSubMenu();
+					premierHomeMenuPage.depositsMenu();
+				}
+				premierHomeMenuPage.depositsMenu();
+				premierHomeMenuPage.savingsDepositsSubMenu();
+				premierHomeMenuPage.changeAccountSavings();
+				premierDepositAccounts.searchAccount(sAccountNumber);	
+				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,"","","","","","","",tc_Test_Data.get(iTDRow).get("ChangeDeposit_SuspendedStatementCycle")
+						,tc_Test_Data.get(iTDRow).get("ChangeDeposit_SuspendedInterest"),tc_Test_Data.get(iTDRow).get("ChangeDeposit_SuspendedDepositRateIndex"));
+				premierDepositAccounts.saveButton();
+				
+				premierLogOff.logoffApplication();
 
+				break;
+	
 			case "PREMIER_TC072":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
