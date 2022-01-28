@@ -42,6 +42,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 	By statusDopArrow = By.xpath("(//span[contains(@class,'ui-dropdown-trigger-icon ui-clickable material-icons expand_more')])[3]");
 	By nameField = By.xpath("//input[@id='transactionNamedesk']");
 	By amountField = By.xpath("//input[@id='transactionAmountdesk']");
+	By okButton = By.xpath("//button[text()='OK']");
 	
 	String approveViewButton = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]//..//..//..//button[@aria-label='Click To View']//i[text()='chevron_right']";
 	String fromAcc_field = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td//div[@aria-label='From Account']/../span";
@@ -262,6 +263,7 @@ public class Corporate_FuturePaymentActivity extends CommonLibrary {
 			if (isElementPresent(rejectPaymentTitle)) {
 				enterText("Future Payment Activity CC- Corporate application", "Reject Payment", rejectTextbox,
 						rejectReason);
+				clickOnElement("Future Payment Activity","Ok button",okButton);
 			}
 			stepResult = true;
 		} catch (Exception e) {

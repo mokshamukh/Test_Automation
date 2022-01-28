@@ -17,6 +17,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 
 	String dropdown = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td[contains(@class,'edit-splitter')]//i[text()='expand_more']";
 	String cancelButton = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td[contains(@class,'edit-splitter')]//i[text()='close']";
+	
 	By paymentActivityTitle = By.xpath("//h3[contains(text(),'Current Activity Summary')]|//button[contains(text(),'Payment Activity')]");
 	By cancelWarningMsg = By.xpath("//p[contains(text(),'Are you sure that you want to cancel')]");
 	By approveWarningMsg = By.xpath("//p[contains(text(),'Are you sure you want to approve')]");

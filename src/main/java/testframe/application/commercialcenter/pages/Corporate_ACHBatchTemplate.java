@@ -43,7 +43,7 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 	public By bankIDField = By.xpath("//input[@id='bankId']");
 	public By bankNameField = By.xpath("//input[@id='bankName']");
 	public By debitAuthoTypeField = By.xpath("//p-dropdown//input[@id='debitAuthorizationType-input']/..//..//span[contains(@class,'expand_more')]");
-	public By addButton = By.xpath("//button[text()='Add']");
+	public By addButton = By.xpath("//button[@aria-label='To save the added account details for the payee'][text()='Add']");
 	public By alertMsg = By.xpath("//div[contains(text(),'An account has been added')]");
 	public By saveButton = By.xpath("//button[text()='Save'][contains(@aria-label,'To save the template and return to the ACH')]");
 	public By payeeSaveBtn = By.xpath("//button[text()='Save'][contains(@aria-label,'To save the added payee details')]");
@@ -203,7 +203,7 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 				enterText("ACH Batch Template", "Bank Id", bankNameField, bankName);
 			}
 			if (!debitType.equals("")) {
-				//driver.findElement(By.xpath("//p-dropdown//input[@id='debitAuthorizationType-input']/..//..//span[contains(@class,'ui-inputtext')]")).click();
+				driver.findElement(By.xpath("//p-dropdown//input[@id='debitAuthorizationType-input']/..//..//span[contains(@class,'ui-inputtext')]")).click();
 				waitElement(1000);
 				selectElementFromListbox("ACH Batch Template", "Debit Authorization Type", debitAuthoTypeField, debitAuthtypList,debitType);
 			}
@@ -215,7 +215,7 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 				enterText("ACH Batch Template", "Existing Amount", existAmount, existPayeeAmt);
 			}
 			if(!addenda.equals("")) {
-				enterText("ACH Batch Template", "Addenda Field", addendaField, addenda);
+			//	enterText("ACH Batch Template", "Addenda Field", addendaField, addenda);
 			}
 			if(sendRemittanceToPayee.equals("Yes")) {
 			//	sendRemittanceEmailToPayee();

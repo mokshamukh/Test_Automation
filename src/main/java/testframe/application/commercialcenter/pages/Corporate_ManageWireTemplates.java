@@ -57,7 +57,10 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 	By createTemplateButton = By.xpath("//button//span[text()='Create Template']");
 	By templateSavedMsg = By.xpath("//div[text()='Template successfully saved.']");
 	By searchButton = By.xpath("//button[contains(@aria-label,'To get the list matching the search criteria')]//i[text()='search']");
-	
+	By accountInfoDetails = By.xpath("//h3[contains(text(),'Account Information')]");
+	By reviewDetails = By.xpath("//div[text()='Debit Account']//..//span[@id='debitAccount'][text()]");
+	By reviewAmount = By.xpath("//h4[@role='heading']//..//..//..//div[@id='Payment Amount']");
+	By confirmButton = By.xpath("//button[text()='Confirm']");
 	
 	String list = "//li[@role='option']/span[contains(text(),'%s')]";
 	String searchData = "//td[@class='ng-star-inserted']//span[contains(text(),'%s')]";
@@ -258,5 +261,39 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			}
 			
 	}		
+	
+	public void reviewManageWireTempaltes(String debitAccount, String amount) throws Exception {
+		boolean stepResult = false;
+		boolean flag = false;
+		try {
+			if (isElementPresent(accountInfoDetails)) {
+//				List<WebElement> element = findElements(reviewDetails);
+//				for (WebElement ele : element) {
+//					if (ele.getText().contains(debitAccount)) {
+//						flag = true;
+//					} else {
+//						flag = false;
+//					}
+//				}
+			}
+			validateElementExist("Corporate New Wire Transfer", "AmountField", reviewAmount, amount);
+			clickOnElement("Corporate New Wire Transfer", "Confirm Button", confirmButton);
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass - Menu");
+				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+						"review Wire Transfer details Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+						"Could not review Wire Transfer details Successfully", "Failed", driver, "Y");
+			}
+		}
+
+	}
+	
 			
 		}

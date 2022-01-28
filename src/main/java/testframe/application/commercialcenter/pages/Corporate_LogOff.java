@@ -19,7 +19,7 @@ public class Corporate_LogOff extends CommonLibrary {
 
 	public By logoff = By.xpath("//button[text()='Logout']");
 	public By logOffMessage = By.xpath("//div[contains(text(),'You have been logged out of online banking')]");
-	public By user = By.xpath("//div[@class='d-none d-sm-inline']");
+	public By user = By.xpath("//div[@class='d-none d-lg-block']");
 
 	public Corporate_LogOff(WebDriver driver) {
 		super(driver);

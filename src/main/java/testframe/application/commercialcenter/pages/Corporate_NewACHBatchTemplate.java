@@ -73,7 +73,7 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 	
 	String achCompanyList = "//li[@role='option']/span[text()='%s']";
 	String debitcreditList = "//li[@role='option']/span[text()='%s']";
-	String batchTypeList = "//li[@role='option']/span[text()='Internet Auth (WEB)']";
+	String batchTypeList = "//li[@role='option']/span[text()='%s']";
 	String existTemplateList = "//li[@role='option']/span[text()='%s']";
 	String payeeList = "//li[@role='option']/span[text()='%s']";
 	String transactionID;

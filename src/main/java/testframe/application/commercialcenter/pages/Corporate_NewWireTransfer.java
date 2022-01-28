@@ -35,7 +35,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By debitAccountField = By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']");
 	By paymentCurrencyField = By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']");
 	By purposeOfPaymentField = By.xpath("//input[@id='purposeOfPay']");
-	By amountFiled = By.xpath("//input[@id='wireAmountId']");
+	By amountFiled = By.xpath("//input[@id='amount']");
 	By requestTransferButton = By.xpath("//button[contains(@aria-label,'To proceed with the transfer')]");
 	By accountInfoDetails = By.xpath("//h3[contains(text(),'Account Information')]");
 	By reviewDetails = By.xpath("//div[text()='Debit Account']//..//span[@id='debitAccount'][text()]");
@@ -44,7 +44,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By pleaseReverifyTitle = By.xpath("//h4[contains(text(),'Please Reverify')]");
 	By confirmPassword = By.xpath("//input[@id='confirmPassword']");
 	By submitButton = By.xpath("//button[text()='Submit']");
-	By msg = By.xpath("//div[@class='alert-message-title']/b");
+	By msg = By.xpath("//div[@class='alert-message-title']/strong");
 	By beneInformation = By.xpath("//h3[text()='Beneficiary Information ']");
 	By payeeName = By.xpath("//input[@id='payeeName']");
 	By beneIDTypeField = By.xpath("//p-dropdown[@inputid='beneficiaryIdType']");
@@ -79,7 +79,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 				clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
 				waitForPresenceOfElement("Corporate New Wire Transfer","Account Information Header", accountInfoHeader);
 				if(!debitAccount.equals("")) {
-					scrollToElement(debitAccountField);
+					scrollToTopOfThePage();
 					driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
 					selectElementFromListbox("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, list,debitAccount);      
 				}
@@ -212,9 +212,13 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 				
 				waitForPresenceOfElement("Corporate New Wire Transfer","Account Information Header", accountInfoHeader);
 				if(!debitAccount.equals("")) {
-					scrollToElement(debitAccountField);
-					driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
-					selectElementFromListbox("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, list,debitAccount);      
+					scrollToTopOfThePage();
+					enterText("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
+					clickOnElement("Corporate New Wire Transfer", "Debit Account Field", getDynamicElement("Debit Account", list, debitAccount));
+					
+//					scrollToElement(debitAccountField);
+//					driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
+//					selectElementFromListbox("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, list,debitAccount);      
 				}
 				scrollToElement(beneInformation);
 				if (!payee.equals("")) {
@@ -222,8 +226,10 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 				}
 				if(!beneIdType.equals("")) {
 					scrollToElement(beneIDTypeField);
-					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//div[2]")).click();
-				    selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
+					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryIdType']")).click();
+					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
+					//clickOnElement("Corporate New Wire Transfer", "Beneficiary Id Type", getDynamicElement("Beneficiary ID Type", list, beneIdType));
+					
 				}
 				if(!beneID.equals("")) {
 					scrollToElement(beneIDField);
@@ -233,25 +239,35 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 					enterText("Corporate New Wire Transfer", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
 				}
 				if(!beneAddress2.equals("")) {
-					enterText("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField1, beneAddress2);
+					enterText("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
 				}
 				if(!beneCountry.equals("")) {
 					scrollToElement(beneCountryField);
-					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//div[2]")).click();
-				    selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
+					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryCountry']")).click();
+					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
+					
+					
+//					enterText("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, beneCountry);
+//					clickOnElement("Corporate New Wire Transfer", "Beneficiary Country", getDynamicElement("Beneficiary Country", list, beneCountry));
+					
 				}
 				if(!paymentCurrency.equals("")) {
 					scrollToElement(paymentCurrencyField);
-					driver.findElement(By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']")).click();
-				    selectElementFromListbox("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
+					enterText("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
+					clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
+					
 				}
 				if(!amount.equals("")) {
 					enterText("Corporate New Wire Transfer", "Amount Field", amountFiled, amount);
 				}
 				if(!beneBankIDType.equals("")) {
-					scrollToElement(beneIDTypeField);
-					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']//div[2]")).click();
-				    selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
+					scrollToElement(beneBankIDTypeField);
+					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']")).click();
+					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
+					
+//					enterText("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneIDTypeField, beneBankIDType);
+//					clickOnElement("Corporate New Wire Transfer", "Beneficiary Bank ID Type", getDynamicElement("Beneficiary Bank ID Type", list, beneBankIDType));
+					
 				}
 				if(!beneBankID.equals("")) {
 					enterText("Corporate New Wire Transfer", "Bene Bank ID", beneBankIdField, beneBankID);
@@ -266,6 +282,8 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 				if(!beneBankAddress2.equals("")) {
 					enterText("Corporate New Wire Transfer", "Beneficiary Bank Address2 Field", beneBankAddress2Field, beneBankAddress2);
 				}
+				
+				
 				
 				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
              }
