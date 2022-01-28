@@ -28,15 +28,19 @@ public class EPP_PaymentRepairVerificationList extends CommonLibrary {
 	public String eppPaymentRepairList = "EPP_PaymentRepairVerificationList";
 	public String actionOntransactionIdList = "//a[@class='linkGeneral'][text()='%s']";
 
-	public void selectPaymentRepairOnTransactionID() throws Exception {
+	public void selectPaymentRepairOnTransactionID(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				waitForPresenceOfElement(eppPaymentRepairList, "Work Summary List", title);
 				if (isElementPresent(title)) {
-					String transID = eppActionPrompts.getTransactionIDOnAction();
-					//String transID = "201300000510";
-					getDynamicElementClick(eppPaymentRepairList, "Work Summary List", actionOntransactionIdList, transID);
+					if(!strTransID.equals("")){
+						getDynamicElementClick(eppPaymentRepairList, "Work Summary List", actionOntransactionIdList, strTransID);
+					}else{
+						String transID = eppActionPrompts.getTransactionIDOnAction();
+						//String transID = "201300000510";
+						getDynamicElementClick(eppPaymentRepairList, "Work Summary List", actionOntransactionIdList, transID);
+					}
 					waitElement(8000);
 				}
 				stepResult = true;

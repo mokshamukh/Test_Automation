@@ -38,8 +38,9 @@ public class Premier_NewCollateral extends CommonLibrary{
 	public By accountSearch = By.xpath("//td[contains(text(),'Account Number:')]/following-sibling::td/input");
 	public By closeScreenImg = By.xpath("//img[contains(@title,'Close')]");
 	String search1 = "(//img[@title='Search'])[%s]";
+	public By collateralSearch = By.xpath("//label[contains(text(),'Collateral Record Number:')]/../following-sibling::td/input");
 	
-	public By collateralDefinitionPageTitle = By.xpath("//label[text()='Step 1 - Collateral Definition']");
+	public By collateralDefinitionPageTitle = By.xpath("//label[contains(text(),'Step 1 - Collateral Definition')]");
 	public By collateralTypeList = By.xpath("//select[@id='oCollType']");
 	public By branchRegionTextbox =  By.xpath("//input[@id='oCollBranch']");
 	public By branchRegionButton =  By.xpath("//button[contains(@id,'oCollBranch_b')]");
@@ -91,6 +92,14 @@ public class Premier_NewCollateral extends CommonLibrary{
 	public By nameRelationshipList = By.xpath("//label[text()='Related Name']/../../following-sibling::tr//select[contains(@id,'RelationshipCode')]");
 	public By addressRelationshipList = By.xpath("//label[text()='Address 1']/../../following-sibling::tr//select[contains(@id,'RelationshipCode')]");
 	public By finishButtoncollateral = By.xpath("//button[@id='SubmitButton']");
+	public By collateralInquiryHeader = By.xpath("//label[contains(text(),'Collateral -')]");
+	String collateralTypeInquiryPage = "//label[contains(text(),'Collateral Type:')]/../following-sibling::td//label[contains(text(),'%s')]";
+	String collateralRecordNumberInquiryPage = "//label[contains(text(),'Collateral Record Number:')]/../following-sibling::td//label[contains(text(),'')]";
+	public By relationshipTab = By.xpath("//a[text()='Relationships']");	
+	String collateralLoanNumberInquiryPage = "//a[contains(text(),'%s')]";
+	String removeLoanICon = "//a[contains(text(),'%s')]/../following-sibling::td//img[@title='Delete']";
+	public By deleteCollateral = By.xpath("//img[@title='Delete']");
+	String loanLink = "//a[contains(text(),'%s')]";
 	
 	public void enterCollateralDefInitionPageDetail(String sCollateralType,String sBranchRegion,String sCollateralCode) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
@@ -99,17 +108,18 @@ public class Premier_NewCollateral extends CommonLibrary{
 			driver.switchTo().frame("Main");
 			if(isElementPresent(collateralDefinitionPageTitle)) {
 				if (!sCollateralType.equals("")) {
-					selectElementByVisibleText("New Line Codes Page", "Maximum Credit Code", collateralTypeList, sCollateralType);
+					selectElementByVisibleText("New Line Codes Page", "Collateral Type Code", collateralTypeList, sCollateralType);
 				}
+				Thread.sleep(1000);
 				if (!sBranchRegion.equals("")) {
 					clickOnElement("New Collateral Page", "Branch Region Input Field",branchRegionTextbox);
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					clickOnElement("New Collateral Page", "Branch Region Button",branchRegionButton);
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					clickOnElement("New Collateral Page", "Branch Region list",getDynamicElement("Branch Region list",branchRegionList,sBranchRegion));
 				}
 				if (!sCollateralCode.equals("")) {
-					selectElementByVisibleText("New Line Codes Page", "Internal Payment option", collateralCodeList, sCollateralCode);
+					selectElementByVisibleText("New Line Codes Page", "Collateral Code", collateralCodeList, sCollateralCode);
 				}				
 				clickOnElement("New Collateral Page", "Next Button", collateralNextButton);
 				waitElement(2000);
@@ -399,6 +409,21 @@ public class Premier_NewCollateral extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(collateralrelationshipPageTitle)) {
+				if (!sSearchAccountNumber.equals("")) {
+					clickOnElement("New Collateral Relationship Page", "Search Account", searchNameAccount);
+					Thread.sleep(4000);
+					switchToWindowWithTitleContaining("Account Search");
+					Thread.sleep(4000);
+					driver.switchTo().frame("bottom");
+					searchAccount(sSearchAccountType,sSearchAccountNumber);
+					Thread.sleep(4000);
+					switchToWindowWithTitleContaining("Institution");
+					driver.switchTo().frame("Main");
+					waitElement(2000);
+					if (!sAccountPledgeRule.equals("")) {
+						selectElementByVisibleText("Collateral relationship Screen", "Account Pledge Rule Field ",pledgeRuleList, sAccountPledgeRule);
+					}
+				}
 				if (!sSearchSSN.equals("")) {
 					clickOnElement("New Collateral Relationship Page", "Search Name", searchNameImg);
 					Thread.sleep(4000);
@@ -427,20 +452,7 @@ public class Premier_NewCollateral extends CommonLibrary{
 						selectElementByVisibleText("Collateral relationship Screen", "Address Relationship Field ",addressRelationshipList, sAddressRelationship);
 					}
 				}
-				if (!sSearchAccountNumber.equals("")) {
-					clickOnElement("New Collateral Relationship Page", "Search Account", searchNameAccount);
-					Thread.sleep(4000);
-					switchToWindowWithTitleContaining("Account Search");
-					Thread.sleep(4000);
-					driver.switchTo().frame("bottom");
-					searchAccount(sSearchAccountType,sSearchAccountNumber);
-					Thread.sleep(4000);
-					switchToWindowWithTitleContaining("Institution");
-					driver.switchTo().frame("Main");
-					if (!sAccountPledgeRule.equals("")) {
-						selectElementByVisibleText("Collateral relationship Screen", "Account Pledge Rule Field ",pledgeRuleList, sAccountPledgeRule);
-					}
-				}
+				
 				//clickOnElement("New Collateral Page", "Next Button", collateralNextButton);
 				waitElement(2000);
 				stepResult = true;
@@ -464,6 +476,7 @@ public class Premier_NewCollateral extends CommonLibrary{
 	}
 	
 	public void searchAccount(String accountType, String accountNumber) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			switchToWithinFrameWithName("Main");
@@ -486,11 +499,13 @@ public class Premier_NewCollateral extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Search Account", "Could not search the Account","Failed", driver, "Y");
+				System.setProperty("runStep","N");
 			}
 		}
 	}
-	
+}
 	public void finishCollateral(String excelFilePath, String sheetName, int rowNo) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
 			sCollateralRecordNumber=getElementText("New Collateral Page", "Collateral No",  collateralrelationshipPageTitle);
@@ -501,16 +516,6 @@ public class Premier_NewCollateral extends CommonLibrary{
 				new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "Collateral_RecordNumber", rowNo, sCollateralRecordNumber);							
 			clickOnElement("New Collateral Page", "Finish Button", finishButtoncollateral);
 			Thread.sleep(5000);
-			/*if(isElementPresent(warningHeader)) {
-				if (isElementPresent(warning1)) {
-					clickOnElement("New Collateral Page", "Warning 1 Checkbox", warningCheckBox1);
-				}
-				if (isElementPresent(warning2)) {
-					clickOnElement("New Collateral Page", "Warning 2 Checkbox", warningCheckBox2);
-				}
-				clickOnElement("New Collateral Page", "Save Button", saveBtn);
-				waitElement(2000);
-			}*/
 			validateElementPresent("New Collateral Page", "collateral Definition", collateralDefinitionPageTitle);
 			driver.switchTo().defaultContent();
 			switchToWindowWithTitleContaining("Institution");
@@ -525,7 +530,142 @@ public class Premier_NewCollateral extends CommonLibrary{
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Click on Finish Button", "Could not clicked on Finish Button", "Failed",driver, "Y");
+				System.setProperty("runStep","N");
 			}	
+		}
+	}
+ }
+	
+	public void searchCollateral(String scollateralNo) throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitElement(6000);
+				driver.switchTo().frame("Main");
+				if (isElementPresent(searchTitle)) {
+					clickOnElement("Search Collateral Page", "Collateral Number", collateralSearch);
+					enterText("Search Collateral Page", "Collateral Number", collateralSearch, scollateralNo);
+					clickOnElement("Search Collateral Page", "Submit", submitSearch);
+					stepResult = true;
+				}	
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search Collateral", "Search Collateral on Collateral page Successfully", "Passed",
+							driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search Collateral", "Could not Search Collateral on Collateral page Successfully", "Failed",
+							driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void validateCollateralDetails(String scollateralNo,String scollateralType,String scollateralLoanNumber) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				//switchToWithinFrameWithName("bottom");
+				if (isElementPresent(collateralInquiryHeader)){
+					/*if (!scollateralType.equals("")) {
+						validateTextContains("Collateral Inquiry Page " , "Collateral Type field", getDynamicElement("Collateral Type field",collateralTypeInquiryPage,scollateralType), scollateralType);
+					}*/
+					if (!scollateralNo.equals("")) {
+						validateTextContains("Collateral Inquiry Page" , "Collateral Record Number field", getDynamicElement("Collateral Record Number field",collateralRecordNumberInquiryPage,scollateralNo), scollateralNo);
+					}
+					clickOnElement("Collateral Inquiry Page", "Relationship Tab", relationshipTab);
+					if (!scollateralLoanNumber.equals("")) {
+						validateTextContains("Collateral Inquiry Page " , "Collateral Loan Number field", getDynamicElement("Collateral Loan Number field",collateralLoanNumberInquiryPage,scollateralLoanNumber), scollateralLoanNumber);
+					}
+					waitElement(2000);
+					clickOnElement("Collateral Inquiry Page", "Close Button", closeScreenImg);
+					switchToDefaultContent();
+					//driver.switchTo().frame("Main");
+					stepResult = true;
+	
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Validated Collateral Details on Collateral Inquiry page Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Could not Validate Collateral Details on Collateral Inquiry page" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void delinkLoanFromCollateral(String scollateralLoanNumber) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(collateralInquiryHeader)){
+					clickOnElement("Collateral Change Page", "Relationship Tab", relationshipTab);			
+					clickOnElement("Collateral Change Page", "Loan Remove Icon", getDynamicElement("Loan Remove Icon",removeLoanICon,scollateralLoanNumber));	
+					waitElement(4000);
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					waitElement(2000);
+					isElementPresent(searchTitle);
+					switchToDefaultContent();
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Validated Collateral Details on Collateral Inquiry page Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Could not Validate Collateral Details on Collateral Inquiry page" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void deleteCollateral(String scollateralLoanNumber) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(collateralInquiryHeader)){
+					clickOnElement("Collateral Change Page", "Relationship Tab", relationshipTab);
+					waitElement(5000);
+					if (isElementPresentZeroWait(getDynamicElement("Relationship Tab",loanLink,scollateralLoanNumber))){
+						stepResult = false;
+					}
+					else{
+						stepResult = true;
+					}
+					clickOnElement("Collateral Delete Page", "Delete Image Button", deleteCollateral);
+					driver.switchTo().alert().accept();
+					waitElement(2000);
+					isElementPresent(searchTitle);
+					switchToDefaultContent();
+					switchToWindowWithTitleContaining("Institution");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Delete Collateral", "Collateral Deleted Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Delete Collateral", "Could not delete Collateral." , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
 		}
 	}
 }

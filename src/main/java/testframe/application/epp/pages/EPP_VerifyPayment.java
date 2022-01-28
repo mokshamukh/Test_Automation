@@ -37,14 +37,19 @@ public class EPP_VerifyPayment extends CommonLibrary{
 	By amount = By.xpath("//input[@id='Amount']");
 	public String  transactionIdList = "//div[@id='Refresh_MEPaymentVerify']//a[@class='linkGeneral'][text()='%s']";
 
-	public void approvePaymentRepairAction(String valueDate) throws Exception {
+	public void approvePaymentRepairAction(String valueDate, String  strTransactionID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){ 
 			boolean stepResult = false;
 			try {
 				if(isElementPresentZeroWait(title)){
-					String transactionID = eppCreatePayment.getTransactionID();
+					if (!strTransactionID.equals("")){
+						getDynamicElementClick(eppVerifyDetails, "Work Summary List", transactionIdList, strTransactionID);
+					}else{
+						String transactionID = eppCreatePayment.getTransactionID();
 					getDynamicElementClick(eppVerifyDetails, "Work Summary List", transactionIdList, transactionID);
+					}
 					waitElement(3000);
+					
 				}	
 					waitForPresenceOfElement(eppVerifyDetails, "Payment Title", paymentTitle);
 					validateElementPresent(eppVerifyDetails, "Approve Message", displayMsgApprove);

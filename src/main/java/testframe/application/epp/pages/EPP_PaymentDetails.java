@@ -82,7 +82,8 @@ public class EPP_PaymentDetails extends CommonLibrary {
 			try {
 				waitElement(3000);
 				if(isElementPresent(paymentTitle)) {
-					validateTextContains(eppPaymentDetails,  "Transaction Status", transactionStatus, "Completed");
+					waitElement(29000);
+					validateElementPresent(eppPaymentDetails,  "Transaction Status", transactionStatus);
 					validateElementPresent(eppPaymentDetails, "Transaction Status", transactionStatus);
 					String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
 					approveTransID = eppCreatePayment.getTransactionID();
@@ -93,7 +94,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 						System.out.println("fail");
 					}
 				}
-				scrollToElement(transactionStatus);
+				//scrollToElement(transactionStatus);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,7 +112,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 
 	}
 
-	public void submitActionOnTransactionWithApproval() throws Exception {
+	public void submitActionOnTransactionWithApproval(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
@@ -120,16 +121,19 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				if(isElementPresent(displayMsgDuplicateContent)) {
 					validateElementPresent(eppPaymentDetails, "Transaction Status", dupTransStatus);
 					validateTextContains(eppPaymentDetails,  "Transaction Status", dupTransStatus, "Duplicate Content");
-					approveDuplicateTransID = eppActionPrompts.getTransactionIDOnAction();
+					if(!strTransID.equals(""))
+						approveDuplicateTransID = strTransID;
+					else
+						approveDuplicateTransID = eppActionPrompts.getTransactionIDOnAction();
 					validateTextContains(eppPaymentDetails,  "Transaction ID", transactionId, approveDuplicateTransID);
-					
+
 					driver.findElement(By.xpath("//select[@id='ActionSelect']")).click();
 					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Approve Payment Action')]")).click();
 					//selectElementByVisibleText(eppPaymentDetails, "Select Action on Duplicate Transaction ID", selectCancelPaymentAction, "Approve Payment Action");
 					waitElement(2000);
 					//ApprovePayment
 					clickOnElement(eppPaymentDetails, "Execute Button", executeButton);
-					
+
 					validateElementPresent(eppPaymentDetails, "Action Successfull Message", actionSuccessfull);
 					waitElement(2000);
 					clickOnElement(eppPaymentDetails, "Action Successfull Message", actionSuccessfull);
@@ -138,9 +142,9 @@ public class EPP_PaymentDetails extends CommonLibrary {
 						validateElementPresent(eppPaymentDetails, "Status Message", stageDetails);
 						stepResult = true;
 					}
-					
+
 				}
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -158,7 +162,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 	}
 
 
-	public void approveRepairPayment() throws Exception {
+	public void approveRepairPayment(String TransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
@@ -166,9 +170,12 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				waitForPresenceOfElement(eppPaymentDetails, "Payment Title", paymentTitle);
 				if(isElementPresent(displayMsg)) {
 					validateElementPresent(eppPaymentDetails, "Transaction Status", repairStatus);
-					approveRepairTransID = eppCreatePayment.getTransactionID();
+					if (!TransID.equals(""))
+						approveRepairTransID = TransID;
+					else	
+						approveRepairTransID = eppCreatePayment.getTransactionID();
 					/*String repairtransID = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
-					
+
 					if(repairtransID.equalsIgnoreCase(approveRepairTransID)) {
 						System.out.println("Pass");
 						stepResult = true;
@@ -188,8 +195,8 @@ public class EPP_PaymentDetails extends CommonLibrary {
 						stepResult = true;
 					}
 				}
-				
-				
+
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -221,7 +228,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Approve Payment Action')]")).click();
 					//selectElementByVisibleText(eppPaymentDetails, "Select Action on Duplicate Transaction ID", approveRepairPayment, "Approve Payment Action");
 					clickOnElement(eppPaymentDetails, "Execute Button", executeButton);
-				
+
 					validateElementPresent(eppPaymentDetails, "Action Successfull Message", actionSuccessfull);
 					waitElement(2000);
 					clickOnElement(eppPaymentDetails, "Clicked on Transaction ID", transIdSaved);
@@ -230,9 +237,9 @@ public class EPP_PaymentDetails extends CommonLibrary {
 						validateElementPresent(eppPaymentDetails, "Status Message", cancelledDetails);
 						stepResult = true;
 					}
-					
+
 				}
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -249,7 +256,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 		}
 	}
 
-	
+
 	public void verifyFutureDatedPaymentTransaction() throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -271,7 +278,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 					validateTextContains(eppPaymentDetails,  "Transaction ID", transactionId, approveTransID);
 					stepResult = true;
 				}
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -290,7 +297,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 	}
 
 
-	public void verifyRepairPaymentTransStatus() throws Exception {
+	public void verifyRepairPaymentTransStatus(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
@@ -301,14 +308,17 @@ public class EPP_PaymentDetails extends CommonLibrary {
 					validateTextContains(eppPaymentDetails,  "Transaction Status", repairStatus, "Repair");
 					validateElementPresent(eppPaymentDetails, "Transaction Status", repairStatus);
 					String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
-					approveTransID = eppCreatePayment.getTransactionID();
+					if (!strTransID.equals(""))
+						approveTransID = strTransID;
+					else	
+						approveTransID = eppCreatePayment.getTransactionID();
 					if(transactionIDStatus.equalsIgnoreCase(approveTransID)) {
 						System.out.println("Pass");
 						stepResult = true;
 					}else {
 						System.out.println("fail");
 					}
-					
+
 				}
 
 			} catch (Exception e) {
@@ -366,20 +376,24 @@ public class EPP_PaymentDetails extends CommonLibrary {
 
 	}
 
-	public void selectReleaseFromInternalFilterPayment() throws Exception {
+	public void selectReleaseFromInternalFilterPayment(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				waitForPresenceOfElement(eppPaymentDetails, "Work Summary List", title);
 				if(isElementPresent(title)){
-					String transactionID = eppCreatePayment.getTransactionID();
-					if(!(transactionID==null)) {
-						getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdInternalPaymentList, transactionID);
-						waitElement(8000);
-					}else {
-						String firstTransID = getElementText(eppPaymentDetails, "First Internal Transaction ID", internalFirstTransID);
-						eppCreatePayment.setTransactionID(firstTransID);
-						clickOnElement(eppPaymentDetails, "First Internal Transaction ID", internalFirstTransID);
+					if(!strTransID.equals("")){
+						getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdInternalPaymentList, strTransID);
+					}else{
+						String transactionID = eppCreatePayment.getTransactionID();
+						if(!(transactionID==null)) {
+							getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdInternalPaymentList, transactionID);
+							waitElement(8000);
+						}else {
+							String firstTransID = getElementText(eppPaymentDetails, "First Internal Transaction ID", internalFirstTransID);
+							eppCreatePayment.setTransactionID(firstTransID);
+							clickOnElement(eppPaymentDetails, "First Internal Transaction ID", internalFirstTransID);
+						}
 					}
 					//clickOnElement(eppPaymentDetails, "Internal Filter Transaction ID", internalTransId);
 					waitForPresenceOfElement(eppPaymentDetails, "Internal Filter Transaction ID", paymentTitle);
@@ -407,20 +421,24 @@ public class EPP_PaymentDetails extends CommonLibrary {
 	}
 
 
-	public void selectCancelPaymentForInternalFilter() throws Exception {
+	public void selectCancelPaymentForInternalFilter(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				waitForPresenceOfElement(eppPaymentDetails, "Work Summary List", title);
 				if(isElementPresent(title)){
-					String transactionID = eppCreatePayment.getTransactionID();
-					if(!(transactionID==null)) {
-						getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdInternalPaymentList, transactionID);
-					}else {
-						String firstTransID = getElementText(eppPaymentDetails, "First Transaction ID", internalTransId);
-						eppCreatePayment.setTransactionID(firstTransID);
-						clickOnElement(eppPaymentDetails, "First Transaction ID", internalTransId);
-					}
+					if (!strTransID.equals("")){
+						getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdInternalPaymentList, strTransID);
+					}else{
+						String transactionID = eppCreatePayment.getTransactionID();
+						if(!(transactionID==null)) {
+							getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdInternalPaymentList, transactionID);
+						}else {
+							String firstTransID = getElementText(eppPaymentDetails, "First Transaction ID", internalTransId);
+							eppCreatePayment.setTransactionID(firstTransID);
+							clickOnElement(eppPaymentDetails, "First Transaction ID", internalTransId);
+						}
+					}	
 					waitForPresenceOfElement(eppPaymentDetails, "Internal Filter Transaction ID", paymentTitle);
 					if(isElementPresent(internalFilterTransStatus)) {
 						driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Cancel Payment')]")).click();
@@ -431,7 +449,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				}
 				//				waitForPresenceOfElement(eppPaymentDetails, "Internal Filter Transaction ID", internalTransId);
 				//				clickOnElement(eppPaymentDetails, "Internal Filter Transaction ID", internalTransId);
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -460,7 +478,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 					approveRepairTransID = eppCreatePayment.getTransactionID();
 					/*if(repairtransID.equalsIgnoreCase(approveRepairTransID)) {
 						System.out.println("Pass");
-						
+
 					}else {
 						System.out.println("fail");
 					}*/
@@ -477,7 +495,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 					}
 					stepResult = true;
 				}
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -494,23 +512,27 @@ public class EPP_PaymentDetails extends CommonLibrary {
 		}
 	}
 
-	public void selectReleaseFromBusinessFilterPayment() throws Exception {
+	public void selectReleaseFromBusinessFilterPayment(String stransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				waitForPresenceOfElement(eppPaymentDetails, "Work Summary List", title);
 				if(isElementPresent(title)){
-					String transactionID = eppCreatePayment.getTransactionID();
-					if(!(transactionID==null)) {
-						getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdBusinessPaymentList, transactionID);
-					}else {
-						String firstTransID = getElementText(eppPaymentDetails, "First Business Transaction ID", businessTransID);
-						eppCreatePayment.setTransactionID(firstTransID);
-						clickOnElement(eppPaymentDetails, "First Transaction ID", businessTransID);
+					if(!stransID.equals(""))
+						getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdBusinessPaymentList, stransID);
+					else{	
+						String transactionID = eppCreatePayment.getTransactionID();
+						if(!(transactionID==null)) {
+							getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdBusinessPaymentList, transactionID);
+						}else {
+							String firstTransID = getElementText(eppPaymentDetails, "First Business Transaction ID", businessTransID);
+							eppCreatePayment.setTransactionID(firstTransID);
+							clickOnElement(eppPaymentDetails, "First Transaction ID", businessTransID);
+						}
 					}
 					//				getDynamicElementClick(eppPaymentDetails, "Work Summary List", transactionIdBusinessPaymentList, transactionID);
 					//				waitElement(2000);
-				
+
 					waitForPresenceOfElement(eppPaymentDetails, "Business Filter Transaction ID", paymentTitle);
 					if(isElementPresent(businessFilterTransStatus)) {
 						driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Release From Business Intervention')]")).click();
@@ -521,7 +543,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				}
 				//				waitForPresenceOfElement(eppPaymentDetails, "Business Filter Transaction ID", businessTransID);
 				//				clickOnElement(eppPaymentDetails, "Business Filter Transaction ID", businessTransID);
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -588,7 +610,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 			boolean stepResult = false;
 			try {
 				if(isElementPresent(paymentTitle)) {
-					validateTextContains(eppPaymentDetails,  "Transaction Status", transactionStatus, "Completed");
+					validateElementPresent(eppPaymentDetails,  "Transaction Status", transactionStatus);
 					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Recall Payment')]")).click();
 					clickOnElement(eppPaymentDetails, "Execute Button", executeButton);
 					stepResult = true;
@@ -638,7 +660,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 					}
 					stepResult = true;
 				}
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

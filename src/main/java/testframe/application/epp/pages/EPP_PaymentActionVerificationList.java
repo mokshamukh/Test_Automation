@@ -34,7 +34,7 @@ public class EPP_PaymentActionVerificationList extends CommonLibrary{
 	By firstPaymentActionID = By.xpath("//div[@id='Refresh_PaymentActionVerification']//a[@class='linkGeneral']");
 
 
-	public void selectPaymentActionVerificationTransID() throws Exception {
+	public void selectPaymentActionVerificationTransID(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
@@ -42,17 +42,19 @@ public class EPP_PaymentActionVerificationList extends CommonLibrary{
 				if(isElementPresent(title)){
 					String transactionID = eppCreatePayment.getTransactionID();
 					//String transactionID_Act = eppActionPrompts.getTransactionIDOnAction();
-					if(!(transactionID==null)) {
-						getDynamicElementClick(eppPaymentActionVerification, "Work Summary List", transactionIdList, transactionID);
+					if(!strTransID.equals("")){
+						getDynamicElementClick(eppPaymentActionVerification, "Work Summary List", transactionIdList, strTransID);
+					}else{
+						if(!(transactionID==null)) {
+							getDynamicElementClick(eppPaymentActionVerification, "Work Summary List", transactionIdList, transactionID);
+							
+						}
+						else {
+							String firstTransID = getElementText(eppPaymentActionVerification, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
+							eppCreatePayment.setTransactionID(firstTransID);
+							clickOnElement(eppPaymentActionVerification, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
+						}
 						waitElement(2000);
-					}/*else if(!(transactionID_Act == null)){
-						getDynamicElementClick(eppPaymentActionVerification, "Work Summary List", transactionIdList, eppActionPrompts.getTransactionIDOnAction());
-						waitElement(2000);
-					}	*/
-					else {
-						String firstTransID = getElementText(eppPaymentActionVerification, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
-						eppCreatePayment.setTransactionID(firstTransID);
-						clickOnElement(eppPaymentActionVerification, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
 					}
 					//String transactionID = eppCreatePayment.getTransactionID();
 
