@@ -56,6 +56,9 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	String depositChangeHeader = "//a[contains(text(),'%s')]";
 	public By warningTextbox = By
 			.xpath("//td[contains(text(),'Warning:')]/following-sibling::td/input[contains(@name,'Warning')]");
+	public By statusCodeInput = By.xpath("(//input[contains(@name,'/StatusCode')])[1]");
+	public By statusCodeBtn = By.xpath("(//input[contains(@name,'/StatusCode')])[3]");
+	String statusCodeDropDown = "//select[contains(@name,'StatusCode')]/option[contains(text(),'%s')]";
 	public By statusCodeList = By
 			.xpath("//td[contains(text(),'Status Code:')]/following-sibling::td/select[contains(@name,'/StatusCode')]");
 	public By transactionRestrictionCodeInput = By.xpath("(//input[contains(@name,'TranRestrictionCode')])[1]");
@@ -544,8 +547,20 @@ public class Premier_DepositAccounts extends CommonLibrary {
 						enterText("Change Account Page", "Warning field", warningTextbox, sAccountWarning);
 					}
 					if (!sAccountStatusCode.equals("")) {
-						selectElementByVisibleText("Change Account Page", "Status Code Field", statusCodeList,
+						if (isElementPresentZeroWait(statusCodeList))
+							selectElementByVisibleText("Change Account Page", "Status Code Field", statusCodeList,
 								sAccountStatusCode);
+						else
+							if (isElementPresentZeroWait(statusCodeInput))
+								clickOnElement("Change Account Page", "Status Code Input",
+										statusCodeInput);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Status Code Button",
+								statusCodeBtn);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Status Code list",
+								getDynamicElement("Status Code list", statusCodeDropDown,
+										sAccountStatusCode));
 					}
 					if (!sAccntsTransRestrictionCode.equals("")) {
 						clickOnElement("Change Account Page", "Trans Restriction Code Input",
@@ -572,10 +587,10 @@ public class Premier_DepositAccounts extends CommonLibrary {
 						if (isElementPresentZeroWait(alternateCycleTextInput)) {
 							clickOnElement("Change Account Page", "Alternate Cycle Input", alternateCycleTextInput);
 						}
-						clickOnElement("Change Account Page", "Alternate Cycle Input", alternateCycleInput);
-						// Thread.sleep(1000);
+						//clickOnElement("Change Account Page", "Alternate Cycle Input", alternateCycleInput);
+						Thread.sleep(1000);
 						clickOnElement("Change Account Page", "Alternate Cycle Button", alternateCycleBtn);
-						// Thread.sleep(1000);
+						Thread.sleep(1000);
 						clickOnElement("Change Account Page", "Alternate Cycle list",
 								getDynamicElement("Alternate Cycle list", alternateCycleList, sAlternateCycle));
 					}
@@ -644,6 +659,10 @@ public class Premier_DepositAccounts extends CommonLibrary {
 					validateTextContains("Account Inquiry", "Statement Cycle field", statementCycleInquiryPage,
 							statementCycle);
 				if (!sAccountStatusCode.equals(""))
+					if (sAccountStatusCode.contains("]")){
+						String[] sAccountStatusCode_split = sAccountStatusCode.split("]");
+						sAccountStatusCode=sAccountStatusCode_split[1].trim();
+					}
 					validateTextContains("Account Inquiry", "Status Code field", statusCodeInquiryPage,
 							sAccountStatusCode);
 				// waitElement(2000);
