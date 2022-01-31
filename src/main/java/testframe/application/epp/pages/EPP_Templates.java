@@ -40,6 +40,7 @@ public class EPP_Templates extends CommonLibrary{
 	By internalFilter = By.xpath("//a[text()='Internal Filter']");
 	By notification = By.xpath("//a[text()='Notification']");	
 	By pendingOutgoingRecallReq = By.xpath("//a[text()='Pending Outgoing Recall Requests Pool']");
+	By authorizationExceptions = By.xpath("//a[text()='Authorization Exceptions']");
 
 
 	public void selectTemplate(String blockHeaderName,String poolValue) throws Exception {
@@ -398,5 +399,30 @@ public class EPP_Templates extends CommonLibrary{
 			}
 		}
 	}
+	
+	
+	public void selectAuthorizationExceptions() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitForPresenceOfElement(eppPoolOptions, "Pool Value", authorizationExceptions);
+				clickOnElement(eppPoolOptions, "Pool Value", authorizationExceptions);
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Pool option Authorization Exceptions", "Successfully clicked on Authorization Exceptions", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Pool option Authorization Exceptions", "Could not clicked on Authorization Exceptions", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
 
 }

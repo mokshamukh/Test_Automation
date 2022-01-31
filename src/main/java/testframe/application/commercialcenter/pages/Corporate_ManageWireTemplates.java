@@ -51,7 +51,8 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 	By benePhoneNumber = By.xpath("//input[@id='phoneNumber']");
 	By paymentCurrencyField = By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']");
 	By purposeOfPaymentField = By.xpath("//input[@id='purposeOfPay']");
-	By amountFiled = By.xpath("//input[@id='wireAmountId']");
+	By amountField = By.xpath("//input[@id='amount']");
+	By searchAmount = By.xpath("//input[@id='primaryAmount']");
 	By requestTransferButton = By.xpath("//button[contains(@aria-label,'To proceed with the transfer')]");
 	By payeeField = By.xpath("//input[@id='selectPayeeSearch']");
 	By createTemplateButton = By.xpath("//button//span[text()='Create Template']");
@@ -76,7 +77,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			if (isElementPresent(manageWireTemplatesHeader)) {
 				clickOnElement("Manage Wire Template", "Create Template Button", createTempalte);
 			    waitForPresenceOfElement("Manage Wire Template", "Start Wire Template", startWireTransfer);
-			    if (!freeFormTempalte.equals("Yes")) {
+			    if (!freeFormTempalte.equals("NA")) {
 			    	clickOnElement("Manage Wire Template", "Free Form Template", freeFormTemplateButton);
 				waitElement(500);
 				clickOnElement("Manage Wire Template", "Next Button", nextButton);
@@ -111,11 +112,11 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 					enterText("Manage Wire Template", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
 				}
 				if(!beneAddress2.equals("")) {
-					enterText("Manage Wire Template", "Beneficiary Address2 Field", beneAddressField1, beneAddress2);
+					enterText("Manage Wire Template", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
 				}
 				if(!beneCountry.equals("")) {
 					scrollToElement(beneCountryField);
-					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//div[2]")).click();
+					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryCountry']")).click();
 				    selectElementFromListbox("Manage Wire Template", "Beneficiary Country", beneCountryField, list, beneCountry);
 				}
 				if(!paymentCurrency.equals("")) {
@@ -124,10 +125,10 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 				    selectElementFromListbox("Manage Wire Template", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
 				}
 				if(!amount.equals("")) {
-					enterText("Manage Wire Template", "Amount Field", amountFiled, amount);
+					enterText("Manage Wire Template", "Amount Field", amountField, amount);
 				}
 				if(!beneBankIDType.equals("")) {
-					scrollToElement(beneIDTypeField);
+					scrollToElement(beneBankIDTypeField);
 					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']//div[2]")).click();
 				    selectElementFromListbox("Manage Wire Template", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
 				}
@@ -147,13 +148,15 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 				
 				clickOnElement("Manage Wire Template", "Create Tempalte Button", createTemplateButton);
 				waitForPresenceOfElement("Manage Wire Template", "Template Saved Banner", templateSavedMsg);
+				stepResult = true;
              }
 			} else {
 				createWireTemplateForPayee(payee, repetitiveButton, templateName, debitAccount, paymentCurrency,
 						purposeOfPayment, amount);
+				stepResult = true;
 				}
-			stepResult = true;
-		} catch (Exception e) {
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (stepResult == true) {
@@ -207,7 +210,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 						enterText("Manage Wire Template", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
 					}
 					if(!amount.equals("")) {
-						enterText("Manage Wire Template", "Amount Field", amountFiled, amount);
+						enterText("Manage Wire Template", "Amount Field", amountField, amount);
 					}
 					clickOnElement("Manage Wire Template", "Create Tempalte Button", createTemplateButton);
 					waitForPresenceOfElement("Manage Wire Template", "Template Saved Banner", templateSavedMsg);
@@ -240,7 +243,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 							enterText("Manage Wire Template", "Template Name", templateNameField, templateName);
 						}
 						if(!amount.equals("")) {
-							enterText("Manage Wire Template", "Amount Field", amountFiled, amount);
+							enterText("Manage Wire Template", "Amount Field", searchAmount, amount);
 						}
 						clickOnElement("Manage Wire Template", "Search Button", searchButton);
 		                isElementPresent(getDynamicElement("Corporate New Payee", searchData, payeeName));
@@ -255,7 +258,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 							"Search Wire Template Successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+					new HTMLReportHelper().HtmlReportBody("Search Wire Template- Corporate application",
 							"Could not Search Wire Template Successfully", "Failed", driver, "Y");
 				}
 			}

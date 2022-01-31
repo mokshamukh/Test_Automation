@@ -63,7 +63,7 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 	public By submitButton = By.xpath("//button[text()='Submit']");
 	public By msg = By.xpath("//div[@class='alert-message-title']/strong");
 	public By existTemplateName = By.xpath("//input[@id='templateName']");
-	public By existTemplateField = By.xpath("(//input[contains(@class,'ui-autocomplete-input')])[2]");
+	public By existTemplateField = By.xpath("(//input[contains(@class,'ui-autocomplete-input')])");
 	public By autoSaveMsg = By.xpath("//div[contains(text(),'An auto-saved draft created')]");
     public By requestBatchButton = By.xpath("//button[contains(@aria-label,'ACH batch details and proceed to the review screen.')]");
     public By alertmsg = By.xpath("//div[contains(text(),'Please correct the errors shown below')]");

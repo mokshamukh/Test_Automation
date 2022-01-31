@@ -262,8 +262,8 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		try {
 			Thread.sleep(4000);
 			if (isElementPresent(paymentActivityTitle)) {
-				if(!date.equals("")) {
-				validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
+				if(!"02/01/2022".equals("")) {
+				validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), "02/01/2022");
 				}
 				if(!amount.equals("")){
 					validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID), amount);
