@@ -76,6 +76,9 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By newLetterOfCredit = By.xpath("//a[text()='New Letter of Credit']");
 	public By newSubLoan = By.xpath("//a[text()='New Sub Loan']");
 	public By newMasterMortgage = By.xpath("//a[text()='New Master Mortgage']");
+	public By sweepsMenu = By.xpath("//a[text()='Sweeps']");
+	public By newSweep = By.xpath("//a[text()='New Sweep']");
+	public By sweepInquire =  By.xpath("//a[text()='Sweep Inquiry']");
 	
 	public Premier_HomeMenu(WebDriver driver) {
 		super(driver);
@@ -1423,6 +1426,79 @@ public class Premier_HomeMenu extends CommonLibrary {
 				else{
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Select New Master Mortgage from Menu", "Could not select Menu New Master Mortgage.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void selectSweeps() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(sweepsMenu)){
+					clickOnElement("Home Menu Page", "Sweep field", sweepsMenu);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Sweeps from Menu", "Menu Sweeps selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Sweeps from Menu", "Could not select Menu Sweeps.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void selectNewSweep() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(sweepsMenu)){
+					clickOnElement("Home Menu Page", "New Sweep field", newSweep);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select New Sweep from Menu", "Menu New Sweep selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select New Sweep from Menu", "Could not select Menu New Sweep.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void sweepInquire() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(sweepsMenu)){
+					clickOnElement("Home Menu Page", "Sweep Inquire field", sweepInquire);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Sweep Inquire from Menu", "Sweep Inquire selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Sweep Inquire from Menu", "Could not select Sweep Inquire.", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
