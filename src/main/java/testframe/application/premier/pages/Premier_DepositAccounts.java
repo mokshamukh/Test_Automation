@@ -1603,6 +1603,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 			try {
 				if (isElementPresent(
 						getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					clickOnElement("Change Account Page", "Maturity Tab", maturityTab);
 					 if (isElementPresent(maturityLabel)){
 
 						if (!sMaturityDate.equals("")) {
