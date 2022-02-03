@@ -38,6 +38,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Work Summary')]");
 	By paymentTitle = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Details')]");
 	By transactionStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Completed')]");
+	By transactionStatus_FundsRelease = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Funds Release')]");
 	By internalFilterTransStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Internal Filter')]");
 	By businessFilterTransStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'BusinessInterventionFilter')]");
 	By bypassON = By.xpath("//div[@id='Refresh_UserResponse']//..//td[contains(text(),'Bypass Flag is currently ON')]");
@@ -75,7 +76,10 @@ public class EPP_PaymentDetails extends CommonLibrary {
 
 	public String transactionIdInternalPaymentList = "//div[@id='Refresh_AllInternalFilterPayments']//a[@class='linkGeneral'][text()='%s']";
 	public String transactionIdBusinessPaymentList = "//div[@id='Refresh_OperatorNotification']//a[@class='linkGeneral'][text()='%s']";
-
+	String displayMsgCancelPayments = "//div[@id='Refresh_UserResponse']//..//div//p[contains(.,'Cancel requested while in %s')]";
+	String cancelStatus = "//td[contains(text(),'%s')]";
+	String cancelBanner = "//div[contains(@id,'Refresh_PaymentDetails')]//p[contains(.,'Cancel requested while in %s')]";
+	
 	public void verifyCompletedPaymentTransaction() throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -84,7 +88,6 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				if(isElementPresent(paymentTitle)) {
 					waitElement(29000);
 					validateElementPresent(eppPaymentDetails,  "Transaction Status", transactionStatus);
-					validateElementPresent(eppPaymentDetails, "Transaction Status", transactionStatus);
 					String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
 					approveTransID = eppCreatePayment.getTransactionID();
 					if(transactionIDStatus.equalsIgnoreCase(approveTransID)) {
@@ -101,10 +104,49 @@ public class EPP_PaymentDetails extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Payment Details EPP - EPP application", "Transaction verified Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Payment Details EPP - Transaction status - Complete Validation", "Transaction verified Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Payment Details EPP - EPP application","Could not verify Transaction Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Payment Details EPP - Transaction status - Complete Validation","Could not verify Transaction Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+
+	}
+	
+	public void verifyFundsReleasePaymentTransaction() throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitElement(3000);
+				clickOnElement(eppPaymentDetails, "Payment Saved with Transaction ID", transIdSaved);
+				if(isElementPresent(paymentTitle)) {
+					waitElement(29000);
+					
+					validateElementPresent(eppPaymentDetails, "Transaction Status", transactionStatus_FundsRelease);
+					
+					String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
+					approveTransID = eppCreatePayment.getTransactionID();
+					
+					if(transactionIDStatus.equalsIgnoreCase(approveTransID)) {
+						System.out.println("Pass");
+						stepResult = true;
+					}else {
+						System.out.println("fail");
+					}
+				}
+				//scrollToElement(transactionStatus);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Payment Details EPP - Transaction status - Funds Release Validation", "Transaction status - Funds Release verified Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Payment Details EPP - Transaction status - Funds Release Validation","Could not verify Transaction status - Funds Release Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -112,6 +154,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 
 	}
 
+	
 	public void submitActionOnTransactionWithApproval(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -213,7 +256,7 @@ public class EPP_PaymentDetails extends CommonLibrary {
 		}
 	}
 
-	public void approveCancelledPayment() throws Exception {
+	public void approveCancelledPayment(String strTansID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
@@ -222,7 +265,10 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				if(isElementPresent(displayMsgDuplicateContent)) {
 					validateElementPresent(eppPaymentDetails, "Transaction Status", cancelledDuplicatesStatus);
 					//String repairtransID = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
-					approveDuplicateTransID = eppCreatePayment.getTransactionID();
+					if (!strTansID.equals(""))
+						approveDuplicateTransID = strTansID;
+					else	
+						approveDuplicateTransID = eppCreatePayment.getTransactionID();
 					//approveDuplicateTransID = "201300000507";
 					validateTextContains(eppPaymentDetails,  "Transaction ID", transactionId, approveDuplicateTransID);
 					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Approve Payment Action')]")).click();
@@ -671,6 +717,82 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				} else {
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Payment Details EPP - EPP application","Could not verify Transaction Status Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void selectPaymentActions(String sActions) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+					
+					waitForPresenceOfElement(eppPaymentDetails, "Payment Details Title", paymentTitle);
+					if(isElementPresent(paymentTitle)) {
+						driver.findElement(By.xpath(String.format("//select[@id='ActionSelect']//option[contains(.,'%s')]",sActions))).click();
+						waitElement(2000);
+						clickOnElement(eppPaymentDetails, "Execute Button", executeButton);
+						stepResult = true;
+					}
+					
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody(sActions +"on Payment Details", sActions +" Selected Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody(sActions + " on Payment Details","Could not Select "+sActions +" Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	
+	public void approveCancelPayments(String strTansID,String sStatus) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				waitElement(3000);
+				waitForPresenceOfElement(eppPaymentDetails, "Payment Title", paymentTitle);
+				if(isElementPresent(getDynamicElement(eppPaymentDetails,displayMsgCancelPayments,sStatus))) {
+					validateElementPresent(eppPaymentDetails, "Transaction Status", getDynamicElement(eppPaymentDetails,cancelStatus,sStatus));
+					//String repairtransID = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
+					if (!strTansID.equals(""))
+						approveTransID = strTansID;
+					else	
+						approveTransID = eppCreatePayment.getTransactionID();
+					//approveDuplicateTransID = "201300000507";
+					validateTextContains(eppPaymentDetails,  "Transaction ID", transactionId, approveTransID);
+					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Approve Payment Action')]")).click();
+					//selectElementByVisibleText(eppPaymentDetails, "Select Action on Duplicate Transaction ID", approveRepairPayment, "Approve Payment Action");
+					clickOnElement(eppPaymentDetails, "Execute Button", executeButton);
+
+					validateElementPresent(eppPaymentDetails, "Action Successfull Message", actionSuccessfull);
+					waitElement(2000);
+					clickOnElement(eppPaymentDetails, "Clicked on Transaction ID", transIdSaved);
+					waitElement(1000);
+					if(isElementPresent(getDynamicElement(eppPaymentDetails,cancelBanner,sStatus))) {
+						validateElementPresent(eppPaymentDetails, "Status Message", cancelledDetails);
+						stepResult = true;
+					}
+
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Payment Details Cancelled - EPP application", "Transaction cancelled Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Payment Details Cancelled - EPP application","Could not cancel the Transaction Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

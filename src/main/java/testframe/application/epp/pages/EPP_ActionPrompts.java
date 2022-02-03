@@ -40,7 +40,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	By paymentTitle = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Details')]");
 	By recallTransStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Awaiting Approval')]");
 	By recallBannerMsg = By.xpath("//p[contains(text(),' This transaction has been submitted for approval following recalled  with Reason:')]");
-
+	By repairReasonSelect = By.xpath("//select[@name='RepairPaymentReasonText']");//Amend Amount/Currency
 
 	public void performActionForCancelPayment(String cancelInitiator) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
