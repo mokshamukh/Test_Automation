@@ -23,7 +23,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	public String eppActionPrompts = "EPP_ActionPrompts";
 	public String menuOPtion = "//div[@class='mainMenu']//h2[text()='%s']";
 	public String subMenuOption = "//a[@class='linkMenu'][text()='%s']";
-
+	
 	By actionPrompts = By.xpath("//div[@id='headerBar']//td[contains(text(),'Action Prompts')]");
 	By cancelPaymentTxtBox = By.xpath("//form[@name='paymentActionForm']//td[contains(text(),'Additional Comments:')]//..//*[@name='CancelPaymentReason']");
 	By cancelByBankBtn = By.xpath("//input[@name='CancelInitiator'][@value='BANK']");
@@ -41,7 +41,8 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	By recallTransStatus = By.xpath("//div[@id='Refresh_PaymentDetailsHeader5']//td[contains(text(),'Awaiting Approval')]");
 	By recallBannerMsg = By.xpath("//p[contains(text(),' This transaction has been submitted for approval following recalled  with Reason:')]");
 	By repairReasonSelect = By.xpath("//select[@name='RepairPaymentReasonText']");//Amend Amount/Currency
-
+	By releaseReasonNote = By.xpath("//textarea[@name='Note']");
+	By backLink = By.xpath("//div[@class='titleBarBackButton']/a");
 	public void performActionForCancelPayment(String cancelInitiator) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -106,7 +107,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 				if (isElementPresent(actionPrompts)) {
 					enterText(eppActionPrompts, "Additional Comments", releaseReason, "Testing");
 					clickOnElement(eppActionPrompts, "Submit Button", submitButton);
-					waitElement(4000);
+					waitElement(1500);
 					if (isElementPresent(transIdSaved)) {
 						actionOntransactionID = getElementText(eppActionPrompts, "Transaction ID", transIdSaved);
 					}
@@ -325,5 +326,54 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			}
 		}
 	}
+	
+	public void VerifyAndPerformActionForRelease(String sReleaseReason) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(actionPrompts)) {
+					if(isElementPresentZeroWait(releaseReason))
+						enterText(eppActionPrompts, "Additional Comments", releaseReason, sReleaseReason);
+					else if(isElementPresentZeroWait(releaseReasonNote))
+						enterText(eppActionPrompts, "Additional Comments", releaseReasonNote, sReleaseReason);
+					clickOnElement(eppActionPrompts, "Submit Button", submitButton);
+					waitElement(1500);
+					if (isElementPresentZeroWait(transIdSaved)) {
+						actionOntransactionID = getElementText(eppActionPrompts, "Transaction ID", transIdSaved);
+						clickOnElement(eppActionPrompts, "Action saved Successfully", transIdSaved);
+						if(isElementPresentZeroWait(transactionStatus)) {
+							validateElementPresent(eppActionPrompts, "Transaction Status", transactionStatus);
+						}
+					}
+					
+					
+					switchToWindowWithTitleContaining("Enterprise Payments Platform");
+					driver.switchTo().frame("mainmenu");
+					waitElement(1500);
+					getDynamicElementClick(eppActionPrompts, "Menu Selected", menuOPtion, "Payment Tracking");
+					getDynamicElementClick(eppActionPrompts, "SubMenu Selected", subMenuOption, "Work Summary");
+					waitElement(2500);
+					
+					stepResult = true;
+				}
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action for Release Transaction executed Successfully","Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not execute the action for Release Transaction", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}		
+			}
+		}
+	}
+
+
 }
 

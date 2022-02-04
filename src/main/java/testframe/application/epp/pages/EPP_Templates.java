@@ -41,7 +41,7 @@ public class EPP_Templates extends CommonLibrary{
 	By notification = By.xpath("//a[text()='Notification']");	
 	By pendingOutgoingRecallReq = By.xpath("//a[text()='Pending Outgoing Recall Requests Pool']");
 	By authorizationExceptions = By.xpath("//a[text()='Authorization Exceptions']");
-
+	String workSummaryPool = "//a[text()='%s']";
 
 	public void selectTemplate(String blockHeaderName,String poolValue) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
@@ -422,5 +422,28 @@ public class EPP_Templates extends CommonLibrary{
 			}
 		}
 	}
-
+	
+	public void selectWorkSummaryPool(String sPoolName) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				//Thread.sleep(4000);
+				waitForPresenceOfElement(eppPoolOptions, "Pool Value", getDynamicElement("Pool Name",workSummaryPool,sPoolName));
+				clickOnElement(eppPoolOptions, "Pool Value", getDynamicElement("Pool Name",workSummaryPool,sPoolName));
+				stepResult = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Pool option - " + sPoolName, "Successfully clicked on Pool option - " + sPoolName, "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Pool option - " + sPoolName, "Could not clicked on Pool option - " + sPoolName, "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
 }

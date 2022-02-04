@@ -23,6 +23,7 @@ import testframe.application.epp.pages.EPP_SecurityQuestions;
 import testframe.application.epp.pages.EPP_Templates;
 import testframe.application.epp.pages.EPP_TransactionIDList;
 import testframe.application.epp.pages.EPP_TransactionInquiry;
+import testframe.application.epp.pages.EPP_TransactionListSelection;
 import testframe.application.epp.pages.EPP_VerifyPayment;
 import testframe.common.reporting.HTMLReportHelper;
 import testframe.common.reporting.Log;
@@ -59,6 +60,7 @@ public class EppTest extends ApplicationBase {
 		EPP_PaymentRepair eppPaymentRepair = new EPP_PaymentRepair(driver);
 		EPP_VerifyPayment eppVerifyPayment = new EPP_VerifyPayment(driver);
 		EPP_AuthorizationExceptionsList eppAuthorizationExceptionsList = new EPP_AuthorizationExceptionsList(driver);
+		EPP_TransactionListSelection eppTransactionListSelection = new EPP_TransactionListSelection(driver);
 
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
 		strpathToAppReportFile = sPathToAppReportFolder + "/" + sApplicationName;
@@ -141,6 +143,7 @@ public class EppTest extends ApplicationBase {
 				String createPayTitle = tc_Test_Data.get(iTDRow).get("CreatePayTitle");
 				String accNum = tc_Test_Data.get(iTDRow).get("AccountNumber");
 				String systemCode = tc_Test_Data.get(iTDRow).get("OrderingSystemCode");
+				String orderingBankName = tc_Test_Data.get(iTDRow).get("OrderingBankName");
 				String debitAccount = tc_Test_Data.get(iTDRow).get("DebitAccount");
 				String amount = tc_Test_Data.get(iTDRow).get("Amount");
 				String benAccount = tc_Test_Data.get(iTDRow).get("BeneAccountNumber");
@@ -170,7 +173,7 @@ public class EppTest extends ApplicationBase {
 				eppMenuOPtions.selectPaymentCreationSubMenu();
 				eppTemplates.verifyPaymentCreationPool();
 				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-				eppCreatePayment.createOutgoingHVBankPaymentFRB(accNum,systemCode, debitAccount, amount, valueDateField,
+				eppCreatePayment.createOutgoingHVBankPaymentFRB(accNum,systemCode,orderingBankName, debitAccount, amount, valueDateField,
 						benAccount, beneName, beneAddress,accWithBankNo, accWithSysCode);
 				driver.close();
 				eppLogOff.logOffEPPApplication();
@@ -436,7 +439,8 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 				//eppTemplates.selectTemplate("Payment Creation","Outgoing High Value Customer Payment (FRB)");
 				eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+						tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+						tc_Test_Data.get(iTDRow).get("DebitAccount"),
 						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 						tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 						tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -470,7 +474,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -527,7 +532,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -585,7 +591,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -641,7 +648,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -699,7 +707,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -749,7 +758,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -804,7 +814,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -854,7 +865,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -909,7 +921,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -968,7 +981,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -992,12 +1006,13 @@ public class EppTest extends ApplicationBase {
 					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 					eppProductSelection.selectProductEPP();
+					
 				}	
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectAuthorizationExceptions();
 				eppAuthorizationExceptionsList.selectAuthorizationExceptionsTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.selectPaymentActions("Release From GFC Hold");
-				eppActionPrompts.VerifyAndPerformActionForReleaseHold();
+				eppActionPrompts.VerifyAndPerformActionForRelease(tc_Test_Data.get(iTDRow).get("ReleaseReason"));
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				
@@ -1016,7 +1031,8 @@ public class EppTest extends ApplicationBase {
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
 					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
-							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
 							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
 							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
@@ -1064,11 +1080,74 @@ public class EppTest extends ApplicationBase {
 				driver.close();
 				eppLogOff.logOffEPPApplication();	
 				
-				driver.close();
-				eppLogOff.logOffEPPApplication();
 				
 				break;
+				
+				
+			case "EPP_TC021":
 
+				eppLoginPage.launchApplication(sURL);
+				eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+				eppProductSelection.selectProductEPP();
+				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
+					eppMenuOPtions.selectManualPaymentOptions();
+					eppMenuOPtions.selectPaymentCreationSubMenu();
+					eppTemplates.verifyPaymentCreationPool();
+					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
+					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
+							tc_Test_Data.get(iTDRow).get("DebitAccount"),
+							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
+							tc_Test_Data.get(iTDRow).get("BeneAccountNumber"),tc_Test_Data.get(iTDRow).get("BeneName"),
+							tc_Test_Data.get(iTDRow).get("BeneAddress"),tc_Test_Data.get(iTDRow).get("AccountWithBank"),
+							tc_Test_Data.get(iTDRow).get("AccountWithBankCode"));
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					eppTemplates.verifyWorkSummaryPool();
+					eppTemplates.selectPaymentCreationVerificationOption();
+					eppTransactionIDList.selectTransactionIDFromList(tc_Test_Data.get(iTDRow).get("TransactionID"));
+					eppApprovePayment.verifyAndApprovePayments(tc_Test_Data.get(iTDRow).get("Amount"),
+							tc_Test_Data.get(iTDRow).get("ValueDate"));
+					eppPaymentDetails.verifyTransaction("Regulatory Filter");
+					driver.close();
+					eppLogOff.logOffEPPApplication();
+					eppLoginPage.launchApplication(sURL);
+					eppLoginPage.loginEppApplication(sUserID1, sPassword1);
+					eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+							tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+					eppProductSelection.selectProductEPP();
+					
+					
+				}	
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectWorkSummaryPool("Regulatory Check");
+				eppTransactionListSelection.selectTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
+				eppPaymentDetails.selectPaymentActions("Release From OFC Hold");
+				eppActionPrompts.VerifyAndPerformActionForRelease(tc_Test_Data.get(iTDRow).get("ReleaseReason"));
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				eppLoginPage.launchApplication(sURL);
+				eppLoginPage.loginEppApplication(sUserID2, sPassword2);
+				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
+						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
+				eppProductSelection.selectProductEPP();
+				eppTemplates.verifyWorkSummaryPool();
+				eppTemplates.selectPaymentActionVerificationOption();
+				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
+				eppPaymentDetails.approvePayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"approval","Approve Release From OFC","Regulatory Filter","Completed");
+				driver.close();
+				eppLogOff.logOffEPPApplication();
+				break;
+				
+				
+
+				
 			}
 			new HTMLReportHelper().HtmlReportFooter();
 
