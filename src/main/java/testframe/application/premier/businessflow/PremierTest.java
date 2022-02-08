@@ -20,6 +20,7 @@ import testframe.application.premier.pages.Premier_LogOff;
 import testframe.application.premier.pages.Premier_Login;
 import testframe.application.premier.pages.Premier_MasterAgreement;
 import testframe.application.premier.pages.Premier_NewCollateral;
+import testframe.application.premier.pages.Premier_NewSweeps;
 import testframe.application.premier.pages.Premier_PortfolioNew;
 import testframe.application.premier.pages.Premier_SafeDepositBox;
 import testframe.common.reporting.HTMLReportHelper;
@@ -61,6 +62,7 @@ public class PremierTest extends ApplicationBase {
 	static  Premier_SafeDepositBox premierSafeDepositBox;
 	static  Premier_NewCollateral premierNewCollateral;
 	static  Premier_MasterAgreement premierMasterAgreement;
+	static  Premier_NewSweeps premierNewSweeps;
 	
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver,String sApplicationName, String sURL,String sTestCase, String sTestDescription,
@@ -83,6 +85,7 @@ public class PremierTest extends ApplicationBase {
 		premierSafeDepositBox = new Premier_SafeDepositBox(driver);
 		premierNewCollateral = new Premier_NewCollateral(driver);
 		premierMasterAgreement = new Premier_MasterAgreement(driver);
+		premierNewSweeps = new Premier_NewSweeps(driver);
 		
 		sPathToAppReportFolder = pr.pathToAppReportFolderFromFrameworkPropFile();
 		strpathToAppReportFile = sPathToAppReportFolder + "/" + sApplicationName;
@@ -1686,7 +1689,6 @@ public class PremierTest extends ApplicationBase {
 					new PremierCommonNavigation().safeDepositBoxCreationAndInquire(tc_Test_Data, iTDRow,sTestCase,"N");
 					sAccountNumber = tc_Test_Data.get(iTDRow).get("SDB_AccountNumber");
 					premierHomeMenuPage.goToSafeDepositBox();
-					
 				}
 				premierHomeMenuPage.goToSafeDepositBox();
 				premierHomeMenuPage.goToChangeSDBAccount();
@@ -1700,13 +1702,13 @@ public class PremierTest extends ApplicationBase {
 				premierSafeDepositBox.closeScreen_Image();			
 				premierLogOff.logoffApplication();				
 				break;	
-								
+				
 			case "PREMIER_TC059":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
+				if(sAccountNumber.equals("")) {
 					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data, iTDRow,testdataFile_Path,sTestCase,"N");
 					}
@@ -2065,17 +2067,15 @@ public class PremierTest extends ApplicationBase {
 				
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();
-
-				break;
-	
+				break;	
 			
 			case "PREMIER_TC070":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
-					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 					}
@@ -2097,7 +2097,6 @@ public class PremierTest extends ApplicationBase {
 						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TransactionRestrictionCode"),"");
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();
-
 				break;
 				
 			case "PREMIER_TC071":
@@ -2105,8 +2104,8 @@ public class PremierTest extends ApplicationBase {
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
-					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 					}
@@ -2124,7 +2123,6 @@ public class PremierTest extends ApplicationBase {
 				premierDepositAccounts.saveButton();
 				
 				premierLogOff.logoffApplication();
-
 				break;
 	
 			case "PREMIER_TC072":
@@ -2132,8 +2130,8 @@ public class PremierTest extends ApplicationBase {
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
-					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 					}
@@ -2178,12 +2176,12 @@ public class PremierTest extends ApplicationBase {
 				premierHomeMenuPage.changeAccountCertificates();
 				premierDepositAccounts.searchAccount(sAccountNumber);	
 				premierDepositAccounts.changeAccountCodeDetails(sAccountNumber,"",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatusCode"),
-						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TransactionRestrictionCode"),"","","","","","","");
+						"","","","","","","","");
 				premierDepositAccounts.saveButton();
 				premierHomeMenuPage.accountInquiryCertificates();
 				premierDepositAccounts.searchAccount(sAccountNumber);
 				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,"",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatusCode"),
-						tc_Test_Data.get(iTDRow).get("ChangeDeposit_TransactionRestrictionCode"),"");
+						"","");
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;
@@ -2249,7 +2247,7 @@ public class PremierTest extends ApplicationBase {
 				premierDepositAccounts.saveButton();
 				premierHomeMenuPage.accountInquiryCertificates();
 				premierDepositAccounts.searchAccount(sAccountNumber);
-				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,tc_Test_Data.get(iTDRow).get("ChangeDeposit_warning"),"","",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatementCycle"));
+				premierDepositAccounts.validateAccountDetailsAfterChange(sAccountNumber,"","","",tc_Test_Data.get(iTDRow).get("ChangeDeposit_StatementCycle"));
 				premierDepositAccounts.closeScreen_Image();
 				premierLogOff.logoffApplication();				
 				break;
@@ -2642,11 +2640,121 @@ public class PremierTest extends ApplicationBase {
 				premierHomeMenuPage.masterAgreementInquire();
 				premierMasterAgreement.searchAgreement(sAgreementNumber);
 				premierMasterAgreement.validateDetailsInMasterAgreementInquiry(sAgreementNumber,"Master Mortgage",tc_Test_Data.get(iTDRow).get("MasterMortgage_NoteNumber"));
-				premierLinesNewLine.closeScreen_Image();
+				premierLinesNewLine.closeScreen_Image();			
+				premierLogOff.logoffApplication();
+				break;
+			
+			case "PREMIER_TC085":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
+					tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				}
+				premierHomeMenuPage.selectSweeps();
+				premierHomeMenuPage.selectNewSweep();
+				premierNewSweeps.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+				premierNewSweeps.newSweep_SelectAccount(tc_Test_Data.get(iTDRow).get("Sweep_NickName"),tc_Test_Data.get(iTDRow).get("Sweep_Frequency"),testdataFile_Path, sTestCase, iTDRow+1);
+				premierNewSweeps.newSweep_FundingAccount(tc_Test_Data.get(iTDRow).get("Sweep_DDAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountNumber"));
+				premierNewSweeps.newSweep_SweepFlow();
+				premierNewSweeps.newSweep_CodesScreen(tc_Test_Data.get(iTDRow).get("FromAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("FromAccount_MaximumBalance"),tc_Test_Data.get(iTDRow).get("ToAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("ToAccount_MaximumBalance"),tc_Test_Data.get(iTDRow).get("SweepMinimumBalance_From"),
+						tc_Test_Data.get(iTDRow).get("BalanceType_From"),tc_Test_Data.get(iTDRow).get("Increment_From"),tc_Test_Data.get(iTDRow).get("TargetBalance_From"),tc_Test_Data.get(iTDRow).get("ChargeCode_From"),tc_Test_Data.get(iTDRow).get("NotificationOption_From"),tc_Test_Data.get(iTDRow).get("SweepFrequency_From"),tc_Test_Data.get(iTDRow).get("SweepFromTransferOption_From")
+						,tc_Test_Data.get(iTDRow).get("SweepMaximumBalance_To"),tc_Test_Data.get(iTDRow).get("BalanceType_To"),tc_Test_Data.get(iTDRow).get("Increment_To"),tc_Test_Data.get(iTDRow).get("ChargeCode_To"),tc_Test_Data.get(iTDRow).get("NotificationOption_To"),tc_Test_Data.get(iTDRow).get("SweepFrequency_To"));
+				premierNewSweeps.sweepFinishButton();
+				
+				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				premierHomeMenuPage.sweepInquire();			
+				premierNewSweeps.searchSweep(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"));
+				premierNewSweeps.validateDetailsInSweepInquiry(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"));
+				premierNewSweeps.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+			
+			case "PREMIER_TC086":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
+					tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				}
+				premierHomeMenuPage.selectSweeps();
+				premierHomeMenuPage.selectNewSweep();
+				premierNewSweeps.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+				premierNewSweeps.newSweep_SelectAccount(tc_Test_Data.get(iTDRow).get("Sweep_NickName"),tc_Test_Data.get(iTDRow).get("Sweep_Frequency"),testdataFile_Path, sTestCase, iTDRow+1);
+				premierNewSweeps.newSweep_FundingAccount(tc_Test_Data.get(iTDRow).get("Sweep_DDAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountNumber"));
+				premierNewSweeps.newSweep_SweepFlow();
+				premierNewSweeps.newSweep_CodesScreen(tc_Test_Data.get(iTDRow).get("FromAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("FromAccount_MaximumBalance"),tc_Test_Data.get(iTDRow).get("ToAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("ToAccount_MaximumBalance"),tc_Test_Data.get(iTDRow).get("SweepMinimumBalance_From"),
+						tc_Test_Data.get(iTDRow).get("BalanceType_From"),tc_Test_Data.get(iTDRow).get("Increment_From"),tc_Test_Data.get(iTDRow).get("TargetBalance_From"),tc_Test_Data.get(iTDRow).get("ChargeCode_From"),tc_Test_Data.get(iTDRow).get("NotificationOption_From"),tc_Test_Data.get(iTDRow).get("SweepFrequency_From"),tc_Test_Data.get(iTDRow).get("SweepFromTransferOption_From")
+						,tc_Test_Data.get(iTDRow).get("SweepMaximumBalance_To"),tc_Test_Data.get(iTDRow).get("BalanceType_To"),tc_Test_Data.get(iTDRow).get("Increment_To"),tc_Test_Data.get(iTDRow).get("ChargeCode_To"),tc_Test_Data.get(iTDRow).get("NotificationOption_To"),tc_Test_Data.get(iTDRow).get("SweepFrequency_To"));
+				premierNewSweeps.sweepFinishButton();
+				
+				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				premierHomeMenuPage.sweepInquire();			
+				premierNewSweeps.searchSweep(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"));
+				premierNewSweeps.validateDetailsInSweepInquiry(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"));
+				premierNewSweeps.closeScreen_Image();
 				premierLogOff.logoffApplication();
 				break;
 				
+			case "PREMIER_TC087":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
+					tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				}
+				premierHomeMenuPage.selectSweeps();
+				premierHomeMenuPage.selectNewSweep();
+				premierNewSweeps.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+				premierNewSweeps.newSweep_SelectAccount(tc_Test_Data.get(iTDRow).get("Sweep_NickName"),tc_Test_Data.get(iTDRow).get("Sweep_Frequency"),testdataFile_Path, sTestCase, iTDRow+1);
+				premierNewSweeps.newSweep_FundingAccount(tc_Test_Data.get(iTDRow).get("Sweep_DDAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountNumber"));
+				premierNewSweeps.newSweep_SweepFlow();
+				premierNewSweeps.newSweep_CodesScreen(tc_Test_Data.get(iTDRow).get("FromAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("FromAccount_MaximumBalance"),"","",tc_Test_Data.get(iTDRow).get("SweepMinimumBalance_From"),
+						tc_Test_Data.get(iTDRow).get("BalanceType_From"),tc_Test_Data.get(iTDRow).get("Increment_From"),tc_Test_Data.get(iTDRow).get("TargetBalance_From"),tc_Test_Data.get(iTDRow).get("ChargeCode_From"),tc_Test_Data.get(iTDRow).get("NotificationOption_From"),tc_Test_Data.get(iTDRow).get("SweepFrequency_From"),tc_Test_Data.get(iTDRow).get("SweepFromTransferOption_From")
+						,tc_Test_Data.get(iTDRow).get("SweepMaximumBalance_To"),tc_Test_Data.get(iTDRow).get("BalanceType_To"),tc_Test_Data.get(iTDRow).get("Increment_To"),tc_Test_Data.get(iTDRow).get("ChargeCode_To"),tc_Test_Data.get(iTDRow).get("NotificationOption_To"),tc_Test_Data.get(iTDRow).get("SweepFrequency_To"));
+				premierNewSweeps.sweepFinishButton();
+				
+				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				premierHomeMenuPage.sweepInquire();			
+				premierNewSweeps.searchSweep(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"));
+				premierNewSweeps.validateDetailsInSweepInquiry(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"));
+				premierNewSweeps.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
+				
+			case "PREMIER_TC088":
+				premierLoginPage.launchApplication(sURL);
+				premierLoginPage.selectGroup(sGroup,sEnvType);
+				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
+				
+				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
+					tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				}
+				premierHomeMenuPage.selectSweeps();
+				premierHomeMenuPage.selectNewSweep();
+				premierNewSweeps.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+				premierNewSweeps.newSweep_SelectAccount(tc_Test_Data.get(iTDRow).get("Sweep_NickName"),tc_Test_Data.get(iTDRow).get("Sweep_Frequency"),testdataFile_Path, sTestCase, iTDRow+1);
+				premierNewSweeps.newSweep_FundingAccount(tc_Test_Data.get(iTDRow).get("Sweep_DDAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountNumber"));
+				premierNewSweeps.newSweep_SweepFlow();
+				premierNewSweeps.newSweep_CodesScreen(tc_Test_Data.get(iTDRow).get("FromAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("FromAccount_MaximumBalance"),"","",tc_Test_Data.get(iTDRow).get("SweepMinimumBalance_From"),
+						tc_Test_Data.get(iTDRow).get("BalanceType_From"),tc_Test_Data.get(iTDRow).get("Increment_From"),tc_Test_Data.get(iTDRow).get("TargetBalance_From"),tc_Test_Data.get(iTDRow).get("ChargeCode_From"),tc_Test_Data.get(iTDRow).get("NotificationOption_From"),tc_Test_Data.get(iTDRow).get("SweepFrequency_From"),tc_Test_Data.get(iTDRow).get("SweepFromTransferOption_From")
+						,tc_Test_Data.get(iTDRow).get("SweepMaximumBalance_To"),tc_Test_Data.get(iTDRow).get("BalanceType_To"),tc_Test_Data.get(iTDRow).get("Increment_To"),tc_Test_Data.get(iTDRow).get("ChargeCode_To"),tc_Test_Data.get(iTDRow).get("NotificationOption_To"),tc_Test_Data.get(iTDRow).get("SweepFrequency_To"));
+				premierNewSweeps.sweepFinishButton();
+				
+				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				premierHomeMenuPage.sweepInquire();			
+				premierNewSweeps.searchSweep(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"));
+				premierNewSweeps.validateDetailsInSweepInquiry(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"));
+				premierNewSweeps.closeScreen_Image();
+				premierLogOff.logoffApplication();
+				break;
 			}
 			new HTMLReportHelper().HtmlReportFooter();
 		}
