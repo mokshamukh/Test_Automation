@@ -62,11 +62,16 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 	By reviewDetails = By.xpath("//div[text()='Debit Account']//..//span[@id='debitAccount'][text()]");
 	By reviewAmount = By.xpath("//h4[@role='heading']//..//..//..//div[@id='Payment Amount']");
 	By confirmButton = By.xpath("//button[text()='Confirm']");
+	By editHeader = By.xpath("//h1[contains(text(),'Edit')]");
+	By editIcon = By.xpath("//button[@aria-label='To edit the template, click the icon']");
+	By saveTemplate = By.xpath("//button//span[text()='Save Template']");
+	By searchExpand =By.xpath("//button[contains(@aria-label,'To get the list of templates matching the search')]//i[text()='expand_more']");
+	
 	
 	String list = "//li[@role='option']/span[contains(text(),'%s')]";
 	String searchData = "//td[@class='ng-star-inserted']//span[contains(text(),'%s')]";
 	
-	public void createWireTemplateForFreeForm(String freeFormTempalte, String repetitiveButton, String templateName,
+	public void createWireTemplateForFreeForm(String freeFormTemplate, String repetitiveButton, String templateName,
 			String payee,String debitAccount,String beneIdType,
 			String beneID,String beneAddress1,String beneAddress2,String beneCountry,
 			String beneBankIDType,String paymentCurrency,String amount,String beneBankID,
@@ -77,7 +82,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			if (isElementPresent(manageWireTemplatesHeader)) {
 				clickOnElement("Manage Wire Template", "Create Template Button", createTempalte);
 			    waitForPresenceOfElement("Manage Wire Template", "Start Wire Template", startWireTransfer);
-			    if (!freeFormTempalte.equals("NA")) {
+			    if (!freeFormTemplate.equals("NA")) {
 			    	clickOnElement("Manage Wire Template", "Free Form Template", freeFormTemplateButton);
 				waitElement(500);
 				clickOnElement("Manage Wire Template", "Next Button", nextButton);
@@ -234,11 +239,14 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			}
 
 			
-	public void searchWireTemplate(String templateName,String amount,String payeeName) throws Exception {
+	public void searchWireTemplate(String templateName,String amount) throws Exception {
 				boolean stepResult = false;
 				try {
 					waitElement(2000);
 					if (isElementPresent(manageWireTemplatesHeader)) {
+						if(isElementPresent(searchExpand)) {
+							clickOnElement("Manage Wire Template", "Search Field", searchExpand);
+						}
 						if (!templateName.equals("")) {
 							enterText("Manage Wire Template", "Template Name", templateNameField, templateName);
 						}
@@ -246,7 +254,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 							enterText("Manage Wire Template", "Amount Field", searchAmount, amount);
 						}
 						clickOnElement("Manage Wire Template", "Search Button", searchButton);
-		                isElementPresent(getDynamicElement("Corporate New Payee", searchData, payeeName));
+		                isElementPresent(getDynamicElement("Corporate New Template", searchData, templateName));
 				stepResult = true;
 			 }
 			} catch (Exception e) {
@@ -297,6 +305,94 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 		}
 
 	}
+	
+	
+	public void editExistingWireTemplate(String update_Payee,String update_BeneIdType,
+			String update_BeneID,String update_BeneAddress1,String update_BeneAddress2,String update_BeneCountry,
+			String update_BeneBankIDType,String update_PaymentCurrency,String update_Amount,String update_BeneBankID,
+			String update_PurposeOfPayment,String update_BeneBankAddress1,String update_BeneBankAddress2) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(2000);
+			if (isElementPresent(manageWireTemplatesHeader)) {
+				clickOnElement("Manage Wire Templates", "Edit Wire Template", editIcon);
+				waitForPresenceOfElement("Manage Wire Templates", "Edit Wire Template", editHeader);
+				clickOnELementUsingActions(beneInformation);
+				//scrollToElement(beneInformation);
+				if (!update_Payee.equals("")) {
+					clearAndType("Manage Wire Template", "Payee Field", payeeName, update_Payee);
+				}
+				if(!update_BeneIdType.equals("")) {
+					clickOnELementUsingActions(beneIDTypeField);
+//					scrollToElement(beneIDTypeField);
+//					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//div[2]")).click();
+				    selectElementFromListbox("Manage Wire Template", "Beneficiary Id Type", beneIDTypeField, list, update_BeneIdType);
+				}
+				if(!update_BeneID.equals("")) {
+					scrollToElement(beneIDField);
+					clearAndType("Manage Wire Templater", "Beneficiary Id", beneIDField, update_BeneID);
+				}
+				if(!update_BeneAddress1.equals("")) {
+					clearAndType("Manage Wire Template", "Beneficiary Address1 Field", beneAddressField1, update_BeneAddress1);
+				}
+				if(!update_BeneAddress2.equals("")) {
+					clearAndType("Manage Wire Template", "Beneficiary Address2 Field", beneAddressField2, update_BeneAddress2);
+				}
+				if(!update_BeneCountry.equals("")) {
+					clickOnELementUsingActions(beneCountryField);
+//					scrollToElement(beneCountryField);
+//					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryCountry']")).click();
+				    selectElementFromListbox("Manage Wire Template", "Beneficiary Country", beneCountryField, list, update_BeneCountry);
+				}
+				if(!update_PaymentCurrency.equals("")) {
+					clickOnELementUsingActions(paymentCurrencyField);
+//					scrollToElement(paymentCurrencyField);
+//					driver.findElement(By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']")).click();
+				    selectElementFromListbox("Manage Wire Template", "Payment Currency", paymentCurrencyField, list, update_PaymentCurrency);
+				}
+				if(!update_Amount.equals("")) {
+					clearAndType("Manage Wire Template", "Amount Field", amountField, update_Amount);
+				}
+				if(!update_BeneBankIDType.equals("")) {
+					clickOnELementUsingActions(beneBankIDTypeField);
+//					scrollToElement(beneBankIDTypeField);
+//					driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']//div[2]")).click();
+				    selectElementFromListbox("Manage Wire Template", "Beneficiary Bank ID Type", beneBankIDTypeField, list, update_BeneBankIDType);
+				}
+				if(!update_BeneBankID.equals("")) {
+					clearAndType("Manage Wire Template", "Bene Bank ID", beneBankIdField, update_BeneBankID);
+				}
+				if(!update_PurposeOfPayment.equals("")) {
+					scrollToElement(purposeOfPaymentField);
+					clearAndType("Manage Wire Template", "Purpose of Payment", purposeOfPaymentField, update_PurposeOfPayment);
+				}
+				if(!update_BeneBankAddress1.equals("")) {
+					clearAndType("Manage Wire Template", "Beneficiary Bank Address1 Field", beneBankAddress1Field, update_BeneBankAddress1);
+				}
+				if(!update_BeneBankAddress2.equals("")) {
+					clearAndType("Manage Wire Template", "Beneficiary Bank Address2 Field", beneBankAddress2Field, update_BeneBankAddress2);
+				}
+				
+				clickOnElement("Manage Wire Template", "Save Tempalte Button", saveTemplate);
+				waitForPresenceOfElement("Manage Wire Template", "Template Saved Banner", templateSavedMsg);
+				stepResult = true;
+             }
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		if (stepResult == true) {
+			System.out.println("Pass - Menu");
+			new HTMLReportHelper().HtmlReportBody("Edit Wire Template- Corporate application",
+					"Edit Wire Template Successfully", "Passed", driver, "Y");
+		} else {
+			System.out.println("fail");
+			new HTMLReportHelper().HtmlReportBody("Edit Wire Template- Corporate application",
+					"Could not Edit Wire Template Successfully", "Failed", driver, "Y");
+		}
+	}
+	
+}		
+	
 	
 			
 		}

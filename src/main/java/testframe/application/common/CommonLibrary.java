@@ -1322,6 +1322,20 @@ public class CommonLibrary {
 		actions.moveToElement(element).click().perform();
 	}
 	
+	protected void clickOnELementUsingActions(By by) {
+		/*Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().perform();*/
+		
+		//---altered code
+		WebElement element = findElement(by);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).perform();
+		waitElement(1000);
+		actions.sendKeys(Keys.DOWN).perform();
+		waitElement(1000);
+		actions.moveToElement(element).click().perform();
+	}
+	
 	protected void clickOnELementUsingJS(WebElement element) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);

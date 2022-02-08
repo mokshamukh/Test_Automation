@@ -17,8 +17,8 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 
 	String dropdown = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td[contains(@class,'edit-splitter')]//i[text()='expand_more']";
 	String cancelButton = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td[contains(@class,'edit-splitter')]//i[text()='close']";
-	
-	By paymentActivityTitle = By.xpath("//h3[contains(text(),'Current Activity Summary')]|//button[contains(text(),'Payment Activity')]");
+
+    By paymentActivityTitle = By.xpath("//h3[contains(text(),'Current Activity Summary')]|//button[contains(text(),'Payment Activity')]");
 	By cancelWarningMsg = By.xpath("//p[contains(text(),'Are you sure that you want to cancel')]");
 	By approveWarningMsg = By.xpath("//p[contains(text(),'Are you sure you want to approve')]");
 	By searchButton = By.xpath("//button[@aria-label='Search']");
@@ -34,7 +34,11 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 	By rejectReason = By.xpath("//label[contains(text(),'Enter the rejection reason for payment :')]");
 	By rejectReasonTextField = By.xpath("//input[contains(@class,'form-control')][@formcontrolname='rejectReason']");
 	By okButton = By.xpath("//button[text()='OK']");
-	
+	By editAddenda = By.xpath("//input[@id='payeeAddenda0']");
+	By saveEditBatch = By.xpath("//button[contains(text(),'Save Batch')]");
+	By achCurrentActivity = By.xpath("//div//a[text()='ACH Payments']");
+	By wireCurrentActivity = By.xpath("//div//a[text()='Wire Transfers']");
+
 	String warningButton = "//button[text()='%s']";
 	String approveViewButton = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]//..//..//..//button[@aria-label='Click To View']//i[text()='chevron_right']";
 	String cancelEditButton = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td[contains(@class,'edit-splitter')]//..//..//button[contains(@class,'dropdown-toggle')]//i[text()='expand_more']";
@@ -46,9 +50,10 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 	String statusList = "//li[contains(@class,'ui-dropdown-item ui-corner-all')]/span[contains(text(),'%s')]";
 	String amount_field = "(//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td/div)[1]";
 	String status_field ="//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td/span";
+	String editButton = "//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]//..//..//..//button//i[text()='mode_edit']";
 	Corporate_AccountTransferDetails corporateAccountTransferDetails;
 	Corporate_NewACHBatchTemplate corporate_NewACHBatchTemplate;
-	
+
 	static String transactionID; 
 	public Corporate_CurrentPaymentActivity(WebDriver driver) {
 		super(driver);
@@ -85,7 +90,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 				System.out.println("fail");
 		}
 	}
-	
+
 	//cancel By user
 	public void verifyCancelPaymentMessage(String transactionID) throws Exception {
 		boolean stepResult = false;
@@ -98,40 +103,40 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		} finally {
 			if (stepResult == true){
 				System.out.println("Pass -Current Payment Activity - Cancel Payment Msg");
-			new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
-					"Cancel payment Msg Successfully", "Passed", driver, "Y");}
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Cancel payment Msg Successfully", "Passed", driver, "Y");}
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
 						"Could not Cancel payment msg Successfully", "Failed", driver, "Y");}
 		}
 	}
-	
-	
+
+
 	public void viewCurretPaymentDetails(String date,String transactionID,String amount, String status,String fromAccount,String toAccount,String initiator){
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
 			if (isElementPresent(paymentActivityTitle)) {
 				if(!date.equals("")) {
-				validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
+					validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
 				}
 				if(!amount.equals("")){
 					validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID), amount);
 				}
 				if(!status.equals("")){
 					validateTextContains("Corporate Current Payment Activity", "Status", getDynamicElement("Status", status_field, transactionID), status);
-					
+
 				}
 				if(!fromAccount.equals("")){
 					validateTextContains("Corporate Current Payment Activity", "From Account", getDynamicElement("From Account", fromAcc_field, transactionID), fromAccount);
-					}
+				}
 				if(!toAccount.equals("")){
 					validateTextContains("Corporate Current Payment Activity", "To Account", getDynamicElement("To Account", toAcc_field, transactionID), toAccount);
-					}
-//				if(!initiator.equals("")){
-//					validateTextContains("Corporate Current Payment Activity", "Initiator", getDynamicElement("Initiator", initiator_field, transactionID), "FGS_ACH04");
-//					}
+				}
+				//				if(!initiator.equals("")){
+				//					validateTextContains("Corporate Current Payment Activity", "Initiator", getDynamicElement("Initiator", initiator_field, transactionID), "FGS_ACH04");
+				//					}
 			}
 			stepResult = true;
 		} catch (Exception e) {
@@ -144,7 +149,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		}
 
 	}
-	
+
 	public void clickApproveButton(String transactionID) {
 		boolean stepResult = false;
 		try {
@@ -155,13 +160,13 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 						getDynamicElement("Approve Button", approveViewButton, transactionID));
 				if(isElementPresent(approveButton)) { 
 					clickOnElement("Corporate Current Payment Activity", "Approve Button", approveButton);
-				if(isElementPresent(approveWarningMsg)){
-					clickOnElement("Corporate Current Payment Activity", "Warning Message", warningYesButton);
-					Thread.sleep(4000);
-					verifyApprovePaymentMessage(transactionID);
+					if(isElementPresent(approveWarningMsg)){
+						clickOnElement("Corporate Current Payment Activity", "Warning Message", warningYesButton);
+						Thread.sleep(4000);
+						verifyApprovePaymentMessage(transactionID);
+					}
 				}
-			}
-		}	stepResult = true;
+			}	stepResult = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -171,12 +176,12 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 				System.out.println("fail");
 		}
 	}
-	
+
 	public void verifyApprovePaymentMessage(String transactionID) throws Exception {
 		boolean stepResult = false;
 		try {
-//			String approvePaymentMsg = "//div[text()='Payment "+transactionID+" successfully approved.']";
-//			isElementPresent(returnByElement("Cancel Payment alert Msg", approvePaymentMsg);
+			//			String approvePaymentMsg = "//div[text()='Payment "+transactionID+" successfully approved.']";
+			//			isElementPresent(returnByElement("Cancel Payment alert Msg", approvePaymentMsg);
 			String approvePaymentSuccessMsg = "//div[text()='This payment has been approved successfully.']";
 			isElementPresent(returnByElement("Payment alert Msg", approvePaymentSuccessMsg));
 			stepResult = true;
@@ -185,16 +190,16 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		} finally {
 			if (stepResult == true){
 				System.out.println("Pass -Current Payment Activity - Approve Payment Msg");
-			new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
-					"Approve payment Msg Successfully", "Passed", driver, "Y");}
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Approve payment Msg Successfully", "Passed", driver, "Y");}
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
 						"Could not approve payment msg Successfully", "Failed", driver, "Y");}
 		}
 	}
-	
-	
+
+
 	public void verifyApproveACHPaymentMessage(String transactionID) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -206,15 +211,15 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		} finally {
 			if (stepResult == true){
 				System.out.println("Pass -Current Payment Activity - Approve Payment Msg");
-			new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
-					"Approve payment Msg Successfully", "Passed", driver, "Y");}
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Approve payment Message Successfully", "Passed", driver, "Y");}
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
-						"Could not approve payment msg Successfully", "Failed", driver, "Y");}
+						"Could not approve payment message Successfully", "Failed", driver, "Y");}
 		}
 	}
-	
+
 	public void filterCurrentActivityDetails(String typeVal, String transNum, String status, String nameVal, String amtVal) throws Exception{
 		boolean stepResult = false;
 		try {
@@ -255,25 +260,25 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 			}
 		}
 	}
-	
+
 	public void viewCurretPaymentDetailsForACH(String date,String transactionID,String amount, String status) {
-			//String initiator){
+		//String initiator){
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
 			if (isElementPresent(paymentActivityTitle)) {
-				if(!"02/01/2022".equals("")) {
-				validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), "02/01/2022");
-				}
+				//				if(!date.equals("")) {
+				//				validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
+				//				}
 				if(!amount.equals("")){
-					validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID), amount);
+					validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID),amount);
 				}
 				if(!status.equals("")){
 					validateTextContains("Corporate Current Payment Activity", "Status", getDynamicElement("Status", status_field, transactionID), status);
 				}
-//				if(!initiator.equals("")){
-//					validateTextContains("Corporate Current Payment Activity", "Initiator", getDynamicElement("Initiator", initiator_field, transactionID), initiator);
-//					}
+				//				if(!initiator.equals("")){
+				//					validateTextContains("Corporate Current Payment Activity", "Initiator", getDynamicElement("Initiator", initiator_field, transactionID), initiator);
+				//					}
 			}
 			stepResult = true;
 		} catch (Exception e) {
@@ -286,7 +291,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		}
 
 	}
-	
+
 	public void clickApproveButtonForACHPayment(String transactionID,String psw) {
 		boolean stepResult = false;
 		try {
@@ -315,7 +320,7 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 				System.out.println("fail");
 		}
 	}
-	
+
 	public void clickRejectButtonForACHPayment(String transactionID,String reason) {
 		boolean stepResult = false;
 		try {
@@ -343,9 +348,9 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 				System.out.println("fail");
 		}
 	}
-	
-	
-	public void clickCancelButtonForACHPayment(String transactionID) {
+
+
+	public void clickCancelButtonForACHPayment(String transactionID) throws Exception {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -366,14 +371,18 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (stepResult == true)
-				System.out.println("Pass -Current Payment Activity - Cancel button");
-			else
+			if (stepResult == true) {
+				System.out.println("Pass -Current Payment Activity - Cancel Payment Msg");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Cancel ACH payment Successfully", "Passed", driver, "Y");}
+			else{
 				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Could not Cancel ACH payment  Successfully", "Failed", driver, "Y");}
 		}
 	}
-	
-	
+
+
 	public void verifyRejectACHPaymentMessage(String transactionID) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -385,18 +394,154 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 		} finally {
 			if (stepResult == true){
 				System.out.println("Pass -Current Payment Activity - Reject Payment Msg");
-			new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
-					"Reject payment Msg Successfully", "Passed", driver, "Y");}
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Reject payment Msg Successfully", "Passed", driver, "Y");}
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
 						"Could not reject payment msg Successfully", "Failed", driver, "Y");}
 		}
 	}
-	
-	
-	
+
+
+
+	public void clickEditButtonFromInitiatorACH(String transactionID,String updatedAddenda) throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			if (isElementPresent(paymentActivityTitle)) {
+				Thread.sleep(2000);
+				clickOnElement("Corporate Current Payment Activity", "Edit Button",
+						getDynamicElement("Edit Button", editButton, transactionID));
+				waitElement(1000);
+				enterText("Corporate Current Payment Activity", "Addenda Field", editAddenda, updatedAddenda);
+				clickOnElement("Corporate Current Payment Activity", "Save Batch", saveEditBatch);
+			}
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass -Current Payment Activity - Edit Payment Msg");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Edit payment Msg Successfully", "Passed", driver, "Y");}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Could not Edit payment msg Successfully", "Failed", driver, "Y");}
+		}
+	}
+
+
+	public void clickOnCurrentACHActivity() throws Exception {
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(paymentActivityTitle)) {
+				Thread.sleep(2000);
+				clickOnElement("Corporate Current Payment Activity", "ACH Button",achCurrentActivity);
+				waitElement(2000);
+				stepResult = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass -Current Payment Activity - Edit Payment Msg");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"ACH payment Successfully", "Passed", driver, "Y");}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Could not ACH payment  Successfully", "Failed", driver, "Y");}
+		}
+	}
+
+
+
+	public void viewInitiatorCurretPaymentDetailsForACH(String date,String transactionID,String amount, String editStatus) {
+		//String initiator){
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			if (isElementPresent(paymentActivityTitle)) {
+				//			if(!date.equals("")) {
+				//			validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
+				//			}
+				if(!amount.equals("")){
+					validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID),amount);
+				}
+				if(!editStatus.equals("")){
+					validateTextContains("Corporate Current Payment Activity", "Status", getDynamicElement("Status", status_field, transactionID), editStatus);
+				}
+				//			if(!initiator.equals("")){
+				//				validateTextContains("Corporate Current Payment Activity", "Initiator", getDynamicElement("Initiator", initiator_field, transactionID), initiator);
+				//				}
+			}
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true)
+				System.out.println("Pass -Current Payment Activity - validate transactions");
+			else
+				System.out.println("fail");
+		}
+
+	}
+
 	
 
+	public void clickOnCurrentWireTransferActivity() throws Exception {
+		boolean stepResult = false;
+		try {
+			if (isElementPresent(paymentActivityTitle)) {
+				Thread.sleep(2000);
+				clickOnElement("Corporate Current Payment Activity", "Wire Transfer Button",wireCurrentActivity);
+				waitElement(2000);
+				stepResult = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass -Current Payment Activity - Edit Payment Msg");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Wire payment Successfully", "Passed", driver, "Y");}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Could not do a Wire payment Successfully", "Failed", driver, "Y");}
+		}
+	}
+	
+	
+	public void clickEditButtonFromInitiatorWire(String transactionID) throws Exception {
+		boolean stepResult = false;
+		try {
+			Thread.sleep(4000);
+			if (isElementPresent(paymentActivityTitle)) {
+				Thread.sleep(2000);
+				clickOnElement("Corporate Current Payment Activity", "Edit Button",
+						getDynamicElement("Edit Button", editButton, transactionID));
+				waitElement(1000);
+			}
+			stepResult = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass -Current Payment Activity - Edit Payment Msg");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Edit payment Msg Successfully", "Passed", driver, "Y");}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Current Payment Activity CC- Corporate application",
+						"Could not Edit payment msg Successfully", "Failed", driver, "Y");}
+		}
+	}
+
+	
 }
 
