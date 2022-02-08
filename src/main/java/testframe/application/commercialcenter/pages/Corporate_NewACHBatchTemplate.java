@@ -27,12 +27,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 	public By freeFormField = By.xpath("//input[@value='Free-Form']");
 	public By templateField = By.xpath("//input[@value='Template']");
 	public By achCompanyField = By.xpath("//p-dropdown[@inputid='achCompany-input']");
-	public By debitCreditField = By.xpath("//p-dropdown[@inputid='debitCreditOptions-input']");
-	public By batchTypeField = By.xpath("//p-dropdown[@inputid='batchTypeOptions-input']");
+	public By debitCreditField = By.xpath("//p-dropdown[@inputid='debitCreditOptions-input']//div/span[contains(@class,'expand_more')]");
+	public By batchTypeField = By.xpath("//p-dropdown[@inputid='batchTypeOptions-input']//div/span[contains(@class,'expand_more')]");
 	public By nextButton = By.xpath("//button[contains(text(),'Next')]");
 	public By achBatchDeailsTitle = By.xpath("//h3[text()='ACH Batch Details']");
 	public By paymentDateField = By.xpath("//input[@id='paymentDate']");
-	public By paymentDateTitle = By.xpath("//label[contains(text(),'Payment Date')]");
+	public By paymentDateTitle = By.xpath("//h3[contains(text(),'ACH Batch Details')]");
 	public By companyDiscretionaryDataField = By.xpath("//input[@id='companyDiscretionaryData']");
 	public By companyEntryDiscretion = By.xpath("//input[@id='companyEntryDescription']");
 	public By offsetAccount = By.xpath("//input[@id='offsetAccount']");
@@ -63,19 +63,15 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 	public By submitButton = By.xpath("//button[text()='Submit']");
 	public By msg = By.xpath("//div[@class='alert-message-title']/strong");
 	public By existTemplateName = By.xpath("//input[@id='templateName']");
-	public By existTemplateField = By.xpath("(//input[contains(@class,'ui-autocomplete-input')])[2]");
+	public By existTemplateField = By.xpath("(//input[contains(@class,'ui-autocomplete-input')])");
 	public By autoSaveMsg = By.xpath("//div[contains(text(),'An auto-saved draft created')]");
     public By requestBatchButton = By.xpath("//button[contains(@aria-label,'ACH batch details and proceed to the review screen.')]");
     public By alertmsg = By.xpath("//div[contains(text(),'Please correct the errors shown below')]");
     public By editAchbatchTemplate = By.xpath("//button[contains(@aria-label,'make changes to the ACH details.')]//i[text()='mode_edit']");
     public By existingNewAmount = By.xpath("(//input[@id='newPayeeAmoountAdd'])[2]");
-    
+    public By paymentAmount = By.xpath("//label[@for='payeeAmount1']//..//input[@id='newPayeeAmoountAdd']");
 	
-	String achCompanyList = "//li[@role='option']/span[text()='%s']";
-	String debitcreditList = "//li[@role='option']/span[text()='%s']";
-	String batchTypeList = "//li[@role='option']/span[text()='Internet Auth (WEB)']";
-	String existTemplateList = "//li[@role='option']/span[text()='%s']";
-	String payeeList = "//li[@role='option']/span[text()='%s']";
+	String list = "//li[@role='option']/span[contains(text(),'%s')]";
 	String transactionID;
 	//ul[contains(@class,'ui-autocomplete')][@role='listbox']
 
@@ -94,23 +90,22 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			if (isElementPresent(newAchBatchTitle)) {
 				clickOnElement("New ACH Batch Template", "free form field", freeFormField);
 				if (!achCompany.equals("")) {
-					selectElementFromListbox("New ACH Batch Template", "ACH Company", achCompanyField, achCompanyList,
+					selectElementFromListbox("New ACH Batch Template", "ACH Company", achCompanyField, list,
 							achCompany);
 				}
 				if (!cardType.equals("")) {
 					waitElement(3000);
 					scrollToBottomOfThePage();
 					waitElement(3000);
-					driver.findElement(By.xpath("//p-dropdown[@inputid='debitCreditOptions-input']//div/span[contains(@class,'expand_more')]")).click();
-					selectElementFromListbox("New ACH Batch Templ6ate", "Debit/redit", debitCreditField, debitcreditList,
+				//	driver.findElement(By.xpath("//p-dropdown[@inputid='debitCreditOptions-input']//div/span[contains(@class,'expand_more')]")).click();
+					selectElementFromListbox("New ACH Batch Templ6ate", "Debit/redit", debitCreditField, list,
 							cardType);
 					Thread.sleep(2000);
 				}
 				if (!batchType.equals("")) {
-					driver.findElement(By.xpath("//p-dropdown[@inputid='batchTypeOptions-input']//div/span[text()='Select']")).click();
-					waitElement(1000);
-					selectElementFromListbox("New ACH Batch Template", "Batch Type", batchTypeField, batchTypeList,
-							batchType);
+					//driver.findElement(By.xpath("//p-dropdown[@inputid='batchTypeOptions-input']//div/span[text()='Select']")).click();
+					//waitElement(1000);
+					selectElementFromListbox("New ACH Batch Template", "Batch Type", batchTypeField, list,batchType);
 				}
 				clickOnElement("New ACH Batch Template", "Next Button", nextButton);
 				stepResult = true;
@@ -139,8 +134,8 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			if (isElementPresent(newAchBatchTitle)) {
 				clickOnElement("New ACH Batch Template", "Template field", templateField);
 				if (!existAchBatchTemplate.equals("")) {
-					clickOnElement("New ACH Batch Template",  "Exist Template Name", existTemplateField);
-					selectElementFromListbox("New ACH Batch Template", "Exist Template Name", existTemplateField, existTemplateList,existAchBatchTemplate);
+					//clickOnElement("New ACH Batch Template",  "Exist Template Name", existTemplateField);
+					selectElementFromListbox("New ACH Batch Template", "Exist Template Name", existTemplateField, list,existAchBatchTemplate);
 				}
 				clickOnElement("New ACH Batch Template", "Next Button", nextButton);
 				stepResult = true;
@@ -163,8 +158,8 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 
 	
 	public void enterACHPaymentDetails(String paymentDate, String cmpDiscretionary, String cmpEntryDiscretionary,
-			String offsetAcc,String new_CreatePayeeName,String new_CreatePayeeID,String new_CreateAccountNumber,
-			String new_CreateBankID,String new_CreateBankName,String new_CreateDebitAuthType,
+			String offsetAcc,String amount,String new_CreatePayeeName,String new_CreatePayeeID,String new_CreateAccountNumber,
+			String new_CreateBankID,String new_CreateBankName,String new_CreateDebitAuthType,String new_CreateMixedDebitorCredit,
 			String new_Amount,String new_addenda,String new_sendRemittanceToPayee) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -185,9 +180,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 					clearAndType("New ACH Batch Template", "Offset Account", offsetAccount, offsetAcc);
 					driver.findElement(By.xpath("//input[@id='offsetAccount']")).sendKeys(Keys.TAB);
 				}
+				if(!amount.equals("")) {
+					clearAndType("New ACH Batch Template", "Amount Field", paymentAmount, amount);
+				}
 				if(!new_CreatePayeeName.equals("")) {
 				corporateACHBatchTemplate.createNewPayee(new_CreatePayeeName, new_CreatePayeeID,new_CreateAccountNumber,
-						new_CreateBankID,new_CreateBankName,new_CreateDebitAuthType,new_Amount,new_addenda,new_sendRemittanceToPayee);
+						new_CreateBankID,new_CreateBankName,new_CreateDebitAuthType,new_CreateMixedDebitorCredit,new_Amount,new_addenda,new_sendRemittanceToPayee);
 				//searchPayee(existPayeeName, existPayeeAmt);
 				//verifyPayeeandAddAmount(displaName, displayyAcc, amt, addenda);
 //				}else {
@@ -221,7 +219,7 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 				clickOnElement("New ACH Batch Template", "Search Existing payees", existPayee);
 				if (!existPayeeName.equals("")) {
 					enterText("New ACH Batch Template", "Existing Payee", existPayee, existPayeeName);
-					selectElementFromListbox("ACH Batch Template", "Payee List", searchPayee, payeeList,existPayeeName);
+					selectElementFromListbox("ACH Batch Template", "Payee List", searchPayee, list,existPayeeName);
 				}
 //				if (!existPayeeAccount.equals("")) {
 //					enterText("New ACH Batch Template", "Existing Account", existAccount, existPayeeAccount);
@@ -314,11 +312,11 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			if (stepResult == true) {
 				System.out.println("Pass - Menu");
 				new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-						"enter ACH Payment details Successfully", "Passed", driver, "Y");
+						"Review ACH Payment details Successfully", "Passed", driver, "Y");
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-						"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
+						"Could not Review ACH Payment details Successfully", "Failed", driver, "Y");
 			}
 		}
 
@@ -380,6 +378,9 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 		boolean stepResult = false;
 		try {
 		clickOnElement("New ACH Batch Template", "Request Batch Button", requestBatchButton);
+//		if(isElementPresent(requestBatchButton)) {
+//			clickOnElement("New ACH Batch Template", "Request Batch Button", requestBatchButton);
+//		}
 		stepResult = true;
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -424,7 +425,7 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 	public void editBatchTemplate(String paymentDate,String cmpDiscretionary,
 			String cmpEntryDiscretionary,String offsetAcc,String amount,
 			String searchPayee,String createPayee,String createPayeeID,String createAccountNumber,String createBankID,
-			String createBankName,String createDebitAuthType,String addenda,String sendRemittanceToPayee) throws Exception {
+			String createBankName,String createDebitAuthType,String mixedDebitCredit,String addenda,String sendRemittanceToPayee) throws Exception {
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(editNewAchBatchTitle)) {
@@ -462,7 +463,7 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 						corporateACHBatchTemplate.createNewPayee(createPayee.split("\\|\\|")[i],createPayeeID.split("\\|\\|")[i],
 								createAccountNumber.split("\\|\\|")[i],createBankID.split("\\|\\|")[i],
 								createBankName.split("\\|\\|")[i],createDebitAuthType.split("\\|\\|")[i],
-								amount.split("\\|\\|")[i],addenda.split("\\|\\")[i],sendRemittanceToPayee.split("\\|\\")[i]);
+								mixedDebitCredit.split("\\|\\|")[i],amount.split("\\|\\|")[i],addenda.split("\\|\\")[i],sendRemittanceToPayee.split("\\|\\")[i]);
 					}
 				}
 			}

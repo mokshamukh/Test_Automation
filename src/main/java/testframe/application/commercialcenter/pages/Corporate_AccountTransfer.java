@@ -66,11 +66,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	String daily_opt = "//label[contains(text(),'%s')]/preceding-sibling::div/div/span";
 	String daily_subOpt = "//label[text()='%s']/..//p-checkbox/div//input";
 	String daily_subOptions = "//span[@class='ui-chkbox-icon ui-clickable']/../preceding-sibling::div/../..//label[contains(text(),'%s')]";
-	String accList = "//ul[@role='listbox']/li/span[text()='%s']";
+	String accList = "//ul[@role='listbox']/li/span[contains(text(),'%s')]";
 	String paymentInstrField = "(//p-dropdown[@inputid='toPaymentInstruction']//span[text()='Select'])[1]/parent::div/following-sibling::div//span[text()='%s']";
 	String durationOpt = "//p-radiobutton[@name='duration']/label[contains(text(),'%s')]/preceding-sibling::div/div[@role='radio']";
 	String daysOfWeek = "//label[text()='%s']/../div[@class='ui-radiobutton ui-widget']";
-	String fromAccList = "//li[@role='option']/span[text()='%s']";
+	String fromAccList = "//li[@role='option']/span[contains(text(),'%s')]";
 	
 	
 	String memo;
@@ -88,7 +88,6 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			if (isElementPresent(accountTransferTitle)) {
 				waitElement(2000);
 				enterText("Corporate Account Transfer", "From Account", fromAccountField, fromAcc);
-				waitElement(2000);
 				clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc));
 				if (!fromAccAmt.equals("")) {
 					Thread.sleep(2000);

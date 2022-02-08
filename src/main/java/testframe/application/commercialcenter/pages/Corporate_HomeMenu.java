@@ -139,7 +139,7 @@ public class Corporate_HomeMenu extends CommonLibrary {
 	public void clickOnPaymentActivity() throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(1000);
 			clickOnElement("Home Page", "Payment Activity", paymentActivityField);
 			stepResult = true;
 		} catch (Exception e) {
@@ -181,7 +181,7 @@ public class Corporate_HomeMenu extends CommonLibrary {
 	public void clickOnfuturePaymentActivity() throws Exception {
 		boolean stepResult = false;
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(1000);
 			clickOnElement("Home Page", "Future Payment Activity", futurePaymentActivityField);
 			stepResult = true;
 		} catch (Exception e) {
@@ -415,5 +415,7 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			}
 		}
 	}
+	
+	
 	
 }

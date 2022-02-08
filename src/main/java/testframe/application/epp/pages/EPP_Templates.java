@@ -400,6 +400,7 @@ public class EPP_Templates extends CommonLibrary{
 		}
 	}
 	
+	
 	public void selectAuthorizationExceptions() throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -422,7 +423,9 @@ public class EPP_Templates extends CommonLibrary{
 			}
 		}
 	}
-	
+
+
+
 	public void selectWorkSummaryPool(String sPoolName) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;

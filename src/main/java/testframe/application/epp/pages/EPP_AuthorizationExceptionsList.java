@@ -31,8 +31,7 @@ public class EPP_AuthorizationExceptionsList extends CommonLibrary{
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Work Summary')]");
 //	***************************************************
 	By firstPaymentActionID = By.xpath("//div[@id='']//a[@class='linkGeneral']");
-	public String transactionIdAEList = "//a[@class='linkGeneral'][text()='%s']";
-	By firstAETransactionID = By.xpath("//a[@class='linkGeneral']");
+	
 	
 	public void selectAuthorizationExceptionsTransID(String strTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
@@ -43,16 +42,16 @@ public class EPP_AuthorizationExceptionsList extends CommonLibrary{
 					String transactionID = eppCreatePayment.getTransactionID();
 					//String transactionID_Act = eppActionPrompts.getTransactionIDOnAction();
 					if(!strTransID.equals("")){
-						getDynamicElementClick(eppAuthorizationExceptions, "Transaction ID List", transactionIdAEList, strTransID);
+						getDynamicElementClick(eppAuthorizationExceptions, "Work Summary List", transactionIdList, strTransID);
 					}else{
 						if(!(transactionID==null)) {
-							getDynamicElementClick(eppAuthorizationExceptions, "Transaction ID List", transactionIdAEList, transactionID);
+							getDynamicElementClick(eppAuthorizationExceptions, "Work Summary List", transactionIdList, transactionID);
 							
 						}
 						else {
-							String firstTransID = getElementText(eppAuthorizationExceptions, "First Authorization Exceptions Transaction ID", firstAETransactionID);
+							String firstTransID = getElementText(eppAuthorizationExceptions, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
 							eppCreatePayment.setTransactionID(firstTransID);
-							clickOnElement(eppAuthorizationExceptions, "First Authorization Exceptions Transaction ID", firstAETransactionID);
+							clickOnElement(eppAuthorizationExceptions, "First PaymentActionVerification Transaction ID", firstPaymentActionID);
 						}
 						waitElement(2000);
 					}
