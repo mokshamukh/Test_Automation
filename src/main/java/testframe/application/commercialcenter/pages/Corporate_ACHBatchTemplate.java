@@ -83,17 +83,17 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 	public By payeeEmail = By.xpath("//input[@id='payeeEmail']");
 	public By memoField = By.xpath("//textarea[@id='genericText']");
 	public By saveRemittanceInfo = By.xpath("//button[contains(@aria-label,'To save the added remittance information')]");
-	
-	
+
+
 	//button[contains(@aria-label,'To save the template')]
 	String list = "//li[@role='option']/span[contains(text(),'%s')]";
-//	String debitcreditList = "//li[@role='option']/span[text()='%s']";
-//	String batchTypeList = "//li[@role='option']/span[text()='%s']";
-//	String debitAuthtypList = "//li[@role='option']/span[text()='%s']";
-//	String payeeList = "//li[@role='option']/span[text()='%s']";
+	//	String debitcreditList = "//li[@role='option']/span[text()='%s']";
+	//	String batchTypeList = "//li[@role='option']/span[text()='%s']";
+	//	String debitAuthtypList = "//li[@role='option']/span[text()='%s']";
+	//	String payeeList = "//li[@role='option']/span[text()='%s']";
 	String existingTemplateName = "(//td[@class='ng-star-inserted'])[1]//span[contains(text(),'%s')]";
-//	String existingAccField = "//li[@role='option']/span[text()='%s']";
-//    String offsetFieldList = "//li[@role='option']/span[text()='%s']";
+	//	String existingAccField = "//li[@role='option']/span[text()='%s']";
+	//    String offsetFieldList = "//li[@role='option']/span[text()='%s']";
 
 	public Corporate_ACHBatchTemplate(WebDriver driver) {
 		super(driver);
@@ -103,40 +103,43 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 
 
 	public void createBatchTemplate(String achCompany,String cardType,String batchType) throws Exception {
-		boolean stepResult = false;
-		try {
-			waitElement(4000);
-			if (isElementPresent(achBatchTitle)) {
-				clickOnElement("ACH Batch Template", "Create Template Button", createTemplateButton);
-			}
-			waitForPresenceOfElement("ACH Batch Template", "New ACH Template", newACHTemplate);
-			if (!achCompany.equals("")) {
-				selectElementFromListbox("ACH Batch Template", "ACH Company", achCompanyField, list,achCompany);
-			}
-			if (!cardType.equals("")) {
-				clickOnElement("ACH Batch Template", "Debit/credit",  debitCreditField);
-				//driver.findElement(By.xpath("//p-dropdown[@inputid='debitCredit-input']//div/span[text()='Select']")).click();
-				selectElementFromListbox("ACH Batch Template", "Debit/credit", debitCreditField, list,cardType);
-				//waitElement(2000);
-			}
-			if (!batchType.equals("")) {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
 				waitElement(4000);
-				clickOnElement("ACH Batch Template", "Batch Type", batchTypeField);
-				//driver.findElement(By.xpath("//p-dropdown[@inputid='batchType-input']//div/span[text()='Select']")).click();
-				waitElement(1000);
-				selectElementFromListbox("ACH Batch Template", "Batch Type", batchTypeField, list,batchType);
-			}
-			clickOnElement("ACH Batch Template", "Next Button", nextButton);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application","Created New ACH Payment Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application","Could not Created New ACH Payment Successfully", "Failed", driver, "Y");
+				if (isElementPresent(achBatchTitle)) {
+					clickOnElement("ACH Batch Template", "Create Template Button", createTemplateButton);
+				}
+				waitForPresenceOfElement("ACH Batch Template", "New ACH Template", newACHTemplate);
+				if (!achCompany.equals("")) {
+					selectElementFromListbox("ACH Batch Template", "ACH Company", achCompanyField, list,achCompany);
+				}
+				if (!cardType.equals("")) {
+					clickOnElement("ACH Batch Template", "Debit/credit",  debitCreditField);
+					//driver.findElement(By.xpath("//p-dropdown[@inputid='debitCredit-input']//div/span[text()='Select']")).click();
+					selectElementFromListbox("ACH Batch Template", "Debit/credit", debitCreditField, list,cardType);
+					//waitElement(2000);
+				}
+				if (!batchType.equals("")) {
+					waitElement(4000);
+					clickOnElement("ACH Batch Template", "Batch Type", batchTypeField);
+					//driver.findElement(By.xpath("//p-dropdown[@inputid='batchType-input']//div/span[text()='Select']")).click();
+					waitElement(1000);
+					selectElementFromListbox("ACH Batch Template", "Batch Type", batchTypeField, list,batchType);
+				}
+				clickOnElement("ACH Batch Template", "Next Button", nextButton);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application","Created New ACH Payment Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application","Could not Created New ACH Payment Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
@@ -144,42 +147,45 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 
 
 	public void enterACHBatchDetails(String templateName, String cmpDiscretionary, String cmpEntryDiscretionary,String offsetAcc,String confidential) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(achBatchDeailsTitle)) {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(achBatchDeailsTitle)) {
 
-				if (!templateName.equals("")) {
-					enterText("ACH Batch Template", "Payment Date", templateNameField, templateName);
+					if (!templateName.equals("")) {
+						enterText("ACH Batch Template", "Payment Date", templateNameField, templateName);
+					}
+					if (!cmpDiscretionary.equals("")) {
+						enterText("ACH Batch Template", "Company Discretionary Data", companyDiscretionaryDataField,
+								cmpDiscretionary);
+					}
+					if (!cmpEntryDiscretionary.equals("")) {
+						enterText("ACH Batch Template", "Company Entry Description", companyEntryDescription,
+								cmpEntryDiscretionary);
+					}
+					if (!offsetAcc.equals("")) {
+						enterText("ACH Batch Template", "Offset Account", offsetAccount, offsetAcc);
+						clickOnElementWithText("ACH Batch Template", "Offset Account", getDynamicElement("Offset Account", list, offsetAcc), offsetAcc);
+						//selectElementFromListbox("ACH Batch Template", "Offset Account", offsetAccountField, offsetFieldList, offsetAcc);
+					}
+					if(confidential.equals("Yes")) {
+						clickOnElement("ACH Batch Template", "Confidential CheckBox", confidentialCheckBox);
+					}
+					stepResult = true;
 				}
-				if (!cmpDiscretionary.equals("")) {
-					enterText("ACH Batch Template", "Company Discretionary Data", companyDiscretionaryDataField,
-							cmpDiscretionary);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"enter ACH Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (!cmpEntryDiscretionary.equals("")) {
-					enterText("ACH Batch Template", "Company Entry Description", companyEntryDescription,
-							cmpEntryDiscretionary);
-				}
-				if (!offsetAcc.equals("")) {
-					enterText("ACH Batch Template", "Offset Account", offsetAccount, offsetAcc);
-					clickOnElementWithText("ACH Batch Template", "Offset Account", getDynamicElement("Offset Account", list, offsetAcc), offsetAcc);
-					//selectElementFromListbox("ACH Batch Template", "Offset Account", offsetAccountField, offsetFieldList, offsetAcc);
-				}
-				if(confidential.equals("Yes")) {
-					clickOnElement("ACH Batch Template", "Confidential CheckBox", confidentialCheckBox);
-				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"enter ACH Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -188,269 +194,287 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 	public void createNewPayee(String payeeName,String payeeID,String accountNumber,
 			String bankID,String bankName,String debitType,String existPayeeAmt,String mixedDebitCredit,
 			String addenda,String sendRemittanceToPayee) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(newPayeeButton)) {
-				clickOnELementUsingJS(driver.findElement(By.xpath("//button[contains(@aria-label,'add new payee')]//i")));
-				//clickOnElement("ACH Batch Template", "Create New Payee Button", newPayeeButton);
-			}
-			if(!payeeName.equals("")) {
-				enterText("ACH Batch Template", "Payee Name", payeeNameField, payeeName);
-			}
-			if(!payeeID.equals("")) {
-				enterText("ACH Batch Template", "Payee ID", payeeIDField, payeeID);
-			}
-			if(isElementPresent(addAccount)) {
-				clickOnElement("ACH Batch Template", "Add Account", addAccount);
-			}
-			//			if(!accountName.equals("")) {
-			//				enterText("ACH Batch Template", "Account Name", accountNameField, accountName);
-			//			}
-			if(!accountNumber.equals("")) {
-				enterText("ACH Batch Template", "Account Name", accountNumberField, accountNumber);
-			}
-			if(!bankID.equals("")) {
-				enterText("ACH Batch Template", "Bank Id", bankIDField, bankID);
-			}
-			if(!bankName.equals("")) {
-				enterText("ACH Batch Template", "Bank Id", bankNameField, bankName);
-			}
-			if (!debitType.equals("")) {
-				waitElement(1000);
-				selectElementFromListbox("ACH Batch Template", "Debit Authorization Type", debitAuthoTypeField, list,debitType);
-			}
-			clickOnElement("ACH Batch Template", "Add Button", addButton);
-			waitForPresenceOfElement("ACH Batch Template", "Alert Message", alertMsg);
-			clickOnElement("ACH Batch Template", "Save Button", payeeSaveBtn);
-			waitElement(1000);
-			if(!mixedDebitCredit.equals("")) {
-				selectElementFromListbox("ACH Batch Template", "Mixed Debit and Credit", debitorCreditField, list,mixedDebitCredit);
-				waitElement(1000);
-			}
-			if (!existPayeeAmt.equals("")) {
-				enterText("ACH Batch Template", "Existing Amount", existAmount, existPayeeAmt);
-				if(existPayeeAmt.equals("0")) {
-					clickOnElement("ACH Batch Template", "AddAddenda", addAddendaText);
-					waitForPresenceOfElement("ACH Batch Template", "AddAddenda", addendaHeader);
-					enterText("ACH Batch Template", "AddAddenda",textArea, addenda);
-					clickOnElement("ACH Batch Template", "AddAddenda OK button", okButton);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(newPayeeButton)) {
+					clickOnELementUsingJS(driver.findElement(By.xpath("//button[contains(@aria-label,'add new payee')]//i")));
+					//clickOnElement("ACH Batch Template", "Create New Payee Button", newPayeeButton);
 				}
-			}
-			if(!addenda.equals("")) {
-			//	enterText("ACH Batch Template", "Addenda Field", addendaField, addenda);
-			}
-			if(sendRemittanceToPayee.equals("No")||sendRemittanceToPayee.equals("")) {
-				
-			}
-			else {
-				
-				sendRemittanceEmailToPayee(sendRemittanceToPayee);
-			}
-			clickOnElement("ACH Batch Template", "Add Existing payees", addPayee);
-			waitElement(1000);
-			
-			//validateElementPresent("ACH Batch Template", "Auto Save Message", autoSaveMsg);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Create Payee for ACH Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Could not create payee for ACH Payment details Successfully", "Failed", driver, "Y");
+				if(!payeeName.equals("")) {
+					enterText("ACH Batch Template", "Payee Name", payeeNameField, payeeName);
+				}
+				if(!payeeID.equals("")) {
+					enterText("ACH Batch Template", "Payee ID", payeeIDField, payeeID);
+				}
+				if(isElementPresent(addAccount)) {
+					clickOnElement("ACH Batch Template", "Add Account", addAccount);
+				}
+				//			if(!accountName.equals("")) {
+				//				enterText("ACH Batch Template", "Account Name", accountNameField, accountName);
+				//			}
+				if(!accountNumber.equals("")) {
+					enterText("ACH Batch Template", "Account Name", accountNumberField, accountNumber);
+				}
+				if(!bankID.equals("")) {
+					enterText("ACH Batch Template", "Bank Id", bankIDField, bankID);
+				}
+				if(!bankName.equals("")) {
+					enterText("ACH Batch Template", "Bank Id", bankNameField, bankName);
+				}
+				if (!debitType.equals("")) {
+					waitElement(1000);
+					selectElementFromListbox("ACH Batch Template", "Debit Authorization Type", debitAuthoTypeField, list,debitType);
+				}
+				clickOnElement("ACH Batch Template", "Add Button", addButton);
+				waitForPresenceOfElement("ACH Batch Template", "Alert Message", alertMsg);
+				clickOnElement("ACH Batch Template", "Save Button", payeeSaveBtn);
+				waitElement(1000);
+				if(!mixedDebitCredit.equals("")) {
+					selectElementFromListbox("ACH Batch Template", "Mixed Debit and Credit", debitorCreditField, list,mixedDebitCredit);
+					waitElement(1000);
+				}
+				if (!existPayeeAmt.equals("")) {
+					enterText("ACH Batch Template", "Existing Amount", existAmount, existPayeeAmt);
+					if(existPayeeAmt.equals("0")) {
+						clickOnElement("ACH Batch Template", "AddAddenda", addAddendaText);
+						waitForPresenceOfElement("ACH Batch Template", "AddAddenda", addendaHeader);
+						enterText("ACH Batch Template", "AddAddenda",textArea, addenda);
+						clickOnElement("ACH Batch Template", "AddAddenda OK button", okButton);
+					}
+				}
+				if(!addenda.equals("")) {
+					//	enterText("ACH Batch Template", "Addenda Field", addendaField, addenda);
+				}
+				if(sendRemittanceToPayee.equals("No")||sendRemittanceToPayee.equals("")) {
+
+				}
+				else {
+
+					sendRemittanceEmailToPayee(sendRemittanceToPayee);
+				}
+				clickOnElement("ACH Batch Template", "Add Existing payees", addPayee);
+				waitElement(1000);
+
+				//validateElementPresent("ACH Batch Template", "Auto Save Message", autoSaveMsg);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Create Payee for ACH Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Could not create payee for ACH Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void searchTemplate(String existTemplateName, String existbatchType) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(achBatchTitle)) {
-				if(isElementPresent(searchExpand)) {
-				clickOnElement("ACH Batch Template", "Search Template", searchTemplate);
-				}
-				waitForPresenceOfElement("ACH Batch Template", "Search Existing payees", searchExistingtemplate);
-				if (!existTemplateName.equals("")) {
-					clearAndType("ACH Batch Template", "Existing Payee", templateNameField, existTemplateName);
-				}
-				if (!existbatchType.equals("")) {
-					driver.findElement(By.xpath("(//p-dropdown[@inputid='batchType-input']//div//span[contains(@class,'expand_more')])[1]")).click();
-					waitElement(1000);
-					selectElementFromListbox("ACH Batch Template", "Batch Type", searchBatchTypField, list,existbatchType);
-				}
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(achBatchTitle)) {
+					if(isElementPresent(searchExpand)) {
+						clickOnElement("ACH Batch Template", "Search Template", searchTemplate);
+					}
+					waitForPresenceOfElement("ACH Batch Template", "Search Existing payees", searchExistingtemplate);
+					if (!existTemplateName.equals("")) {
+						clearAndType("ACH Batch Template", "Existing Payee", templateNameField, existTemplateName);
+					}
+					if (!existbatchType.equals("")) {
+						driver.findElement(By.xpath("(//p-dropdown[@inputid='batchType-input']//div//span[contains(@class,'expand_more')])[1]")).click();
+						waitElement(1000);
+						selectElementFromListbox("ACH Batch Template", "Batch Type", searchBatchTypField, list,existbatchType);
+					}
 
-				clickOnElement("ACH Batch Template", "Search Existing payees", searchSymbol);
-				validateTextContains("ACH Batch Template", "Tempalte Name", getDynamicElement("Tempalte Name", existingTemplateName, existTemplateName), existTemplateName);
-				validateTextContains("ACH Batch Template", "Tempalte Name",existingBatchType,existbatchType);   
-				//validateElementPresent("ACH Batch Template", "Confidential Lock", confidentialLock);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						" Search ACH Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Could not Search ACH Payment details Successfully", "Failed", driver, "Y");
+					clickOnElement("ACH Batch Template", "Search Existing payees", searchSymbol);
+					validateTextContains("ACH Batch Template", "Tempalte Name", getDynamicElement("Tempalte Name", existingTemplateName, existTemplateName), existTemplateName);
+					validateTextContains("ACH Batch Template", "Tempalte Name",existingBatchType,existbatchType);   
+					//validateElementPresent("ACH Batch Template", "Confidential Lock", confidentialLock);
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							" Search ACH Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Could not Search ACH Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 
 	public void searchPayee(String existPayeeName, String existPayeeAmt) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(achBatchDeailsTitle)) {
-				waitForPresenceOfElement("ACH Batch Template", "Search Existing payees", searchExistingPayee);
-				if (!existPayeeName.equals("")) {
-					clearAndType("ACH Batch Template", "Existing Payee", existPayee, existPayeeName);
-					selectElementFromListbox("ACH Batch Template", "Payee List", searchPayeeType, list,existPayeeName);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(achBatchDeailsTitle)) {
+					waitForPresenceOfElement("ACH Batch Template", "Search Existing payees", searchExistingPayee);
+					if (!existPayeeName.equals("")) {
+						clearAndType("ACH Batch Template", "Existing Payee", existPayee, existPayeeName);
+						selectElementFromListbox("ACH Batch Template", "Payee List", searchPayeeType, list,existPayeeName);
+					}
+					if (!existPayeeAmt.equals("")) {
+						clearAndType("ACH Batch Template", "Existing Amount", existAmount, existPayeeAmt);
+					}
+					clickOnElement("ACH Batch Template", "Add Existing payees", addPayee);
+					waitElement(2000);
+					//				clickOnElement("ACH Batch Template", "Save Button", saveButton);
+					//				validateElementPresent("ACH Batch Template", "Successfully Complete Message", successTemplateMsg);
+					stepResult = true;
 				}
-				if (!existPayeeAmt.equals("")) {
-					clearAndType("ACH Batch Template", "Existing Amount", existAmount, existPayeeAmt);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"search ACH Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Could not search ACH Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				clickOnElement("ACH Batch Template", "Add Existing payees", addPayee);
-				waitElement(2000);
-				//				clickOnElement("ACH Batch Template", "Save Button", saveButton);
-				//				validateElementPresent("ACH Batch Template", "Successfully Complete Message", successTemplateMsg);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"search ACH Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Could not search ACH Payment details Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
-	
+
 	public void editBatchTemplate(String templateName,String cmpDiscretionary,
 			String cmpEntryDiscretionary,String offsetAcc,String amount,String removePayee,
 			String searchPayee,String createPayee,String createPayeeID,String createAccountNumber,String createBankID,
 			String createBankName,String createDebitAuthType,String createMixedDebitCredit,String addenda,String sendRemittanceToPayee) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(achBatchTitle)) {
-				if(isElementPresent(editbatchTemplate)) {
-					clickOnElement("ACH Batch Template", "Edit Button", editbatchTemplate);
-				}
-				waitForPresenceOfElement("ACH Batch Template", "Edit ", editHeader);
-				if (!templateName.equals("")) {
-					clearAndType("ACH Batch Template", "Payment Date", templateNameField, templateName);
-				}
-				if (!cmpDiscretionary.equals("")) {
-					clearAndType("ACH Batch Template", "Company Discretionary Data", companyDiscretionaryDataField,
-							cmpDiscretionary);
-				}
-				if (!cmpEntryDiscretionary.equals("")) {
-					clearAndType("ACH Batch Template", "Company Entry Description", companyEntryDescription,
-							cmpEntryDiscretionary);
-				}
-				if (!offsetAcc.equals("")) {
-					clearAndType("ACH Batch Template", "Offset Account", offsetAccount, offsetAcc);
-				}
-				if (!amount.equals("")) {
-					clearAndType("ACH Batch Template", "Amount Field", existingNewAmount, amount);
-				}
-//				if (!account.equals("")) {
-//					selectElementFromListbox("ACH Batch Template", "Account Field", existingAccount, existingAccField, account);
-//				}
-				if (!removePayee.equals("")) {
-					clickOnElement("ACH Batch Template", "Remove Payee Button", removeExistingPayee);
-				}
-				String[] multiPayee;
-				if (!searchPayee.equals("")) {
-					multiPayee =searchPayee.split("\\|\\|");
-					for(int i=0;i<=multiPayee.length-1;i++){
-						searchPayee(multiPayee[i],amount.split("\\|\\|")[i]);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(achBatchTitle)) {
+					if(isElementPresent(editbatchTemplate)) {
+						clickOnElement("ACH Batch Template", "Edit Button", editbatchTemplate);
+					}
+					waitForPresenceOfElement("ACH Batch Template", "Edit ", editHeader);
+					if (!templateName.equals("")) {
+						clearAndType("ACH Batch Template", "Payment Date", templateNameField, templateName);
+					}
+					if (!cmpDiscretionary.equals("")) {
+						clearAndType("ACH Batch Template", "Company Discretionary Data", companyDiscretionaryDataField,
+								cmpDiscretionary);
+					}
+					if (!cmpEntryDiscretionary.equals("")) {
+						clearAndType("ACH Batch Template", "Company Entry Description", companyEntryDescription,
+								cmpEntryDiscretionary);
+					}
+					if (!offsetAcc.equals("")) {
+						clearAndType("ACH Batch Template", "Offset Account", offsetAccount, offsetAcc);
+					}
+					if (!amount.equals("")) {
+						clearAndType("ACH Batch Template", "Amount Field", existingNewAmount, amount);
+					}
+					//				if (!account.equals("")) {
+					//					selectElementFromListbox("ACH Batch Template", "Account Field", existingAccount, existingAccField, account);
+					//				}
+					if (!removePayee.equals("")) {
+						clickOnElement("ACH Batch Template", "Remove Payee Button", removeExistingPayee);
+					}
+					String[] multiPayee;
+					if (!searchPayee.equals("")) {
+						multiPayee =searchPayee.split("\\|\\|");
+						for(int i=0;i<=multiPayee.length-1;i++){
+							searchPayee(multiPayee[i],amount.split("\\|\\|")[i]);
+						}
+					}
+					if (!createPayee.equals("")) {
+						multiPayee = createPayee.split("\\|\\|");
+						for(int i=0;i<=multiPayee.length-1;i++){
+							createNewPayee(createPayee.split("\\|\\|")[i],createPayeeID.split("\\|\\|")[i],
+									createAccountNumber.split("\\|\\|")[i],createBankID.split("\\|\\|")[i],
+									createBankName.split("\\|\\|")[i],createDebitAuthType.split("\\|\\|")[i],
+									createMixedDebitCredit.split("\\|\\|")[i],amount.split("\\|\\|")[i],
+									addenda.split("\\|\\")[i],sendRemittanceToPayee.split("\\|\\")[i]);
+						}
 					}
 				}
-				if (!createPayee.equals("")) {
-					multiPayee = createPayee.split("\\|\\|");
-					for(int i=0;i<=multiPayee.length-1;i++){
-						createNewPayee(createPayee.split("\\|\\|")[i],createPayeeID.split("\\|\\|")[i],
-								createAccountNumber.split("\\|\\|")[i],createBankID.split("\\|\\|")[i],
-								createBankName.split("\\|\\|")[i],createDebitAuthType.split("\\|\\|")[i],
-								createMixedDebitCredit.split("\\|\\|")[i],amount.split("\\|\\|")[i],
-								addenda.split("\\|\\")[i],sendRemittanceToPayee.split("\\|\\")[i]);
-					}
+				clickOnElement("ACH Batch Template", "Save Button", saveButton);
+				stepResult = true;
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Edit ACH Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Could not Edit ACH Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-			}
-			clickOnElement("ACH Batch Template", "Save Button", saveButton);
-			stepResult = true;
-		}catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Edit ACH Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Could not Edit ACH Payment details Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
 
 	public void saveBatchTemplate() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("ACH Batch Template", "Save Button", saveButton);
-			validateElementPresent("ACH Batch Template", "Successfully Complete Message", successTemplateMsg);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Save Template for ACH Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Could not Save Template for ACH Payment details Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				clickOnElement("ACH Batch Template", "Save Button", saveButton);
+				validateElementPresent("ACH Batch Template", "Successfully Complete Message", successTemplateMsg);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Save Template for ACH Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Could not Save Template for ACH Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 	public void sendRemittanceEmailToPayee(String sendRemittanceToPayee) throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("ACH Batch Template", "Send Remittance Email to Payee", sendRemittanceEmail);
-			waitElement(1000);
-			clickOnElement("ACH Batch Template", "ADD Remittance Email to Payee", addRemittanceField);
-			validateElementPresent("ACH Batch Template", "Remittance Header" , remittanceHeader);
-			enterText("ACH Batch Template", "Remittance Email", payeeEmail, sendRemittanceToPayee);
-			enterText("ACH Batch Template", "Memo Field", memoField, sendRemittanceToPayee);
-			clickOnElement("ACH Batch Template", "Save Button", saveRemittanceInfo);
-			
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Save Template for ACH Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-						"Could not Save Template for ACH Payment details Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				clickOnElement("ACH Batch Template", "Send Remittance Email to Payee", sendRemittanceEmail);
+				waitElement(1000);
+				clickOnElement("ACH Batch Template", "ADD Remittance Email to Payee", addRemittanceField);
+				validateElementPresent("ACH Batch Template", "Remittance Header" , remittanceHeader);
+				enterText("ACH Batch Template", "Remittance Email", payeeEmail, sendRemittanceToPayee);
+				enterText("ACH Batch Template", "Memo Field", memoField, sendRemittanceToPayee);
+				clickOnElement("ACH Batch Template", "Save Button", saveRemittanceInfo);
+
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Save Template for ACH Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
+							"Could not Save Template for ACH Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}

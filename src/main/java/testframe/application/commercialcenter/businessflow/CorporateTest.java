@@ -117,6 +117,7 @@ public class CorporateTest extends ApplicationBase  {
 			System.setProperty("testcaseid.iteration", sTestCase+"||"+iIteration_count);
 			fi.createFile(sHTMLFilePath);
 			fi.checkAndCreateFolder(sScreenShotFolder);
+			System.setProperty("runStep","Y");
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
@@ -1463,6 +1464,5 @@ public class CorporateTest extends ApplicationBase  {
 		driver.close();
 	}
 }
-
 
 

@@ -17,6 +17,381 @@ import testframe.common.reporting.HTMLReportHelper;
  * @author shilpa.thangapalam
  */
 
+//public class Corporate_NewWireTransfer extends CommonLibrary{
+//
+//	public Corporate_NewWireTransfer(WebDriver driver) {
+//		super(driver);
+//		this.driver = driver;
+//		PageFactory.initElements(driver, this);
+//	}
+//
+//
+//	
+//	String list = "//li[@role='option']/span[contains(text(),'%s')]";
+//	String transactionID;
+//
+//	
+//	public void reviewWireTransferDetails(String amount) throws Exception {
+//		boolean stepResult = false;
+//		boolean flag = false;
+//		try {
+//			if (isElementPresent(accountInfoDetails)) {
+//				//				List<WebElement> element = findElements(reviewDetails);
+//				//				for (WebElement ele : element) {
+//				//					if (ele.getText().contains(debitAccount)) {
+//				//						flag = true;
+//				//					} else {
+//				//						flag = false;
+//				//					}
+//				//				}
+//			}
+//			validateElementExist("Corporate New Wire Transfer", "AmountField", reviewAmount, amount);
+//			clickOnElement("Corporate New Wire Transfer", "Confirm Button", confirmButton);
+//			stepResult = true;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult == true) {
+//				System.out.println("Pass - Menu");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"review Wire Transfer details Successfully", "Passed", driver, "Y");
+//			} else {
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"Could not review Wire Transfer details Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//
+//	}
+//
+//	public void verifyPassword(String password) throws Exception {
+//		boolean stepResult = false;
+//		try {
+//			if (isElementPresent(pleaseReverifyTitle)) {
+//				if (!password.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Password", confirmPassword, password);
+//				}
+//				clickOnElement("Corporate New Wire Transfer", "Submit Button", submitButton);
+//				stepResult = true;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult == true) {
+//				System.out.println("Pass - Menu");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"enter password Successfully", "Passed", driver, "Y");
+//			} else {
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"Could not enter password Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//
+//	}
+//
+//	public String getTransaction() throws Exception {
+//		boolean stepResult = false;
+//		try {
+//			if (isElementPresent(wireTransferHeader)) {
+//				transactionID = getElementText("New Wire Transfer", "Alert Message", msg);
+//				transactionID = transactionID.replaceAll("\\.", "");
+//				stepResult = true;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult == true) {
+//				System.out.println("Pass - Menu");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"Captured TransactionID Payment details Successfully", "Passed", driver, "Y");
+//			} else {
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"Could not Capture TransactionID Payment details Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//		return transactionID;
+//
+//	}
+//
+//
+//	public void createNewWireTransferUsingFreeForm(String payee,String debitAccount,String beneIdType,
+//			String beneID,String beneAddress1,String beneAddress2,String beneCountry,
+//			String beneBankIDType,String paymentCurrency,String amount,String beneBankID,
+//			String purposeOfPayment,String beneBankAddress1,String beneBankAddress2) throws Exception{
+//		boolean stepResult = false;
+//		try {
+//			if (isElementPresent(wireTransferHeader)) {
+//				clickOnElement("Corporate New Wire Transfer", "Free Form Field", freeFormField);
+//
+//				clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
+//
+//				waitForPresenceOfElement("Corporate New Wire Transfer","Account Information Header", accountInfoHeader);
+//				if(!debitAccount.equals("")) {
+//					scrollToTopOfThePage();
+//					enterText("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
+//					clickOnElement("Corporate New Wire Transfer", "Debit Account Field", getDynamicElement("Debit Account", list, debitAccount));
+//				}
+//				scrollToElement(beneInformation);
+//				if (!payee.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Payee Field", payeeName, payee);
+//				}
+//				if(!beneIdType.equals("")) {
+//					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
+//				}
+//				if(!beneID.equals("")) {
+//					scrollToElement(beneIDField);
+//					enterText("Corporate New Wire Transfer", "Beneficiary Id", beneIDField, beneID);
+//				}
+//				if(!beneAddress1.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
+//				}
+//				if(!beneAddress2.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
+//				}
+//				if(!beneCountry.equals("")) {
+//					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
+//				}
+//				if(!paymentCurrency.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
+//					clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
+//				}
+//				if(!amount.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Amount Field", amountField, amount);
+//				}
+//				if(!beneBankIDType.equals("")) {
+//					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
+//				}
+//				if(!beneBankID.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Bene Bank ID", beneBankIdField, beneBankID);
+//				}
+//				if(!purposeOfPayment.equals("")) {
+//					scrollToElement(purposeOfPaymentField);
+//					enterText("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
+//				}
+//				if(!beneBankAddress1.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Beneficiary Bank Address1 Field", beneBankAddress1Field, beneBankAddress1);
+//				}
+//				if(!beneBankAddress2.equals("")) {
+//					enterText("Corporate New Wire Transfer", "Beneficiary Bank Address2 Field", beneBankAddress2Field, beneBankAddress2);
+//				}
+//
+//				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
+//				stepResult = true;
+//			}
+//
+//
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult==true){
+//				System.out.println("Pass - From acc");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
+//			}
+//			else{
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
+//
+//			}
+//		}
+//	}
+//
+//	public void createNewWireTransferUsingExistingTemplate(String existTemplate,String paymentDate) throws Exception{
+//		boolean stepResult = false;
+//		try {
+//			if (isElementPresent(wireTransferHeader)) {
+//				clickOnElement("Corporate New Wire Transfer", "Template Field", templateField);
+//				clickOnElement("Corporate New Wire Transfer", "Template Field",templateDropdown);
+//				selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", existingTemplateField, list, existTemplate);
+//
+//				clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
+//				waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer Header", selectTemplateHeader);
+//
+//				if(!paymentDate.equals("")) {
+//					enterNewWireTransferPaymentDate(paymentDate);
+//				}
+//				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
+//				stepResult = true;
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult==true){
+//				System.out.println("Pass - From acc");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Existing New Wire Transfer created Successfully", "Passed", driver, "Y");
+//			}
+//			else{
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create Existing New Wire Transfer Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//	}
+//
+//	public void enterNewWireTransferPaymentDate(String paymentDate) throws Exception {
+//		boolean stepResult = false;
+//		try {
+//			if (!paymentDate.equals("")) {
+//				for (int i = 1; i <= 10; i++) {
+//					driver.findElement(paymentDateField).sendKeys(Keys.BACK_SPACE);
+//				}
+//				enterText("Corporate ACH Payment", "Payment Date", paymentDateField, paymentDate);
+//				clickOnElement("Corporate ACH Payment", "Payment Date Title", paymentDateTitle);
+//			}
+//			stepResult = true;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult==true){
+//				System.out.println("Pass -- transfer date");
+//				new HTMLReportHelper().HtmlReportBody("AcH CC- Corporate application", "Enter transfer date field Successfully", "Passed", driver, "Y");
+//			}
+//			else{
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("ACH CC- Corporate application", "Could not Enter transfer date field Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//	}
+//
+//
+//	public void editNewWireTransferUsingFreeForm(String payee,String debitAccount,String beneIdType,
+//			String beneID,String beneAddress1,String beneAddress2,String beneCountry,
+//			String beneBankIDType,String paymentCurrency,String amount,String beneBankID,
+//			String purposeOfPayment,String beneBankAddress1,String beneBankAddress2) throws Exception{
+//		boolean stepResult = false;
+//		try {
+//			if (isElementPresent(editTransferHeader)) {
+//
+//				waitForPresenceOfElement("Corporate New Wire Transfer","Wire Details", wireDetailsHeader);
+//				if(!debitAccount.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
+//					clickOnElement("Corporate New Wire Transfer", "Debit Account Field", getDynamicElement("Debit Account", list, debitAccount));
+//				}
+//				scrollToElement(beneInformation);
+//				if (!payee.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Payee Field", payeeName, payee);
+//				}
+//				if(!beneIdType.equals("")) {
+//					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
+//
+//				}
+//				if(!beneID.equals("")) {
+//					scrollToElement(beneIDField);
+//					clearAndType("Corporate New Wire Transfer", "Beneficiary Id", beneIDField, beneID);
+//				}
+//				if(!beneAddress1.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
+//				}
+//				if(!beneAddress2.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
+//				}
+//				if(!beneCountry.equals("")) {
+//					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
+//				}
+//				if(!paymentCurrency.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
+//					clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
+//
+//				}
+//				if(!amount.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Amount Field", amountField, amount);
+//				}
+//				if(!beneBankIDType.equals("")) {
+//					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
+//				}
+//				if(!beneBankID.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Bene Bank ID", beneBankIdField, beneBankID);
+//				}
+//				if(!purposeOfPayment.equals("")) {
+//					scrollToElement(purposeOfPaymentField);
+//					clearAndType("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
+//				}
+//				if(!beneBankAddress1.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Beneficiary Bank Address1 Field", beneBankAddress1Field, beneBankAddress1);
+//				}
+//				if(!beneBankAddress2.equals("")) {
+//					clearAndType("Corporate New Wire Transfer", "Beneficiary Bank Address2 Field", beneBankAddress2Field, beneBankAddress2);
+//				}
+//
+//				clickOnElement("Corporate New Wire Transfer", "Save Transfer Button", requestTransferButton);
+//				stepResult = true;
+//			}
+//
+//
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult==true){
+//				System.out.println("Pass - From acc");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
+//			}
+//			else{
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//	}
+//
+//
+//
+//	public String getTransactionIDFromPayment() throws Exception {
+//		boolean stepResult = false;
+//		try {
+//			if (isElementPresent(paymentActivityTitle)) {
+//				transactionID = getElementText("New Wire Transfer Transaction ID", "Current Activity Details", currentActivityTransID);
+//				//transactionID = transactionID.replaceAll("\\.", "");
+//				stepResult = true;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult == true) {
+//				System.out.println("Pass - Menu");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"Transaction ID Payment details captured Successfully", "Passed", driver, "Y");
+//			} else {
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+//						"Could not get Transaction ID Payment details Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//		return transactionID;
+//
+//	}
+//
+//
+//	public void editNewWireTransferUsingExistingTemplate(String paymentDate) throws Exception{
+//		boolean stepResult = false;
+//		try {
+//			if (isElementPresent(editTransferHeader)) {
+//				waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer details Header", wireDetailsHeader);
+//
+//				if(!paymentDate.equals("")) {
+//					enterNewWireTransferPaymentDate(paymentDate);
+//				}
+//				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
+//				stepResult = true;
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			if (stepResult==true){
+//				System.out.println("Pass - From acc");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Existing New Wire Transfer edit Successfully", "Passed", driver, "Y");
+//			}
+//			else{
+//				System.out.println("fail");
+//				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not edit Existing New Wire Transfer Successfully", "Failed", driver, "Y");
+//			}
+//		}
+//	}
+//
+//}
+
 public class Corporate_NewWireTransfer extends CommonLibrary{
 
 	public Corporate_NewWireTransfer(WebDriver driver) {
@@ -72,6 +447,8 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By currentActivityTransID = By.xpath("(//span[@class='d-block'])[1]");
 	By payee = By.xpath("//label[text()='Payee']//..//div[contains(@class,'ui-state')]");
 	By payeeAmountField = By.xpath("//input[@id='wireAmountId']");
+
+
 
 
 	String list = "//li[@role='option']/span[contains(text(),'%s')]";
@@ -130,83 +507,92 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	}
 
 	public void reviewWireTransferDetails(String amount) throws Exception {
-		boolean stepResult = false;
-		boolean flag = false;
-		try {
-			if (isElementPresent(accountInfoDetails)) {
-				//				List<WebElement> element = findElements(reviewDetails);
-				//				for (WebElement ele : element) {
-				//					if (ele.getText().contains(debitAccount)) {
-				//						flag = true;
-				//					} else {
-				//						flag = false;
-				//					}
-				//				}
-			}
-			validateElementExist("Corporate New Wire Transfer", "AmountField", reviewAmount, amount);
-			clickOnElement("Corporate New Wire Transfer", "Confirm Button", confirmButton);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"review Wire Transfer details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"Could not review Wire Transfer details Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			boolean flag = false;
+			try {
+				if (isElementPresent(accountInfoDetails)) {
+					//				List<WebElement> element = findElements(reviewDetails);
+					//				for (WebElement ele : element) {
+					//					if (ele.getText().contains(debitAccount)) {
+					//						flag = true;
+					//					} else {
+					//						flag = false;
+					//					}
+					//				}
+				}
+				validateElementExist("Corporate New Wire Transfer", "AmountField", reviewAmount, amount);
+				clickOnElement("Corporate New Wire Transfer", "Confirm Button", confirmButton);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"review Wire Transfer details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"Could not review Wire Transfer details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
 	public void verifyPassword(String password) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(pleaseReverifyTitle)) {
-				if (!password.equals("")) {
-					enterText("Corporate New Wire Transfer", "Password", confirmPassword, password);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(pleaseReverifyTitle)) {
+					if (!password.equals("")) {
+						enterText("Corporate New Wire Transfer", "Password", confirmPassword, password);
+					}
+					clickOnElement("Corporate New Wire Transfer", "Submit Button", submitButton);
+					stepResult = true;
 				}
-				clickOnElement("Corporate New Wire Transfer", "Submit Button", submitButton);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"enter password Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"Could not enter password Successfully", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"enter password Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"Could not enter password Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
 	public String getTransaction() throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(wireTransferHeader)) {
-				transactionID = getElementText("New Wire Transfer", "Alert Message", msg);
-				transactionID = transactionID.replaceAll("\\.", "");
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"Captured TransactionID Payment details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"Could not Capture TransactionID Payment details Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(wireTransferHeader)) {
+					transactionID = getElementText("New Wire Transfer", "Alert Message", msg);
+					transactionID = transactionID.replaceAll("\\.", "");
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"Captured TransactionID Payment details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"Could not Capture TransactionID Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 		return transactionID;
@@ -218,137 +604,145 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 			String beneID,String beneAddress1,String beneAddress2,String beneCountry,
 			String beneBankIDType,String paymentCurrency,String amount,String beneBankID,
 			String purposeOfPayment,String beneBankAddress1,String beneBankAddress2) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(wireTransferHeader)) {
-				clickOnElement("Corporate New Wire Transfer", "Free Form Field", freeFormField);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(wireTransferHeader)) {
+					clickOnElement("Corporate New Wire Transfer", "Free Form Field", freeFormField);
 
-				clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
+					clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
 
-				waitForPresenceOfElement("Corporate New Wire Transfer","Account Information Header", accountInfoHeader);
-				if(!debitAccount.equals("")) {
-					scrollToTopOfThePage();
-					enterText("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
-					clickOnElement("Corporate New Wire Transfer", "Debit Account Field", getDynamicElement("Debit Account", list, debitAccount));
-				}
-				scrollToElement(beneInformation);
-				if (!payee.equals("")) {
-					enterText("Corporate New Wire Transfer", "Payee Field", payeeName, payee);
-				}
-				if(!beneIdType.equals("")) {
-					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
-				}
-				if(!beneID.equals("")) {
-					scrollToElement(beneIDField);
-					enterText("Corporate New Wire Transfer", "Beneficiary Id", beneIDField, beneID);
-				}
-				if(!beneAddress1.equals("")) {
-					enterText("Corporate New Wire Transfer", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
-				}
-				if(!beneAddress2.equals("")) {
-					enterText("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
-				}
-				if(!beneCountry.equals("")) {
-					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
-				}
-				if(!paymentCurrency.equals("")) {
-					enterText("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
-					clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
-				}
-				if(!amount.equals("")) {
-					enterText("Corporate New Wire Transfer", "Amount Field", amountField, amount);
-				}
-				if(!beneBankIDType.equals("")) {
-					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
-				}
-				if(!beneBankID.equals("")) {
-					enterText("Corporate New Wire Transfer", "Bene Bank ID", beneBankIdField, beneBankID);
-				}
-				if(!purposeOfPayment.equals("")) {
-					scrollToElement(purposeOfPaymentField);
-					enterText("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
-				}
-				if(!beneBankAddress1.equals("")) {
-					enterText("Corporate New Wire Transfer", "Beneficiary Bank Address1 Field", beneBankAddress1Field, beneBankAddress1);
-				}
-				if(!beneBankAddress2.equals("")) {
-					enterText("Corporate New Wire Transfer", "Beneficiary Bank Address2 Field", beneBankAddress2Field, beneBankAddress2);
+					waitForPresenceOfElement("Corporate New Wire Transfer","Account Information Header", accountInfoHeader);
+					if(!debitAccount.equals("")) {
+						scrollToTopOfThePage();
+						enterText("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
+						clickOnElement("Corporate New Wire Transfer", "Debit Account Field", getDynamicElement("Debit Account", list, debitAccount));
+					}
+					scrollToElement(beneInformation);
+					if (!payee.equals("")) {
+						enterText("Corporate New Wire Transfer", "Payee Field", payeeName, payee);
+					}
+					if(!beneIdType.equals("")) {
+						selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
+					}
+					if(!beneID.equals("")) {
+						scrollToElement(beneIDField);
+						enterText("Corporate New Wire Transfer", "Beneficiary Id", beneIDField, beneID);
+					}
+					if(!beneAddress1.equals("")) {
+						enterText("Corporate New Wire Transfer", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
+					}
+					if(!beneAddress2.equals("")) {
+						enterText("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
+					}
+					if(!beneCountry.equals("")) {
+						selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
+					}
+					if(!paymentCurrency.equals("")) {
+						enterText("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
+						clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
+					}
+					if(!amount.equals("")) {
+						enterText("Corporate New Wire Transfer", "Amount Field", amountField, amount);
+					}
+					if(!beneBankIDType.equals("")) {
+						selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
+					}
+					if(!beneBankID.equals("")) {
+						enterText("Corporate New Wire Transfer", "Bene Bank ID", beneBankIdField, beneBankID);
+					}
+					if(!purposeOfPayment.equals("")) {
+						scrollToElement(purposeOfPaymentField);
+						enterText("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
+					}
+					if(!beneBankAddress1.equals("")) {
+						enterText("Corporate New Wire Transfer", "Beneficiary Bank Address1 Field", beneBankAddress1Field, beneBankAddress1);
+					}
+					if(!beneBankAddress2.equals("")) {
+						enterText("Corporate New Wire Transfer", "Beneficiary Bank Address2 Field", beneBankAddress2Field, beneBankAddress2);
+					}
+
+					clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
+					stepResult = true;
 				}
 
-				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
-				stepResult = true;
-			}
 
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - From acc");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
-
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - From acc");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void createNewWireTransferUsingExistingTemplate(String existTemplate,String paymentDate) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(wireTransferHeader)) {
-				clickOnElement("Corporate New Wire Transfer", "Template Field", templateField);
-				clickOnElement("Corporate New Wire Transfer", "Template Field",templateDropdown);
-				selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", existingTemplateField, list, existTemplate);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(wireTransferHeader)) {
+					clickOnElement("Corporate New Wire Transfer", "Template Field", templateField);
+					clickOnElement("Corporate New Wire Transfer", "Template Field",templateDropdown);
+					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", existingTemplateField, list, existTemplate);
 
-				clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
-				waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer Header", selectTemplateHeader);
+					clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
+					waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer Header", selectTemplateHeader);
 
-				if(!paymentDate.equals("")) {
-					enterNewWireTransferPaymentDate(paymentDate);
+					if(!paymentDate.equals("")) {
+						enterNewWireTransferPaymentDate(paymentDate);
+					}
+					clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
+					stepResult = true;
 				}
-				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - From acc");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Existing New Wire Transfer created Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create Existing New Wire Transfer Successfully", "Failed", driver, "Y");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - From acc");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Existing New Wire Transfer created Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create Existing New Wire Transfer Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void enterNewWireTransferPaymentDate(String paymentDate) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (!paymentDate.equals("")) {
-				for (int i = 1; i <= 10; i++) {
-					driver.findElement(paymentDateField).sendKeys(Keys.BACK_SPACE);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!paymentDate.equals("")) {
+					for (int i = 1; i <= 10; i++) {
+						driver.findElement(paymentDateField).sendKeys(Keys.BACK_SPACE);
+					}
+					enterText("Corporate ACH Payment", "Payment Date", paymentDateField, paymentDate);
+					clickOnElement("Corporate ACH Payment", "Payment Date Title", paymentDateTitle);
 				}
-				enterText("Corporate ACH Payment", "Payment Date", paymentDateField, paymentDate);
-				clickOnElement("Corporate ACH Payment", "Payment Date Title", paymentDateTitle);
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass -- transfer date");
-				new HTMLReportHelper().HtmlReportBody("AcH CC- Corporate application", "Enter transfer date field Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("ACH CC- Corporate application", "Could not Enter transfer date field Successfully", "Failed", driver, "Y");
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- transfer date");
+					new HTMLReportHelper().HtmlReportBody("AcH CC- Corporate application", "Enter transfer date field Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("ACH CC- Corporate application", "Could not Enter transfer date field Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -358,77 +752,80 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 			String beneID,String beneAddress1,String beneAddress2,String beneCountry,
 			String beneBankIDType,String paymentCurrency,String amount,String beneBankID,
 			String purposeOfPayment,String beneBankAddress1,String beneBankAddress2) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(editTransferHeader)) {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(editTransferHeader)) {
 
-				waitForPresenceOfElement("Corporate New Wire Transfer","Wire Details", wireDetailsHeader);
-				if(!debitAccount.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
-					clickOnElement("Corporate New Wire Transfer", "Debit Account Field", getDynamicElement("Debit Account", list, debitAccount));
-				}
-				scrollToElement(beneInformation);
-				if (!payee.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Payee Field", payeeName, payee);
-				}
-				if(!beneIdType.equals("")) {
-					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
+					waitForPresenceOfElement("Corporate New Wire Transfer","Wire Details", wireDetailsHeader);
+					if(!debitAccount.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
+						clickOnElement("Corporate New Wire Transfer", "Debit Account Field", getDynamicElement("Debit Account", list, debitAccount));
+					}
+					scrollToElement(beneInformation);
+					if (!payee.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Payee Field", payeeName, payee);
+					}
+					if(!beneIdType.equals("")) {
+						selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
 
-				}
-				if(!beneID.equals("")) {
-					scrollToElement(beneIDField);
-					clearAndType("Corporate New Wire Transfer", "Beneficiary Id", beneIDField, beneID);
-				}
-				if(!beneAddress1.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
-				}
-				if(!beneAddress2.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
-				}
-				if(!beneCountry.equals("")) {
-					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
-				}
-				if(!paymentCurrency.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
-					clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
+					}
+					if(!beneID.equals("")) {
+						scrollToElement(beneIDField);
+						clearAndType("Corporate New Wire Transfer", "Beneficiary Id", beneIDField, beneID);
+					}
+					if(!beneAddress1.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Beneficiary Address1 Field", beneAddressField1, beneAddress1);
+					}
+					if(!beneAddress2.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Beneficiary Address2 Field", beneAddressField2, beneAddress2);
+					}
+					if(!beneCountry.equals("")) {
+						selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Country", beneCountryField, list, beneCountry);
+					}
+					if(!paymentCurrency.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
+						clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
 
-				}
-				if(!amount.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Amount Field", amountField, amount);
-				}
-				if(!beneBankIDType.equals("")) {
-					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
-				}
-				if(!beneBankID.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Bene Bank ID", beneBankIdField, beneBankID);
-				}
-				if(!purposeOfPayment.equals("")) {
-					scrollToElement(purposeOfPaymentField);
-					clearAndType("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
-				}
-				if(!beneBankAddress1.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Beneficiary Bank Address1 Field", beneBankAddress1Field, beneBankAddress1);
-				}
-				if(!beneBankAddress2.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Beneficiary Bank Address2 Field", beneBankAddress2Field, beneBankAddress2);
+					}
+					if(!amount.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Amount Field", amountField, amount);
+					}
+					if(!beneBankIDType.equals("")) {
+						selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
+					}
+					if(!beneBankID.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Bene Bank ID", beneBankIdField, beneBankID);
+					}
+					if(!purposeOfPayment.equals("")) {
+						scrollToElement(purposeOfPaymentField);
+						clearAndType("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
+					}
+					if(!beneBankAddress1.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Beneficiary Bank Address1 Field", beneBankAddress1Field, beneBankAddress1);
+					}
+					if(!beneBankAddress2.equals("")) {
+						clearAndType("Corporate New Wire Transfer", "Beneficiary Bank Address2 Field", beneBankAddress2Field, beneBankAddress2);
+					}
+
+					clickOnElement("Corporate New Wire Transfer", "Save Transfer Button", requestTransferButton);
+					stepResult = true;
 				}
 
-				clickOnElement("Corporate New Wire Transfer", "Save Transfer Button", requestTransferButton);
-				stepResult = true;
-			}
 
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - From acc");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - From acc");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -436,24 +833,27 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 
 
 	public String getTransactionIDFromPayment() throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(paymentActivityTitle)) {
-				transactionID = getElementText("New Wire Transfer Transaction ID", "Current Activity Details", currentActivityTransID);
-				//transactionID = transactionID.replaceAll("\\.", "");
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"Transaction ID Payment details captured Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
-						"Could not get Transaction ID Payment details Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(paymentActivityTitle)) {
+					transactionID = getElementText("New Wire Transfer Transaction ID", "Current Activity Details", currentActivityTransID);
+					//transactionID = transactionID.replaceAll("\\.", "");
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"Transaction ID Payment details captured Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
+							"Could not get Transaction ID Payment details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 		return transactionID;
@@ -462,28 +862,31 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 
 
 	public void editNewWireTransferUsingExistingTemplate(String paymentDate) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(editTransferHeader)) {
-				waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer details Header", wireDetailsHeader);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(editTransferHeader)) {
+					waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer details Header", wireDetailsHeader);
 
-				if(!paymentDate.equals("")) {
-					enterNewWireTransferPaymentDate(paymentDate);
+					if(!paymentDate.equals("")) {
+						enterNewWireTransferPaymentDate(paymentDate);
+					}
+					clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
+					stepResult = true;
 				}
-				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - From acc");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Existing New Wire Transfer edit Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not edit Existing New Wire Transfer Successfully", "Failed", driver, "Y");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - From acc");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Existing New Wire Transfer edit Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not edit Existing New Wire Transfer Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}

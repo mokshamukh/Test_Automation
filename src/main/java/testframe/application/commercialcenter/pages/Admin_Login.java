@@ -30,8 +30,8 @@ public class Admin_Login extends CommonLibrary {
 	public By dashboardIcon = By.xpath("//li/a/span[text()='Dashboard']");
 
 	String pageMenuOptions = "//li/a/span[text()='%s']";
-	
-	
+
+
 	public Admin_Login(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -39,55 +39,61 @@ public class Admin_Login extends CommonLibrary {
 	}
 
 	public void launchApplication(String url) throws Exception{
-		boolean stepResult = false;
-		try {
-			goTo(url);
-			if (isElementPresent(welcomeRepublicHeader))
-				stepResult = true;
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Launch CC- Admin application", "Launch Successfully", "Passed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				goTo(url);
+				if (isElementPresent(welcomeRepublicHeader))
+					stepResult = true;
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Launch CC- Admin application", "Could not Launch Successfully", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Launch CC- Admin application", "Launch Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Launch CC- Admin application", "Could not Launch Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
 	public void logInToApplication( String admCompanyID, String admUserID, String psd) throws Exception {
-		boolean stepResult = false;
-		try {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
 
-			//goTo(url);
-			
-			enterText("Admin Login Page", "CompanyID", companyID, admCompanyID);
-			enterText("Admin Login Page", "UserID", userID, admUserID);
-			clickOnElement("Admin Login Page", "Login Button", loginButton);
-			if(isElementPresent(img)){ 
-				validateTextEquals("Admin Login Page", "CompanyID", verifyCompanyID, admCompanyID);
-				validateTextEquals("Admin Login Page", "User ID", verifyUserID, admUserID);
-				enterText("Admin Login Page", "Password", password, psd);
+				//goTo(url);
+
+				enterText("Admin Login Page", "CompanyID", companyID, admCompanyID);
+				enterText("Admin Login Page", "UserID", userID, admUserID);
 				clickOnElement("Admin Login Page", "Login Button", loginButton);
-				if (isElementPresent(dashboardIcon))
-				stepResult = true;
+				if(isElementPresent(img)){ 
+					validateTextEquals("Admin Login Page", "CompanyID", verifyCompanyID, admCompanyID);
+					validateTextEquals("Admin Login Page", "User ID", verifyUserID, admUserID);
+					enterText("Admin Login Page", "Password", password, psd);
+					clickOnElement("Admin Login Page", "Login Button", loginButton);
+					if (isElementPresent(dashboardIcon))
+						stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Login CC- Admin application", "Login Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Login CC- Admin application", "Could not Login Successfully", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Login CC- Admin application", "Login Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Login CC- Admin application", "Could not Login Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 

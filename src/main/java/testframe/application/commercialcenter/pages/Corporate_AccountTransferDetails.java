@@ -38,6 +38,7 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 	}
 
 	public void verifyAccStatus(String accountStatus) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accountTransferDetailsTitle)) {
@@ -56,12 +57,15 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 		else{
 			System.out.println("fail");
 			new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "Could not verify acc status Successfully", "Failed", driver, "Y");
+			System.setProperty("runStep","N");
+		}
 		}
 		}
 	}
 	
 
 	public String getAccTransaction() throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accountTransferDetailsTitle)) {
@@ -83,6 +87,8 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 		else{
 			System.out.println("fail");
 			new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "Could not get transaction ID Successfully", "Failed", driver, "Y");
+			System.setProperty("runStep","N");
+		}
 		}
 	}
 		return transactionID;
@@ -90,6 +96,7 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 	}
 
 	public String getMultiAccTransaction(String field, String field1, String field2, String field3) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(accountTransferDetailsTitle)) {
@@ -117,6 +124,8 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "Could not get multiple transaction ID Successfully", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
+			}
 			}
 		
 		}

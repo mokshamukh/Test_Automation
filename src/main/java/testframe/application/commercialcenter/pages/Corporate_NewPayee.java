@@ -48,110 +48,113 @@ public class Corporate_NewPayee extends CommonLibrary{
 	By searchPayeeNameField = By.xpath("//input[@id='payeeName']");
 	By searchIcon = By.xpath("//button[contains(@aria-label,' click the icon')]//i[text()='search']");
 	By accountAddedMsg = By.xpath("//div[contains(text(),'An account has been added or modified to the payee')]");
-	
-	
-	
+
+
+
 	String payeeTypeList = "//p-dropdown[@inputid='payeeType-input']//li[@aria-label='%s']";
 	String beneIDTypeList = "//p-dropdown[@inputid='beneficiaryBankIdType-input']//li[@aria-label='%s']";
 	String beneBankCountryList = "//p-dropdown[@inputid='beneficiaryBankCountry-input']//li[@aria-label='%s']";
 	String beneCountryList = "//p-dropdown[@inputid='beneficiaryCountry-input']//li[@aria-label='%s']";
 	String searchData = "//td[@class='ng-star-inserted']//span[contains(text(),'%s')]";
-	
-	
+
+
 	public void createNewPayeeAndSearch(String payeeName,String payeeID,String payeeType,String address1,
 			String address2,String accountNumber,String beneBankIDType,String beneBankCountry,
 			String beneBankID,String beneBankName,String beneCountry) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(createPayeeTitle)) {
-				if (!payeeName.equals("")) {
-					clearAndType("Corporate New Payee", "Payee Name", payeeNameField, payeeName);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(createPayeeTitle)) {
+					if (!payeeName.equals("")) {
+						clearAndType("Corporate New Payee", "Payee Name", payeeNameField, payeeName);
+					}
+					if(!payeeID.equals("")) {
+						clearAndType("Corporate New Payee", "Payee ID", payeeIdField, payeeID);	
+					}
+					if(!payeeType.equals("")) {
+						clickOnElement("Corporate New Payee", "Payee Type", payeeTypeField);
+						getDynamicElementClick("Corporate New Payee", "Payee Type", payeeTypeList, payeeType);
+						//selectElementFromListbox("Corporate New Payee", fieldName, payeeTypeField, field, text);
+					}
+					if(!address1.equals("")) {
+						enterText("Corporate New Payee", "Address Field", address1Field, address1);
+					}
+					if(!address2.equals("")) {
+						enterText("Corporate New Payee", "Address Field", address2Field, address2);
+					}
+					clickOnElement("Corporate New Payee", "Add Account", addPayeeAccount);
+					waitForPresenceOfElement("Corporate New Payee", "Add Payee Drawer", addPayeeDrawer);
+					
+					if(!accountNumber.equals("")) {
+						enterText("Corporate New Payee", "Account Number", accountNumberField, accountNumber);
+					}
+					if(isElementPresent(wireInformationChkBox)) {
+						clickOnElement("Corporate New Payee", "Wire Information Payment", wireInformationChkBox);
+					}
+					clickOnElement("Corporate New Payee", "Next Button", nextButton);
+					waitForPresenceOfElement("Corporate New Payee", "Beneficiary", beneficiaryBankHeader);
+					
+					if(!beneBankIDType.equals("")) {
+						clickOnElement("Corporate New Payee", "Payee Type", beneBankIDTypeField);
+						getDynamicElementClick("Corporate New Payee", "Payee Type", beneIDTypeList, beneBankIDType);
+					}
+					if(!beneBankCountry.equals("")) {
+						clickOnElement("Corporate New Payee", "Payee Type", beneBankCountryField);
+						getDynamicElementClick("Corporate New Payee", "Payee Type", beneBankCountryList, beneBankCountry);
+					}
+					if(!beneBankID.equals("")) {
+						enterText("Corporate New Payee", "Account Number", beneBankIDField, beneBankID);
+					}
+					if(!beneBankName.equals("")) {
+						enterText("Corporate New Payee", "Account Number", beneBankNameField, beneBankName);
+					}
+					if(!address1.equals("")) {
+						enterText("Corporate New Payee", "Account Number", addressAddPayeeField1, address1);
+					}
+					if(!address2.equals("")) {
+						enterText("Corporate New Payee", "Account Number", addressAddPayeeField2, address1);
+					}
+					if(!beneCountry.equals("")) {
+						clickOnElement("Corporate New Payee", "Payee Type", beneCountryField);
+						getDynamicElementClick("Corporate New Payee", "Payee Type", beneCountryList, beneCountry);
+					}
+					waitForPresenceOfElement("Corporate New Payee", "Add Payee Button", addPayeeAccountButton);
+					clickOnElement("Corporate New Payee", "Add Payee Button", addPayeeAccountButton);
+					waitForPresenceOfElement("Corporate New Payee", "Create Payee Title", createPayeeTitle);
+					if(isElementPresent(accountAddedMsg)) {
+						clickOnElement("Corporate New Payee", "Save Button", saveButton);
+					}
+					waitForPresenceOfElement("Corporate New Payee", "Successful Msg", successfulPayeesMsg);
+					if(isElementPresent(searchButton)) {
+						clickOnElement("Corporate New Payee", "Search Button", searchButton);
+					}
+					if(!payeeID.equals("")) {
+						enterText("Corporate New Payee", "Search Payee", searchPayeeIDField, payeeID);
+					}
+					if(!payeeName.equals("")) {
+						enterText("Corporate New Payee", "Search Payee", searchPayeeNameField, payeeName);
+					}
+	                 isElementPresent(searchIcon);
+	                 clickOnElement("Corporate New Payee", "Search Icon", searchIcon);
+	                 isElementPresent(getDynamicElement("Corporate New Payee", searchData, payeeName));
+	             	stepResult = true;
 				}
-				if(!payeeID.equals("")) {
-					clearAndType("Corporate New Payee", "Payee ID", payeeIdField, payeeID);	
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - From acc");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Payee CC- Corporate application", "New Payee created Successfully", "Passed", driver, "Y");
 				}
-				if(!payeeType.equals("")) {
-					clickOnElement("Corporate New Payee", "Payee Type", payeeTypeField);
-					getDynamicElementClick("Corporate New Payee", "Payee Type", payeeTypeList, payeeType);
-					//selectElementFromListbox("Corporate New Payee", fieldName, payeeTypeField, field, text);
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Payee CC- Corporate application", "Could not create New Payee Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if(!address1.equals("")) {
-					enterText("Corporate New Payee", "Address Field", address1Field, address1);
-				}
-				if(!address2.equals("")) {
-					enterText("Corporate New Payee", "Address Field", address2Field, address2);
-				}
-				clickOnElement("Corporate New Payee", "Add Account", addPayeeAccount);
-				waitForPresenceOfElement("Corporate New Payee", "Add Payee Drawer", addPayeeDrawer);
-				
-				if(!accountNumber.equals("")) {
-					enterText("Corporate New Payee", "Account Number", accountNumberField, accountNumber);
-				}
-				if(isElementPresent(wireInformationChkBox)) {
-					clickOnElement("Corporate New Payee", "Wire Information Payment", wireInformationChkBox);
-				}
-				clickOnElement("Corporate New Payee", "Next Button", nextButton);
-				waitForPresenceOfElement("Corporate New Payee", "Beneficiary", beneficiaryBankHeader);
-				
-				if(!beneBankIDType.equals("")) {
-					clickOnElement("Corporate New Payee", "Payee Type", beneBankIDTypeField);
-					getDynamicElementClick("Corporate New Payee", "Payee Type", beneIDTypeList, beneBankIDType);
-				}
-				if(!beneBankCountry.equals("")) {
-					clickOnElement("Corporate New Payee", "Payee Type", beneBankCountryField);
-					getDynamicElementClick("Corporate New Payee", "Payee Type", beneBankCountryList, beneBankCountry);
-				}
-				if(!beneBankID.equals("")) {
-					enterText("Corporate New Payee", "Account Number", beneBankIDField, beneBankID);
-				}
-				if(!beneBankName.equals("")) {
-					enterText("Corporate New Payee", "Account Number", beneBankNameField, beneBankName);
-				}
-				if(!address1.equals("")) {
-					enterText("Corporate New Payee", "Account Number", addressAddPayeeField1, address1);
-				}
-				if(!address2.equals("")) {
-					enterText("Corporate New Payee", "Account Number", addressAddPayeeField2, address1);
-				}
-				if(!beneCountry.equals("")) {
-					clickOnElement("Corporate New Payee", "Payee Type", beneCountryField);
-					getDynamicElementClick("Corporate New Payee", "Payee Type", beneCountryList, beneCountry);
-				}
-				waitForPresenceOfElement("Corporate New Payee", "Add Payee Button", addPayeeAccountButton);
-				clickOnElement("Corporate New Payee", "Add Payee Button", addPayeeAccountButton);
-				waitForPresenceOfElement("Corporate New Payee", "Create Payee Title", createPayeeTitle);
-				if(isElementPresent(accountAddedMsg)) {
-					clickOnElement("Corporate New Payee", "Save Button", saveButton);
-				}
-				waitForPresenceOfElement("Corporate New Payee", "Successful Msg", successfulPayeesMsg);
-				if(isElementPresent(searchButton)) {
-					clickOnElement("Corporate New Payee", "Search Button", searchButton);
-				}
-				if(!payeeID.equals("")) {
-					enterText("Corporate New Payee", "Search Payee", searchPayeeIDField, payeeID);
-				}
-				if(!payeeName.equals("")) {
-					enterText("Corporate New Payee", "Search Payee", searchPayeeNameField, payeeName);
-				}
-                 isElementPresent(searchIcon);
-                 clickOnElement("Corporate New Payee", "Search Icon", searchIcon);
-                 isElementPresent(getDynamicElement("Corporate New Payee", searchData, payeeName));
-             	stepResult = true;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - From acc");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Payee CC- Corporate application", "New Payee created Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Payee CC- Corporate application", "Could not create New Payee Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
-	
-	
+
+
 }

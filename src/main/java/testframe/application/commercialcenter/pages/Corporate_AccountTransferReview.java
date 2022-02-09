@@ -61,44 +61,47 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 
 	public void verifyAccDetails(String fromAccReview, String toAccReview, String memoReview, String payInstrReview,
 			String amtReview) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(accTransferReviewTitle)) {
-				clickOnElement("Account Transfer Review", "Account Review Title", accTransferReviewTitle);
-				if (!fromAccReview.equals("")) {
-					clickOnElement("Account Transfer Review", "fromAcc_review title", fromAccountTitle);
-					validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review, fromAccReview);
-				}
-				if (!toAccReview.equals("")) {
-					validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review, toAccReview);
-				}
-				if (!memoReview.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review, memoReview);
-				}
-				if (!payInstrReview.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr, payInstrReview);
-				}
-				if (!amtReview.equals("")) {
-					if (isElementPresent(paymentInstructionTitle)) {
-						validateElementExist("Account Transfer Review", "amt_review", amt_review, amtReview);
-					} else {
-						validateElementExist("Account Transfer Review", "amt_review", amount_review, amtReview);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accTransferReviewTitle)) {
+					clickOnElement("Account Transfer Review", "Account Review Title", accTransferReviewTitle);
+					if (!fromAccReview.equals("")) {
+						clickOnElement("Account Transfer Review", "fromAcc_review title", fromAccountTitle);
+						validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review, fromAccReview);
 					}
+					if (!toAccReview.equals("")) {
+						validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review, toAccReview);
+					}
+					if (!memoReview.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review, memoReview);
+					}
+					if (!payInstrReview.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr, payInstrReview);
+					}
+					if (!amtReview.equals("")) {
+						if (isElementPresent(paymentInstructionTitle)) {
+							validateElementExist("Account Transfer Review", "amt_review", amt_review, amtReview);
+						} else {
+							validateElementExist("Account Transfer Review", "amt_review", amount_review, amtReview);
+						}
 
+					}
+					stepResult = true;
 				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - verify acc details");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-						"verify account details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-						"Could not verify account details Successfully", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - verify acc details");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
+							"verify account details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
+							"Could not verify account details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -108,128 +111,134 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 			String payInstrReview1, String amtReview1, String fromAccReview2, String toAccReview2, String memoReview2,
 			String payInstrReview2, String amtReview2, String fromAccReview3, String toAccReview3, String memoReview3,
 			String payInstrReview3, String amtReview3) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(accTransferReviewTitle)) {
-				if (!fromAccReview.equals("")) {
-					validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review, fromAccReview);
-				}
-				if (!toAccReview.equals("")) {
-					validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review, toAccReview);
-				}
-				if (!memoReview.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review, memoReview);
-				}
-				if (!payInstrReview.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr, payInstrReview);
-				}
-				if (!amtReview.equals("")) {
-					if (isElementPresent(toAccPayInstr)) {
-						validateElementExist("Account Transfer Review", "amt_review", amt_review, amtReview);
-					} else {
-						validateElementExist("Account Transfer Review", "amt_review", amount_review, amtReview);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accTransferReviewTitle)) {
+					if (!fromAccReview.equals("")) {
+						validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review, fromAccReview);
+					}
+					if (!toAccReview.equals("")) {
+						validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review, toAccReview);
+					}
+					if (!memoReview.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review, memoReview);
+					}
+					if (!payInstrReview.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr, payInstrReview);
+					}
+					if (!amtReview.equals("")) {
+						if (isElementPresent(toAccPayInstr)) {
+							validateElementExist("Account Transfer Review", "amt_review", amt_review, amtReview);
+						} else {
+							validateElementExist("Account Transfer Review", "amt_review", amount_review, amtReview);
+						}
+
+					}
+					if (!fromAccReview1.equals("")) {
+						validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review1, fromAccReview1);
+					}
+					if (!toAccReview1.equals("")) {
+						validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review1, toAccReview1);
+					}
+					if (!memoReview1.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review1, memoReview1);
+					}
+					if (!payInstrReview1.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr1,
+								payInstrReview1);
+					}
+					if (!amtReview1.equals("")) {
+						if (isElementPresent(toAccPayInstr)) {
+							validateElementExist("Account Transfer Review", "amt_review", amt_review1, amtReview1);
+						} else {
+							validateElementExist("Account Transfer Review", "amt_review", amount_review1, amtReview1);
+						}
+
 					}
 
-				}
-				if (!fromAccReview1.equals("")) {
-					validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review1, fromAccReview1);
-				}
-				if (!toAccReview1.equals("")) {
-					validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review1, toAccReview1);
-				}
-				if (!memoReview1.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review1, memoReview1);
-				}
-				if (!payInstrReview1.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr1,
-							payInstrReview1);
-				}
-				if (!amtReview1.equals("")) {
-					if (isElementPresent(toAccPayInstr)) {
-						validateElementExist("Account Transfer Review", "amt_review", amt_review1, amtReview1);
-					} else {
-						validateElementExist("Account Transfer Review", "amt_review", amount_review1, amtReview1);
+					if (!fromAccReview2.equals("")) {
+						validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review2, fromAccReview2);
+					}
+					if (!toAccReview2.equals("")) {
+						validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review2, toAccReview2);
+					}
+					if (!memoReview2.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review2, memoReview2);
+					}
+					if (!payInstrReview2.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr2,
+								payInstrReview2);
+					}
+					if (!amtReview2.equals("")) {
+						if (isElementPresent(toAccPayInstr)) {
+							validateElementExist("Account Transfer Review", "amt_review", amt_review2, amtReview2);
+						} else {
+							validateElementExist("Account Transfer Review", "amt_review", amount_review2, amtReview2);
+						}
+
 					}
 
-				}
+					if (!fromAccReview3.equals("")) {
+						validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review3, fromAccReview3);
+					}
+					if (!toAccReview3.equals("")) {
+						validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review3, toAccReview3);
+					}
+					if (!memoReview3.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review3, memoReview3);
+					}
+					if (!payInstrReview3.equals("")) {
+						validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr3,
+								payInstrReview3);
+					}
+					if (!amtReview3.equals("")) {
+						if (isElementPresent(toAccPayInstr)) {
+							validateElementExist("Account Transfer Review", "amt_review", amt_review3, amtReview3);
+						} else {
+							validateElementExist("Account Transfer Review", "amt_review", amount_review3, amtReview3);
+						}
 
-				if (!fromAccReview2.equals("")) {
-					validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review2, fromAccReview2);
-				}
-				if (!toAccReview2.equals("")) {
-					validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review2, toAccReview2);
-				}
-				if (!memoReview2.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review2, memoReview2);
-				}
-				if (!payInstrReview2.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr2,
-							payInstrReview2);
-				}
-				if (!amtReview2.equals("")) {
-					if (isElementPresent(toAccPayInstr)) {
-						validateElementExist("Account Transfer Review", "amt_review", amt_review2, amtReview2);
-					} else {
-						validateElementExist("Account Transfer Review", "amt_review", amount_review2, amtReview2);
 					}
 
+					stepResult = true;
 				}
-
-				if (!fromAccReview3.equals("")) {
-					validateElementExist("Account Transfer Review", "fromAcc_review", fromAcc_review3, fromAccReview3);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Multi  Acc Transfer Review");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
+							"verify multiple account details Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
+							"Could not verify multiple account details Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (!toAccReview3.equals("")) {
-					validateElementExist("Account Transfer Review", "toAcc_review", toAcc_review3, toAccReview3);
-				}
-				if (!memoReview3.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccMemo_review3, memoReview3);
-				}
-				if (!payInstrReview3.equals("")) {
-					validateElementExist("Account Transfer Review", "toAccMemo_review", toAccPayInstr3,
-							payInstrReview3);
-				}
-				if (!amtReview3.equals("")) {
-					if (isElementPresent(toAccPayInstr)) {
-						validateElementExist("Account Transfer Review", "amt_review", amt_review3, amtReview3);
-					} else {
-						validateElementExist("Account Transfer Review", "amt_review", amount_review3, amtReview3);
-					}
-
-				}
-
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Multi  Acc Transfer Review");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-						"verify multiple account details Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-						"Could not verify multiple account details Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
 
 	public void clickConfirmButton() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Corporate Account Transfer Review", "Confirm Button", confirmButton);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Acc Transfer review confirm");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-						"click confirm button Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-						"Could not click confirm button Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				clickOnElement("Corporate Account Transfer Review", "Confirm Button", confirmButton);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Acc Transfer review confirm");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
+							"click confirm button Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
+							"Could not click confirm button Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}

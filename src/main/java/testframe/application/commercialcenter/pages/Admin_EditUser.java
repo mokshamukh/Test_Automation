@@ -15,7 +15,7 @@ import testframe.common.reporting.HTMLReportHelper;
 
 
 public class Admin_EditUser extends CommonLibrary {
-	
+
 	By userID = By.xpath("//input[@id='userId']");
 	By firstName = By.xpath("//input[@id='profile.firstname']");
 	By lastName = By.xpath("//input[@id='profile.lastname']");
@@ -47,70 +47,73 @@ public class Admin_EditUser extends CommonLibrary {
 	public void editUser(String userID,String editUserID, String userFirstName, String userLastName, String userEnableDate,
 			String userEmailAddress, String comapanyResidesZip, String mothersName, String tempPsd,
 			String reEnterTempPsd) throws Exception {
-		boolean stepResult = false;
-		boolean flag = false;
-		try {
-			if (isElementPresent(editUserTitle)) {
-				String userIDtext = getElementText("Edit User", "User ID", verifyUserID);
-				if(userIDtext.equalsIgnoreCase(editUserID)){
-					flag = true;
-				}
-				if (!userFirstName.equals("")) {
-					clearAndType("Edit User", "First Name", firstName, userFirstName);
-				}
-				if (!userLastName.equals("")) {
-					clearAndType("Edit User", "Last Name", lastName, userLastName);
-				}
-				if (!userEnableDate.equals("")) {
-					clearAndType("Edit User", "Enable Date", enableDate, userEnableDate);
-				}
-				else{
-					isElementPresent(enableDate);
-				}
-				if (!userEmailAddress.equals("")) {
-					enterText("Edit User", "Email Adress", emailAdress, userEmailAddress);
-					clickOnElement("Edit User", "TestButton", testButton);
-					Thread.sleep(4000);
-				}
-				if (!comapanyResidesZip.equals("")) {
-					waitForPresenceOfElement("Edit User", "Company Resides Zip Code", companyZipAdress);
-					clearText("Edit User", "Company Resides Zip Code", companyZipAdress);
-					enterText("Edit User", "Company Resides Zip Code", companyZipAdress, comapanyResidesZip);
-				}
-				if (!mothersName.equals("")) {
-					clearAndType("Edit User", "Mother's Middle Name", mothersMiddleName, mothersName);
-				}
-				if (!tempPsd.equals("")) {
-					clearAndType("Edit User", "Temporaray Password", tempPassword, tempPsd);
-				}
-				if (!reEnterTempPsd.equals("")) {
-					clearAndType("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
-				}
-				clickOnElement("Edit User", "Save Button", saveButton);
-				Thread.sleep(2000);
-				//clickOnElement("Edit User", "Encrypted Password Title", encryptedPsdTitle);
-				//clickOnElement("Edit User", "Save Button", saveButton);
-				Thread.sleep(2000);
-				if(isElementPresent(psdValidationMsg)){
-					clearAndType("Edit User", "Temporaray Password", tempPassword, tempPsd);
-					clearAndType("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			boolean flag = false;
+			try {
+				if (isElementPresent(editUserTitle)) {
+					String userIDtext = getElementText("Edit User", "User ID", verifyUserID);
+					if(userIDtext.equalsIgnoreCase(editUserID)){
+						flag = true;
+					}
+					if (!userFirstName.equals("")) {
+						clearAndType("Edit User", "First Name", firstName, userFirstName);
+					}
+					if (!userLastName.equals("")) {
+						clearAndType("Edit User", "Last Name", lastName, userLastName);
+					}
+					if (!userEnableDate.equals("")) {
+						clearAndType("Edit User", "Enable Date", enableDate, userEnableDate);
+					}
+					else{
+						isElementPresent(enableDate);
+					}
+					if (!userEmailAddress.equals("")) {
+						enterText("Edit User", "Email Adress", emailAdress, userEmailAddress);
+						clickOnElement("Edit User", "TestButton", testButton);
+						Thread.sleep(4000);
+					}
+					if (!comapanyResidesZip.equals("")) {
+						waitForPresenceOfElement("Edit User", "Company Resides Zip Code", companyZipAdress);
+						clearText("Edit User", "Company Resides Zip Code", companyZipAdress);
+						enterText("Edit User", "Company Resides Zip Code", companyZipAdress, comapanyResidesZip);
+					}
+					if (!mothersName.equals("")) {
+						clearAndType("Edit User", "Mother's Middle Name", mothersMiddleName, mothersName);
+					}
+					if (!tempPsd.equals("")) {
+						clearAndType("Edit User", "Temporaray Password", tempPassword, tempPsd);
+					}
+					if (!reEnterTempPsd.equals("")) {
+						clearAndType("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
+					}
 					clickOnElement("Edit User", "Save Button", saveButton);
-					
+					Thread.sleep(2000);
+					//clickOnElement("Edit User", "Encrypted Password Title", encryptedPsdTitle);
+					//clickOnElement("Edit User", "Save Button", saveButton);
+					Thread.sleep(2000);
+					if(isElementPresent(psdValidationMsg)){
+						clearAndType("Edit User", "Temporaray Password", tempPassword, tempPsd);
+						clearAndType("Edit User", "Reenter Temporaray Password", reEnterPassword, reEnterTempPsd);
+						clickOnElement("Edit User", "Save Button", saveButton);
+
+					}
+					if(isElementPresent(getDynamicElement("Edit User",verifyUser,userID))) 
+						stepResult = true;
+
 				}
-				if(isElementPresent(getDynamicElement("Edit User",verifyUser,userID))) 
-					stepResult = true;
-				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true && flag== true)
+					new HTMLReportHelper().HtmlReportBody("User Details Edit- Admin application", "Edit User Successfully", "Passed", driver, "Y");
+				else
+					new HTMLReportHelper().HtmlReportBody("User Details Edit- Admin application", "Could not edit user details", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true && flag== true)
-				new HTMLReportHelper().HtmlReportBody("User Details Edit- Admin application", "Edit User Successfully", "Passed", driver, "Y");
-			else
-				new HTMLReportHelper().HtmlReportBody("User Details Edit- Admin application", "Could not edit user details", "Failed", driver, "Y");
 		}
 
 	}
-	
-	
+
+
 }
