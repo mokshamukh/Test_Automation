@@ -23,7 +23,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	public String eppActionPrompts = "EPP_ActionPrompts";
 	public String menuOPtion = "//div[@class='mainMenu']//h2[text()='%s']";
 	public String subMenuOption = "//a[@class='linkMenu'][text()='%s']";
-	
+
 	By actionPrompts = By.xpath("//div[@id='headerBar']//td[contains(text(),'Action Prompts')]");
 	By cancelPaymentTxtBox = By.xpath("//form[@name='paymentActionForm']//td[contains(text(),'Additional Comments:')]//..//*[@name='CancelPaymentReason']");
 	By cancelByBankBtn = By.xpath("//input[@name='CancelInitiator'][@value='BANK']");
@@ -43,6 +43,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	By repairReasonSelect = By.xpath("//select[@name='RepairPaymentReasonText']");//Amend Amount/Currency
 	By releaseReasonNote = By.xpath("//textarea[@name='Note']");
 	By backLink = By.xpath("//div[@class='titleBarBackButton']/a");
+
 	public void performActionForCancelPayment(String cancelInitiator) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -57,9 +58,18 @@ public class EPP_ActionPrompts extends CommonLibrary{
 				}
 				clickOnElement(eppActionPrompts, "Submit Button", submitButton);
 				waitElement(4000);
-				if (isElementPresent(transIdSaved)) {
+				if (isElementPresentZeroWait(transIdSaved)) {
 					actionOntransactionID = getElementText(eppActionPrompts, "Transaction ID", transIdSaved);
 					System.out.println(actionOntransactionID);
+				}
+				if(isElementPresentZeroWait(paymentTitle)){
+					clickOnElement(eppActionPrompts, "Back Link",backLink);
+					/*switchToWindowWithTitleContaining("Enterprise Payments Platform");
+					driver.switchTo().frame("mainmenu");
+					waitElement(1500);
+					getDynamicElementClick(eppActionPrompts, "Menu Selected", menuOPtion, "Payment Tracking");
+					getDynamicElementClick(eppActionPrompts, "SubMenu Selected", subMenuOption, "Work Summary");
+					waitElement(2500);*/
 				}
 				stepResult = true;
 			} catch (Exception e) {
@@ -326,7 +336,7 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			}
 		}
 	}
-	
+
 	public void VerifyAndPerformActionForRelease(String sReleaseReason) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -345,19 +355,21 @@ public class EPP_ActionPrompts extends CommonLibrary{
 							validateElementPresent(eppActionPrompts, "Transaction Status", transactionStatus);
 						}
 					}
-					
-					
-					switchToWindowWithTitleContaining("Enterprise Payments Platform");
+
+					if(isElementPresentZeroWait(paymentTitle)){
+						clickOnElement(eppActionPrompts, "Back Link",backLink);
+					/*switchToWindowWithTitleContaining("Enterprise Payments Platform");
 					driver.switchTo().frame("mainmenu");
 					waitElement(1500);
 					getDynamicElementClick(eppActionPrompts, "Menu Selected", menuOPtion, "Payment Tracking");
 					getDynamicElementClick(eppActionPrompts, "SubMenu Selected", subMenuOption, "Work Summary");
-					waitElement(2500);
-					
+					waitElement(2500);	
+					 */		
+					}
 					stepResult = true;
 				}
-				
-				
+
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

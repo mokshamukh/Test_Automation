@@ -1191,8 +1191,6 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectWorkSummaryPool("Regulatory Check");
 				eppTransactionListSelection.selectTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
-				
-				
 				eppPaymentDetails.selectPaymentActions("Cancel Payment");
 				eppActionPrompts.performActionForCancelPayment("CUST");
 				driver.close();
@@ -1205,14 +1203,10 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
-				eppPaymentDetails.approveCancelPayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"Cancelled");
+				eppPaymentDetails.approveCancelPayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"Regulatory Filter");
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
-
-				
-
-				
 			}
 			new HTMLReportHelper().HtmlReportFooter();
 
