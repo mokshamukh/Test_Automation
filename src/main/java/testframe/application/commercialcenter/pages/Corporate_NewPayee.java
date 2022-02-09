@@ -136,9 +136,8 @@ public class Corporate_NewPayee extends CommonLibrary{
                  isElementPresent(searchIcon);
                  clickOnElement("Corporate New Payee", "Search Icon", searchIcon);
                  isElementPresent(getDynamicElement("Corporate New Payee", searchData, payeeName));
+             	stepResult = true;
 			}
-			
-			stepResult = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

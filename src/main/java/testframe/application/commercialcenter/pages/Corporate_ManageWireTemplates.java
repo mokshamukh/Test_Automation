@@ -156,7 +156,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 				stepResult = true;
              }
 			} else {
-				createWireTemplateForPayee(payee, repetitiveButton, templateName, debitAccount, paymentCurrency,
+				createWireTemplateForSelectPayee(payee, repetitiveButton, templateName, debitAccount, paymentCurrency,
 						purposeOfPayment, amount);
 				stepResult = true;
 				}
@@ -176,7 +176,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 		}
 
 	}
-			public void createWireTemplateForPayee(String payee,String repetitiveButton,String templateName,
+			public void createWireTemplateForSelectPayee(String payee,String repetitiveButton,String templateName,
 					String debitAccount,String paymentCurrency,String purposeOfPayment,String amount) throws Exception {
 				boolean stepResult = false;
 				try {

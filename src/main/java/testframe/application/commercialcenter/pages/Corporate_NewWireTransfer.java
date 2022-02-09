@@ -33,10 +33,10 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By payeeField = By.xpath("//input[@id='selectPayeeSearch']");
 	By nextButton = By.xpath("//button[contains(text(),'Next')]");
 	By accountInfoHeader = By.xpath("//h3[text()='Account Information ']");
-	By debitAccountField = By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']");
-	By paymentCurrencyField = By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']");
+	By debitAccountField = By.xpath("//p-autocomplete[@inputid='debitAccount']//button//span[text()='ui-btn']");
+	By paymentCurrencyField = By.xpath("//p-autocomplete[@inputid='paymentCurrency']//button//span[text()='ui-btn']");
 	By purposeOfPaymentField = By.xpath("//input[@id='purposeOfPay']");
-	By amountFiled = By.xpath("//input[@id='amount']");
+	By amountField = By.xpath("//input[@id='amount']");
 	By requestTransferButton = By.xpath("//button[contains(@aria-label,'To proceed with the transfer')]");
 	By accountInfoDetails = By.xpath("//h3[contains(text(),'Account Information')]");
 	By reviewDetails = By.xpath("//div[text()='Debit Account']//..//span[@id='debitAccount'][text()]");
@@ -45,7 +45,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By pleaseReverifyTitle = By.xpath("//h4[contains(text(),'Please Reverify')]");
 	By confirmPassword = By.xpath("//input[@id='confirmPassword']");
 	By submitButton = By.xpath("//button[text()='Submit']");
-	By msg = By.xpath("//div[@class='alert-message-title']/strong");
+	By msg = By.xpath("//div[@class='alert-message-title']/b|//div[@class='alert-message-title']/strong");
 	By beneInformation = By.xpath("//h3[text()='Beneficiary Information ']");
 	By payeeName = By.xpath("//input[@id='payeeName']");
 	By beneIDTypeField = By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//..//div//span[contains(@class,'expand_more')]");
@@ -62,66 +62,69 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By templateField = By.xpath("//p-radiobutton[@inputid='selectTemplate']//div//span");
 	By templateDropdown = By.xpath("//p-dropdown//div//span[contains(@class,'expand_more')]");
 	By existingTemplateField = By.xpath("//p-dropdown[@inputid='templateData']");
-    By selectTemplateHeader = By.xpath("//h1[text()='Wire Transfer: Select Template']");
-    By paymentDateField = By.xpath("//input[@id='paymentDate']");
+	By selectTemplateHeader = By.xpath("//h1[text()='Wire Transfer: Select Template']");
+	By paymentDateField = By.xpath("//input[@id='paymentDate']");
 	By paymentDateTitle = By.xpath("//h4[contains(text(),'Amount & Currency')]");
 	By existingReviewAmount = By.xpath("//h4[@role='heading']//..//..//..//div[@id='amount']");
 	By editTransferHeader= By.xpath("//h1[@id='wireTransferLbl'][contains(text(),'Edit')]");
 	By wireDetailsHeader = By.xpath("//h3[text()='Wire Details ']");
 	By paymentActivityTitle = By.xpath("//h3[contains(text(),'Current Activity Summary')]|//button[contains(text(),'Payment Activity')]");
-    By currentActivityTransID = By.xpath("(//span[@class='d-block'])[1]");
-	
-    
+	By currentActivityTransID = By.xpath("(//span[@class='d-block'])[1]");
+	By payee = By.xpath("//label[text()='Payee']//..//div[contains(@class,'ui-state')]");
+	By payeeAmountField = By.xpath("//input[@id='wireAmountId']");
+
+
 	String list = "//li[@role='option']/span[contains(text(),'%s')]";
 	String transactionID;
 
 	public void createNewWireTransferUsingPayee(String payee,String debitAccount,String paymentCurrency,
 			String purposeOfPayment,String amount) throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(wireTransferHeader)) {
-				clickOnElement("Corporate New Wire Transfer", "Payee Field", searchPayeeField);
-				if (!payee.equals("")) {
-					enterText("Corporate New Wire Transfer", "Payee Field", payeeField, payee);
-					waitElement(1000);
-					clickOnElement("Corporate New Wire Transfer", "payee List", getDynamicElement("Corporate New Wire Transfer", list, payee));
-					//selectElementFromListbox("Corporate New Wire Transfer", "payee List", searchPayeeField, payeeList,payee);
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(wireTransferHeader)) {
+					clickOnElement("Corporate New Wire Transfer", "Payee Field", searchPayeeField);
+					if (!payee.equals("")) {
+						enterText("Corporate New Wire Transfer", "Payee Field", payeeField, payee);
+						waitElement(1000);
+						clickOnElement("Corporate New Wire Transfer", "payee List", getDynamicElement("Corporate New Wire Transfer", list, payee));
+						//selectElementFromListbox("Corporate New Wire Transfer", "payee List", searchPayeeField, payeeList,payee);
+					}
+					clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
+					waitForPresenceOfElement("Corporate New Wire Transfer","Account Information Header", accountInfoHeader);
+					if(!debitAccount.equals("")) {
+						clickOnELementUsingActions(debitAccountField);
+						//getDynamicElement("Corporate New Wire Transfer", list, debitAccount);
+						selectElementFromListbox("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, list,debitAccount);      
+					}
+					if(!paymentCurrency.equals("")) {
+						clickOnELementUsingActions(paymentCurrencyField);
+						selectElementFromListbox("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
+					}
+					if(!purposeOfPayment.equals("")) {
+						scrollToElement(purposeOfPaymentField);
+						enterText("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
+					}
+					if(!amount.equals("")) {
+						enterText("Corporate New Wire Transfer", "Amount Field", payeeAmountField, amount);
+					}
+					clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
+					stepResult = true;
 				}
-				clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
-				waitForPresenceOfElement("Corporate New Wire Transfer","Account Information Header", accountInfoHeader);
-				if(!debitAccount.equals("")) {
-					scrollToTopOfThePage();
-					driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
-					selectElementFromListbox("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, list,debitAccount);      
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - From acc");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
 				}
-				if(!paymentCurrency.equals("")) {
-					scrollToElement(paymentCurrencyField);
-					driver.findElement(By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']")).click();
-					selectElementFromListbox("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if(!purposeOfPayment.equals("")) {
-					scrollToElement(purposeOfPaymentField);
-					enterText("Corporate New Wire Transfer", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
-				}
-				if(!amount.equals("")) {
-					enterText("Corporate New Wire Transfer", "Amount Field", amountFiled, amount);
-				}
-				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
-				stepResult = true;
-			}
 
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - From acc");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "New Wire Transfer created Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -253,7 +256,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 					clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
 				}
 				if(!amount.equals("")) {
-					enterText("Corporate New Wire Transfer", "Amount Field", amountFiled, amount);
+					enterText("Corporate New Wire Transfer", "Amount Field", amountField, amount);
 				}
 				if(!beneBankIDType.equals("")) {
 					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
@@ -276,7 +279,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 				stepResult = true;
 			}
 
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -288,10 +291,11 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 			else{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer CC- Corporate application", "Could not create New Wire Transfer Successfully", "Failed", driver, "Y");
+
 			}
 		}
 	}
-	
+
 	public void createNewWireTransferUsingExistingTemplate(String existTemplate,String paymentDate) throws Exception{
 		boolean stepResult = false;
 		try {
@@ -299,10 +303,10 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 				clickOnElement("Corporate New Wire Transfer", "Template Field", templateField);
 				clickOnElement("Corporate New Wire Transfer", "Template Field",templateDropdown);
 				selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Id Type", existingTemplateField, list, existTemplate);
-				
+
 				clickOnElement("Corporate New Wire Transfer", "Next Button", nextButton);
 				waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer Header", selectTemplateHeader);
-				
+
 				if(!paymentDate.equals("")) {
 					enterNewWireTransferPaymentDate(paymentDate);
 				}
@@ -348,8 +352,8 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 			}
 		}
 	}
-	
-	
+
+
 	public void editNewWireTransferUsingFreeForm(String payee,String debitAccount,String beneIdType,
 			String beneID,String beneAddress1,String beneAddress2,String beneCountry,
 			String beneBankIDType,String paymentCurrency,String amount,String beneBankID,
@@ -357,7 +361,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(editTransferHeader)) {
-			
+
 				waitForPresenceOfElement("Corporate New Wire Transfer","Wire Details", wireDetailsHeader);
 				if(!debitAccount.equals("")) {
 					clearAndType("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, debitAccount);
@@ -390,7 +394,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 
 				}
 				if(!amount.equals("")) {
-					clearAndType("Corporate New Wire Transfer", "Amount Field", amountFiled, amount);
+					clearAndType("Corporate New Wire Transfer", "Amount Field", amountField, amount);
 				}
 				if(!beneBankIDType.equals("")) {
 					selectElementFromListbox("Corporate New Wire Transfer", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
@@ -413,7 +417,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 				stepResult = true;
 			}
 
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -428,9 +432,9 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	public String getTransactionIDFromPayment() throws Exception {
 		boolean stepResult = false;
 		try {
@@ -455,14 +459,14 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 		return transactionID;
 
 	}
-	
-	
+
+
 	public void editNewWireTransferUsingExistingTemplate(String paymentDate) throws Exception{
 		boolean stepResult = false;
 		try {
 			if (isElementPresent(editTransferHeader)) {
 				waitForPresenceOfElement("Corporate New Wire Transfer", "Wire Transfer details Header", wireDetailsHeader);
-				
+
 				if(!paymentDate.equals("")) {
 					enterNewWireTransferPaymentDate(paymentDate);
 				}

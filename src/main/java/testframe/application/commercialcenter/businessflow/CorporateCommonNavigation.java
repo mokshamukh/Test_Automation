@@ -3,12 +3,6 @@ package testframe.application.commercialcenter.businessflow;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import testframe.application.commercialcenter.pages.Corporate_NewPayee;
-import testframe.application.common.CommonLibrary;
-
 
 
 public class CorporateCommonNavigation extends CorporateTest {
@@ -89,7 +83,7 @@ public class CorporateCommonNavigation extends CorporateTest {
 	
 	public void createNewPayeeAndSearch(List<Map<String, String>> tc_Test_Data,int iTDRow) {
 	       try {
-	    	   corporate_NewPayee.createNewPayeeAndSearch(tc_Test_Data.get(iTDRow).get("PayeeName"),tc_Test_Data.get(iTDRow).get("PayeeID"),
+	    	   corporateNewPayee.createNewPayeeAndSearch(tc_Test_Data.get(iTDRow).get("PayeeName"),tc_Test_Data.get(iTDRow).get("PayeeID"),
 						tc_Test_Data.get(iTDRow).get("PayeeType"),tc_Test_Data.get(iTDRow).get("Address1"),
 						tc_Test_Data.get(iTDRow).get("Address2"),tc_Test_Data.get(iTDRow).get("AccountNumber"),
 						tc_Test_Data.get(iTDRow).get("BeneBankIDType"),tc_Test_Data.get(iTDRow).get("BeneBankCountry"),
