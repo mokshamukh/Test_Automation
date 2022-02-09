@@ -28,24 +28,27 @@ public class Corporate_LogOff extends CommonLibrary {
 	}
 
 	public void logoffApplication() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Corporate Page", "User button", user);
-			clickOnElement("Corporate Page", "Log Off button", logoff);
-			if (isElementPresent(logOffMessage))
-				stepResult = true;
-			//driver.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass -- logoff");
-				new HTMLReportHelper().HtmlReportBody("LogOff CC- Corporate application", "LogOff Successfully",
-						"Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("LogOff CC- Corporate application",
-						"Could not LogOff Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				clickOnElement("Corporate Page", "User button", user);
+				clickOnElement("Corporate Page", "Log Off button", logoff);
+				if (isElementPresent(logOffMessage))
+					stepResult = true;
+				//driver.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass -- logoff");
+					new HTMLReportHelper().HtmlReportBody("LogOff CC- Corporate application", "LogOff Successfully",
+							"Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("LogOff CC- Corporate application",
+							"Could not LogOff Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 

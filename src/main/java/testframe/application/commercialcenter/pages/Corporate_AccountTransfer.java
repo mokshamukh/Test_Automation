@@ -61,7 +61,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	// By.xpath("//p-radiobutton[@formcontrolname='everyDay']/div/div/input[@id='opt1']");
 	// By daily_SpeciDay =
 	// By.xpath("//p-radiobutton[@formcontrolname='everyDay']/div/div/input[@id='opt2']");
-	
+
 	String freq = "//ul[@class='nav nav-pills flex-column']/li/a[@id='%s']";
 	String daily_opt = "//label[contains(text(),'%s')]/preceding-sibling::div/div/span";
 	String daily_subOpt = "//label[text()='%s']/..//p-checkbox/div//input";
@@ -71,8 +71,8 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	String durationOpt = "//p-radiobutton[@name='duration']/label[contains(text(),'%s')]/preceding-sibling::div/div[@role='radio']";
 	String daysOfWeek = "//label[text()='%s']/../div[@class='ui-radiobutton ui-widget']";
 	String fromAccList = "//li[@role='option']/span[contains(text(),'%s')]";
-	
-	
+
+
 	String memo;
 	String amt;
 
@@ -83,28 +83,31 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	}
 
 	public void enterFromAccount(String fromAcc, String fromAccAmt) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(accountTransferTitle)) {
-				waitElement(2000);
-				enterText("Corporate Account Transfer", "From Account", fromAccountField, fromAcc);
-				clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc));
-				if (!fromAccAmt.equals("")) {
-					Thread.sleep(2000);
-					enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt, fromAccAmt);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accountTransferTitle)) {
+					waitElement(2000);
+					enterText("Corporate Account Transfer", "From Account", fromAccountField, fromAcc);
+					clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc));
+					if (!fromAccAmt.equals("")) {
+						Thread.sleep(2000);
+						enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt, fromAccAmt);
+					}
+					stepResult = true;
 				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - From acc");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter From acc field Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter From acc field Successfully", "Failed", driver, "Y");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - From acc");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter From acc field Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter From acc field Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -112,60 +115,63 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	public void addAndEnterFromAccDetails(String addFromAccountVal1, String fromAcMemo, String fromAcc1,
 			String fromAccAmt1, String fromAccMemo1, String addFromAccountVal2, String fromAcc2, String fromAccAmt2,
 			String fromAccMemo2, String addFromAccountVal3, String fromAcc3, String fromAccAmt3, String fromAccMemo3) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (addFromAccountVal1.equals("Yes")) {
-				clickOnElement("Corporate Account Transfer", "From Account1", addAccount_frmAcc);
-				if (!fromAcMemo.equals("")) {
-					enterText("Corporate Account Transfer", "From Account Memo", fromAccMemo, fromAcMemo);
-				}
-				if (!fromAcc1.equals("")) {
-					enterText("Corporate Account Transfer", "From Account1", fromAccountField, fromAcc1);
-					clickOnElement("Corporate Account Transfer", "From Account1", getDynamicElement("From Account1", fromAccList, fromAcc1));
-				}
-				if (!fromAccAmt1.equals("")) {
-					enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt1, fromAccAmt1);
-				}
-				if (!fromAccMemo1.equals("")) {
-					enterText("Corporate Account Transfer", "From Account Memo", fromAccountMemo, fromAccMemo1);
-				}
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (addFromAccountVal1.equals("Yes")) {
+					clickOnElement("Corporate Account Transfer", "From Account1", addAccount_frmAcc);
+					if (!fromAcMemo.equals("")) {
+						enterText("Corporate Account Transfer", "From Account Memo", fromAccMemo, fromAcMemo);
+					}
+					if (!fromAcc1.equals("")) {
+						enterText("Corporate Account Transfer", "From Account1", fromAccountField, fromAcc1);
+						clickOnElement("Corporate Account Transfer", "From Account1", getDynamicElement("From Account1", fromAccList, fromAcc1));
+					}
+					if (!fromAccAmt1.equals("")) {
+						enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt1, fromAccAmt1);
+					}
+					if (!fromAccMemo1.equals("")) {
+						enterText("Corporate Account Transfer", "From Account Memo", fromAccountMemo, fromAccMemo1);
+					}
 
-			}
-			if (addFromAccountVal2.equals("Yes")) {
-				clickOnElement("Corporate Account Transfer", "From Account2", addAccount_frmAcc);
-				if (!fromAcc2.equals("")) {
-					enterText("Corporate Account Transfer", "From Account2", fromAccountField, fromAcc2);
 				}
-				if (!fromAccAmt2.equals("")) {
-					enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt2, fromAccAmt2);
+				if (addFromAccountVal2.equals("Yes")) {
+					clickOnElement("Corporate Account Transfer", "From Account2", addAccount_frmAcc);
+					if (!fromAcc2.equals("")) {
+						enterText("Corporate Account Transfer", "From Account2", fromAccountField, fromAcc2);
+					}
+					if (!fromAccAmt2.equals("")) {
+						enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt2, fromAccAmt2);
+					}
+					if (!fromAccMemo2.equals("")) {
+						enterText("Corporate Account Transfer", "From Account Memo", fromAccountMemo, fromAccMemo2);
+					}
 				}
-				if (!fromAccMemo2.equals("")) {
-					enterText("Corporate Account Transfer", "From Account Memo", fromAccountMemo, fromAccMemo2);
+				if (addFromAccountVal3.equals("Yes")) {
+					clickOnElement("Corporate Account Transfer", "From Account3", addAccount_frmAcc);
+					if (!fromAcc3.equals("")) {
+						enterText("Corporate Account Transfer", "From Account3", fromAccountField, fromAcc3);
+					}
+					if (!fromAccAmt3.equals("")) {
+						enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt3, fromAccAmt3);
+					}
+					if (!fromAccMemo3.equals("")) {
+						enterText("Corporate Account Transfer", "From Account Memo", fromAccountMemo, fromAccMemo3);
+					}
 				}
-			}
-			if (addFromAccountVal3.equals("Yes")) {
-				clickOnElement("Corporate Account Transfer", "From Account3", addAccount_frmAcc);
-				if (!fromAcc3.equals("")) {
-					enterText("Corporate Account Transfer", "From Account3", fromAccountField, fromAcc3);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter multiple from acc field Successfully", "Passed", driver, "Y");
 				}
-				if (!fromAccAmt3.equals("")) {
-					enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt3, fromAccAmt3);
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter multiple from acc field Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (!fromAccMemo3.equals("")) {
-					enterText("Corporate Account Transfer", "From Account Memo", fromAccountMemo, fromAccMemo3);
-				}
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter multiple from acc field Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter multiple from acc field Successfully", "Failed", driver, "Y");
 			}
 		}
 
@@ -173,39 +179,43 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 
 	public void enterToAccount(String toAcc, String toAccAmt, String toAccMemo,
 			String toAccPayInstr) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(accountTransferTitle)) {
-				if(!toAcc.equals("")){
-				enterText("Corporate Account Transfer", "To Account", toAccountField, toAcc);
-				clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc));
-				//selectElementFromListbox("Corporate Account Transfer", "To Account", toAccountField, fromAccList, toAcc);
-				waitElement(2000);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accountTransferTitle)) {
+					if(!toAcc.equals("")){
+						enterText("Corporate Account Transfer", "To Account", toAccountField, toAcc);
+						clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc));
+						//selectElementFromListbox("Corporate Account Transfer", "To Account", toAccountField, fromAccList, toAcc);
+						waitElement(2000);
+					}
+					if (!toAccAmt.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Amount",
+								returnByElement("To Account Amount", getToAccAmt("Amt_0")), toAccAmt);
+					}
+					if (!toAccMemo.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Memo",
+								returnByElement("To Account Memo", getToAccMemo("Memo_0")) ,toAccMemo);
+					}
+					if (!toAccPayInstr.equals("")) {
+						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction", toAccPayInstruction);
+						getDynamicElementClick("Corporate Account Transfer", "To Account Payment Instruction", paymentInstrField, toAccPayInstr);
+					}
+					stepResult = true;
 				}
-				if (!toAccAmt.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt("Amt_0")), toAccAmt);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- to acc");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter to acc field Successfully", "Passed", driver, "Y");
+
 				}
-				if (!toAccMemo.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo("Memo_0")) ,toAccMemo);
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter to acc field Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (!toAccPayInstr.equals("")) {
-					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction", toAccPayInstruction);
-					getDynamicElementClick("Corporate Account Transfer", "To Account Payment Instruction", paymentInstrField, toAccPayInstr);
-				}
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass -- to acc");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter to acc field Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter to acc field Successfully", "Failed", driver, "Y");
 			}
 		}
 	}
@@ -214,82 +224,85 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			String toAccMemo1, String toAccPayInstr1, String addToAccountVal2, String toAcc2,
 			String toAccAmt2, String toAccMemo2, String toAccPayInstr2,
 			String addToAccountVal3, String toAcc3, String toAccAmt3,  String toAccMemo3, String toAccPayInstr3) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (addToAccountVal1.equals("Yes")) {
-				clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
-				if (!toAcc1.equals("")) {
-					enterText("Corporate Account Transfer", "To Account1", toAccField1, toAcc1);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (addToAccountVal1.equals("Yes")) {
+					clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
+					if (!toAcc1.equals("")) {
+						enterText("Corporate Account Transfer", "To Account1", toAccField1, toAcc1);
+					}
+					if (!toAccAmt1.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Amount",
+								returnByElement("To Account Amount", getToAccAmt("Amt_1")), toAccAmt1);
+					}
+					if (!toAccMemo1.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Memo",
+								returnByElement("To Account Memo", getToAccMemo("Memo_1")), toAccMemo1);
+					}
+					if (!toAccPayInstr1.equals("")) {
+						Thread.sleep(2000);
+						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction1",
+								toAccPayInstruction1);
+						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction1",
+								getDynamicElement("To Account Payment Instruction", paymentInstrField, toAccPayInstr1));
+					}
 				}
-				if (!toAccAmt1.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt("Amt_1")), toAccAmt1);
+				if (addToAccountVal2.equals("Yes")) {
+					clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
+					if (!toAcc2.equals("")) {
+						enterText("Corporate Account Transfer", "From Account2", toAccField2, toAcc2);
+					}
+					if (!toAccAmt2.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Amount",
+								returnByElement("To Account Amount", getToAccAmt("Amt_2")), toAccAmt2);
+					}
+					if (!toAccMemo2.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Memo",
+								returnByElement("To Account Memo", getToAccMemo("Memo_2")), toAccMemo2);
+					}
+					if (!toAccPayInstr2.equals("")) {
+						Thread.sleep(2000);
+						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction2",
+								toAccPayInstruction2);
+						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction2",
+								getDynamicElement("To Account Payment Instruction", paymentInstrField, toAccPayInstr2));
+					}
 				}
-				if (!toAccMemo1.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo("Memo_1")), toAccMemo1);
+				if (addToAccountVal3.equals("Yes")) {
+					clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
+					if (!toAcc3.equals("")) {
+						enterText("Corporate Account Transfer", "To Account3", toAccField3, toAcc3);
+					}
+					if (!toAccAmt3.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Amount",
+								returnByElement("To Account Amount", getToAccAmt("Amt_3")), toAccAmt3);
+					}
+					if (!toAccMemo3.equals("")) {
+						enterText("Corporate Account Transfer", "To Account Memo",
+								returnByElement("To Account Memo", getToAccMemo("Memo_3")), toAccMemo3);
+					}
+					if (!toAccPayInstr3.equals("")) {
+						Thread.sleep(2000);
+						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction3",
+								toAccPayInstruction3);
+						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction3",
+								getDynamicElement("To Account Payment Instruction", paymentInstrField, toAccPayInstr3));
+					}
 				}
-				if (!toAccPayInstr1.equals("")) {
-					Thread.sleep(2000);
-					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction1",
-							toAccPayInstruction1);
-					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction1",
-							getDynamicElement("To Account Payment Instruction", paymentInstrField, toAccPayInstr1));
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - multiple to acc");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter multiple to acc field Successfully", "Passed", driver, "Y");
 				}
-			}
-			if (addToAccountVal2.equals("Yes")) {
-				clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
-				if (!toAcc2.equals("")) {
-					enterText("Corporate Account Transfer", "From Account2", toAccField2, toAcc2);
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter multiple to acc field Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
 				}
-				if (!toAccAmt2.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt("Amt_2")), toAccAmt2);
-				}
-				if (!toAccMemo2.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo("Memo_2")), toAccMemo2);
-				}
-				if (!toAccPayInstr2.equals("")) {
-					Thread.sleep(2000);
-					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction2",
-							toAccPayInstruction2);
-					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction2",
-							getDynamicElement("To Account Payment Instruction", paymentInstrField, toAccPayInstr2));
-				}
-			}
-			if (addToAccountVal3.equals("Yes")) {
-				clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
-				if (!toAcc3.equals("")) {
-					enterText("Corporate Account Transfer", "To Account3", toAccField3, toAcc3);
-				}
-				if (!toAccAmt3.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Amount",
-							returnByElement("To Account Amount", getToAccAmt("Amt_3")), toAccAmt3);
-				}
-				if (!toAccMemo3.equals("")) {
-					enterText("Corporate Account Transfer", "To Account Memo",
-							returnByElement("To Account Memo", getToAccMemo("Memo_3")), toAccMemo3);
-				}
-				if (!toAccPayInstr3.equals("")) {
-					Thread.sleep(2000);
-					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction3",
-							toAccPayInstruction3);
-					clickOnElement("Corporate Account Transfer", "To Account Payment Instruction3",
-							getDynamicElement("To Account Payment Instruction", paymentInstrField, toAccPayInstr3));
-				}
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - multiple to acc");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter multiple to acc field Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter multiple to acc field Successfully", "Failed", driver, "Y");
 			}
 		}
 
@@ -339,48 +352,54 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	}
 
 	public void enterTransferDate(String transferDates) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (!transferDates.equals("")) {
-				for (int i = 1; i <= 10; i++) {
-					driver.findElement(transferDate).sendKeys(Keys.BACK_SPACE);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!transferDates.equals("")) {
+					for (int i = 1; i <= 10; i++) {
+						driver.findElement(transferDate).sendKeys(Keys.BACK_SPACE);
+					}
+					enterText("Corporate Account Transfer", "Transfer Date", transferDate, transferDates);
+					clickOnElement("Corporate Account Transfer", "Transfer Date Title", transferDateTitle);
 				}
-				enterText("Corporate Account Transfer", "Transfer Date", transferDate, transferDates);
-				clickOnElement("Corporate Account Transfer", "Transfer Date Title", transferDateTitle);
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass -- transfer date");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter transfer date field Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter transfer date field Successfully", "Failed", driver, "Y");
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- transfer date");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter transfer date field Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter transfer date field Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void clickReqTransfer() throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(accountTransferTitle)) {
-				clickOnELementUsingJS(driver.findElement(By.xpath("//button[@aria-label='Request Transfer']")));
-				stepResult = true;
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass - click transfer req");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Click transfer Request Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Click transfer Request Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accountTransferTitle)) {
+					clickOnELementUsingJS(driver.findElement(By.xpath("//button[@aria-label='Request Transfer']")));
+					stepResult = true;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass - click transfer req");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Click transfer Request Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Click transfer Request Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -389,153 +408,168 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	 Freq : Daily,Weekly,Bi-Weekly,Semi-Monthly,Monthly,Anually 
 	 Daily opt :Business, Specific Daily 
 	 Sub Opt : Select All, Monday,Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-	
-	
+
+
 	 */
 	public void selectRecurringOption(String recurringOpt, String frequency, String dailyopt, String dailySubOpt,String day) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (!recurringOpt.equals("")) {
-				clickOnElement("Corporate Account Transfer", "Recurring Option Accordion", recurringOptAcc);
-				Thread.sleep(8000);
-				getDynamicElementClick("Corporate Account Transfer", "Frequency Option", freq, frequency.toUpperCase());
-				if (frequency.equalsIgnoreCase("Daily")) {
-					getDynamicElementClick("Corporate Account Transfer", "Daily Option", daily_opt, dailyopt);
-					if (dailyopt.contains("Specific")) {
-						if (!dailySubOpt.equals("Select All")) {
-							// dailySubOptArr = Monday|Saturday|Sunday
-							String[] dailySubOptArr = dailySubOpt.trim().split("\\|");
-							for (int i = 0; i < dailySubOptArr.length; i++) {
-								Thread.sleep(4000);
-								getDynamicElementClick("Corporate Account Transfer", "Daily Option", daily_subOptions,
-										dailySubOptArr[i]);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!recurringOpt.equals("")) {
+					clickOnElement("Corporate Account Transfer", "Recurring Option Accordion", recurringOptAcc);
+					Thread.sleep(8000);
+					getDynamicElementClick("Corporate Account Transfer", "Frequency Option", freq, frequency.toUpperCase());
+					if (frequency.equalsIgnoreCase("Daily")) {
+						getDynamicElementClick("Corporate Account Transfer", "Daily Option", daily_opt, dailyopt);
+						if (dailyopt.contains("Specific")) {
+							if (!dailySubOpt.equals("Select All")) {
+								// dailySubOptArr = Monday|Saturday|Sunday
+								String[] dailySubOptArr = dailySubOpt.trim().split("\\|");
+								for (int i = 0; i < dailySubOptArr.length; i++) {
+									Thread.sleep(4000);
+									getDynamicElementClick("Corporate Account Transfer", "Daily Option", daily_subOptions,
+											dailySubOptArr[i]);
+								}
+							} else {
+								getDynamicElementClick("Corporate Account Transfer", "Daily Option", daily_subOpt,dailySubOpt);
 							}
-						} else {
-							getDynamicElementClick("Corporate Account Transfer", "Daily Option", daily_subOpt,dailySubOpt);
 						}
 					}
+					if(frequency.equalsIgnoreCase("Weekly")){
+						getDynamicElementClick("Corporate Account Transfer", "Weekly Option", daysOfWeek, day);
+					}
 				}
-				if(frequency.equalsIgnoreCase("Weekly")){
-					getDynamicElementClick("Corporate Account Transfer", "Weekly Option", daysOfWeek, day);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Select recurring option Successfully", "Passed", driver, "Y");
 				}
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Select recurring option Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Select recurring option Successfully", "Failed", driver, "Y");
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Select recurring option Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	// Duration :Indefinitely,Until End Date,Fixed Number
 	public void selectDuration(String duration, String transDate, String fixedNumTrans) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (!duration.equals("")) {
-				if (duration.contains("Until End Date")) {
-					getDynamicElementClick("Corporate Account Transfer", "Duration Option", durationOpt, duration);
-					if (!transDate.equals("")) {
-						for (int i = 1; i <= 10; i++) {
-							driver.findElement(transferDate).sendKeys(Keys.BACK_SPACE);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!duration.equals("")) {
+					if (duration.contains("Until End Date")) {
+						getDynamicElementClick("Corporate Account Transfer", "Duration Option", durationOpt, duration);
+						if (!transDate.equals("")) {
+							for (int i = 1; i <= 10; i++) {
+								driver.findElement(transferDate).sendKeys(Keys.BACK_SPACE);
+							}
+							Thread.sleep(10000);
+							enterText("Corporate Account Transfer", "Transaction Repeats Until End Date ",
+									transactionUntilEndDate, transDate);
 						}
-						Thread.sleep(10000);
-						enterText("Corporate Account Transfer", "Transaction Repeats Until End Date ",
-								transactionUntilEndDate, transDate);
+					}
+					if (duration.contains("Fixed Number")) {
+						getDynamicElementClick("Corporate Account Transfer", "Duration Option", durationOpt, duration);
+						clearAndType("Corporate Account Transfer", "Fixed Number of Transaction", fixedDateNum,
+								fixedNumTrans);
 					}
 				}
-				if (duration.contains("Fixed Number")) {
-					getDynamicElementClick("Corporate Account Transfer", "Duration Option", durationOpt, duration);
-					clearAndType("Corporate Account Transfer", "Fixed Number of Transaction", fixedDateNum,
-							fixedNumTrans);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Select duration option Successfully", "Passed", driver, "Y");
 				}
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Select duration option Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Select duration option Successfully", "Failed", driver, "Y");
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Select duration option Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void enterSeriesDetails(String seriesDate) throws Exception{
-		boolean stepResult = false;
-		try {
-			Thread.sleep(2000);
-			if (!seriesDate.equals("")) {
-				for (int i = 1; i <= 10; i++) {
-					driver.findElement(seriesDetailsDate).sendKeys(Keys.BACK_SPACE);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				if (!seriesDate.equals("")) {
+					for (int i = 1; i <= 10; i++) {
+						driver.findElement(seriesDetailsDate).sendKeys(Keys.BACK_SPACE);
+					}
+					Thread.sleep(10000);
+					enterText("Corporate Account Transfer", "Series Details Date", seriesDetailsDate, seriesDate);
 				}
-				Thread.sleep(10000);
-				enterText("Corporate Account Transfer", "Series Details Date", seriesDetailsDate, seriesDate);
-			}
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter series date Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter series date Successfully", "Failed", driver, "Y");
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter series date Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter series date Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
-	
+
 	public void clickRecurringOptButton() throws Exception{
-		boolean stepResult = false;
-		try {
-			Thread.sleep(2000);
-			clickOnElement("Corporate Account Transfer", "Save Button", saveButton);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true){
-				System.out.println("Pass - Acc Transfer -- transfer date");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Click save button Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Click save button Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				clickOnElement("Corporate Account Transfer", "Save Button", saveButton);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true){
+					System.out.println("Pass - Acc Transfer -- transfer date");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Click save button Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Click save button Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 	public void enterSeriesName(String name) throws Exception{
-		boolean stepResult = false;
-		try {
-			Thread.sleep(2000);
-			enterText("Corporate Account Transfer", "Series Name", seriesName, name);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true){
-				System.out.println("Pass - Acc Transfer -- Series Name");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter series name Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter series name Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				enterText("Corporate Account Transfer", "Series Name", seriesName, name);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true){
+					System.out.println("Pass - Acc Transfer -- Series Name");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter series name Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter series name Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 }

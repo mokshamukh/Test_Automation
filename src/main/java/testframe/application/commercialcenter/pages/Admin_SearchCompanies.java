@@ -38,23 +38,26 @@ public class Admin_SearchCompanies extends CommonLibrary{
 	}
 
 	public void clickCreateCompany() throws Exception{
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(searchCompanyTitle)){
-				clickOnElement("Admin Search Companies Page", "Create Company Button", createCompanyButton);
-				stepResult = true;
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(searchCompanyTitle)){
+					clickOnElement("Admin Search Companies Page", "Create Company Button", createCompanyButton);
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Create a Company button click", "Click on Create Company button Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Create a Company button click", "Could not click on Create Company button", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Create a Company button click", "Click on Create Company button Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Create a Company button click", "Could not click on Create Company button", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
@@ -64,64 +67,70 @@ public class Admin_SearchCompanies extends CommonLibrary{
 
 
 	public void searchCompany(String sCompanyId,String accountNum, String sCompanyName,String marketSeg,String labelVal,String showLabels) throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(searchCompanyTitle)){
-				if (!sCompanyId.equals("")) {
-					enterText("Admin Search Companies Page", "Company ID", companyID, sCompanyId);
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(searchCompanyTitle)){
+					if (!sCompanyId.equals("")) {
+						enterText("Admin Search Companies Page", "Company ID", companyID, sCompanyId);
+					}
+					if (!sCompanyName.equals("")) {
+						enterText("Admin Search Companies Page", "Company Name", companyName, sCompanyName);
+					}
+					if (!accountNum.equals("")) {
+						enterText("Admin Search Companies Page", "Account Number", accountNumber, accountNum);
+					}
+					if(!marketSeg.equals("")){
+						clearText("Admin Search Companies Page", "Market Segment", marketSegment);
+						enterText("Admin Search Companies Page", "Market Segment", marketSegment, marketSeg);
+					}
+					if(!labelVal.equals("")){
+						enterText("Admin Search Companies Page", "Label", label, labelVal);
+					}
+					if(showLabels.equals("Checked")){
+						clickOnElement("Admin Search Companies Page", "Click Show Lables", showLabel);
+					}
+					clickOnElement("Admin Search Companies Page", "Search Companies Button", searchCompanyButton);
+					stepResult = true;
 				}
-				if (!sCompanyName.equals("")) {
-					enterText("Admin Search Companies Page", "Company Name", companyName, sCompanyName);
-				}
-				if (!accountNum.equals("")) {
-					enterText("Admin Search Companies Page", "Account Number", accountNumber, accountNum);
-				}
-				if(!marketSeg.equals("")){
-					clearText("Admin Search Companies Page", "Market Segment", marketSegment);
-					enterText("Admin Search Companies Page", "Market Segment", marketSegment, marketSeg);
-				}
-				if(!labelVal.equals("")){
-					enterText("Admin Search Companies Page", "Label", label, labelVal);
-				}
-				if(showLabels.equals("Checked")){
-					clickOnElement("Admin Search Companies Page", "Click Show Lables", showLabel);
-				}
-				clickOnElement("Admin Search Companies Page", "Search Companies Button", searchCompanyButton);
-				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search Companies", "Search Company Successfully", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search Companies", "Could not Search Company", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Search Companies", "Search Company Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Search Companies", "Could not Search Company", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
 	public void noResults() throws Exception{
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(noResultCompany)){
-				stepResult = true;
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(noResultCompany)){
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "No result found", "Passed", driver, "Y");
-			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "Could not No result found", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "No result found", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "Could not No result found", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}		}
 	}
 

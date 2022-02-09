@@ -27,27 +27,30 @@ public class Admin_LogOff extends CommonLibrary {
 	}
 
 	public void logoffApplication() throws Exception{
-		boolean stepResult = false;
-		try {
-			clickOnElement("Admin Page", "Log Off button", logoff);
-			if (isElementPresent(logOffMessage))
-				stepResult = true;
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("LogOff CC- Admin application", "LogOff Successfully", "Passed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				clickOnElement("Admin Page", "Log Off button", logoff);
+				if (isElementPresent(logOffMessage))
+					stepResult = true;
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("LogOff CC- Admin application", "Could not LogOff Successfully", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("LogOff CC- Admin application", "LogOff Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("LogOff CC- Admin application", "Could not LogOff Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 
 	}
 
-	
+
 
 }

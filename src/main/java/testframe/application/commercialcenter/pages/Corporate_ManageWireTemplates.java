@@ -76,6 +76,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			String beneID,String beneAddress1,String beneAddress2,String beneCountry,
 			String beneBankIDType,String paymentCurrency,String amount,String beneBankID,
 			String purposeOfPayment,String beneBankAddress1,String beneBankAddress2)throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
 		boolean stepResult = false;
 		try {
 			waitElement(2000);
@@ -172,12 +173,15 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
 						"Could not Created New Wire Template Successfully", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
+			}
 			}
 		}
 
 	}
 			public void createWireTemplateForPayee(String payee,String repetitiveButton,String templateName,
 					String debitAccount,String paymentCurrency,String purposeOfPayment,String amount) throws Exception {
+				if (System.getProperty("runStep")=="Y"){	
 				boolean stepResult = false;
 				try {
 					waitElement(2000);
@@ -233,6 +237,8 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 						System.out.println("fail");
 						new HTMLReportHelper().HtmlReportBody("Wire Template- Corporate application",
 								"Could not Created New Wire Template Successfully", "Failed", driver, "Y");
+						System.setProperty("runStep","N");
+					}
 					}
 				}
 
@@ -240,6 +246,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 
 			
 	public void searchWireTemplate(String templateName,String amount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
 				boolean stepResult = false;
 				try {
 					waitElement(2000);
@@ -268,12 +275,15 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Search Wire Template- Corporate application",
 							"Could not Search Wire Template Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 				}
 			}
 			
 	}		
 	
 	public void reviewManageWireTempaltes(String debitAccount, String amount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
 		boolean stepResult = false;
 		boolean flag = false;
 		try {
@@ -301,6 +311,8 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Corporate New Wire Transfer- Corporate application",
 						"Could not review Wire Transfer details Successfully", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
+			}
 			}
 		}
 
@@ -311,6 +323,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			String update_BeneID,String update_BeneAddress1,String update_BeneAddress2,String update_BeneCountry,
 			String update_BeneBankIDType,String update_PaymentCurrency,String update_Amount,String update_BeneBankID,
 			String update_PurposeOfPayment,String update_BeneBankAddress1,String update_BeneBankAddress2) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
 		boolean stepResult = false;
 		try {
 			waitElement(2000);
@@ -388,6 +401,8 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			System.out.println("fail");
 			new HTMLReportHelper().HtmlReportBody("Edit Wire Template- Corporate application",
 					"Could not Edit Wire Template Successfully", "Failed", driver, "Y");
+			System.setProperty("runStep","N");
+		}
 		}
 	}
 	
