@@ -22,7 +22,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By addressLink = By.xpath("(//a[contains(@id,'SearchType=Address')])[1]");
 	public By saveButton = By.xpath("//a[contains(@onclick,'Save')]");
 	public By saveButton2 = By.xpath("//img[contains(@title,'Save')]");
-	public By nextButton = By.xpath("//button[@v/alue='Next']");
+	public By nextButton = By.xpath("//button[@value='Next']");
 	public By finishButton = By.xpath("//button[@value='Finish']");
 	public By accountSearch = By.xpath("//td[contains(text(),'Account Number:')]/following-sibling::td/input");
 	public By closeScreenImg = By.xpath("//img[contains(@title,'Close')]");
@@ -50,47 +50,40 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	// Deposit')]");
 	String depositInquiryHeader = "//td[contains(text(),'%s')]";
 	public By productInquiryPage = By.xpath("//td[contains(text(),'Product:')]/following-sibling::td[1]");
+	public By portfolioInquiryPage = By.xpath("//td[contains(text(),'Portfolio:')]/following-sibling::td[1]");
 	String accountNameInquiryPage = "//td//u[contains(text(),'%s')]";
 	String relationshipInquiryPage = "//td[contains(text(),'%s')]";
-
 	String depositChangeHeader = "//a[contains(text(),'%s')]";
-	public By warningTextbox = By
-			.xpath("//td[contains(text(),'Warning:')]/following-sibling::td/input[contains(@name,'Warning')]");
+	public By warningTextbox = By.xpath("//td[contains(text(),'Warning:')]/following-sibling::td/input[contains(@name,'Warning')]");
 	public By statusCodeInput = By.xpath("(//input[contains(@name,'/StatusCode')])[1]");
 	public By statusCodeBtn = By.xpath("(//input[contains(@name,'/StatusCode')])[3]");
 	String statusCodeDropDown = "//select[contains(@name,'StatusCode')]/option[contains(text(),'%s')]";
-	public By statusCodeList = By
-			.xpath("//td[contains(text(),'Status Code:')]/following-sibling::td/select[contains(@name,'/StatusCode')]");
+	public By statusCodeList = By.xpath("//td[contains(text(),'Status Code:')]/following-sibling::td/select[contains(@name,'/StatusCode')]");
 	public By transactionRestrictionCodeInput = By.xpath("(//input[contains(@name,'TranRestrictionCode')])[1]");
 	public By transactionRestrictionCodeButton = By.xpath("(//input[contains(@name,'TranRestrictionCode')])[3]");
 	String transactionRestrictionCodeList = "//select[contains(@name,'TranRestrictionCode')]/option[contains(text(),'%s')]";
-	public By statementCycleList = By.xpath(
-			"//td[contains(text(),'Statement Cycle:')]/following-sibling::td/select[contains(@name,'/StatementCycle')]");
-	public By alternateCycleOptionList = By.xpath(
-			"//td[contains(text(),'Alternate Cycle Option:')]/following-sibling::td/select[contains(@name,'/AlternateCycleOption')]");
+	public By statementCycleList = By.xpath("//td[contains(text(),'Statement Cycle:')]/following-sibling::td/select[contains(@name,'/StatementCycle')]");
+	public By alternateCycleOptionList = By.xpath("//td[contains(text(),'Alternate Cycle Option:')]/following-sibling::td/select[contains(@name,'/AlternateCycleOption')]");
 	public By alternateCycleTextInput = By.xpath("(//input[contains(@id,'AlternateCycle')])[1]");
 	public By alternateCycleInput = By.xpath("(//input[contains(@id,'AlternateCycle')])[2]");
 	public By alternateCycleBtn = By.xpath("(//input[contains(@id,'AlternateCycle')])[3]");
 	String alternateCycleList = "(//select[contains(@id,'AlternateCycle')])[2]/option[contains(text(),'%s')]";
-	public By notificationOptionList = By.xpath(
-			"//td[contains(text(),'Notification Option:')]/following-sibling::td/select[contains(@name,'NotificationCode')]");
-	public By suspendedInterestList = By.xpath(
-			"//td[contains(text(),'Interest Cycle:')]/following-sibling::td/select[contains(@name,'SuspendInterestCycle')]");
+	public By notificationOptionList = By.xpath("//td[contains(text(),'Notification Option:')]/following-sibling::td/select[contains(@name,'NotificationCode')]");
+	public By sStatementRequestCodeList = By.xpath("//td[contains(text(),'Statement Request Code:')]/following-sibling::td/select[contains(@name,'StatementRequestCode')]");
+	public By suspendedInterestList = By.xpath("//td[contains(text(),'Interest Cycle:')]/following-sibling::td/select[contains(@name,'SuspendInterestCycle')]");
 	public By suspendedDepositRateIndexInput = By.xpath("(//input[contains(@id,'SuspendDepRateCode')])[2]");
 	public By suspendedDepositRateIndexTextInput = By.xpath("(//input[contains(@id,'SuspendDepRateCode')])[1]");
 	public By suspendedDepositRateIndexBtn = By.xpath("(//input[contains(@id,'SuspendDepRateCode')])[3]");
 	String suspendedDepositRateIndexList = "//select[contains(@id,'SuspendDepRateCode')]/option[contains(text(),'%s')]";
 	public By suspendedStatementCycleList = By.xpath("//select[contains(@id,'SuspendStatementCycle')]");
-
 	public By codesTab = By.xpath("//li//a[text()='Codes']");
+	public By balanceTab = By.xpath("//li//a[text()='Balances']");
 	public By statusCodeInquiryPage = By.xpath("//td[text()='Status Code:']/following-sibling::td[1]");
 	public By statementCycleInquiryPage = By.xpath("//td[text()='Statement Cycle:']/following-sibling::td[1]");
 	public By expandWarningInquiryPage = By.xpath("//img[@id='WarningsArrow']");
 	public By warningInquiryPage = By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
-	public By transRestrictionCodeInquiryPage = By
-			.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
-	public By suspendFieldCheckBox = By
-			.xpath("//tr[@class='dataRow']//td//u[contains(text(),'Suspend Fields will be Cleared')]/../..//input");
+	public By transRestrictionCodeInquiryPage = By.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
+	public By suspendFieldCheckBox = By.xpath("//tr[@class='dataRow']//td//u[contains(text(),'Suspend Fields will be Cleared')]/../..//input");
 	public By fileMenu = By.xpath("//a[text()='File']");
 	public By holdMenu = By.xpath("//a[contains(text(),'Hold')]");
 	public By holdTitle = By.xpath("//a[contains(text(),'Hold - New')]");
@@ -133,6 +126,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 
 	public By newStopPayAddImg = By.xpath("//img[@alt='New']");
 	public By stopPayMenu = By.xpath("//a[contains(text(),'Stop Pay')]");
+	public By analysisItemsMenu = By.xpath("//a[contains(text(),'Analysis Items')]");
 	public By stopPayLabel = By.xpath("//a[text()='Stop Pay - New']");
 	public By stopPayTypeInput = By.xpath("(//input[contains(@id,'ItemType')])[2]");
 	public By stopPayTypeSelect = By.xpath("(//input[contains(@id,'ItemType')])[3]");
@@ -167,11 +161,9 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	By warning1 = By.xpath("//td/u[contains(text(),'Note Date is in the Future')]");
 	By warningCheckBox1 = By.xpath("//td/u[contains(text(),'Note Date is in the Future')]/../..//input");
 	By warning2 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]");
-	By warningCheckBox2 = By
-			.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]/../..//input");
+	By warningCheckBox2 = By.xpath("//td/u[contains(text(),'One Payment in Schedule with Payment Frequency')]/../..//input");
 	By warning3 = By.xpath("//td/u[contains(text(),'Branch Region Does Not Match Portfolio Branch Region')]");
-	By warningCheckBox3 = By
-			.xpath("//td/u[contains(text(),'Branch Region Does Not Match Portfolio Branch Region')]/../..//input");
+	By warningCheckBox3 = By.xpath("//td/u[contains(text(),'Branch Region Does Not Match Portfolio Branch Region')]/../..//input");
 	By warning4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]");
 	By warningCheckBox4 = By.xpath("//td/u[contains(text(),'Verify Non-Accrual Late Charge Option')]/../..//input");
 	//By saveBtn = By.xpath("//*[@title='Save']");
@@ -184,11 +176,42 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	By maturityIssueDate = By.xpath("//input[contains(@id,'OrigIssueDate')]");
 	By maturityContractDateList = By.xpath("//select[contains(@id,'ContractCode')]");
 	By maturityRateDateList = By.xpath("//select[contains(@id,'MaturityRateCode')]");
-	
-	String verifyMaturityData = "//table[@name='Maturity']//td[contains(text(),'%s')]";
-	
+	public By dateLastRolloverInput = By.xpath("//input[contains(@id,'IraDateLastRollover')]");
+	public By iRAPlanInput = By.xpath("(//input[contains(@name,'IraTypeCode')])[1]");
+	public By iRAPlanButton = By.xpath("(//input[contains(@name,'IraTypeCode')])[3]");
+	String iRAPlanList = "//select[contains(@name,'IraTypeCode')]/option[contains(text(),'%s')]";
+	public By iRAStatusCodeList = By.xpath("//select[contains(@id,'IraStatusCode')]");
+	public By iRADefaultContributionCodeList = By.xpath("//select[contains(@id,'IraDefContributionCode')]");
+	public By iRADefaultDistributionCodeList = By.xpath("//select[contains(@id,'IraDefDistributionCode')]");
+	public By iRAPlanInquiryPage = By.xpath("//td[text()='IRA Plan:']/following-sibling::td[1]");
+	public By iRAStatusCodeInquiryPage = By.xpath("//td[text()='IRA Status Code:']/following-sibling::td[1]");
+	public By iRADefaultContributionCodeInquiryPage = By.xpath("//td[text()='IRA Default Contribution Code:']/following-sibling::td[1]");
+	public By iRADefaultDistributionCodeInquiryPage = By.xpath("//td[text()='IRA Default Distribution Code:']/following-sibling::td[1]");
+	String verifyMaturityData = "//table[@name='Maturity']//td[contains(text(),'%s')]";	
 	String removeNameIcon = "//u[text()='%s']/../../td/img[contains(@title,'Delete')]";
-
+	public By changeProductImg = By.xpath("//td[contains(text(),'Product:')]/../td/img");
+	public By selectProductTitle = By.xpath("//a[text()='Step 1 - Select Product']");
+	public By reviewDefaultsTitle = By.xpath("//a[text()='Step 2 - Review Defaults']");
+	public By classCheckbox = By.xpath("//input[contains(@id,'ClassCode')]");
+	public By checkAllLink = By.xpath("//td/u[text()='Check All']");	
+	String changeProductField = "//td/u[text()='%s']";
+	public By changePortfolioImg = By.xpath("//td[contains(text(),'Portfolio:')]/../td/img");
+	public By changePortfolioTitle = By.xpath("//td[text()='Change Portfolio']");
+	public By portfolioNoInput = By.xpath("//td[text()='Portfolio Number:']/../td/input");
+	public By addChargeTitle = By.xpath("//a[text()='Add Charge']");
+	public By selectChargeList = By.xpath("//select[@id='SelectChargeAnalysis']");
+	public By recurringfrequencyList = By.xpath("//select[contains(@id,'RecurringFrequency')]");
+	public By itemTypeList = By.xpath("//select[contains(@id,'ItemType')]");
+	public By creditBackOverrideList = By.xpath("//select[contains(@id,'CreditBackOverride')]");
+	public By perItemAmountInput = By.xpath("//input[contains(@id,'PerItemAmount')]");
+	public By refreshOptionList = By.xpath("//select[contains(@id,'RefreshOption')]");
+	public By transDateInput = By.xpath("//input[contains(@id,'TranDate')]");
+	public By transQuantityInput = By.xpath("//input[contains(@id,'Quantity')]");
+	public By transTotalAmountInput = By.xpath("//input[contains(@id,'TotalAmount')]");
+	public By serviceChargeCycleList = By.xpath("//select[contains(@id,'ServiceChargeCycle')]");
+	public By analysisHeaderBar = By.xpath("(//td/a[contains(text(),'Analysis')])[1]");
+	String selectChargeInquiryPage = "//td[text()='Description']/../following-sibling::tr/td[text()='%s']";
+	
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -535,7 +558,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 
 	public void changeAccountCodeDetails(String sAccountNumber, String sAccountWarning, String sAccountStatusCode,
 			String sAccntsTransRestrictionCode, String statementCycle, String sAlternateCycleOption,
-			String sAlternateCycle, String sNotificationOption, String sSuspendedStatementCycle,
+			String sAlternateCycle, String sNotificationOption,String sStatementRequestCode, String sSuspendedStatementCycle,
 			String sSuspendedInterestList, String sSuspendedDepositRateIndex) throws Exception {
 		if (System.getProperty("runStep") == "Y") {
 			boolean stepResult = false;
@@ -548,19 +571,14 @@ public class Premier_DepositAccounts extends CommonLibrary {
 					}
 					if (!sAccountStatusCode.equals("")) {
 						if (isElementPresentZeroWait(statusCodeList))
-							selectElementByVisibleText("Change Account Page", "Status Code Field", statusCodeList,
-								sAccountStatusCode);
+							selectElementByVisibleText("Change Account Page", "Status Code Field", statusCodeList,sAccountStatusCode);
 						else
 							if (isElementPresentZeroWait(statusCodeInput))
-								clickOnElement("Change Account Page", "Status Code Input",
-										statusCodeInput);
+								clickOnElement("Change Account Page", "Status Code Input",statusCodeInput);
 						Thread.sleep(1000);
-						clickOnElement("Change Account Page", "Status Code Button",
-								statusCodeBtn);
+						clickOnElement("Change Account Page", "Status Code Button",statusCodeBtn);
 						Thread.sleep(1000);
-						clickOnElement("Change Account Page", "Status Code list",
-								getDynamicElement("Status Code list", statusCodeDropDown,
-										sAccountStatusCode));
+						clickOnElement("Change Account Page", "Status Code list",getDynamicElement("Status Code list", statusCodeDropDown,sAccountStatusCode));
 					}
 					if (!sAccntsTransRestrictionCode.equals("")) {
 						clickOnElement("Change Account Page", "Trans Restriction Code Input",
@@ -599,7 +617,12 @@ public class Premier_DepositAccounts extends CommonLibrary {
 						selectElementByVisibleText("Change Account Page", "Notification Option Field",
 								notificationOptionList, sNotificationOption);
 					}
-
+					
+					if (!sStatementRequestCode.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Statement Request Code Field",
+								sStatementRequestCodeList, sStatementRequestCode);
+					}
+					
 					if (!sSuspendedStatementCycle.equals("")) {
 						selectElementByVisibleText("Change Account Page", "Suspended Statement Cycle Field",
 								suspendedStatementCycleList, sSuspendedStatementCycle);
@@ -1700,6 +1723,354 @@ public class Premier_DepositAccounts extends CommonLibrary {
 			}
 		}
 	}
+	
+	public void changeAccountIRADetails(String sAccountNumber, String sDateLastRollover, String sIRAPlan,
+			String sIRAStatusCode, String sIRADefaultContributionCode, String sIRADefaultDistributionCode) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
 
+					if (!sDateLastRollover.equals("")) {
+						enterText("Change Account Page", "Date Last Rollover field", dateLastRolloverInput, sDateLastRollover);
+					}
+					if (!sIRAPlan.equals("")) {
+						clickOnElement("Change Account Page", "IRA Plan Input",iRAPlanInput);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "IRA Plan Button",iRAPlanButton);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "IRA Plan list",getDynamicElement("IRA Plan list", iRAPlanList,sIRAPlan));
+					}
+					if (!sIRAStatusCode.equals("")) {
+						selectElementByVisibleText("Change Account Page", "IRA Status Code Field", iRAStatusCodeList,sIRAStatusCode);
+					}
+					if (!sIRADefaultContributionCode.equals("")) {
+						selectElementByVisibleText("Change Account Page", "IRA Default Contribution Code Field", iRADefaultContributionCodeList, sIRADefaultContributionCode);
+					}
+					if (!sIRADefaultDistributionCode.equals("")) {
+						selectElementByVisibleText("Change Account Page", "IRA Default Distribution Code Field", iRADefaultDistributionCodeList, sIRADefaultDistributionCode);
+					}
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details",
+							"Account Details changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details",
+							"Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountDetailsIRAafterChange(String sAccountNumber, String sIRAPlan,
+			String sIRAStatusCode, String sIRADefaultContributionCode, String sIRADefaultDistributionCode) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			clickOnElement("Account Inquiry Page", "Codes Tab Field", codesTab);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field", expandWarningInquiryPage);			
+				if (!sIRAPlan.equals("")) {
+					if (sIRAPlan.contains("[")){
+						String[] sIRAPlan_split = sIRAPlan.split("\\[");
+						sIRAPlan=sIRAPlan_split[0].trim();
+					}
+					validateTextContains("Account Inquiry", "IRA Plan field", iRAPlanInquiryPage,sIRAPlan);
+				}
+				if (!sIRAStatusCode.equals("")) {
+					validateTextContains("Account Inquiry", "IRA Status Code field", iRAStatusCodeInquiryPage,sIRAStatusCode);
+				}
+				if (!sIRADefaultContributionCode.equals("")) {
+					validateTextContains("Account Inquiry", "IRA Default Contribution Code field", iRADefaultContributionCodeInquiryPage, sIRADefaultContributionCode);
+				}
+				if (!sIRADefaultDistributionCode.equals("")) {
+					validateTextContains("Account Inquiry", "IRA Default Distribution Code field", iRADefaultDistributionCodeInquiryPage, sIRADefaultDistributionCode);
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;
 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation",
+						"Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation",
+						"Could not Validated Account Details on Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void changeAccountProduct(String sAccountNumber, String sChangeProduct) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+
+					if (!sChangeProduct.equals("")) {
+						if (sChangeProduct.contains("[")){
+							String[] sIRAPlan_split = sChangeProduct.split("\\[");
+							sChangeProduct=sIRAPlan_split[0].trim();
+						}
+						clickOnElement("Change Account Page", "Change Product Image Field", changeProductImg);
+						waitElement(3000);
+						if (isElementPresent(selectProductTitle)) {
+							clickOnElement("Change Account Page", "Product Description Field", getDynamicElement("Product field", changeProductField, sChangeProduct));
+							waitElement(3000);
+						}
+						if (isElementPresent(reviewDefaultsTitle)) {
+							//clickOnElement("Change Account Page", "Class CheckBox Field", classCheckbox);
+							clickOnElement("Change Account Page", "Check All Checkbox Link Field", checkAllLink);							
+							clickOnElement("Change Account Page", "Finish Button Field", finishButton);
+							waitElement(3000);
+						}
+					}				
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details","Account Details changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details","Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountProductAfterChange(String sAccountNumber, String sChangeProduct) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			//clickOnElement("Account Inquiry Page", "Codes Tab Field", codesTab);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field", expandWarningInquiryPage);
+				if (!sChangeProduct.equals(""))
+					if (sChangeProduct.contains("[")){
+						String[] sIRAPlan_split = sChangeProduct.split("\\[");
+						sChangeProduct=sIRAPlan_split[0].trim();
+					}
+					validateTextContains("Account Inquiry", "Product field", productInquiryPage,sChangeProduct);
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Could not Validated Account Details on Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void changeAccountPortfolio(String sAccountNumber, String sChangePortfolio) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					if (!sChangePortfolio.equals("")) {
+						clickOnElement("Change Account Page", "Change Portfolio Image Field", changePortfolioImg);
+						waitElement(3000);
+						if (isElementPresent(changePortfolioTitle)) {
+							enterText("Change Account Page", "Enter Portfolio field", portfolioNoInput, sChangePortfolio);
+							clickOnElement("Change Account Page", "Submit Button Field", submitSearch);
+							waitElement(3000);
+						}
+					}
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details","Account Details changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details","Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountPortfolioAfterChange(String sAccountNumber, String sChangePortfolio) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			//clickOnElement("Account Inquiry Page", "Codes Tab Field", codesTab);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field", expandWarningInquiryPage);
+				if (!sChangePortfolio.equals(""))
+					validateTextContains("Account Inquiry", "Product field", portfolioInquiryPage,sChangePortfolio);
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Could not Validated Account Details on Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void changeAccountAnalysisItem(String sAccountNumber, String sSelectCharge, String sRecurringFrequency,
+			String sItemType, String sCreditBackOverride, String sPerItemAmount, String sRefreshOption,
+			String sTransDate, String sTransQuantity, String sTransAmount, String sServiceChargeCycle)throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					mouseHoverCickOnElement("Change Account Page", "Analysis Items Menu Field", fileMenu, analysisItemsMenu);
+					
+					switchToWindowWithTitleContaining("Add Charge");
+					driver.switchTo().frame("bottom");
+					if (isElementPresent(addChargeTitle)) {
+						selectElementByVisibleText("Change Account Page", "Select Charge Field",selectChargeList,sSelectCharge);
+						clickOnElement("Change Account Page", "Submit Button Field", submitSearch);
+					}
+					switchToWindowWithTitleContaining("Institution");
+					driver.switchTo().frame("Main");
+					
+					if (isElementPresent(analysisHeaderBar)) {
+						if (!sRecurringFrequency.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Recurring Frequency field", recurringfrequencyList, sRecurringFrequency);
+						}
+						if (!sItemType.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Item Type field", itemTypeList,sItemType);
+						}
+						if (!sCreditBackOverride.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Credit Back Override field", creditBackOverrideList, sCreditBackOverride);
+						}
+
+						if (!sPerItemAmount.equals("")) {
+							clearAndType("Change Account Page", "Per Item Amount field", perItemAmountInput, sPerItemAmount);
+						}
+
+						if (!sRefreshOption.equals("")) {
+							selectElementByVisibleText("Change Account Page", "Refresh Option field", refreshOptionList,sRefreshOption);
+						}
+
+						if (!sTransDate.equals("")) {
+							clearAndType("Change Account Page", "Trans Date field", transDateInput, sTransDate);
+						}
+
+						if (!sTransQuantity.equals("")) {
+							clearAndType("Change Account Page", "Trans Quantity field", transQuantityInput,sTransQuantity);
+						}
+
+						if (!sTransAmount.equals("")) {
+							clearAndType("Change Account Page", "Trans Amount field", transTotalAmountInput,sTransAmount);
+						}
+						if (!sServiceChargeCycle.equals("")) {
+							clickOnElement("Account Inquiry Page", "Balances Tab Field", balanceTab);
+							waitElement(5000);
+							selectElementByVisibleText("Change Account Page", "Service Charge Cycle field", serviceChargeCycleList,sServiceChargeCycle);
+						}
+						stepResult = true;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Analysis Items Details",
+							"Account Details - Analysis Items changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Analysis Items Details",
+							"Could not change account Details- Analysis Items", "Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountAnalysisItemAfterChange(String sAccountNumber, String sSelectCharge) throws Exception {
+		boolean stepResult = false;
+		try {
+			mouseHoverCickOnElement("Change Account Page", "Overdrafts Menu Field", activityMenu, analysisItemsMenu);
+			waitElement(1000);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				if (isElementPresent(getDynamicElement("Analysis Item - Charge field", selectChargeInquiryPage, sSelectCharge))) {
+					stepResult = true;
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Analysis Items Validation",
+						"Validated Account Details - Analysis Items on Account Inquiry page Successfully", "Passed", driver,"Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Analysis Items  Validation",
+						"Could not Validated Account Details - Analysis Items on Account Inquiry page", "Failed", driver,"Y");
+			}
+		}
+	}
+	
+	public void validateAccountAnalysisItemServiceChargeAfterChange(String sAccountNumber, String sSelectCharge,String sServiceChargeCycle) throws Exception {
+		boolean stepResult = false;
+		try {
+			mouseHoverCickOnElement("Change Account Page", "Overdrafts Menu Field", activityMenu, analysisItemsMenu);
+			waitElement(1000);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				if (isElementPresent(getDynamicElement("Analysis Item - Charge field", selectChargeInquiryPage, sSelectCharge))) {
+					stepResult = true;
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Analysis Items Validation",
+						"Validated Account Details - Analysis Items on Account Inquiry page Successfully", "Passed", driver,"Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Analysis Items  Validation",
+						"Could not Validated Account Details - Analysis Items on Account Inquiry page", "Failed", driver,"Y");
+			}
+		}
+	}
 }
