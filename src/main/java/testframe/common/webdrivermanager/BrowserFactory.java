@@ -10,6 +10,7 @@ import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 
@@ -18,14 +19,15 @@ import testframe.common.utilities.PropertyReader;
 public class BrowserFactory {
 	
 	private WebDriver driver;
-	private static final String CHROME_DRIVE_PROPERTY = "webdriver.chrome.driver";
+	private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
+	private static final String EDGE_DRIVER_PROPERTY ="webdriver.edge.driver";
 	
 	public WebDriver getDriver(String browserToUse) throws IOException{
 		
 		switch(browserToUse){
 		
 		case "chrome":
-			System.setProperty(CHROME_DRIVE_PROPERTY, "lib/chromedriver.exe");
+			System.setProperty(CHROME_DRIVER_PROPERTY, "lib/chromedriver.exe");
 			ChromeOptions option = new ChromeOptions();
 			String downloadFolderPath = System.getProperty("user.dir")+File.separator+"testreport"+File.separator+"downloads";
 			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
@@ -47,6 +49,11 @@ public class BrowserFactory {
 		
 
 			driver = new ChromeDriver(option);
+			break;
+			
+		case "edge":
+			System.setProperty(EDGE_DRIVER_PROPERTY, "lib/chromedriver.exe");
+			driver = new EdgeDriver();
 			break;
 		}
 		

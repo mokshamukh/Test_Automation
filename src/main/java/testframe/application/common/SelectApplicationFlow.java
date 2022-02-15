@@ -18,7 +18,7 @@ public class SelectApplicationFlow extends ApplicationTestBase  {
 		
 	public void executeApplicationFlow(String Browser,String ApplicationName, String ModuleName,
 			String Sub_Module, String URL,String TestCase, String TestDescription,
-			String ApplicationTDFolder, String Iteration) throws Exception{
+			String ApplicationTDFolder, String Iteration, String Manual_TSID) throws Exception{
 		
 		driver =new BrowserFactory().getDriver(Browser);
 		strHTMLFileName = ApplicationName;
@@ -27,7 +27,7 @@ public class SelectApplicationFlow extends ApplicationTestBase  {
 		if(!Sub_Module.equals(""))
 			strHTMLFileName = strHTMLFileName +"_"+Sub_Module;
 		
-		System.setProperty("testcaseid.app.module.submod.testdesc", TestCase+"||"+ApplicationName+"||"+ModuleName+"||"+Sub_Module+"||"+TestDescription);
+		System.setProperty("testcaseid.app.module.submod.testdesc", TestCase+"||"+ApplicationName+"||"+ModuleName+"||"+Sub_Module+"||"+TestDescription+"||"+Manual_TSID);
 		switch(ApplicationName.toUpperCase()){
 
 		case "DDF":

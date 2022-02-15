@@ -43,10 +43,10 @@ public class EPP_Login extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Launch EPP - EPP application", "Launch Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Launch EPP application", "Launch Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Launch EPP - EPP application","Could not Launch Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Launch EPP application","Could not Launch Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -70,10 +70,10 @@ public class EPP_Login extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Login EPP - EPP application", "Login Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Login EPP application", "Login Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Login EPP - EPP application","Could not Login Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Login EPP application","Could not Login Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

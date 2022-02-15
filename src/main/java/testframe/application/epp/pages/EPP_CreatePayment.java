@@ -123,10 +123,10 @@ public class EPP_CreatePayment extends CommonLibrary {
 				if (stepResult == true) {
 					System.out.println("Pass");
 					//new HTMLReportHelper().HtmlReportBody("TransactionID - EPP application", "Created Successfully","Passed", driver, "Y");
-					new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on Create Payment", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create manual Payment", "Successfully created manual payment for TransactionID no '" + transactionID +"'", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application","Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create manual Payment","Could not Create Manual Payment", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -207,12 +207,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment", "Created payment Successfully",
 							"Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-							"Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment",
+							"Could not Create the payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -261,12 +261,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment", "Created payment successfully",
 							"Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-							"Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment",
+							"Could not Create payment successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -310,12 +310,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment", "Created Payment Successfully",
 							"Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-							"Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment",
+							"Could not Create Payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

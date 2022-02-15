@@ -58,10 +58,10 @@ public class EPP_TransactionIDList extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Transaction from List", "Transaction ID Selected Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully", "Failed", driver, "N");
+					new HTMLReportHelper().HtmlReportBody("Select Transaction from List","Could not Select Transaction ID", "Failed", driver, "N");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -100,10 +100,10 @@ public class EPP_TransactionIDList extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully from Pending Outgoing Recall Request ","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select and Verify Recall Transaction", "Selected  and Verified Recall Transaction Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully from Pending Outgoing Recall Request", "Failed", driver, "N");
+					new HTMLReportHelper().HtmlReportBody("Select and Verify Recall Transaction","Could not Select and Verify Recall Transaction", "Failed", driver, "N");
 					System.setProperty("runStep","N");
 				}
 			}

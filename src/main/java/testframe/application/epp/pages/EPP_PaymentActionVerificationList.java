@@ -66,10 +66,10 @@ public class EPP_PaymentActionVerificationList extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application", "TransactionID Selected Successfully from Payment Action Verification","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Transaction from list", "Transaction ID Selected Successfully from Payment Action Verification","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("TransactionID List EPP - EPP application","Could not Select TransactionID Successfully from Payment Action Verification", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Transaction from list","Could not Select Transaction ID Successfully from Payment Action Verification", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

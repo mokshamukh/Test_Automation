@@ -78,10 +78,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action for Cancelled executed Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Payment", "The action for Cancelled payment executed Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not execute action for Cancel Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Payment","Could not execute action for Cancel payment", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -133,10 +133,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action for Release Transaction executed Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction", "The action for Release Transaction executed Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not execute the action for Release Transaction", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction","Could not execute the action for Release Transaction", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}		
 			}
@@ -168,10 +168,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action for execute Transaction Completed Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction", "The execute action on transaction completed successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not execute action for Transaction", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction","Could not execute action on Transaction", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -204,10 +204,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action Performed  Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction", "Action Performed Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not Perform Action Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction","Could not Perform Action Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -234,10 +234,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action on Internal Filter Performed  Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction", "The action on Internal Filter Performed  Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not Perform Action on Internal Filter Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on transaction","Could not Perform Action on Internal Filter Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -262,10 +262,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action on Business Filter Performed  Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Submit Payment", "The payment in Business Filter pool submitted Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not Perform Action on Business Filter Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Submit Payment","Could not submit payment in Business Filter pool", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -294,10 +294,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action for Cancelled Internal Filter executed Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Payment", "The action for Cancel payment in Internal Filter executed Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not execute action for Cancel Internal Filter Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Payment","Could not execute action for Cancel payment in Internal Filter", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -327,10 +327,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action for Recall Payment executed Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Transaction", "The action for Recall Payment executed Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not execute action for Recall Payment Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Transaction","Could not execute action for Recall Payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -376,10 +376,10 @@ public class EPP_ActionPrompts extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application", "The action for Release Transaction executed Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Payment", "The action for Release Transaction executed Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody(" EPP - EPP application","Could not execute the action for Release Transaction", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Action on Payment","Could not execute the action for Release Transaction", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}		
 			}

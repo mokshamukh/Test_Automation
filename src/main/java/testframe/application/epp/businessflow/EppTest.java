@@ -1142,7 +1142,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
-				eppPaymentDetails.approvePayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"approval","Approve Release From OFC","Regulatory Filter","Completed");
+				eppPaymentDetails.performAction(tc_Test_Data.get(iTDRow).get("TransactionID"),"approval","Approve Release From OFC","Regulatory Filter","Completed");
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
