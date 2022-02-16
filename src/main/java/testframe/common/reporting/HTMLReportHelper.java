@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +35,7 @@ import com.itextpdf.html2pdf.HtmlConverter;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import testframe.application.common.CommonLibrary;
 import testframe.common.utilities.DateTimeHelper;
 import testframe.common.utilities.ExcelReader;
 
@@ -48,6 +50,8 @@ public class HTMLReportHelper {
 	static Date sTime,eTime;
 	String tTimeTaken,strStartTime,strEndTime;
 	String strScreenshot_split[],sScreenshot_Path="";
+	
+	WebDriver driver;
 
 	ExcelReader er = new ExcelReader();
 	
@@ -143,11 +147,24 @@ public class HTMLReportHelper {
 			color ="#FF0000";
 		}
 		if (sTakeScreenshot.equalsIgnoreCase("Y") || sTakeScreenshot.equalsIgnoreCase("YES")){
-			//sBase64StringScreenshot = getScreenshot(driver);
-			strScreenshot = getCompleteScreenShot(driver);
+			
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			Object frameName=  executor.executeScript("return self.name");
+			if(!frameName.toString().equals("")){
+				driver.switchTo().defaultContent();
+				strScreenshot = getCompleteScreenShot(driver);
+				driver.switchTo().frame(frameName.toString());
+			}	
+			else{	
+				strScreenshot = getCompleteScreenShot(driver);
+			}
 			strScreenshot_split = strScreenshot.split("\\|\\|");
 			sBase64StringScreenshot = strScreenshot_split[0];
 			sScreenshot_Path = strScreenshot_split[1];
+			/*switch_driver.switchTo().window(parentWindow);
+			driver.switchTo().window(parentWindow);*/
+			
+			
 		}
 		if (VPNbr >1){
 			strHTMLFileData = strHTMLFileData + "\r\n"+"<table align=center width=650px heigth=400px cellspacing=2 cellpading=2 Border=0 bordercolor=#000000>"+ "\r\n" +"\t" ;

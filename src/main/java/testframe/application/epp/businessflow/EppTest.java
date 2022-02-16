@@ -1206,7 +1206,7 @@ public class EppTest extends ApplicationBase {
 				eppPaymentDetails.approveCancelPayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"Regulatory Filter");
 				driver.close();
 				eppLogOff.logOffEPPApplication();
-				break;
+			break;
 			}
 			new HTMLReportHelper().HtmlReportFooter();
 

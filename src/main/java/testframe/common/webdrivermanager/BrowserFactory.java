@@ -52,7 +52,7 @@ public class BrowserFactory {
 			break;
 			
 		case "edge":
-			System.setProperty(EDGE_DRIVER_PROPERTY, "lib/chromedriver.exe");
+			System.setProperty(EDGE_DRIVER_PROPERTY, "lib/msedgedriver.exe");
 			driver = new EdgeDriver();
 			break;
 		}
