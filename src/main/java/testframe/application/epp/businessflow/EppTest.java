@@ -39,7 +39,7 @@ public class EppTest extends ApplicationBase {
 
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver, String sApplicationName, String sURL, String sTestCase,
-			String sTestDescription, String sApplicationTDFolder, String sIteration, String sHTMLFileName)
+			String sTestDescription, String sApplicationTDFolder, String sIteration, String sHTMLFileName, String sManual_TSID)
 					throws Exception {
 
 		EPP_Login eppLoginPage = new EPP_Login(driver);
@@ -127,7 +127,7 @@ public class EppTest extends ApplicationBase {
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
-			new HTMLReportHelper().HTMLReportHeader("EPP", sTestCase, sTestDescription);
+			new HTMLReportHelper().HTMLReportHeader("EPP", sTestCase, sTestDescription,sManual_TSID);
 
 
 			switch (sTestCase.toUpperCase()) {
@@ -1027,12 +1027,12 @@ public class EppTest extends ApplicationBase {
 				eppSecurityQuestions.enterSecurityQuestions(tc_Test_Data.get(iTDRow).get("SecurityQuestion1"),
 						tc_Test_Data.get(iTDRow).get("SecurityAnswer1"));
 				eppProductSelection.selectProductEPP();
-				if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
+				//if(!(tc_Test_Data.get(iTDRow).get("AccountNumber").equals("NA"))) {
 					eppMenuOPtions.selectManualPaymentOptions();
 					eppMenuOPtions.selectPaymentCreationSubMenu();
 					eppTemplates.verifyPaymentCreationPool();
 					eppTemplates.selectOutgoingHVBankPaymentFRBOption();
-					eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
+					/*eppCreatePayment.createOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("AccountNumber"),
 							tc_Test_Data.get(iTDRow).get("OrderingSystemCode"),tc_Test_Data.get(iTDRow).get("OrderingBankName"),
 							tc_Test_Data.get(iTDRow).get("DebitAccount"),
 							tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("ValueDate"),
@@ -1079,7 +1079,7 @@ public class EppTest extends ApplicationBase {
 				//eppTemplates.selectTemplate("Work Summary","Payment Repair Verification");
 				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ApprovalDate"),tc_Test_Data.get(iTDRow).get("TransactionID"));
-				driver.close();
+*/				driver.close();
 				eppLogOff.logOffEPPApplication();	
 				
 				
@@ -1206,7 +1206,7 @@ public class EppTest extends ApplicationBase {
 				eppPaymentDetails.approveCancelPayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"Regulatory Filter");
 				driver.close();
 				eppLogOff.logOffEPPApplication();
-				break;
+			break;
 			}
 			new HTMLReportHelper().HtmlReportFooter();
 

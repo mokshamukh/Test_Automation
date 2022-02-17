@@ -818,8 +818,10 @@ public class EPP_PaymentDetails extends CommonLibrary {
 			try {
 				waitElement(3000);
 				clickOnElement(eppPaymentDetails, "Payment Saved with Transaction ID", transIdSaved);
-				if(isElementPresent(paymentTitle)) {
-					waitElement(29000);
+				if(isElementPresentZeroWait(paymentTitle)) {
+					if (isElementNotPresentZeroWait(getDynamicElement("Transaction Status",verifyTransactionStatus,sStatus))){
+						waitElement(29000);
+					}	
 					validateElementPresent(eppPaymentDetails, "Transaction Status", getDynamicElement("Transaction Status",verifyTransactionStatus,sStatus));
 					String transactionIDStatus = getElementText(eppPaymentDetails, "Transaction ID", transactionId);
 					approveTransID = eppCreatePayment.getTransactionID();

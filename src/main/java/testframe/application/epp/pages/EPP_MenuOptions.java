@@ -103,7 +103,7 @@ public class EPP_MenuOptions extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Click on Manual Payments menu", "Successfully clicked on Manual Payments menu", "Passed", driver, "N");
+					new HTMLReportHelper().HtmlReportBody("Click on Manual Payments menu", "Successfully clicked on Manual Payments menu", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Click on Manual Payments menu", "Could not clicked on Manual Payments menu", "Failed", driver, "N");

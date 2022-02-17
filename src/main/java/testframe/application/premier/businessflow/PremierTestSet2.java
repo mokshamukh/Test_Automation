@@ -68,7 +68,7 @@ public class PremierTestSet2 extends ApplicationBase {
 	
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver,String sApplicationName, String sURL,String sTestCase, String sTestDescription,
-			String sApplicationTDFolder, String sIteration, String sHTMLFileName) throws Exception{
+			String sApplicationTDFolder, String sIteration, String sHTMLFileName,String sManual_TSID) throws Exception{
 
 
 		premierLoginPage = new Premier_Login(driver);
@@ -145,7 +145,7 @@ public class PremierTestSet2 extends ApplicationBase {
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
-			new HTMLReportHelper().HTMLReportHeader("Premier", sTestCase, sTestDescription);
+			new HTMLReportHelper().HTMLReportHeader("Premier", sTestCase, sTestDescription,sManual_TSID);
 
 			String sAccountNumber,sLoanAccountNumber,sCollateralRecordNumber,sAgreementNumber;
 			switch(sTestCase.toUpperCase()){

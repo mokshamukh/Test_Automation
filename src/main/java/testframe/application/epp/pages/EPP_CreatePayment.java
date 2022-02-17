@@ -111,7 +111,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 				waitElement(5000);
 				clickOnElement(eppCreatePayment, "Submit Payment Button", submitPayment);
 				waitElement(4000);
-				if (isElementPresent(paymentSaved)) {
+				if (isElementPresentZeroWait(paymentSaved)) {
 					savedtransactionID = getElementText(PaymentTemplate, "Transaction ID", paymentSaved);
 				}
 				getTransactionID();

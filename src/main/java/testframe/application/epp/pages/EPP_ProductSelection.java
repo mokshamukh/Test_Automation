@@ -56,10 +56,10 @@ public class EPP_ProductSelection extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select EPP product", "Product Selected Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select EPP platform", "EPP Platform Selected Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Select EPP product","Could not Select Product Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select EPP platform","Could not EPP Select Product Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

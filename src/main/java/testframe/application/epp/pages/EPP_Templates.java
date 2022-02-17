@@ -20,7 +20,7 @@ public class EPP_Templates extends CommonLibrary{
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 50), this);
 	}
 
-	public String eppPoolOptions = "EPP_Templates";
+	public String eppPoolOptions = "EPP Templates";
 	public String poolTemplateOptions = "//a[text()='%s']";
 	public String blockName = "//div[@id='headerBar']//table//td[contains(text(),'%s')]";
 
@@ -42,6 +42,7 @@ public class EPP_Templates extends CommonLibrary{
 	By pendingOutgoingRecallReq = By.xpath("//a[text()='Pending Outgoing Recall Requests Pool']");
 	By authorizationExceptions = By.xpath("//a[text()='Authorization Exceptions']");
 	String workSummaryPool = "//a[text()='%s']";
+	By recordDropdown = By.xpath("//select[@name='start2']");
 
 	public void selectTemplate(String blockHeaderName,String poolValue) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
@@ -399,8 +400,8 @@ public class EPP_Templates extends CommonLibrary{
 			}
 		}
 	}
-	
-	
+
+
 	public void selectAuthorizationExceptions() throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
@@ -449,4 +450,14 @@ public class EPP_Templates extends CommonLibrary{
 			}
 		}
 	}
+
+	public void goToLastRecordPage() throws Exception {
+
+
+		if(isElementPresentZeroWait(recordDropdown)) {
+			selectLastValueFromList(eppPoolOptions, "Last Record",recordDropdown);
+		}
+
+	}
+
 }

@@ -43,7 +43,7 @@ public class CorporateTest extends ApplicationBase  {
 	static Corporate_NewWireTransfer corporateNewWireTransfer;
 
 	public void executeTestCase(WebDriver driver,String sApplicationName, String cURL,String sTestCase, String sTestDescription,
-			String sApplicationTDFolder, String sIteration, String sHTMLFileName) throws IOException, Exception{
+			String sApplicationTDFolder, String sIteration, String sHTMLFileName,String sManual_TSID) throws IOException, Exception{
 
 		Corporate_Login corporateLogin = new Corporate_Login(driver);
 		Corporate_LogOff corporateLogOff = new Corporate_LogOff(driver);
@@ -121,7 +121,7 @@ public class CorporateTest extends ApplicationBase  {
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
-			new HTMLReportHelper().HTMLReportHeader("Corporate", sTestCase, sTestDescription);
+			new HTMLReportHelper().HTMLReportHeader("Corporate", sTestCase, sTestDescription,sManual_TSID);
 
 
 

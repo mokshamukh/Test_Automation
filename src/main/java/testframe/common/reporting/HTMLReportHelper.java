@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +35,7 @@ import com.itextpdf.html2pdf.HtmlConverter;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import testframe.application.common.CommonLibrary;
 import testframe.common.utilities.DateTimeHelper;
 import testframe.common.utilities.ExcelReader;
 
@@ -48,6 +50,8 @@ public class HTMLReportHelper {
 	static Date sTime,eTime;
 	String tTimeTaken,strStartTime,strEndTime;
 	String strScreenshot_split[],sScreenshot_Path="";
+	
+	WebDriver driver;
 
 	ExcelReader er = new ExcelReader();
 	
@@ -78,7 +82,7 @@ public class HTMLReportHelper {
 		this.sExecutionStart = sExecutionStart;
 	}
 
-	public void HTMLReportHeader(String Module, String TestCaseID, String TestDescription) throws Exception{
+	public void HTMLReportHeader(String Module, String TestCaseID, String TestDescription, String Manual_TSID) throws Exception{
 		
 		VPNbr =1;
 		strHTMLFileData="";
@@ -122,7 +126,8 @@ public class HTMLReportHelper {
 		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td bgcolor=#FFFFFF align=Left width=180px><font face=Arial size=2><b> " + "Execution Result:</b> RVTEQ</font></td>" + "\r\n";
 		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=left width=163px><font face=Arial size=2><b> " + "Module: </b>"+Module +"</font></td>" + "\r\n";
 		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Passed Checkpoints:</b> PVPPVP1" + "</font></td>" + "\r\n";
-		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Failed Checkpoints:</b> FVPFVP1" + "</font></td>" + "\r\n" + "\t" + "</tr>" + "\r\n"+ "\t";
+		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Failed Checkpoints:</b> FVPFVP1" + "</font></td>" + "\r\n";
+		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Manual TS#: </b> "+ Manual_TSID + "</font></td>" + "\r\n" + "\t" + "</tr>" + "\r\n"+ "\t";
 		strHTMLFileData = strHTMLFileData + "</table>" + "\r\n"+ "<br><br>" + "\r\n";
 		strHTMLFileData = strHTMLFileData +  "\t" + "<table align=center width=650px heigth=400px cellspacing=2 cellpading=2 Border=0 bordercolor=#000000>"+ "\r\n"+ "\t";
 		strHTMLFileData = strHTMLFileData + "<tr bgcolor=#808080 height=30px>" + "\r\n";
@@ -143,11 +148,24 @@ public class HTMLReportHelper {
 			color ="#FF0000";
 		}
 		if (sTakeScreenshot.equalsIgnoreCase("Y") || sTakeScreenshot.equalsIgnoreCase("YES")){
-			//sBase64StringScreenshot = getScreenshot(driver);
-			strScreenshot = getCompleteScreenShot(driver);
+			
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			Object frameName=  executor.executeScript("return self.name");
+			if(!frameName.toString().equals("")){
+				driver.switchTo().defaultContent();
+				strScreenshot = getCompleteScreenShot(driver);
+				driver.switchTo().frame(frameName.toString());
+			}	
+			else{	
+				strScreenshot = getCompleteScreenShot(driver);
+			}
 			strScreenshot_split = strScreenshot.split("\\|\\|");
 			sBase64StringScreenshot = strScreenshot_split[0];
 			sScreenshot_Path = strScreenshot_split[1];
+			/*switch_driver.switchTo().window(parentWindow);
+			driver.switchTo().window(parentWindow);*/
+			
+			
 		}
 		if (VPNbr >1){
 			strHTMLFileData = strHTMLFileData + "\r\n"+"<table align=center width=650px heigth=400px cellspacing=2 cellpading=2 Border=0 bordercolor=#000000>"+ "\r\n" +"\t" ;
@@ -226,7 +244,7 @@ public class HTMLReportHelper {
 		HtmlConverter.convertToPdf(new FileInputStream(shtmlfilePath), 
 				new FileOutputStream(spdffilePath), converterProperties);
 		System.out.println( "PDF Created!" );
-		new ReportHelper().pdfEncryption(spdffilePath);
+		//new ReportHelper().pdfEncryption(spdffilePath);
 		storeResultToMasterFile(appendValue,sExecutionStart,strEndTime);
 		
 		new ReportHelper().writeToSummaryReportTestDetailsTab(appendValue, strStartTime, strEndTime, tTimeTaken.toString(), Integer.toString(totalPassed), Integer.toString(totalFailed), Integer.toString(totalPassed+totalFailed), spdffilePath);
