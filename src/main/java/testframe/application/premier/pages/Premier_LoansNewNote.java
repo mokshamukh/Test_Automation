@@ -12,7 +12,7 @@ import testframe.common.utilities.ExcelReader;
 /**
  * PageNage : Premier_LoansNewNote
  * 
- * @author shilpa.thangapalam
+ * @author onkar.narlawar
  */
 
 public class Premier_LoansNewNote extends CommonLibrary{

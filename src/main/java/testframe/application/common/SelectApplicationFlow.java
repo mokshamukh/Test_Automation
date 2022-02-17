@@ -29,7 +29,7 @@ public class SelectApplicationFlow extends ApplicationTestBase  {
 		
 		System.setProperty("testcaseid.app.module.submod.testdesc", TestCase+"||"+ApplicationName+"||"+ModuleName+"||"+Sub_Module+"||"+TestDescription+"||"+Manual_TSID);
 		switch(ApplicationName.toUpperCase()){
-
+		
 		case "DDF":
 			
 			break;
@@ -48,7 +48,12 @@ public class SelectApplicationFlow extends ApplicationTestBase  {
 			break;
 			
 		case "PREMIER":
-			premiertest.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
+			int iTCNo = Integer.valueOf(TestCase.replaceAll("[^0-9]", ""));
+			if (iTCNo>100) {
+				premiertestset2.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
+			}else {
+				premiertestset1.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
+			}
 			break;
 			
 		}
