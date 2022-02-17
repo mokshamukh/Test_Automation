@@ -40,12 +40,12 @@ public class Corporate_Dashboard extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - approval type");
-					new HTMLReportHelper().HtmlReportBody("Dashboard CC- Corporate application",
-							"click on approval type Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on approval type",
+							"Click on approval type successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Dashboard CC- Corporate application",
-							"Could not click on approval type Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on approval type",
+							"Could not click on approval type successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
