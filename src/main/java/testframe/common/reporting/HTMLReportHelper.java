@@ -82,7 +82,7 @@ public class HTMLReportHelper {
 		this.sExecutionStart = sExecutionStart;
 	}
 
-	public void HTMLReportHeader(String Module, String TestCaseID, String TestDescription) throws Exception{
+	public void HTMLReportHeader(String Module, String TestCaseID, String TestDescription, String Manual_TSID) throws Exception{
 		
 		VPNbr =1;
 		strHTMLFileData="";
@@ -126,7 +126,8 @@ public class HTMLReportHelper {
 		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td bgcolor=#FFFFFF align=Left width=180px><font face=Arial size=2><b> " + "Execution Result:</b> RVTEQ</font></td>" + "\r\n";
 		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=left width=163px><font face=Arial size=2><b> " + "Module: </b>"+Module +"</font></td>" + "\r\n";
 		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Passed Checkpoints:</b> PVPPVP1" + "</font></td>" + "\r\n";
-		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Failed Checkpoints:</b> FVPFVP1" + "</font></td>" + "\r\n" + "\t" + "</tr>" + "\r\n"+ "\t";
+		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Failed Checkpoints:</b> FVPFVP1" + "</font></td>" + "\r\n";
+		strHTMLFileData = strHTMLFileData + "\t"+ "\t" +"<td align=Left width=162px><font face=Arial size=2><b>" + "Manual TS#: </b> "+ Manual_TSID + "</font></td>" + "\r\n" + "\t" + "</tr>" + "\r\n"+ "\t";
 		strHTMLFileData = strHTMLFileData + "</table>" + "\r\n"+ "<br><br>" + "\r\n";
 		strHTMLFileData = strHTMLFileData +  "\t" + "<table align=center width=650px heigth=400px cellspacing=2 cellpading=2 Border=0 bordercolor=#000000>"+ "\r\n"+ "\t";
 		strHTMLFileData = strHTMLFileData + "<tr bgcolor=#808080 height=30px>" + "\r\n";
@@ -243,7 +244,7 @@ public class HTMLReportHelper {
 		HtmlConverter.convertToPdf(new FileInputStream(shtmlfilePath), 
 				new FileOutputStream(spdffilePath), converterProperties);
 		System.out.println( "PDF Created!" );
-		new ReportHelper().pdfEncryption(spdffilePath);
+		//new ReportHelper().pdfEncryption(spdffilePath);
 		storeResultToMasterFile(appendValue,sExecutionStart,strEndTime);
 		
 		new ReportHelper().writeToSummaryReportTestDetailsTab(appendValue, strStartTime, strEndTime, tTimeTaken.toString(), Integer.toString(totalPassed), Integer.toString(totalFailed), Integer.toString(totalPassed+totalFailed), spdffilePath);
