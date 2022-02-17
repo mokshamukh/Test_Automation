@@ -42,12 +42,12 @@ public class EPP_ProductSelection extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
 				clickOnElement(eppproductSelectionPage, "EPP Product Selected", imgProduct);
-				waitElement(30000);
+				waitElement(10000);
 				switchToWindowWithTitleContaining("Unauthorized Access Warning");
-				waitElement(6000);
-				if(isElementPresent(disclaimerBox)) {
+				waitElement(1500);
+				if(isElementPresentZeroWait(disclaimerBox)) {
 					clickOnElement(eppdisclaimerPage, "Disclaimer", disclaimerContinueBtn);
-					waitElement(6000);
+					waitElement(1500);
 					stepResult = true;
 				}
 			} catch (Exception e) {
@@ -56,10 +56,10 @@ public class EPP_ProductSelection extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Product_Selection EPP - EPP application", "Product Selected Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select EPP product", "Product Selected Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Product_Selection EPP - EPP application","Could not Select Product Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select EPP product","Could not Select Product Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

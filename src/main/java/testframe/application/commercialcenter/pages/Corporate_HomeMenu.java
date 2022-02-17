@@ -31,8 +31,8 @@ public class Corporate_HomeMenu extends CommonLibrary {
 	By payees = By.xpath("//span[text()='Payees']");
 	By newPayee = By.xpath("//span[text()='New Payee']");
 	By managePayees = By.xpath("//span[text()='Manage Payees']");
-	
-	
+
+
 	String subOpt = "//li/a[text()='%s']";
 	By corpRepublicBankLogo = By.xpath("//img[@class='main-logo']");
 	By newAchBatchTemplateField = By.xpath("//span[text()='New ACH Batch']");
@@ -44,7 +44,7 @@ public class Corporate_HomeMenu extends CommonLibrary {
 		PageFactory.initElements(driver, this);
 	}
 
-/*	public void clickOnMenu(String corpMenu) {
+	/*	public void clickOnMenu(String corpMenu) {
 		boolean stepResult = false;
 		try {
 			Thread.sleep(4000);
@@ -67,26 +67,29 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			}
 		}
 	}*/
-	
+
 	public void clickOnPaymentMenu() throws Exception {
-		boolean stepResult = false;
-		try {
-			if (isElementPresent(corpRepublicBankLogo)) {
-				clickOnElement("Corporate Home Page", "Menu Bar", homeMenuIcon);
-				clickOnElement("Corporate Home Page", "Menu Bar", paymentMenu);
-				stepResult = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - Menu");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on menu Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on menu Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(corpRepublicBankLogo)) {
+					clickOnElement("Corporate Home Page", "Menu Bar", homeMenuIcon);
+					clickOnElement("Corporate Home Page", "Menu Bar", paymentMenu);
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - Menu");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on menu Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on menu Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
@@ -115,305 +118,349 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			}
 		}
 	}*/
-	
+
 	public void clickOnAccountTransfer() throws Exception {
-		boolean stepResult = false;
-		try {
-			clickOnElement("Home Page", "Accout Transfer", accountTransferField);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on account Transfer Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on account Transfer Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				clickOnElement("Home Page", "Accout Transfer", accountTransferField);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on account Transfer Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on account Transfer Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 	public void clickOnPaymentActivity() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Payment Activity", paymentActivityField);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on payment activity Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on payment activity Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(1000);
+				clickOnElement("Home Page", "Payment Activity", paymentActivityField);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on payment activity Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on payment activity Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void clickOnCurrentPaymentActivity() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Current Payment Activity", currentPaymentActivityField);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on current payment activity Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on current payment activity Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "Current Payment Activity", currentPaymentActivityField);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on current payment activity Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on current payment activity Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
 
 	public void clickOnfuturePaymentActivity() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Future Payment Activity", futurePaymentActivityField);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on future payment activity Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on future payment activity Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(1000);
+				clickOnElement("Home Page", "Future Payment Activity", futurePaymentActivityField);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on future payment activity Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on future payment activity Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
-	
+
+
 	public void clickOnAchPayments() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "ACH Payments", aCHPaymentsField);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on ach payment Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on ach payment Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "ACH Payments", aCHPaymentsField);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on ach payment Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on ach payment Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 	public void clickOnAchBacthTemplate() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "ACH Batch Template", aCHBatchTemplate);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on Ach batch template Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on Ach batch template Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "ACH Batch Template", aCHBatchTemplate);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on Ach batch template Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on Ach batch template Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 	public void clickOnNewAchBacth() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "New ACH Batch Template", newAchBatchTemplateField);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on new ACH batch template Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on new ACH batch template Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "New ACH Batch Template", newAchBatchTemplateField);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on new ACH batch template Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on new ACH batch template Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
-	
+
+
 	public void clickOnRecurringPaymentActivity() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Future Payment Activity", repeatingPaymentActivity);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on Recurring payment activity Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on Recurring payment activity Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "Future Payment Activity", repeatingPaymentActivity);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on Recurring payment activity Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on Recurring payment activity Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 	public void clickOnWireTransfers() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Wire Transfers", wireTransfers);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on Wire Transfers Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on Wire Transfers Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "Wire Transfers", wireTransfers);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on Wire Transfers Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on Wire Transfers Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
-	
+
+
 	public void clickOnNewWireTransfer() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "New Wire Transfer", newWireTransfer);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on New Wire Transfer Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on New Wire Transfer Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "New Wire Transfer", newWireTransfer);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on New Wire Transfer Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on New Wire Transfer Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
-	
+
+
 	public void clickOnManageWireTemplates() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Manage Wire Templates", manageWireTemplate);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on Manage Wire Templates Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on Manage Wire Templates Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "Manage Wire Templates", manageWireTemplate);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on Manage Wire Templates Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on Manage Wire Templates Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
-	
+
 	}
-		
+
 
 	public void clickOnPayees() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Payees", payees);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on Payees Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on Payees Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "Payees", payees);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on Payees Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on Payees Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-		
+
 	public void clickOnNewPayee() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "New Payee", newPayee);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on New Payee Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on New Payee Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "New Payee", newPayee);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on New Payee Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on New Payee Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-		
-	
+
+
 	public void clickOnManagePayees() throws Exception {
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			clickOnElement("Home Page", "Manage Payees", managePayees);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stepResult == true) {
-				System.out.println("Pass - submenu bar");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"click on Manage Payees Successfully", "Passed", driver, "Y");
-			} else {
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
-						"Could not click on Manage Payees Successfully", "Failed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "Manage Payees", managePayees);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"click on Manage Payees Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Home Menu CC- Corporate application",
+							"Could not click on Manage Payees Successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
+
+
 }

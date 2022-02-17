@@ -27,6 +27,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 	}
 
 	By orderingBankaccNum = By.xpath("//input[@id='OrderInstID']");
+	By orderBankName = By.xpath("//input[@id='OrderInstName']");
 	By orderBankSystemCode = By.xpath("//select[@id='OrderInstIDType']");
 	By orderBankLookUp = By.xpath("//span[@id='OrderInstIDTypeWrapper']//..//div[@id='img_button_lookUp']");
 	By debitAcc = By.xpath("//input[@id='Debit_Account_Override']");
@@ -61,36 +62,47 @@ public class EPP_CreatePayment extends CommonLibrary {
 	public String createPaymentTitle = "//div[@id='headerBar']//td[contains(text(),'%s')]";
 	public String PaymentTemplate = "Payment Template";
 
-	public void createOutgoingHVBankPaymentFRB(String accNum, String systemCode, String debitAccount,
+	public void createOutgoingHVBankPaymentFRB(String accNum, String systemCode,String orderingBankName, String debitAccount,
 			String amount,String valueDateField,String benAccount, String beneName, String beneAddress, String accWithBankNo,
 			String accWithSysCode) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
 				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
-				enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, accNum);
-				waitElement(3000);
-				selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, systemCode);
-				waitElement(3000);
-				clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
-				waitElement(3000);
+				if (!accNum.equals("")){
+					enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, accNum);
+					waitElement(1500);
+				}
+				if (!systemCode.equals("")){
+					selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, systemCode);
+					waitElement(1500);
+					clickOnElement(eppCreatePayment, "Ordering Bank_LookUp", orderBankLookUp);
+					waitElement(1500);
+				}
+				if (!orderingBankName.equals("")){
+					enterText(eppCreatePayment, "Bank Name", orderBankName, orderingBankName);
+					waitElement(1500);
+				}
+				
+				
+				
 				enterText(eppCreatePayment, "Debit Account", debitAcc, debitAccount);
-				waitElement(3000);
+				waitElement(1500);
 				enterText(eppCreatePayment, "Amount", amountTxtBox, amount);
-				waitElement(3000);
+				waitElement(1500);
 				clearAndType(eppCreatePayment, "Value Date", valueDate, valueDateField);
 				//enterText(eppCreatePayment, "Value Date", valueDate, valueDateField);
-				waitElement(3000);
+				waitElement(1500);
 				enterText(eppCreatePayment, "Benificiary Bank Account", beneBankAccount, benAccount);
-				waitElement(3000);
+				waitElement(1500);
 				enterText(eppCreatePayment, "Benificiary Name", beneBankName, beneName);
-				waitElement(3000);
+				waitElement(1500);
 				enterText(eppCreatePayment, "Benificiary Address", beneBankAddress, beneAddress);
-				waitElement(3000);
+				waitElement(1500);
 				enterText(eppCreatePayment, "Account With Bank", accWithBankNum, accWithBankNo);
-				waitElement(3000);
+				waitElement(1500);
 				enterText(eppCreatePayment, "Account With Bank System Code", accSystemCode, accWithSysCode);
-				waitElement(3000);
+				waitElement(1500);
 				clickOnElement(eppCreatePayment, "Account With Bank_LookUp", accWithBankLookup);
 				waitElement(5000);
 				clickOnElement(eppCreatePayment, "Validate Button", validateBttn);
@@ -111,10 +123,10 @@ public class EPP_CreatePayment extends CommonLibrary {
 				if (stepResult == true) {
 					System.out.println("Pass");
 					//new HTMLReportHelper().HtmlReportBody("TransactionID - EPP application", "Created Successfully","Passed", driver, "Y");
-					new HTMLReportHelper().HtmlReportBody("TransactionID no'" + transactionID +"' is", "Created Successfully on Create Payment", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create manual Payment", "Successfully created manual payment for TransactionID no '" + transactionID +"'", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application","Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create manual Payment","Could not Create Manual Payment", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -195,12 +207,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment", "Created payment Successfully",
 							"Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-							"Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment",
+							"Could not Create the payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -249,12 +261,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment", "Created payment successfully",
 							"Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-							"Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment",
+							"Could not Create payment successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -298,12 +310,12 @@ public class EPP_CreatePayment extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application", "Created Successfully",
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment", "Created Payment Successfully",
 							"Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create EPP Payment- EPP application",
-							"Could not Create Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create EPP Payment",
+							"Could not Create Payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

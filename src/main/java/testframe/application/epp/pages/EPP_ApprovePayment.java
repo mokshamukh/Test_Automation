@@ -65,10 +65,10 @@ public class EPP_ApprovePayment extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Approved Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment", "Approved the payment Successfully", "Passed", driver, "Y");
 				}else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Could not Approve Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment", "Could not Approve the payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -102,10 +102,10 @@ public class EPP_ApprovePayment extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Approved Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Approve manual Payment- EPP application", "Approved manual payment Successfully", "Passed", driver, "Y");
 				}else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Approve EPP Payment- EPP application", "Could not Approve Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Approve manual Payment- EPP application", "Could not Approve manual payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

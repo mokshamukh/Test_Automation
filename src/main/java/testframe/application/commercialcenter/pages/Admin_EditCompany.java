@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
+import testframe.common.reporting.HTMLReportHelper;
 
 /**
  * PageNage : CommercialCenter_Admin_CreateCompany
@@ -40,8 +41,8 @@ public class Admin_EditCompany extends CommonLibrary {
 	By saveBtn = By.xpath("//button[@id='saveButton']");
 	By cancelBtn = By.xpath("//button[@id='cancelButton']");
 	String validateCompanyName = "//h1[contains(text(),'Company Details : %s')]";
-	
-	
+
+
 
 	public Admin_EditCompany(WebDriver driver) {
 		super(driver);
@@ -53,80 +54,94 @@ public class Admin_EditCompany extends CommonLibrary {
 			String State, String zipcodeVal,String countryName,String marketSegmentVal,
 			String BillingAccountNo,String timeZoneOption,String expDate,String processingCenterVal,
 			String bankChk,String reVerifyBox,String taxIdTyp,String taxIdVal,
-			String addIdentity,String label) {
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(editCompanyTitle)){
-				clearAndType("Create Company", "companyNameField", companyName, comName);
-				if(!busUnit.equals(""))
-					clearAndType("Create Company", "businessUnitField", businessUnit, busUnit);
-				if(!strAddress.equals(""))
-					clearAndType("Create Company", "streetAddressField", streetAddress, strAddress);
-				if(!city.equals(""))
-					clearAndType("Create Company", "cityField", cityName, city);
-				if(!State.equals(""))
-					clearAndType("Create Company", "stateField", stateName, State);
-				if(!zipcodeVal.equals(""))
-					clearAndType("Create Company", "zipcodeField", zipcode, zipcodeVal);
-				if(!countryName.equals(""))
-					selectElementByVisibleText("Create Company", "Country", country, countryName);
-				if(!marketSegmentVal.equals(""))
-					selectElementByVisibleText("Create Company", "Market Segment", marketSegment, marketSegmentVal);
-				if(!BillingAccountNo.equals(""))
-					clearAndType("Create Company", "Billing Account", billingAccount, BillingAccountNo);
-				if(!timeZoneOption.equals(""))
-					selectElementByVisibleText("Create Company", "Time Zone", timeZone, timeZoneOption);
-				if(!expDate.equals(""))
-					clearAndType("Create Company", "Date Field", enableDate, expDate);
-				if(!processingCenterVal.equals(""))
-					selectElementByVisibleText("Create Company", "Processing Center", processingCentre, processingCenterVal);
-				if(bankChk.equals("Yes"))
-					clickOnElement("Create Company", "IsBank Check Box", isBankCheck);
-				if(reVerifyBox.equals("Yes"))
-					clickOnElement("Create Company", "Re-Verification Check Box", reVerificationCheck);
-				if(!taxIdTyp.equals("")){
-					//validateTextEquals("Create Company", "Additional Identification", additionalID, additionalIdentity);
-				    clickOnElement("Create Company", "Additional Identification", additionalID);
-				    selectElementByVisibleText("Create Company", "TaxID Type", taxIdType,taxIdTyp );
-				    clearAndType("Create Company", "TaxID Type", taxIdValue,taxIdVal );
-				}	
-				if(addIdentity.equals("Yes")){
-					//validateTextEquals("Create Company", "Add Identifier Button", addIdentifierBtn, addIdentityBttn);
-				    clickOnElement("Create Company", "Add Identifier Button", addIdentifierBtn);
-				}    
-				if(!label.equals(""))  {
-					clickOnElement("Create Company", "Labels Accordion", LabelLink);
-				}	
-				clickOnElement("Create Company", "Saved Company", saveBtn);
-				stepResult = true;
+			String addIdentity,String label) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(editCompanyTitle)){
+					clearAndType("Create Company", "companyNameField", companyName, comName);
+					if(!busUnit.equals(""))
+						clearAndType("Create Company", "businessUnitField", businessUnit, busUnit);
+					if(!strAddress.equals(""))
+						clearAndType("Create Company", "streetAddressField", streetAddress, strAddress);
+					if(!city.equals(""))
+						clearAndType("Create Company", "cityField", cityName, city);
+					if(!State.equals(""))
+						clearAndType("Create Company", "stateField", stateName, State);
+					if(!zipcodeVal.equals(""))
+						clearAndType("Create Company", "zipcodeField", zipcode, zipcodeVal);
+					if(!countryName.equals(""))
+						selectElementByVisibleText("Create Company", "Country", country, countryName);
+					if(!marketSegmentVal.equals(""))
+						selectElementByVisibleText("Create Company", "Market Segment", marketSegment, marketSegmentVal);
+					if(!BillingAccountNo.equals(""))
+						clearAndType("Create Company", "Billing Account", billingAccount, BillingAccountNo);
+					if(!timeZoneOption.equals(""))
+						selectElementByVisibleText("Create Company", "Time Zone", timeZone, timeZoneOption);
+					if(!expDate.equals(""))
+						clearAndType("Create Company", "Date Field", enableDate, expDate);
+					if(!processingCenterVal.equals(""))
+						selectElementByVisibleText("Create Company", "Processing Center", processingCentre, processingCenterVal);
+					if(bankChk.equals("Yes"))
+						clickOnElement("Create Company", "IsBank Check Box", isBankCheck);
+					if(reVerifyBox.equals("Yes"))
+						clickOnElement("Create Company", "Re-Verification Check Box", reVerificationCheck);
+					if(!taxIdTyp.equals("")){
+						//validateTextEquals("Create Company", "Additional Identification", additionalID, additionalIdentity);
+						clickOnElement("Create Company", "Additional Identification", additionalID);
+						selectElementByVisibleText("Create Company", "TaxID Type", taxIdType,taxIdTyp );
+						clearAndType("Create Company", "TaxID Type", taxIdValue,taxIdVal );
+					}	
+					if(addIdentity.equals("Yes")){
+						//validateTextEquals("Create Company", "Add Identifier Button", addIdentifierBtn, addIdentityBttn);
+						clickOnElement("Create Company", "Add Identifier Button", addIdentifierBtn);
+					}    
+					if(!label.equals(""))  {
+						clickOnElement("Create Company", "Labels Accordion", LabelLink);
+					}	
+					clickOnElement("Create Company", "Saved Company", saveBtn);
+					stepResult = true;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true)
-				System.out.println("Pass");
-			else
-				System.out.println("fail");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Edit User CC- Admin application", "User edited Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Edit User CC- Admin application", "Could not edit user Successfully", "Passed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
 		}
 
 	}
-	
-	public void validateCompanyCreation(String validateValue){
-		boolean stepResult = false;
-		try {
-			if(isElementPresent(getDynamicElement("Company Name",validateCompanyName,validateValue))){
-				stepResult = true;
+
+	public void validateCompanyCreation(String validateValue) throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if(isElementPresent(getDynamicElement("Company Name",validateCompanyName,validateValue))){
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true)
-				System.out.println("Pass");
-			else
-				System.out.println("fail");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Validate company CC- Admin application", "Company validated Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Validate company CC- Admin application", "Could not validate the comapny Successfully", "Passed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
 		}
 	}
 

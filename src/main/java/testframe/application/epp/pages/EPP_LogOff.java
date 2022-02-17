@@ -39,11 +39,11 @@ public class EPP_LogOff extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("LogOff EPP - EPP application", "LogOff Successfully",
+					new HTMLReportHelper().HtmlReportBody("LogOff EPP application", "LogOff Successfully",
 							"Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("LogOff EPP - EPP application","Could not LogOff Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("LogOff EPP application","Could not LogOff Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

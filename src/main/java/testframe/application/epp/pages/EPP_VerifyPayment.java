@@ -71,10 +71,10 @@ public class EPP_VerifyPayment extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Verify Payment Details EPP - EPP application", "Transaction Approved Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Approve and Verify Payment Details", "Transaction Approved and verified Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Verify Payment Details EPP - EPP application","Could not approve Transaction Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Approve and Verify Payment Details","Could not approve and verify the transaction", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -107,10 +107,10 @@ public class EPP_VerifyPayment extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Verify Payment Details EPP - EPP application", "Transaction verified Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Repair Payment", "Repair Payment cancelled successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Verify Payment Details EPP - EPP application","Could not verify Transaction Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Repair Payment","Could not cancel Repair payment", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

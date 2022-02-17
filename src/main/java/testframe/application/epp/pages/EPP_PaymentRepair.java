@@ -86,10 +86,10 @@ public class EPP_PaymentRepair extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application", "Payment Saved with TransactionID Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Payment Repair", "Payment submitted Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application","Could not save Payment TransactionID Successfully", "Failed", driver,"Y");
+					new HTMLReportHelper().HtmlReportBody("Payment Repair","Could not submit payment", "Failed", driver,"Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -123,10 +123,10 @@ public class EPP_PaymentRepair extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application", "Payment Saved with TransactionID Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Payment Repair", "Payment repaired Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application","Could not save Payment TransactionID Successfully", "Failed", driver,"Y");
+					new HTMLReportHelper().HtmlReportBody("Payment Repair","Could not repair payment", "Failed", driver,"Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -155,10 +155,10 @@ public class EPP_PaymentRepair extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application", "Payment Saved with TransactionID Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Payment Repair", "Repair Payment cancelled Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application","Could not save Payment TransactionID Successfully", "Failed", driver,"Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Payment Repair","Could not cancel Repair Payment", "Failed", driver,"Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -190,10 +190,10 @@ public class EPP_PaymentRepair extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application", "Payment Saved with TransactionID Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Repair and Verify payment", "Payment Repaired and Verified payment Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application","Could not save Payment TransactionID Successfully", "Failed", driver,"Y");
+					new HTMLReportHelper().HtmlReportBody("Repair and Verify payment","Could not Repair and Verify payment", "Failed", driver,"Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -230,12 +230,12 @@ public class EPP_PaymentRepair extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application",
-							"TransactionID Successfully Selected", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Transaction from list",
+							"Transaction Selected Successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application",
-							"Could not select TransactionID ", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Transaction from list",
+							"Could not select Transaction ", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -263,10 +263,10 @@ public class EPP_PaymentRepair extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application", "Payment Saved with TransactionID Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Payment", "Payment cancelled uccessfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Payment Repair EPP - EPP application","Could not save Payment TransactionID Successfully", "Failed", driver,"Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Payment","Could not Cancel Payment", "Failed", driver,"Y");
 					System.setProperty("runStep","N");
 				}
 			}

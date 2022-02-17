@@ -68,10 +68,10 @@ public class EPP_TransactionInquiry extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application", "Transaction searched Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry", "Transaction searched Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry EPP - EPP application","Could not search Transaction Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry","Could not search Transaction Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

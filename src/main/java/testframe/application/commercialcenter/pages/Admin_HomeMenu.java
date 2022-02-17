@@ -22,7 +22,7 @@ public class Admin_HomeMenu extends CommonLibrary{
 	By searchUsers = By.xpath("//li/a[text()='Search Users']");
 	String menuBar = "//li/a/span[text()='%s']";
 	String subMenuBar = "//li/a[text()='%s']";
-	
+
 	public Admin_HomeMenu(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
@@ -30,65 +30,74 @@ public class Admin_HomeMenu extends CommonLibrary{
 	}
 
 	public void clickOnMenuBar() throws Exception{
-		boolean stepResult = false;
-		try {
-			Thread.sleep(4000);
-			if(isElementPresent(verifyAccInfoTitle)){
-				//getDynamicElementClick("Home Page", "Menu Bar" , menuBar, value);
-				clickOnElement("Home Page", "Menu Bar", administration);
-				stepResult = true;
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				if(isElementPresent(verifyAccInfoTitle)){
+					//getDynamicElementClick("Home Page", "Menu Bar" , menuBar, value);
+					clickOnElement("Home Page", "Menu Bar", administration);
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (stepResult==true){
-			System.out.println("Pass");
-			new HTMLReportHelper().HtmlReportBody("Click on menu", "Successfully clicked on Administration menu", "Passed", driver, "Y");
-		}
-		else{
-			System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("Click on menu", "Could not clicked on Administration menu", "Failed", driver, "Y");
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Click on menu", "Successfully clicked on Administration menu", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Click on menu", "Could not clicked on Administration menu", "Failed", driver, "Y");
+				System.setProperty("runStep","N");
+			}
 		}
 	}
-	
+
 	public void clickOnSubMenuBar() throws Exception{
-		boolean stepResult = false;
-		try {
-			//getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);
-			clickOnElement("Home Page", "Sub Menu Bar", searchCompanies);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				//getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);
+				clickOnElement("Home Page", "Sub Menu Bar", searchCompanies);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
-	
+
 	public void clickOnSearchUsers() throws Exception{
-		boolean stepResult = false;
-		try {
-			//getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);
-			clickOnElement("Home Page", "Sub Menu Bar", searchUsers);
-			stepResult = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (stepResult==true){
-				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				//getDynamicElementClick("Home Page", "Sub Menu Bar", subMenuBar, value);
+				clickOnElement("Home Page", "Sub Menu Bar", searchUsers);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			else{
-				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
 			}
 		}
 	}
