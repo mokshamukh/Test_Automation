@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.ExcelReader;
 
 /**
  * PageNage : CommercialCenter_CorporateAccountTransfer
@@ -16,6 +17,12 @@ import testframe.common.reporting.HTMLReportHelper;
  */
 
 public class Corporate_AccountTransfer extends CommonLibrary {
+
+	public String currentBalanceField;
+	public String sAfterTransBalance;
+	public int iAfterTransAccountBalance;
+	public int iInitialBalance;
+	public int totalAmount;
 
 	By accountTransferTitle = By.xpath("//button[contains(text(),'Account Transfer')]");
 	By fromAccountField = By.xpath(
@@ -57,6 +64,14 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	By saveButton = By.xpath("//button[text()='Save'][contains(@aria-label,'recurring options')]");
 	By seriesName= By.xpath("//input[@formcontrolname='seriesName']");
 	By fromAccField = By.xpath("//p-autocomplete//input[@id='fromAccount']");
+	By accountNumberField = By.xpath("//input[@name='accountNumberId']");
+	By accountSearchButton = By.xpath("//button//span[text()='ui-btn']");
+	By accountBalanceHeader = By.xpath("//h1[text()='Account Balances']");
+	By searchAccountNumber = By.xpath("//button[contains(@aria-label,'To get the list matching the search criteria')]//i[text()='search']");
+	By currentBalance = By.xpath("//div[text()='Current Balance ']//..//span[@class='card-value']");
+	By closeBalanceTab = By.xpath("//a[@title='Balances']//i[text()='close']");
+
+
 	// By daily_EachBusiDay =
 	// By.xpath("//p-radiobutton[@formcontrolname='everyDay']/div/div/input[@id='opt1']");
 	// By daily_SpeciDay =
@@ -89,6 +104,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 				if (isElementPresent(accountTransferTitle)) {
 					waitElement(2000);
 					enterText("Corporate Account Transfer", "From Account", fromAccountField, fromAcc);
+					waitElement(2000);
 					clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc));
 					if (!fromAccAmt.equals("")) {
 						Thread.sleep(2000);
@@ -101,11 +117,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass - From acc");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter From acc field Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter from account field", "Enter from account field successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter From acc field Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter from account field", "Could not enter from account field successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -165,11 +181,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter multiple from acc field Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter multiple from account field", "Enter multiple from account field successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter multiple from acc field Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter multiple from account field ", "Could not enter multiple from account field successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -184,7 +200,9 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			try {
 				if (isElementPresent(accountTransferTitle)) {
 					if(!toAcc.equals("")){
+						waitElement(2000);
 						enterText("Corporate Account Transfer", "To Account", toAccountField, toAcc);
+						waitElement(2000);
 						clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc));
 						//selectElementFromListbox("Corporate Account Transfer", "To Account", toAccountField, fromAccList, toAcc);
 						waitElement(2000);
@@ -199,6 +217,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					}
 					if (!toAccPayInstr.equals("")) {
 						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction", toAccPayInstruction);
+						waitElement(2000);
 						getDynamicElementClick("Corporate Account Transfer", "To Account Payment Instruction", paymentInstrField, toAccPayInstr);
 					}
 					stepResult = true;
@@ -208,12 +227,12 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass -- to acc");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter to acc field Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter to account field", "Enter to account field successfully", "Passed", driver, "Y");
 
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter to acc field Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter to account field", "Could not enter to account field successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -296,11 +315,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass - multiple to acc");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter multiple to acc field Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter multiple to account field", "Enter multiple to account field successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter multiple to acc field Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter multiple to account field", "Could not enter multiple to account field successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -368,11 +387,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass -- transfer date");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter transfer date field Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter transfer date field", "Enter transfer date field successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter transfer date field Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter transfer date field", "Could not enter transfer date field successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -393,11 +412,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass - click transfer req");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Click transfer Request Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click transfer request", "Click transfer request successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Click transfer Request Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click transfer request", "Could not click transfer request successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -445,11 +464,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Select recurring option Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select recurring option", "Select recurring option successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Select recurring option Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select recurring option", "Could not select recurring option successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -485,11 +504,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Select duration option Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select duration option ", "Select duration option successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Select duration option Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select duration option ", "Could not select duration option successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -514,11 +533,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult == true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter series date Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter series date ", "Enter series date successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter series date Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter series date ", "Could not Enter series date successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -538,11 +557,11 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult == true){
 					System.out.println("Pass - Acc Transfer -- transfer date");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Click save button Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click save button ", "Click save button successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Click save button Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click save button ", "Could not click save button successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -561,15 +580,105 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			} finally {
 				if (stepResult == true){
 					System.out.println("Pass - Acc Transfer -- Series Name");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Enter series name Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter series name", "Enter series name successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer CC- Corporate application", "Could not Enter series name Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter series name", "Could not Enter series name successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
 		}
 	}
+
+
+	public void searchAccountBalances(String fromAccountNumber,String excelFilePath,String sheetName, int rowNo) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accountBalanceHeader)) {
+					if(!fromAccountNumber.equals("")){
+						waitElement(2000);
+						enterText("Corporate Account Transfer", "Account Number", accountNumberField, fromAccountNumber);
+						waitElement(2000);
+						clickOnElement("Corporate Account Transfer", "Account Number", getDynamicElement("Account Number", fromAccList, fromAccountNumber));
+						waitElement(2000);
+						clickOnElement("Corporate Account Transfer", "Search button", searchAccountNumber);
+						waitElement(2000);
+					}
+					currentBalanceField = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
+					if(currentBalanceField != "") {
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "CurrentBalance", rowNo, currentBalanceField);				
+					}
+                     clickOnElement("Corporate Account Transfer", "Balance close button",  closeBalanceTab);
+
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- to acc");
+					new HTMLReportHelper().HtmlReportBody("search account balance", "search account balance successfully", "Passed", driver, "Y");
+
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("search account balance", "Could not search account balance successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+
+
+	public void verifyAccountBalanceAfterTransaction(String fromAccountNumber,String balanceBeforeTransaction,String amount) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accountBalanceHeader)) {
+					if(!fromAccountNumber.equals("")){
+						waitElement(2000);
+						enterText("Corporate Account Transfer", "Account Number", accountNumberField, fromAccountNumber);
+						waitElement(2000);
+						clickOnElement("Corporate Account Transfer", "Account Number", getDynamicElement("Account Number", fromAccList, fromAccountNumber));
+						waitElement(2000);
+						clickOnElement("Corporate Account Transfer", "Search button", searchAccountNumber);
+						waitElement(2000);
+					}
+					if (!balanceBeforeTransaction.equals("")) {
+						sAfterTransBalance = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
+						sAfterTransBalance = sAfterTransBalance.replace("$", "");
+						sAfterTransBalance = sAfterTransBalance.replace(",", "");
+						iAfterTransAccountBalance = (int) Double.parseDouble(sAfterTransBalance);
+						balanceBeforeTransaction = balanceBeforeTransaction.replace("$", "");
+						balanceBeforeTransaction = balanceBeforeTransaction.replace(",", "");
+						iInitialBalance = (int) Double.parseDouble(balanceBeforeTransaction);
+						amount = amount.replace("$", "");
+					    amount = amount.replace(",", "");
+						totalAmount =  (int) Double.parseDouble(amount);
+						if(iInitialBalance - iAfterTransAccountBalance == totalAmount ) {
+							stepResult = true;
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- to acc");
+					new HTMLReportHelper().HtmlReportBody("Account balance after transaction", "Account balance after transaction verified successfully", "Passed", driver, "Y");
+
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Account balance after transaction", "Could not verify account balance after Transaction successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
 
 }
