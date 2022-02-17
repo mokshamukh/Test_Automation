@@ -60,10 +60,10 @@ public class EPP_SecurityQuestions extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Security_Questions EPP - EPP application", "Security Questions Answered Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Answers to Security Questions", "Security Questions Answered Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Security_Questions EPP - EPP application","Could not Answer Security Questions Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Answers to Security Questions","Could not Answer Security Questions Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

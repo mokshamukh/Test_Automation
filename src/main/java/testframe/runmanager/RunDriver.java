@@ -17,7 +17,7 @@ import testframe.common.utilities.PropertyReader;
 
 public class RunDriver {
 	public  String strApplication_Name,strModule_Name,strSubModule_Name,strURL,strTCModule_Name
-						 ,strTCNum,strTCSubModule_Name,strTestCaseID,strTestDescription,strTCIterations
+						 ,strTCNum,strTCSubModule_Name,strManualTSID,strTestDescription,strTCIterations
 						 ,strTD_filePath,strTD_sheetName;
 	
 	String strMasterfilePath,strpathToAppTestDataFolder,strRunOnBrowser,strResult;
@@ -62,13 +62,13 @@ public class RunDriver {
 						strTCModule_Name = tc_App_Data.get(iTCAppRow).get("Module");
 						strTCNum = tc_App_Data.get(iTCAppRow).get("TC#");
 						strTCSubModule_Name = tc_App_Data.get(iTCAppRow).get("Sub_Module");
-						strTestCaseID = tc_App_Data.get(iTCAppRow).get("TestCaseID");
+						strManualTSID = tc_App_Data.get(iTCAppRow).get("Manual_TS#");
 						strTestDescription = tc_App_Data.get(iTCAppRow).get("TestDescription");
 						strTCIterations = tc_App_Data.get(iTCAppRow).get("Iterations");
 						//strTCModule_Name = tc_App_Data.get(iTCAppRow).get("ExexutionStatus");
 						//strTCModule_Name = tc_App_Data.get(iTCAppRow).get("Date");
 						Log.startTestCase(strTCNum,strTestDescription);
-						af.executeApplicationFlow(strRunOnBrowser, strApplication_Name, strModule_Name, strSubModule_Name, strURL, strTCNum,strTestDescription,strpathToAppTestDataFolder,strTCIterations);
+						af.executeApplicationFlow(strRunOnBrowser, strApplication_Name, strModule_Name, strSubModule_Name, strURL, strTCNum,strTestDescription,strpathToAppTestDataFolder,strTCIterations,strManualTSID);
 						Log.endTestCase(strTCNum);
 					}
 					

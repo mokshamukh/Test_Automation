@@ -79,6 +79,9 @@ public class Premier_HomeMenu extends CommonLibrary {
 	public By sweepsMenu = By.xpath("//a[text()='Sweeps']");
 	public By newSweep = By.xpath("//a[text()='New Sweep']");
 	public By sweepInquire =  By.xpath("//a[text()='Sweep Inquiry']");
+	public By modelingMenu = By.xpath("//a[text()='Modeling']");
+	public By noteCalculatorSubMenu = By.xpath("//a[text()='Note Calculator']");
+	public By depositCalculatorSubMenu = By.xpath("//a[text()='Deposit Calculator']");
 	
 	public Premier_HomeMenu(WebDriver driver) {
 		super(driver);
@@ -1499,6 +1502,81 @@ public class Premier_HomeMenu extends CommonLibrary {
 				else{
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Select Sweep Inquire from Menu", "Could not select Sweep Inquire.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void selectModelingMenu() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(modelingMenu)){
+					clickOnElement("Home Menu Page", "Modeling field", modelingMenu);
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Modeling from Menu", "Menu Modeling selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Modeling from Menu", "Could not select Menu Modeling.", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void noteCalculator_Modeling() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(modelingMenu)){
+					clickOnElement("Home Page", "Note Calculator",noteCalculatorSubMenu );
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Note Calculator from Modeling Menu", "Note Calculator from Modeling menu selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Note Calculator from Modeling Menu", "Could not select Note Calculator from Modeling menu", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void depositCalculator_Modeling() throws Exception{
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(modelingMenu)){
+					clickOnElement("Home Page", "Deposit Calculator",depositCalculatorSubMenu );
+					stepResult = true;
+				}	
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select Deposit Calculator from Modeling Menu", "Deposit Calculator from Modeling menu selected Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select Deposit Calculator from Modeling Menu", "Could not select Deposit Calculator from Modeling menu", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

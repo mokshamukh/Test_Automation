@@ -1,3 +1,4 @@
+
 package testframe.application.commercialcenter.businessflow;
 
 import java.io.File;
@@ -39,11 +40,12 @@ public class CorporateTest extends ApplicationBase  {
 	String transactionID;
 	static Corporate_ACHBatchTemplate corporateACHBatchTemplate;
 	static Corporate_NewACHBatchTemplate corporateNewACHBatchTemplate;
-	static Corporate_NewPayee corporateNewPayee;
+	static Corporate_NewPayee corporate_NewPayee;
 	static Corporate_NewWireTransfer corporateNewWireTransfer;
-
+    static Corporate_NewPayee corporateNewPayee;
+	
 	public void executeTestCase(WebDriver driver,String sApplicationName, String cURL,String sTestCase, String sTestDescription,
-			String sApplicationTDFolder, String sIteration, String sHTMLFileName) throws IOException, Exception{
+			String sApplicationTDFolder, String sIteration, String sHTMLFileName,String sManual_TSID) throws IOException, Exception{
 
 		Corporate_Login corporateLogin = new Corporate_Login(driver);
 		Corporate_LogOff corporateLogOff = new Corporate_LogOff(driver);
@@ -58,7 +60,7 @@ public class CorporateTest extends ApplicationBase  {
 		corporateNewACHBatchTemplate = new Corporate_NewACHBatchTemplate(driver);
 		corporateACHBatchTemplate = new Corporate_ACHBatchTemplate(driver);
 		CorporateCommonNavigation corporateCommonNavigation = new CorporateCommonNavigation();
-		corporateNewPayee  = new Corporate_NewPayee(driver);
+		Corporate_NewPayee corporateNewPayee = new Corporate_NewPayee(driver);
 		corporateNewWireTransfer = new Corporate_NewWireTransfer(driver);
 		Corporate_ManageWireTemplates corporateManageWireTemplates = new Corporate_ManageWireTemplates(driver);
 
@@ -116,12 +118,13 @@ public class CorporateTest extends ApplicationBase  {
 			}
 			System.setProperty("testcaseid.iteration", sTestCase+"||"+iIteration_count);
 			fi.createFile(sHTMLFilePath);
+			System.setProperty("runStep","Y");
 			fi.checkAndCreateFolder(sScreenShotFolder);
 			System.setProperty("runStep","Y");
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 
-			new HTMLReportHelper().HTMLReportHeader("Corporate", sTestCase, sTestDescription);
+			new HTMLReportHelper().HTMLReportHeader("Corporate", sTestCase, sTestDescription,sManual_TSID);
 
 
 
@@ -1634,5 +1637,4 @@ public class CorporateTest extends ApplicationBase  {
 		driver.close();
 	}
 }
-
 

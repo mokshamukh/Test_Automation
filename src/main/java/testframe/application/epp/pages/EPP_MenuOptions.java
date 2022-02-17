@@ -103,7 +103,7 @@ public class EPP_MenuOptions extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Click on Manual Payments menu", "Successfully clicked on Manual Payments menu", "Passed", driver, "N");
+					new HTMLReportHelper().HtmlReportBody("Click on Manual Payments menu", "Successfully clicked on Manual Payments menu", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Click on Manual Payments menu", "Could not clicked on Manual Payments menu", "Failed", driver, "N");
@@ -128,10 +128,10 @@ public class EPP_MenuOptions extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Click on Payment Tracking menu", "Successfully clicked on Payment Tracking menu", "Passed", driver, "N");
+					new HTMLReportHelper().HtmlReportBody("Payment Tracking menu", "Successfully clicked on Payment Tracking menu", "Passed", driver, "N");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Click on Payment Tracking menu", "Could not clicked on Payment Tracking menu", "Failed", driver, "N");
+					new HTMLReportHelper().HtmlReportBody("Payment Tracking menu", "Could not clicked on Payment Tracking menu", "Failed", driver, "N");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -154,10 +154,10 @@ public class EPP_MenuOptions extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Click on PaymentCreation subMenuValue" , "Successfully clicked on PaymentCreation Submenu", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on Payment Creation sub menu" , "Successfully clicked on Payment Creation Sub-menu", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Click on PaymentCreation subMenuValue", "Could not clicked on PaymentCreation Submenu", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on Payment Creation sub menu", "Could not clicked on Payment Creation Sub-menu", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -182,10 +182,10 @@ public class EPP_MenuOptions extends CommonLibrary{
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Click on Transaction Inquiry subMenuValue" , "Successfully clicked on Transaction Inquiry Submenu", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry sub-menu" , "Successfully clicked on Transaction Inquiry Sub-menu", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Click on Transaction Inquiry subMenuValue", "Could not clicked on Transaction Inquiry Submenu", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Transaction Inquiry sub-menu", "Could not clicked on Transaction Inquiry Sub-menu", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

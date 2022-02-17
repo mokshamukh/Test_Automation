@@ -18,7 +18,7 @@ public class SelectApplicationFlow extends ApplicationTestBase  {
 		
 	public void executeApplicationFlow(String Browser,String ApplicationName, String ModuleName,
 			String Sub_Module, String URL,String TestCase, String TestDescription,
-			String ApplicationTDFolder, String Iteration) throws Exception{
+			String ApplicationTDFolder, String Iteration, String Manual_TSID) throws Exception{
 		
 		driver =new BrowserFactory().getDriver(Browser);
 		strHTMLFileName = ApplicationName;
@@ -27,28 +27,33 @@ public class SelectApplicationFlow extends ApplicationTestBase  {
 		if(!Sub_Module.equals(""))
 			strHTMLFileName = strHTMLFileName +"_"+Sub_Module;
 		
-		System.setProperty("testcaseid.app.module.submod.testdesc", TestCase+"||"+ApplicationName+"||"+ModuleName+"||"+Sub_Module+"||"+TestDescription);
+		System.setProperty("testcaseid.app.module.submod.testdesc", TestCase+"||"+ApplicationName+"||"+ModuleName+"||"+Sub_Module+"||"+TestDescription+"||"+Manual_TSID);
 		switch(ApplicationName.toUpperCase()){
-
+		
 		case "DDF":
 			
 			break;
 			
 		case "COMMERCIALCENTER":
 			if (ModuleName.toUpperCase().equals("ADMIN")){
-				admintest.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName);
+				admintest.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
 			}
 			else if(ModuleName.toUpperCase().equals("CORPORATE")){
-				corporatetest.executeTestCase(driver, ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName);
+				corporatetest.executeTestCase(driver, ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
 			}
 			break;
 			
 		case "EPP":
-			epptest.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName);
+			epptest.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
 			break;
 			
 		case "PREMIER":
-			premiertest.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName);
+			int iTCNo = Integer.valueOf(TestCase.replaceAll("[^0-9]", ""));
+			if (iTCNo>100) {
+				premiertestset2.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
+			}else {
+				premiertestset1.executeTestCase(driver,ApplicationName,URL,TestCase,TestDescription,ApplicationTDFolder,Iteration,strHTMLFileName,Manual_TSID);
+			}
 			break;
 			
 		}

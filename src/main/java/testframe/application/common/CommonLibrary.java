@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormatSymbols;
+import java.text.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -68,7 +69,7 @@ public class CommonLibrary {
 	 * 
 	 * @author Moksha.mukh
 	 */
-	protected void switchToWindowWithTitleContaining(String windowTitle) throws Exception {
+	public void switchToWindowWithTitleContaining(String windowTitle) throws Exception {
 		String messageToDisplay = "Switch To Window With Title As [" + windowTitle + "]";
 		String errorMessageToDisplay = "Could not Switch To Window With Title As [" + windowTitle + "]";
 		Boolean found = false;
@@ -198,7 +199,7 @@ public class CommonLibrary {
 	 * Switch To Default Content
 	 * 	 * @author Moksha.mukh
 	 */
-	protected void switchToDefaultContent() throws Exception {
+	public void switchToDefaultContent() throws Exception {
 		String messageToDisplay = "Switch To Default Content";
 		String errorMessageToDisplay = "Could not Switch To Default Content";
 		try {
@@ -825,10 +826,12 @@ public class CommonLibrary {
 	
 	protected Boolean isElementPresentZeroWait(By by) throws Exception {
 		Boolean found = false;
+		String messageToDisplay = "Locator [ " + by + "] was found On Page ";
 		String errorMessageToDisplay = "Could Not Find Locator [ " + by + "]";
 		turnOffImplicitWaits();
 		try {
 			Thread.sleep(2000);
+			Log.info(messageToDisplay);
 			int elementCount = driver.findElements(by).size();
 			turnOnImplicitWaits();
 			if (elementCount > 0) {
@@ -837,6 +840,31 @@ public class CommonLibrary {
 		} catch (Exception e) {
 			turnOnImplicitWaits();
 			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+		
+		return found;
+	}
+	
+	protected Boolean isElementNotPresentZeroWait(By by) throws Exception {
+		Boolean found = false;
+		String messageToDisplay = "Locator [ " + by + "] was not found On Page ";
+		String errorMessageToDisplay = "Locator [ " + by + "] was found On Page ";
+		turnOffImplicitWaits();
+		try {
+			Thread.sleep(2000);
+			Log.info(messageToDisplay);
+			int elementCount = driver.findElements(by).size();
+			turnOnImplicitWaits();
+			if (elementCount > 0) {
+				found = true;
+			}
+		} catch (Exception e) {
+			turnOnImplicitWaits();
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+		if (found == true) {
 			throw new Exception(errorMessageToDisplay);
 		}
 		
@@ -1680,6 +1708,27 @@ public class CommonLibrary {
 
 	}
 
-
+	
+	/**
+	 * Select Element By Visible Text On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected void selectLastValueFromList(String pageName, String fieldName, By by) throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [SelectByVisibleTxt]    ###   Text [last value from drop down]   ###   Locator [" + by + "]";
+		String errorMessageToDisplay = "Could Not Select Text  [last value from drop down] On Page Name [ " + pageName
+				+ "]  And Field Name [" + fieldName + "]";
+		try {
+			Log.info(messageToDisplay);
+			WebElement element = findElement(by);
+			Select select = new Select(element);
+			select.selectByIndex(select.getOptions().size()-1);
+			
+		} catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+	}
 
 }

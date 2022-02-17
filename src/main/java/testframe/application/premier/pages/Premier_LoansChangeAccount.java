@@ -30,6 +30,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By searchTitle = By.xpath("//label[text()='Search']");
 	public By searchTitle2 = By.xpath("//td[contains(text(),'Search')]");
 	public By saveButton2 = By.xpath("//img[contains(@title,'Save')]");
+	public By finishButton = By.xpath("//button[@value='Finish']");
 	By codesPageTitle =  By.xpath("//a[text()='Step 3 - Codes']");
 	By noteNumber = By.xpath("//td[contains(text(),'Note Number:')]/following-sibling::td/input[contains(@id,'AccountNumber')]");
 	By cashProcceds = By.xpath("//td[contains(text(),'Cash Proceeds:')]/following-sibling::td/input[contains(@id,'OrigCashProceeds')]");
@@ -127,6 +128,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By warningInquiryPage =  By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
 	public By searchIconName =  By.xpath("(//img[@title='Search'])[1]");
 	public By nonAccrualHeader = By.xpath("//a[text()='Non-Accrual']");
+	public By paymentsSummaryHeader = By.xpath("//a[text()='Payment Summary']");
 	public By nonAccrualCodeList = By.xpath("//select[contains(@id,'NonAccrualCode')]");
 	public By nonAccrualLateChargeOptionList = By.xpath("//select[contains(@id,'NonAccrualLateChrgOpt')]");
 	public By automaticRecoveryOverrideList = By.xpath("//select[contains(@id,'AutoRecoveryOv')]");
@@ -140,6 +142,15 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By collateralSearch = By.xpath("//label[contains(text(),'Collateral Record Number:')]/../following-sibling::td/input");
 	public By submitSearch = By.xpath("//button[text()='Submit']");
 	public By collateralRecordNoInquiryPage = By.xpath("//table[@name='Collateral to Loan Pledge Summary']//td/u");
+	public By automaticPaymentOptionList = By.xpath("//select[contains(@id,'AutoPymtOption')]");
+	public By paymentCodeList = By.xpath("//select[contains(@id,'PaymentCode')]");
+	public By automaticDraftAmountInput = By.xpath("//input[contains(@id,'AutoDraftAmount')]");
+	public By chargeAccountInput = By.xpath("//input[contains(@id,'ChargeAccount')]");
+	public By automaticDraftPaymentOptionList = By.xpath("//select[contains(@id,'AutoDraftAmountOption')]");
+	public By autoDraftPaymentDateInput = By.xpath("//input[contains(@id,'AutoPymtDraftDate')]");
+	public By automaticPaymentOptionInquiryPage =  By.xpath("//td[text()='Automatic Payment Option:']/following-sibling::td[1]");
+	public By paymentCodeInquiryPage =  By.xpath("//td[text()='Payment Code:']/following-sibling::td[1]");
+	public By automaticDraftPaymentOptionInquiryPage =  By.xpath("//td[text()='Automatic Draft Payment Option:']/following-sibling::td[1]");
 	
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
@@ -155,7 +166,20 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	String updateName = "//b[text()='Name']/../../..//*[text()='%s']";
 	String newNameRelationshipInquiryPage = "//table[@name='Relationships']//u[text()='%s']/../../td[10]";
 	String removeNameIcon = "//*[text()='%s']/../../following-sibling::td/img[contains(@title,'Delete')]";
-	String searchAccountLink = "//td/a[contains(text(),'%s')]";	
+	String searchAccountLink = "//td/a[contains(text(),'%s')]";
+	public By changeProductImg = By.xpath("//td[contains(text(),'Product:')]/../td/img");
+	public By selectProductTitle = By.xpath("//a[text()='Step 1 - Select Product']");
+	public By reviewDefaultsTitle = By.xpath("//a[text()='Step 2 - Review Defaults']");
+	public By classCheckbox = By.xpath("//input[contains(@id,'ClassCode')]");
+	public By checkAllLink = By.xpath("//td/u[text()='Check All']");	
+	String changeProductField = "//td/u[text()='%s']";
+	public By changePortfolioImg = By.xpath("//td[contains(text(),'Portfolio:')]/../td/img");
+	public By changeLineImg = By.xpath("//td[contains(text(),'Line Number:')]/../td/img");
+	public By changePortfolioTitle = By.xpath("//td[text()='Change Portfolio']");
+	public By changeLineTitle = By.xpath("//td[text()='Change Line']");
+	public By lineNoInput = By.xpath("//td[text()='Line Number:']/../td/input");
+	public By productInquiryPage = By.xpath("//td[contains(text(),'Product:')]/following-sibling::td[1]");
+	public By lineInquiryPage = By.xpath("//td[contains(text(),'Line:')]/following-sibling::td[1]");
 	
 	public void changeLoanAccountDetails(String sAccountNumber,String sClass, String sBranchRegion, String sAccountingMethod, String sWarning, String sPaymentFrequency, String sStatusCode, String sWriteDownStatus, String sLoanRatingCode1, String sPaymentRestrictionCode, String sPaymentRestrictionCodeOverride, String sBankruptcyChapter, String sBankruptcyStatus, String sBankruptcyPetitionFileDate) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
@@ -755,32 +779,260 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 		}
 	}
 	public void validateAccountDetailsAfterCollateralAdd(String sAccountNumber,String sCollateralRecordNumber) throws Exception {
+			if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				mouseHoverCickOnElement("Change Account Page", "Collateral Under Balances Tab Field",balancesTab,collateralUnderBalancesTab);
+				waitElement(2000);			
+				switchToWithinFrameWithName("bottom");			
+				if (!sCollateralRecordNumber.equals("")) {
+					validateTextContains("Account Inquiry" , "Collateral Record Number",collateralRecordNoInquiryPage, sCollateralRecordNumber);
+				}
+				stepResult = true;
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");									
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Validated Collateral Details on Inquiry page Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Could not Validated Collateral Details on Inquiry page" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void changeAccountDetails_Payments(String sAccountNumber,String sAutomaticPaymentOption, String sChargeAccount, String sPaymentCode, String sAutomaticDraftAmount, String sAutomaticDraftPaymentOption, String sAutoDraftPaymentDate) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("Change Account Page", "Payment Tab Field",paymentTab);
+				waitElement(2000);
+				if (isElementPresent(paymentsSummaryHeader)) {
+					if (!sAutomaticPaymentOption.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Automatic Payment Option Field",automaticPaymentOptionList, sAutomaticPaymentOption);
+					}
+					if (!sPaymentCode.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Payment Code Field",paymentCodeList, sPaymentCode);
+					}
+					if (!sChargeAccount.equals("")) {
+						enterText("Change Account Page", "Charge Account Field", chargeAccountInput, sChargeAccount);
+					}
+					if (!sAutomaticDraftAmount.equals("")) {
+						enterText("Change Account Page", "Automatic Draft Amount field", automaticDraftAmountInput, sAutomaticDraftAmount);
+					}
+					if (!sAutomaticDraftPaymentOption.equals("")) {
+						selectElementByVisibleText("Change Account Page", "Automatic Draft Payment Option Field", automaticDraftPaymentOptionList, sAutomaticDraftPaymentOption);
+					}
+					if (!sAutoDraftPaymentDate.equals("")) {
+						enterText("Change Account Page", "Auto Draft Payment Date field", autoDraftPaymentDateInput, sAutoDraftPaymentDate);
+					}
+					
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(2000);
+					if(isElementPresent(warningHeader)) {
+						if (isElementPresent(warning2)) {
+							clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
+						}
+						if (isElementPresentZeroWait(warning1)) {
+							clickOnElement("New Loan Page", "Warning 1 Checkbox", warningCheckBox1);
+						}
+						if (isElementPresentZeroWait(warning3)) {
+							clickOnElement("New Loan Page", "Warning 3 Checkbox", warningCheckBox3);
+						}
+						if (isElementPresentZeroWait(warning4)) {
+							clickOnElement("New Loan Page", "Warning 4 Checkbox", warningCheckBox4);
+						}
+						clickOnElement("New Loan Page", "Save Button", saveBtn);
+						waitElement(2000);
+					}
+					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
+					switchToWindowWithTitleContaining("Institution");
+					stepResult = true;	
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Payment Details", "Payment details updated Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Payment Details", "Could not update Payment Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountDetailsAfterChange_Payments(String sAccountNumber,String sAutomaticPaymentOption, String sChargeAccount, String sPaymentCode, String sAutomaticDraftAmount, String sAutomaticDraftPaymentOption, String sAutoDraftPaymentDate) throws Exception {
 		boolean stepResult = false;
 		try {
-			mouseHoverCickOnElement("Change Account Page", "Collateral Under Balances Tab Field",balancesTab,collateralUnderBalancesTab);
-			waitElement(2000);			
-			switchToWithinFrameWithName("bottom");			
-			if (!sCollateralRecordNumber.equals("")) {
-				validateTextContains("Account Inquiry" , "Collateral Record Number",collateralRecordNoInquiryPage, sCollateralRecordNumber);
+			waitElement(5000);
+			clickOnElement("Account Inquiry Page", "Payment Tab Field",paymentTab);	
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeaderInquiry,sAccountNumber))){
+				if (!sAutomaticPaymentOption.equals("")) {
+					validateTextContains("Account Inquiry" , "Automatic Payment Option", automaticPaymentOptionInquiryPage, sAutomaticPaymentOption);
+				}
+				if (!sPaymentCode.equals("")) {
+					validateTextContains("Account Inquiry" , "Payment Frequency", paymentCodeInquiryPage, sPaymentCode);
+				}
+				if (!sAutomaticDraftPaymentOption.equals("")) {
+					validateTextContains("Account Inquiry" , "Payment Frequency", automaticDraftPaymentOptionInquiryPage, sAutomaticDraftPaymentOption);
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;				
 			}
-			stepResult = true;
-			switchToDefaultContent();
-			driver.switchTo().frame("Main");									
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Validated Collateral Details on Inquiry page Successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Validated Loan Details on Inquiry page Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Collateral Details Validation", "Could not Validated Collateral Details on Inquiry page" , "Failed", driver, "Y");
-				System.setProperty("runStep","N");
+				new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Could not Validated Loan Details on Inquiry page" , "Failed", driver, "Y");
 			}
 		}
 	}
+	
+	public void changeAccountProduct(String sAccountNumber, String sChangeProduct) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeader,sAccountNumber))){
+
+					if (!sChangeProduct.equals("")) {
+						if (sChangeProduct.contains("[")){
+							String[] sIRAPlan_split = sChangeProduct.split("\\[");
+							sChangeProduct=sIRAPlan_split[0].trim();
+						}
+						clickOnElement("Change Account Page", "Change Product Image Field", changeProductImg);
+						waitElement(3000);
+						if (isElementPresent(selectProductTitle)) {
+							clickOnElement("Change Account Page", "Product Description Field", getDynamicElement("Product field", changeProductField, sChangeProduct));
+							waitElement(3000);
+						}
+						if (isElementPresent(reviewDefaultsTitle)) {
+							//clickOnElement("Change Account Page", "Class CheckBox Field", classCheckbox);
+							clickOnElement("Change Account Page", "Check All Checkbox Link Field", checkAllLink);							
+							clickOnElement("Change Account Page", "Finish Button Field", finishButton);
+							waitElement(3000);
+						}
+					}				
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details","Account Details changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details","Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountProductAfterChange(String sAccountNumber, String sChangeProduct) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			//clickOnElement("Account Inquiry Page", "Codes Tab Field", codesTab);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeaderInquiry,sAccountNumber))){
+				//clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field", expandWarningInquiryPage);
+				if (!sChangeProduct.equals(""))
+					if (sChangeProduct.contains("[")){
+						String[] sIRAPlan_split = sChangeProduct.split("\\[");
+						sChangeProduct=sIRAPlan_split[0].trim();
+					}
+					validateTextContains("Account Inquiry", "Product field", productInquiryPage,sChangeProduct);
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Could not Validated Account Details on Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void changeAccountLine(String sAccountNumber, String sChangeLine) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeader,sAccountNumber))){
+					if (!sChangeLine.equals("")) {
+						clickOnElement("Change Account Page", "Change Line Image Field", changeLineImg);
+						waitElement(3000);
+						if (isElementPresent(changeLineTitle)) {
+							enterText("Change Account Page", "Enter Line field", lineNoInput, sChangeLine);
+							clickOnElement("Change Account Page", "Submit Button Field", submitSearch);
+							waitElement(3000);
+						}
+					}
+					stepResult = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details","Account Details changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Details", "Could not change account Details","Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountLineAfterChange(String sAccountNumber, String sChangeLine) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			//clickOnElement("Account Inquiry Page", "Codes Tab Field", codesTab);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", loanChangeHeaderInquiry, sAccountNumber))) {
+				//clickOnElement("Account Inquiry Page", "Expand Icon for Warning Field", expandWarningInquiryPage);
+				if (!sChangeLine.equals(""))
+					validateTextContains("Account Inquiry", "Line field", lineInquiryPage,sChangeLine);
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Validated Account Details on Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details Validation","Could not Validated Account Details on Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
 	}
 }
 

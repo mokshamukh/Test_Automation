@@ -58,10 +58,10 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Cancel Duplicate - EPP application", "Cancel Payment Selected Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Duplicate", "Cancel Payment Selected Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Cancel Duplicate - EPP application","Could not Select Cancel Payment Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Cancel Duplicate","Could not Select Cancel Payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -88,10 +88,10 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Release Hold  - EPP application", "Release From Duplicate Hold Selected Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Release from Hold", "Release From Duplicate Hold Selected Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Release Hold - EPP application","Could not Select Release From Duplicate Hold Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Release from Hold","Could not Select Release From Duplicate Hold Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -124,10 +124,10 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Repair Payment  - EPP application", "Repair Payment Selected Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Repair Payment", "Repair Payment Selected Successfully","Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Repair Payment - EPP application","Could not Select Repair Payment Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Repair Payment","Could not Select Repair Payment Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

@@ -37,7 +37,7 @@ public class AdminTest extends ApplicationBase {
 	
 	@SuppressWarnings("unused")
 	public void executeTestCase(WebDriver driver,String sApplicationName, String sURL,String sTestCase, String sTestDescription,
-			String sApplicationTDFolder, String sIteration, String sHTMLFileName) throws Exception{
+			String sApplicationTDFolder, String sIteration, String sHTMLFileName, String sManual_TSID) throws Exception{
 		
 		Admin_Login adminLoginPage = new Admin_Login(driver);
 		Admin_HomeMenu adminHomePage = new Admin_HomeMenu(driver);
@@ -105,7 +105,7 @@ public class AdminTest extends ApplicationBase {
 			new HTMLReportHelper().setHTMLReportFilePath(sHTMLFilePath);
 			new HTMLReportHelper().setScreenShotFolder(sScreenShotFolder);
 			
-			new HTMLReportHelper().HTMLReportHeader("Admin", sTestCase, sTestDescription);
+			new HTMLReportHelper().HTMLReportHeader("Admin", sTestCase, sTestDescription,sManual_TSID);
 			
 			
 			switch(sTestCase.toUpperCase()){
