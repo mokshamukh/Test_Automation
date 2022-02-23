@@ -25,7 +25,7 @@ public class EPP_AuthorizationExceptionsList extends CommonLibrary{
 
 	public String eppAuthorizationExceptions = "EPP_AuthorizationExceptionsList";
 	//*********************************
-	public String transactionIdList = "//div[@id='']//a[@class='linkGeneral'][text()='%s']";
+	public String transactionIdList = "//a[@class='linkGeneral'][text()='%s']";
 	
 	
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Work Summary')]");
@@ -42,10 +42,10 @@ public class EPP_AuthorizationExceptionsList extends CommonLibrary{
 					String transactionID = eppCreatePayment.getTransactionID();
 					//String transactionID_Act = eppActionPrompts.getTransactionIDOnAction();
 					if(!strTransID.equals("")){
-						getDynamicElementClick(eppAuthorizationExceptions, "Work Summary List", transactionIdList, strTransID);
+						getDynamicElementClick(eppAuthorizationExceptions, "Transaction List", transactionIdList, strTransID);
 					}else{
 						if(!(transactionID==null)) {
-							getDynamicElementClick(eppAuthorizationExceptions, "Work Summary List", transactionIdList, transactionID);
+							getDynamicElementClick(eppAuthorizationExceptions, "Transaction List", transactionIdList, transactionID);
 							
 						}
 						else {

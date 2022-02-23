@@ -19,6 +19,7 @@ public class EPP_CreatePayment extends CommonLibrary {
 
 	static String transactionID;
 	String savedtransactionID;
+	int longWait = 180;
 
 	public EPP_CreatePayment(WebDriver driver) {
 		super(driver);
@@ -68,7 +69,9 @@ public class EPP_CreatePayment extends CommonLibrary {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
-				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				
+				//getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				waitForPresenceOfElementTillTime(eppCreatePayment, "Validate Button", validateBttn,longWait );
 				if (!accNum.equals("")){
 					enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, accNum);
 					waitElement(1500);
@@ -169,7 +172,8 @@ public class EPP_CreatePayment extends CommonLibrary {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
-				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				//getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				waitForPresenceOfElementTillTime(eppCreatePayment, "Validate Button", validateBttn,longWait );
 				enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
 				waitElement(3000);
 				clickOnElement(eppCreatePayment, "Ordering Customer_LookUp", custLookup);
@@ -225,7 +229,8 @@ public class EPP_CreatePayment extends CommonLibrary {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
-				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				//getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				waitForPresenceOfElementTillTime(eppCreatePayment, "Validate Button", validateBttn,longWait );
 				enterText(eppCreatePayment, "Ordering Customer Account", custaccountNum, custAccNum);
 				waitElement(3000);
 				clickOnElement(eppCreatePayment, "Ordering Bank Expand Button", incomngOrderBankExpand);
@@ -278,7 +283,8 @@ public class EPP_CreatePayment extends CommonLibrary {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
-				getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				//getDynamicElement(eppCreatePayment, createPaymentTitle, "Create Payment");
+				waitForPresenceOfElementTillTime(eppCreatePayment, "Validate Button", validateBttn,longWait );
 				enterText(eppCreatePayment, "Ordering Bank Account", orderingBankaccNum, bankAccNum);
 				waitElement(3000);
 				selectElementByVisibleText(eppCreatePayment, "System Code", orderBankSystemCode, bankSystemCode);

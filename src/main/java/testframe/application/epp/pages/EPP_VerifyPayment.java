@@ -19,7 +19,8 @@ public class EPP_VerifyPayment extends CommonLibrary{
 		eppCreatePayment = new EPP_CreatePayment(driver);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	int longWait = 200000;
 	public String eppVerifyDetails = "EPP_VerifyDetails";
 
 	By title = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Repair Verification')]");
@@ -36,17 +37,29 @@ public class EPP_VerifyPayment extends CommonLibrary{
 	By paymentDetails = By.xpath("//div[@id='headerBar']//td[contains(text(),'Payment Details')]");
 	By amount = By.xpath("//input[@id='Amount']");
 	public String  transactionIdList = "//div[@id='Refresh_MEPaymentVerify']//a[@class='linkGeneral'][text()='%s']";
+	By auditTrail = By.xpath("//a[text()='Audit Trail']");
+	By messagesTab = By.xpath("//a[text()='Messages']");
+	By sentMessage = By.xpath("//a[text()='Sent']");
+	By selectAction = By.xpath("//select[@id='ActionSelect']");
+	By password = By.xpath("//input[@name='ValidatePassword']");
+	By submit = By.xpath("//a[@id='Submit']");
+	String transactionIDLink = "//a[text()='%s']";
+	By executeButton = By.xpath("//div[@id='img_button_execute']");	
+	By transStatus = By.xpath("(//div[@id='contentBody']//table[@class='outer-table'])[1]//tr[2]//td[@class='valueCell'][2]");
 
-	public void approvePaymentRepairAction(String valueDate, String  strTransactionID) throws Exception {
+	public void approvePaymentRepairAction(String valueDate, String  strTransactionID,String sPassword) throws Exception {
 		if (System.getProperty("runStep")=="Y"){ 
 			boolean stepResult = false;
 			try {
+				
 				if(isElementPresentZeroWait(title)){
 					if (!strTransactionID.equals("")){
+						
 						getDynamicElementClick(eppVerifyDetails, "Work Summary List", transactionIdList, strTransactionID);
 					}else{
 						String transactionID = eppCreatePayment.getTransactionID();
-					getDynamicElementClick(eppVerifyDetails, "Work Summary List", transactionIdList, transactionID);
+						getDynamicElementClick(eppVerifyDetails, "Work Summary List", transactionIdList, transactionID);
+						strTransactionID = transactionID;
 					}
 					waitElement(3000);
 					
@@ -56,12 +69,31 @@ public class EPP_VerifyPayment extends CommonLibrary{
 					enterText(eppVerifyDetails, "Value Date", date, valueDate);
 					
 					clickOnElement(eppVerifyDetails, "Approve Button", approveBtn);
-					waitElement(8000);
+					waitElement(3000);
 					validateElementPresent(eppVerifyDetails, "Action Successfull Message", actionSuccessfull);
 					waitElement(2000);
 					clickOnElement(eppVerifyDetails, "Clicked on Transaction ID", transIdSaved);
 					waitElement(1000);
 					waitForPresenceOfElement(eppVerifyDetails, "Payment Details",paymentDetails);
+					waitElement(longWait);
+					if (getElementText(eppVerifyDetails,"Transaction Status",transStatus).equals("Clearing")){
+						clickOnElement(eppVerifyDetails, "Audit Trail Tab", auditTrail);
+						waitElement(1000);
+						clickOnElement(eppVerifyDetails, "Messages Tab", messagesTab);
+						waitElement(1000);
+						clickOnElement(eppVerifyDetails, "Sent", sentMessage);
+						waitElement(1000);
+						selectElementByVisibleText(eppVerifyDetails, "Select Action", selectAction,"Manual Ack");
+						clickOnElement(eppVerifyDetails, "Execute Button", executeButton);
+						waitElement(1000);
+						enterText(eppVerifyDetails, "Paswword Field", password, sPassword);
+						clickOnElement(eppVerifyDetails, "Submit Button", submit);
+						waitElement(1000);
+						System.out.println(strTransactionID);
+						getDynamicElementClick(eppVerifyDetails, "Transaction ID link", transactionIDLink,strTransactionID);
+						waitElement(1500);
+					}
+					
 					validateElementPresent(eppVerifyDetails, "Status Message", transactionStatus);
 					stepResult = true;
 					

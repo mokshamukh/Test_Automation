@@ -217,6 +217,7 @@ public class EPP_Templates extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", duplicatePayment);
 				clickOnElement(eppPoolOptions, "Pool Value", duplicatePayment);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -242,6 +243,7 @@ public class EPP_Templates extends CommonLibrary{
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", paymentActionVerificationOption);
 				clickOnElement(eppPoolOptions, "Pool Value", paymentActionVerificationOption);
 				Thread.sleep(4000);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -266,6 +268,7 @@ public class EPP_Templates extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", paymentCreationVerificationOption);
 				clickOnElement(eppPoolOptions, "Pool Value", paymentCreationVerificationOption);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -289,6 +292,7 @@ public class EPP_Templates extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", paymentRepair);
 				clickOnElement(eppPoolOptions, "Pool Value", paymentRepair);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -315,6 +319,7 @@ public class EPP_Templates extends CommonLibrary{
 				//Thread.sleep(4000);
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", paymentRepairVerification);
 				clickOnElement(eppPoolOptions, "Pool Value", paymentRepairVerification);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -338,6 +343,7 @@ public class EPP_Templates extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", internalFilter);
 				clickOnElement(eppPoolOptions, "Pool Value", internalFilter);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -361,6 +367,7 @@ public class EPP_Templates extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", notification);
 				clickOnElement(eppPoolOptions, "Pool Value", notification);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -384,6 +391,7 @@ public class EPP_Templates extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", pendingOutgoingRecallReq);
 				clickOnElement(eppPoolOptions, "Pool Value", pendingOutgoingRecallReq);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -408,6 +416,7 @@ public class EPP_Templates extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", authorizationExceptions);
 				clickOnElement(eppPoolOptions, "Pool Value", authorizationExceptions);
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -434,6 +443,7 @@ public class EPP_Templates extends CommonLibrary{
 				//Thread.sleep(4000);
 				waitForPresenceOfElement(eppPoolOptions, "Pool Value", getDynamicElement("Pool Name",workSummaryPool,sPoolName));
 				clickOnElement(eppPoolOptions, "Pool Value", getDynamicElement("Pool Name",workSummaryPool,sPoolName));
+				goToLastRecordPage();
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
