@@ -127,9 +127,12 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By newStopPayAddImg = By.xpath("//img[@alt='New']");
 	public By stopPayMenu = By.xpath("//a[contains(text(),'Stop Pay')]");
 	public By transferMenu = By.xpath("//a[contains(text(),'Transfer')]");
+	public By beneficiaryMenu = By.xpath("//a[contains(text(),'Beneficiary')]");
+	public By beneficiaryMenu2 = By.xpath("(//a[contains(text(),'Beneficiary')])[2]");
 	public By analysisItemsMenu = By.xpath("//a[contains(text(),'Analysis Items')]");
 	public By stopPayLabel = By.xpath("//a[text()='Stop Pay - New']");
 	public By transferLabel = By.xpath("//a[contains(text(),'Transfer - New')]");
+	public By beneficiaryLabel = By.xpath("//a[contains(text(),'Beneficiary - ')]");
 	public By stopPayTypeInput = By.xpath("(//input[contains(@id,'ItemType')])[2]");
 	public By stopPayTypeSelect = By.xpath("(//input[contains(@id,'ItemType')])[3]");
 	String stopPayTypeList = "//select[contains(@id,'ItemType')]/option[contains(text(),'%s')]";
@@ -149,6 +152,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By stopPayPayeeComments = By.xpath("//input[contains(@id,'Comments')]");
 	public By stopPayInquirylabel = By.xpath("//td[text()='Stop Pays']");
 	public By transferInquirylabel = By.xpath("//td[contains(text(),'Transfer To')]");
+	public By beneficiaryInquirylabel = By.xpath("(//td[contains(text(),'Beneficiary Addenda')])[1]");
 	String verifyStopPayData = "//table[@name='Stop Pays']//td[contains(text(),'%s')]";
 	String expandStopPayInquiry = "//table[@name='Stop Pays']//td[contains(text(),'%1$s')]/following-sibling::td[text()='%2$s']//..//img";
 
@@ -251,6 +255,14 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By transferFrequencyInquiryPage = By.xpath("//td[text()='Transfer Frequency:']/following-sibling::td[1]");
 	public By transferDayInquiryPage = By.xpath("//td[text()='Transfer Day:']/following-sibling::td[1]");
 	public By notificationCodeInquiryPage = By.xpath("//td[text()='Notification Code:']/following-sibling::td[1]");
+	public By beneRelationsipInput = By.xpath("//input[contains(@id,'Relationship')]");
+	public By benePercentInput = By.xpath("//input[contains(@id,'BeneficiaryPercentage')]");
+	public By searchNameImg =  By.xpath("//img[@title='Search']");
+	public By searchAddress =  By.xpath("//img[@title='Search For Address']");
+	public By beneficiarySSNInquiryPage = By.xpath("//tr[contains(@name,'Beneficiary Addenda')]/../../following-sibling::table//td[text()='Tax Identification Number:']/following-sibling::td[1]");
+	public By beneficiaryPercentInquiryPage = By.xpath("//td[text()='Beneficiary Percent:']/following-sibling::td[1]");
+	public By beneficiaryRelationshipInquiryPage = By.xpath("//td[text()='Beneficiary Relationship:']/following-sibling::td[1]");
+	String beneAddress = "//tr/td[text()='%s']";
 	
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
@@ -2376,4 +2388,154 @@ public class Premier_DepositAccounts extends CommonLibrary {
 			}
 		}
 	}
+	
+	public void changeAccountAddBeneficiary(String sAccountNumber, String sBeneficiarySSN, String sBeneficiaryAddress,
+			String sBeneficiaryRelationship, String sBeneficiaryPercent)throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					mouseHoverCickOnElement("Change Account Page", "Beneficiary Menu Field", fileMenu, beneficiaryMenu);
+					if (isElementPresent(beneficiaryLabel)) {
+						if (!sBeneficiarySSN.equals("")) {
+								clickOnElement("Change Account Page", "Search Name", searchNameImg);
+								Thread.sleep(4000);
+								switchToWindowWithTitleContaining("Name Search");
+								Thread.sleep(4000);
+								driver.switchTo().frame("bottom");
+								new Premier_CustomerContact(driver).searchSSN(sBeneficiarySSN);
+								Thread.sleep(4000);
+								switchToWindowWithTitleContaining("Institution");
+								driver.switchTo().frame("Main");
+						}
+						if (!sBeneficiaryAddress.equals("")) {
+							clickOnElement("Change Account Page", "Search Address", searchAddress);
+							Thread.sleep(4000);
+							switchToWindowWithTitleContaining("Address Search");
+							Thread.sleep(4000);
+							driver.switchTo().frame("bottom");
+							new Premier_CustomerAddress(driver).searchAddress(sBeneficiaryAddress);
+							Thread.sleep(4000);
+							switchToWindowWithTitleContaining("Institution");
+							driver.switchTo().frame("Main");
+						}
+						if (!sBeneficiaryRelationship.equals("")) {
+							clearAndType("Change Account Page", "Beneficiary Relationship field", beneRelationsipInput,sBeneficiaryRelationship);
+						}
+						if (!sBeneficiaryPercent.equals("")) {
+							clearAndType("Change Account Page", "Beneficiary Percent field", benePercentInput,sBeneficiaryPercent);
+						}
+						stepResult = true;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Beneficiary Details","Account Details - Beneficiary changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Beneficiary Details","Could not change account Details- Beneficiary", "Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountAddBeneficiaryAfterChange(String sAccountNumber, String sBeneficiarySSN, String sBeneficiaryAddress,
+			String sBeneficiaryRelationship, String sBeneficiaryPercent) throws Exception {
+		boolean stepResult = false;
+		try {
+			clickOnElement("Account Inquiry Page", "Relationship Tab Field",relationshipTab);
+			waitElement(1000);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				if (isElementPresent(beneficiaryInquirylabel)) {
+
+					if (!sBeneficiarySSN.equals(""))
+						validateTextContains("Account Inquiry", "Beneficiary SSN field", beneficiarySSNInquiryPage,sBeneficiarySSN);
+					
+					if (!sBeneficiaryAddress.equals(""))
+						validateElementPresent("Account Inquiry", "Beneficiary Address field",
+								getDynamicElement("Beneficiary Address field", beneAddress, sBeneficiaryAddress));
+					
+					if (!sBeneficiaryRelationship.equals(""))
+						validateTextContains("Account Inquiry", "Beneficiary Relationship field", beneficiaryRelationshipInquiryPage,sBeneficiaryRelationship);
+					
+					if (!sBeneficiaryPercent.equals(""))
+						validateTextContains("Account Inquiry", "Beneficiary Percent field", beneficiaryPercentInquiryPage,sBeneficiaryPercent);
+					
+					stepResult = true;
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details -Beneficiary Validation","Validated Account Details - Beneficiary on Account Inquiry page Successfully", "Passed", driver,"Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Beneficiary  Validation","Could not Validated Account Details - Beneficiary on Account Inquiry page", "Failed", driver,"Y");
+			}
+		}
+	}
+	
+	public void changeAccountUpdateBeneficiary(String sAccountNumber, String sBeneficiarySSN, String sBeneficiaryAddress,
+			String sBeneficiaryRelationship, String sBeneficiaryPercent)throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					mouseHoverCickOnElement("Change Account Page", "Beneficiary Menu Field", relationshipTab, beneficiaryMenu2);
+					if (isElementPresent(beneficiaryLabel)) {
+						if (!sBeneficiarySSN.equals("")) {
+								clickOnElement("Change Account Page", "Search Name", searchNameImg);
+								Thread.sleep(4000);
+								switchToWindowWithTitleContaining("Name Search");
+								Thread.sleep(4000);
+								driver.switchTo().frame("bottom");
+								new Premier_CustomerContact(driver).searchSSN(sBeneficiarySSN);
+								Thread.sleep(4000);
+								switchToWindowWithTitleContaining("Institution");
+								driver.switchTo().frame("Main");
+						}
+						if (!sBeneficiaryAddress.equals("")) {
+							clickOnElement("Change Account Page", "Search Address", searchAddress);
+							Thread.sleep(4000);
+							switchToWindowWithTitleContaining("Address Search");
+							Thread.sleep(4000);
+							driver.switchTo().frame("bottom");
+							new Premier_CustomerAddress(driver).searchAddress(sBeneficiaryAddress);
+							Thread.sleep(4000);
+							switchToWindowWithTitleContaining("Institution");
+							driver.switchTo().frame("Main");
+						}
+						if (!sBeneficiaryRelationship.equals("")) {
+							clearAndType("Change Account Page", "Beneficiary Relationship field", beneRelationsipInput,sBeneficiaryRelationship);
+						}
+						if (!sBeneficiaryPercent.equals("")) {
+							clearAndType("Change Account Page", "Beneficiary Percent field", benePercentInput,sBeneficiaryPercent);
+						}
+						stepResult = true;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Beneficiary Details","Account Details - Beneficiary changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Beneficiary Details","Could not change account Details- Beneficiary", "Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
 }

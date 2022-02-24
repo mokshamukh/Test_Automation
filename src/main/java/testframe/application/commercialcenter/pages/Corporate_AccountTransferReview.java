@@ -94,12 +94,12 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - verify acc details");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-							"verify account details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("verify account details",
+							"verify account details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-							"Could not verify account details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("verify account details",
+							"Could not verify account details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -208,12 +208,12 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Multi  Acc Transfer Review");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-							"verify multiple account details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("verify multiple account details",
+							"verify multiple account details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-							"Could not verify multiple account details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("verify multiple account details",
+							"Could not verify multiple account details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -231,12 +231,12 @@ public class Corporate_AccountTransferReview extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Acc Transfer review confirm");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-							"click confirm button Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("click confirm button",
+							"click confirm button successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Account Transfer Review CC- Corporate application",
-							"Could not click confirm button Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("click confirm button",
+							"Could not click confirm button successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

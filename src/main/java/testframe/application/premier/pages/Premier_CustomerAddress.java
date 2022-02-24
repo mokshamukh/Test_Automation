@@ -265,10 +265,10 @@ public class Premier_CustomerAddress extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Seacrh Address  Successfully","Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Search Address","Search Address Successfully","Passed",driver,"N");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Seacrh Address", "Could not search the Address","Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Search Address", "Could not search the Address","Failed", driver, "N");
 					System.setProperty("runStep","N");
 				}
 			}

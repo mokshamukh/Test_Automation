@@ -301,8 +301,6 @@ public class PremierTestSet1 extends ApplicationBase {
 
 				new PremierCommonNavigation().customerInquiry("",  sChangeSSN,tc_Test_Data.get(iTDRow).get("ChangeName_Name"), tc_Test_Data.get(iTDRow).get("ChangeContact_PhoneNumber"),tc_Test_Data.get(iTDRow).get("ChangeContact_Email"),
 						tc_Test_Data.get(iTDRow).get("Address_Address1"), tc_Test_Data.get(iTDRow).get("Address_Address2"), tc_Test_Data.get(iTDRow).get("Address_Zipcode"),"","");
-
-
 				premierLogOff.logoffApplication();
 
 				break;
@@ -532,11 +530,11 @@ public class PremierTestSet1 extends ApplicationBase {
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
-
+				
 				if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 					new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 					tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
-				}			
+				}
 				premierHomeMenuPage.depositsMenu();
 				premierHomeMenuPage.demandDepositsSubMenu();
 				premierHomeMenuPage.newDemandDeposits();
@@ -553,10 +551,10 @@ public class PremierTestSet1 extends ApplicationBase {
 				premierDepositAccounts.newDepositAccount_CustomerScreenDetails(tc_Test_Data.get(iTDRow).get("Deposit_Product"));
 				premierDepositAccounts.newDepositAccount_CodesScreen(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"),tc_Test_Data.get(iTDRow).get("Deposit_InitialDeposit"),tc_Test_Data.get(iTDRow).get("Deposit_ResponsibilityCode"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitlePrintOption"),tc_Test_Data.get(iTDRow).get("Deposit_AccountTitle"),testdataFile_Path, sTestCase, iTDRow+1);
 				premierDepositAccounts.depositFinishButton();//need to update
-
+				
 				premierHomeMenuPage.accountInquiryDemandDeposits();
 				premierDepositAccounts.searchAccount(tc_Test_Data.get(iTDRow).get("Deposit_AccountNumber"));	
-
+				
 				strPortfolioCustName  = tc_Test_Data.get(iTDRow).get("Deposit_Name");
 				strPortfolioCustName_Split = strPortfolioCustName.split("\\|\\|"); 
 				iPortfolioCustomerCount = strPortfolioCustName_Split.length;

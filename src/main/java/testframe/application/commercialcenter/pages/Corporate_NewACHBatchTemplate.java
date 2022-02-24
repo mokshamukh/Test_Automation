@@ -55,7 +55,7 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 	public By existAmount = By.xpath("//input[@id='payeeAmountAdd']|(//input[@id='newPayeeAmoountAdd'])[1]");
 	public By existPayeeId = By.xpath("//input[@id='payeeId']");
 	public By searchSymbol = By.xpath("//button[contains(@aria-label,'get the list matching the search criteria')]");
-	public By reviewDetails = By.xpath("//th[contains(text(),'Payee')][@role='columnheader']//..//..//..//td[@class='ng-star-inserted'][1]");
+	public By reviewDetails = By.xpath("//th[contains(text(),'Payee')][@role='columnheader']//..//..//..//td[@class='ng-star-inserted']//div[1]");
 	public By reviewAmt = By.xpath("//td[contains(@class,'bordered-last-column ng-star')]");
 	public By confirmButton = By.xpath("//button[text()='Confirm']");
 	public By pleaseReverifyTitle = By.xpath("//h4[contains(text(),'Please Reverify')]");
@@ -70,8 +70,19 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 	public By editAchbatchTemplate = By.xpath("//button[contains(@aria-label,'make changes to the ACH details.')]//i[text()='mode_edit']");
 	public By existingNewAmount = By.xpath("(//input[@id='newPayeeAmoountAdd'])[2]");
 	public By paymentAmount = By.xpath("//label[@for='payeeAmount1']//..//input[@id='newPayeeAmoountAdd']");
-
+	public By recurringOption = By.xpath("(//div[@class='card-header'])[2]/a/i[text()='keyboard_arrow_right']");
+	public By freq = By.xpath("//ul[@class='nav nav-pills flex-column']/li/a[@id='DAILY']");
+	public By seriesDetailsDate = By.xpath("//input[@id='defaultStartDate']");
+	public By saveButton = By.xpath("//button[text()='Save'][contains(@aria-label,'recurring options')]");
+	public By seriesNameField= By.xpath("//input[@formcontrolname='seriesName']");
+	public By paymentActivityTitle = By.xpath("//h3[contains(text(),'Current Activity Summary')]|//button[contains(text(),'Payment Activity')]");
+    public By reviewBatchType = By.xpath("//div[@class='form-group']//div[@id='batchType'][contains(text(),'')]");
+    public By reviewOffsetAccount = By.xpath("//div[@class='form-group ng-star-inserted']//div[@id='offsetAccount']");
+	
+	
 	String list = "//li[@role='option']/span[contains(text(),'%s')]";
+	String amount_field = "(//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td/div)[1]";
+	String status_field ="//div[contains(@class,'tranIdLable')]/span[contains(text(),'%s')]/../../following-sibling::td/span";
 	String transactionID;
 	//ul[contains(@class,'ui-autocomplete')][@role='listbox']
 
@@ -87,7 +98,7 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
-				Thread.sleep(4000);
+				Thread.sleep(2500);
 				if (isElementPresent(newAchBatchTitle)) {
 					clickOnElement("New ACH Batch Template", "free form field", freeFormField);
 					if (!achCompany.equals("")) {
@@ -116,12 +127,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Created start ACH  with free form Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create ach with free form",
+							"Created ach  with free form successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not Created start ACH Payment with free form Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create ach with free form",
+							"Could not create start ach payment with free form successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -138,8 +149,8 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 				if (isElementPresent(newAchBatchTitle)) {
 					clickOnElement("New ACH Batch Template", "Template field", templateField);
 					if (!existAchBatchTemplate.equals("")) {
-						//clickOnElement("New ACH Batch Template",  "Exist Template Name", existTemplateField);
-						selectElementFromListbox("New ACH Batch Template", "Exist Template Name", existTemplateField, list,existAchBatchTemplate);
+						enterText("New ACH Batch Template", "Exist Template Name", existTemplateField, existAchBatchTemplate);
+						clickOnElement("New ACH Batch Template",  "Exist Template Name", getDynamicElement("Exist Template Name", list, existAchBatchTemplate));
 					}
 					clickOnElement("New ACH Batch Template", "Next Button", nextButton);
 					stepResult = true;
@@ -149,12 +160,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Created start ACH Payment Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create ach payment",
+							"Created ach payment successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not Created start ACH Payment Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create ach payment",
+							"Could not create ach payment successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -165,13 +176,14 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 
 	public void enterACHPaymentDetails(String paymentDate, String cmpDiscretionary, String cmpEntryDiscretionary,
 			String offsetAcc,String amount,String new_CreatePayeeName,String new_CreatePayeeID,String new_CreateAccountNumber,
-			String new_CreateBankID,String new_CreateBankName,String new_CreateDebitAuthType,String new_CreateMixedDebitorCredit,
-			String new_Amount,String new_addenda,String new_sendRemittanceToPayee) throws Exception {
+			String new_CreateBankID,String new_CreateBankName,String new_CreateDebitAuthType,String new_Amount,
+			String new_CreateMixedDebitorCredit,String new_addenda,String new_sendRemittanceToPayee) throws Exception {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
 				if (isElementPresent(achBatchDeailsTitle)) {
 					if (!paymentDate.equals("")) {
+						waitElement(2000);
 						enterPaymentDate(paymentDate);
 						//clearAndType("New ACH Batch Template", "Payment Date", paymentDateField, paymentDate);
 					}
@@ -190,14 +202,24 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 					if(!amount.equals("")) {
 						clearAndType("New ACH Batch Template", "Amount Field", paymentAmount, amount);
 					}
-					if(!new_CreatePayeeName.equals("")) {
-						corporateACHBatchTemplate.createNewPayee(new_CreatePayeeName, new_CreatePayeeID,new_CreateAccountNumber,
-								new_CreateBankID,new_CreateBankName,new_CreateDebitAuthType,new_CreateMixedDebitorCredit,new_Amount,new_addenda,new_sendRemittanceToPayee);
-						//searchPayee(existPayeeName, existPayeeAmt);
-						//verifyPayeeandAddAmount(displaName, displayyAcc, amt, addenda);
-						//				}else {
-						//					searchPayee(existPayeeName, existPayeeAmt);
-						//				}
+					//					if(!new_CreatePayeeName.equals("")) {
+					//						corporateACHBatchTemplate.createNewPayee(new_CreatePayeeName, new_CreatePayeeID,new_CreateAccountNumber,
+					//								new_CreateBankID,new_CreateBankName,new_CreateDebitAuthType,new_CreateMixedDebitorCredit,new_Amount,new_addenda,new_sendRemittanceToPayee);
+					//						//searchPayee(existPayeeName, existPayeeAmt);
+					//						//verifyPayeeandAddAmount(displaName, displayyAcc, amt, addenda);
+					//						//				}else {
+					//						//					searchPayee(existPayeeName, existPayeeAmt);
+					//						//				}
+					//					}
+					String[] multiPayee;
+					if (!new_CreatePayeeName.equals("")) {
+						multiPayee = new_CreatePayeeName.split("\\|\\|");
+						for(int i=0;i<=multiPayee.length-1;i++){
+							corporateACHBatchTemplate.createNewPayee(new_CreatePayeeName.split("\\|\\|")[i],new_CreatePayeeID.split("\\|\\|")[i],
+									new_CreateAccountNumber.split("\\|\\|")[i],new_CreateBankID.split("\\|\\|")[i],
+									new_CreateBankName.split("\\|\\|")[i],new_CreateDebitAuthType.split("\\|\\|")[i],
+									new_Amount.split("\\|\\|")[i],new_CreateMixedDebitorCredit.split("\\|\\|")[i],new_addenda.split("\\|\\|")[i],new_sendRemittanceToPayee.split("\\|\\|")[i]);
+						}
 					}
 					waitElement(5000);
 					waitForPresenceOfElement("New ACH Batch Template", "Auto Save Message", autoSaveMsg);
@@ -209,12 +231,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"enter ACH Payment details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Entered ach payment details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Could not enter ach payment details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -251,12 +273,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"enter ACH Payment details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Enter ach payment details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Could not enter ach payment details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -290,12 +312,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"enter ACH Payment details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Enter ach payment details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Could not enter ach payment details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -303,36 +325,39 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 
 	}
 
-	public void reviewAchBatchDetails(String payeeName, String amount) throws Exception {
+	public void reviewAchBatchDetails(String payeeName, String amount,String batchType) throws Exception {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			boolean flag = false;
 			try {
 				if (isElementPresent(achBatchDeailsTitle)) {
-					List<WebElement> element = findElements(reviewDetails);
-					for (WebElement ele : element) {
-						if (ele.getText().contains(payeeName)) {
-							flag = true;
-						} else {
-							flag = false;
-						}
-					}
-				}
-				validateElementExist("New ACH Batch Template", "AmountField", reviewAmt, amount);
-				//validateElementAttributeContains("New ACH Batch Template", "Amount", reviewAmt, "text", amount);
-				clickOnElement("New ACH Batch Template", "Confirm Button", confirmButton);
-				stepResult = true;
+//					String[] payee = payeeName.trim().split("\\|\\|");
+//					for (int i = 0; i < payee.length; i++) {
+//						List<WebElement> element = findElements(reviewDetails);
+//						for (WebElement ele : element) {
+//							if (ele.getText().contains(payee[i])) {
+//								flag = true;
+//							} else {
+//								flag = false;
+//							}
+//						}
+//					}
+				validateElementExist("New ACH Batch Template", "Batch Type", reviewBatchType, batchType);
+//				validateElementExist("New ACH Batch Template", "AmountField", reviewAmt, amount);
+					clickOnElement("New ACH Batch Template", "Confirm Button", confirmButton);
+					stepResult = true;
+				}		
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Review ACH Payment details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Review ach payment details",
+							"Review ach payment details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not Review ACH Payment details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Review ach payment details",
+							"Could not review ach payment details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -356,12 +381,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"enter ACH Payment details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Enter ach payment details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Could not enter ach payment details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -383,12 +408,12 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"enter ACH Payment details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Enter ach payment details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not enter ACH Payment details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter ach payment details",
+							"Could not enter ach payment details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -403,21 +428,18 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			boolean stepResult = false;
 			try {
 				clickOnElement("New ACH Batch Template", "Request Batch Button", requestBatchButton);
-				//		if(isElementPresent(requestBatchButton)) {
-				//			clickOnElement("New ACH Batch Template", "Request Batch Button", requestBatchButton);
-				//		}
 				stepResult = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Clicked on Request Batch button Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on request batch button",
+							"Clicked on request batch button successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("New ACH Batch Template- Corporate application",
-							"Could not clicked on Request Batch button Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on request batch buttons",
+							"Could not clicked on request batch button successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -433,7 +455,9 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 						driver.findElement(paymentDateField).sendKeys(Keys.BACK_SPACE);
 					}
 					enterText("Corporate ACH Payment", "Payment Date", paymentDateField, paymentDates);
+					waitElement(2000);
 					clickOnElement("Corporate ACH Payment", "Payment Date Title", paymentDateTitle);
+					waitElement(2000);
 				}
 				stepResult = true;
 			} catch (Exception e) {
@@ -441,11 +465,11 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass -- transfer date");
-					new HTMLReportHelper().HtmlReportBody("AcH CC- Corporate application", "Enter transfer date field Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter transfer date field", "Enter transfer date field successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("ACH CC- Corporate application", "Could not Enter transfer date field Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter transfer date field", "Could not enter transfer date field successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -504,17 +528,159 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-							"Edit ACH Payment details Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Edit ach payment details",
+							"Edit ach payment details successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("ACH Batch Template- Corporate application",
-							"Could not Edit ACH Payment details Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Edit ach payment details",
+							"Could not edit ach payment details successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
 		}
 	}
 
+
+	public void selectRecurringOption(String recurringOpt) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!recurringOpt.equals("")) {
+					clickOnElement("Corporate Wire Transfer", "Recurring Option Accordion", recurringOption);
+					waitForPresenceOfElement("Corporate Wire Transfer", "Frequency", freq);
+				}
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Select recurring option", "Select recurring option successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Select recurring option", "Could not select recurring option successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+	public void enterSeriesDetails(String seriesDate) throws Exception{
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				if (!seriesDate.equals("")) {
+					for (int i = 1; i <= 10; i++) {
+						driver.findElement(seriesDetailsDate).sendKeys(Keys.BACK_SPACE);
+					}
+					Thread.sleep(10000);
+					enterText("Corporate Account Transfer", "Series Details Date", seriesDetailsDate, seriesDate);
+				}
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Enter series date", "Enter series date successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter series date", "Could not enter series date successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+
+	public void clickRecurringSaveButtonForACH() throws Exception{
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				clickOnElement("Corporate Account Transfer", "Save Button", saveButton);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true){
+					System.out.println("Pass -- transfer date");
+					new HTMLReportHelper().HtmlReportBody("Click save button", "Click save button successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click save button", "Could not click save button successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+	public void enterACHSeriesName(String name) throws Exception{
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				enterText("Corporate Account Transfer", "Series Name", seriesNameField, name);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true){
+					System.out.println("Pass - Acc Transfer -- Series Name");
+					new HTMLReportHelper().HtmlReportBody("Enter series name", "Enter series name successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Enter series name", "Could not enter series name successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+
+	public void verifyInitiatorRecurringPaymentDetailsForACH(String seriesName,String amount, String editStatus) throws Exception {
+		//String initiator){
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				if (isElementPresent(paymentActivityTitle)) {
+					if(!amount.equals("")){
+						validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, seriesName),amount);
+					}
+					if(!"Scheduled".equals("")){
+						validateTextContains("Corporate Current Payment Activity", "Status", getDynamicElement("Status", status_field, seriesName), "Scheduled");
+					}
+				}
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass -Recurring Payment Activity -Approved");
+					new HTMLReportHelper().HtmlReportBody("Validate Payment Details",
+							"Validate payment details successfully", "Passed", driver, "Y");}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Validate Payment Details",
+							"Could not validate payment details  successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+
+	}
+
+
+
 }
+
+
+
+
 
