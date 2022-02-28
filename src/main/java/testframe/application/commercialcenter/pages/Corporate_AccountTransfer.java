@@ -1,5 +1,8 @@
 package testframe.application.commercialcenter.pages;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -18,11 +21,11 @@ import testframe.common.utilities.ExcelReader;
 
 public class Corporate_AccountTransfer extends CommonLibrary {
 
-	public String currentBalanceField;
+	String currentBalanceField;
 	public String sAfterTransBalance;
-	public int iAfterTransAccountBalance;
-	public int iInitialBalance;
-	public int totalAmount;
+	public double iAfterTransAccountBalance;
+	public double iInitialBalance;
+	public double totalAmount;
 
 	By accountTransferTitle = By.xpath("//button[contains(text(),'Account Transfer')]");
 	By fromAccountField = By.xpath(
@@ -67,9 +70,19 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	By accountNumberField = By.xpath("//input[@name='accountNumberId']");
 	By accountSearchButton = By.xpath("//button//span[text()='ui-btn']");
 	By accountBalanceHeader = By.xpath("//h1[text()='Account Balances']");
+	By accountTransactionHeader = By.xpath("//h1[contains(text(),'Transaction Search')]");
 	By searchAccountNumber = By.xpath("//button[contains(@aria-label,'To get the list matching the search criteria')]//i[text()='search']");
 	By currentBalance = By.xpath("//div[text()='Current Balance ']//..//span[@class='card-value']");
 	By closeBalanceTab = By.xpath("//a[@title='Balances']//i[text()='close']");
+	By transactionSearchAccNum = By.xpath("//input[@id='accountNumber']");
+	By transSearchButton = By.xpath("(//div[@class='transaction-search']//button[contains(@aria-label,'To get the list matching the search criteria')]//i[text()='search'])[1]");
+	By showingTransactions = By.xpath("(//div//span[@class='details'])[1]");
+	By fromDate = By.xpath("(//input[@id='fromDate'])[1]");
+	By toDate = By.xpath("(//input[@id='toDate'])[1]");
+	By amountfield = By.xpath("//input[@name='transactionAmountFrom']");
+	By transactionFromAmtField = By.xpath("//input[@id='transactionAmountFrom']");
+	By transactionToAmtField = By.xpath("//input[@id='transactionAmountTo']");
+	
 
 
 	// By daily_EachBusiDay =
@@ -86,7 +99,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 	String durationOpt = "//p-radiobutton[@name='duration']/label[contains(text(),'%s')]/preceding-sibling::div/div[@role='radio']";
 	String daysOfWeek = "//label[text()='%s']/../div[@class='ui-radiobutton ui-widget']";
 	String fromAccList = "//li[@role='option']/span[contains(text(),'%s')]";
-
+	String memoReviewField = "(//div[contains(@class,'transaction-search-description')]//div//span[contains(text(),'%s')])[1]";
 
 	String memo;
 	String amt;
@@ -102,12 +115,14 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			boolean stepResult = false;
 			try {
 				if (isElementPresent(accountTransferTitle)) {
-					waitElement(2000);
+					waitElement(3000);
 					enterText("Corporate Account Transfer", "From Account", fromAccountField, fromAcc);
-					waitElement(2000);
+					waitElement(3000);
+					//selectElementFromListbox("Corporate Account Transfer", "From Account", fromAccountField, fromAccList, fromAcc);
 					clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc));
+					waitElement(3000);
 					if (!fromAccAmt.equals("")) {
-						Thread.sleep(2000);
+						waitElement(3000);
 						enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt, fromAccAmt);
 					}
 					stepResult = true;
@@ -141,6 +156,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					}
 					if (!fromAcc1.equals("")) {
 						enterText("Corporate Account Transfer", "From Account1", fromAccountField, fromAcc1);
+						waitElement(3000);
 						clickOnElement("Corporate Account Transfer", "From Account1", getDynamicElement("From Account1", fromAccList, fromAcc1));
 					}
 					if (!fromAccAmt1.equals("")) {
@@ -155,6 +171,8 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					clickOnElement("Corporate Account Transfer", "From Account2", addAccount_frmAcc);
 					if (!fromAcc2.equals("")) {
 						enterText("Corporate Account Transfer", "From Account2", fromAccountField, fromAcc2);
+						waitElement(3000);
+						clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc2));
 					}
 					if (!fromAccAmt2.equals("")) {
 						enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt2, fromAccAmt2);
@@ -167,6 +185,8 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					clickOnElement("Corporate Account Transfer", "From Account3", addAccount_frmAcc);
 					if (!fromAcc3.equals("")) {
 						enterText("Corporate Account Transfer", "From Account3", fromAccountField, fromAcc3);
+						waitElement(3000);
+						clickOnElement("Corporate Account Transfer", "From Account",getDynamicElement("From Account", fromAccList, fromAcc2));
 					}
 					if (!fromAccAmt3.equals("")) {
 						enterText("Corporate Account Transfer", "From Account Amount", fromAccountAmt3, fromAccAmt3);
@@ -200,12 +220,12 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			try {
 				if (isElementPresent(accountTransferTitle)) {
 					if(!toAcc.equals("")){
-						waitElement(2000);
+						waitElement(3000);
 						enterText("Corporate Account Transfer", "To Account", toAccountField, toAcc);
-						waitElement(2000);
+						waitElement(3000);
 						clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc));
 						//selectElementFromListbox("Corporate Account Transfer", "To Account", toAccountField, fromAccList, toAcc);
-						waitElement(2000);
+						waitElement(3000);
 					}
 					if (!toAccAmt.equals("")) {
 						enterText("Corporate Account Transfer", "To Account Amount",
@@ -217,7 +237,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					}
 					if (!toAccPayInstr.equals("")) {
 						clickOnElement("Corporate Account Transfer", "To Account Payment Instruction", toAccPayInstruction);
-						waitElement(2000);
+						waitElement(3000);
 						getDynamicElementClick("Corporate Account Transfer", "To Account Payment Instruction", paymentInstrField, toAccPayInstr);
 					}
 					stepResult = true;
@@ -250,6 +270,8 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
 					if (!toAcc1.equals("")) {
 						enterText("Corporate Account Transfer", "To Account1", toAccField1, toAcc1);
+						waitElement(3000);
+						clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc1));
 					}
 					if (!toAccAmt1.equals("")) {
 						enterText("Corporate Account Transfer", "To Account Amount",
@@ -271,6 +293,8 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
 					if (!toAcc2.equals("")) {
 						enterText("Corporate Account Transfer", "From Account2", toAccField2, toAcc2);
+						waitElement(3000);
+						clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc2));
 					}
 					if (!toAccAmt2.equals("")) {
 						enterText("Corporate Account Transfer", "To Account Amount",
@@ -292,6 +316,9 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 					clickOnElement("Corporate Account Transfer", "Add Account1", addAccount_toAcc);
 					if (!toAcc3.equals("")) {
 						enterText("Corporate Account Transfer", "To Account3", toAccField3, toAcc3);
+						waitElement(3000);
+						clickOnElement("Corporate Account Transfer", "To Account", getDynamicElement("To Account", fromAccList, toAcc3));
+
 					}
 					if (!toAccAmt3.equals("")) {
 						enterText("Corporate Account Transfer", "To Account Amount",
@@ -607,10 +634,12 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 						waitElement(2000);
 					}
 					currentBalanceField = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
+					System.out.println(currentBalanceField);
 					if(currentBalanceField != "") {
-						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "CurrentBalance", rowNo, currentBalanceField);				
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "CurrentBalance", rowNo+1, currentBalanceField);				
+						System.out.println(currentBalanceField);
 					}
-                     clickOnElement("Corporate Account Transfer", "Balance close button",  closeBalanceTab);
+				//	clickOnElement("Corporate Account Transfer", "Balance close button",  closeBalanceTab);
 
 					stepResult = true;
 				}
@@ -631,9 +660,28 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 		}
 	}
 
+	public void closeBalanceTab()throws Exception{
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(2000);
+				clickOnElement("Corporate Account Transfer", "Balance close button",  closeBalanceTab);
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true){
+					System.out.println("Pass - Acc Transfer -- Balance tab closed");
+				}
+				else{
+					System.out.println("fail");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
 
-
-	public void verifyAccountBalanceAfterTransaction(String fromAccountNumber,String balanceBeforeTransaction,String amount) throws Exception {
+	public void verifyAccountBalanceAfterTransaction(String date,String fromAccountNumber,String balanceBeforeTransaction,String amount) throws Exception {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
@@ -647,19 +695,50 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 						clickOnElement("Corporate Account Transfer", "Search button", searchAccountNumber);
 						waitElement(2000);
 					}
-					if (!balanceBeforeTransaction.equals("")) {
-						sAfterTransBalance = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
-						sAfterTransBalance = sAfterTransBalance.replace("$", "");
-						sAfterTransBalance = sAfterTransBalance.replace(",", "");
-						iAfterTransAccountBalance = (int) Double.parseDouble(sAfterTransBalance);
-						balanceBeforeTransaction = balanceBeforeTransaction.replace("$", "");
-						balanceBeforeTransaction = balanceBeforeTransaction.replace(",", "");
-						iInitialBalance = (int) Double.parseDouble(balanceBeforeTransaction);
-						amount = amount.replace("$", "");
-					    amount = amount.replace(",", "");
-						totalAmount =  (int) Double.parseDouble(amount);
-						if(iInitialBalance - iAfterTransAccountBalance == totalAmount ) {
-							stepResult = true;
+					if(!date.equals("")){
+						DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");  
+						LocalDateTime now = LocalDateTime.now();  
+						String currentDate = dtf.format(now);
+						System.out.println(dtf.format(now)); 
+						
+						if(currentDate.compareTo(date) == 0) {
+
+//							if(!fromAccountNumber.equals("")){
+//								waitElement(2000);
+//								clearAndType("Corporate Account Transfer", "Account Number", accountNumberField, fromAccountNumber);
+//								waitElement(2000);
+//								clickOnElement("Corporate Account Transfer", "Account Number", getDynamicElement("Account Number", fromAccList, fromAccountNumber));
+//								waitElement(2000);
+//								clickOnElement("Corporate Account Transfer", "Search button", searchAccountNumber);
+//								waitElement(2000);
+//							}
+							if (!balanceBeforeTransaction.equals("")) {
+								sAfterTransBalance = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
+								sAfterTransBalance = sAfterTransBalance.replace("$", "");
+								sAfterTransBalance = sAfterTransBalance.replace(",", "");
+								iAfterTransAccountBalance =  Double.parseDouble(sAfterTransBalance);
+								balanceBeforeTransaction = balanceBeforeTransaction.replace("$", "");
+								balanceBeforeTransaction = balanceBeforeTransaction.replace(",", "");
+								iInitialBalance =  Double.parseDouble(balanceBeforeTransaction);
+								amount = amount.replace("$", "");
+								amount = amount.replace(",", "");
+								totalAmount =  Double.parseDouble(amount);
+								if(iInitialBalance - totalAmount == iAfterTransAccountBalance ) {
+									stepResult = true;
+								}
+							}
+						}else if(currentDate.compareTo(date) < 0){
+							sAfterTransBalance = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
+							sAfterTransBalance = sAfterTransBalance.replace("$", "");
+							sAfterTransBalance = sAfterTransBalance.replace(",", "");
+							iAfterTransAccountBalance = Double.parseDouble(sAfterTransBalance);
+							balanceBeforeTransaction = balanceBeforeTransaction.replace("$", "");
+							balanceBeforeTransaction = balanceBeforeTransaction.replace(",", "");
+							iInitialBalance =  Double.parseDouble(balanceBeforeTransaction);
+							System.out.println("Future date");
+							if(iInitialBalance == iAfterTransAccountBalance ) {
+								stepResult = true;
+							}
 						}
 					}
 				}
@@ -679,6 +758,140 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			}
 		}
 	}
+
+	public void verifyTransactinSearch(String fromAccountNumber,String fromDateField,String toDateField,
+			String fromAmtField,String toAmtField,String memoReview) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(accountTransactionHeader)) {
+					if(!fromAccountNumber.equals("")){
+						waitElement(2000);
+						clearAndType("Corporate Account Transfer", "Account Number", transactionSearchAccNum, fromAccountNumber);
+						waitElement(2000);
+						clickOnElement("Corporate Account Transfer", "Account Number", getDynamicElement("Account Number", fromAccList, fromAccountNumber));
+						waitElement(2000);
+						clickOnElement("Corporate Account Transfer", "Search button", transSearchButton);
+						waitElement(2000);
+					}
+					if (!fromDateField.equals("")) {
+						waitElement(2000);
+						enterFromDate(fromDateField);
+					}
+					if (!toDateField.equals("")) {
+						waitElement(2000);
+						enterToDate(toDateField);
+					}
+					if (!fromAmtField.equals("")) {
+						waitElement(2000);
+						clearAndType("Corporate Account Transfer", "From Account Amount", transactionFromAmtField, fromAmtField);
+					}
+					if (!toAmtField.equals("")) {
+						waitElement(2000);
+						clearAndType("Corporate Account Transfer", "To Account Amount", transactionToAmtField, toAmtField);
+					}
+					clickOnElement("Corporate Account Transfer", "Search button", transSearchButton);
+					isElementPresent(showingTransactions);
+					verifySearchData(memoReview);
+					stepResult = true;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- to acc");
+					new HTMLReportHelper().HtmlReportBody("Verify the transaction search", "Verify the transaction search is successfully", "Passed", driver, "Y");
+
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Verify the transaction search", "Could not verify the transaction search successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+
+	public void enterFromDate(String fromDateField) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!fromDateField.equals("")) {
+					for (int i = 1; i <= 10; i++) {
+						driver.findElement(fromDate).sendKeys(Keys.BACK_SPACE);
+					}
+					enterText("Corporate Account Transfer", "From Date", fromDate, fromDateField);
+					clickOnElement("Corporate Account Transfer", "From Date Title", amountfield);
+				}
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- transfer date");
+				}
+				else{
+					System.out.println("fail");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+
+	public void enterToDate(String toDateField) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!toDateField.equals("")) {
+					for (int i = 1; i <= 10; i++) {
+						driver.findElement(toDate).sendKeys(Keys.BACK_SPACE);
+					}
+					enterText("Corporate Account Transfer", "From Date", toDate, toDateField);
+					driver.findElement(toDate).sendKeys(Keys.ENTER);
+					//clickOnElement("Corporate Account Transfer", "From Date Title", amountfield);
+				}
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- transfer date");
+				}
+				else{
+					System.out.println("fail");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+
+	public void verifySearchData(String memoReview) throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				if (!memoReview.equals("")) {
+					getDynamicElement("Transaction Search", memoReviewField, memoReview);
+					stepResult = true;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult==true){
+					System.out.println("Pass -- transfer date");
+				}
+				else{
+					System.out.println("fail");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+
+
 
 
 }

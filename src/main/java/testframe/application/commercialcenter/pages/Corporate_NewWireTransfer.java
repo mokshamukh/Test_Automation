@@ -409,7 +409,8 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By nextButton = By.xpath("//button[contains(text(),'Next')]");
 	By accountInfoHeader = By.xpath("//h3[text()='Account Information ']");
 	By debitAccountField = By.xpath("//p-autocomplete[@inputid='debitAccount']//button//span[text()='ui-btn']");
-	By paymentCurrencyField = By.xpath("//p-autocomplete[@inputid='paymentCurrency']//button//span[text()='ui-btn']");
+	By paymentCurrencyField = By.xpath("//input[@id='paymentCurrency']");
+			//+ "//p-autocomplete[@inputid='paymentCurrency']//button//span[text()='ui-btn']");
 	By purposeOfPaymentField = By.xpath("//input[@id='purposeOfPay']");
 	By amountField = By.xpath("//input[@id='amount']");
 	By requestTransferButton = By.xpath("//button[contains(@aria-label,'To proceed with the transfer')]");
@@ -503,7 +504,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 						selectElementFromListbox("Corporate New Wire Transfer", "Debit Account Field", debitAccountField, list,debitAccount);      
 					}
 					if(!paymentCurrency.equals("")) {
-						clickOnELementUsingActions(paymentCurrencyField);
+						enterText("Corporate New Wire Transfer",  "Payment Currency",paymentCurrencyField,paymentCurrency);
 						selectElementFromListbox("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
 					}
 					if(!purposeOfPayment.equals("")) {
@@ -672,12 +673,13 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 						enterNewWireTransferPaymentDate(paymentDate);
 					}
 					if(!paymentCurrency.equals("")) {
-						clickOnELementUsingActions(paymentCurrencyField);
-						//enterText("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
-						selectElementFromListbox("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
-						//clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
+						//clickOnELementUsingActions(paymentCurrencyField);
+						enterText("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, paymentCurrency);
+						//selectElementFromListbox("Corporate New Wire Transfer", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
+						clickOnElement("Corporate New Wire Transfer", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
 					}
 					if(!amount.equals("")) {
+						waitElement(2000);
 						enterText("Corporate New Wire Transfer", "Amount Field", amountField, amount);
 					}
 					if(!beneBankIDType.equals("")) {
@@ -896,7 +898,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	}
 
 
-	public void editNewWireTransferUsingExistingTemplate(String paymentDate) throws Exception{
+	public void editNewWireTransferUsingExistingTemplate(String paymentDate,String psw) throws Exception{
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
@@ -906,6 +908,8 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 					if(!paymentDate.equals("")) {
 						enterNewWireTransferPaymentDate(paymentDate);
 					}
+					verifyPassword(psw);
+					
 					clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
 					stepResult = true;
 				}
@@ -941,29 +945,39 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 						enterNewWireTransferPaymentDate(paymentDate);
 					}
 					if(!template1.equals("")) {
+						waitElement(2000);
 						enterText("Corporate New Wire Transfer", "Template1 Field", template1Field, template1);
+						waitElement(2000);
 						clickOnElement("Corporate New Wire Transfer", "Template1 Field", getDynamicElement( "Template1 Field", templateList, template1));
 						//clickOnELementUsingActions(template1Field);
 						//selectElementFromListbox("Corporate New Wire Transfer", "Template1 Field", template1Field, list, template1);
 					}
 					if(!template2.equals("")) {
+						waitElement(2000);
 						enterText("Corporate New Wire Transfer", "Template2 Field", template2Field, template2);
+						waitElement(2000);
 						clickOnElement("Corporate New Wire Transfer", "Template1 Field", getDynamicElement("Corporate New Wire Transfer", templateList, template2));
 					}
 					if(!template3.equals("")) {
+						waitElement(2000);
 						enterText("Corporate New Wire Transfer", "Template3 Field", template3Field, template3);
+						waitElement(2000);
 						clickOnElement("Corporate New Wire Transfer", "Template1 Field", getDynamicElement("Corporate New Wire Transfer", templateList, template3));
 					}
 					if(!template4.equals("")) {
+						waitElement(2000);
 						enterText("Corporate New Wire Transfer", "Template4 Field", template4Field, template4);
+						waitElement(2000);
 						clickOnElement("Corporate New Wire Transfer", "Template1 Field", getDynamicElement("Corporate New Wire Transfer", templateList, template4));
 					}
 					if(!template5.equals("")) {
+						waitElement(2000);
 						enterText("Corporate New Wire Transfer", "Template5 Field", template5Field, template5);
+						waitElement(2000);
 						clickOnElement("Corporate New Wire Transfer", "Template1 Field", getDynamicElement("Corporate New Wire Transfer", templateList, template5));
 					}
 				}
-
+                 
 				clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
 				stepResult = true;
 			}

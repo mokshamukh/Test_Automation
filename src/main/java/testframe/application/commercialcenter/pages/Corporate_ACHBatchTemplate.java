@@ -61,7 +61,7 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 	public By existingNewAmount = By.xpath("//input[@id='newPayeeAmoountAdd']");
 	public By addPayee = By.xpath("//button[contains(@aria-label,'add payee')]//i|//button[contains(@aria-label,'To add another payee')]");
 	public By searchPayeeType = By.xpath("//p-autocomplete[@inputid='payeeName']//input[@id='payeeName']/..//..//span[contains(@class,'ng-star-inserted')]");
-	public By successTemplateMsg = By.xpath("//div[contains(text(),'successfully created the template.')]");
+	public By successTemplateMsg = By.xpath("//div[contains(text(),'Successfully created the template.')]");
 	public By editbatchTemplate = By.xpath("//button[contains(@aria-label,'make changes to this template')]//i[text()='mode_edit']");
 	public By editHeader = By.xpath("//h1[contains(text(),'Edit')]");
 	public By existingBatchType = By.xpath("(//td[@class='ng-star-inserted'])[2]");
@@ -87,13 +87,8 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 
 	//button[contains(@aria-label,'To save the template')]
 	String list = "//li[@role='option']/span[contains(text(),'%s')]";
-	//	String debitcreditList = "//li[@role='option']/span[text()='%s']";
-	//	String batchTypeList = "//li[@role='option']/span[text()='%s']";
-	//	String debitAuthtypList = "//li[@role='option']/span[text()='%s']";
-	//	String payeeList = "//li[@role='option']/span[text()='%s']";
 	String existingTemplateName = "(//td[@class='ng-star-inserted'])[1]//span[contains(text(),'%s')]";
-	//	String existingAccField = "//li[@role='option']/span[text()='%s']";
-	//    String offsetFieldList = "//li[@role='option']/span[text()='%s']";
+	String removeExistPayee = "//div[contains(@id,'payeeNameValue')]//span[contains(text(),'%s')]//..//../parent::div/following-sibling::div//button[@aria-label='clear Payee field']";
 
 	public Corporate_ACHBatchTemplate(WebDriver driver) {
 		super(driver);
@@ -121,13 +116,14 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 					//waitElement(2000);
 				}
 				if (!batchType.equals("")) {
-					waitElement(4000);
+					waitElement(3000);
 					clickOnElement("ACH Batch Template", "Batch Type", batchTypeField);
 					//driver.findElement(By.xpath("//p-dropdown[@inputid='batchType-input']//div/span[text()='Select']")).click();
 					waitElement(1000);
 					selectElementFromListbox("ACH Batch Template", "Batch Type", batchTypeField, list,batchType);
 				}
 				clickOnElement("ACH Batch Template", "Next Button", nextButton);
+				waitElement(2000);
 				stepResult = true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -164,7 +160,9 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 								cmpEntryDiscretionary);
 					}
 					if (!offsetAcc.equals("")) {
+						waitElement(2000);
 						enterText("ACH Batch Template", "Offset Account", offsetAccount, offsetAcc);
+						waitElement(2000);
 						clickOnElementWithText("ACH Batch Template", "Offset Account", getDynamicElement("Offset Account", list, offsetAcc), offsetAcc);
 						//selectElementFromListbox("ACH Batch Template", "Offset Account", offsetAccountField, offsetFieldList, offsetAcc);
 					}
@@ -307,11 +305,12 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 					if (!existTemplateName.equals("")) {
 						clearAndType("ACH Batch Template", "Existing Payee", templateNameField, existTemplateName);
 					}
-					if (!existbatchType.equals("")) {
-						driver.findElement(By.xpath("(//p-dropdown[@inputid='batchType-input']//div//span[contains(@class,'expand_more')])[1]")).click();
-						waitElement(1000);
-						selectElementFromListbox("ACH Batch Template", "Batch Type", searchBatchTypField, list,existbatchType);
-					}
+//					if (!existbatchType.equals("")) {
+//						clickOnElement("ACH Batch Template", "Batch Type", searchBatchTypField);
+//						//driver.findElement(By.xpath("(//p-dropdown[@inputid='batchType-input']//div//span[contains(@class,'expand_more')])[1]")).click();
+//						waitElement(1000);
+//						selectElementFromListbox("ACH Batch Template", "Batch Type", searchBatchTypField, list,existbatchType);
+//					}
 
 					clickOnElement("ACH Batch Template", "Search Existing payees", searchSymbol);
 					validateTextContains("ACH Batch Template", "Tempalte Name", getDynamicElement("Tempalte Name", existingTemplateName, existTemplateName), existTemplateName);
@@ -406,7 +405,7 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 					//					selectElementFromListbox("ACH Batch Template", "Account Field", existingAccount, existingAccField, account);
 					//				}
 					if (!removePayee.equals("")) {
-						clickOnElement("ACH Batch Template", "Remove Payee Button", removeExistingPayee);
+						clickOnElement("ACH Batch Template", "Remove Payee Button", getDynamicElement("Remove Payee Button", removeExistPayee, removePayee));
 					}
 					String[] multiPayee;
 					if (!searchPayee.equals("")) {

@@ -60,7 +60,7 @@ public class CorporateTest extends ApplicationBase  {
 		corporateNewACHBatchTemplate = new Corporate_NewACHBatchTemplate(driver);
 		corporateACHBatchTemplate = new Corporate_ACHBatchTemplate(driver);
 		CorporateCommonNavigation corporateCommonNavigation = new CorporateCommonNavigation();
-		Corporate_NewPayee corporateNewPayee = new Corporate_NewPayee(driver);
+		corporateNewPayee = new Corporate_NewPayee(driver);
 		corporateNewWireTransfer = new Corporate_NewWireTransfer(driver);
 		Corporate_ManageWireTemplates corporateManageWireTemplates = new Corporate_ManageWireTemplates(driver);
 
@@ -134,7 +134,8 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
 				corporateHomeMenu.clickOnAccountsMenu();
 				corporateHomeMenu.clickOnBalancesMenu();
-				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow+1);
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
@@ -149,14 +150,25 @@ public class CorporateTest extends ApplicationBase  {
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
 				corporateAccountTransferDetails.getAccTransaction();
-				corporateHomeMenu.clickOnAccountsMenu();
-				corporateHomeMenu.clickOnBalancesMenu();
-				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("CurrentBalance"), tc_Test_Data.get(iTDRow).get("AmtReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+//						tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("AmtReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateLogOff.logoffApplication();
 				break;
 			case "CC_CORP_TC002":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
@@ -170,20 +182,46 @@ public class CorporateTest extends ApplicationBase  {
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
 				corporateAccountTransferDetails.getAccTransaction();
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+//						tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("AmtReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateLogOff.logoffApplication();
 				break;
 			case "CC_CORP_TC003":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
 				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), tc_Test_Data.get(iTDRow).get("ToAccountAmount"), tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
 				corporateAccountTransfer.enterTransferDate(tc_Test_Data.get(iTDRow).get("TransferDate"));
 				corporateAccountTransfer.clickReqTransfer();
-				corporateAccountTransferReview.verifyAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), tc_Test_Data.get(iTDRow).get("ToAccReview"), tc_Test_Data.get(iTDRow).get("MemoReview"), tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"), tc_Test_Data.get(iTDRow).get("AmtReview"));
+				corporateAccountTransferReview.verifyAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), 
+						tc_Test_Data.get(iTDRow).get("ToAccReview"), tc_Test_Data.get(iTDRow).get("MemoReview"), 
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"), tc_Test_Data.get(iTDRow).get("AmtReview"));
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+//						tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("AmtReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateAccountTransferDetails.getAccTransaction();
 				corporateLogOff.logoffApplication();
 				break;
@@ -191,13 +229,20 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC004":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
-				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), tc_Test_Data.get(iTDRow).get("ToAccountAmount"), tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
+				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), 
+						tc_Test_Data.get(iTDRow).get("ToAccountAmount"), tc_Test_Data.get(iTDRow).get("ToAccountMemo"), 
+						tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
 				corporateAccountTransfer.enterTransferDate(tc_Test_Data.get(iTDRow).get("TransferDate"));
 				corporateAccountTransfer.clickReqTransfer();
-				corporateAccountTransferReview.verifyAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), tc_Test_Data.get(iTDRow).get("ToAccReview"), tc_Test_Data.get(iTDRow).get("MemoReview"), tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"), tc_Test_Data.get(iTDRow).get("AmtReview"));
+				corporateAccountTransferReview.verifyAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), tc_Test_Data.get(iTDRow).get("ToAccReview"), 
+						tc_Test_Data.get(iTDRow).get("MemoReview"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"), tc_Test_Data.get(iTDRow).get("AmtReview"));
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
 				transactionID = corporateAccountTransferDetails.getAccTransaction();
@@ -205,15 +250,30 @@ public class CorporateTest extends ApplicationBase  {
 				corporateHomeMenu.clickOnPaymentActivity();
 				corporateHomeMenu.clickOnCurrentPaymentActivity();
 				corporateCurrentPaymentActivity.clickCancelButton(transactionID);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+//						tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("AmtReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateLogOff.logoffApplication();
 				break;
 
 			case "CC_CORP_TC005":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
-				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
+				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), 
+						tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
 				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), tc_Test_Data.get(iTDRow).get("ToAccountAmount"), 
 						tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
 				corporateAccountTransfer.addAndEnterToAccDetails(tc_Test_Data.get(iTDRow).get("AddToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccount1"),
@@ -234,6 +294,18 @@ public class CorporateTest extends ApplicationBase  {
 						tc_Test_Data.get(iTDRow).get("MemoReview3"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),tc_Test_Data.get(iTDRow).get("AmtReview3"));
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+//						tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("FromAccountAmount")+tc_Test_Data.get(iTDRow).get("ToAccountAmount1")+tc_Test_Data.get(iTDRow).get("ToAccountAmount2")+
+//						tc_Test_Data.get(iTDRow).get("ToAccountAmount3"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateAccountTransferDetails.getAccTransaction();
 				corporateLogOff.logoffApplication();
 				break;
@@ -241,6 +313,10 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC006":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), 
@@ -257,9 +333,31 @@ public class CorporateTest extends ApplicationBase  {
 						tc_Test_Data.get(iTDRow).get("ToAccountMemo3"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction3"));
 				corporateAccountTransfer.enterTransferDate(tc_Test_Data.get(iTDRow).get("TransferDate"));
 				corporateAccountTransfer.clickReqTransfer();
-				corporateAccountTransferReview.verifyMultipleAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"),tc_Test_Data.get(iTDRow).get("FromAccReview1"),tc_Test_Data.get(iTDRow).get("ToAccReview1"),tc_Test_Data.get(iTDRow).get("MemoReview1"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview1"),tc_Test_Data.get(iTDRow).get("AmtReview1"),tc_Test_Data.get(iTDRow).get("FromAccReview2"),tc_Test_Data.get(iTDRow).get("ToAccReview2"),tc_Test_Data.get(iTDRow).get("MemoReview2"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview2"),tc_Test_Data.get(iTDRow).get("AmtReview2"),tc_Test_Data.get(iTDRow).get("FromAccReview3"),tc_Test_Data.get(iTDRow).get("ToAccReview3"),tc_Test_Data.get(iTDRow).get("MemoReview3"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),tc_Test_Data.get(iTDRow).get("AmtReview3"));
+				corporateAccountTransferReview.verifyMultipleAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),
+						tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"),
+						tc_Test_Data.get(iTDRow).get("FromAccReview1"),tc_Test_Data.get(iTDRow).get("ToAccReview1"),
+						tc_Test_Data.get(iTDRow).get("MemoReview1"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview1"),
+						tc_Test_Data.get(iTDRow).get("AmtReview1"),
+						tc_Test_Data.get(iTDRow).get("FromAccReview2"),tc_Test_Data.get(iTDRow).get("ToAccReview2"),
+						tc_Test_Data.get(iTDRow).get("MemoReview2"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview2"),
+						tc_Test_Data.get(iTDRow).get("AmtReview2"),tc_Test_Data.get(iTDRow).get("FromAccReview3"),
+						tc_Test_Data.get(iTDRow).get("ToAccReview3"),tc_Test_Data.get(iTDRow).get("MemoReview3"),
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),tc_Test_Data.get(iTDRow).get("AmtReview3"));
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+//						tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("FromAccountAmount")+
+//						tc_Test_Data.get(iTDRow).get("ToAccountAmount1")+tc_Test_Data.get(iTDRow).get("ToAccountAmount2")+
+//						tc_Test_Data.get(iTDRow).get("ToAccountAmount3"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateAccountTransferDetails.getAccTransaction();
 				corporateLogOff.logoffApplication();
 				break;
@@ -267,27 +365,68 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC007":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
-				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
-				corporateAccountTransfer.addAndEnterFromAccDetails(tc_Test_Data.get(iTDRow).get("AddFromAccount1"),tc_Test_Data.get(iTDRow).get("FromAccountMemo"),tc_Test_Data.get(iTDRow).get("FromAccount1"),tc_Test_Data.get(iTDRow).get("FromAccountAmount1"),tc_Test_Data.get(iTDRow).get("FromAccountMemo1"),tc_Test_Data.get(iTDRow).get("AddFromAccount2"),tc_Test_Data.get(iTDRow).get("FromAccount2"),tc_Test_Data.get(iTDRow).get("FromAccountAmount2"),tc_Test_Data.get(iTDRow).get("FromAccountMemo2"),tc_Test_Data.get(iTDRow).get("AddFromAccount3"),tc_Test_Data.get(iTDRow).get("FromAccount3"),tc_Test_Data.get(iTDRow).get("FromAccountAmount3"),tc_Test_Data.get(iTDRow).get("FromAccountMemo3"));
-				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), tc_Test_Data.get(iTDRow).get("ToAccountAmount"), tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
+				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), 
+						tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
+				corporateAccountTransfer.addAndEnterFromAccDetails(tc_Test_Data.get(iTDRow).get("AddFromAccount1"),
+						tc_Test_Data.get(iTDRow).get("FromAccountMemo"),tc_Test_Data.get(iTDRow).get("FromAccount1"),
+						tc_Test_Data.get(iTDRow).get("FromAccountAmount1"),tc_Test_Data.get(iTDRow).get("FromAccountMemo1"),
+						tc_Test_Data.get(iTDRow).get("AddFromAccount2"),tc_Test_Data.get(iTDRow).get("FromAccount2"),
+						tc_Test_Data.get(iTDRow).get("FromAccountAmount2"),tc_Test_Data.get(iTDRow).get("FromAccountMemo2"),
+						tc_Test_Data.get(iTDRow).get("AddFromAccount3"),tc_Test_Data.get(iTDRow).get("FromAccount3"),
+						tc_Test_Data.get(iTDRow).get("FromAccountAmount3"),tc_Test_Data.get(iTDRow).get("FromAccountMemo3"));
+				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), tc_Test_Data.get(iTDRow).get("ToAccountAmount"),
+						tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
 				corporateAccountTransfer.enterTransferDate(tc_Test_Data.get(iTDRow).get("TransferDate"));
-				corporateAccountTransfer.selectRecurringOption(tc_Test_Data.get(iTDRow).get("RecurringOptions"),tc_Test_Data.get(iTDRow).get("Frequency"),tc_Test_Data.get(iTDRow).get("DailyOption"),tc_Test_Data.get(iTDRow).get("DailySubOption"),tc_Test_Data.get(iTDRow).get("Day"));
-				corporateAccountTransfer.selectDuration(tc_Test_Data.get(iTDRow).get("Duration"),tc_Test_Data.get(iTDRow).get("TransactionDate"),tc_Test_Data.get(iTDRow).get("FixedNumTransaction"));
+				corporateAccountTransfer.selectRecurringOption(tc_Test_Data.get(iTDRow).get("RecurringOptions"),
+						tc_Test_Data.get(iTDRow).get("Frequency"),tc_Test_Data.get(iTDRow).get("DailyOption"),
+						tc_Test_Data.get(iTDRow).get("DailySubOption"),tc_Test_Data.get(iTDRow).get("Day"));
+				corporateAccountTransfer.selectDuration(tc_Test_Data.get(iTDRow).get("Duration"),tc_Test_Data.get(iTDRow).get("TransactionDate"),
+						tc_Test_Data.get(iTDRow).get("FixedNumTransaction"));
 				corporateAccountTransfer.enterSeriesDetails(tc_Test_Data.get(iTDRow).get("SeriesDetails"));
 				corporateAccountTransfer.clickRecurringOptButton();
 				corporateAccountTransfer.enterSeriesName(tc_Test_Data.get(iTDRow).get("SeriesName"));
 				corporateAccountTransfer.clickReqTransfer();
-				corporateAccountTransferReview.verifyMultipleAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"),tc_Test_Data.get(iTDRow).get("FromAccReview1"),tc_Test_Data.get(iTDRow).get("ToAccReview1"),tc_Test_Data.get(iTDRow).get("MemoReview1"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview1"),tc_Test_Data.get(iTDRow).get("AmtReview1"),tc_Test_Data.get(iTDRow).get("FromAccReview2"),tc_Test_Data.get(iTDRow).get("ToAccReview2"),tc_Test_Data.get(iTDRow).get("MemoReview2"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview2"),tc_Test_Data.get(iTDRow).get("AmtReview2"),tc_Test_Data.get(iTDRow).get("FromAccReview3"),tc_Test_Data.get(iTDRow).get("ToAccReview3"),tc_Test_Data.get(iTDRow).get("MemoReview3"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),tc_Test_Data.get(iTDRow).get("AmtReview3"));
+				corporateAccountTransferReview.verifyMultipleAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),
+						tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"),
+						tc_Test_Data.get(iTDRow).get("FromAccReview1"),tc_Test_Data.get(iTDRow).get("ToAccReview1"),
+						tc_Test_Data.get(iTDRow).get("MemoReview1"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview1"),
+						tc_Test_Data.get(iTDRow).get("AmtReview1"),tc_Test_Data.get(iTDRow).get("FromAccReview2"),
+						tc_Test_Data.get(iTDRow).get("ToAccReview2"),tc_Test_Data.get(iTDRow).get("MemoReview2"),
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview2"),tc_Test_Data.get(iTDRow).get("AmtReview2"),
+						tc_Test_Data.get(iTDRow).get("FromAccReview3"),tc_Test_Data.get(iTDRow).get("ToAccReview3"),
+						tc_Test_Data.get(iTDRow).get("MemoReview3"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),
+						tc_Test_Data.get(iTDRow).get("AmtReview3"));
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+//						tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("FromAccountAmount")+
+//						tc_Test_Data.get(iTDRow).get("FromAccountAmount1")+tc_Test_Data.get(iTDRow).get("FromAccountAmount2")+
+//						tc_Test_Data.get(iTDRow).get("FromAccountAmount3"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateLogOff.logoffApplication();
 				break;
 
 			case "CC_CORP_TC008":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
@@ -295,9 +434,9 @@ public class CorporateTest extends ApplicationBase  {
 						tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
 				corporateAccountTransfer.enterTransferDate(tc_Test_Data.get(iTDRow).get("TransferDate"));
 				corporateAccountTransfer.clickReqTransfer();
-				corporateAccountTransferReview.verifyAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), tc_Test_Data.get(iTDRow).get("ToAccReview"), 
-						tc_Test_Data.get(iTDRow).get("MemoReview"), tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"), 
-						tc_Test_Data.get(iTDRow).get("AmtReview"));
+				corporateAccountTransferReview.verifyAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),
+						tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"));
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
 				//transactionID= "ATR-00001101";
@@ -311,25 +450,48 @@ public class CorporateTest extends ApplicationBase  {
 				//						tc_Test_Data.get(iTDRow).get("EntryMethod"),tc_Test_Data.get(iTDRow).get("ImportFile"),
 				//						tc_Test_Data.get(iTDRow).get("TransactionDate"));
 				corporateFuturePaymentActivity.editPaymentActivity(transactionID,tc_Test_Data.get(iTDRow).get("SeriesName"));
-				corporateEditTransaction.enterToAccount(tc_Test_Data.get(iTDRow).get("EditToAccount"),tc_Test_Data.get(iTDRow).get("EditToAccountAmount"),
-						tc_Test_Data.get(iTDRow).get("EditToAccountMemo"),tc_Test_Data.get(iTDRow).get("EditToAccountPaymentInstruction"));
+				corporateEditTransaction.enterToAccount(tc_Test_Data.get(iTDRow).get("EditToAccount"),
+						tc_Test_Data.get(iTDRow).get("EditToAccountAmount"),tc_Test_Data.get(iTDRow).get("EditToAccountMemo"),
+						tc_Test_Data.get(iTDRow).get("EditToAccountPaymentInstruction"));
 				corporateEditTransaction.enterTransferDate(tc_Test_Data.get(iTDRow).get("EditTransferDate"));
 				corporateEditTransaction.clickReqTransfer();
 				corporateEditTransaction.verifyAccountTransferDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), 
 						tc_Test_Data.get(iTDRow).get("ToAccReview"), tc_Test_Data.get(iTDRow).get("MemoEditReview"),
 						tc_Test_Data.get(iTDRow).get("PaymentIstructionEditReview"), tc_Test_Data.get(iTDRow).get("AmtReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),
+//						tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmtReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateLogOff.logoffApplication();
 				break;
 
 			case "CC_CORP_TC009":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("FromAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAccountTransfer();
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
-				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), tc_Test_Data.get(iTDRow).get("ToAccountAmount"), tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
-				corporateAccountTransfer.addAndEnterToAccDetails(tc_Test_Data.get(iTDRow).get("AddToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccountAmount1"),tc_Test_Data.get(iTDRow).get("ToAccountMemo1"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction1"),tc_Test_Data.get(iTDRow).get("AddToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccountAmount2"),tc_Test_Data.get(iTDRow).get("ToAccountMemo2"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction2"),tc_Test_Data.get(iTDRow).get("AddToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccountAmount3"),tc_Test_Data.get(iTDRow).get("ToAccountMemo3"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction3"));
-				////corporateAccountTransfer.addAndEnterToAccDetails(tc_Test_Data.get(iTDRow).get("AddToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccountAmount1"),tc_Test_Data.get(iTDRow).get("ToAccountAmountVal1"),tc_Test_Data.get(iTDRow).get("ToAccountMemo1"),tc_Test_Data.get(iTDRow).get("ToAccountMemoValue1"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction1"),tc_Test_Data.get(iTDRow).get("AddToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccountAmount2"),tc_Test_Data.get(iTDRow).get("	ToAccountAmountVal2"),tc_Test_Data.get(iTDRow).get("ToAccountMemo2"),tc_Test_Data.get(iTDRow).get("	ToAccountMemoValue2"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction2"),tc_Test_Data.get(iTDRow).get("AddToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccountAmount3"),tc_Test_Data.get(iTDRow).get("ToAccountAmountVal3"),tc_Test_Data.get(iTDRow).get("ToAccountMemo3"),tc_Test_Data.get(iTDRow).get("ToAccountMemoValue3"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction3"));
+				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"),tc_Test_Data.get(iTDRow).get("ToAccountAmount"),
+						tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
+				corporateAccountTransfer.addAndEnterToAccDetails(tc_Test_Data.get(iTDRow).get("AddToAccount1"),
+						tc_Test_Data.get(iTDRow).get("ToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccountAmount1"),
+						tc_Test_Data.get(iTDRow).get("ToAccountMemo1"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction1"),
+						tc_Test_Data.get(iTDRow).get("AddToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccount2"),
+						tc_Test_Data.get(iTDRow).get("ToAccountAmount2"),tc_Test_Data.get(iTDRow).get("ToAccountMemo2"),
+						tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction2"),tc_Test_Data.get(iTDRow).get("AddToAccount3"),
+						tc_Test_Data.get(iTDRow).get("ToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccountAmount3"),
+						tc_Test_Data.get(iTDRow).get("ToAccountMemo3"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction3"));
 				corporateAccountTransfer.enterTransferDate(tc_Test_Data.get(iTDRow).get("TransferDate"));
 				corporateAccountTransfer.selectRecurringOption(tc_Test_Data.get(iTDRow).get("RecurringOptions"),tc_Test_Data.get(iTDRow).get("Frequency"),tc_Test_Data.get(iTDRow).get("DailyOption"),tc_Test_Data.get(iTDRow).get("DailySubOption"),tc_Test_Data.get(iTDRow).get("Day"));
 				corporateAccountTransfer.selectDuration(tc_Test_Data.get(iTDRow).get("Duration"),tc_Test_Data.get(iTDRow).get("TransactionDate"),tc_Test_Data.get(iTDRow).get("FixedNumTransaction"));
@@ -337,7 +499,17 @@ public class CorporateTest extends ApplicationBase  {
 				corporateAccountTransfer.clickRecurringOptButton();
 				corporateAccountTransfer.enterSeriesName(tc_Test_Data.get(iTDRow).get("SeriesName"));
 				corporateAccountTransfer.clickReqTransfer();
-				corporateAccountTransferReview.verifyMultipleAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"),tc_Test_Data.get(iTDRow).get("FromAccReview1"),tc_Test_Data.get(iTDRow).get("ToAccReview1"),tc_Test_Data.get(iTDRow).get("MemoReview1"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview1"),tc_Test_Data.get(iTDRow).get("AmtReview1"),tc_Test_Data.get(iTDRow).get("FromAccReview2"),tc_Test_Data.get(iTDRow).get("ToAccReview2"),tc_Test_Data.get(iTDRow).get("MemoReview2"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview2"),tc_Test_Data.get(iTDRow).get("AmtReview2"),tc_Test_Data.get(iTDRow).get("FromAccReview3"),tc_Test_Data.get(iTDRow).get("ToAccReview3"),tc_Test_Data.get(iTDRow).get("MemoReview3"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),tc_Test_Data.get(iTDRow).get("AmtReview3"));
+				corporateAccountTransferReview.verifyMultipleAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),
+						tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"),
+						tc_Test_Data.get(iTDRow).get("FromAccReview1"),tc_Test_Data.get(iTDRow).get("ToAccReview1"),
+						tc_Test_Data.get(iTDRow).get("MemoReview1"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview1"),
+						tc_Test_Data.get(iTDRow).get("AmtReview1"),tc_Test_Data.get(iTDRow).get("FromAccReview2"),
+						tc_Test_Data.get(iTDRow).get("ToAccReview2"),tc_Test_Data.get(iTDRow).get("MemoReview2"),
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview2"),tc_Test_Data.get(iTDRow).get("AmtReview2"),
+						tc_Test_Data.get(iTDRow).get("FromAccReview3"),tc_Test_Data.get(iTDRow).get("ToAccReview3"),
+						tc_Test_Data.get(iTDRow).get("MemoReview3"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),
+						tc_Test_Data.get(iTDRow).get("AmtReview3"));
 				corporateAccountTransferReview.clickConfirmButton();
 				corporateAccountTransferDetails.verifyAccStatus(tc_Test_Data.get(iTDRow).get("AccountStatus"));
 				corporateAccountTransferDetails.getAccTransaction();
@@ -349,11 +521,24 @@ public class CorporateTest extends ApplicationBase  {
 				//						tc_Test_Data.get(iTDRow).get("EntryMethod"),tc_Test_Data.get(iTDRow).get("ImportFile"),
 				//						tc_Test_Data.get(iTDRow).get("TransferDate"));
 				corporateFuturePaymentActivity.editPaymentActivity(transactionID,tc_Test_Data.get(iTDRow).get("SeriesName"));
-				corporateEditTransaction.enterToAccount(tc_Test_Data.get(iTDRow).get("EditToAccount"),tc_Test_Data.get(iTDRow).get("EditToAccountAmount"),tc_Test_Data.get(iTDRow).get("EditToAccountMemo"),tc_Test_Data.get(iTDRow).get("EditToAccountPaymentInstruction"));
-				//corporateEditTransaction.editAddAndEnterToAccDetails(tc_Test_Data.get(iTDRow).get("EditAddToAccount1"),tc_Test_Data.get(iTDRow).get("EditToAccount1"),tc_Test_Data.get(iTDRow).get("EditToAccountAmount1"),tc_Test_Data.get(iTDRow).get("EditToAccountAmountVal1"),tc_Test_Data.get(iTDRow).get("EditToAccountMemo1"),tc_Test_Data.get(iTDRow).get("EditToAccountMemoValue1"),tc_Test_Data.get(iTDRow).get("EditToAccountPaymentInstruction1"),tc_Test_Data.get(iTDRow).get("EditAddToAccount2"),tc_Test_Data.get(iTDRow).get("EditToAccount2"),tc_Test_Data.get(iTDRow).get("EditToAccountAmount2"),tc_Test_Data.get(iTDRow).get("EditToAccountAmountVal2"),tc_Test_Data.get(iTDRow).get("EditToAccountMemo2"),tc_Test_Data.get(iTDRow).get("EditToAccountMemoValue2"),tc_Test_Data.get(iTDRow).get("EditToAccountPaymentInstruction2"),tc_Test_Data.get(iTDRow).get("EditAddToAccount3"),tc_Test_Data.get(iTDRow).get("EditToAccount3"),tc_Test_Data.get(iTDRow).get("EditToAccountAmount3"),tc_Test_Data.get(iTDRow).get("EditToAccountAmountVal3"),tc_Test_Data.get(iTDRow).get("EditToAccountMemo3"),tc_Test_Data.get(iTDRow).get("EditToAccountMemoValue3"),tc_Test_Data.get(iTDRow).get("EditToAccountPaymentInstruction3"));
+				corporateEditTransaction.enterToAccount(tc_Test_Data.get(iTDRow).get("EditToAccount"),
+						tc_Test_Data.get(iTDRow).get("EditToAccountAmount"),tc_Test_Data.get(iTDRow).get("EditToAccountMemo"),
+						tc_Test_Data.get(iTDRow).get("EditToAccountPaymentInstruction"));
 				corporateEditTransaction.enterTransferDate(tc_Test_Data.get(iTDRow).get("EditTransferDate"));
 				corporateEditTransaction.clickReqTransfer();
-				corporateEditTransaction.verifyAccountTransferDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), tc_Test_Data.get(iTDRow).get("ToAccReview"), tc_Test_Data.get(iTDRow).get("EditToAccountMemo"), tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"), tc_Test_Data.get(iTDRow).get("AmtReview"));
+				corporateEditTransaction.verifyAccountTransferDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"), 
+						tc_Test_Data.get(iTDRow).get("ToAccReview"), tc_Test_Data.get(iTDRow).get("EditToAccountMemo"), 
+						tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"), tc_Test_Data.get(iTDRow).get("AmtReview"));
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),tc_Test_Data.get(iTDRow).get("FromAccount"),
+						tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("AmtReview"));
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnTransactionSearchMenu();
+				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("FromAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("MemoReview"));
 				corporateLogOff.logoffApplication();
 				break;
 
@@ -405,7 +590,6 @@ public class CorporateTest extends ApplicationBase  {
 				corporateAccountTransfer.enterFromAccount(tc_Test_Data.get(iTDRow).get("FromAccount"), tc_Test_Data.get(iTDRow).get("FromAccountAmount"));
 				corporateAccountTransfer.enterToAccount(tc_Test_Data.get(iTDRow).get("ToAccount"), tc_Test_Data.get(iTDRow).get("ToAccountAmount"), tc_Test_Data.get(iTDRow).get("ToAccountMemo"), tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction"));
 				corporateAccountTransfer.addAndEnterToAccDetails(tc_Test_Data.get(iTDRow).get("AddToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccountAmount1"),tc_Test_Data.get(iTDRow).get("ToAccountMemo1"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction1"),tc_Test_Data.get(iTDRow).get("AddToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccountAmount2"),tc_Test_Data.get(iTDRow).get("ToAccountMemo2"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction2"),tc_Test_Data.get(iTDRow).get("AddToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccountAmount3"),tc_Test_Data.get(iTDRow).get("ToAccountMemo3"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction3"));
-				//corporateAccountTransfer.addAndEnterToAccDetails(tc_Test_Data.get(iTDRow).get("AddToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccount1"),tc_Test_Data.get(iTDRow).get("ToAccountAmount1"),tc_Test_Data.get(iTDRow).get("ToAccountAmountVal1"),tc_Test_Data.get(iTDRow).get("ToAccountMemo1"),tc_Test_Data.get(iTDRow).get("ToAccountMemoValue1"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction1"),tc_Test_Data.get(iTDRow).get("AddToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccount2"),tc_Test_Data.get(iTDRow).get("ToAccountAmount2"),tc_Test_Data.get(iTDRow).get("	ToAccountAmountVal2"),tc_Test_Data.get(iTDRow).get("ToAccountMemo2"),tc_Test_Data.get(iTDRow).get("	ToAccountMemoValue2"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction2"),tc_Test_Data.get(iTDRow).get("AddToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccount3"),tc_Test_Data.get(iTDRow).get("ToAccountAmount3"),tc_Test_Data.get(iTDRow).get("ToAccountAmountVal3"),tc_Test_Data.get(iTDRow).get("ToAccountMemo3"),tc_Test_Data.get(iTDRow).get("ToAccountMemoValue3"),tc_Test_Data.get(iTDRow).get("ToAccountPaymentInstruction3"));
 				corporateAccountTransfer.enterTransferDate(tc_Test_Data.get(iTDRow).get("TransferDate"));
 				corporateAccountTransfer.clickReqTransfer();
 				corporateAccountTransferReview.verifyMultipleAccDetails(tc_Test_Data.get(iTDRow).get("FromAccReview"),tc_Test_Data.get(iTDRow).get("ToAccReview"),tc_Test_Data.get(iTDRow).get("MemoReview"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview"),tc_Test_Data.get(iTDRow).get("AmtReview"),tc_Test_Data.get(iTDRow).get("FromAccReview1"),tc_Test_Data.get(iTDRow).get("ToAccReview1"),tc_Test_Data.get(iTDRow).get("MemoReview1"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview1"),tc_Test_Data.get(iTDRow).get("AmtReview1"),tc_Test_Data.get(iTDRow).get("FromAccReview2"),tc_Test_Data.get(iTDRow).get("ToAccReview2"),tc_Test_Data.get(iTDRow).get("MemoReview2"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview2"),tc_Test_Data.get(iTDRow).get("AmtReview2"),tc_Test_Data.get(iTDRow).get("FromAccReview3"),tc_Test_Data.get(iTDRow).get("ToAccReview3"),tc_Test_Data.get(iTDRow).get("MemoReview3"),tc_Test_Data.get(iTDRow).get("PaymentIstructionReview3"),tc_Test_Data.get(iTDRow).get("AmtReview3"));
@@ -614,6 +798,9 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC017":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("OffsetAccount"), testdataFile_Path, sTestCase, iTDRow);
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
@@ -645,18 +832,32 @@ public class CorporateTest extends ApplicationBase  {
 				corporateNewACHBatchTemplate.verifyPassword(cPassword);
 				transactionID = corporateNewACHBatchTemplate.getTransaction();
 				corporateLogOff.logoffApplication();
-//				corporateLogin.launchApplication(cURL);
-//				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
-//				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
-//				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
-//						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
-//				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
-//				corporateLogOff.logoffApplication();
+				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
+				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(ACH Payments)
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
+						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
+				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"));
+				corporateLogOff.logoffApplication();
 				break;
 
 			case "CC_CORP_TC018":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("OffsetAccount"), testdataFile_Path, sTestCase, iTDRow);
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
@@ -696,12 +897,25 @@ public class CorporateTest extends ApplicationBase  {
 				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickRejectButtonForACHPayment(transactionID,"Testing");
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"));
 				corporateLogOff.logoffApplication();
 				break;
 
 			case "CC_CORP_TC019":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("OffsetAccount"), testdataFile_Path, sTestCase, iTDRow);
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
@@ -739,6 +953,17 @@ public class CorporateTest extends ApplicationBase  {
 				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickCancelButtonForACHPayment(transactionID);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"));
 				corporateLogOff.logoffApplication();
 				break;		
 
@@ -1018,6 +1243,10 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC029":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnWireTransfers();
 				if(!tc_Test_Data.get(iTDRow).get("ExistingWireTemplate").equals("")){
@@ -1043,14 +1272,26 @@ public class CorporateTest extends ApplicationBase  {
 				}
 				corporateNewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("Amount"));
 				corporateNewWireTransfer.verifyPassword(cPassword);
+//				transactionID = "DWR-00002046";
 				transactionID = corporateNewWireTransfer.getTransaction();
 				corporateLogOff.logoffApplication();
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication();
 				break;			
 
@@ -1058,6 +1299,10 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC030":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnWireTransfers();
 				if(!tc_Test_Data.get(iTDRow).get("ExistingWireTemplate").equals("")){
@@ -1091,12 +1336,27 @@ public class CorporateTest extends ApplicationBase  {
 				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickRejectButtonForACHPayment(transactionID, "Test");
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("TransferDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication();
 				break;			
 				
 			case "CC_CORP_TC031":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnWireTransfers();
 				corporateHomeMenu.clickOnNewWireTransfer();
@@ -1104,11 +1364,10 @@ public class CorporateTest extends ApplicationBase  {
 						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("BeneIdType"),
 						tc_Test_Data.get(iTDRow).get("BeneId"),tc_Test_Data.get(iTDRow).get("BeneAddress1"),
 						tc_Test_Data.get(iTDRow).get("BeneAddress2"),tc_Test_Data.get(iTDRow).get("BeneCountry"),
-						tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("PaymentCurrency"),
-						tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("BeneBankID"),
-						tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),
-						tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
+						tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
+						tc_Test_Data.get(iTDRow).get("PaymentCurrency"),tc_Test_Data.get(iTDRow).get("Amount"),
+						tc_Test_Data.get(iTDRow).get("BeneBankID"),tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),
+						tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
 				corporateNewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("Amount"));
 				corporateNewWireTransfer.verifyPassword(cPassword);
 				transactionID = corporateNewWireTransfer.getTransaction();
@@ -1116,7 +1375,7 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(Wires)
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickRejectButtonForACHPayment(transactionID,"Reject Testing");
 				corporateLogOff.logoffApplication();
@@ -1126,7 +1385,7 @@ public class CorporateTest extends ApplicationBase  {
 				corporateHomeMenu.clickOnPaymentActivity();
 				corporateHomeMenu.clickOnCurrentPaymentActivity();
 				corporateCurrentPaymentActivity.clickOnCurrentWireTransferActivity();
-				corporateCurrentPaymentActivity.viewInitiatorCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewInitiatorCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("EditTransactionStatus"));
 				corporateCurrentPaymentActivity.clickEditButtonFromInitiatorWire(transactionID);
 				corporateNewWireTransfer.editNewWireTransferUsingFreeForm(tc_Test_Data.get(iTDRow).get("Update_Payee"),
@@ -1142,15 +1401,30 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication(); 
 				break;		
 
 			case "CC_CORP_TC032":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnWireTransfers();
 				corporateHomeMenu.clickOnNewWireTransfer();
@@ -1158,11 +1432,10 @@ public class CorporateTest extends ApplicationBase  {
 						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("BeneIdType"),
 						tc_Test_Data.get(iTDRow).get("BeneId"),tc_Test_Data.get(iTDRow).get("BeneAddress1"),
 						tc_Test_Data.get(iTDRow).get("BeneAddress2"),tc_Test_Data.get(iTDRow).get("BeneCountry"),
-						tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("PaymentCurrency"),
-						tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("BeneBankID"),
-						tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),
-						tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
+						tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
+						tc_Test_Data.get(iTDRow).get("PaymentCurrency"),tc_Test_Data.get(iTDRow).get("Amount"),
+						tc_Test_Data.get(iTDRow).get("BeneBankID"),tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),
+						tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
 				corporateNewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("Amount"));
 				corporateNewWireTransfer.verifyPassword(cPassword);
 				transactionID = corporateNewWireTransfer.getTransaction();
@@ -1170,7 +1443,7 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(Wires)
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickRejectButtonForACHPayment(transactionID,"Reject Testing");
 				corporateLogOff.logoffApplication();
@@ -1180,25 +1453,40 @@ public class CorporateTest extends ApplicationBase  {
 				corporateHomeMenu.clickOnPaymentActivity();
 				corporateHomeMenu.clickOnCurrentPaymentActivity();
 				corporateCurrentPaymentActivity.clickOnCurrentWireTransferActivity();
-				corporateCurrentPaymentActivity.viewInitiatorCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewInitiatorCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("EditTransactionStatus"));
 				corporateCurrentPaymentActivity.clickCancelButtonForACHPayment(transactionID);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication(); 
 				break;							
 
 			case "CC_CORP_TC033":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				if(tc_Test_Data.get(iTDRow).get("ExistingWireTemplate").equals("Yes")){
 					corporateHomeMenu.clickOnPaymentActivity();
 					corporateHomeMenu.clickOnCurrentPaymentActivity();
 					corporateCurrentPaymentActivity.clickOnCurrentWireTransferActivity();
 					transactionID = corporateNewWireTransfer.getTransactionIDFromPayment();
-					corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+					corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 					corporateCurrentPaymentActivity.clickEditButtonFromInitiatorWire(transactionID);
-					corporateNewWireTransfer.editNewWireTransferUsingExistingTemplate(tc_Test_Data.get(iTDRow).get("PaymentDate"));
+					corporateNewWireTransfer.editNewWireTransferUsingExistingTemplate(tc_Test_Data.get(iTDRow).get("PaymentDate"),cPassword);
 				}else {
 					corporateHomeMenu.clickOnWireTransfers();
 					corporateHomeMenu.clickOnManageWireTemplates();
@@ -1223,29 +1511,41 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
 				corporateLogOff.logoffApplication();
 				corporateLogin.launchApplication(cURL);
+				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnPaymentActivity();
 				corporateHomeMenu.clickOnCurrentPaymentActivity();
 				corporateCurrentPaymentActivity.clickOnCurrentWireTransferActivity();
 				transactionID = corporateNewWireTransfer.getTransactionIDFromPayment();
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 					tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickEditButtonFromInitiatorWire(transactionID);
-				corporateNewWireTransfer.editNewWireTransferUsingExistingTemplate(tc_Test_Data.get(iTDRow).get("PaymentDate"));
+				corporateNewWireTransfer.editNewWireTransferUsingExistingTemplate(tc_Test_Data.get(iTDRow).get("PaymentDate"),cPassword);
 				}
 				corporateNewWireTransfer.verifyPassword(cPassword);
 				corporateLogOff.logoffApplication();
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication();
 				break;			
 	
@@ -1253,6 +1553,10 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC034":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				if(tc_Test_Data.get(iTDRow).get("ExistingWireTemplate").equals("Yes")){
 					corporateHomeMenu.clickOnPaymentActivity();
@@ -1284,24 +1588,39 @@ public class CorporateTest extends ApplicationBase  {
 				corporateHomeMenu.clickOnCurrentPaymentActivity();
 				corporateCurrentPaymentActivity.clickOnCurrentWireTransferActivity();
 				}
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("Amount"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickEditButtonFromInitiatorWire(transactionID);
-				corporateNewWireTransfer.editNewWireTransferUsingExistingTemplate(tc_Test_Data.get(iTDRow).get("PaymentDate"));
+				corporateNewWireTransfer.editNewWireTransferUsingExistingTemplate(tc_Test_Data.get(iTDRow).get("PaymentDate"),cPassword);
 				corporateNewWireTransfer.verifyPassword(cPassword);
 				corporateLogOff.logoffApplication();
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickRejectButtonForACHPayment(transactionID,"test");
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication();
 				break;	
 				
 			case "CC_CORP_TC035":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnWireTransfers();
 				corporateHomeMenu.clickOnNewWireTransfer();
@@ -1309,11 +1628,10 @@ public class CorporateTest extends ApplicationBase  {
 						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("BeneIdType"),
 						tc_Test_Data.get(iTDRow).get("BeneId"),tc_Test_Data.get(iTDRow).get("BeneAddress1"),
 						tc_Test_Data.get(iTDRow).get("BeneAddress2"),tc_Test_Data.get(iTDRow).get("BeneCountry"),
-						tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("PaymentCurrency"),
-						tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
-						tc_Test_Data.get(iTDRow).get("Amount"),tc_Test_Data.get(iTDRow).get("BeneBankID"),
-						tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),
-						tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
+						tc_Test_Data.get(iTDRow).get("PaymentDate"),tc_Test_Data.get(iTDRow).get("BeneBankIDType"),
+						tc_Test_Data.get(iTDRow).get("PaymentCurrency"),tc_Test_Data.get(iTDRow).get("Amount"),
+						tc_Test_Data.get(iTDRow).get("BeneBankID"),tc_Test_Data.get(iTDRow).get("PurposeOfPayment"),
+						tc_Test_Data.get(iTDRow).get("BeneBankAddress1"),tc_Test_Data.get(iTDRow).get("BeneBankAddress2"));
 				corporateNewWireTransfer.reviewWireTransferDetails(tc_Test_Data.get(iTDRow).get("Amount"));
 				corporateNewWireTransfer.verifyPassword(cPassword);
 				transactionID = corporateNewWireTransfer.getTransaction();
@@ -1321,15 +1639,30 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(Wires)
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication(); 
 				break;		
 				
 			case "CC_CORP_TC036":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				if(!tc_Test_Data.get(iTDRow).get("ExistingPayee").equals("")){
 					corporateHomeMenu.clickOnWireTransfers();
@@ -1341,7 +1674,15 @@ public class CorporateTest extends ApplicationBase  {
 				}else {
 					corporateHomeMenu.clickOnPayees();
 					corporateHomeMenu.clickOnNewPayee();
-					corporateCommonNavigation.createNewPayeeAndSearch(tc_Test_Data, iTDRow);
+					corporateNewPayee.createNewPayeeAndSearch(tc_Test_Data.get(iTDRow).get("PayeeName"),tc_Test_Data.get(iTDRow).get("PayeeID"),
+							tc_Test_Data.get(iTDRow).get("PayeeType"),tc_Test_Data.get(iTDRow).get("Address1"),
+							tc_Test_Data.get(iTDRow).get("Address2"),tc_Test_Data.get(iTDRow).get("AccountNumber"),
+							tc_Test_Data.get(iTDRow).get("TemplateInfo"),tc_Test_Data.get(iTDRow).get("BankId"),
+							tc_Test_Data.get(iTDRow).get("BankName"),tc_Test_Data.get(iTDRow).get("DebitType"),
+							tc_Test_Data.get(iTDRow).get("BeneBankIDType"),tc_Test_Data.get(iTDRow).get("BeneBankCountry"),
+							tc_Test_Data.get(iTDRow).get("BeneBankID"),tc_Test_Data.get(iTDRow).get("BeneBankName"), 
+							tc_Test_Data.get(iTDRow).get("BeneCountry"));
+					//corporateCommonNavigation.createNewPayeeAndSearch(tc_Test_Data, iTDRow);
 					corporateHomeMenu.clickOnPaymentMenu();
 					corporateHomeMenu.clickOnWireTransfers();
 					corporateHomeMenu.clickOnNewWireTransfer();
@@ -1357,15 +1698,30 @@ public class CorporateTest extends ApplicationBase  {
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID1, cUserID1, cPassword1);
 				corporateDashboard.selectApprovals(tc_Test_Data.get(iTDRow).get("ApprovalType"));//(Wires)
-				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
+				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("PaymentDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication();
 				break;
 
 			case "CC_CORP_TC037":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("DebitAccount"), testdataFile_Path, sTestCase, iTDRow);
+				corporateAccountTransfer.closeBalanceTab();
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnWireTransfers();
 				if(tc_Test_Data.get(iTDRow).get("ExistingMultipleWireTemplate").equals("Yes")){
@@ -1409,12 +1765,21 @@ public class CorporateTest extends ApplicationBase  {
 //						tc_Test_Data.get(iTDRow).get("Amount2Review"),tc_Test_Data.get(iTDRow).get("TransactionStatus2"),
 //						tc_Test_Data.get(iTDRow).get("Amount3Review"),tc_Test_Data.get(iTDRow).get("TransactionStatus3"));
 				corporateCurrentPaymentActivity.clickMultipleWireApproveButton(multiTransactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("DebitAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("Payee").toUpperCase());
 				corporateLogOff.logoffApplication();
 				break;			
 
-				
-				
-				
+			
 			case "CC_CORP_TC038":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
@@ -1526,6 +1891,9 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC040":
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("OffsetAccount"), testdataFile_Path, sTestCase, iTDRow);
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
@@ -1562,6 +1930,17 @@ public class CorporateTest extends ApplicationBase  {
 				corporateCurrentPaymentActivity.clickOnCurrentACHActivity();
 				corporateCurrentPaymentActivity.viewInitiatorCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("EditTransactionStatus"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"));
 				corporateLogOff.logoffApplication();
 				break;	
 				
@@ -1569,6 +1948,9 @@ public class CorporateTest extends ApplicationBase  {
 			case "CC_CORP_TC041":	
 				corporateLogin.launchApplication(cURL);
 				corporateLogin.logInToApplication(cCompanyID, cUserID, cPassword);
+				corporateHomeMenu.clickOnAccountsMenu();
+				corporateHomeMenu.clickOnBalancesMenu();
+				corporateAccountTransfer.searchAccountBalances(tc_Test_Data.get(iTDRow).get("OffsetAccount"), testdataFile_Path, sTestCase, iTDRow);
 				corporateHomeMenu.clickOnPaymentMenu();
 				corporateHomeMenu.clickOnAchPayments();
 				corporateHomeMenu.clickOnNewAchBacth();
@@ -1594,6 +1976,17 @@ public class CorporateTest extends ApplicationBase  {
 				corporateCurrentPaymentActivity.viewCurretPaymentDetailsForACH(tc_Test_Data.get(iTDRow).get("TransferDate"), transactionID, 
 						tc_Test_Data.get(iTDRow).get("AmountReview"), tc_Test_Data.get(iTDRow).get("TransactionStatus"));
 				corporateCurrentPaymentActivity.clickApproveButtonForACHPayment(transactionID,cPassword1);
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnBalancesMenu();
+//				tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+//				corporateAccountTransfer.verifyAccountBalanceAfterTransaction(tc_Test_Data.get(iTDRow).get("PaymentDate"),
+//						tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("CurrentBalance"),
+//						tc_Test_Data.get(iTDRow).get("AmountReview"));
+//				corporateHomeMenu.clickOnAccountsMenu();
+//				corporateHomeMenu.clickOnTransactionSearchMenu();
+//				corporateAccountTransfer.verifyTransactinSearch(tc_Test_Data.get(iTDRow).get("OffsetAccount"),tc_Test_Data.get(iTDRow).get("FromDate"),
+//						tc_Test_Data.get(iTDRow).get("ToDate"),tc_Test_Data.get(iTDRow).get("FromAmount"),
+//						tc_Test_Data.get(iTDRow).get("ToAmount"),tc_Test_Data.get(iTDRow).get("CompanyEntryDescription"));
 				corporateLogOff.logoffApplication();
 				break;
 				

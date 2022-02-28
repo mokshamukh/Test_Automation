@@ -318,11 +318,11 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 			try {
 				Thread.sleep(4000);
 				if (isElementPresent(paymentActivityTitle)) {
-					//				if(!date.equals("")) {
-					//				validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
-					//				}
+					if(!date.equals("")) {
+						validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
+					}
 					if(!amount.equals("")){
-						validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID),"amount");
+						validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID),amount);
 					}
 					if(!status.equals("")){
 						validateTextContains("Corporate Current Payment Activity", "Status", getDynamicElement("Status", status_field, transactionID), status);
@@ -690,13 +690,13 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 				Thread.sleep(4000);
 				if (isElementPresent(paymentActivityTitle)) {
 					String[] newtrans=transID.split("\\|\\|");
-					for(int i=0;i<=newtrans.length;i++) {
+					for (int i=0; i<newtrans.length; i++) {
 
 						if(!status1Review.equals("")){
 							validateTextContains("Corporate Current Payment Activity", "Status1_review", getDynamicElement("Status", status1_field, newtrans[i].trim()), status1Review);
 						}
 					}
-					
+
 				}
 				stepResult = true;
 			} catch (Exception e) {
