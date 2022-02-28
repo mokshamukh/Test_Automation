@@ -298,10 +298,10 @@ public class EPP_PaymentDetails extends CommonLibrary {
 				} finally {
 					if (stepResult == true) {
 						System.out.println("Pass");
-						new HTMLReportHelper().HtmlReportBody("Approve Repair Payments", "Repair Payment approved Successfully","Passed", driver, "Y");
+						new HTMLReportHelper().HtmlReportBody("Approve Payment Action", "Action approved on Payment Successfully","Passed", driver, "Y");
 					} else {
 						System.out.println("fail");
-						new HTMLReportHelper().HtmlReportBody("Approve Repair Payments","Could not approve repair payment Successfully", "Failed", driver, "Y");
+						new HTMLReportHelper().HtmlReportBody("Approve Payment Action","Could not approve action on payment Successfully", "Failed", driver, "Y");
 						System.setProperty("runStep","N");
 					}
 				}
