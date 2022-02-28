@@ -979,6 +979,30 @@ public class CommonLibrary {
 			throw new Exception(errorMessageToDisplay);
 		}
 	}
+	
+	
+	protected void waitForPresenceOfElementTillTime(String pageName, String fieldName, By by, int waitTime) throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [WaitForPresence]    ###   Locator [" + by + "]";
+		String errorMessageToDisplay = "Could Not be find [" + fieldName + "] in [" + waitTime
+				+ "] Seconds On Page [" + pageName + "]";
+
+		Boolean found = false;
+		try {
+			Log.info(messageToDisplay);
+			WebDriverWait wait = new WebDriverWait(driver, waitTime);
+			wait.until(ExpectedConditions.presenceOfElementLocated(by));
+			found = true;
+		} catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+		if (found == false) {
+			throw new Exception(errorMessageToDisplay);
+		}
+	}
+
+
 
 	/**
 	 * Wait For Element To be Clickable by locator

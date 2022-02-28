@@ -175,11 +175,11 @@ public class EPP_PaymentRepair extends CommonLibrary{
 					clearAndType(eppPaymentRepair, "Amount", amountTxtBox, updatedAmount);
 					waitElement(3000);
 					clickOnElement(eppPaymentRepair, "Validate Button", validateBttn);
-					waitElement(8000);
+					waitElement(3000);
 					waitForPresenceOfElement(eppPaymentRepair, "Validation Successfull Window", confirmWindow);
-					waitElement(5000);
+					waitElement(3000);
 					clickOnElement(eppPaymentRepair, "Submit Payment Button", submitPayment);
-					waitElement(20000);
+					waitElement(5000);
 					//driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Cancel Payment')]")).click();
 					waitForPresenceOfElement(eppPaymentRepair, "Payment Saved with Transaction", transIdSaved);
 					stepResult = true;

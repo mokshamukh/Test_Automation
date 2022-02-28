@@ -23,7 +23,8 @@ public class EPP_ActionPrompts extends CommonLibrary{
 	public String eppActionPrompts = "EPP_ActionPrompts";
 	public String menuOPtion = "//div[@class='mainMenu']//h2[text()='%s']";
 	public String subMenuOption = "//a[@class='linkMenu'][text()='%s']";
-
+	
+	int longWait = 180;
 	By actionPrompts = By.xpath("//div[@id='headerBar']//td[contains(text(),'Action Prompts')]");
 	By cancelPaymentTxtBox = By.xpath("//form[@name='paymentActionForm']//td[contains(text(),'Additional Comments:')]//..//*[@name='CancelPaymentReason']");
 	By cancelByBankBtn = By.xpath("//input[@name='CancelInitiator'][@value='BANK']");
@@ -123,9 +124,9 @@ public class EPP_ActionPrompts extends CommonLibrary{
 					}
 				}
 				clickOnElement(eppActionPrompts, "Action saved Successfully", transIdSaved);
-				if(isElementPresent(transactionStatus)) {
-					validateElementPresent(eppActionPrompts, "Transaction Status", transactionStatus);
-				}
+				waitForPresenceOfElementTillTime(eppActionPrompts, "Transaction Status", transactionStatus,longWait);
+				validateElementPresent(eppActionPrompts, "Transaction Status", transactionStatus);
+				
 				stepResult = true;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

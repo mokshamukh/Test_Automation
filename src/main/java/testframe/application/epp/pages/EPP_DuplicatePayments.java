@@ -38,12 +38,18 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 	By executeButton = By.xpath("//div[@id='img_button_execute']");	
 
 
-	public void selectCancelDuplicatePayment() throws Exception {
+	public void selectCancelDuplicatePayment(String sTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
-				waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
-				clickOnElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+				if(!sTransID.equals("")){
+					waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", getDynamicElement("Duplicate Transaction ID", dupTransID, sTransID));
+					getDynamicElementClick(eppDuplicatePayments, "Duplicate Transaction ID", dupTransID, sTransID);
+				}
+				else{
+					waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+					clickOnElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+				}
 				waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", paymentTitle);
 				if(isElementPresent(transactionStatus)) {
 					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Cancel Payment')]")).click();
@@ -68,12 +74,18 @@ public class EPP_DuplicatePayments extends CommonLibrary {
 		}
 	}
 
-	public void selectReleaseHoldPayment() throws Exception {
+	public void selectReleaseHoldPayment(String sTransID) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
-				waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
-				clickOnElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+				if(!sTransID.equals("")){
+					waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", getDynamicElement("Duplicate Transaction ID", dupTransID, sTransID));
+					getDynamicElementClick(eppDuplicatePayments, "Duplicate Transaction ID", dupTransID, sTransID);
+				}
+				else{
+					waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+					clickOnElement(eppDuplicatePayments, "Duplicate Transaction ID", duplicateTransID);
+				}	
 				waitForPresenceOfElement(eppDuplicatePayments, "Duplicate Transaction ID", paymentTitle);
 				if(isElementPresent(transactionStatus)) {
 					driver.findElement(By.xpath("//select[@id='ActionSelect']//option[contains(.,'Release From Duplicate Hold')]")).click();
