@@ -103,7 +103,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Customer from Menu", "Customer from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Customer from Menu", "Customer from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -129,7 +129,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Customer Inquiry from customer menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Home Menu Page", "Customer Inquiry from customer menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -156,7 +156,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Menu New Name selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Menu New Name selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -183,7 +183,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Names from Menu", "Menu Name selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Names from Menu", "Menu Name selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -210,7 +210,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Menu New Name selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Name from Menu", "Menu New Name selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -237,7 +237,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Menu New Address selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Menu New Address selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -264,7 +264,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Address from Menu", "Menu Address selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Address from Menu", "Menu Address selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -291,7 +291,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Menu New Address selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Address from Menu", "Menu New Address selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -318,7 +318,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Conatct from Menu", "Menu New contact selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Conatct from Menu", "Menu New contact selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -345,7 +345,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Conatct from Menu", "Menu contact selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Conatct from Menu", "Menu contact selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -372,7 +372,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Conatct from Menu", "Menu New contact selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Conatct from Menu", "Menu New contact selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -397,7 +397,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Portfolio from Menu", "Portfolio from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Portfolio from Menu", "Portfolio from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -421,7 +421,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Portfolio from Menu", "New Portfolio from Portfolio menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Portfolio from Menu", "New Portfolio from Portfolio menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -446,7 +446,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Portfolio from Menu", "Change Portfolio from Portfolio menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Portfolio from Menu", "Change Portfolio from Portfolio menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -472,7 +472,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Name from Menu", "Change name from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Name from Menu", "Change name from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -498,7 +498,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Deposits from Menu", "Deposits from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Deposits from Menu", "Deposits from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -523,7 +523,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Demand Deposits from Menu", "Demand Deposits from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Demand Deposits from Menu", "Demand Deposits from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -548,7 +548,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Demand Deposits from Menu", "New Demand Deposits from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Demand Deposits from Menu", "New Demand Deposits from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -573,7 +573,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Demand Deposits Menu", "Account Inquiry from Demand Deposits menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Demand Deposits Menu", "Account Inquiry from Demand Deposits menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -597,7 +597,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Account from Demand Deposits Menu", "Change Account from Demand Deposits menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Account from Demand Deposits Menu", "Change Account from Demand Deposits menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -625,7 +625,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Saving Deposits from Menu", "Saving Deposits from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Saving Deposits from Menu", "Saving Deposits from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -650,7 +650,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Account from Saving Deposits", "New Account from Saving selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Account from Saving Deposits", "New Account from Saving selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -675,7 +675,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Savings Menu", "Account Inquiry from Savings menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Savings Menu", "Account Inquiry from Savings menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -699,7 +699,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Account from Savings Menu", "Change Account from Savings menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Account from Savings Menu", "Change Account from Savings menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -725,7 +725,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Certificates Deposits from Menu", "Certificates Deposits from menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Certificates Deposits from Menu", "Certificates Deposits from menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -750,7 +750,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Account from Certificates Deposits", "New Account from Certificates selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Account from Certificates Deposits", "New Account from Certificates selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -775,7 +775,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Certificates Menu", "Account Inquiry from Certificates menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Certificates Menu", "Account Inquiry from Certificates menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -799,7 +799,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Account from Certificates Menu", "Change Account from Certificates menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Account from Certificates Menu", "Change Account from Certificates menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -824,7 +824,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -849,7 +849,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Line from Menu", "Menu New Line selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -874,7 +874,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Line Inquiry from Menu", "Menu Line Inquiry selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Line Inquiry from Menu", "Menu Line Inquiry selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -899,7 +899,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Loans from Menu", "Menu Loans selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Loans from Menu", "Menu Loans selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -924,7 +924,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Note from Menu", "Menu New Note selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Note from Menu", "Menu New Note selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -948,7 +948,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Menu", "Account Inquiry selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Menu", "Account Inquiry selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -975,7 +975,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Address from Menu", "Menu Change Address selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Address from Menu", "Menu Change Address selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -999,7 +999,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Safe Deposit Box from Menu", "Safe Deposit Box clicked Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Safe Deposit Box from Menu", "Safe Deposit Box clicked Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1024,7 +1024,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("New Account - Safe Deposit Box from Menu", "New Account - Safe Deposit Box clicked Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("New Account - Safe Deposit Box from Menu", "New Account - Safe Deposit Box clicked Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1050,7 +1050,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Account from Loans Menu", "Change Account from Loans menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Account from Loans Menu", "Change Account from Loans menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1075,7 +1075,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Safe Deposit Box Menu", "Account Inquiry from Safe Deposit Box menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Account Inquiry from Safe Deposit Box Menu", "Account Inquiry from Safe Deposit Box menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1100,7 +1100,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Account from Safe Deposit Box Menu", "Change Account from Safe Deposit Box menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Account from Safe Deposit Box Menu", "Change Account from Safe Deposit Box menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1125,7 +1125,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Collateral from Menu", "Menu Collateral selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Collateral from Menu", "Menu Collateral selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1149,7 +1149,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Collateral from Menu", "SubMenu New Collateral selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Collateral from Menu", "SubMenu New Collateral selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1175,7 +1175,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Collateral Inquiry from Menu", "SubMenu Collateral Inquiry selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Collateral Inquiry from Menu", "SubMenu Collateral Inquiry selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1201,7 +1201,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Change Collateral from Menu", "SubMenu Change Collateral selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Change Collateral from Menu", "SubMenu Change Collateral selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1227,7 +1227,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select delete Collateral from Menu", "SubMenu delete Collateral selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select delete Collateral from Menu", "SubMenu delete Collateral selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1253,7 +1253,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Master Agreements from Menu", "Menu Master Agreements selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Master Agreements from Menu", "Menu Master Agreements selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1278,7 +1278,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Agreement from Menu", "Menu New Agreement selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Agreement from Menu", "Menu New Agreement selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1303,7 +1303,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Master Agreement Inquire from Menu", "Master Agreement Inquire selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Master Agreement Inquire from Menu", "Master Agreement Inquire selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1327,7 +1327,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Commitment from Menu", "Menu New Commitment selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Commitment from Menu", "Menu New Commitment selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1352,7 +1352,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Line of Credit from Menu", "Menu New Line of Credit selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Line of Credit from Menu", "Menu New Line of Credit selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1376,7 +1376,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Letter of Credit from Menu", "Menu New Letter of Credit selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Letter of Credit from Menu", "Menu New Letter of Credit selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1400,7 +1400,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Sub Loan from Menu", "Menu New Sub Loan selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Sub Loan from Menu", "Menu New Sub Loan selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1424,7 +1424,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Master Mortgage from Menu", "Menu New Master Mortgage selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Master Mortgage from Menu", "Menu New Master Mortgage selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1449,7 +1449,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Sweeps from Menu", "Menu Sweeps selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Sweeps from Menu", "Menu Sweeps selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1473,7 +1473,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select New Sweep from Menu", "Menu New Sweep selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select New Sweep from Menu", "Menu New Sweep selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1497,7 +1497,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Sweep Inquire from Menu", "Sweep Inquire selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Sweep Inquire from Menu", "Sweep Inquire selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1522,7 +1522,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Modeling from Menu", "Menu Modeling selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Modeling from Menu", "Menu Modeling selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1547,7 +1547,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Note Calculator from Modeling Menu", "Note Calculator from Modeling menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Note Calculator from Modeling Menu", "Note Calculator from Modeling menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");
@@ -1572,7 +1572,7 @@ public class Premier_HomeMenu extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Select Deposit Calculator from Modeling Menu", "Deposit Calculator from Modeling menu selected Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Select Deposit Calculator from Modeling Menu", "Deposit Calculator from Modeling menu selected Successfully", "Passed", driver, "N");
 				}
 				else{
 					System.out.println("fail");

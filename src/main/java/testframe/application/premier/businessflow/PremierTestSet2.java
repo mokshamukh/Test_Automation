@@ -1152,13 +1152,13 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();		
 				break;
 				
-			case "PREMIER_TC118":
+			case "PREMIER_TC121":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
-					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 					}
@@ -1180,13 +1180,13 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();
 				break;
 				
-			case "PREMIER_TC119":
+			case "PREMIER_TC122":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
-					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 					}
@@ -1208,13 +1208,13 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();
 				break;
 				
-			case "PREMIER_TC120":
+			case "PREMIER_TC123":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
-					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 					}
@@ -1240,13 +1240,13 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();
 				break;
 				
-			case "PREMIER_TC121":
+			case "PREMIER_TC124":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
 				sAccountNumber = tc_Test_Data.get(iTDRow).get("ChangeDeposit_AccountNumber");
-				if(sAccountNumber.equals("")) {					
-					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {						
+				if(sAccountNumber.equals("")) {
+					if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
 						new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
 						tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
 					}
@@ -1272,7 +1272,7 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();
 				break;
 				
-			case "PREMIER_TC122":
+			case "PREMIER_TC125":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
@@ -1308,7 +1308,7 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();
 				break;
 				
-			case "PREMIER_TC123":
+			case "PREMIER_TC129":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
@@ -1336,7 +1336,7 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();			
 				break;
 				
-			case "PREMIER_TC124":
+			case "PREMIER_TC130":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
@@ -1368,7 +1368,7 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();			
 				break;
 				
-			case "PREMIER_TC125":
+			case "PREMIER_TC131":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);
@@ -1400,7 +1400,7 @@ public class PremierTestSet2 extends ApplicationBase {
 				premierLogOff.logoffApplication();			
 				break;
 				
-			case "PREMIER_TC126":
+			case "PREMIER_TC132":
 				premierLoginPage.launchApplication(sURL);
 				premierLoginPage.selectGroup(sGroup,sEnvType);
 				premierLoginPage.logInToApplication(sUserID,sPassword,sInstitution);

@@ -298,10 +298,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		boolean stepResult = false;
 		try {
 			if(isElementPresent(duplicatePageTitle)) {
-				if (isElementPresent(duplicateMsgNameAddress)) {
+				//if (isElementPresent(duplicateMsgNameAddress)) {
 					clickOnElement("New Portfolio Page", "Next Button", nextButton);
 					stepResult = true;
-				}
+				//}
 				
 			}					
 			}catch(Exception e) {

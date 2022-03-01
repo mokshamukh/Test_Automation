@@ -5,7 +5,7 @@ import java.util.Map;
 
 import testframe.common.utilities.DateTimeHelper;
 
-public class PremierCommonNavigation extends PremierTestSet1{
+public class PremierCommonNavigation extends PremierTestSet2{
 	
 	
 	
