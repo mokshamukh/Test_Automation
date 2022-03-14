@@ -663,7 +663,7 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 				}else {
 					clickOnElement("Manage Wire Template", "Search Field", searchExpand);
 				}
-					if (!templateName.equals("")) {
+ 					if (!templateName.equals("")) {
 						enterText("Manage Wire Template", "Template Name", templateNameField, templateName);
 					}
 					if(!amount.equals("")) {

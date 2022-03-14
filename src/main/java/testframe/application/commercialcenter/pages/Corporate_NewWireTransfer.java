@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.ExcelReader;
 
 /**
  * PageNage : Corporate_NewWireTransfer
@@ -412,6 +413,8 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By paymentCurrencyField = By.xpath("//input[@id='paymentCurrency']");
 			//+ "//p-autocomplete[@inputid='paymentCurrency']//button//span[text()='ui-btn']");
 	By purposeOfPaymentField = By.xpath("//input[@id='purposeOfPay']");
+	By semiPurposeOfPayment = By.xpath("//input[@id='referenceToBeneficiary']");
+	By semiAmountField = By.xpath("//input[@aria-label='amount']");
 	By amountField = By.xpath("//input[@id='amount']");
 	By requestTransferButton = By.xpath("//button[contains(@aria-label,'To proceed with the transfer')]");
 	By accountInfoDetails = By.xpath("//h3[contains(text(),'Account Information')]");
@@ -440,7 +443,7 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 	By existingTemplateField = By.xpath("//p-dropdown[@inputid='templateData']");
 	By selectTemplateHeader = By.xpath("//h1[text()='Wire Transfer: Select Template']");
 	By paymentDateField = By.xpath("//input[@id='paymentDate']");
-	By paymentDateTitle = By.xpath("//h4[contains(text(),'Amount & Currency')]");
+	By paymentDateTitle = By.xpath("//h4[contains(text(),'Amount')]");
 	By existingReviewAmount = By.xpath("//h4[@role='heading']//..//..//..//div[@id='amount']");
 	By editTransferHeader= By.xpath("//h1[@id='wireTransferLbl'][contains(text(),'Edit')]");
 	By wireDetailsHeader = By.xpath("//h3[text()='Wire Details ']");
@@ -600,13 +603,17 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 
 	}
 
-	public String getTransaction() throws Exception {
+	public String getTransaction(String excelFilePath,String sheetName, int rowNo) throws Exception {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
 				if (isElementPresent(wireTransferHeader)) {
 					transactionID = getElementText("New Wire Transfer", "Alert Message", msg);
 					transactionID = transactionID.replaceAll("\\.", "");
+					if(transactionID != "") {
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "TransactionID", rowNo+1, transactionID);				
+						System.out.println(transactionID);
+					}
 					stepResult = true;
 				}
 			} catch (Exception e) {
@@ -721,7 +728,8 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 		}
 	}
 
-	public void createNewWireTransferUsingExistingTemplate(String existTemplate,String paymentDate) throws Exception{
+	public void createNewWireTransferUsingExistingTemplate(String existTemplate,String paymentDate,String semiReppurposeOfPayment,
+			String semiRepamount) throws Exception{
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
@@ -735,6 +743,14 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 
 					if(!paymentDate.equals("")) {
 						enterNewWireTransferPaymentDate(paymentDate);
+					}
+					if(!semiReppurposeOfPayment.equals("")) {
+						scrollToElement(semiPurposeOfPayment);
+						enterText("Corporate New Wire Transfer", "Purpose of Payment", semiPurposeOfPayment, semiReppurposeOfPayment);
+					}
+					if(!semiRepamount.equals("")) {
+						waitElement(2000);
+						enterText("Corporate New Wire Transfer", "Amount Field", semiAmountField, semiRepamount);
 					}
 					clickOnElement("Corporate New Wire Transfer", "Request Transfer Button", requestTransferButton);
 					stepResult = true;
@@ -869,13 +885,17 @@ public class Corporate_NewWireTransfer extends CommonLibrary{
 
 
 
-	public String getTransactionIDFromPayment() throws Exception {
+	public String getTransactionIDFromPayment(String excelFilePath,String sheetName, int rowNo) throws Exception {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
 				if (isElementPresent(paymentActivityTitle)) {
 					transactionID = getElementText("New Wire Transfer Transaction ID", "Current Activity Details", currentActivityTransID);
 					//transactionID = transactionID.replaceAll("\\.", "");
+					if(transactionID != "") {
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "TransactionID", rowNo+1, transactionID);				
+						System.out.println(transactionID);
+					}
 					stepResult = true;
 				}
 			} catch (Exception e) {

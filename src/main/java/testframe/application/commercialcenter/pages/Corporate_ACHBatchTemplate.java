@@ -231,7 +231,7 @@ public class Corporate_ACHBatchTemplate extends CommonLibrary{
 				if (debitType.equals("")||debitType.equals("No")) {
 					
 				}else {
-					waitElement(1000);
+					waitElement(2000);
 					selectElementFromListbox("ACH Batch Template", "Debit Authorization Type", debitAuthoTypeField, list,debitType);
 				}
 				clickOnElement("ACH Batch Template", "Add Button", addButton);

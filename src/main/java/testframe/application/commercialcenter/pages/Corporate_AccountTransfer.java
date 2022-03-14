@@ -714,28 +714,36 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 //							}
 							if (!balanceBeforeTransaction.equals("")) {
 								sAfterTransBalance = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
+								waitElement(1000);
 								sAfterTransBalance = sAfterTransBalance.replace("$", "");
 								sAfterTransBalance = sAfterTransBalance.replace(",", "");
 								iAfterTransAccountBalance =  Double.parseDouble(sAfterTransBalance);
+								waitElement(1000);
 								balanceBeforeTransaction = balanceBeforeTransaction.replace("$", "");
 								balanceBeforeTransaction = balanceBeforeTransaction.replace(",", "");
 								iInitialBalance =  Double.parseDouble(balanceBeforeTransaction);
+								waitElement(1000);
 								amount = amount.replace("$", "");
 								amount = amount.replace(",", "");
 								totalAmount =  Double.parseDouble(amount);
+								waitElement(1000);
 								if(iInitialBalance - totalAmount == iAfterTransAccountBalance ) {
 									stepResult = true;
 								}
 							}
 						}else if(currentDate.compareTo(date) < 0){
 							sAfterTransBalance = getElementText("Corporate Account Transfer", "Current Balance", currentBalance);
+							waitElement(1000);
 							sAfterTransBalance = sAfterTransBalance.replace("$", "");
 							sAfterTransBalance = sAfterTransBalance.replace(",", "");
 							iAfterTransAccountBalance = Double.parseDouble(sAfterTransBalance);
+							waitElement(1000);
 							balanceBeforeTransaction = balanceBeforeTransaction.replace("$", "");
 							balanceBeforeTransaction = balanceBeforeTransaction.replace(",", "");
 							iInitialBalance =  Double.parseDouble(balanceBeforeTransaction);
+							waitElement(1000);
 							System.out.println("Future date");
+							waitElement(1000);
 							if(iInitialBalance == iAfterTransAccountBalance ) {
 								stepResult = true;
 							}
@@ -771,8 +779,8 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 						waitElement(2000);
 						clickOnElement("Corporate Account Transfer", "Account Number", getDynamicElement("Account Number", fromAccList, fromAccountNumber));
 						waitElement(2000);
-						clickOnElement("Corporate Account Transfer", "Search button", transSearchButton);
-						waitElement(2000);
+//						clickOnElement("Corporate Account Transfer", "Search button", transSearchButton);
+//						waitElement(2000);
 					}
 					if (!fromDateField.equals("")) {
 						waitElement(2000);
@@ -791,8 +799,10 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 						clearAndType("Corporate Account Transfer", "To Account Amount", transactionToAmtField, toAmtField);
 					}
 					clickOnElement("Corporate Account Transfer", "Search button", transSearchButton);
+					waitElement(5000);
 					isElementPresent(showingTransactions);
 					verifySearchData(memoReview);
+					waitElement(4000);
 					stepResult = true;
 				}
 			}catch (Exception e) {
@@ -874,6 +884,7 @@ public class Corporate_AccountTransfer extends CommonLibrary {
 			try {
 				if (!memoReview.equals("")) {
 					getDynamicElement("Transaction Search", memoReviewField, memoReview);
+					waitElement(3000);
 					stepResult = true;
 				}
 				

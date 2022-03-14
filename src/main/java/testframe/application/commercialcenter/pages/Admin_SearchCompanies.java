@@ -51,11 +51,11 @@ public class Admin_SearchCompanies extends CommonLibrary{
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Create a Company button click", "Click on Create Company button Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create a company button click", "Clicked on create company button successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Create a Company button click", "Could not click on Create Company button", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Create a company button click", "Could not click on create company button", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -99,11 +99,11 @@ public class Admin_SearchCompanies extends CommonLibrary{
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Search Companies", "Search Company Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Search companies", "Search company successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Search Companies", "Could not Search Company", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Search companies", "Could not search company", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -124,11 +124,11 @@ public class Admin_SearchCompanies extends CommonLibrary{
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "No result found", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Admin search company", "No result found", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Admin Search Company CC- Admin application", "Could not No result found", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Admin search company", "Could not see no result found", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}		}

@@ -188,6 +188,7 @@ public class EppTest extends ApplicationBase {
 				eppMenuOPtions.selectTransactionInquirySubMenu();
 				eppTransactionInquiry.searchTransaction(instAmount, valueDateField,"");
 				eppPaymentDetails.verifyCompletedPaymentTransaction(sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -225,6 +226,7 @@ public class EppTest extends ApplicationBase {
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"),"");
 				eppPaymentDetails.verifyCompletedPaymentTransaction(sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -259,6 +261,7 @@ public class EppTest extends ApplicationBase {
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"),"");
 				eppPaymentDetails.verifyCompletedPaymentTransaction(sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -294,6 +297,7 @@ public class EppTest extends ApplicationBase {
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"),"");
 				eppPaymentDetails.verifyCompletedPaymentTransaction(sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				eppLogOff.logOffEPPApplication();
 				break;
 
@@ -330,6 +334,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.approveCancelledPayment(tc_Test_Data.get(iTDRow).get("TransactionID"));
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -345,6 +350,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectDuplicatePaymentOption();
 				eppDuplicatePayments.selectReleaseHoldPayment(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppActionPrompts.VerifyAndPerformActionForReleaseHold();
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -375,6 +381,7 @@ public class EppTest extends ApplicationBase {
 				//eppTemplates.selectTemplate("Work Summary","Payment Repair Verification");
 				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ApprovalDate"),tc_Test_Data.get(iTDRow).get("TransactionID"),sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();	
 
@@ -423,6 +430,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.approveRepairPayment(tc_Test_Data.get(iTDRow).get("TransactionID"));
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -458,6 +466,7 @@ public class EppTest extends ApplicationBase {
 				eppApprovePayment.verifyAndApproveOutgoingHVBankPaymentFRB(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"));
 				eppPaymentDetails.verifyFutureDatedPaymentTransaction();
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -516,6 +525,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairVerificationOption();
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"),tc_Test_Data.get(iTDRow).get("TransactionID"),sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -575,6 +585,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.approveRepairPayment(tc_Test_Data.get(iTDRow).get("TransactionID"));
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -632,6 +643,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.verifyWorkSummaryPool();
 				eppTemplates.selectPaymentRepairVerificationOption();
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"),tc_Test_Data.get(iTDRow).get("TransactionID"),sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -691,6 +703,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.approveRepairPayment(tc_Test_Data.get(iTDRow).get("TransactionID"));
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -742,6 +755,7 @@ public class EppTest extends ApplicationBase {
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"),tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.verifyCompletedPaymentTransaction(sPassword1);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -798,6 +812,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.approveInternalFilterPayment();
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -849,6 +864,7 @@ public class EppTest extends ApplicationBase {
 				eppTransactionInquiry.searchTransaction(tc_Test_Data.get(iTDRow).get("Amount"),
 						tc_Test_Data.get(iTDRow).get("ValueDate"),tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.verifyCompletedPaymentTransaction(sPassword3);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;	
@@ -966,6 +982,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.approveCancelPayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"Funds Release");
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -1016,6 +1033,7 @@ public class EppTest extends ApplicationBase {
 				eppAuthorizationExceptionsList.selectAuthorizationExceptionsTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.selectPaymentActions("Release From GFC Hold");
 				eppActionPrompts.VerifyAndPerformActionForRelease(tc_Test_Data.get(iTDRow).get("ReleaseReason"));
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 
@@ -1080,6 +1098,7 @@ public class EppTest extends ApplicationBase {
 				//eppTemplates.selectTemplate("Work Summary","Payment Repair Verification");
 				eppPaymentRepairVerificationList.selectPaymentRepairOnTransactionID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppVerifyPayment.approvePaymentRepairAction(tc_Test_Data.get(iTDRow).get("ValueDate"),tc_Test_Data.get(iTDRow).get("TransactionID"),sPassword2);
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();	
 
@@ -1144,6 +1163,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.performAction(tc_Test_Data.get(iTDRow).get("TransactionID"),"approval","Approve Release From OFC","Regulatory Filter","Completed");
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;
@@ -1205,6 +1225,7 @@ public class EppTest extends ApplicationBase {
 				eppTemplates.selectPaymentActionVerificationOption();
 				eppPaymentActionVerificationList.selectPaymentActionVerificationTransID(tc_Test_Data.get(iTDRow).get("TransactionID"));
 				eppPaymentDetails.approveCancelPayments(tc_Test_Data.get(iTDRow).get("TransactionID"),"Regulatory Filter");
+				eppPaymentDetails.clickOnAuditTrail();
 				driver.close();
 				eppLogOff.logOffEPPApplication();
 				break;

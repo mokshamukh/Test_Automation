@@ -1370,7 +1370,7 @@ public class CommonLibrary {
 		actions.moveToElement(element).perform();
 		waitElement(1000);
 		actions.sendKeys(Keys.DOWN).perform();
-		waitElement(1000);
+		waitElement(2000);
 		actions.moveToElement(element).click().perform();
 	}
 	

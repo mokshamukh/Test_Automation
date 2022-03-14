@@ -322,16 +322,18 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 						validateTextContains("Corporate Current Payment Activity", "Date", getDynamicElement("Date", transferDate_field, transactionID), date);
 					}
 					if(!amount.equals("")){
+						waitElement(2000);
 						validateTextContains("Corporate Current Payment Activity", "Amount", getDynamicElement("Amount", amount_field, transactionID),amount);
 					}
 					if(!status.equals("")){
+						waitElement(2000);
 						validateTextContains("Corporate Current Payment Activity", "Status", getDynamicElement("Status", status_field, transactionID), status);
 					}
 					//				if(!initiator.equals("")){
 					//					validateTextContains("Corporate Current Payment Activity", "Initiator", getDynamicElement("Initiator", initiator_field, transactionID), initiator);
 					//					}
+					stepResult = true;
 				}
-				stepResult = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -367,8 +369,9 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 						Thread.sleep(4000);
 						verifyApproveACHPaymentMessage(transactionID);
 					}
+					stepResult = true;
 				}
-				stepResult = true;
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -401,8 +404,9 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 						Thread.sleep(4000);
 						verifyRejectACHPaymentMessage(transactionID);
 					}
+					stepResult = true;
 				}
-				stepResult = true;
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -436,8 +440,9 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 						Thread.sleep(4000);
 						verifyCancelPaymentMessage(transactionID);
 					}
+					stepResult = true;
 				}
-				stepResult = true;
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -494,8 +499,9 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 					waitElement(1000);
 					enterText("Corporate Current Payment Activity", "Addenda Field", editAddenda, updatedAddenda);
 					clickOnElement("Corporate Current Payment Activity", "Save Batch", saveEditBatch);
+					stepResult = true;
 				}
-				stepResult = true;
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -624,8 +630,8 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 					clickOnElement("Corporate Current Payment Activity", "Edit Button",
 							getDynamicElement("Edit Button", editButton, transactionID));
 					waitElement(1000);
+					stepResult = true;
 				}
-				stepResult = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -661,8 +667,8 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 							}
 						}
 					}
+					stepResult = true;
 				}	
-				stepResult = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -696,9 +702,8 @@ public class Corporate_CurrentPaymentActivity extends CommonLibrary {
 							validateTextContains("Corporate Current Payment Activity", "Status1_review", getDynamicElement("Status", status1_field, newtrans[i].trim()), status1Review);
 						}
 					}
-
+					stepResult = true;
 				}
-				stepResult = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
