@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.ExcelReader;
 
 /**
  * PageNage : Corporate_NewACHBatchTemplate
@@ -394,13 +395,18 @@ public class Corporate_NewACHBatchTemplate extends CommonLibrary {
 
 	}
 
-	public String getTransaction() throws Exception {
+	public String getTransaction(String excelFilePath,String sheetName, int rowNo) throws Exception {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
 				if (isElementPresent(achBatchDeailsTitle)) {
 					transactionID = getElementText("New ACH Batch Template", "Alert Message", msg);
 					transactionID = transactionID.replaceAll("\\.", "");
+					if(transactionID != "") {
+						new ExcelReader().setValueInColumnforRow(excelFilePath,  sheetName.toUpperCase(), "TransactionID", rowNo+1, transactionID);				
+						System.out.println(transactionID);
+					}
+
 					stepResult = true;
 				}
 			} catch (Exception e) {

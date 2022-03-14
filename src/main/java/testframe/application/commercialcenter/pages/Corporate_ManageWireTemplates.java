@@ -3,6 +3,8 @@ package testframe.application.commercialcenter.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
@@ -423,20 +425,21 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 	By templateNameField = By.xpath("//input[@id='templateName']");
 	By debitAccountField = By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']");
 	By payeeName = By.xpath("//input[@id='payeeName']");
-	By beneIDTypeField = By.xpath("//p-dropdown[@inputid='beneficiaryIdType']");
+	By beneIDTypeField = By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//span[contains(@class,'expand_more')]");
 	By beneIDField = By.xpath("//input[@id='beneficiaryId']");
 	By beneAddressField1 = By.xpath("//input[@id='beneficiaryAddress1']");
 	By beneAddressField2 = By.xpath("//input[@id='beneficiaryAddress2']");
-	By beneCountryField = By.xpath("//p-dropdown[@inputid='beneficiaryCountry']");
-	By beneBankIDTypeField = By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']");
+	By beneCountryField = By.xpath("//p-dropdown[@inputid='beneficiaryCountry']//span[contains(@class,'expand_more')]");
+	By beneBankIDTypeField = By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']//span[contains(@class,'expand_more')]");
 	By beneBankIdField = By.xpath("//input[@id='beneficiaryBankId']");
 	By beneBankAddress1Field = By.xpath("//input[@id='beneficiaryBankAddress1']");
 	By beneBankAddress2Field = By.xpath("//input[@id='beneficiaryBankAddress2']");
-	By beneBankCountry = By.xpath("//p-dropdown[@inputid='beneficiaryBankCountry']");
+	By beneBankCountry = By.xpath("//p-dropdown[@inputid='beneficiaryBankCountry']//span[contains(@class,'expand_more')]");
 	By benePhoneNumber = By.xpath("//input[@id='phoneNumber']");
 	By paymentCurrencyField = By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']");
 	By purposeOfPaymentField = By.xpath("//input[@id='purposeOfPay']");
 	By amountField = By.xpath("//input[@id='amount']");
+	By payeeAmountField = By.xpath("//input[@id='wireAmountId']");
 	By searchAmount = By.xpath("//input[@id='primaryAmount']");
 	By requestTransferButton = By.xpath("//button[contains(@aria-label,'To proceed with the transfer')]");
 	By payeeField = By.xpath("//input[@id='selectPayeeSearch']");
@@ -483,8 +486,10 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 						}
 						if(!debitAccount.equals("")) {
 							scrollToElement(debitAccountField);
-							driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
-							selectElementFromListbox("Manage Wire Template", "Debit Account Field", debitAccountField, list,debitAccount);      
+							enterText("Manage Wire Template", "Debit Account Field",debitAccountField, debitAccount);
+							clickOnElement("Manage Wire Template", "Debit Account Field", getDynamicElement("Debit Account Field", list, debitAccount));
+//							driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
+//							selectElementFromListbox("Manage Wire Template", "Debit Account Field", debitAccountField, list,debitAccount);      
 						}
 						scrollToElement(beneInformation);
 						if (!payee.equals("")) {
@@ -492,8 +497,11 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 						}
 						if(!beneIdType.equals("")) {
 							scrollToElement(beneIDTypeField);
-							driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//div[2]")).click();
-							selectElementFromListbox("Manage Wire Template", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
+							//enterText("Manage Wire Template", "Beneficiary Id Type",beneIDTypeField, debitAccount);
+							clickOnElement("Manage Wire Template", "Beneficiary Id Type", beneIDTypeField);
+							clickOnElement("Manage Wire Template", "Debit Account Field", getDynamicElement("Beneficiary Id Type", list, beneIdType));
+//							driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryIdType']//div[2]")).click();
+//							selectElementFromListbox("Manage Wire Template", "Beneficiary Id Type", beneIDTypeField, list, beneIdType);
 						}
 						if(!beneID.equals("")) {
 							scrollToElement(beneIDField);
@@ -507,21 +515,28 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 						}
 						if(!beneCountry.equals("")) {
 							scrollToElement(beneCountryField);
-							driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryCountry']")).click();
-							selectElementFromListbox("Manage Wire Template", "Beneficiary Country", beneCountryField, list, beneCountry);
+							clickOnElement("Manage Wire Template", "Debit Account Field", beneCountryField);
+							clickOnElement("Manage Wire Template", "Debit Account Field", getDynamicElement( "Beneficiary Country", list, beneCountry));
+//							driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryCountry']")).click();
+//							selectElementFromListbox("Manage Wire Template", "Beneficiary Country", beneCountryField, list, beneCountry);
 						}
 						if(!paymentCurrency.equals("")) {
 							scrollToElement(paymentCurrencyField);
-							driver.findElement(By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']")).click();
-							selectElementFromListbox("Manage Wire Template", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
+							enterText("Manage Wire Template","Payment Currency",paymentCurrencyField, paymentCurrency);
+							clickOnElement("Manage Wire Template", "Debit Account Field", getDynamicElement("Payment Currency", list, paymentCurrency));
+//							driver.findElement(By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']")).click();
+//							selectElementFromListbox("Manage Wire Template", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
 						}
 						if(!amount.equals("")) {
 							enterText("Manage Wire Template", "Amount Field", amountField, amount);
 						}
 						if(!beneBankIDType.equals("")) {
 							scrollToElement(beneBankIDTypeField);
-							driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']//div[2]")).click();
-							selectElementFromListbox("Manage Wire Template", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
+							//enterText("Manage Wire Template","Beneficiary Bank ID Type",beneBankIDTypeField, beneBankIDType);
+							clickOnElement("Manage Wire Template","Beneficiary Bank ID Type", beneBankIDTypeField);
+							clickOnElement("Manage Wire Template", "Debit Account Field", getDynamicElement("Beneficiary Bank ID Type", list, beneBankIDType));
+//							driver.findElement(By.xpath("//p-dropdown[@inputid='beneficiaryBankIdType']//div[2]")).click();
+//							selectElementFromListbox("Manage Wire Template", "Beneficiary Bank ID Type", beneBankIDTypeField, list, beneBankIDType);
 						}
 						if(!beneBankID.equals("")) {
 							enterText("Manage Wire Template", "Bene Bank ID", beneBankIdField, beneBankID);
@@ -575,12 +590,15 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 					waitForPresenceOfElement("Manage Wire Template", "Start Wire Template", startWireTransfer);
 
 					clickOnElement("Manage Wire Template", "Select Payee Template", selectPayeeButton);
+					waitElement(2000);
 					if (!payee.equals("")) {
 						enterText("Manage Wire Template", "Payee Field", payeeField, payee);
-						waitElement(1000);
+						waitElement(2000);
 						clickOnElement("Manage Wire Template", "payee List", getDynamicElement("Corporate New Wire Transfer", list, payee));
+						waitElement(2000);
 					}
 					clickOnElement("Manage Wire Template", "Next Button", nextButton);
+					waitElement(2000);
 					if (!repetitiveButton.equals("Yes")) {
 						clickOnElement("Manage Wire Template", "RepetitiveField", repetitiveField);
 					} else {
@@ -591,20 +609,24 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 					}
 					if(!debitAccount.equals("")) {
 						scrollToElement(debitAccountField);
-						driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
-						selectElementFromListbox("Manage Wire Template", "Debit Account Field", debitAccountField, list,debitAccount);      
+						enterText("Manage Wire Template", "Debit Account Field", debitAccountField, debitAccount);
+						clickOnElement("Manage Wire Template", "Debit Account Field", getDynamicElement("Debit Account Field", list, debitAccount));
+						//driver.findElement(By.xpath("//p-autocomplete[@inputid='debitAccount']//input[@id='debitAccount']")).click();
+						//selectElementFromListbox("Manage Wire Template", "Debit Account Field", debitAccountField, list,debitAccount);      
 					}
 					if(!paymentCurrency.equals("")) {
 						scrollToElement(paymentCurrencyField);
-						driver.findElement(By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']")).click();
-						selectElementFromListbox("Manage Wire Template", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
+						enterText("Manage Wire Template", "Payment Currency", paymentCurrencyField, paymentCurrency);
+						clickOnElement("Manage Wire Template", "Payment Currency", getDynamicElement("Payment Currency", list, paymentCurrency));
+						//driver.findElement(By.xpath("//p-autocomplete[@inputid='paymentCurrency']//input[@id='paymentCurrency']")).click();
+						//selectElementFromListbox("Manage Wire Template", "Payment Currency", paymentCurrencyField, list, paymentCurrency);
 					}
 					if(!purposeOfPayment.equals("")) {
 						scrollToElement(purposeOfPaymentField);
 						enterText("Manage Wire Template", "Purpose of Payment", purposeOfPaymentField, purposeOfPayment);
 					}
 					if(!amount.equals("")) {
-						enterText("Manage Wire Template", "Amount Field", amountField, amount);
+						enterText("Manage Wire Template", "Amount Field", payeeAmountField, amount);
 					}
 					clickOnElement("Manage Wire Template", "Create Tempalte Button", createTemplateButton);
 					waitForPresenceOfElement("Manage Wire Template", "Template Saved Banner", templateSavedMsg);
@@ -636,10 +658,12 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 			try {
 				waitElement(2000);
 				if (isElementPresent(manageWireTemplatesHeader)) {
-					if(isElementPresent(searchExpand)) {
-						clickOnElement("Manage Wire Template", "Search Field", searchExpand);
-					}
-					if (!templateName.equals("")) {
+					if(!(isElementPresent(searchExpand))) {
+					
+				}else {
+					clickOnElement("Manage Wire Template", "Search Field", searchExpand);
+				}
+ 					if (!templateName.equals("")) {
 						enterText("Manage Wire Template", "Template Name", templateNameField, templateName);
 					}
 					if(!amount.equals("")) {
@@ -792,6 +816,9 @@ public class Corporate_ManageWireTemplates extends CommonLibrary{
 		}
 
 	}		
+
+	
+
 
 
 

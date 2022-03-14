@@ -51,11 +51,11 @@ public class Admin_Login extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Launch CC- Admin application", "Launch Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Launch application", "Launch successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Launch CC- Admin application", "Could not Launch Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Launch application", "Could not launch successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -87,11 +87,11 @@ public class Admin_Login extends CommonLibrary {
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Login CC- Admin application", "Login Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Login application", "Login successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Login CC- Admin application", "Could not Login Successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Login application", "Could not login successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
