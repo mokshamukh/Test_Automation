@@ -5,7 +5,7 @@ import java.util.Map;
 
 import testframe.common.utilities.DateTimeHelper;
 
-public class PremierCommonNavigation extends PremierTestSet2{
+public class PremierCommonNavigation extends PremierTestSet1{
 	
 	
 	
@@ -590,6 +590,31 @@ public class PremierCommonNavigation extends PremierTestSet2{
 			premierLinesNewLine.closeScreen_Image();
 		}
 
+	}
+	
+	public void sweepCreationAndInquire(List<Map<String, String>> tc_Test_Data,int iTDRow,String testdataFile_Path,String sTestCase,String sSweepInquireFlag) throws Exception{
+		if((tc_Test_Data.get(iTDRow).get("Portfolio_No")).equals("")) {
+			new PremierCommonNavigation().portfolioCreationWithCustomer(tc_Test_Data,iTDRow,testdataFile_Path,sTestCase,"N");
+			tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+		}
+		premierHomeMenuPage.selectSweeps();
+		premierHomeMenuPage.selectNewSweep();
+		premierNewSweeps.searchPortfolio(tc_Test_Data.get(iTDRow).get("Portfolio_No"));
+		premierNewSweeps.newSweep_SelectAccount(tc_Test_Data.get(iTDRow).get("Sweep_NickName"),tc_Test_Data.get(iTDRow).get("Sweep_Frequency"),testdataFile_Path, sTestCase, iTDRow+1);
+		premierNewSweeps.newSweep_FundingAccount(tc_Test_Data.get(iTDRow).get("Sweep_DDAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepFromAccountNumber"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountType"),tc_Test_Data.get(iTDRow).get("Sweep_SweepToAccountNumber"));
+		premierNewSweeps.newSweep_SweepFlow();
+		premierNewSweeps.newSweep_CodesScreen(tc_Test_Data.get(iTDRow).get("FromAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("FromAccount_MaximumBalance"),tc_Test_Data.get(iTDRow).get("ToAccount_MinimumBalance"),tc_Test_Data.get(iTDRow).get("ToAccount_MaximumBalance"),tc_Test_Data.get(iTDRow).get("SweepMinimumBalance_From"),
+				tc_Test_Data.get(iTDRow).get("BalanceType_From"),tc_Test_Data.get(iTDRow).get("Increment_From"),tc_Test_Data.get(iTDRow).get("TargetBalance_From"),tc_Test_Data.get(iTDRow).get("ChargeCode_From"),tc_Test_Data.get(iTDRow).get("NotificationOption_From"),tc_Test_Data.get(iTDRow).get("SweepFrequency_From"),tc_Test_Data.get(iTDRow).get("SweepFromTransferOption_From")
+				,tc_Test_Data.get(iTDRow).get("SweepMaximumBalance_To"),tc_Test_Data.get(iTDRow).get("BalanceType_To"),tc_Test_Data.get(iTDRow).get("Increment_To"),tc_Test_Data.get(iTDRow).get("ChargeCode_To"),tc_Test_Data.get(iTDRow).get("NotificationOption_To"),tc_Test_Data.get(iTDRow).get("SweepFrequency_To"));
+		premierNewSweeps.sweepFinishButton();
+		
+		//tc_Test_Data = er.getData(testdataFile_Path,sTestCase);
+		if(sSweepInquireFlag.equalsIgnoreCase("Y")){
+			premierHomeMenuPage.sweepInquire();			
+			premierNewSweeps.searchSweep(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"));
+			premierNewSweeps.validateDetailsInSweepInquiry(tc_Test_Data.get(iTDRow).get("Sweep_RelationshipNumber"),tc_Test_Data.get(iTDRow).get("Sweep_DDAccountNumber"));
+			premierNewSweeps.closeScreen_Image();
+		}
 	}
 }
 

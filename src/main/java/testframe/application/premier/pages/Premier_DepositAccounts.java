@@ -86,7 +86,8 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By suspendFieldCheckBox = By.xpath("//tr[@class='dataRow']//td//u[contains(text(),'Suspend Fields will be Cleared')]/../..//input");
 	public By fileMenu = By.xpath("//a[text()='File']");
 	public By holdMenu = By.xpath("//a[contains(text(),'Hold')]");
-	public By holdTitle = By.xpath("//a[contains(text(),'Hold - New')]");
+	public By holdMenuBalances = By.xpath("(//a[contains(text(),'Hold')])[2]");
+	public By holdTitle = By.xpath("//a[contains(text(),'Hold - ')]");
 	public By holdReason = By.xpath("//input[contains(@id,'HoldReason')]");
 	public By holdAMount = By.xpath("//input[contains(@id,'HoldAmount')]");
 	public By holdExpDate = By.xpath("//input[contains(@id,'ExpirationDate')]");
@@ -127,6 +128,10 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By newStopPayAddImg = By.xpath("//img[@alt='New']");
 	public By stopPayMenu = By.xpath("//a[contains(text(),'Stop Pay')]");
 	public By transferMenu = By.xpath("//a[contains(text(),'Transfer')]");
+	public By transferMenuActivity = By.xpath("(//a[contains(text(),'Transfer')])[2]");
+	public By stopPaysMenuActivity = By.xpath("(//a[contains(text(),'Stop Pays')])[1]");
+	public By transferTitle = By.xpath("//a[contains(text(),'Transfer - ')]");
+	public By stopPaysTitle = By.xpath("//a[(text()='Stop Pay')]");
 	public By beneficiaryMenu = By.xpath("//a[contains(text(),'Beneficiary')]");
 	public By beneficiaryMenu2 = By.xpath("(//a[contains(text(),'Beneficiary')])[2]");
 	public By analysisItemsMenu = By.xpath("//a[contains(text(),'Analysis Items')]");
@@ -237,6 +242,10 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By depositRateIndexButton =  By.xpath("(//input[contains(@id,'DepositRateCode')])[3]");
 	String depositRateIndexList =  "//select[contains(@id,'DepositRateCode')]/option[contains(text(),'%s')]";
 	public By interestCycleList =  By.xpath("//select[contains(@id,'InterestCycle')]");
+	public By depositRateIndexTextboxSavings =  By.xpath("(//input[contains(@id,'RateIndex')])[1]");
+	public By depositRateIndexButtonSavings =  By.xpath("(//input[contains(@id,'RateIndex')])[3]");
+	String depositRateIndexListSavings =  "//select[contains(@id,'RateIndex')]/option[contains(text(),'%s')]";
+	public By interestCycleListSavings =  By.xpath("//select[contains(@id,'IntCycle')]");
 	public By depositRateIndexInquiryPage = By.xpath("//td[text()='Deposit Rate Index:']/following-sibling::td[1]");
 	public By interestCycleInquiryPage = By.xpath("//td[text()='Interest Cycle:']/following-sibling::td[1]");
 	public By nextTransferDateInput = By.xpath("//input[contains(@id,'NextTransferDate')]");
@@ -251,6 +260,8 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By nextTransferDateInquiryPage = By.xpath("//td[text()='Next Transfer Date:']/following-sibling::td[1]");
 	public By nextTransferAmountInquiryPage = By.xpath("//td[text()='Next Transfer Amount:']/following-sibling::td[1]");
 	String creditToAccountNo = "//td[contains(text(),'%s')]";
+	String stopPayeeName = "//td[contains(text(),'%s')]";
+	String creditToAccountNoTransfer = "//input[contains(@value,'%s')]"; 
 	public By expirationDateInquiryPage = By.xpath("//td[text()='Expiration Date:']/following-sibling::td[1]");
 	public By transferFrequencyInquiryPage = By.xpath("//td[text()='Transfer Frequency:']/following-sibling::td[1]");
 	public By transferDayInquiryPage = By.xpath("//td[text()='Transfer Day:']/following-sibling::td[1]");
@@ -263,6 +274,9 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By beneficiaryPercentInquiryPage = By.xpath("//td[text()='Beneficiary Percent:']/following-sibling::td[1]");
 	public By beneficiaryRelationshipInquiryPage = By.xpath("//td[text()='Beneficiary Relationship:']/following-sibling::td[1]");
 	String beneAddress = "//tr/td[text()='%s']";
+	String removeHoldICon = "//a[contains(text(),'%s')]/../../td/img[@title='Delete']";
+	String removeTransferICon = "//a[contains(text(),'%s')]/../../td/img[@title='Delete']";
+	String removeStopPayICon = "//td[contains(text(),'%s')]/../td/img[@title='Delete']";
 	
 	public Premier_DepositAccounts(WebDriver driver) {
 		super(driver);
@@ -602,18 +616,19 @@ public class Premier_DepositAccounts extends CommonLibrary {
 			try {
 				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
 					if (!sAccountWarning.equals("")) {
-						enterText("Change Account Page", "Warning field", warningTextbox, sAccountWarning);
+						clearAndType("Change Account Page", "Warning field", warningTextbox, sAccountWarning);
 					}
 					if (!sAccountStatusCode.equals("")) {
-						if (isElementPresentZeroWait(statusCodeList))
+						if (isElementPresentZeroWait(statusCodeList)) {
 							selectElementByVisibleText("Change Account Page", "Status Code Field", statusCodeList,sAccountStatusCode);
-						else
+						}else {
 							if (isElementPresentZeroWait(statusCodeInput))
 								clickOnElement("Change Account Page", "Status Code Input",statusCodeInput);
 						Thread.sleep(1000);
 						clickOnElement("Change Account Page", "Status Code Button",statusCodeBtn);
 						Thread.sleep(1000);
 						clickOnElement("Change Account Page", "Status Code list",getDynamicElement("Status Code list", statusCodeDropDown,sAccountStatusCode));
+						}
 					}
 					if (!sAccntsTransRestrictionCode.equals("")) {
 						clickOnElement("Change Account Page", "Trans Restriction Code Input",
@@ -2243,6 +2258,40 @@ public class Premier_DepositAccounts extends CommonLibrary {
 		}
 	}
 	
+	public void changeAccountBalanceDetailsSavings(String sAccountNumber, String sDepositRateIndex, String sInterestCycle)throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					clickOnElement("Account Inquiry Page", "Balances Tab Field", balanceTab);
+					waitElement(5000);
+						if (!sDepositRateIndex.equals("")) {	
+							clickOnElement("Change Account Page", "Deposit Rate Index Input",depositRateIndexTextboxSavings);
+							Thread.sleep(1000);
+							clickOnElement("Change Account Page", "Deposit Rate Index Button",depositRateIndexButtonSavings);
+							Thread.sleep(1000);
+							clickOnElement("Change Account Page", "Deposit Rate Index list",getDynamicElement("Deposit Rate Index list", depositRateIndexListSavings,sDepositRateIndex));
+						}
+						if (!sInterestCycle.equals("")) {	
+							selectElementByVisibleText("Change Account Page", "Interest Cycle Field", interestCycleListSavings,sInterestCycle);
+						}
+						stepResult = true;
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Balance Details","Account Details - Balance details changed Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account - Balance Details","Could not change account Details- Balance details", "Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
 	public void validateAccountBalanceDetailsAfterChange(String sAccountNumber, String sDepositRateIndex, String sInterestCycle) throws Exception {
 		boolean stepResult = false;
 		try {
@@ -2492,6 +2541,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
 					mouseHoverCickOnElement("Change Account Page", "Beneficiary Menu Field", relationshipTab, beneficiaryMenu2);
 					if (isElementPresent(beneficiaryLabel)) {
+						new HTMLReportHelper().HtmlReportBody("Change Account - Beneficiary Details","Account Details - Beneficiary details page", "Passed", driver, "Y");
 						if (!sBeneficiarySSN.equals("")) {
 								clickOnElement("Change Account Page", "Search Name", searchNameImg);
 								Thread.sleep(4000);
@@ -2538,4 +2588,203 @@ public class Premier_DepositAccounts extends CommonLibrary {
 		}
 	}
 	
+	public void removeAccountHold(String sAccountNumber,String sHoldReason) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					mouseHoverCickOnElement("Change Account Page", "Hold Menu Field", balanceTab, holdMenuBalances);
+					if (isElementPresent(holdTitle)) {
+						if (!sHoldReason.equals("")) {
+							clickOnElement("Change Account Page", "Remove Hold Icon", getDynamicElement("Remove Hold Icon field", removeHoldICon, sHoldReason));
+						}
+						driver.switchTo().alert().accept();
+						waitElement(3000);
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("Main");
+						stepResult = true;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Remove Account - Hold Details","Account - Hold Details Remove Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Remove Account - Hold Details","Could not Remove account - Hold Details", "Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountHoldDetailsAfterRemove(String sAccountNumber, String sVerifyHoldReason) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(1000);
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+				waitElement(2000);
+					if (!sVerifyHoldReason.equals("")) {
+						if (isElementPresentZeroWait(getDynamicElement("Hold Reason field", verifyHoldData, sVerifyHoldReason))) {
+							stepResult = false;
+						}else {
+							stepResult = true;
+						}	
+					}	
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Hold Validation",
+						"Validated Account Details - Hold info removed from Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Hold Validation",
+						"Could not Validated Account Details - removed Hold info from Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void removeAccountTransfer(String sAccountNumber,String sCredittoAccountType,String sCredittoAccount) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					mouseHoverCickOnElement("Change Account Page", "Transfer Menu Field", activityMenu, transferMenuActivity);
+					if (isElementPresent(transferTitle)) {
+						if (!sCredittoAccount.equals("")) {
+							clickOnElement("Change Account Page", "Remove Transfer Icon", getDynamicElement("Remove Transfer Icon field", removeTransferICon, sCredittoAccount));
+						}
+						driver.switchTo().alert().accept();
+						waitElement(3000);
+						driver.switchTo().defaultContent();
+						driver.switchTo().frame("Main");
+						stepResult = true;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Remove Account - Transfer Details","Account - Transfer Details Remove Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Remove Account - Transfer Details","Could not Remove account - Transfer Details", "Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountTransferDetailsAfterRemove(String sAccountNumber,String sCredittoAccountType, String sCredittoAccount) throws Exception {
+		boolean stepResult = false;
+		try {
+			mouseHoverOnElement("Change Account Page", "Activity Menu Field", activityMenu);
+			waitElement(1000);
+			if(isElementPresentZeroWait(transferMenu)) {
+				mouseHoverCickOnElement("Change Account Page", "Transfer Menu Field", activityMenu, transferMenu);
+				waitElement(1000);
+				switchToWithinFrameWithName("bottom");
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+						if(isElementNotPresentZeroWait(getDynamicElement("Credit to Account field", creditToAccountNoTransfer, sCredittoAccount))){
+							stepResult = false;
+						}else {
+							stepResult = true;
+						}
+				}
+			}else {
+				stepResult = true;
+			}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Transfer Validation",
+						"Validated Account Details - Transfer info removed from Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Transfer Validation",
+						"Could not Validated Account Details - removed Transfer info from Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
+	
+	public void removeAccountStopPays(String sAccountNumber,String sStopPayPayee) throws Exception {
+		if (System.getProperty("runStep") == "Y") {
+			boolean stepResult = false;
+			try {
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
+					mouseHoverCickOnElement("Change Account Page", "Transfer Menu Field", activityMenu, stopPaysMenuActivity);
+					if (isElementPresent(stopPaysTitle)) {
+						if (!sStopPayPayee.equals("")) {
+							clickOnElement("Change Account Page", "Remove Stop Pay Icon", getDynamicElement("Remove Stop Pay Icon field", removeStopPayICon, sStopPayPayee));
+						}
+						//driver.switchTo().alert().accept();
+						//waitElement(3000);
+						//driver.switchTo().defaultContent();
+						//driver.switchTo().frame("Main");
+						stepResult = true;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Remove Account - Stop Pay Details","Account - Stop Pay Details Remove Successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Remove Account - Stop Pay Details","Could not Remove account - Stop Pay Details", "Failed", driver, "Y");
+					System.setProperty("runStep", "N");
+				}
+			}
+		}
+	}
+	
+	public void validateAccountStopPayDetailsAfterRemove(String sAccountNumber,String sStopPayPayee) throws Exception {
+		boolean stepResult = false;
+		try {
+			mouseHoverOnElement("Change Account Page", "Activity Menu Field", activityMenu);
+			waitElement(1000);
+			if(isElementPresentZeroWait(stopPaysMenuActivity)) {
+				mouseHoverCickOnElement("Change Account Page", "Transfer Menu Field", activityMenu, stopPaysMenuActivity);
+				waitElement(1000);
+				switchToWithinFrameWithName("bottom");
+				if (isElementPresent(getDynamicElement("Account Number Header field", depositInquiryHeader, sAccountNumber))) {
+						if(isElementNotPresentZeroWait(getDynamicElement("Stop Pay Payee Name field", stopPayeeName, sStopPayPayee))){
+							stepResult = false;
+						}else {
+							stepResult = true;
+						}
+				}
+			}else {
+				stepResult = true;
+			}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (stepResult == true) {
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Stop Pay Validation",
+						"Validated Account Details - Stop Pay info removed from Account Inquiry page Successfully", "Passed", driver, "Y");
+			} else {
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Account Details - Stop Pay Validation",
+						"Could not Validated Account Details - removed Stop Pay info from Account Inquiry page", "Failed", driver, "Y");
+			}
+		}
+	}
 }

@@ -109,6 +109,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By bankruptcyPetitionDate =  By.xpath("//input[contains(@id,'/BankruptcyPetitionDate')]");
 	public By codesTab = By.xpath("//li//a[text()='Codes']");
 	public By paymentTab = By.xpath("//li//a[text()='Payment']");
+	public By interestFeesTab = By.xpath("//li//a[text()='Interest/Fees']");
 	public By relationshipTab = By.xpath("//li//a[text()='Relationships']");
 	public By balancesTab = By.xpath("//li//a[text()='Balances']");
 	public By collateralUnderBalancesTab = By.xpath("//li//a[text()='Balances']/following-sibling::div//a[text()='Collateral']");
@@ -151,6 +152,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By automaticPaymentOptionInquiryPage =  By.xpath("//td[text()='Automatic Payment Option:']/following-sibling::td[1]");
 	public By paymentCodeInquiryPage =  By.xpath("//td[text()='Payment Code:']/following-sibling::td[1]");
 	public By automaticDraftPaymentOptionInquiryPage =  By.xpath("//td[text()='Automatic Draft Payment Option:']/following-sibling::td[1]");
+	public By loanRateIndexInquiryPage =  By.xpath("//td[text()='Loan Rate Index:']/following-sibling::td[1]");
 	
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
@@ -180,6 +182,9 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 	public By lineNoInput = By.xpath("//td[text()='Line Number:']/../td/input");
 	public By productInquiryPage = By.xpath("//td[contains(text(),'Product:')]/following-sibling::td[1]");
 	public By lineInquiryPage = By.xpath("//td[contains(text(),'Line:')]/following-sibling::td[1]");
+	public By loanRateIndexInput =  By.xpath("(//input[contains(@name,'RateIndex')])[1]");
+	public By loanRateIndexButton =  By.xpath("(//input[contains(@name,'RateIndex')])[3]");
+	String loanRateIndexList =  "//select[contains(@name,'RateIndex')]/option[contains(text(),'%s')]";
 	
 	public void changeLoanAccountDetails(String sAccountNumber,String sClass, String sBranchRegion, String sAccountingMethod, String sWarning, String sPaymentFrequency, String sStatusCode, String sWriteDownStatus, String sLoanRatingCode1, String sPaymentRestrictionCode, String sPaymentRestrictionCodeOverride, String sBankruptcyChapter, String sBankruptcyStatus, String sBankruptcyPetitionFileDate) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
@@ -1034,6 +1039,66 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 			}
 		}
 	}
+	
+	public void changeAccountDetails_InterestFees(String sAccountNumber,String sLoanRateIndex) throws Exception {
+		if (System.getProperty("runStep")=="Y"){
+			boolean stepResult = false;
+			try {
+				clickOnElement("Change Account Page", "Intrest/Fees Tab Field",interestFeesTab);
+				waitElement(2000);
+					if (!sLoanRateIndex.equals("")) {
+						clickOnElement("Change Account Page", "Loan Rate Index Input Field",loanRateIndexInput);	
+						waitElement(1000);
+						clickOnElement("Change Account Page", "Loan Rate Index Button Field",loanRateIndexButton);
+						waitElement(1000);
+						clickOnElement("Change Account Page", "Loan Rate Index List Field", getDynamicElement("Loan Rate Index Field",loanRateIndexList,sLoanRateIndex));
+					}
+					stepResult = true;	
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (stepResult==true){
+					System.out.println("Pass");
+					new HTMLReportHelper().HtmlReportBody("Change Account Intrest/Fees Details", "Intrest/Fees details updated Successfully", "Passed", driver, "Y");
+				}
+				else{
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Change Account Intrest/Fees Details", "Could not update Intrest/Fees Details" , "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
+	public void validateAccountAfterChangeInterestFees(String sAccountNumber,String sLoanRateIndex) throws Exception {
+		boolean stepResult = false;
+		try {
+			waitElement(5000);
+			clickOnElement("Account Inquiry Page", "Intrest/Fees Tab Field",interestFeesTab);	
+			switchToWithinFrameWithName("bottom");
+			if (isElementPresent(getDynamicElement("Account Number Header field",loanChangeHeaderInquiry,sAccountNumber))){
+				if (!sLoanRateIndex.equals("")) {
+					sLoanRateIndex = ((sLoanRateIndex.split("\\["))[0]).trim();
+					validateTextContains("Account Inquiry" , "Loan Rate Index Option", loanRateIndexInquiryPage, sLoanRateIndex);
+				}
+				switchToDefaultContent();
+				driver.switchTo().frame("Main");
+				stepResult = true;				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (stepResult==true){
+				System.out.println("Pass");
+				new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Validated Loan Details on Inquiry page Successfully", "Passed", driver, "Y");
+			}
+			else{
+				System.out.println("fail");
+				new HTMLReportHelper().HtmlReportBody("Loan Details Validation", "Could not Validated Loan Details on Inquiry page" , "Failed", driver, "Y");
+			}
+		}
+	}
+	
 }
 
 
