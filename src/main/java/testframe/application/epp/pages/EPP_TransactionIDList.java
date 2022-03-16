@@ -90,7 +90,7 @@ public class EPP_TransactionIDList extends CommonLibrary {
 					}
 					//getDynamicElementClick(eppTransactionIDList, "Work Summary List", pendingOutgoingRecallReqTransList, transactionID);
 					validateTextContains(eppTransactionIDList, "Outgoing Recall TransactionID", outgoingRecallReqReason, "RECALL");
-					waitElement(8000);
+					waitElement(3000);
 					stepResult = true;
 				}
 

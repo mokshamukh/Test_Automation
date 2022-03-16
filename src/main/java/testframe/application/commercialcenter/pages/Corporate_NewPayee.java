@@ -106,6 +106,7 @@ public class Corporate_NewPayee extends CommonLibrary{
 					}
 					
 					else {
+						waitElement(1000);
 						clickOnElement("Corporate New Payee", "Wire Information Payment", wireInformationChkBox);
 					
 					clickOnElement("Corporate New Payee", "Next Button", nextButton);

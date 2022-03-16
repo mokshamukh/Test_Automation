@@ -44,11 +44,11 @@ public class Admin_HomeMenu extends CommonLibrary{
 			}
 			if (stepResult==true){
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Click on menu", "Successfully clicked on Administration menu", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Click on menu", "Successfully clicked on administration menu", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Click on menu", "Could not clicked on Administration menu", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Click on menu", "Could not clicked on administration menu", "Failed", driver, "Y");
 				System.setProperty("runStep","N");
 			}
 		}
@@ -67,11 +67,11 @@ public class Admin_HomeMenu extends CommonLibrary{
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on search companies sub-menu", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on search companies sub-menu", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -91,11 +91,11 @@ public class Admin_HomeMenu extends CommonLibrary{
 			finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on Search companies sub-menu", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Successfully clicked on search companies sub-menu", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on Search companies sub-menu", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on sub-menu", "Could not clicked on search companies sub-menu", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

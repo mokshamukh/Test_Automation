@@ -20,7 +20,7 @@ public class EPP_ApprovePayment extends CommonLibrary{
 		// TODO Auto-generated constructor stub
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, 50), this);
 	}
-
+	int longWait = 180;
 	public String eppApprovePayment = "EPP_ApprovePayment";
 	public String paymentTabs = "//div[@id='Refresh_PaymentDetailsBanner']//p[contains(text(),'approval')]//..//..//a[text()='%s']";
 
@@ -44,6 +44,7 @@ public class EPP_ApprovePayment extends CommonLibrary{
 			try {
 				waitForPresenceOfElement(eppApprovePayment, "Approve Payment", screenTitle);
 				if(isElementPresent(screenTitle)) {
+					waitForPresenceOfElementTillTime(eppApprovePayment, "Approve Payment", approveButton,longWait );
 					validateTextContains(eppApprovePayment,  "Payment Details Banner", paymentBanner, "This transaction has been submitted for approval following manual creation");
 					getDynamicElement("Payment Details Tab", paymentTabs, "Payment Details" );
 					isElementPresent(transactionvalue);
