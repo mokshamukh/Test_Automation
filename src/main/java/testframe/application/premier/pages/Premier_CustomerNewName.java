@@ -267,6 +267,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 					if (!alt_NameFormatCode.equals("")) {
 						selectElementByVisibleText("New Name Page", "Alternate Name Format Code field", altNameFormatCodeCombobox, alt_NameFormatCode);
 					}
+					new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Customer Name entered Successfully", "Passed", driver, "Y");
 					clickOnElement("New Name Page", "Next Button", nextButton);
 					stepResult = true;
 				}
@@ -276,7 +277,7 @@ public class Premier_CustomerNewName extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Customer Name entered Successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Customer Name entered Successfully", "Passed", driver, "N");
 				} else {
 					System.out.println("fail");
 					new HTMLReportHelper().HtmlReportBody("Enter Customer Name Details", "Could not entered customer name details", "Failed", driver, "Y");

@@ -96,6 +96,8 @@ public class Premier_LoansNewNote extends CommonLibrary{
 	public By buildNewCollateralLink = By.xpath("//a[text()='Build New Collateral']");
 	public By finishButtoncollateral = By.xpath("//button[@id='SubmitButton']");
 	public By collateralrelationshipPageTitle = By.xpath("//label[contains(text(),'Step 4 - Relationships')]");
+	public By warningsCheckbox_1 = By.xpath("//table[@class='advisoryTable']//input[@type='checkbox']");
+	String warningsCheckbox = "(//table[@class='advisoryTable']//input[@type='checkbox'])[%s]";
 	
 	String responsibilityCodeList =  "//select[contains(@name,'ResponsibilityCode')]/option[contains(text(),'%s')]";
 	String accountOpenMethodCodeList =  "//select[contains(@name,'AccountOpenMethod')]/option[contains(text(),'%s')]";
@@ -335,7 +337,7 @@ public class Premier_LoansNewNote extends CommonLibrary{
 			try {
 				clickOnElement("New Loan Page", "Finish Button", finishButtonLoan);
 				Thread.sleep(5000);
-				if(isElementPresent(warningHeader)) {
+			/*	if(isElementPresent(warningHeader)) {
 					if (isElementPresent(warning2)) {
 						clickOnElement("New Loan Page", "Warning 2 Checkbox", warningCheckBox2);
 					}
@@ -347,6 +349,15 @@ public class Premier_LoansNewNote extends CommonLibrary{
 					}
 					clickOnElement("New Loan Page", "Save Button", saveBtn);
 					waitElement(2000);
+				} */
+				if (isElementPresentZeroWait(warningsCheckbox_1)) {
+					int count = getElementCount("Change Page", "Warning Checkboxs", warningsCheckbox_1);
+					for (int i = 1; i <= count; i++) {
+						clickOnElement("Change Page", "Warning CheckBox",
+								getDynamicElement("Warning CheckBox", warningsCheckbox, Integer.toString(i)));
+					}
+					clickOnElement("Change Page", "Save Button", saveButton2);
+					Thread.sleep(1500);
 				}
 				validateElementPresent("New Loan Page", "Search Title", searchTitle2);
 				driver.switchTo().defaultContent();

@@ -52,11 +52,11 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 		} finally {
 			if (stepResult == true){
 				System.out.println("Pass - Acc Transfer Review");
-			new HTMLReportHelper().HtmlReportBody("verify account status", "verify account status successfully", "Passed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "verify acc status Successfully", "Passed", driver, "Y");
 		}
 		else{
 			System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("verify account status", "Could not verify account status successfully", "Failed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "Could not verify acc status Successfully", "Failed", driver, "Y");
 			System.setProperty("runStep","N");
 		}
 		}
@@ -82,11 +82,11 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 		} finally {
 			if (stepResult == true){
 				System.out.println("Pass. Transaction Id is : " + transactionID);
-			new HTMLReportHelper().HtmlReportBody("Captured transactionId ", "get transactionId successfully", "Passed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "get transaction ID Successfully", "Passed", driver, "Y");
 		}
 		else{
 			System.out.println("fail");
-			new HTMLReportHelper().HtmlReportBody("Captured transactionId", "Could not get transactionId successfully", "Failed", driver, "Y");
+			new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "Could not get transaction ID Successfully", "Failed", driver, "Y");
 			System.setProperty("runStep","N");
 		}
 		}
@@ -119,11 +119,11 @@ public class Corporate_AccountTransferDetails extends CommonLibrary {
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass.Multi Transaction Id is : " + transactionID);
-				new HTMLReportHelper().HtmlReportBody("get multiple transactionId", "get multiple transactionId successfully", "Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "get multiple transaction ID Successfully", "Passed", driver, "Y");
 			}
 			else{
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("get multiple transactionId", "Could not get multiple transactionId successfully", "Failed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Account Transfer Details CC- Corporate application", "Could not get multiple transaction ID Successfully", "Failed", driver, "Y");
 				System.setProperty("runStep","N");
 			}
 			}

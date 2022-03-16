@@ -45,13 +45,11 @@ public class Corporate_Login extends CommonLibrary {
 			} finally {
 				if (stepResult == true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Launch application","Launch application successfully", "Passed", driver, "Y");}
+					new HTMLReportHelper().HtmlReportBody("Launch CC- Corporate application", "Launch Successfully", "Passed", driver, "Y");}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Launch application", "Could not Launch application successfully", "Failed", driver, "Y");
-					System.setProperty("runStep","N");	
-				}
-				
+					new HTMLReportHelper().HtmlReportBody("Launch CC- Corporate application", "Could not Launch Successfully", "Failed", driver, "Y");}
+				System.setProperty("runStep","N");
 			}
 		}
 
@@ -76,11 +74,11 @@ public class Corporate_Login extends CommonLibrary {
 			} finally {
 				if (stepResult==true){
 					System.out.println("Pass");
-					new HTMLReportHelper().HtmlReportBody("Login application", "Login application successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Login CC- Corporate application", "Login Successfully", "Passed", driver, "Y");
 				}
 				else{
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("Login application", "Could not Login application successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Login CC- Corporate application", "Could not Login Successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}

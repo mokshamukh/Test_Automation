@@ -1731,7 +1731,28 @@ public class CommonLibrary {
 
 
 	}
-
+	
+	/**
+	 * Click On Element by locators
+	 * 
+	 * @author Moksha.mukh
+	 */
+	protected void mouseHoverOnElement(String pageName, String fieldName, By byMainElement) 
+			throws Exception {
+		String messageToDisplay = "Page Name [ " + pageName + "]  ###  Field Name [" + fieldName
+				+ "]   ###   Action [Mosuse Hover]    ###   Locator [" + byMainElement + "]";
+		String errorMessageToDisplay = "Could Not Mouse Hover and click On [" + fieldName + "]   On Page [ " + pageName + "]";
+		try {
+			Log.info(messageToDisplay);
+			Actions actions = new Actions(driver);
+			actions.moveToElement(driver.findElement(byMainElement));
+			actions.build().perform();
+		}
+		catch (Exception e) {
+			Log.error(errorMessageToDisplay, e);
+			throw new Exception(errorMessageToDisplay);
+		}
+	}
 	
 	/**
 	 * Select Element By Visible Text On Element by locators

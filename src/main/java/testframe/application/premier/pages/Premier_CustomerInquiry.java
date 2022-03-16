@@ -229,11 +229,11 @@ public class Premier_CustomerInquiry extends CommonLibrary {
 							sDelimiter=",";
 						for (int i=0; i<phoneNumber.split(sDelimiter).length;i++){
 							validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber.split(sDelimiter)[i]);
-						}	
+						}
 					}
 					else
 						validateTextContains("Customer Inquiry" , "Phone Number", phonenumber, phoneNumber);
-				}	
+				}
 				if (!(eMailID.equals(""))){
 					if(eMailID.contains("||") || eMailID.contains(",")){
 						if (eMailID.contains("||"))
