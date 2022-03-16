@@ -965,6 +965,38 @@ public class EPP_PaymentDetails extends CommonLibrary {
 			}
 		}
 
+		
+		public void clickOnAuditTrail() throws Exception {
+			if (System.getProperty("runStep")=="Y"){
+				boolean stepResult = false;
+				try {
+					waitElement(3000);
+					waitForPresenceOfElement(eppPaymentDetails, "Payment Title", paymentTitle);
+					if(isElementPresent(auditTrail)) {
+						clickOnElement(eppPaymentDetails, "Audit Trail Tab", auditTrail);
+						waitElement(1000);
+						stepResult = true;
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					if (stepResult == true) {
+						System.out.println("Pass");
+						new HTMLReportHelper().HtmlReportBody("Audit Trail", "Clicked on audit trail successfully","Passed", driver, "Y");
+					} else {
+						System.out.println("fail");
+						new HTMLReportHelper().HtmlReportBody("Audit Trail","Could not click on audit trail", "Failed", driver, "Y");
+						System.setProperty("runStep","N");
+					}
+				}
+			}
+		}
+		
+		
+		
+		
+		
 	}
 
 

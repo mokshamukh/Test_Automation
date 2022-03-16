@@ -118,20 +118,5 @@ public class CorporateCommonNavigation extends CorporateTest {
 		}
 	
 
-//	public void createNewPayee(List<Map<String, String>> tc_Test_Data,int iTDRow) {
-//		try {
-//			corporateACHBatchTemplate.createNewPayee(tc_Test_Data.get(iTDRow).get("CreatePayeeName").split("\\|\\|")[i], tc_Test_Data.get(iTDRow).get("CreatePayeeID").split("\\|\\|")[i],
-//					tc_Test_Data.get(iTDRow).get("CreateAccountNumber").split("\\|\\|")[i],tc_Test_Data.get(iTDRow).get("CreateBankID").split("\\|\\|")[i],
-//					tc_Test_Data.get(iTDRow).get("CreateBankName").split("\\|\\|")[i],tc_Test_Data.get(iTDRow).get("CreateDebitAuthType").split("\\|\\|")[i],
-//					tc_Test_Data.get(iTDRow).get("Amount").split("\\|\\|")[i],tc_Test_Data.get(iTDRow).get("CreateMixedDebitOrCredit").split("\\|\\|")[i],
-//					tc_Test_Data.get(iTDRow).get("Addenda").split("\\|\\|")[i],tc_Test_Data.get(iTDRow).get("SendRemittanceToPayee").split("\\|\\|")[i]);
-//		}
-//		 catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-	
 
 }

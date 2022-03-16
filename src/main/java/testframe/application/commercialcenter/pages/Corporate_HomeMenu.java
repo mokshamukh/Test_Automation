@@ -85,10 +85,10 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - Menu");
-					new HTMLReportHelper().HtmlReportBody("click on menu ","clicked on menu successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu ","Clicked on menu successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu ","Could not click on menu successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu ","Could not click on menu successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -131,10 +131,10 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu","clicked on account transfer successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu","Clicked on account transfer successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu","Could not click on account transfer successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu","Could not click on account transfer successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -153,11 +153,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"click on payment activity successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Click on payment activity successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on payment activity successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -177,11 +177,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on current payment activity successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on current payment activity successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on current payment activity successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -201,11 +201,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on future payment activity successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on future payment activity successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on future payment activity successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -226,11 +226,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on ach payment successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on ach payment successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on ach payment successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -250,11 +250,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on ach batch template successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on ach batch template successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu CC- Corporate application",
+					new HTMLReportHelper().HtmlReportBody("Click on menu CC- Corporate application",
 							"Could not click on ach batch template successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -274,12 +274,12 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on new ach batch template successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on new ach batch template successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"could not click on new ach batch template successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Could not click on new ach batch template successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -299,12 +299,12 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on recurring payment activity successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on recurring payment activity successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"could not click on recurring payment activity successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Could not click on recurring payment activity successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -323,12 +323,12 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on wire transfers successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on wire transfers successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu CC- Corporate application",
-							"could not click on wire transfers successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu CC- Corporate application",
+							"Could not click on wire transfers successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -348,12 +348,12 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on new wire transfer successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on new wire transfer successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"could not click on new wire transfer successfully", "Failed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Could not click on new wire transfer successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
 			}
@@ -373,11 +373,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on manage wire templates successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on manage wire templates successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on manage wire templates successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -399,11 +399,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on payees successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on payees successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on payees successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -423,11 +423,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on new payee successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on new payee successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on new payee successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -448,11 +448,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on manage payees successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on manage payees successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on manage payees successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -475,11 +475,11 @@ public class Corporate_HomeMenu extends CommonLibrary {
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on acounts menu successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on acounts menu successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on account menu successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -492,20 +492,20 @@ public class Corporate_HomeMenu extends CommonLibrary {
 		if (System.getProperty("runStep")=="Y"){	
 			boolean stepResult = false;
 			try {
-				Thread.sleep(4000);
+				waitForPresenceOfElement("Home Page", "Balances", balances);
 				clickOnElement("Home Page", "Balances", balances);
-				
+				waitElement(2000);
 				stepResult = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				if (stepResult == true) {
 					System.out.println("Pass - submenu bar");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
-							"clicked on balance menu successfully", "Passed", driver, "Y");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on balance menu successfully", "Passed", driver, "Y");
 				} else {
 					System.out.println("fail");
-					new HTMLReportHelper().HtmlReportBody("click on menu",
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
 							"Could not click on balance menu successfully", "Failed", driver, "Y");
 					System.setProperty("runStep","N");
 				}
@@ -513,6 +513,31 @@ public class Corporate_HomeMenu extends CommonLibrary {
 		}
 	}
 
+	
+	public void clickOnTransactionSearchMenu() throws Exception {
+		if (System.getProperty("runStep")=="Y"){	
+			boolean stepResult = false;
+			try {
+				Thread.sleep(4000);
+				clickOnElement("Home Page", "Transaction search", transactionSearch);
+				
+				stepResult = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (stepResult == true) {
+					System.out.println("Pass - submenu bar");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Clicked on transaction search menu successfully", "Passed", driver, "Y");
+				} else {
+					System.out.println("fail");
+					new HTMLReportHelper().HtmlReportBody("Click on menu",
+							"Could not click on balance menu successfully", "Failed", driver, "Y");
+					System.setProperty("runStep","N");
+				}
+			}
+		}
+	}
 	
 	
 }

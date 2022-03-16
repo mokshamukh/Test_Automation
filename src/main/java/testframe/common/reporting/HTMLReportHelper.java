@@ -153,11 +153,14 @@ public class HTMLReportHelper {
 			Object frameName=  executor.executeScript("return self.name");
 			if(!frameName.toString().equals("")){
 				driver.switchTo().defaultContent();
-				strScreenshot = getCompleteScreenShot(driver);
+				strScreenshot = getScreenshot(driver);
+				//strScreenshot = getCompleteScreenShot(driver);
 				driver.switchTo().frame(frameName.toString());
 			}	
 			else{	
-				strScreenshot = getCompleteScreenShot(driver);
+				strScreenshot = getScreenshot(driver);
+				//strScreenshot = getCompleteScreenShot(driver);
+						
 			}
 			strScreenshot_split = strScreenshot.split("\\|\\|");
 			sBase64StringScreenshot = strScreenshot_split[0];
@@ -189,6 +192,8 @@ public class HTMLReportHelper {
 
 		new ReportHelper().writeToSummaryReportVerificationTab(sStepDescription, sActualResultDescription, result.toUpperCase(), sScreenshot_Path);
 	}
+
+	
 
 	public void HtmlReportFooter() throws Exception{
 		//strHTMLFileData = strHTMLFileData + "\r\n" + "\t" + "</table>" + "\r\n" + "<center><p><font face=Arial size=1>CONFIDENTIAL - LIMITED: Distribution restricted to clients of Fiserv Products.</font></p></center>" + "\r\n"+"'";
@@ -274,7 +279,7 @@ public class HTMLReportHelper {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
 			sScreenShotPath = sScreenShotFolderpath +"/"+ new DateTimeHelper().CurrentDateTime("yyyyMMddHHmmss")+".png";
-			Screenshot s=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+			Screenshot s=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(driver);
 			//byte[] fileContent = FileUtils.readFileToByteArray(s);
 			BufferedImage originalImage = s.getImage();
 			ImageIO.write(originalImage, "png", baos);
