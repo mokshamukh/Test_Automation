@@ -94,7 +94,8 @@ public class Premier_NewCollateral extends CommonLibrary{
 	public By finishButtoncollateral = By.xpath("//button[@id='SubmitButton']");
 	public By collateralInquiryHeader = By.xpath("//label[contains(text(),'Collateral -')]");
 	String collateralTypeInquiryPage = "//label[contains(text(),'Collateral Type:')]/../following-sibling::td//label[contains(text(),'%s')]";
-	String collateralRecordNumberInquiryPage = "//label[contains(text(),'Collateral Record Number:')]/../following-sibling::td//label[contains(text(),'')]";
+	public By collateralRecordNumberInquiryPage = By.xpath("//label[contains(text(),'Collateral Record Number:')]/../following-sibling::td//label");
+	//String collateralRecordNumberInquiryPage = "//label[contains(text(),'Collateral Record Number:')]/../following-sibling::td//label";
 	public By relationshipTab = By.xpath("//a[text()='Relationships']");	
 	String collateralLoanNumberInquiryPage = "//a[contains(text(),'%s')]";
 	String removeLoanICon = "//a[contains(text(),'%s')]/../following-sibling::td//img[@title='Delete']";
@@ -479,7 +480,7 @@ public class Premier_NewCollateral extends CommonLibrary{
 		if (System.getProperty("runStep")=="Y"){
 		boolean stepResult = false;
 		try {
-			switchToWithinFrameWithName("Main");
+			//switchToWithinFrameWithName("Main");
 			if (isElementPresent(searchTitle)) {
 				selectElementByVisibleText("Searh Account Page", "Account Type Field ",accountTypeList, accountType);
 				enterText("Searh Account Page", "Account field", accountNumberList, accountNumber);
@@ -495,7 +496,7 @@ public class Premier_NewCollateral extends CommonLibrary{
 		} finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search Account", "Search Account  Successfully","Passed", driver, "Y");
+				new HTMLReportHelper().HtmlReportBody("Search Account", "Search Account  Successfully","Passed", driver, "N");
 			} else {
 				System.out.println("fail");
 				new HTMLReportHelper().HtmlReportBody("Search Account", "Could not search the Account","Failed", driver, "Y");
@@ -568,6 +569,8 @@ public class Premier_NewCollateral extends CommonLibrary{
 	public void validateCollateralDetails(String scollateralNo,String scollateralType,String scollateralLoanNumber) throws Exception {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
+			Object stepResult1 = null;
+			Object stepResult2 = null;
 			try {
 				//switchToWithinFrameWithName("bottom");
 				if (isElementPresent(collateralInquiryHeader)){
@@ -575,18 +578,26 @@ public class Premier_NewCollateral extends CommonLibrary{
 						validateTextContains("Collateral Inquiry Page " , "Collateral Type field", getDynamicElement("Collateral Type field",collateralTypeInquiryPage,scollateralType), scollateralType);
 					}*/
 					if (!scollateralNo.equals("")) {
-						validateTextContains("Collateral Inquiry Page" , "Collateral Record Number field", getDynamicElement("Collateral Record Number field",collateralRecordNumberInquiryPage,scollateralNo), scollateralNo);
+						String SCollateralnumberInquiryPage = getElementText("Collateral Inquiry Page" , "Collateral Record Number field",collateralRecordNumberInquiryPage);
+						SCollateralnumberInquiryPage = SCollateralnumberInquiryPage.replaceAll("[^a-zA-Z0-9]","");
+						if (scollateralNo.equalsIgnoreCase(SCollateralnumberInquiryPage)) {
+							stepResult1= true;
+						}
+						//validateTextContains("Collateral Inquiry Page" , "Collateral Record Number field", getDynamicElement("Collateral Record Number field",collateralRecordNumberInquiryPage,scollateralNo), scollateralNo);
 					}
 					clickOnElement("Collateral Inquiry Page", "Relationship Tab", relationshipTab);
 					if (!scollateralLoanNumber.equals("")) {
 						validateTextContains("Collateral Inquiry Page " , "Collateral Loan Number field", getDynamicElement("Collateral Loan Number field",collateralLoanNumberInquiryPage,scollateralLoanNumber), scollateralLoanNumber);
+						stepResult2 = true;
 					}
 					waitElement(2000);
 					clickOnElement("Collateral Inquiry Page", "Close Button", closeScreenImg);
 					switchToDefaultContent();
+					
 					//driver.switchTo().frame("Main");
+					if (stepResult1 == stepResult2){
 					stepResult = true;
-	
+					}
 				}
 			}catch(Exception e) {
 				e.printStackTrace();

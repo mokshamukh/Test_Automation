@@ -242,7 +242,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 					}
 					if (!sBankruptcyPetitionFileDate.equals("")) {
 						enterText("Change Account Page", "bankruptcy Petition Date field", bankruptcyPetitionDate, sBankruptcyPetitionFileDate);
-					}
+					}/*
 					clickOnElement("Change Page", "Save Button", saveButton2);
 					Thread.sleep(5000);
 					if(isElementPresent(warningHeader)) {
@@ -259,7 +259,7 @@ public class Premier_LoansChangeAccount extends CommonLibrary{
 						waitElement(2000);
 					}
 					validateElementPresent("New Loan Page", "Search Title", searchTitle2);
-					switchToWindowWithTitleContaining("Institution");
+					switchToWindowWithTitleContaining("Institution");*/
 					stepResult = true;
 
 				}

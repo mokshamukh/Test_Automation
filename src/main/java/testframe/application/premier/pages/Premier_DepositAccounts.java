@@ -7,6 +7,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import testframe.application.common.CommonLibrary;
 import testframe.common.reporting.HTMLReportHelper;
+import testframe.common.utilities.DateTimeHelper;
 import testframe.common.utilities.ExcelReader;
 
 public class Premier_DepositAccounts extends CommonLibrary {
@@ -62,6 +63,17 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By transactionRestrictionCodeInput = By.xpath("(//input[contains(@name,'TranRestrictionCode')])[1]");
 	public By transactionRestrictionCodeButton = By.xpath("(//input[contains(@name,'TranRestrictionCode')])[3]");
 	String transactionRestrictionCodeList = "//select[contains(@name,'TranRestrictionCode')]/option[contains(text(),'%s')]";
+	public By statusDateInput = By.xpath("(//input[contains(@id,'StatusDate')])[1]");
+	public By initialDepositInput = By.xpath("//input[contains(@id,'InitialDeposit')]");
+	public By warningTellerAlert1Input = By.xpath("(//input[contains(@name,'TellerAlert1')])[2]");
+	public By warningTellerAlert1Button = By.xpath("(//input[contains(@name,'TellerAlert1')])[3]");
+	String warningTellerAlert1List = "//select[contains(@name,'TellerAlert1')]/option[contains(text(),'%s')]";
+	public By warningTellerAlert2Input = By.xpath("(//input[contains(@name,'TellerAlert2')])[2]");
+	public By warningTellerAlert2Button = By.xpath("(//input[contains(@name,'TellerAlert2')])[3]");
+	String warningTellerAlert2List = "//select[contains(@name,'TellerAlert2')]/option[contains(text(),'%s')]";
+	public By warningTellerAlert3Input = By.xpath("(//input[contains(@name,'TellerAlert3')])[2]");
+	public By warningTellerAlert3Button = By.xpath("(//input[contains(@name,'TellerAlert3')])[3]");
+	String warningTellerAlert3List = "//select[contains(@name,'TellerAlert3')]/option[contains(text(),'%s')]";
 	public By statementCycleList = By.xpath("//td[contains(text(),'Statement Cycle:')]/following-sibling::td/select[contains(@name,'/StatementCycle')]");
 	public By alternateCycleOptionList = By.xpath("//td[contains(text(),'Alternate Cycle Option:')]/following-sibling::td/select[contains(@name,'/AlternateCycleOption')]");
 	public By alternateCycleTextInput = By.xpath("(//input[contains(@id,'AlternateCycle')])[1]");
@@ -79,9 +91,12 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public By codesTab = By.xpath("//li//a[text()='Codes']");
 	public By balanceTab = By.xpath("//li//a[text()='Balances']");
 	public By statusCodeInquiryPage = By.xpath("//td[text()='Status Code:']/following-sibling::td[1]");
+	public By initialDepositInquiryPage = By.xpath("//td[text()='Initial Deposit:']/following-sibling::td[1]");
+	public By statusDateInquiryPage = By.xpath("//td[text()='Status Date:']/following-sibling::td[1]");
 	public By statementCycleInquiryPage = By.xpath("//td[text()='Statement Cycle:']/following-sibling::td[1]");
 	public By expandWarningInquiryPage = By.xpath("//img[@id='WarningsArrow']");
 	public By warningInquiryPage = By.xpath("//table[@name='Warnings']//td[contains(text(),'Warning:')]");
+	String warningtellerAlertInquiryPage = "//table[@name='Warnings']/tbody//td[contains(text(),'%s')]";
 	public By transRestrictionCodeInquiryPage = By.xpath("//table[@name='Warnings']//td[contains(text(),'Transaction Restriction Code:')]");
 	public By suspendFieldCheckBox = By.xpath("//tr[@class='dataRow']//td//u[contains(text(),'Suspend Fields will be Cleared')]/../..//input");
 	public By fileMenu = By.xpath("//a[text()='File']");
@@ -610,13 +625,37 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	public void changeAccountCodeDetails(String sAccountNumber, String sAccountWarning, String sAccountStatusCode,
 			String sAccntsTransRestrictionCode, String statementCycle, String sAlternateCycleOption,
 			String sAlternateCycle, String sNotificationOption,String sStatementRequestCode, String sSuspendedStatementCycle,
-			String sSuspendedInterestList, String sSuspendedDepositRateIndex) throws Exception {
+			String sSuspendedInterestList, String sSuspendedDepositRateIndex,String sWarningTellerAlert1,String sWarningTellerAlert2,String sWarningTellerAlert3,String sStatusDate,String sInitialDeposit) throws Exception {
 		if (System.getProperty("runStep") == "Y") {
 			boolean stepResult = false;
 			try {
 				if (isElementPresent(getDynamicElement("Account Number Header field", depositChangeHeader, sAccountNumber))) {
 					if (!sAccountWarning.equals("")) {
 						clearAndType("Change Account Page", "Warning field", warningTextbox, sAccountWarning);
+					}
+					if (!sWarningTellerAlert1.equals("")) {
+						clickOnElement("Change Account Page", "Warning Teller Alert 1 Input",warningTellerAlert1Input);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Warning Teller Alert 1 Button",warningTellerAlert1Button);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Warning Teller Alert 1 list",
+								getDynamicElement("Warning Teller Alert 1 list", warningTellerAlert1List,sWarningTellerAlert1));
+					}
+					if (!sWarningTellerAlert2.equals("")) {
+						clickOnElement("Change Account Page", "Warning Teller Alert 2 Input",warningTellerAlert2Input);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Warning Teller Alert 2 Button",warningTellerAlert2Button);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Warning Teller Alert 2 list",
+								getDynamicElement("Warning Teller Alert 2 list", warningTellerAlert2List,sWarningTellerAlert2));
+					}
+					if (!sWarningTellerAlert3.equals("")) {
+						clickOnElement("Change Account Page", "Warning Teller Alert 3 Input",warningTellerAlert3Input);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Warning Teller Alert 3 Button",warningTellerAlert3Button);
+						Thread.sleep(1000);
+						clickOnElement("Change Account Page", "Warning Teller Alert 3 list",
+								getDynamicElement("Warning Teller Alert 3 list", warningTellerAlert3List,sWarningTellerAlert3));
 					}
 					if (!sAccountStatusCode.equals("")) {
 						if (isElementPresentZeroWait(statusCodeList)) {
@@ -630,16 +669,19 @@ public class Premier_DepositAccounts extends CommonLibrary {
 						clickOnElement("Change Account Page", "Status Code list",getDynamicElement("Status Code list", statusCodeDropDown,sAccountStatusCode));
 						}
 					}
+					if (!sStatusDate.equals("")) {
+						clearAndType("Change Account Page", "Status Date Field", statusDateInput, sStatusDate);
+					}
+					if (!sInitialDeposit.equals("")) {
+						clearAndType("Change Account Page", "Initial Deposit Field", initialDepositInput,sInitialDeposit);
+					}
 					if (!sAccntsTransRestrictionCode.equals("")) {
-						clickOnElement("Change Account Page", "Trans Restriction Code Input",
-								transactionRestrictionCodeInput);
+						clickOnElement("Change Account Page", "Trans Restriction Code Input",transactionRestrictionCodeInput);
 						Thread.sleep(1000);
-						clickOnElement("Change Account Page", "Trans Restriction Code Button",
-								transactionRestrictionCodeButton);
+						clickOnElement("Change Account Page", "Trans Restriction Code Button",transactionRestrictionCodeButton);
 						Thread.sleep(1000);
 						clickOnElement("Change Account Page", "Trans Restriction Code list",
-								getDynamicElement("Trans Restriction Code list", transactionRestrictionCodeList,
-										sAccntsTransRestrictionCode));
+								getDynamicElement("Trans Restriction Code list", transactionRestrictionCodeList,sAccntsTransRestrictionCode));
 					}
 					if (!statementCycle.equals("")) {
 						selectElementByVisibleText("Change Account Page", "statement Cycle Field", statementCycleList,
@@ -720,7 +762,7 @@ public class Premier_DepositAccounts extends CommonLibrary {
 	}
 
 	public void validateAccountDetailsAfterChange(String sAccountNumber, String sAccountWarning,
-			String sAccountStatusCode, String sAccntsTransRestrictionCode, String statementCycle) throws Exception {
+			String sAccountStatusCode, String sAccntsTransRestrictionCode, String statementCycle,String sWarningTellerAlert1,String sWarningTellerAlert2,String sWarningTellerAlert3,String sStatusDate,String sInitialDeposit) throws Exception {
 		boolean stepResult = false;
 		try {
 			waitElement(1000);
@@ -736,18 +778,32 @@ public class Premier_DepositAccounts extends CommonLibrary {
 						String[] sAccountStatusCode_split = sAccountStatusCode.split("]");
 						sAccountStatusCode=sAccountStatusCode_split[1].trim();
 					}
-					validateTextContains("Account Inquiry", "Status Code field", statusCodeInquiryPage,
-							sAccountStatusCode);
-				// waitElement(2000);
+					validateTextContains("Account Inquiry", "Status Code field", statusCodeInquiryPage,sAccountStatusCode);
 				if (!sAccountWarning.equals("")) {
-					
-					// waitElement(1000);
 					validateTextContains("Account Inquiry", "Warning field", warningInquiryPage, sAccountWarning);
+				}
+				if (!sWarningTellerAlert1.equals("")) {
+					sWarningTellerAlert1 = ((sWarningTellerAlert1.split("\\["))[0]).trim();
+					validateTextContains("Account Inquiry", "Warning Teller Alert 1 field", getDynamicElement("Warning Teller Alert 1 field", warningtellerAlertInquiryPage, sWarningTellerAlert1), sWarningTellerAlert1);
+				}
+				if (!sWarningTellerAlert2.equals("")) {
+					sWarningTellerAlert2 = ((sWarningTellerAlert2.split("\\["))[0]).trim();
+					validateTextContains("Account Inquiry", "Warning Teller Alert 2 field", getDynamicElement("Warning Teller Alert 2 field", warningtellerAlertInquiryPage, sWarningTellerAlert2), sWarningTellerAlert2);
+				}
+				if (!sWarningTellerAlert3.equals("")) {
+					sWarningTellerAlert3 = ((sWarningTellerAlert3.split("\\["))[0]).trim();
+					validateTextContains("Account Inquiry", "Warning Teller Alert 3 field", getDynamicElement("Warning Teller Alert 3 field", warningtellerAlertInquiryPage, sWarningTellerAlert3), sWarningTellerAlert3);
 				}
 				if (!sAccntsTransRestrictionCode.equals("")) {
 					sAccntsTransRestrictionCode = ((sAccntsTransRestrictionCode.split("\\["))[0]).trim();
-					validateTextContains("Account Inquiry", "Trans Restriction Code field",
-							transRestrictionCodeInquiryPage, sAccntsTransRestrictionCode);
+					validateTextContains("Account Inquiry", "Trans Restriction Code field",transRestrictionCodeInquiryPage, sAccntsTransRestrictionCode);
+				}
+				if (!sStatusDate.equals("")) {
+					sStatusDate = new DateTimeHelper().getDateTime(sStatusDate,"MM/dd/yyyy","MMM dd, yyyy");
+					validateTextContains("Account Inquiry", "Status Date field", statusDateInquiryPage, sStatusDate);
+				}
+				if (!sInitialDeposit.equals("")) {
+					validateTextContains("Account Inquiry", "Initial Deposit field", initialDepositInquiryPage, sInitialDeposit);
 				}
 				switchToDefaultContent();
 				driver.switchTo().frame("Main");
