@@ -368,8 +368,14 @@ public class HTMLReportHelper {
 
 
 	}
-
-
+	
+	@Test
+	public void htmlTOPdfConvert() throws FileNotFoundException, IOException{
+		ConverterProperties converterProperties = new ConverterProperties();
+		HtmlConverter.convertToPdf(new FileInputStream("C:\\Users\\F9Z2G8A\\OneDrive - Fiserv Corp\\Desktop\\Republic UAT\\TestAutomation\\git\\workspace\\Test_Automation\\testreport\\application\\Premier\\03-21-2022-05-42-34\\PREMIER_TC010_Premier_03212022-174238.html"), 
+				new FileOutputStream("C:\\Users\\F9Z2G8A\\OneDrive - Fiserv Corp\\Desktop\\Republic UAT\\TestAutomation\\git\\workspace\\Test_Automation\\testreport\\application\\Premier\\03-21-2022-05-42-34\\PREMIER_TC010_Premier_03212022-174238_Passed.pdf"), converterProperties);
+		System.out.println( "PDF Created!" );
+	}
 
 }
 

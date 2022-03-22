@@ -250,7 +250,8 @@ public class Premier_CustomerAddress extends CommonLibrary {
 		if (System.getProperty("runStep")=="Y"){
 			boolean stepResult = false;
 			try {
-				//switchToWithinFrameWithName("Main");
+				switchToWithinFrameWithName("Main");
+				waitElement(1500);
 				if (isElementPresent(searchTitle)) {
 					enterText("Searh Address Page", "Address field", searchAddress, address1Val);
 					clickOnElement("Search Address Page", "Submit button", submitSearch);

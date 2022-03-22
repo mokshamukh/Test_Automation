@@ -161,10 +161,10 @@ public class Premier_PortfolioNew extends CommonLibrary{
 		}finally {
 			if (stepResult == true) {
 				System.out.println("Pass");
-				new HTMLReportHelper().HtmlReportBody("Search Address", "Address Searched on New Portfolio Page Successfully", "Passed",driver, "Y");
+				//new HTMLReportHelper().HtmlReportBody("Search Address", "Address Searched on New Portfolio Page Successfully", "Passed",driver, "Y");
 			} else {
 				System.out.println("fail");
-				new HTMLReportHelper().HtmlReportBody("Search Address", "Could not Searched Address Details on New Portfolio Page", "Failed",driver, "Y");
+				//new HTMLReportHelper().HtmlReportBody("Search Address", "Could not Searched Address Details on New Portfolio Page", "Failed",driver, "Y");
 				System.setProperty("runStep","N");
 			}	
 		}

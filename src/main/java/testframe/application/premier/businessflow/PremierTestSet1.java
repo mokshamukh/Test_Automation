@@ -412,7 +412,10 @@ public class PremierTestSet1 extends ApplicationBase {
 					premierHomeMenuPage.goToAddress();
 				}
 				premierHomeMenuPage.goToChangeAddress();
-				premierCustomerAddress.searchAddress(tc_Test_Data.get(iTDRow).get("Address_Address1"));
+				if((tc_Test_Data.get(iTDRow).get("Address_UpdateExistingAddress1")).equals(""))	
+					premierCustomerAddress.searchAddress(tc_Test_Data.get(iTDRow).get("Address_Address1"));
+				else
+					premierCustomerAddress.searchAddress(tc_Test_Data.get(iTDRow).get("Address_UpdateExistingAddress1"));
 				premierCustomerAddress.updateAddress(tc_Test_Data.get(iTDRow).get("Address_UpdateAddress1"), tc_Test_Data.get(iTDRow).get("Address_UpdateAddress2"),
 						tc_Test_Data.get(iTDRow).get("Address_UpdateZipCode"),tc_Test_Data.get(iTDRow).get("Address_UpdateBranchRegion"), 
 						tc_Test_Data.get(iTDRow).get("Address_UpdateSeasonalAddress1"), tc_Test_Data.get(iTDRow).get("Address_UpdateSeasonalAddress2"), 
